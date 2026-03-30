@@ -307,7 +307,7 @@ Auto-verification avant de presenter :
 
 Apres avoir presente les directions en texte et obtenu une reaction de l'utilisateur, tu CODES les 2-3 directions en vrai composants React.
 
-**Objectif :** L'utilisateur ouvre `localhost:3000/design-preview/[nom-ecran]` et voit les directions cote a cote dans son navigateur. Il choisit sur ce qu'il VOIT, pas sur ce qu'il lit.
+**Objectif :** L'utilisateur ouvre `localhost:3010/design-preview/[nom-ecran]` et voit les directions cote a cote dans son navigateur. Il choisit sur ce qu'il VOIT, pas sur ce qu'il lit.
 
 **2.5.1 — Ce que tu generes**
 
