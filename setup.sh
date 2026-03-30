@@ -8,7 +8,7 @@ echo ""
 npm install next@latest react@latest react-dom@latest
 
 # TypeScript
-npm install -D typescript @types/react @types/react-dom @types/node
+npm install -D typescript@^5.8.0 @types/react @types/react-dom @types/node
 
 # Supabase
 npm install @supabase/supabase-js @supabase/ssr
