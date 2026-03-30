@@ -56,7 +56,9 @@ Reponds toujours en francais sauf si le code ou la doc l'exige en anglais.
 - `code-reviewer` — review securite + patterns + bugs avant push → invoquer avec "review" ou "pret a pusher ?"
 - `db-architect` — schema Supabase, RLS, migrations, index → invoquer pour tout travail DB
 - `feature-planner` — planifie avant de coder, decoupe en taches atomiques → invoquer avant toute feature M/L
-- `cto-advisor` — veille tech, architecture scalable, dette technique, decisions strategiques → invoquer pour vision long terme
+- `cto-advisor` — veille tech, audit archi, business moat, investor red flags → invoquer pour vision long terme
+- `ai-auditor` — qualite pipeline AI, modeles deprecies, couts, hallucinations → invoquer si l'AI se degrade ou coute trop cher
+- `dependency-sentinel` — CVE, packages outdated, modeles AI deprecies → invoquer avant chaque release
 
 ## Token Routing — OBLIGATOIRE
 
