@@ -30,6 +30,9 @@ npm install -D @playwright/test
 # TanStack Query
 npm install @tanstack/react-query
 
+# AI
+npm install @anthropic-ai/sdk
+
 # Git hooks (pre-commit auto)
 npm install -D husky lint-staged
 

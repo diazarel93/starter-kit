@@ -30,8 +30,13 @@ Reponds toujours en francais sauf si le code ou la doc l'exige en anglais.
 - `src/components/ui/` — composants UI de base
 - `src/lib/` — logique metier, utilitaires, API clients
 - `src/lib/supabase/` — clients Supabase (browser, server, middleware)
-- `src/hooks/` — hooks React custom
-- `src/types/` — types TypeScript globaux
+- `src/lib/auth.ts` — requireAuth(), requireAdmin(), getCurrentUser()
+- `src/lib/ai.ts` — complete() et stream() avec Claude (Haiku/Sonnet/Opus)
+- `src/lib/constants.ts` — APP_NAME, APP_URL, APP_DESCRIPTION
+- `src/lib/query-provider.tsx` — TanStack Query (deja dans layout.tsx)
+- `src/hooks/` — hooks React custom (useDebounce, ...)
+- `src/types/index.ts` — ApiResponse<T>, PaginatedResponse<T>, AIMessage
+- `src/types/database.ts` — types auto-generes par `npm run db:types`
 - `e2e/` — tests end-to-end Playwright
 
 ## Conventions
