@@ -303,6 +303,103 @@ Auto-verification avant de presenter :
 
 ---
 
+### Phase 2.5 — PROTOTYPE VISUEL (Rendre tangible)
+
+Apres avoir presente les directions en texte et obtenu une reaction de l'utilisateur, tu CODES les 2-3 directions en vrai composants React.
+
+**Objectif :** L'utilisateur ouvre `localhost:3000/design-preview/[nom-ecran]` et voit les directions cote a cote dans son navigateur. Il choisit sur ce qu'il VOIT, pas sur ce qu'il lit.
+
+**2.5.1 — Ce que tu generes**
+
+Un fichier `src/app/design-preview/[nom-ecran]/page.tsx` qui affiche :
+- Un header avec le nom de l'ecran + la date
+- Les 2-3 directions en colonnes (ou en tabs sur mobile)
+- Chaque direction avec son nom, son concept, et le composant rendu
+- Un bandeau avec le tableau de decision en bas
+
+**2.5.2 — Regles de code pour les prototypes visuels**
+
+- Utilise UNIQUEMENT les tokens CSS existants du projet (pas de couleurs hardcodees)
+- Si une direction necessite de nouvelles couleurs → les definir en inline CSS var() dans le composant de preview UNIQUEMENT, sans toucher globals.css
+- Chaque direction est un composant isole : `DirectionA`, `DirectionB`, `DirectionC`
+- Les composants de preview sont READ-ONLY — ils ne modifient pas l'etat global
+- Pas de logique metier — uniquement des props statiques pour illustrer les etats (loading, data, empty)
+
+**2.5.3 — Structure du fichier de preview**
+
+```tsx
+// src/app/design-preview/[nom-ecran]/page.tsx
+// FICHIER TEMPORAIRE — supprimer apres validation de la direction
+
+export default function DesignPreviewPage() {
+  return (
+    <div className="min-h-screen bg-neutral-950 p-8">
+      {/* Header */}
+      <div className="mb-12 text-center">
+        <p className="text-xs uppercase tracking-widest text-neutral-500 mb-2">Design Preview</p>
+        <h1 className="text-3xl font-bold text-white">[Nom de l'ecran]</h1>
+        <p className="text-neutral-400 text-sm mt-2">[Date] — Choisir une direction avant de coder</p>
+      </div>
+
+      {/* Directions en grille */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-[1400px] mx-auto">
+        <DirectionCard
+          name="Direction A"
+          concept="[concept en 1 phrase]"
+          score={{ lisibilite: 4, brand: 5, effort: "M", modernite: 5, emotion: 4 }}
+        >
+          <DirectionA />
+        </DirectionCard>
+
+        <DirectionCard
+          name="Direction B"
+          concept="[concept en 1 phrase]"
+          score={{ lisibilite: 5, brand: 4, effort: "S", modernite: 4, emotion: 5 }}
+        >
+          <DirectionB />
+        </DirectionCard>
+
+        <DirectionCard
+          name="Direction C"
+          concept="[concept en 1 phrase]"
+          score={{ lisibilite: 3, brand: 5, effort: "L", modernite: 5, emotion: 5 }}
+        >
+          <DirectionC />
+        </DirectionCard>
+      </div>
+
+      {/* Note bas de page */}
+      <p className="text-center text-neutral-600 text-xs mt-12">
+        Dis "je choisis la direction X" pour passer a la Phase 3. Ce fichier sera supprime.
+      </p>
+    </div>
+  );
+}
+```
+
+**2.5.4 — Niveau de fidelite attendu**
+
+Les prototypes ne sont PAS des maquettes haute fidelite. Ils montrent :
+- La palette de couleurs reelle
+- La typographie reelle (font, taille, weight)
+- Le layout et la grille
+- Les etats principaux (au moins : normal + hover simulé)
+- L'atmosphere visuelle generale
+
+Ils ne montrent PAS :
+- Toutes les interactions complexes
+- Les animations (trop long a prototyper)
+- La logique metier
+
+**2.5.5 — Apres validation**
+
+Quand l'utilisateur choisit une direction :
+1. Supprimer le dossier `src/app/design-preview/[nom-ecran]/`
+2. Passer a la Phase 3 avec la direction validee
+3. Les vraies valeurs de tokens choisies dans le prototype → aller dans globals.css
+
+---
+
 ### Phase 3 — COMPOSITION (Structurer)
 
 Wireframe en mots avant le code. C'est l'etape la plus souvent sautee, et la plus chere a ignorer.
@@ -486,7 +583,9 @@ COHERENCE :     [OK / A revoir — detail]
 3. Corrections concretes avec CODE (pas de "devrait etre mieux")
 
 ### Creation from scratch
-Phases 1 → 2 → 3 → 4 → 5. Dans cet ordre. Jamais de code avant Phase 3.
+Phases 1 → 2 → 2.5 → 3 → 4 → 5. Dans cet ordre.
+- Jamais de code production avant Phase 3
+- TOUJOURS passer par Phase 2.5 pour les nouveaux ecrans — l'utilisateur doit choisir sur ce qu'il voit, pas sur ce qu'il lit
 
 ### Quick fix
 Pour un ajustement mineur (couleur, spacing, typo) : code direct. Mais explique POURQUOI en 1 phrase.
