@@ -1,13 +1,13 @@
 #!/bin/bash
 set -e
 
-echo "🎬 Installation du projet..."
+echo "Installation du projet..."
 echo ""
 
 # Next.js + React
 npm install next@latest react@latest react-dom@latest
 
-# TypeScript
+# TypeScript — pinned a 5.x (6.x incompatible avec @typescript-eslint)
 npm install -D typescript@^5.8.0 @types/react @types/react-dom @types/node
 
 # Supabase
@@ -19,8 +19,8 @@ npm install -D tailwindcss @tailwindcss/postcss postcss
 # Utils
 npm install clsx tailwind-merge
 
-# Lint + Format
-npm install -D eslint eslint-config-next @eslint/eslintrc @typescript-eslint/eslint-plugin @typescript-eslint/parser
+# Lint + Format — legacy-peer-deps car @typescript-eslint requiert TS < 6
+npm install -D eslint eslint-config-next @eslint/eslintrc @typescript-eslint/eslint-plugin @typescript-eslint/parser --legacy-peer-deps
 npm install -D prettier prettier-plugin-tailwindcss
 
 # Tests
@@ -33,10 +33,11 @@ npm install @tanstack/react-query
 # AI
 npm install @anthropic-ai/sdk
 
+# Email
+npm install resend
+
 # Git hooks (pre-commit auto)
 npm install -D husky lint-staged
-
-# Init husky
 npx husky init
 echo 'npx lint-staged' > .husky/pre-commit
 
@@ -44,10 +45,10 @@ echo 'npx lint-staged' > .husky/pre-commit
 npx playwright install webkit chromium
 
 echo ""
-echo "✅ Installation terminee !"
+echo "Installation terminee !"
 echo ""
 echo "Prochaines etapes :"
-echo "  1. Copie .env.example vers .env et remplis tes cles"
-echo "  2. Adapte CLAUDE.md avec le nom de ton projet"
-echo "  3. git init && git add -A && git commit -m 'chore: init project'"
+echo "  1. cp .env.example .env  — remplis tes cles"
+echo "  2. Adapte CLAUDE.md avec le nom et stack du projet"
+echo "  3. Remplis .claude/agents/design-director.md section SETUP PROJET"
 echo "  4. npm run dev"

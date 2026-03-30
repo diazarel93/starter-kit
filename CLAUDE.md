@@ -32,9 +32,12 @@ Reponds toujours en francais sauf si le code ou la doc l'exige en anglais.
 - `src/lib/supabase/` — clients Supabase (browser, server, middleware)
 - `src/lib/auth.ts` — requireAuth(), requireAdmin(), getCurrentUser()
 - `src/lib/ai.ts` — complete() et stream() avec Claude (Haiku/Sonnet/Opus)
+- `src/lib/api.ts` — fetch wrapper : api.get/post/put/patch/delete → ApiResponse<T>
+- `src/lib/email.ts` — sendEmail() via Resend
 - `src/lib/constants.ts` — APP_NAME, APP_URL, APP_DESCRIPTION
 - `src/lib/query-provider.tsx` — TanStack Query (deja dans layout.tsx)
-- `src/hooks/` — hooks React custom (useDebounce, ...)
+- `src/hooks/useDebounce.ts` — debounce valeur avec delai configurable
+- `src/hooks/useLocalStorage.ts` — persistance locale [value, setValue, remove]
 - `src/types/index.ts` — ApiResponse<T>, PaginatedResponse<T>, AIMessage
 - `src/types/database.ts` — types auto-generes par `npm run db:types`
 - `e2e/` — tests end-to-end Playwright
@@ -46,6 +49,11 @@ Reponds toujours en francais sauf si le code ou la doc l'exige en anglais.
 - TypeScript strict, pas de `any`
 - Toujours lire un fichier avant de le modifier
 - Verifier build + tests avant push
+
+## Agents disponibles
+
+- `design-director` — DA senior, 5 phases, prototypes visuels → invoquer pour tout travail UI/design
+- `code-reviewer` — review securite + patterns + bugs avant push → invoquer avec "review" ou "pret a pusher ?"
 
 ## Token Routing — OBLIGATOIRE
 
