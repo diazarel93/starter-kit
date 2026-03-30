@@ -54,6 +54,9 @@ Reponds toujours en francais sauf si le code ou la doc l'exige en anglais.
 
 - `design-director` — DA senior, 5 phases, prototypes visuels → invoquer pour tout travail UI/design
 - `code-reviewer` — review securite + patterns + bugs avant push → invoquer avec "review" ou "pret a pusher ?"
+- `db-architect` — schema Supabase, RLS, migrations, index → invoquer pour tout travail DB
+- `feature-planner` — planifie avant de coder, decoupe en taches atomiques → invoquer avant toute feature M/L
+- `cto-advisor` — veille tech, architecture scalable, dette technique, decisions strategiques → invoquer pour vision long terme
 
 ## Token Routing — OBLIGATOIRE
 
