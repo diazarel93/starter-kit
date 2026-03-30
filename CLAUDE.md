@@ -89,6 +89,8 @@ Estimation : [description]
 
 ## Rules
 
+> Voir aussi `RULES.md` — regles auto-generees qui s'enrichissent au fil du projet.
+
 - JAMAIS push sur main directement
 - JAMAIS commit des fichiers .env
 - JAMAIS skip les hooks (`--no-verify`)
