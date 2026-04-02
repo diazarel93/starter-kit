@@ -1,7 +1,9 @@
-import { requireAuth } from "@/lib/auth";
-
-export default async function MarchePage() {
-  await requireAuth();
+export default async function MarchePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ p?: string }>;
+}) {
+  const { p } = await searchParams;
 
   const veille = [
     {
@@ -42,21 +44,29 @@ export default async function MarchePage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-display text-3xl text-white">📡 Marché & Veille</h1>
-        <p className="text-white/40 text-sm mt-1">Concurrents, WADA, stack tech, opportunités</p>
+        <h1 className="font-display text-4xl text-white">MARCHÉ & VEILLE</h1>
+        <p className="mt-1 text-sm text-white/40">Concurrents, WADA, stack tech, opportunités</p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      {p && p !== "all" && (
+        <p className="rounded border border-white/5 bg-white/3 px-3 py-2 text-xs text-white/20">
+          Vue globale — cette section n&apos;est pas filtrée par projet
+        </p>
+      )}
+
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         {veille.map((cat) => (
-          <div key={cat.category} className="bg-white/3 border border-white/5 rounded-lg p-4">
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">
+          <div key={cat.category} className="rounded-lg border border-white/5 bg-white/3 p-4">
+            <h3 className="mb-3 text-xs font-semibold tracking-widest text-white/40 uppercase">
               {cat.category}
             </h3>
             <div className="space-y-2.5">
               {cat.items.map((item) => (
                 <div key={item.label} className="flex items-start justify-between gap-2">
-                  <span className="text-sm text-white/60 flex-1">{item.label}</span>
-                  <span className={`text-xs px-2 py-0.5 rounded whitespace-nowrap ${badgeStyle[item.badge as keyof typeof badgeStyle]}`}>
+                  <span className="flex-1 text-sm text-white/60">{item.label}</span>
+                  <span
+                    className={`rounded px-2 py-0.5 text-xs whitespace-nowrap ${badgeStyle[item.badge as keyof typeof badgeStyle]}`}
+                  >
                     {item.status}
                   </span>
                 </div>
@@ -66,10 +76,11 @@ export default async function MarchePage() {
         ))}
       </div>
 
-      <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
-        <p className="text-sm text-red-300 font-medium">⚠️ Claude Haiku 3 déprécié le 19/04/2026</p>
-        <p className="text-xs text-red-300/60 mt-1">
-          Migrer vers Haiku 4.5 (<code>claude-haiku-4-5-20251001</code>) avant cette date. Vérifier Kura V4 + bot Telegram.
+      <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-4">
+        <p className="text-sm font-medium text-red-300">Claude Haiku 3 déprécié le 19/04/2026</p>
+        <p className="mt-1 text-xs text-red-300/60">
+          Migrer vers Haiku 4.5 (<code>claude-haiku-4-5-20251001</code>) avant cette date. Vérifier
+          Kura V4 + bot Telegram.
         </p>
       </div>
     </div>

@@ -17,7 +17,9 @@ export type AuthorizedUser = {
 export async function requireAuth(): Promise<AuthorizedUser> {
   const supabase = await createClient();
 
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!user?.email) {
     redirect("/login");
@@ -58,7 +60,9 @@ export async function requireAdmin(): Promise<AuthorizedUser> {
 export async function getCurrentUser(): Promise<AuthorizedUser | null> {
   try {
     const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
     if (!user?.email) return null;
 

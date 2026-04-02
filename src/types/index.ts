@@ -1,7 +1,5 @@
 // Reponse API standard
-export type ApiResponse<T> =
-  | { data: T; error: null }
-  | { data: null; error: string };
+export type ApiResponse<T> = { data: T; error: null } | { data: null; error: string };
 
 // Reponse paginee
 export type PaginatedResponse<T> = {

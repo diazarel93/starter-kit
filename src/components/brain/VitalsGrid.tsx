@@ -1,4 +1,6 @@
 import { getAllCosts, getGithubBuilds, getStripeMRR } from "@/lib/brain-data";
+import { MetricCard } from "@/components/brain/MetricCard";
+import type { ProjectKey } from "@/components/brain/ProjectSwitcher";
 
 interface Vital {
   label: string;
@@ -8,32 +10,42 @@ interface Vital {
   status?: "ok" | "warn" | "danger";
 }
 
-export async function VitalsGrid() {
+const REPO_BY_PROJECT: Record<ProjectKey, string[]> = {
+  all: ["diazarel93/atelier-banlieuwood", "diazarel93/lokivo-app", "diazarel93/starter-kit"],
+  kura: [],
+  banlieuwood: ["diazarel93/atelier-banlieuwood"],
+  lokivo: ["diazarel93/lokivo-app"],
+};
+
+export async function VitalsGrid({ project = "all" }: { project?: ProjectKey }) {
   const [costs, builds, stripe] = await Promise.all([
     getAllCosts(),
     getGithubBuilds(),
     getStripeMRR(),
   ]);
 
-  // Builds
-  const passing = builds.filter((b) => b.status === "success").length;
-  const failing = builds.filter((b) => b.status === "failure").length;
-  const allUnknown = builds.every((b) => b.status === "unknown");
-  const buildsValue = allUnknown ? "—" : `${passing}/${builds.length}`;
-  const buildsStatus: Vital["status"] = failing > 0 ? "danger" : passing === builds.length ? "ok" : "warn";
+  const reposToShow = REPO_BY_PROJECT[project];
+  const filteredBuilds =
+    reposToShow.length > 0 ? builds.filter((b) => reposToShow.includes(b.repo)) : builds;
 
-  // Coûts APIs
+  const passing = filteredBuilds.filter((b) => b.status === "success").length;
+  const failing = filteredBuilds.filter((b) => b.status === "failure").length;
+  const allUnknown = filteredBuilds.every((b) => b.status === "unknown");
+  const buildsValue =
+    allUnknown || filteredBuilds.length === 0 ? "—" : `${passing}/${filteredBuilds.length}`;
+  const buildsStatus: Vital["status"] =
+    failing > 0 ? "danger" : passing === filteredBuilds.length && passing > 0 ? "ok" : "warn";
+
   const totalCost = parseFloat(costs.total_usd);
   const apiStatus: Vital["status"] = totalCost > 20 ? "danger" : totalCost > 8 ? "warn" : "ok";
   const apiSub = costs.openai
     ? `Anthropic $${costs.anthropic.anthropic_usd} · OpenAI $${costs.openai.usd}`
     : `Anthropic $${costs.anthropic.anthropic_usd} · ${costs.anthropic.calls} appels`;
 
-  // Stripe MRR
   const mrr = stripe ? parseInt(stripe.mrr_usd) : 0;
   const mrrDisplay = stripe ? `$${stripe.mrr_usd}` : "$0";
   const arrDisplay = stripe ? `ARR: $${stripe.arr_usd}` : "ARR: $0";
-  const mrrStatus: Vital["status"] = mrr > 500 ? "ok" : mrr > 0 ? "warn" : "warn";
+  const mrrStatus: Vital["status"] = mrr > 500 ? "ok" : "warn";
 
   const vitals: Vital[] = [
     {
@@ -44,25 +56,18 @@ export async function VitalsGrid() {
       status: mrrStatus,
     },
     {
-      label: "Burn Rate",
-      value: `$${costs.total_usd}/mois`,
-      sub: "APIs uniquement",
+      label: "Coût APIs / mois",
+      value: `$${costs.total_usd}`,
+      sub: apiSub,
       trend: "flat",
       status: apiStatus,
     },
     {
       label: "Utilisateurs actifs",
-      value: "—",
-      sub: "Tous projets",
+      value: "0",
+      sub: project === "all" ? "Tous projets" : project,
       trend: "flat",
-      status: "ok",
-    },
-    {
-      label: "Coût APIs",
-      value: `$${costs.total_usd}`,
-      sub: apiSub,
-      trend: "flat",
-      status: apiStatus,
+      status: "warn",
     },
     {
       label: "Marge brute",
@@ -82,37 +87,14 @@ export async function VitalsGrid() {
 
   return (
     <div>
-      <h2 className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-3">
+      <h2 className="mb-3 text-xs font-semibold tracking-widest text-white/30 uppercase">
         Métriques Clés
       </h2>
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
         {vitals.map((vital) => (
-          <VitalCard key={vital.label} {...vital} />
+          <MetricCard key={vital.label} {...vital} />
         ))}
       </div>
-    </div>
-  );
-}
-
-function VitalCard({ label, value, sub, trend, status }: Vital) {
-  const statusColor = {
-    ok: "border-green-500/20",
-    warn: "border-yellow-500/30",
-    danger: "border-red-500/30",
-  }[status ?? "ok"];
-
-  const trendIcon = { up: "↑", down: "↓", flat: "—" }[trend ?? "flat"];
-  const trendColor =
-    trend === "up" ? "text-green-400" : trend === "down" ? "text-red-400" : "text-white/20";
-
-  return (
-    <div className={`bg-white/3 border ${statusColor} rounded-lg p-4`}>
-      <div className="flex items-start justify-between">
-        <p className="text-xs text-white/30 uppercase tracking-wide">{label}</p>
-        <span className={`text-xs ${trendColor}`}>{trendIcon}</span>
-      </div>
-      <p className="text-2xl font-bold text-white mt-2">{value}</p>
-      {sub && <p className="text-xs text-white/30 mt-1">{sub}</p>}
     </div>
   );
 }
