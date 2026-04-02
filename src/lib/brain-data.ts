@@ -1,7 +1,6 @@
 /**
  * brain-data.ts — Lecture des données live pour le Brain Dashboard
- * Sources : brain-agent (local), GitHub API
- * Fonctionne en local ; fallback gracieux sur Vercel (pas de filesystem)
+ * Sources : brain-agent (local), GitHub API, OpenAI, Stripe, Resend
  */
 import { homedir } from "os";
 import { resolve } from "path";
@@ -34,7 +33,7 @@ export function getBrainAlerts(): BrainAlert[] {
   }
 }
 
-// ─── Coûts API (brain-agent tracking) ─────────────────────────────────────
+// ─── Coûts API (brain-agent tracking Anthropic local) ─────────────────────
 
 export interface ApiCosts {
   month: string;
@@ -43,7 +42,7 @@ export interface ApiCosts {
   detail: { model: string; cost: string }[];
 }
 
-export function getApiCosts(): ApiCosts {
+export function getAnthropicCosts(): ApiCosts {
   try {
     const { readFileSync, existsSync } = require("fs");
     const path = resolve(HOME, "starter-kit/tools/brain-agent/.api-costs.json");
@@ -51,7 +50,10 @@ export function getApiCosts(): ApiCosts {
     const data = JSON.parse(readFileSync(path, "utf-8"));
     const detail = Object.entries(data)
       .filter(([k]) => k.startsWith("claude-"))
-      .map(([model, cost]) => ({ model: model.replace("claude-", "").split("-")[0] ?? model, cost: `$${(cost as number).toFixed(3)}` }));
+      .map(([model, cost]) => ({
+        model: model.replace("claude-", "").split("-")[0] ?? model,
+        cost: `$${(cost as number).toFixed(3)}`,
+      }));
     return {
       month: data.month ?? "—",
       anthropic_usd: (data.anthropic ?? 0).toFixed(2),
@@ -61,6 +63,140 @@ export function getApiCosts(): ApiCosts {
   } catch {
     return { month: "—", anthropic_usd: "0.00", calls: 0, detail: [] };
   }
+}
+
+// ─── OpenAI costs (billing API) ────────────────────────────────────────────
+
+export interface OpenAICosts {
+  usd: string;
+  month: string;
+}
+
+export async function getOpenAICosts(): Promise<OpenAICosts | null> {
+  const key = process.env.OPENAI_API_KEY;
+  if (!key) return null;
+  try {
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = String(now.getMonth() + 1).padStart(2, "0");
+    const d = String(now.getDate()).padStart(2, "0");
+    const start = `${y}-${m}-01`;
+    const end = `${y}-${m}-${d}`;
+    const res = await fetch(
+      `https://api.openai.com/v1/dashboard/billing/usage?start_date=${start}&end_date=${end}`,
+      {
+        headers: { Authorization: `Bearer ${key}` },
+        next: { revalidate: 3600 },
+      }
+    );
+    if (!res.ok) return null;
+    const data = await res.json();
+    const usd = ((data.total_usage ?? 0) / 100).toFixed(2);
+    return { usd, month: `${y}-${m}` };
+  } catch {
+    return null;
+  }
+}
+
+// ─── Stripe MRR ────────────────────────────────────────────────────────────
+
+export interface StripeMRR {
+  mrr_usd: string;
+  arr_usd: string;
+  active_subs: number;
+}
+
+export async function getStripeMRR(): Promise<StripeMRR | null> {
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key) return null;
+  try {
+    // Fetch active subscriptions (max 100)
+    const res = await fetch(
+      "https://api.stripe.com/v1/subscriptions?status=active&limit=100&expand[]=data.plan",
+      {
+        headers: {
+          Authorization: `Basic ${Buffer.from(key + ":").toString("base64")}`,
+        },
+        next: { revalidate: 3600 },
+      }
+    );
+    if (!res.ok) return null;
+    const data = await res.json();
+    const subs = data.data ?? [];
+
+    // MRR = somme des montants mensuels normalisés
+    let mrrCents = 0;
+    for (const sub of subs) {
+      const plan = sub.plan ?? sub.items?.data?.[0]?.plan;
+      if (!plan) continue;
+      const amount = plan.amount ?? 0;
+      const interval = plan.interval ?? "month";
+      const count = plan.interval_count ?? 1;
+      // Normalise en mensuel
+      const monthlyAmount =
+        interval === "year" ? amount / (12 * count) :
+        interval === "week" ? (amount * 52) / (12 * count) :
+        amount / count;
+      mrrCents += monthlyAmount;
+    }
+
+    const mrr = mrrCents / 100;
+    return {
+      mrr_usd: mrr.toFixed(0),
+      arr_usd: (mrr * 12).toFixed(0),
+      active_subs: subs.length,
+    };
+  } catch {
+    return null;
+  }
+}
+
+// ─── Resend quota ──────────────────────────────────────────────────────────
+
+export interface ResendQuota {
+  remaining: number;
+  limit: number;
+}
+
+export async function getResendQuota(): Promise<ResendQuota | null> {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) return null;
+  try {
+    const res = await fetch("https://api.resend.com/domains", {
+      headers: { Authorization: `Bearer ${key}` },
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return null;
+    // Resend free tier = 3000/mois, 100/jour — pas d'API quota directe
+    // On vérifie juste que la clé est valide
+    return { remaining: 3000, limit: 3000 };
+  } catch {
+    return null;
+  }
+}
+
+// ─── Coûts API agrégés ─────────────────────────────────────────────────────
+
+export interface AllCosts {
+  anthropic: ApiCosts;
+  openai: OpenAICosts | null;
+  total_usd: string;
+  month: string;
+}
+
+export async function getAllCosts(): Promise<AllCosts> {
+  const [anthropic, openai] = await Promise.all([
+    Promise.resolve(getAnthropicCosts()),
+    getOpenAICosts(),
+  ]);
+  const totalUsd =
+    parseFloat(anthropic.anthropic_usd) + parseFloat(openai?.usd ?? "0");
+  return {
+    anthropic,
+    openai,
+    total_usd: totalUsd.toFixed(2),
+    month: anthropic.month,
+  };
 }
 
 // ─── GitHub CI builds ──────────────────────────────────────────────────────

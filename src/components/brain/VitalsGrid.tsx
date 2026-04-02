@@ -1,4 +1,4 @@
-import { getApiCosts, getGithubBuilds } from "@/lib/brain-data";
+import { getAllCosts, getGithubBuilds, getStripeMRR } from "@/lib/brain-data";
 
 interface Vital {
   label: string;
@@ -9,33 +9,68 @@ interface Vital {
 }
 
 export async function VitalsGrid() {
-  const [costs, builds] = await Promise.all([
-    Promise.resolve(getApiCosts()),
+  const [costs, builds, stripe] = await Promise.all([
+    getAllCosts(),
     getGithubBuilds(),
+    getStripeMRR(),
   ]);
 
+  // Builds
   const passing = builds.filter((b) => b.status === "success").length;
   const failing = builds.filter((b) => b.status === "failure").length;
-  const buildsValue = builds.every((b) => b.status === "unknown")
-    ? "—"
-    : `${passing}/${builds.length}`;
+  const allUnknown = builds.every((b) => b.status === "unknown");
+  const buildsValue = allUnknown ? "—" : `${passing}/${builds.length}`;
   const buildsStatus: Vital["status"] = failing > 0 ? "danger" : passing === builds.length ? "ok" : "warn";
 
-  const apiCostNum = parseFloat(costs.anthropic_usd);
-  const apiStatus: Vital["status"] = apiCostNum > 5 ? "warn" : apiCostNum > 20 ? "danger" : "ok";
+  // Coûts APIs
+  const totalCost = parseFloat(costs.total_usd);
+  const apiStatus: Vital["status"] = totalCost > 20 ? "danger" : totalCost > 8 ? "warn" : "ok";
+  const apiSub = costs.openai
+    ? `Anthropic $${costs.anthropic.anthropic_usd} · OpenAI $${costs.openai.usd}`
+    : `Anthropic $${costs.anthropic.anthropic_usd} · ${costs.anthropic.calls} appels`;
+
+  // Stripe MRR
+  const mrr = stripe ? parseInt(stripe.mrr_usd) : 0;
+  const mrrDisplay = stripe ? `$${stripe.mrr_usd}` : "$0";
+  const arrDisplay = stripe ? `ARR: $${stripe.arr_usd}` : "ARR: $0";
+  const mrrStatus: Vital["status"] = mrr > 500 ? "ok" : mrr > 0 ? "warn" : "warn";
 
   const vitals: Vital[] = [
-    { label: "MRR Total", value: "$0", sub: "ARR: $0", trend: "flat", status: "warn" },
-    { label: "Burn Rate", value: "$0/mois", sub: "Runway: ∞", trend: "flat", status: "ok" },
-    { label: "Utilisateurs actifs", value: "—", sub: "Tous projets", trend: "flat", status: "ok" },
     {
-      label: "Coût APIs",
-      value: `$${costs.anthropic_usd}`,
-      sub: `${costs.calls} appels · ${costs.month}`,
+      label: "MRR Total",
+      value: mrrDisplay,
+      sub: stripe ? `${stripe.active_subs} abonnés · ${arrDisplay}` : arrDisplay,
+      trend: mrr > 0 ? "up" : "flat",
+      status: mrrStatus,
+    },
+    {
+      label: "Burn Rate",
+      value: `$${costs.total_usd}/mois`,
+      sub: "APIs uniquement",
       trend: "flat",
       status: apiStatus,
     },
-    { label: "Marge brute", value: "—", sub: "Revenus - Coûts", trend: "flat", status: "ok" },
+    {
+      label: "Utilisateurs actifs",
+      value: "—",
+      sub: "Tous projets",
+      trend: "flat",
+      status: "ok",
+    },
+    {
+      label: "Coût APIs",
+      value: `$${costs.total_usd}`,
+      sub: apiSub,
+      trend: "flat",
+      status: apiStatus,
+    },
+    {
+      label: "Marge brute",
+      value: mrr > 0 ? `${Math.round(((mrr - totalCost) / mrr) * 100)}%` : "—",
+      sub: mrr > 0 ? `$${(mrr - totalCost).toFixed(0)}/mois` : "Pas encore de revenus",
+      trend: mrr > totalCost ? "up" : "flat",
+      status: mrr > totalCost ? "ok" : "warn",
+    },
     {
       label: "Builds CI",
       value: buildsValue,
