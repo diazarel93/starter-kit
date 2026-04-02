@@ -40,7 +40,7 @@ export default async function MarchePage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-display text-3xl text-white">📡 Marché & Veille</h1>
+        <h1 className="font-display text-4xl text-white">📡 MARCHÉ & VEILLE</h1>
         <p className="text-white/40 text-sm mt-1">Concurrents, WADA, stack tech, opportunités</p>
       </div>
 

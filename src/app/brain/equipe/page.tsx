@@ -14,7 +14,7 @@ export default async function EquipePage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-display text-3xl text-white">👥 Équipe & Accès</h1>
+        <h1 className="font-display text-4xl text-white">👥 ÉQUIPE & ACCÈS</h1>
         <p className="text-white/40 text-sm mt-1">Rôles, permissions, beta testeurs, sessions actives</p>
       </div>
 
@@ -37,18 +37,13 @@ export default async function EquipePage() {
       {/* Membres actifs */}
       <div className="bg-white/3 border border-white/5 rounded-lg p-4">
         <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">Membres actifs</h3>
-        <p className="text-sm text-white/30">Phase 5 — Connexion Supabase authorized_users en cours</p>
+        <p className="text-sm text-white/20 italic">Aucun membre ajouté</p>
       </div>
 
       {/* Beta testeurs */}
       <div className="bg-white/3 border border-white/5 rounded-lg p-4">
         <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">Beta testeurs</h3>
-        <p className="text-sm text-white/30">Phase 5 — Liste des beta testeurs par projet</p>
-        <div className="mt-3">
-          <button className="text-xs bg-[#FF6B35]/20 text-[#FF6B35] hover:bg-[#FF6B35]/30 transition-colors px-3 py-1.5 rounded">
-            + Inviter un beta testeur
-          </button>
-        </div>
+        <p className="text-sm text-white/20 italic">Aucun beta testeur</p>
       </div>
     </div>
   );

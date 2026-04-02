@@ -47,7 +47,7 @@ export default async function LegalPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-display text-3xl text-white">⚖️ Légal & RGPD</h1>
+        <h1 className="font-display text-4xl text-white">⚖️ LÉGAL & RGPD</h1>
         <p className="text-white/40 text-sm mt-1">Obligations réglementaires, compliance, fiscal</p>
       </div>
 
@@ -77,11 +77,6 @@ export default async function LegalPage() {
         ))}
       </div>
 
-      <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
-        <p className="text-xs text-yellow-400/70">
-          Phase 7 — Les données légales seront remplies manuellement. Connecter un service juridique en V2.
-        </p>
-      </div>
     </div>
   );
 }
