@@ -5,7 +5,10 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { sendTelegram } from "./tools/telegram.js";
 import { getAllProjectsStatus } from "./tools/git.js";
-import { readDecisions, readGoals, readMemory, appendToMemory } from "./tools/files.js";
+import { readGoals, readMemory, appendToMemory } from "./tools/files.js";
+import { getApiCosts, checkGithubBuilds } from "./tools/apis.js";
+import { webSearch, checkWadaUpdates } from "./tools/search.js";
+import { createTask, saveAlert, getRecentAlerts } from "./tools/tasks.js";
 
 // Lazy init — ANTHROPIC_API_KEY doit être set avant runAgentCycle()
 let client = null;
@@ -14,52 +17,104 @@ function getClient() {
   return client;
 }
 
-// Outils disponibles pour l'agent
 const TOOLS = [
   {
     name: "send_telegram",
-    description: "Envoyer un message Telegram à Romain. Utiliser pour alertes, tips, résumés. Max 1 message par cycle sauf urgence critique.",
+    description: "Envoyer un message Telegram à Romain. Max 1 message/cycle sauf urgence critique (P0).",
     input_schema: {
       type: "object",
       properties: {
-        message: { type: "string", description: "Message en Markdown Telegram. Max 500 chars. Concis et actionnable." },
-        silent: { type: "boolean", description: "true = pas de notification sonore (pour messages non urgents)" },
+        message: { type: "string", description: "Markdown Telegram. Max 500 chars. Concis, actionnable." },
+        silent: { type: "boolean", description: "true = pas de son (messages non urgents)" },
       },
       required: ["message"],
     },
   },
   {
     name: "get_projects_status",
-    description: "Récupérer l'état git de tous les projets (branch, dernier commit, uncommitted changes, commits non pushés)",
+    description: "État git de tous les projets (branch, dernier commit, uncommitted, non pushés)",
     input_schema: { type: "object", properties: {}, required: [] },
   },
   {
-    name: "save_to_memory",
-    description: "Sauvegarder une information importante en mémoire persistante pour les prochains cycles",
+    name: "get_api_costs",
+    description: "Coûts APIs ce mois : Anthropic brain-agent, GitHub rate limit",
+    input_schema: { type: "object", properties: {}, required: [] },
+  },
+  {
+    name: "check_builds",
+    description: "Statut CI/CD GitHub Actions pour tous les repos (dernier run, succès/échec)",
+    input_schema: { type: "object", properties: {}, required: [] },
+  },
+  {
+    name: "web_search",
+    description: "Recherche web (veille WADA, tech stack, RegTech). Utiliser pour vérifier des infos récentes.",
     input_schema: {
       type: "object",
       properties: {
-        key: { type: "string", description: "Clé mémoire (ex: 'last_alert_haiku', 'kura_build_failing_since')" },
-        value: { type: "string", description: "Valeur à mémoriser" },
+        query: { type: "string", description: "Requête de recherche en anglais de préférence" },
+        maxResults: { type: "number", description: "Nombre de résultats (défaut 3)" },
+      },
+      required: ["query"],
+    },
+  },
+  {
+    name: "check_wada",
+    description: "Vérifier si le site WADA est accessible et si la liste 2026 est présente",
+    input_schema: { type: "object", properties: {}, required: [] },
+  },
+  {
+    name: "create_task",
+    description: "Créer une tâche/décision dans decisions.md (pour choses importantes à ne pas oublier)",
+    input_schema: {
+      type: "object",
+      properties: {
+        title: { type: "string", description: "Titre court de la tâche" },
+        context: { type: "string", description: "Pourquoi c'est important, contexte" },
+        priority: { type: "string", enum: ["critical", "high", "normal", "low"] },
+        project: { type: "string", description: "Projet concerné" },
+      },
+      required: ["title", "context"],
+    },
+  },
+  {
+    name: "get_recent_alerts",
+    description: "Lire les alertes récentes pour éviter les doublons",
+    input_schema: {
+      type: "object",
+      properties: { hours: { type: "number", description: "Dernières X heures (défaut 24)" } },
+      required: [],
+    },
+  },
+  {
+    name: "save_to_memory",
+    description: "Mémoriser une info pour les prochains cycles",
+    input_schema: {
+      type: "object",
+      properties: {
+        key: { type: "string" },
+        value: { type: "string" },
       },
       required: ["key", "value"],
     },
   },
   {
     name: "do_nothing",
-    description: "Ne rien faire ce cycle. Utiliser quand tout va bien et qu'aucune action n'est nécessaire.",
+    description: "Ne rien faire ce cycle. Utiliser quand tout est nominal.",
     input_schema: { type: "object", properties: { reason: { type: "string" } }, required: ["reason"] },
   },
 ];
 
 async function executeTool(name, input) {
   switch (name) {
-    case "send_telegram":
-      return await sendTelegram(input);
-    case "get_projects_status":
-      return getAllProjectsStatus();
-    case "save_to_memory":
-      return appendToMemory(input.key, input.value);
+    case "send_telegram":       return await sendTelegram(input);
+    case "get_projects_status": return getAllProjectsStatus();
+    case "get_api_costs":       return await getApiCosts();
+    case "check_builds":        return await checkGithubBuilds();
+    case "web_search":          return await webSearch(input);
+    case "check_wada":          return await checkWadaUpdates();
+    case "create_task":         return createTask(input);
+    case "get_recent_alerts":   return getRecentAlerts(input);
+    case "save_to_memory":      return appendToMemory(input.key, input.value);
     case "do_nothing":
       console.log(`[agent] Rien à faire : ${input.reason}`);
       return { ok: true };
@@ -73,67 +128,73 @@ export async function runAgentCycle() {
   const memory = readMemory();
   const goals = readGoals();
   const hour = now.getHours();
+  const isSilent = hour >= 22 || hour < 7;
 
-  // Contexte injecté dans le system prompt
   const context = `
-Date : ${now.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" })}
+Date : ${now.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
 Heure : ${hour}h${String(now.getMinutes()).padStart(2, "0")}
-Mémoire : ${JSON.stringify(memory, null, 2)}
+Mode silencieux : ${isSilent ? "OUI (22h-7h)" : "non"}
+Mémoire persistante :
+${JSON.stringify(memory, null, 2)}
 `.trim();
 
-  const systemPrompt = `Tu es le cerveau autonome de Romain Ndiaye Chansarel, entrepreneur tech (Kura, Banlieuwood, Lokivo).
+  const systemPrompt = `Tu es le cerveau autonome de Romain Ndiaye Chansarel, entrepreneur tech.
+Projets : Kura (RegTech antidopage), Banlieuwood (éducation cinéma), Lokivo (marketplace), Kura Player (biomarqueurs).
 
-Tu tournes en boucle toutes les 30 minutes et tu dois décider si quelque chose nécessite une action.
+Tu tournes toutes les 30 minutes. Ton job : détecter ce qui mérite attention et agir si besoin.
 
-CONTEXTE ACTUEL :
+CONTEXTE :
 ${context}
 
-TES OBJECTIFS :
+OBJECTIFS :
 ${goals}
 
-RÈGLES ABSOLUES :
-- Envoyer MAX 1 message Telegram par cycle (sauf alerte critique = max 2)
-- Ne pas répéter un message envoyé dans les 6 dernières heures (vérifie la mémoire)
-- Entre 22h et 7h : mode silencieux — n'envoyer que si urgence P0
-- Préférer do_nothing si tout va bien
-- Messages Telegram : courts, actionnables, en français
+RÈGLES :
+- MAX 1 message Telegram/cycle (2 si urgence P0)
+- Mode silencieux ${isSilent ? "ACTIF → ne pas envoyer de message sauf P0" : "inactif"}
+- Toujours vérifier get_recent_alerts avant d'envoyer pour éviter les doublons
+- Préférer do_nothing si rien d'anormal
+- Messages : français, courts, 1 action claire
+
+PRIORITÉS DE SURVEILLANCE :
+🔴 P0 : build cassé en production, secret exposé, coût API × 10 normal
+🟠 P1 : commits non pushés depuis 24h+, Haiku 3 dépréciation (19/04/2026), WADA update
+🟡 P2 : TODO critiques, dette technique, opportunités veille
+⚪ P3 : infos utiles à mémoriser, stats
 
 PROCESSUS :
-1. Appelle get_projects_status pour voir l'état des projets
-2. Analyse : y a-t-il quelque chose d'anormal ou d'important ?
-3. Décide : action nécessaire ou do_nothing ?
-4. Si action : envoie 1 message et/ou mémorise
+1. get_projects_status → état git
+2. Optionnel si pertinent : get_api_costs, check_builds, check_wada, web_search
+3. get_recent_alerts → éviter doublons
+4. Décide : do_nothing ou action(s)
 `;
 
   const messages = [
-    { role: "user", content: "Analyse le contexte et décide quoi faire ce cycle." }
+    { role: "user", content: "Lance ton cycle d'analyse." }
   ];
 
-  // Boucle agentic (max 5 tours)
-  for (let turn = 0; turn < 5; turn++) {
+  for (let turn = 0; turn < 8; turn++) {
     const response = await getClient().messages.create({
-      model: "claude-haiku-4-5-20251001", // Haiku = moins cher pour surveiller en continu
+      model: "claude-haiku-4-5-20251001",
       max_tokens: 1024,
       system: systemPrompt,
       tools: TOOLS,
       messages,
     });
 
-    // Ajouter la réponse à l'historique
     messages.push({ role: "assistant", content: response.content });
 
     if (response.stop_reason === "end_turn") {
-      console.log(`[agent] Cycle terminé après ${turn + 1} tour(s)`);
+      console.log(`[agent] Cycle OK — ${turn + 1} tour(s)`);
       break;
     }
 
     if (response.stop_reason !== "tool_use") break;
 
-    // Exécuter tous les tool calls
     const toolResults = [];
     for (const block of response.content) {
       if (block.type !== "tool_use") continue;
-      console.log(`[agent] → ${block.name}`, JSON.stringify(block.input).substring(0, 80));
+      console.log(`[agent] → ${block.name}`, JSON.stringify(block.input).substring(0, 100));
       const result = await executeTool(block.name, block.input);
       toolResults.push({
         type: "tool_result",

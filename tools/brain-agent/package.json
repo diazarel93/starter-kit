@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    "once": "node index.js --once"
+    "once": "node index.js --once",
+    "idea": "node idea.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.82.0",
