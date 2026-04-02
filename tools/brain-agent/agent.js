@@ -9,6 +9,7 @@ import { readGoals, readMemory, appendToMemory } from "./tools/files.js";
 import { getApiCosts, checkGithubBuilds } from "./tools/apis.js";
 import { webSearch, checkWadaUpdates } from "./tools/search.js";
 import { createTask, saveAlert, getRecentAlerts } from "./tools/tasks.js";
+import { loadPatterns, loadEvents } from "./tools/patterns.js";
 
 // Lazy init — ANTHROPIC_API_KEY doit être set avant runAgentCycle()
 let client = null;
@@ -98,6 +99,11 @@ const TOOLS = [
     },
   },
   {
+    name: "get_patterns",
+    description: "Lire les patterns récurrents détectés (bugs, incompréhensions, problèmes systémiques)",
+    input_schema: { type: "object", properties: {}, required: [] },
+  },
+  {
     name: "do_nothing",
     description: "Ne rien faire ce cycle. Utiliser quand tout est nominal.",
     input_schema: { type: "object", properties: { reason: { type: "string" } }, required: ["reason"] },
@@ -115,6 +121,8 @@ async function executeTool(name, input) {
     case "create_task":         return createTask(input);
     case "get_recent_alerts":   return getRecentAlerts(input);
     case "save_to_memory":      return appendToMemory(input.key, input.value);
+    case "get_patterns":
+      return { patterns: loadPatterns().filter((p) => !p.resolved).slice(-10) };
     case "do_nothing":
       console.log(`[agent] Rien à faire : ${input.reason}`);
       return { ok: true };

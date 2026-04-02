@@ -177,7 +177,12 @@ async function handleHelp(bot, chatId) {
 *Veille & Info :*
 /veille — Rapport veille tech maintenant
 /agents — Quel agent utiliser selon ta situation
+/patterns — Patterns & bugs récurrents détectés
 /status — État du système
+
+*Cerveau Autonome :*
+/dispatch [problème] — Router vers le bon agent
+/idea [idée] — Générer un plan complet depuis une idée
 
 *Contrôle :*
 /help — Ce menu
@@ -441,6 +446,62 @@ bot.onText(/\/veille/, async (msg) => {
 bot.onText(/\/status/, async (msg) => {
   if (String(msg.chat.id) !== chatId) return;
   await handleStatus(bot, chatId);
+});
+
+// /dispatch — Router un problème vers le bon agent
+bot.onText(/\/dispatch (.+)/, async (msg, match) => {
+  if (String(msg.chat.id) !== chatId) return;
+  const problem = match[1];
+  await bot.sendMessage(chatId, `🔍 _Analyse du problème en cours..._`, { parse_mode: "Markdown" });
+  try {
+    const { execSync } = await import("child_process");
+    execSync(
+      `node ${resolve(__dirname, "../brain-agent/dispatch.js")} "${problem.replace(/"/g, '\\"')}"`,
+      { env: { ...process.env, HOME: process.env.HOME } }
+    );
+  } catch (e) {
+    await bot.sendMessage(chatId, `⚠️ Erreur dispatcher : ${e.message.substring(0, 200)}`);
+  }
+});
+
+// /idea — Lancer l'agent Idée sur une nouvelle idée
+bot.onText(/\/idea (.+)/, async (msg, match) => {
+  if (String(msg.chat.id) !== chatId) return;
+  const idea = match[1];
+  await bot.sendMessage(chatId, `💡 _Analyse de ton idée en cours... (Sonnet, ~2min)_`, { parse_mode: "Markdown" });
+  try {
+    const { execSync } = await import("child_process");
+    execSync(
+      `node ${resolve(__dirname, "../brain-agent/idea.js")} "${idea.replace(/"/g, '\\"')}"`,
+      { env: { ...process.env, HOME: process.env.HOME }, timeout: 120000 }
+    );
+  } catch (e) {
+    await bot.sendMessage(chatId, `⚠️ Erreur idea agent : ${e.message.substring(0, 200)}`);
+  }
+});
+
+// /patterns — Voir les patterns détectés
+bot.onText(/\/patterns/, async (msg) => {
+  if (String(msg.chat.id) !== chatId) return;
+  try {
+    const { readFileSync, existsSync } = await import("fs");
+    const path = resolve(__dirname, "../brain-agent/.detected-patterns.json");
+    if (!existsSync(path)) {
+      await bot.sendMessage(chatId, "Aucun pattern détecté pour l'instant.");
+      return;
+    }
+    const patterns = JSON.parse(readFileSync(path, "utf-8")).filter((p) => !p.resolved).slice(-5);
+    if (!patterns.length) {
+      await bot.sendMessage(chatId, "✅ Aucun pattern non résolu.");
+      return;
+    }
+    const msg2 = `*🔍 Patterns détectés*\n\n${patterns
+      .map((p) => `*${p.title}* (×${p.frequency})\n_${p.description.substring(0, 100)}_\n→ ${p.suggestedAction ?? ""}`)
+      .join("\n\n")}`;
+    await bot.sendMessage(chatId, msg2, { parse_mode: "Markdown" });
+  } catch (e) {
+    await bot.sendMessage(chatId, `Erreur : ${e.message}`);
+  }
 });
 
 // ─── BOUTONS (callback_query) ───────────────────────────────────────────────
