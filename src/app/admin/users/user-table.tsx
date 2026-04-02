@@ -76,7 +76,7 @@ export function UserTable({ users }: { users: AuthorizedUser[] }) {
               <th className="px-4 py-3 text-left font-medium">Role</th>
               <th className="px-4 py-3 text-left font-medium">Statut</th>
               <th className="px-4 py-3 text-left font-medium">Derniere connexion</th>
-              <th className="px-4 py-3"></th>
+              <th className="px-4 py-3" />
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
