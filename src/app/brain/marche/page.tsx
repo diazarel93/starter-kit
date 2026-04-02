@@ -1,6 +1,10 @@
 
-export default async function MarchePage({ searchParams }: { searchParams: Promise<{ p?: string }> }) {
-  await searchParams;
+export default async function MarchePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ p?: string }>;
+}) {
+  const { p } = await searchParams;
 
   const veille = [
     {
@@ -41,9 +45,15 @@ export default async function MarchePage({ searchParams }: { searchParams: Promi
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-display text-4xl text-white">📡 MARCHÉ & VEILLE</h1>
+        <h1 className="font-display text-4xl text-white">MARCHÉ & VEILLE</h1>
         <p className="text-white/40 text-sm mt-1">Concurrents, WADA, stack tech, opportunités</p>
       </div>
+
+      {p && p !== "all" && (
+        <p className="text-xs text-white/20 bg-white/3 border border-white/5 rounded px-3 py-2">
+          Vue globale — cette section n&apos;est pas filtrée par projet
+        </p>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {veille.map((cat) => (
@@ -55,7 +65,9 @@ export default async function MarchePage({ searchParams }: { searchParams: Promi
               {cat.items.map((item) => (
                 <div key={item.label} className="flex items-start justify-between gap-2">
                   <span className="text-sm text-white/60 flex-1">{item.label}</span>
-                  <span className={`text-xs px-2 py-0.5 rounded whitespace-nowrap ${badgeStyle[item.badge as keyof typeof badgeStyle]}`}>
+                  <span
+                    className={`text-xs px-2 py-0.5 rounded whitespace-nowrap ${badgeStyle[item.badge as keyof typeof badgeStyle]}`}
+                  >
                     {item.status}
                   </span>
                 </div>
@@ -66,9 +78,10 @@ export default async function MarchePage({ searchParams }: { searchParams: Promi
       </div>
 
       <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
-        <p className="text-sm text-red-300 font-medium">⚠️ Claude Haiku 3 déprécié le 19/04/2026</p>
+        <p className="text-sm text-red-300 font-medium">Claude Haiku 3 déprécié le 19/04/2026</p>
         <p className="text-xs text-red-300/60 mt-1">
-          Migrer vers Haiku 4.5 (<code>claude-haiku-4-5-20251001</code>) avant cette date. Vérifier Kura V4 + bot Telegram.
+          Migrer vers Haiku 4.5 (<code>claude-haiku-4-5-20251001</code>) avant cette date. Vérifier
+          Kura V4 + bot Telegram.
         </p>
       </div>
     </div>

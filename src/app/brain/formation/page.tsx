@@ -3,7 +3,9 @@ import { resolve } from "path";
 
 function getCurrentWeekDay() {
   const now = new Date();
-  const dayOfYear = Math.floor((now.getTime() - new Date(now.getFullYear(), 0, 0).getTime()) / 86400000);
+  const dayOfYear = Math.floor(
+    (now.getTime() - new Date(now.getFullYear(), 0, 0).getTime()) / 86400000,
+  );
   const week = Math.ceil(dayOfYear / 7);
   const day = now.getDay() === 0 ? 7 : now.getDay(); // 1=lundi, 7=dimanche
   return { week, day, dayOfYear };
@@ -19,10 +21,14 @@ function loadCurriculum(week: number, day: number) {
   }
 }
 
-export default async function FormationPage({ searchParams }: { searchParams: Promise<{ p?: string }> }) {
-  await searchParams;
+export default async function FormationPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ p?: string }>;
+}) {
+  const { p } = await searchParams;
 
-  const { week, day, dayOfYear } = getCurrentWeekDay();
+  const { week, day } = getCurrentWeekDay();
   const lesson = loadCurriculum(Math.min(week, 4), Math.min(day, 7));
 
   const skills = [
@@ -36,26 +42,38 @@ export default async function FormationPage({ searchParams }: { searchParams: Pr
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-display text-4xl text-white">🎯 FORMATION PERSONNELLE</h1>
-        <p className="text-white/40 text-sm mt-1">Curriculum Kura, coaching bot Telegram, progression</p>
+        <h1 className="font-display text-4xl text-white">FORMATION PERSONNELLE</h1>
+        <p className="text-white/40 text-sm mt-1">
+          Curriculum Kura, coaching bot Telegram, progression
+        </p>
       </div>
 
-      {/* Statut aujourd'hui */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      {p && p !== "all" && (
+        <p className="text-xs text-white/20 bg-white/3 border border-white/5 rounded px-3 py-2">
+          Vue globale — cette section n&apos;est pas filtrée par projet
+        </p>
+      )}
+
+      {/* Statut aujourd&apos;hui */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
         <div className="bg-white/3 border border-white/5 rounded-lg p-4">
-          <p className="text-xs text-white/30 uppercase tracking-wide">Semaine</p>
-          <p className="text-3xl font-bold text-white mt-1">{week}</p>
+          <p className="text-xs text-white/30 uppercase tracking-widest">Semaine</p>
+          <p className="text-2xl font-bold text-white mt-2">{week}</p>
           <p className="text-xs text-white/30 mt-1">Jour {day}/7</p>
         </div>
         <div className="bg-white/3 border border-white/5 rounded-lg p-4">
-          <p className="text-xs text-white/30 uppercase tracking-wide">Quiz 20h ce soir</p>
-          <p className="text-lg font-bold text-white mt-1">
-            {[1, 3, 5].includes(day) ? "🧬 Kura" : [2, 4].includes(day) ? "🧠 Tech" : "🔀 Les deux"}
+          <p className="text-xs text-white/30 uppercase tracking-widest">Quiz 20h ce soir</p>
+          <p className="text-lg font-bold text-white mt-2">
+            {[1, 3, 5].includes(day)
+              ? "Kura"
+              : [2, 4].includes(day)
+                ? "Tech"
+                : "Les deux"}
           </p>
         </div>
         <div className="bg-white/3 border border-white/5 rounded-lg p-4">
-          <p className="text-xs text-white/30 uppercase tracking-wide">Bot Telegram</p>
-          <div className="flex items-center gap-2 mt-1">
+          <p className="text-xs text-white/30 uppercase tracking-widest">Bot Telegram</p>
+          <div className="flex items-center gap-2 mt-2">
             <span className="w-2 h-2 rounded-full bg-green-400" />
             <span className="text-sm text-white/70">Actif — 5 messages/jour</span>
           </div>
@@ -66,7 +84,7 @@ export default async function FormationPage({ searchParams }: { searchParams: Pr
       {lesson && (
         <div className="bg-white/3 border border-[#4ECDC4]/20 rounded-lg p-5">
           <div className="flex items-center gap-2 mb-3">
-            <span className="text-xs bg-[#4ECDC4]/20 text-[#4ECDC4] px-2 py-0.5 rounded uppercase tracking-wider">
+            <span className="text-xs bg-[#4ECDC4]/20 text-[#4ECDC4] px-2 py-0.5 rounded uppercase tracking-widest">
               Leçon du jour
             </span>
           </div>
@@ -77,7 +95,9 @@ export default async function FormationPage({ searchParams }: { searchParams: Pr
 
       {/* Radar compétences */}
       <div className="bg-white/3 border border-white/5 rounded-lg p-4">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">Radar compétences</h3>
+        <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">
+          Radar compétences
+        </h3>
         <div className="space-y-3">
           {skills.map((s) => (
             <div key={s.name} className="flex items-center gap-3">
@@ -92,12 +112,13 @@ export default async function FormationPage({ searchParams }: { searchParams: Pr
             </div>
           ))}
         </div>
-        <p className="text-xs text-white/20 mt-3">Estimations initiales — se mettent à jour au fil des quiz</p>
       </div>
 
       {/* Crons actifs */}
       <div className="bg-white/3 border border-white/5 rounded-lg p-4">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">Messages Telegram programmés</h3>
+        <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">
+          Messages Telegram programmés
+        </h3>
         <div className="space-y-2">
           {[
             { time: "08h00", label: "Veille tech + leçon dev AI", active: true },
@@ -108,7 +129,9 @@ export default async function FormationPage({ searchParams }: { searchParams: Pr
           ].map((cron) => (
             <div key={cron.time} className="flex items-center gap-3 text-sm">
               <span className="text-white/30 w-12">{cron.time}</span>
-              <span className={`w-1.5 h-1.5 rounded-full ${cron.active ? "bg-green-400" : "bg-white/20"}`} />
+              <span
+                className={`w-1.5 h-1.5 rounded-full ${cron.active ? "bg-green-400" : "bg-white/20"}`}
+              />
               <span className="text-white/60">{cron.label}</span>
             </div>
           ))}

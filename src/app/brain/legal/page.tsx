@@ -1,6 +1,10 @@
 
-export default async function LegalPage({ searchParams }: { searchParams: Promise<{ p?: string }> }) {
-  await searchParams; // consommé pour la cohérence du router
+export default async function LegalPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ p?: string }>;
+}) {
+  const { p } = await searchParams;
 
   const checklist = [
     {
@@ -11,7 +15,7 @@ export default async function LegalPage({ searchParams }: { searchParams: Promis
         { label: "Mentions légales", status: null },
         { label: "Consentement cookies", status: null },
         { label: "Registre des traitements", status: null },
-        { label: "Droit à l'effacement (delete account)", status: null },
+        { label: "Droit à l&apos;effacement (delete account)", status: null },
         { label: "Export données utilisateur", status: null },
       ],
     },
@@ -48,9 +52,15 @@ export default async function LegalPage({ searchParams }: { searchParams: Promis
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-display text-4xl text-white">⚖️ LÉGAL & RGPD</h1>
+        <h1 className="font-display text-4xl text-white">LÉGAL & RGPD</h1>
         <p className="text-white/40 text-sm mt-1">Obligations réglementaires, compliance, fiscal</p>
       </div>
+
+      {p && p !== "all" && (
+        <p className="text-xs text-white/20 bg-white/3 border border-white/5 rounded px-3 py-2">
+          Vue globale — cette section n&apos;est pas filtrée par projet
+        </p>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {checklist.map((cat) => (
@@ -61,13 +71,15 @@ export default async function LegalPage({ searchParams }: { searchParams: Promis
             <div className="space-y-2">
               {cat.items.map((item) => (
                 <div key={item.label} className="flex items-center gap-3">
-                  <span className={`w-5 h-5 rounded flex items-center justify-center text-xs ${
-                    item.status === "ok"
-                      ? "bg-green-500/20 text-green-400"
-                      : item.status === "danger"
-                      ? "bg-red-500/20 text-red-400"
-                      : "bg-white/5 text-white/20"
-                  }`}>
+                  <span
+                    className={`w-5 h-5 rounded flex items-center justify-center text-xs ${
+                      item.status === "ok"
+                        ? "bg-green-500/20 text-green-400"
+                        : item.status === "danger"
+                          ? "bg-red-500/20 text-red-400"
+                          : "bg-white/5 text-white/20"
+                    }`}
+                  >
                     {item.status === "ok" ? "✓" : item.status === "danger" ? "✗" : "?"}
                   </span>
                   <span className="text-sm text-white/60">{item.label}</span>
@@ -77,7 +89,6 @@ export default async function LegalPage({ searchParams }: { searchParams: Promis
           </div>
         ))}
       </div>
-
     </div>
   );
 }

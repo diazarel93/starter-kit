@@ -2,7 +2,7 @@
 // DESIGN PREVIEW — Phase 2 : Directions Artistiques
 //
 // USAGE :
-// 1. Lancez l'agent design-director pour generer 3 directions (Phase 1 + 2)
+// 1. Lancez l&apos;agent design-director pour generer 3 directions (Phase 1 + 2)
 // 2. Remplissez les DIRECTIONS ci-dessous avec les specs de chaque direction
 // 3. Ouvrez /design-preview pour valider visuellement avant de coder
 // 4. Supprimez ce dossier apres avoir choisi une direction
@@ -48,7 +48,7 @@ interface DirectionConfig {
   };
 }
 
-// ─── 3 Directions (REMPLIR avec les specs de l'agent design-director) ──────
+// ─── 3 Directions (REMPLIR avec les specs de l&apos;agent design-director) ──────
 //
 // Ces 3 directions sont des EXEMPLES generiques.
 // Remplacez-les avec celles generees par votre agent design-director.
@@ -61,7 +61,7 @@ const DIRECTIONS: DirectionConfig[] = [
     concept:
       "L'interface comme espace de travail professionnel et chaleureux. " +
       "Inspiration : Linear meets warm paper. Densite maximale, " +
-      "decoration minimale. Chaque pixel a une raison d'etre.",
+      "decoration minimale. Chaque pixel a une raison d&apos;etre.",
     origin:
       "Le studio de design de Dieter Rams chez Braun. Des surfaces neutres, " +
       "une organisation logique, rien de superflu. La chaleur vient " +
@@ -69,13 +69,13 @@ const DIRECTIONS: DirectionConfig[] = [
       "Reference : Braun T3 pocket radio (1958) — fonctionnel et elegant.",
     logique:
       "Pour un SaaS de productivite, la decoration est de la friction. " +
-      "L'utilisateur vient accomplir une tache, pas admirer l'interface. " +
+      "L'utilisateur vient accomplir une tache, pas admirer l&apos;interface. " +
       "Le chaleureux (fond creme, accents or) evite la froideur sans ajouter " +
       "de bruit visuel. La direction la plus universelle et la plus sure.",
     references: [
       "Braun design — minimalisme fonctionnel",
       "Linear app — densite + clarte",
-      "Notion — neutralite + contenu d'abord",
+      "Notion — neutralite + contenu d&apos;abord",
     ],
     layoutAscii: `
 ┌──────────────────────────────────────────────────────┐
@@ -92,9 +92,9 @@ const DIRECTIONS: DirectionConfig[] = [
 │              │   FOOTER ACTIONS                      │
 └──────────────┴───────────────────────────────────────┘`,
     hierarchie: {
-      p1: "Contenu principal + CTA primaire (centre, 70% de l'ecran)",
+      p1: "Contenu principal + CTA primaire (centre, 70% de l&apos;ecran)",
       p2: "Navigation sidebar + labels de section (toujours visible)",
-      p3: "Actions secondaires + filtres (barre d'outils contextuelle)",
+      p3: "Actions secondaires + filtres (barre d&apos;outils contextuelle)",
       p4: "Settings, notifications, profil (menu utilisateur)",
     },
     actionPrincipale: "CTA primaire en haut-droite du contenu — toujours visible",
@@ -141,13 +141,13 @@ const DIRECTIONS: DirectionConfig[] = [
     concept:
       "L'interface comme outil pro nocturne. Fond noir chaud (pas froid), " +
       "surfaces avec depth, accents qui brillent. " +
-      "Pour les power users qui passent 8h/jour dans l'outil.",
+      "Pour les power users qui passent 8h/jour dans l&apos;outil.",
     origin:
-      "Les salles de controle NASA et les studios d'enregistrement professionnels. " +
-      "L'obscurite n'est pas une contrainte mais un choix : elle reduit la fatigue " +
+      "Les salles de controle NASA et les studios d&apos;enregistrement professionnels. " +
+      "L'obscurite n&apos;est pas une contrainte mais un choix : elle reduit la fatigue " +
       "visuelle en session longue et fait ressortir les informations critiques " +
       "comme des voyants lumineux dans le noir. Reference : regie de tournage " +
-      "BBC — dark mode avant que ca s'appelle dark mode.",
+      "BBC — dark mode avant que ca s&apos;appelle dark mode.",
     logique:
       "Un outil utilise 6-8h/jour en mode professionnel justifie le dark mode. " +
       "Les accents (#FF6B35, #D4A843) ressortent davantage sur fond sombre. " +
@@ -221,14 +221,14 @@ const DIRECTIONS: DirectionConfig[] = [
     name: "Bold Typographic",
     concept:
       "La typographie comme element hero. Fond blanc pur, titres massifs, " +
-      "contenu d'abord. La couleur est utilisee chirurgicalement — " +
+      "contenu d&apos;abord. La couleur est utilisee chirurgicalement — " +
       "seulement pour ce qui compte vraiment.",
     origin:
       "Les grands magazines editoriaux (Monocle, Wallpaper*, Kinfolk). " +
-      "L'espace blanc n'est pas du vide — c'est du luxe. " +
+      "L'espace blanc n&apos;est pas du vide — c&apos;est du luxe. " +
       "La typographie porte le poids visuel. Les accents de couleur " +
       "resonnent exactement parce qu'ils sont rares. " +
-      "Reference : la mise en page d'une couverture Kinfolk.",
+      "Reference : la mise en page d&apos;une couverture Kinfolk.",
     logique:
       "Si votre contenu est fort (texte, donnees, insights), " +
       "ne le noyer pas dans des elements visuels. Laissez-le respirer. " +
@@ -261,7 +261,7 @@ const DIRECTIONS: DirectionConfig[] = [
       p3: "Navigation + CTAs secondaires",
       p4: "Footer, legal, liens utilitaires",
     },
-    actionPrincipale: "CTA hero — gros, centre ou gauche-aligné, couleur d'accent",
+    actionPrincipale: "CTA hero — gros, centre ou gauche-aligné, couleur d&apos;accent",
     navigation: "Nav minimaliste. Scroll naturel. Pas de sidebar.",
     canvas: "#ffffff",
     surface: "#f9f9f9",
@@ -352,7 +352,7 @@ function MiniAppPreview({ d, index }: { d: DirectionConfig; index: number }) {
               <div className="h-2 rounded-full mb-2" style={{ background: d.elevated }}>
                 <div className="h-full rounded-full" style={{ width: "68%", background: d.accent1 }} />
               </div>
-              <p className="text-[12px]" style={{ color: d.muted }}>68% de l'objectif mensuel atteint</p>
+              <p className="text-[12px]" style={{ color: d.muted }}>68% de l&apos;objectif mensuel atteint</p>
             </div>
           </div>
         </div>
