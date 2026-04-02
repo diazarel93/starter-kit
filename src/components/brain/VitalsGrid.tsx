@@ -1,4 +1,5 @@
 import { getAllCosts, getGithubBuilds, getStripeMRR } from "@/lib/brain-data";
+import type { ProjectKey } from "@/components/brain/ProjectSwitcher";
 
 interface Vital {
   label: string;
@@ -8,32 +9,42 @@ interface Vital {
   status?: "ok" | "warn" | "danger";
 }
 
-export async function VitalsGrid() {
+const REPO_BY_PROJECT: Record<ProjectKey, string[]> = {
+  all: ["diazarel93/atelier-banlieuwood", "diazarel93/lokivo-app", "diazarel93/starter-kit"],
+  kura: [],
+  banlieuwood: ["diazarel93/atelier-banlieuwood"],
+  lokivo: ["diazarel93/lokivo-app"],
+};
+
+export async function VitalsGrid({ project = "all" }: { project?: ProjectKey }) {
   const [costs, builds, stripe] = await Promise.all([
     getAllCosts(),
     getGithubBuilds(),
     getStripeMRR(),
   ]);
 
-  // Builds
-  const passing = builds.filter((b) => b.status === "success").length;
-  const failing = builds.filter((b) => b.status === "failure").length;
-  const allUnknown = builds.every((b) => b.status === "unknown");
-  const buildsValue = allUnknown ? "—" : `${passing}/${builds.length}`;
-  const buildsStatus: Vital["status"] = failing > 0 ? "danger" : passing === builds.length ? "ok" : "warn";
+  // Filtrer les builds selon le projet
+  const reposToShow = REPO_BY_PROJECT[project];
+  const filteredBuilds = reposToShow.length > 0
+    ? builds.filter((b) => reposToShow.includes(b.repo))
+    : builds;
 
-  // Coûts APIs
+  const passing = filteredBuilds.filter((b) => b.status === "success").length;
+  const failing = filteredBuilds.filter((b) => b.status === "failure").length;
+  const allUnknown = filteredBuilds.every((b) => b.status === "unknown");
+  const buildsValue = allUnknown || filteredBuilds.length === 0 ? "—" : `${passing}/${filteredBuilds.length}`;
+  const buildsStatus: Vital["status"] = failing > 0 ? "danger" : passing === filteredBuilds.length && passing > 0 ? "ok" : "warn";
+
   const totalCost = parseFloat(costs.total_usd);
   const apiStatus: Vital["status"] = totalCost > 20 ? "danger" : totalCost > 8 ? "warn" : "ok";
   const apiSub = costs.openai
     ? `Anthropic $${costs.anthropic.anthropic_usd} · OpenAI $${costs.openai.usd}`
     : `Anthropic $${costs.anthropic.anthropic_usd} · ${costs.anthropic.calls} appels`;
 
-  // Stripe MRR
   const mrr = stripe ? parseInt(stripe.mrr_usd) : 0;
   const mrrDisplay = stripe ? `$${stripe.mrr_usd}` : "$0";
   const arrDisplay = stripe ? `ARR: $${stripe.arr_usd}` : "ARR: $0";
-  const mrrStatus: Vital["status"] = mrr > 500 ? "ok" : mrr > 0 ? "warn" : "warn";
+  const mrrStatus: Vital["status"] = mrr > 500 ? "ok" : "warn";
 
   const vitals: Vital[] = [
     {
@@ -52,8 +63,8 @@ export async function VitalsGrid() {
     },
     {
       label: "Utilisateurs actifs",
-      value: "—",
-      sub: "Tous projets",
+      value: "0",
+      sub: project === "all" ? "Tous projets" : project,
       trend: "flat",
       status: "ok",
     },

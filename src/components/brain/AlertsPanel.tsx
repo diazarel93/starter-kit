@@ -1,7 +1,19 @@
 import { getBrainAlerts } from "@/lib/brain-data";
+import type { ProjectKey } from "@/components/brain/ProjectSwitcher";
 
-export async function AlertsPanel() {
-  const alerts = getBrainAlerts();
+const PROJECT_FILTER: Record<ProjectKey, string | null> = {
+  all: null,
+  kura: "kura",
+  banlieuwood: "banlieuwood",
+  lokivo: "lokivo",
+};
+
+export async function AlertsPanel({ project = "all" }: { project?: ProjectKey }) {
+  const allAlerts = getBrainAlerts();
+  const filter = PROJECT_FILTER[project];
+  const alerts = filter
+    ? allAlerts.filter((a) => a.project?.toLowerCase().includes(filter))
+    : allAlerts;
 
   if (alerts.length === 0) {
     return (

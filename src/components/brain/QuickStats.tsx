@@ -1,26 +1,29 @@
 import { getGithubBuilds, type BuildStatus } from "@/lib/brain-data";
+import type { ProjectKey } from "@/components/brain/ProjectSwitcher";
 
 interface Project {
   name: string;
   color: string;
   build?: BuildStatus;
   env: string;
+  projects: ProjectKey[];
 }
 
-const PROJECT_CONFIG = [
-  { name: "Kura", color: "#4ECDC4", env: "production" },
-  { name: "Lokivo", color: "#FF6B35", env: "production", repo: "diazarel93/lokivo-app" },
-  { name: "Banlieuwood", color: "#D4A843", env: "production", repo: "diazarel93/atelier-banlieuwood" },
-  { name: "Kura Player", color: "#8B5CF6", env: "staging" },
-  { name: "Turn Up", color: "#6B7280", env: "staging" },
+const PROJECT_CONFIG: (Omit<Project, "build"> & { repo?: string })[] = [
+  { name: "Kura", color: "#4ECDC4", env: "production", projects: ["all", "kura"] },
+  { name: "Kura Player", color: "#8B5CF6", env: "staging", projects: ["all", "kura"] },
+  { name: "Lokivo", color: "#8B5CF6", env: "production", repo: "diazarel93/lokivo-app", projects: ["all", "lokivo"] },
+  { name: "Banlieuwood", color: "#FF6B35", env: "production", repo: "diazarel93/atelier-banlieuwood", projects: ["all", "banlieuwood"] },
+  { name: "Turn Up", color: "#6B7280", env: "staging", projects: ["all", "banlieuwood"] },
 ];
 
-export async function QuickStats() {
+export async function QuickStats({ project = "all" }: { project?: ProjectKey }) {
   const builds = await getGithubBuilds();
 
-  const projects: Project[] = PROJECT_CONFIG.map((p) => ({
+  const filtered = PROJECT_CONFIG.filter((p) => p.projects.includes(project));
+  const projects: Project[] = filtered.map((p) => ({
     ...p,
-    build: builds.find((b) => b.repo === (p as { repo?: string }).repo),
+    build: builds.find((b) => b.repo === p.repo),
   }));
 
   return (

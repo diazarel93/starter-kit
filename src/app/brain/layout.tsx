@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import { BrainNav } from "@/components/brain/BrainNav";
+import { ProjectSwitcher } from "@/components/brain/ProjectSwitcher";
 
 export const metadata = {
   title: "Brain Dashboard",
@@ -11,9 +13,14 @@ export default function BrainLayout({ children }: { children: React.ReactNode })
       <BrainNav role="admin" />
       <div className="flex flex-col flex-1 min-w-0">
         <header className="h-14 border-b border-white/5 bg-[#0A0A12] px-6 flex items-center justify-between flex-shrink-0">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-xs text-white/30">Live</span>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <span className="text-xs text-white/30">Live</span>
+            </div>
+            <Suspense>
+              <ProjectSwitcher />
+            </Suspense>
           </div>
           <span className="text-xs text-white/20">Romain · Brain OS</span>
         </header>
