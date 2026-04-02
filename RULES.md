@@ -35,6 +35,12 @@
 - Toujours valider les données utilisateur à l'entrée des routes API (zod)
 - Les routes API qui modifient des données doivent vérifier l'auth
 
+## Design / UI
+
+- Quand un projet a un dossier `design-preview/`, le code de ces composants est la source de vérité — il prime sur tout doc texte (spec, verdict, notes)
+- Lors d'un audit implementation vs mockup, classifier chaque écart : JUSTIFIÉ (raison fonctionnelle) ou RÉEL (oubli d'implémentation). Ne corriger que les écarts réels.
+- `var(--token, fallback)` — le fallback DOIT être cohérent avec le thème cible (dark → fallback sombre, light → fallback clair)
+
 ---
 
 > Ajouter une règle : "Ajoute une règle dans RULES.md pour que [erreur] ne se reproduise plus"
