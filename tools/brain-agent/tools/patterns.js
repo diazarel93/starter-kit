@@ -26,7 +26,7 @@ export const AGENT_ROUTER = {
   "rls|supabase|migration|sql|db|database|table|foreign key":  "db-architect",
   "security|secret|injection|xss|cve|auth|jwt|token":          "code-reviewer",
   "typescript|type error|any|generic|interface|type":           "code-reviewer",
-  "design|ui|ux|composant|couleur|layout|responsive|ipad":      "design-director",
+  "design|interface|composant|couleur|layout|responsive|ipad": "design-director",
   "feature|fonctionnalit|implémentation|nouvelle page":         "feature-planner",
   "stripe|billing|abonnement|payment|subscription|webhook":     "stripe-expert",
   "i18n|traduction|locale|language|multilingue":                "i18n-manager",
