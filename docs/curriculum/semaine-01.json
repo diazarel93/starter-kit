@@ -1,0 +1,51 @@
+[
+  {
+    "jour": 1,
+    "titre": "Specification Engineering — La base du vibe coding pro",
+    "cours": "En 2026, 'prompt engineering' c'est fini. Les meilleurs devs pratiquent le 'specification engineering' : ecrire une spec technique AVANT de demander quoi que ce soit a l'AI.\n\nUne bonne spec contient :\n- **Objectif** : ce qu'on veut accomplir (1 phrase)\n- **Scope** : ce qu'on fait ET ce qu'on ne fait PAS\n- **Contraintes** : perf, secu, compat, device cible\n- **Architecture** : ou ca vit dans le code, quels fichiers touches\n- **Criteres d'acceptation** : comment on sait que c'est fini\n\nExemple concret pour Banlieuwood :\n```\nObjectif : Ajouter un bouton tap-to-vote sur l'ecran eleve\nScope : Composant Vote dans src/components/play/. Ne PAS toucher au backend.\nContraintes : iPad Safari, touch events, feedback < 100ms\nArchitecture : Nouveau composant TapVote, utilise le hook useSession existant\nCriteres : 1 tap = 1 vote enregistre, animation de confirmation, pas de double-tap\n```\n\nC'est 10x plus efficace que 'fais moi un systeme de vote'.",
+    "exercice": "Prends la prochaine feature que tu dois faire sur un de tes projets. Ecris la spec en 5 lignes AVANT de coder. Copie-la dans Claude et compare le resultat avec ce que tu aurais eu sans spec.",
+    "ressources": ["https://towardsdatascience.com/vibe-coding-with-ai-best-practices-for-human-ai-collaboration-in-software-development/", "https://www.builder.io/blog/claude-code-tips-best-practices"]
+  },
+  {
+    "jour": 2,
+    "titre": "Plan Mode — L'arme secrete de Claude Code",
+    "cours": "La plupart des gens tapent direct leur demande dans Claude. Les pros utilisent /plan.\n\nPlan Mode fait 3 choses :\n1. Claude analyse le codebase AVANT de toucher un fichier\n2. Il te propose une strategie (quels fichiers, dans quel ordre)\n3. Tu valides ou corriges AVANT qu'il code\n\nQuand utiliser /plan :\n- Feature qui touche 3+ fichiers\n- Code que tu connais mal\n- Decision d'architecture\n- Refactoring\n\nQuand NE PAS utiliser /plan :\n- Fix de typo\n- Changement de couleur\n- Ajout d'une prop simple\n\nAstuce : en Plan Mode, Claude utilise le raisonnement adaptatif. Il 'pense' plus longtemps avant d'agir. Ca evite le syndrome 'Claude a passe 20 minutes a resoudre le mauvais probleme'.\n\nRaccourci : Shift+Tab pour switcher entre les modes.",
+    "exercice": "Ouvre Claude sur Banlieuwood. Tape /plan puis decris une feature du Cycle 2 (ex: tap-to-vote). Lis le plan propose. Est-ce que tu aurais pense a tous les fichiers qu'il mentionne ?",
+    "ressources": ["https://code.claude.com/docs/en/common-workflows", "https://www.f22labs.com/blogs/10-claude-code-productivity-tips-for-every-developer/"]
+  },
+  {
+    "jour": 3,
+    "titre": "Git Diff Review — Le skill qui separe junior et senior",
+    "cours": "92% des devs utilisent l'AI pour coder. La difference entre un junior et un senior : le senior REVIEW chaque diff avant de commit.\n\n45% du code genere par AI contient des failles de securite. Si tu merge sans lire, tu introduis des bugs et des vulnerabilites.\n\nWorkflow pro :\n```bash\n# 1. Voir les fichiers modifies\ngit diff --stat\n\n# 2. Lire le detail\ngit diff\n\n# 3. Si tu comprends pas une ligne\n# → demande a Claude : 'explique cette ligne'\n\n# 4. Si tout est OK\ngit add <fichiers specifiques>   # PAS git add -A\ngit commit -m 'feat(vote): add tap-to-vote component'\n```\n\nRegles :\n- JAMAIS `git add -A` ou `git add .` — tu risques de commit des .env ou des fichiers de debug\n- TOUJOURS ajouter les fichiers par nom\n- Si le diff est gros (>200 lignes), review par blocs\n- Si tu comprends pas, c'est un red flag — investigue avant de commit",
+    "exercice": "Apres ta prochaine session de code avec Claude, fais un git diff complet. Pour chaque fichier modifie, ecris 1 phrase qui explique POURQUOI ce fichier a change. Si tu peux pas expliquer, relis le code.",
+    "ressources": ["https://github.com/shanraisshan/claude-code-best-practice"]
+  },
+  {
+    "jour": 4,
+    "titre": "Agent Teams — Coder comme une equipe de 5",
+    "cours": "Nouveaute 2026 : au lieu d'un seul Claude qui fait tout sequentiellement, tu peux lancer une EQUIPE d'agents en parallele.\n\nComment ca marche :\n```\nLance 3 agents en parallele :\n1. Agent 1 : ecris les tests pour le composant TapVote\n2. Agent 2 : implemente le composant TapVote\n3. Agent 3 : review le code existant de src/components/play/ et liste les patterns utilises\n```\n\nClaude cree 3 sous-processus qui travaillent en meme temps. Chacun a son propre contexte. Le resultat arrive 3x plus vite.\n\nCas d'usage :\n- **Code + Tests en parallele** : un agent code, un agent teste\n- **Research + Implementation** : un agent explore le codebase, l'autre code\n- **Multi-fichiers** : chaque agent s'occupe d'un domaine\n\nQuand NE PAS utiliser :\n- Taches dependantes (B a besoin du resultat de A)\n- Petit fix rapide\n- Quand tu as besoin de comprendre le code toi-meme",
+    "exercice": "Sur ta prochaine feature, demande a Claude de lancer 2 agents : un qui explore le code existant lie a ta feature, et un qui ecrit les tests. Compare le temps vs faire les 2 sequentiellement.",
+    "ressources": ["https://www.builder.io/blog/claude-code-tips-best-practices"]
+  },
+  {
+    "jour": 5,
+    "titre": "TypeScript Strict — Ton filet de securite",
+    "cours": "TypeScript strict mode attrape des bugs AVANT qu'ils arrivent en prod. Mais beaucoup de devs desactivent les regles strictes parce que 'ca compile pas'. C'est comme enlever sa ceinture parce qu'elle serre.\n\nLes regles critiques dans ton tsconfig :\n```json\n\"strict\": true,                    // active tout\n\"noUncheckedIndexedAccess\": true,  // array[0] peut etre undefined\n\"noImplicitReturns\": true,         // toutes les branches doivent return\n\"noFallthroughCasesInSwitch\": true // pas de switch sans break\n```\n\nErreurs courantes :\n```typescript\n// MAL — 'any' desactive TypeScript\nfunction process(data: any) { ... }\n\n// BIEN — 'unknown' + type guard\nfunction process(data: unknown) {\n  if (isSession(data)) { ... }\n}\n\n// MAL — force non-null\nconst name = user!.name;\n\n// BIEN — check explicite\nconst name = user?.name ?? 'Anonyme';\n```\n\nRegle d'or : si tu utilises `any` ou `!`, tu desactives TypeScript. A chaque fois que tu es tente, demande-toi : 'quel est le vrai type ici ?'",
+    "exercice": "Ouvre ton projet et cherche tous les 'any' : grep -r 'any' src/ --include='*.ts' --include='*.tsx'. Pour chacun, remplace par le vrai type ou 'unknown'.",
+    "ressources": ["https://www.typescriptlang.org/docs/handbook/2/narrowing.html"]
+  },
+  {
+    "jour": 6,
+    "titre": "Securite Web — Les headers HTTP obligatoires",
+    "cours": "Ton starter kit a deja les headers, mais tu dois comprendre POURQUOI.\n\n**CSP (Content-Security-Policy)** :\nControle d'ou viennent les scripts, styles, images. Empeche les attaques XSS.\n→ Si quelqu'un injecte un <script> malicieux, le browser le bloque.\n\n**X-Frame-Options: DENY** :\nEmpeche ton site d'etre charge dans un iframe.\n→ Protege contre le clickjacking (un site malicieux met ton site en iframe invisible et capture les clics).\n\n**HSTS (Strict-Transport-Security)** :\nForce HTTPS. Meme si l'utilisateur tape http://, le browser redirige en https.\n→ Protege contre les attaques man-in-the-middle.\n\n**X-Content-Type-Options: nosniff** :\nEmpeche le browser de 'deviner' le type MIME.\n→ Un fichier .txt ne sera pas execute comme du JavaScript.\n\nOWASP Top 10 2026 — les 3 plus courants dans les apps AI :\n1. **Injection** (SQL, prompt) — toujours parametrer les requetes\n2. **Broken Auth** — toujours verifier les sessions cote serveur\n3. **Sensitive Data Exposure** — jamais de secrets dans le code",
+    "exercice": "Ouvre les DevTools de ton navigateur sur ton app deployee. Va dans Network > choisis une requete > regarde les Response Headers. Verifie que tu as CSP, X-Frame-Options, HSTS. Si il en manque, ajoute-les dans next.config.ts.",
+    "ressources": ["https://owasp.org/www-project-top-ten/"]
+  },
+  {
+    "jour": 7,
+    "titre": "Review de semaine — Bilan et auto-evaluation",
+    "cours": "Chaque dimanche, les meilleures equipes font une retro. Toi aussi.\n\nQuestions a te poser :\n1. Qu'est-ce que j'ai appris cette semaine que je ne savais pas lundi ?\n2. Est-ce que j'ai ecrit une spec avant chaque feature ? (jour 1)\n3. Est-ce que j'ai utilise /plan au bon moment ? (jour 2)\n4. Est-ce que j'ai review chaque diff ? (jour 3)\n5. Combien de 'any' j'ai introduits ? (jour 5)\n6. Est-ce que mes headers de secu sont en place ? (jour 6)\n\nScore :\n- 6/6 : tu progresses vite\n- 4-5/6 : bien, continue\n- <4/6 : relis les cours de la semaine\n\nLa semaine prochaine : Architecture (system design, API design, DB design, patterns React avances).",
+    "exercice": "Ecris 3 phrases : ce que tu as appris, ce que tu as applique, ce que tu veux ameliorer. Garde-les dans un fichier ~/FORMATION_AI/journal.md.",
+    "ressources": []
+  }
+]

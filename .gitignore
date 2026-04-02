@@ -43,3 +43,4 @@ yarn-error.log*
 # Claude Code — machine-local (ne pas versionner)
 .claude/settings.local.json
 .claude/sessions/
+tsconfig.tsbuildinfo
