@@ -10,7 +10,9 @@ export const metadata = {
 export default function BrainLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen bg-[#0A0A12] text-white overflow-hidden">
-      <BrainNav role="admin" />
+      <Suspense fallback={<div className="w-56 flex-shrink-0 bg-[#080810] border-r border-white/5" />}>
+        <BrainNav role="admin" />
+      </Suspense>
       <div className="flex flex-col flex-1 min-w-0">
         <header className="h-14 border-b border-white/5 bg-[#0A0A12] px-6 flex items-center justify-between flex-shrink-0">
           <div className="flex items-center gap-4">
