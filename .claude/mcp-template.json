@@ -1,0 +1,54 @@
+{
+  "_comment": "Copier dans ~/.claude/mcp.json (global) ou .claude/mcp.json (projet). Ne pas versionner les clés.",
+  "_transports": "stdio | http | sse | websocket | sdk | managed-proxy",
+  "mcpServers": {
+    "supabase": {
+      "_comment": "Type: stdio — npx @supabase/mcp-server-supabase",
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@supabase/mcp-server-supabase@latest"],
+      "env": {
+        "SUPABASE_URL": "${SUPABASE_URL}",
+        "SUPABASE_SERVICE_ROLE_KEY": "${SUPABASE_SERVICE_ROLE_KEY}"
+      }
+    },
+    "github": {
+      "_comment": "Type: stdio — nécessite GITHUB_TOKEN",
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    "filesystem": {
+      "_comment": "Type: stdio — accès fichiers local",
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/[USERNAME]/[PROJECT]"]
+    },
+    "notion": {
+      "_comment": "Type: stdio — intégration Notion",
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "env": {
+        "NOTION_API_KEY": "${NOTION_API_KEY}"
+      }
+    },
+    "remote-api": {
+      "_comment": "Type: http — serveur MCP distant via HTTP/SSE",
+      "type": "http",
+      "url": "https://your-mcp-server.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${MCP_API_KEY}"
+      }
+    },
+    "websocket-server": {
+      "_comment": "Type: websocket — streaming bidirectionnel",
+      "type": "websocket",
+      "url": "wss://your-mcp-server.com/ws",
+      "headers": {}
+    }
+  }
+}

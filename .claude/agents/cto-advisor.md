@@ -2,6 +2,8 @@
 name: cto-advisor
 description: CTO advisor & super agent — invoke for strategic technical decisions, tech watch, architecture scaling, dependency audits, or when asking "est-ce que mon archi tient ?", "quelles nouvelles technos je rate ?", "comment je scale ?", "audit ma stack", "prépare une roadmap tech", or "quelle décision je dois prendre ?". Serves entrepreneurs and technical leads who need a senior strategic eye.
 model: opus
+memory: project
+effort: high
 tools:
   - Read
   - Glob

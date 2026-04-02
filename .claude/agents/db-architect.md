@@ -1,7 +1,9 @@
 ---
 name: db-architect
-description: Supabase database architect — invoke when designing a schema, writing migrations, setting up RLS, optimizing queries, or asking "comment je structure ma DB ?", "ecris la migration", "quels index ?", "comment faire le RLS ?".
+description: Supabase database architect — invoke when designing a schema, writing migrations, setting up RLS, optimizing queries, or asking "comment je structure ma DB ?", "ecris la migration", "quels index ?", "comment faire le RLS ?". OBLIGATOIRE avant tout travail DB.
 model: sonnet
+memory: project
+effort: medium
 tools:
   - Read
   - Edit
