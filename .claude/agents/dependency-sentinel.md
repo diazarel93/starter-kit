@@ -2,6 +2,9 @@
 name: dependency-sentinel
 description: Dependency security sentinel — invoke for CVE scanning, outdated packages, deprecated AI models, or when asking "mes dépendances sont-elles sécurisées ?", "y a-t-il des vulnérabilités ?", "quels packages mettre à jour ?", "mon modèle AI est-il déprécié ?". Runs WebSearch to find real CVEs and deprecation notices.
 model: sonnet
+memory: project
+effort: low
+background: true
 tools:
   - Read
   - Glob

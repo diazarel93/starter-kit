@@ -1,0 +1,16 @@
+{
+  "name": "ai-veille-bot",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node bot.js",
+    "veille": "node veille.js",
+    "kura": "node kura.js",
+    "coach": "node coach.js",
+    "interactive": "node interactive.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.82.0",
+    "node-telegram-bot-api": "^0.66.0"
+  }
+}
