@@ -1,5 +1,6 @@
 
-export default async function MarchePage() {
+export default async function MarchePage({ searchParams }: { searchParams: Promise<{ p?: string }> }) {
+  await searchParams;
 
   const veille = [
     {

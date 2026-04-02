@@ -1,5 +1,6 @@
 
-export default async function LegalPage() {
+export default async function LegalPage({ searchParams }: { searchParams: Promise<{ p?: string }> }) {
+  await searchParams; // consommé pour la cohérence du router
 
   const checklist = [
     {

@@ -10,7 +10,8 @@ function loadDecisions() {
   }
 }
 
-export default async function DecisionsPage() {
+export default async function DecisionsPage({ searchParams }: { searchParams: Promise<{ p?: string }> }) {
+  await searchParams;
   const content = loadDecisions();
 
   const roadmap = [
@@ -24,7 +25,7 @@ export default async function DecisionsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-display text-3xl text-white">🧭 Décisions & Stratégie</h1>
+        <h1 className="font-display text-4xl text-white">🧭 DÉCISIONS & STRATÉGIE</h1>
         <p className="text-white/40 text-sm mt-1">decisions.md live, roadmap, leçons apprises</p>
       </div>
 

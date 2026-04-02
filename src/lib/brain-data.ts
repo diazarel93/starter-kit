@@ -2,6 +2,7 @@
  * brain-data.ts — Lecture des données live pour le Brain Dashboard
  * Sources : brain-agent (local), GitHub API, OpenAI, Stripe, Resend
  */
+import { readFileSync, existsSync } from "fs";
 import { homedir } from "os";
 import { resolve } from "path";
 
@@ -19,7 +20,6 @@ export interface BrainAlert {
 
 export function getBrainAlerts(): BrainAlert[] {
   try {
-    const { readFileSync, existsSync } = require("fs");
     const path = resolve(HOME, "starter-kit/tools/brain-agent/.brain-alerts.json");
     if (!existsSync(path)) return [];
     const alerts: BrainAlert[] = JSON.parse(readFileSync(path, "utf-8"));
@@ -44,7 +44,6 @@ export interface ApiCosts {
 
 export function getAnthropicCosts(): ApiCosts {
   try {
-    const { readFileSync, existsSync } = require("fs");
     const path = resolve(HOME, "starter-kit/tools/brain-agent/.api-costs.json");
     if (!existsSync(path)) return { month: "—", anthropic_usd: "0.00", calls: 0, detail: [] };
     const data = JSON.parse(readFileSync(path, "utf-8"));

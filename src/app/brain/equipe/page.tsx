@@ -1,5 +1,6 @@
 
-export default async function EquipePage() {
+export default async function EquipePage({ searchParams }: { searchParams: Promise<{ p?: string }> }) {
+  await searchParams;
 
   const roles = [
     { role: "owner", desc: "Tous les projets — accès total", color: "#FF6B35" },

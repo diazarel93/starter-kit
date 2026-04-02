@@ -19,7 +19,8 @@ function loadCurriculum(week: number, day: number) {
   }
 }
 
-export default async function FormationPage() {
+export default async function FormationPage({ searchParams }: { searchParams: Promise<{ p?: string }> }) {
+  await searchParams;
 
   const { week, day, dayOfYear } = getCurrentWeekDay();
   const lesson = loadCurriculum(Math.min(week, 4), Math.min(day, 7));
@@ -35,7 +36,7 @@ export default async function FormationPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-display text-3xl text-white">🎯 Formation Personnelle</h1>
+        <h1 className="font-display text-4xl text-white">🎯 FORMATION PERSONNELLE</h1>
         <p className="text-white/40 text-sm mt-1">Curriculum Kura, coaching bot Telegram, progression</p>
       </div>
 

@@ -14,7 +14,6 @@ const PROJECT_CONFIG: (Omit<Project, "build"> & { repo?: string })[] = [
   { name: "Kura Player", color: "#8B5CF6", env: "staging", projects: ["all", "kura"] },
   { name: "Lokivo", color: "#8B5CF6", env: "production", repo: "diazarel93/lokivo-app", projects: ["all", "lokivo"] },
   { name: "Banlieuwood", color: "#FF6B35", env: "production", repo: "diazarel93/atelier-banlieuwood", projects: ["all", "banlieuwood"] },
-  { name: "Turn Up", color: "#6B7280", env: "staging", projects: ["all", "banlieuwood"] },
 ];
 
 export async function QuickStats({ project = "all" }: { project?: ProjectKey }) {

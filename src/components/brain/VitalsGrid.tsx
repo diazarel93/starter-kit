@@ -55,9 +55,9 @@ export async function VitalsGrid({ project = "all" }: { project?: ProjectKey }) 
       status: mrrStatus,
     },
     {
-      label: "Burn Rate",
-      value: `$${costs.total_usd}/mois`,
-      sub: "APIs uniquement",
+      label: "Coût APIs / mois",
+      value: `$${costs.total_usd}`,
+      sub: apiSub,
       trend: "flat",
       status: apiStatus,
     },
@@ -67,13 +67,6 @@ export async function VitalsGrid({ project = "all" }: { project?: ProjectKey }) 
       sub: project === "all" ? "Tous projets" : project,
       trend: "flat",
       status: "ok",
-    },
-    {
-      label: "Coût APIs",
-      value: `$${costs.total_usd}`,
-      sub: apiSub,
-      trend: "flat",
-      status: apiStatus,
     },
     {
       label: "Marge brute",
