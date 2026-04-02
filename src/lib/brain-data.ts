@@ -79,20 +79,26 @@ export async function getOpenAICosts(): Promise<OpenAICosts | null> {
     const now = new Date();
     const y = now.getFullYear();
     const m = String(now.getMonth() + 1).padStart(2, "0");
-    const d = String(now.getDate()).padStart(2, "0");
-    const start = `${y}-${m}-01`;
-    const end = `${y}-${m}-${d}`;
-    const res = await fetch(
-      `https://api.openai.com/v1/dashboard/billing/usage?start_date=${start}&end_date=${end}`,
-      {
+
+    // Query usage for each day of the current month and sum up
+    let totalTokens = 0;
+    const daysInMonth = now.getDate();
+    for (let day = 1; day <= daysInMonth; day++) {
+      const date = `${y}-${m}-${String(day).padStart(2, "0")}`;
+      const res = await fetch(`https://api.openai.com/v1/usage?date=${date}`, {
         headers: { Authorization: `Bearer ${key}` },
         next: { revalidate: 3600 },
+      });
+      if (!res.ok) continue;
+      const data = await res.json();
+      for (const entry of data.data ?? []) {
+        totalTokens += (entry.n_context_tokens_total ?? 0) + (entry.n_generated_tokens_total ?? 0);
       }
-    );
-    if (!res.ok) return null;
-    const data = await res.json();
-    const usd = ((data.total_usage ?? 0) / 100).toFixed(2);
-    return { usd, month: `${y}-${m}` };
+    }
+
+    // Estimation coût : ~$0.002 / 1K tokens (moyenne gpt-4o-mini)
+    const estimatedUsd = (totalTokens / 1000) * 0.002;
+    return { usd: estimatedUsd.toFixed(2), month: `${y}-${m}` };
   } catch {
     return null;
   }
