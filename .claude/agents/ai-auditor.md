@@ -2,6 +2,8 @@
 name: ai-auditor
 description: AI pipeline quality auditor — invoke when your AI features feel degraded, expensive, slow, or wrong. Use for "mes réponses AI sont nulles", "ça hallucine", "c'est trop lent", "ça coûte trop cher", "audit mon pipeline AI", "mes embeddings sont périmés", "le RAG répond n'importe quoi". Works for any project using Claude, OpenAI, Gemini, or custom LLM pipelines.
 model: sonnet
+memory: project
+effort: medium
 tools:
   - Read
   - Glob

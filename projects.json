@@ -1,0 +1,72 @@
+{
+  "_comment": "Registre centralisé de tous les projets. Mis à jour par /audit-project et /health-all.",
+  "_last_updated": null,
+  "projects": {
+    "banlieuwood": {
+      "name": "Atelier Banlieuwood",
+      "path": "~/atelier-banlieuwood",
+      "stack": ["Next.js 16", "Supabase", "Gemini API", "Playwright"],
+      "type": "web-app",
+      "status": "active",
+      "audit_score": null,
+      "audit_date": null,
+      "alerts": [],
+      "github": "diazarel93/atelier-banlieuwood"
+    },
+    "lokivo": {
+      "name": "Lokivo",
+      "path": "~/lokivo-app",
+      "stack": ["Next.js 16", "Supabase", "Claude API", "Stripe"],
+      "type": "web-app",
+      "status": "active",
+      "audit_score": null,
+      "audit_date": null,
+      "alerts": [],
+      "github": null
+    },
+    "kura-v4": {
+      "name": "Kura V4 Backend",
+      "path": "~/kura-v4",
+      "stack": ["Python", "FastAPI", "Supabase", "Claude API", "RAG"],
+      "type": "backend",
+      "status": "active",
+      "audit_score": null,
+      "audit_date": null,
+      "alerts": [],
+      "github": null
+    },
+    "kura-player": {
+      "name": "Kura Player",
+      "path": "~/kura-player",
+      "stack": ["React Native", "Expo 53", "Supabase"],
+      "type": "mobile",
+      "status": "active",
+      "audit_score": null,
+      "audit_date": null,
+      "alerts": [],
+      "github": null
+    },
+    "turnupformation": {
+      "name": "Turn Up Formation",
+      "path": "~/turnupformation",
+      "stack": ["Next.js 16", "TypeScript", "Tailwind", "Resend"],
+      "type": "web-app",
+      "status": "active",
+      "audit_score": null,
+      "audit_date": null,
+      "alerts": [],
+      "github": null
+    },
+    "banlieuwood-site": {
+      "name": "Banlieuwood Site",
+      "path": "~/banlieuwood",
+      "stack": ["Vite", "React 18", "TypeScript", "Supabase"],
+      "type": "web-app",
+      "status": "active",
+      "audit_score": null,
+      "audit_date": null,
+      "alerts": [],
+      "github": null
+    }
+  }
+}
