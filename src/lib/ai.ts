@@ -32,15 +32,19 @@ export async function complete({
   model?: AIModel;
   maxTokens?: number;
 }): Promise<string> {
+  const anthropicMessages = messages
+    .filter((m) => m.role !== "system")
+    .map((m) => ({ role: m.role as "user" | "assistant", content: m.content }));
+
   const response = await getClient().messages.create({
     model: AI_MODELS[model],
     max_tokens: maxTokens,
     system,
-    messages,
+    messages: anthropicMessages,
   });
 
   const block = response.content[0];
-  if (block.type !== "text") throw new Error("Unexpected response type");
+  if (!block || block.type !== "text") throw new Error("Unexpected response type");
   return block.text;
 }
 
@@ -56,11 +60,15 @@ export async function stream({
   model?: AIModel;
   maxTokens?: number;
 }): Promise<ReadableStream<string>> {
+  const anthropicMessages = messages
+    .filter((m) => m.role !== "system")
+    .map((m) => ({ role: m.role as "user" | "assistant", content: m.content }));
+
   const anthropicStream = await getClient().messages.create({
     model: AI_MODELS[model],
     max_tokens: maxTokens,
     system,
-    messages,
+    messages: anthropicMessages,
     stream: true,
   });
 
