@@ -6,7 +6,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { sendTelegram } from "./tools/telegram.js";
 import { getAllProjectsStatus } from "./tools/git.js";
 import { readGoals, readMemory, appendToMemory } from "./tools/files.js";
-import { getApiCosts, checkGithubBuilds } from "./tools/apis.js";
+import { getApiCosts, checkGithubBuilds, trackApiCall } from "./tools/apis.js";
 import { webSearch, checkWadaUpdates } from "./tools/search.js";
 import { createTask, saveAlert, getRecentAlerts } from "./tools/tasks.js";
 import { loadPatterns, loadEvents } from "./tools/patterns.js";
@@ -181,14 +181,34 @@ PROCESSUS :
     { role: "user", content: "Lance ton cycle d'analyse." }
   ];
 
+  // Limiter la mémoire injectée (max 2KB pour éviter l'inflation de coûts)
+  const memoryKeys = Object.keys(memory).slice(-20);
+  const memoryTrimmed = Object.fromEntries(memoryKeys.map((k) => [k, memory[k]]));
+
   for (let turn = 0; turn < 8; turn++) {
-    const response = await getClient().messages.create({
+    const apiCall = getClient().messages.create({
       model: "claude-haiku-4-5-20251001",
       max_tokens: 1024,
       system: systemPrompt,
       tools: TOOLS,
       messages,
     });
+
+    // Timeout 60s pour éviter le hang infini
+    const timeout = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("API Anthropic timeout 60s")), 60000)
+    );
+
+    const response = await Promise.race([apiCall, timeout]);
+
+    // Tracker les coûts réels
+    if (response.usage) {
+      trackApiCall({
+        model: "claude-haiku-4-5-20251001",
+        inputTokens: response.usage.input_tokens,
+        outputTokens: response.usage.output_tokens,
+      });
+    }
 
     messages.push({ role: "assistant", content: response.content });
 

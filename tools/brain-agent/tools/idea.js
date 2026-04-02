@@ -82,7 +82,8 @@ async function executeIdeaTool(name, input) {
       const dir = resolve(process.env.HOME, "starter-kit/docs/ideas");
       const { mkdirSync } = await import("fs");
       mkdirSync(dir, { recursive: true });
-      const path = resolve(dir, `${input.filename}.md`);
+      const safeName = input.filename.replace(/[^a-zA-Z0-9_-]/g, "-").substring(0, 80);
+      const path = resolve(dir, `${safeName}.md`);
       writeFileSync(path, input.content);
       return { ok: true, path };
     }

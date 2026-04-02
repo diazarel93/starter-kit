@@ -55,7 +55,9 @@ export function loadEvents({ last = 100 } = {}) {
   if (!existsSync(LOG_FILE)) return [];
   try {
     const lines = readFileSync(LOG_FILE, "utf-8").trim().split("\n").filter(Boolean);
-    return lines.slice(-last).map((l) => JSON.parse(l));
+    return lines.slice(-last).flatMap((l) => {
+      try { return [JSON.parse(l)]; } catch { return []; }
+    });
   } catch {
     return [];
   }

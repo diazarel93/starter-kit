@@ -2,7 +2,7 @@
  * tasks.js — Gestion decisions.md + alertes autonomes
  * L'agent peut écrire dans decisions.md sans intervention humaine
  */
-import { readFileSync, writeFileSync, existsSync } from "fs";
+import { readFileSync, writeFileSync, appendFileSync, existsSync } from "fs";
 import { resolve } from "path";
 
 const DECISIONS_PATH = resolve(process.env.HOME, "starter-kit/decisions.md");
@@ -21,8 +21,7 @@ export function createTask({ title, context, priority = "normal", project = "gé
 **Statut** : À traiter
 `;
 
-  const current = readFileSync(DECISIONS_PATH, "utf-8");
-  writeFileSync(DECISIONS_PATH, current + entry);
+  appendFileSync(DECISIONS_PATH, entry);
   return { ok: true, title, priority, project };
 }
 
