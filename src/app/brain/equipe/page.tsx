@@ -1,7 +1,5 @@
-import { requireAuth } from "@/lib/auth";
 
 export default async function EquipePage() {
-  await requireAuth();
 
   const roles = [
     { role: "owner", desc: "Tous les projets — accès total", color: "#FF6B35" },

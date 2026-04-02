@@ -1,4 +1,3 @@
-import { requireAuth } from "@/lib/auth";
 import { readFileSync } from "fs";
 import { resolve } from "path";
 
@@ -21,7 +20,6 @@ function loadCurriculum(week: number, day: number) {
 }
 
 export default async function FormationPage() {
-  await requireAuth();
 
   const { week, day, dayOfYear } = getCurrentWeekDay();
   const lesson = loadCurriculum(Math.min(week, 4), Math.min(day, 7));

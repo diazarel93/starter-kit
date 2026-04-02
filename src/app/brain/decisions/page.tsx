@@ -1,4 +1,3 @@
-import { requireAuth } from "@/lib/auth";
 import { readFileSync } from "fs";
 import { resolve } from "path";
 
@@ -12,7 +11,6 @@ function loadDecisions() {
 }
 
 export default async function DecisionsPage() {
-  await requireAuth();
   const content = loadDecisions();
 
   const roadmap = [

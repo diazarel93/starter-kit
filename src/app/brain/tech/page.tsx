@@ -1,8 +1,6 @@
-import { requireAuth } from "@/lib/auth";
 import { SectionShell } from "@/components/brain/SectionShell";
 
 export default async function TechPage() {
-  await requireAuth();
 
   return (
     <SectionShell

@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-import { requireAuth } from "@/lib/auth";
 import { VitalsGrid } from "@/components/brain/VitalsGrid";
 import { AlertsPanel } from "@/components/brain/AlertsPanel";
 import { QuickStats } from "@/components/brain/QuickStats";
@@ -11,7 +10,7 @@ function Skeleton({ className }: { className?: string }) {
 }
 
 export default async function BrainPage() {
-  await requireAuth();
+  // Auth désactivée — dashboard local uniquement
 
   return (
     <div className="space-y-6">

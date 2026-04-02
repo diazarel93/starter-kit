@@ -1,7 +1,5 @@
-import { requireAuth } from "@/lib/auth";
 
 export default async function MarchePage() {
-  await requireAuth();
 
   const veille = [
     {
