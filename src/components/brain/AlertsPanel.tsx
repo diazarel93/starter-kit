@@ -17,7 +17,7 @@ export async function AlertsPanel({ project = "all" }: { project?: ProjectKey })
 
   if (alerts.length === 0) {
     return (
-      <div className="flex items-center gap-3 px-4 py-2.5 rounded-lg border border-green-500/20 bg-green-500/5 text-sm text-green-400">
+      <div className="flex items-center gap-3 rounded-lg border border-green-500/20 bg-green-500/5 px-4 py-2.5 text-sm text-green-400">
         <span>✓</span>
         <span className="flex-1">Aucune alerte active — tout est nominal</span>
         <span className="text-xs opacity-40">brain-agent</span>
@@ -39,13 +39,11 @@ export async function AlertsPanel({ project = "all" }: { project?: ProjectKey })
         return (
           <div
             key={i}
-            className={`flex items-center gap-3 px-4 py-2.5 rounded-lg border ${styles} text-sm`}
+            className={`flex items-center gap-3 rounded-lg border px-4 py-2.5 ${styles} text-sm`}
           >
             <span>{icon}</span>
             <span className="flex-1">{alert.message}</span>
-            {alert.project && (
-              <span className="text-xs opacity-50">{alert.project}</span>
-            )}
+            {alert.project && <span className="text-xs opacity-50">{alert.project}</span>}
             <span className="text-xs opacity-40">{age}</span>
           </div>
         );

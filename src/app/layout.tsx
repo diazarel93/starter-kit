@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr" className={`${jakarta.variable} ${bebas.variable}`}>
-      <body className="min-h-screen bg-background font-body text-foreground antialiased">
+      <body className="bg-background font-body text-foreground min-h-screen antialiased">
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>

@@ -1,4 +1,3 @@
-
 export default async function LegalPage({
   searchParams,
 }: {
@@ -53,26 +52,26 @@ export default async function LegalPage({
     <div className="space-y-6">
       <div>
         <h1 className="font-display text-4xl text-white">LÉGAL & RGPD</h1>
-        <p className="text-white/40 text-sm mt-1">Obligations réglementaires, compliance, fiscal</p>
+        <p className="mt-1 text-sm text-white/40">Obligations réglementaires, compliance, fiscal</p>
       </div>
 
       {p && p !== "all" && (
-        <p className="text-xs text-white/20 bg-white/3 border border-white/5 rounded px-3 py-2">
+        <p className="rounded border border-white/5 bg-white/3 px-3 py-2 text-xs text-white/20">
           Vue globale — cette section n&apos;est pas filtrée par projet
         </p>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {checklist.map((cat) => (
-          <div key={cat.category} className="bg-white/3 border border-white/5 rounded-lg p-4">
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">
+          <div key={cat.category} className="rounded-lg border border-white/5 bg-white/3 p-4">
+            <h3 className="mb-3 text-xs font-semibold tracking-widest text-white/40 uppercase">
               {cat.category}
             </h3>
             <div className="space-y-2">
               {cat.items.map((item) => (
                 <div key={item.label} className="flex items-center gap-3">
                   <span
-                    className={`w-5 h-5 rounded flex items-center justify-center text-xs ${
+                    className={`flex h-5 w-5 items-center justify-center rounded text-xs ${
                       item.status === "ok"
                         ? "bg-green-500/20 text-green-400"
                         : item.status === "danger"

@@ -139,9 +139,11 @@ export async function getStripeMRR(): Promise<StripeMRR | null> {
       const count = plan.interval_count ?? 1;
       // Normalise en mensuel
       const monthlyAmount =
-        interval === "year" ? amount / (12 * count) :
-        interval === "week" ? (amount * 52) / (12 * count) :
-        amount / count;
+        interval === "year"
+          ? amount / (12 * count)
+          : interval === "week"
+            ? (amount * 52) / (12 * count)
+            : amount / count;
       mrrCents += monthlyAmount;
     }
 
@@ -194,8 +196,7 @@ export async function getAllCosts(): Promise<AllCosts> {
     Promise.resolve(getAnthropicCosts()),
     getOpenAICosts(),
   ]);
-  const totalUsd =
-    parseFloat(anthropic.anthropic_usd) + parseFloat(openai?.usd ?? "0");
+  const totalUsd = parseFloat(anthropic.anthropic_usd) + parseFloat(openai?.usd ?? "0");
   return {
     anthropic,
     openai,
@@ -229,26 +230,26 @@ export async function getGithubBuilds(): Promise<BuildStatus[]> {
   return Promise.all(
     REPOS.map(async ({ repo, name }) => {
       try {
-        const res = await fetch(
-          `https://api.github.com/repos/${repo}/actions/runs?per_page=1`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "User-Agent": "brain-dashboard/1.0",
-            },
-            next: { revalidate: 120 },
-          }
-        );
+        const res = await fetch(`https://api.github.com/repos/${repo}/actions/runs?per_page=1`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "User-Agent": "brain-dashboard/1.0",
+          },
+          next: { revalidate: 120 },
+        });
         if (!res.ok) return { repo, name, status: "unknown" as const };
         const data = await res.json();
         const run = data.workflow_runs?.[0];
         if (!run) return { repo, name, status: "unknown" as const };
 
         const status: BuildStatus["status"] =
-          run.conclusion === "success" ? "success" :
-          run.conclusion === "failure" ? "failure" :
-          run.status === "in_progress" || run.status === "queued" ? "pending" :
-          "unknown";
+          run.conclusion === "success"
+            ? "success"
+            : run.conclusion === "failure"
+              ? "failure"
+              : run.status === "in_progress" || run.status === "queued"
+                ? "pending"
+                : "unknown";
 
         const ageMs = Date.now() - new Date(run.created_at).getTime();
         const ageH = Math.round(ageMs / 3600000);

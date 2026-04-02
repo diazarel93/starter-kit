@@ -14,31 +14,31 @@ function renderMarkdown(content: string) {
   return lines.map((line, i) => {
     if (line.startsWith("### "))
       return (
-        <h3 key={i} className="text-sm font-bold text-white/70 mt-4 mb-1">
+        <h3 key={i} className="mt-4 mb-1 text-sm font-bold text-white/70">
           {line.slice(4)}
         </h3>
       );
     if (line.startsWith("## "))
       return (
-        <h2 key={i} className="text-base font-bold text-white mt-5 mb-1">
+        <h2 key={i} className="mt-5 mb-1 text-base font-bold text-white">
           {line.slice(3)}
         </h2>
       );
     if (line.startsWith("# "))
       return (
-        <h1 key={i} className="text-lg font-bold text-white mt-5 mb-2">
+        <h1 key={i} className="mt-5 mb-2 text-lg font-bold text-white">
           {line.slice(2)}
         </h1>
       );
     if (line.startsWith("- ") || line.startsWith("* "))
       return (
-        <p key={i} className="text-xs text-white/50 pl-3 py-0.5">
+        <p key={i} className="py-0.5 pl-3 text-xs text-white/50">
           · {line.slice(2)}
         </p>
       );
     if (line.trim() === "") return <div key={i} className="h-2" />;
     return (
-      <p key={i} className="text-xs text-white/50 py-0.5">
+      <p key={i} className="py-0.5 text-xs text-white/50">
         {line}
       </p>
     );
@@ -73,25 +73,25 @@ export default async function DecisionsPage({
     <div className="space-y-6">
       <div>
         <h1 className="font-display text-4xl text-white">DÉCISIONS & STRATÉGIE</h1>
-        <p className="text-white/40 text-sm mt-1">decisions.md live, roadmap, leçons apprises</p>
+        <p className="mt-1 text-sm text-white/40">decisions.md live, roadmap, leçons apprises</p>
       </div>
 
       {p && p !== "all" && (
-        <p className="text-xs text-white/20 bg-white/3 border border-white/5 rounded px-3 py-2">
+        <p className="rounded border border-white/5 bg-white/3 px-3 py-2 text-xs text-white/20">
           Vue globale — cette section n&apos;est pas filtrée par projet
         </p>
       )}
 
       {/* Roadmap */}
-      <div className="bg-white/3 border border-white/5 rounded-lg p-4">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">
+      <div className="rounded-lg border border-white/5 bg-white/3 p-4">
+        <h3 className="mb-4 text-xs font-semibold tracking-widest text-white/40 uppercase">
           Roadmap
         </h3>
         <div className="space-y-3">
           {roadmap.map((r) => (
             <div key={r.horizon} className="flex items-start gap-4">
               <span
-                className={`text-xs px-2 py-1 rounded whitespace-nowrap flex-shrink-0 ${
+                className={`flex-shrink-0 rounded px-2 py-1 text-xs whitespace-nowrap ${
                   r.status === "active"
                     ? "bg-[#FF6B35]/20 text-[#FF6B35]"
                     : "bg-white/5 text-white/30"
@@ -99,23 +99,23 @@ export default async function DecisionsPage({
               >
                 {r.horizon}
               </span>
-              <span className="text-sm text-white/60 pt-0.5">{r.item}</span>
+              <span className="pt-0.5 text-sm text-white/60">{r.item}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* decisions.md */}
-      <div className="bg-white/3 border border-white/5 rounded-lg p-4">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">
+      <div className="rounded-lg border border-white/5 bg-white/3 p-4">
+        <h3 className="mb-3 text-xs font-semibold tracking-widest text-white/40 uppercase">
           decisions.md
         </h3>
         {content ? (
           <div className="max-h-96 overflow-auto">{renderMarkdown(content)}</div>
         ) : (
           <p className="text-sm text-white/30">
-            decisions.md introuvable — créer{" "}
-            <code className="text-white/20">decisions.md</code> à la racine du projet
+            decisions.md introuvable — créer <code className="text-white/20">decisions.md</code> à
+            la racine du projet
           </p>
         )}
       </div>

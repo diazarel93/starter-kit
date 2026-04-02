@@ -13,9 +13,9 @@ function getClient(): Anthropic {
 
 // Modeles disponibles
 export const AI_MODELS = {
-  haiku: "claude-haiku-4-5-20251001",   // Rapide, pas cher — taches simples
-  sonnet: "claude-sonnet-4-6",           // Defaut — la plupart des features
-  opus: "claude-opus-4-6",               // Complexe — archi, debug difficile
+  haiku: "claude-haiku-4-5-20251001", // Rapide, pas cher — taches simples
+  sonnet: "claude-sonnet-4-6", // Defaut — la plupart des features
+  opus: "claude-opus-4-6", // Complexe — archi, debug difficile
 } as const;
 
 export type AIModel = keyof typeof AI_MODELS;
@@ -75,10 +75,7 @@ export async function stream({
   return new ReadableStream({
     async start(controller) {
       for await (const event of anthropicStream) {
-        if (
-          event.type === "content_block_delta" &&
-          event.delta.type === "text_delta"
-        ) {
+        if (event.type === "content_block_delta" && event.delta.type === "text_delta") {
           controller.enqueue(event.delta.text);
         }
       }

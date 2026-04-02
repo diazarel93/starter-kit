@@ -30,7 +30,7 @@ export function UserTable({ users }: { users: AuthorizedUser[] }) {
 
   const toggleUser = async (id: string, is_active: boolean) => {
     await supabase.from("authorized_users").update({ is_active: !is_active }).eq("id", id);
-    setList(list.map((u) => u.id === id ? { ...u, is_active: !is_active } : u));
+    setList(list.map((u) => (u.id === id ? { ...u, is_active: !is_active } : u)));
   };
 
   const removeUser = async (id: string) => {
@@ -48,26 +48,26 @@ export function UserTable({ users }: { users: AuthorizedUser[] }) {
           placeholder="email@exemple.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm"
+          className="border-border bg-background flex-1 rounded-lg border px-3 py-2 text-sm"
         />
         <input
           type="text"
           placeholder="Nom (optionnel)"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-40 rounded-lg border border-border bg-background px-3 py-2 text-sm"
+          className="border-border bg-background w-40 rounded-lg border px-3 py-2 text-sm"
         />
         <button
           onClick={addUser}
           disabled={loading || !email}
-          className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
+          className="bg-primary text-primary-foreground rounded-lg px-4 py-2 text-sm font-medium disabled:opacity-50"
         >
           Ajouter
         </button>
       </div>
 
       {/* Liste des utilisateurs */}
-      <div className="rounded-lg border border-border overflow-hidden">
+      <div className="border-border overflow-hidden rounded-lg border">
         <table className="w-full text-sm">
           <thead className="bg-foreground/5">
             <tr>
@@ -79,17 +79,19 @@ export function UserTable({ users }: { users: AuthorizedUser[] }) {
               <th className="px-4 py-3" />
             </tr>
           </thead>
-          <tbody className="divide-y divide-border">
+          <tbody className="divide-border divide-y">
             {list.map((user) => (
               <tr key={user.id} className={!user.is_active ? "opacity-40" : ""}>
                 <td className="px-4 py-3">{user.email}</td>
                 <td className="px-4 py-3">{user.name ?? "—"}</td>
                 <td className="px-4 py-3">
-                  <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${
-                    user.role === "admin"
-                      ? "bg-primary/10 text-primary"
-                      : "bg-foreground/10 text-foreground/70"
-                  }`}>
+                  <span
+                    className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                      user.role === "admin"
+                        ? "bg-primary/10 text-primary"
+                        : "bg-foreground/10 text-foreground/70"
+                    }`}
+                  >
                     {user.role}
                   </span>
                 </td>
@@ -105,7 +107,7 @@ export function UserTable({ users }: { users: AuthorizedUser[] }) {
                     {user.is_active ? "Actif" : "Revoque"}
                   </button>
                 </td>
-                <td className="px-4 py-3 text-foreground/50">
+                <td className="text-foreground/50 px-4 py-3">
                   {user.last_seen_at
                     ? new Date(user.last_seen_at).toLocaleDateString("fr-FR")
                     : "Jamais"}
@@ -114,7 +116,7 @@ export function UserTable({ users }: { users: AuthorizedUser[] }) {
                   {user.role !== "admin" && (
                     <button
                       onClick={() => removeUser(user.id)}
-                      className="text-foreground/30 hover:text-red-500 transition-colors"
+                      className="text-foreground/30 transition-colors hover:text-red-500"
                     >
                       ✕
                     </button>

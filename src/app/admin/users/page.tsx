@@ -12,10 +12,10 @@ export default async function UsersPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <main className="p-8 max-w-4xl mx-auto">
+    <main className="mx-auto max-w-4xl p-8">
       <div className="mb-8">
         <h1 className="text-2xl font-bold">Utilisateurs autorises</h1>
-        <p className="text-foreground/60 text-sm mt-1">
+        <p className="text-foreground/60 mt-1 text-sm">
           Gere qui peut acceder a l&apos;application.
         </p>
       </div>

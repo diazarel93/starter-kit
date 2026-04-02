@@ -1,4 +1,5 @@
 import { getAllCosts, getGithubBuilds, getStripeMRR } from "@/lib/brain-data";
+import { MetricCard } from "@/components/brain/MetricCard";
 import type { ProjectKey } from "@/components/brain/ProjectSwitcher";
 
 interface Vital {
@@ -23,17 +24,17 @@ export async function VitalsGrid({ project = "all" }: { project?: ProjectKey }) 
     getStripeMRR(),
   ]);
 
-  // Filtrer les builds selon le projet
   const reposToShow = REPO_BY_PROJECT[project];
-  const filteredBuilds = reposToShow.length > 0
-    ? builds.filter((b) => reposToShow.includes(b.repo))
-    : builds;
+  const filteredBuilds =
+    reposToShow.length > 0 ? builds.filter((b) => reposToShow.includes(b.repo)) : builds;
 
   const passing = filteredBuilds.filter((b) => b.status === "success").length;
   const failing = filteredBuilds.filter((b) => b.status === "failure").length;
   const allUnknown = filteredBuilds.every((b) => b.status === "unknown");
-  const buildsValue = allUnknown || filteredBuilds.length === 0 ? "—" : `${passing}/${filteredBuilds.length}`;
-  const buildsStatus: Vital["status"] = failing > 0 ? "danger" : passing === filteredBuilds.length && passing > 0 ? "ok" : "warn";
+  const buildsValue =
+    allUnknown || filteredBuilds.length === 0 ? "—" : `${passing}/${filteredBuilds.length}`;
+  const buildsStatus: Vital["status"] =
+    failing > 0 ? "danger" : passing === filteredBuilds.length && passing > 0 ? "ok" : "warn";
 
   const totalCost = parseFloat(costs.total_usd);
   const apiStatus: Vital["status"] = totalCost > 20 ? "danger" : totalCost > 8 ? "warn" : "ok";
@@ -66,7 +67,7 @@ export async function VitalsGrid({ project = "all" }: { project?: ProjectKey }) 
       value: "0",
       sub: project === "all" ? "Tous projets" : project,
       trend: "flat",
-      status: "ok",
+      status: "warn",
     },
     {
       label: "Marge brute",
@@ -86,37 +87,14 @@ export async function VitalsGrid({ project = "all" }: { project?: ProjectKey }) 
 
   return (
     <div>
-      <h2 className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-3">
+      <h2 className="mb-3 text-xs font-semibold tracking-widest text-white/30 uppercase">
         Métriques Clés
       </h2>
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
         {vitals.map((vital) => (
-          <VitalCard key={vital.label} {...vital} />
+          <MetricCard key={vital.label} {...vital} />
         ))}
       </div>
-    </div>
-  );
-}
-
-function VitalCard({ label, value, sub, trend, status }: Vital) {
-  const statusColor = {
-    ok: "border-green-500/20",
-    warn: "border-yellow-500/30",
-    danger: "border-red-500/30",
-  }[status ?? "ok"];
-
-  const trendIcon = { up: "↑", down: "↓", flat: "—" }[trend ?? "flat"];
-  const trendColor =
-    trend === "up" ? "text-green-400" : trend === "down" ? "text-red-400" : "text-white/20";
-
-  return (
-    <div className={`bg-white/3 border ${statusColor} rounded-lg p-4`}>
-      <div className="flex items-start justify-between">
-        <p className="text-xs text-white/30 uppercase tracking-wide">{label}</p>
-        <span className={`text-xs ${trendColor}`}>{trendIcon}</span>
-      </div>
-      <p className="text-2xl font-bold text-white mt-2">{value}</p>
-      {sub && <p className="text-xs text-white/30 mt-1">{sub}</p>}
     </div>
   );
 }

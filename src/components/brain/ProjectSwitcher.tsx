@@ -25,15 +25,13 @@ export function ProjectSwitcher() {
   }
 
   return (
-    <div className="flex items-center gap-1 bg-white/5 rounded-lg p-1">
+    <div className="flex items-center gap-1 rounded-lg bg-white/5 p-1">
       {PROJECTS.map((p) => (
         <button
           key={p.key}
           onClick={() => switchProject(p.key)}
-          className={`px-3 py-1 rounded text-xs font-medium transition-all ${
-            current === p.key
-              ? "bg-white/10 text-white"
-              : "text-white/30 hover:text-white/60"
+          className={`rounded px-3 py-1 text-xs font-medium transition-all ${
+            current === p.key ? "bg-white/10 text-white" : "text-white/30 hover:text-white/60"
           }`}
           style={current === p.key ? { color: p.color } : {}}
         >

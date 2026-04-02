@@ -304,14 +304,14 @@ const DIRECTIONS: DirectionConfig[] = [
 
 function SectionLabel({ children, color }: { children: React.ReactNode; color: string }) {
   return (
-    <p className="text-[11px] uppercase tracking-[0.2em] mb-4 font-semibold" style={{ color }}>
+    <p className="mb-4 text-[11px] font-semibold tracking-[0.2em] uppercase" style={{ color }}>
       {children}
     </p>
   );
 }
 
 function Divider({ color }: { color: string }) {
-  return <div className="h-px w-full my-10" style={{ background: color }} />;
+  return <div className="my-10 h-px w-full" style={{ background: color }} />;
 }
 
 // ─── MINI APP PREVIEW (generique — adapter selon le projet) ───────────────
@@ -320,39 +320,77 @@ function MiniAppPreview({ d, index }: { d: DirectionConfig; index: number }) {
   // Layout A : sidebar + main (neo-minimal)
   if (index === 0) {
     return (
-      <div className="rounded-xl overflow-hidden border" style={{ borderColor: d.border, background: d.canvas }}>
+      <div
+        className="overflow-hidden rounded-xl border"
+        style={{ borderColor: d.border, background: d.canvas }}
+      >
         {/* Header */}
-        <div className="flex items-center gap-3 px-4 py-3 border-b" style={{ borderColor: d.border, background: d.surface }}>
-          <span className="text-[13px] font-bold" style={{ color: d.text }}>Projet</span>
+        <div
+          className="flex items-center gap-3 border-b px-4 py-3"
+          style={{ borderColor: d.border, background: d.surface }}
+        >
+          <span className="text-[13px] font-bold" style={{ color: d.text }}>
+            Projet
+          </span>
           <div className="flex-1" />
-          <button className="px-3 py-1.5 rounded-lg text-[11px] font-bold" style={{ color: d.canvas, background: d.accent1 }}>
+          <button
+            className="rounded-lg px-3 py-1.5 text-[11px] font-bold"
+            style={{ color: d.canvas, background: d.accent1 }}
+          >
             + Nouveau
           </button>
         </div>
         <div className="flex" style={{ minHeight: 160 }}>
           {/* Sidebar */}
-          <div className="w-[120px] border-r p-3 space-y-1" style={{ borderColor: d.border, background: d.elevated }}>
+          <div
+            className="w-[120px] space-y-1 border-r p-3"
+            style={{ borderColor: d.border, background: d.elevated }}
+          >
             {["Dashboard", "Contenu", "Analytics", "Settings"].map((item, i) => (
-              <div key={item} className="px-2 py-1.5 rounded-lg text-[11px] font-medium" style={
-                i === 0 ? { background: d.accent1Bg, color: d.accent1 } : { color: d.muted }
-              }>{item}</div>
+              <div
+                key={item}
+                className="rounded-lg px-2 py-1.5 text-[11px] font-medium"
+                style={i === 0 ? { background: d.accent1Bg, color: d.accent1 } : { color: d.muted }}
+              >
+                {item}
+              </div>
             ))}
           </div>
           {/* Main */}
-          <div className="flex-1 p-4 space-y-3">
+          <div className="flex-1 space-y-3 p-4">
             <div className="grid grid-cols-3 gap-2">
-              {[{ v: "1,240", l: "Utilisateurs", c: d.accent1 }, { v: "98%", l: "Uptime", c: d.accent3 }, { v: "24", l: "Nouveaux", c: d.accent2 }].map(k => (
-                <div key={k.l} className="rounded-xl p-3 border" style={{ background: d.surface, borderColor: `${k.c}25` }}>
-                  <span className="text-xl font-black block" style={{ color: k.c }}>{k.v}</span>
-                  <span className="text-[10px]" style={{ color: d.muted }}>{k.l}</span>
+              {[
+                { v: "1,240", l: "Utilisateurs", c: d.accent1 },
+                { v: "98%", l: "Uptime", c: d.accent3 },
+                { v: "24", l: "Nouveaux", c: d.accent2 },
+              ].map((k) => (
+                <div
+                  key={k.l}
+                  className="rounded-xl border p-3"
+                  style={{ background: d.surface, borderColor: `${k.c}25` }}
+                >
+                  <span className="block text-xl font-black" style={{ color: k.c }}>
+                    {k.v}
+                  </span>
+                  <span className="text-[10px]" style={{ color: d.muted }}>
+                    {k.l}
+                  </span>
                 </div>
               ))}
             </div>
-            <div className="rounded-xl border p-3" style={{ background: d.surface, borderColor: d.border }}>
-              <div className="h-2 rounded-full mb-2" style={{ background: d.elevated }}>
-                <div className="h-full rounded-full" style={{ width: "68%", background: d.accent1 }} />
+            <div
+              className="rounded-xl border p-3"
+              style={{ background: d.surface, borderColor: d.border }}
+            >
+              <div className="mb-2 h-2 rounded-full" style={{ background: d.elevated }}>
+                <div
+                  className="h-full rounded-full"
+                  style={{ width: "68%", background: d.accent1 }}
+                />
               </div>
-              <p className="text-[12px]" style={{ color: d.muted }}>68% de l&apos;objectif mensuel atteint</p>
+              <p className="text-[12px]" style={{ color: d.muted }}>
+                68% de l&apos;objectif mensuel atteint
+              </p>
             </div>
           </div>
         </div>
@@ -363,47 +401,96 @@ function MiniAppPreview({ d, index }: { d: DirectionConfig; index: number }) {
   // Layout B : dark premium (3 zones)
   if (index === 1) {
     return (
-      <div className="rounded-xl overflow-hidden border" style={{ borderColor: d.border, background: d.canvas }}>
+      <div
+        className="overflow-hidden rounded-xl border"
+        style={{ borderColor: d.border, background: d.canvas }}
+      >
         {/* Header */}
-        <div className="flex items-center gap-2 px-3 py-2 border-b" style={{ borderColor: d.border }}>
-          <span className="w-2 h-2 rounded-full" style={{ background: d.accent1, boxShadow: `0 0 6px ${d.accent1}` }} />
-          <span className="text-[12px] font-bold" style={{ color: d.text }}>Dashboard</span>
+        <div
+          className="flex items-center gap-2 border-b px-3 py-2"
+          style={{ borderColor: d.border }}
+        >
+          <span
+            className="h-2 w-2 rounded-full"
+            style={{ background: d.accent1, boxShadow: `0 0 6px ${d.accent1}` }}
+          />
+          <span className="text-[12px] font-bold" style={{ color: d.text }}>
+            Dashboard
+          </span>
           <div className="flex-1" />
-          <span className="text-[10px] px-2 py-0.5 rounded" style={{ color: d.muted, background: d.elevated }}>⌘K</span>
+          <span
+            className="rounded px-2 py-0.5 text-[10px]"
+            style={{ color: d.muted, background: d.elevated }}
+          >
+            ⌘K
+          </span>
         </div>
         <div className="flex" style={{ minHeight: 160 }}>
           {/* Sidebar dark */}
-          <div className="w-[80px] border-r flex flex-col gap-2 p-2" style={{ borderColor: d.border, background: d.surface }}>
+          <div
+            className="flex w-[80px] flex-col gap-2 border-r p-2"
+            style={{ borderColor: d.border, background: d.surface }}
+          >
             {[
               { icon: "⊞", label: "Home" },
               { icon: "◈", label: "Data" },
               { icon: "◉", label: "Live" },
               { icon: "⚙", label: "Config" },
             ].map((item, i) => (
-              <div key={item.label} className="flex flex-col items-center gap-0.5 py-1.5 px-1 rounded-lg" style={
-                i === 0 ? { background: d.accent1Bg } : {}
-              }>
-                <span className="text-base" style={{ color: i === 0 ? d.accent1 : d.muted }}>{item.icon}</span>
-                <span className="text-[8px]" style={{ color: i === 0 ? d.accent1 : `${d.muted}80` }}>{item.label}</span>
+              <div
+                key={item.label}
+                className="flex flex-col items-center gap-0.5 rounded-lg px-1 py-1.5"
+                style={i === 0 ? { background: d.accent1Bg } : {}}
+              >
+                <span className="text-base" style={{ color: i === 0 ? d.accent1 : d.muted }}>
+                  {item.icon}
+                </span>
+                <span
+                  className="text-[8px]"
+                  style={{ color: i === 0 ? d.accent1 : `${d.muted}80` }}
+                >
+                  {item.label}
+                </span>
               </div>
             ))}
           </div>
           {/* Main */}
-          <div className="flex-1 p-3 space-y-2">
+          <div className="flex-1 space-y-2 p-3">
             <div className="grid grid-cols-2 gap-2">
-              {[{ v: "2,840", l: "Total", c: d.accent1 }, { v: "+12%", l: "Growth", c: d.accent3 }].map(k => (
-                <div key={k.l} className="rounded-lg p-2.5 border" style={{ borderColor: `${k.c}20`, background: `${k.c}06` }}>
-                  <span className="text-xl font-black" style={{ color: k.c }}>{k.v}</span>
-                  <span className="text-[10px] block" style={{ color: d.muted }}>{k.l}</span>
+              {[
+                { v: "2,840", l: "Total", c: d.accent1 },
+                { v: "+12%", l: "Growth", c: d.accent3 },
+              ].map((k) => (
+                <div
+                  key={k.l}
+                  className="rounded-lg border p-2.5"
+                  style={{ borderColor: `${k.c}20`, background: `${k.c}06` }}
+                >
+                  <span className="text-xl font-black" style={{ color: k.c }}>
+                    {k.v}
+                  </span>
+                  <span className="block text-[10px]" style={{ color: d.muted }}>
+                    {k.l}
+                  </span>
                 </div>
               ))}
             </div>
-            <div className="rounded-lg border p-2.5" style={{ borderColor: d.border, background: d.surface }}>
-              <p className="text-[11px] mb-2" style={{ color: d.muted }}>Activite recente</p>
+            <div
+              className="rounded-lg border p-2.5"
+              style={{ borderColor: d.border, background: d.surface }}
+            >
+              <p className="mb-2 text-[11px]" style={{ color: d.muted }}>
+                Activite recente
+              </p>
               {["Deployment reussi", "Nouveau user connecte", "Alert resolue"].map((item, i) => (
                 <div key={item} className="flex items-center gap-2 py-1">
-                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: i === 0 ? d.accent3 : i === 1 ? d.accent1 : d.accent2 }} />
-                  <span className="text-[11px]" style={{ color: i === 0 ? d.text : d.muted }}>{item}</span>
+                  <span
+                    className="h-1.5 w-1.5 rounded-full"
+                    style={{ background: i === 0 ? d.accent3 : i === 1 ? d.accent1 : d.accent2 }}
+                  />
+                  <span className="text-[11px]" style={{ color: i === 0 ? d.text : d.muted }}>
+                    {item}
+                  </span>
                 </div>
               ))}
             </div>
@@ -415,33 +502,58 @@ function MiniAppPreview({ d, index }: { d: DirectionConfig; index: number }) {
 
   // Layout C : bold typographic (landing/editorial)
   return (
-    <div className="rounded-xl overflow-hidden border" style={{ borderColor: d.border, background: d.canvas }}>
+    <div
+      className="overflow-hidden rounded-xl border"
+      style={{ borderColor: d.border, background: d.canvas }}
+    >
       {/* Nav minimal */}
-      <div className="flex items-center gap-4 px-6 py-3 border-b" style={{ borderColor: d.border }}>
-        <span className="text-[14px] font-black" style={{ color: d.text }}>Brand</span>
+      <div className="flex items-center gap-4 border-b px-6 py-3" style={{ borderColor: d.border }}>
+        <span className="text-[14px] font-black" style={{ color: d.text }}>
+          Brand
+        </span>
         <div className="flex-1" />
-        {["Product", "Pricing", "Docs"].map(item => (
-          <span key={item} className="text-[12px]" style={{ color: d.muted }}>{item}</span>
+        {["Product", "Pricing", "Docs"].map((item) => (
+          <span key={item} className="text-[12px]" style={{ color: d.muted }}>
+            {item}
+          </span>
         ))}
-        <button className="px-3 py-1 rounded-lg text-[11px] font-bold" style={{ color: d.canvas, background: d.text }}>
+        <button
+          className="rounded-lg px-3 py-1 text-[11px] font-bold"
+          style={{ color: d.canvas, background: d.text }}
+        >
           Get started
         </button>
       </div>
       {/* Hero */}
       <div className="px-8 py-8">
-        <p className="text-[10px] font-semibold uppercase tracking-widest mb-3" style={{ color: d.accent1 }}>Nouveau</p>
-        <h1 className="text-[28px] font-black leading-none mb-4" style={{ color: d.text, letterSpacing: "-0.03em" }}>
-          Votre produit,<br />
+        <p
+          className="mb-3 text-[10px] font-semibold tracking-widest uppercase"
+          style={{ color: d.accent1 }}
+        >
+          Nouveau
+        </p>
+        <h1
+          className="mb-4 text-[28px] leading-none font-black"
+          style={{ color: d.text, letterSpacing: "-0.03em" }}
+        >
+          Votre produit,
+          <br />
           <span style={{ color: d.accent1 }}>simplifie.</span>
         </h1>
-        <p className="text-[13px] leading-relaxed mb-5" style={{ color: d.muted }}>
+        <p className="mb-5 text-[13px] leading-relaxed" style={{ color: d.muted }}>
           Une description concise qui explique la valeur en 2 lignes max.
         </p>
         <div className="flex gap-3">
-          <button className="px-4 py-2 rounded-xl text-[12px] font-bold" style={{ color: "#fff", background: d.text }}>
+          <button
+            className="rounded-xl px-4 py-2 text-[12px] font-bold"
+            style={{ color: "#fff", background: d.text }}
+          >
             Commencer gratuitement
           </button>
-          <button className="px-4 py-2 rounded-xl text-[12px] font-semibold border" style={{ color: d.text, borderColor: d.border }}>
+          <button
+            className="rounded-xl border px-4 py-2 text-[12px] font-semibold"
+            style={{ color: d.text, borderColor: d.border }}
+          >
             Voir la demo
           </button>
         </div>
@@ -459,21 +571,39 @@ function DirectionCard({ d, index }: { d: DirectionConfig; index: number }) {
   return (
     <section className="space-y-6">
       {/* ── Titre + concept ── */}
-      <div className="rounded-2xl border p-6" style={{ background: d.surface, borderColor: d.border, boxShadow: isRecommended ? `0 0 0 2px ${d.accent1}40` : "none" }}>
-        <div className="flex items-start gap-4 mb-4">
+      <div
+        className="rounded-2xl border p-6"
+        style={{
+          background: d.surface,
+          borderColor: d.border,
+          boxShadow: isRecommended ? `0 0 0 2px ${d.accent1}40` : "none",
+        }}
+      >
+        <div className="mb-4 flex items-start gap-4">
           <span
-            className="flex items-center justify-center w-12 h-12 rounded-xl text-2xl font-black shrink-0"
-            style={{ background: d.accent1Bg, color: d.accent1, border: `1px solid ${d.accent1Border}` }}
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-2xl font-black"
+            style={{
+              background: d.accent1Bg,
+              color: d.accent1,
+              border: `1px solid ${d.accent1Border}`,
+            }}
           >
             {letter}
           </span>
           <div className="flex-1">
-            <div className="flex items-center gap-3 mb-1">
+            <div className="mb-1 flex items-center gap-3">
               <h2 className="text-2xl font-black" style={{ color: d.text }}>
                 Direction {letter} — &ldquo;{d.name}&rdquo;
               </h2>
               {isRecommended && (
-                <span className="text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider" style={{ color: d.accent1, background: d.accent1Bg, border: `1px solid ${d.accent1Border}` }}>
+                <span
+                  className="rounded-full px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase"
+                  style={{
+                    color: d.accent1,
+                    background: d.accent1Bg,
+                    border: `1px solid ${d.accent1Border}`,
+                  }}
+                >
                   Recommandee
                 </span>
               )}
@@ -487,7 +617,11 @@ function DirectionCard({ d, index }: { d: DirectionConfig; index: number }) {
         {/* References */}
         <div className="flex flex-wrap gap-2">
           {d.references.map((ref) => (
-            <span key={ref} className="inline-flex items-center px-3 py-1.5 rounded-lg text-[11px] font-semibold border" style={{ color: d.accent2, background: d.accent2Bg, borderColor: d.accent2Border }}>
+            <span
+              key={ref}
+              className="inline-flex items-center rounded-lg border px-3 py-1.5 text-[11px] font-semibold"
+              style={{ color: d.accent2, background: d.accent2Bg, borderColor: d.accent2Border }}
+            >
               {ref}
             </span>
           ))}
@@ -501,19 +635,32 @@ function DirectionCard({ d, index }: { d: DirectionConfig; index: number }) {
       </div>
 
       {/* ── Argumentaire ── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="rounded-2xl border p-5" style={{ background: d.surface, borderColor: d.border }}>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div
+          className="rounded-2xl border p-5"
+          style={{ background: d.surface, borderColor: d.border }}
+        >
           <SectionLabel color={d.accent1}>Origine</SectionLabel>
-          <p className="text-[13px] leading-relaxed" style={{ color: d.text }}>{d.origin}</p>
+          <p className="text-[13px] leading-relaxed" style={{ color: d.text }}>
+            {d.origin}
+          </p>
         </div>
-        <div className="rounded-2xl border p-5" style={{ background: d.surface, borderColor: d.border }}>
+        <div
+          className="rounded-2xl border p-5"
+          style={{ background: d.surface, borderColor: d.border }}
+        >
           <SectionLabel color={d.accent1}>Logique strategique</SectionLabel>
-          <p className="text-[13px] leading-relaxed" style={{ color: d.text }}>{d.logique}</p>
+          <p className="text-[13px] leading-relaxed" style={{ color: d.text }}>
+            {d.logique}
+          </p>
         </div>
       </div>
 
       {/* ── Palette ── */}
-      <div className="rounded-2xl border p-5" style={{ background: d.surface, borderColor: d.border }}>
+      <div
+        className="rounded-2xl border p-5"
+        style={{ background: d.surface, borderColor: d.border }}
+      >
         <SectionLabel color={d.muted}>Palette</SectionLabel>
         <div className="flex flex-wrap gap-3">
           {[
@@ -527,10 +674,17 @@ function DirectionCard({ d, index }: { d: DirectionConfig; index: number }) {
             { label: "Accent 3", color: d.accent3 },
           ].map((c) => (
             <div key={c.label} className="flex items-center gap-2">
-              <span className="w-6 h-6 rounded-md border" style={{ background: c.color, borderColor: d.border }} />
+              <span
+                className="h-6 w-6 rounded-md border"
+                style={{ background: c.color, borderColor: d.border }}
+              />
               <div>
-                <p className="text-[10px] font-semibold" style={{ color: d.text }}>{c.label}</p>
-                <p className="text-[10px] font-mono" style={{ color: d.muted }}>{c.color}</p>
+                <p className="text-[10px] font-semibold" style={{ color: d.text }}>
+                  {c.label}
+                </p>
+                <p className="font-mono text-[10px]" style={{ color: d.muted }}>
+                  {c.color}
+                </p>
               </div>
             </div>
           ))}
@@ -538,12 +692,23 @@ function DirectionCard({ d, index }: { d: DirectionConfig; index: number }) {
       </div>
 
       {/* ── Layout ASCII + hierarchie ── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="rounded-2xl border p-5" style={{ background: d.surface, borderColor: d.border }}>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div
+          className="rounded-2xl border p-5"
+          style={{ background: d.surface, borderColor: d.border }}
+        >
           <SectionLabel color={d.muted}>Layout ASCII</SectionLabel>
-          <pre className="text-[11px] leading-snug overflow-x-auto" style={{ color: d.text, fontFamily: "monospace" }}>{d.layoutAscii}</pre>
+          <pre
+            className="overflow-x-auto text-[11px] leading-snug"
+            style={{ color: d.text, fontFamily: "monospace" }}
+          >
+            {d.layoutAscii}
+          </pre>
         </div>
-        <div className="rounded-2xl border p-5" style={{ background: d.surface, borderColor: d.border }}>
+        <div
+          className="rounded-2xl border p-5"
+          style={{ background: d.surface, borderColor: d.border }}
+        >
           <SectionLabel color={d.muted}>Hierarchie</SectionLabel>
           <div className="space-y-2.5">
             {[
@@ -553,8 +718,15 @@ function DirectionCard({ d, index }: { d: DirectionConfig; index: number }) {
               { label: "P4 — 2+ taps", value: d.hierarchie.p4 },
             ].map((item) => (
               <div key={item.label}>
-                <p className="text-[10px] font-bold uppercase tracking-wider mb-0.5" style={{ color: d.accent1 }}>{item.label}</p>
-                <p className="text-[12px]" style={{ color: d.text }}>{item.value}</p>
+                <p
+                  className="mb-0.5 text-[10px] font-bold tracking-wider uppercase"
+                  style={{ color: d.accent1 }}
+                >
+                  {item.label}
+                </p>
+                <p className="text-[12px]" style={{ color: d.text }}>
+                  {item.value}
+                </p>
               </div>
             ))}
           </div>
@@ -562,38 +734,70 @@ function DirectionCard({ d, index }: { d: DirectionConfig; index: number }) {
       </div>
 
       {/* ── Typo + Motion + Scores ── */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="rounded-2xl border p-5" style={{ background: d.surface, borderColor: d.border }}>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div
+          className="rounded-2xl border p-5"
+          style={{ background: d.surface, borderColor: d.border }}
+        >
           <SectionLabel color={d.muted}>Typographie</SectionLabel>
           <div className="space-y-2">
             {Object.entries(d.typo).map(([k, v]) => (
               <div key={k}>
-                <p className="text-[10px] font-bold uppercase" style={{ color: d.accent1 }}>{k}</p>
-                <p className="text-[11px]" style={{ color: d.text }}>{v}</p>
+                <p className="text-[10px] font-bold uppercase" style={{ color: d.accent1 }}>
+                  {k}
+                </p>
+                <p className="text-[11px]" style={{ color: d.text }}>
+                  {v}
+                </p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="rounded-2xl border p-5" style={{ background: d.surface, borderColor: d.border }}>
+        <div
+          className="rounded-2xl border p-5"
+          style={{ background: d.surface, borderColor: d.border }}
+        >
           <SectionLabel color={d.muted}>Motion</SectionLabel>
           <div className="space-y-2">
             {Object.entries(d.motion).map(([k, v]) => (
               <div key={k}>
-                <p className="text-[10px] font-bold uppercase" style={{ color: d.accent1 }}>{k}</p>
-                <p className="text-[11px]" style={{ color: d.text }}>{v}</p>
+                <p className="text-[10px] font-bold uppercase" style={{ color: d.accent1 }}>
+                  {k}
+                </p>
+                <p className="text-[11px]" style={{ color: d.text }}>
+                  {v}
+                </p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="rounded-2xl border p-5" style={{ background: d.surface, borderColor: d.border }}>
+        <div
+          className="rounded-2xl border p-5"
+          style={{ background: d.surface, borderColor: d.border }}
+        >
           <SectionLabel color={d.muted}>Scores</SectionLabel>
           <div className="space-y-2">
             {Object.entries(d.scores).map(([k, v]) => (
               <div key={k} className="flex justify-between">
-                <p className="text-[11px]" style={{ color: d.muted }}>{k}</p>
-                <p className="text-[11px] font-bold" style={{ color: v.includes("10") ? d.accent3 : v === "S" ? d.accent3 : v === "L" ? d.accent1 : d.text }}>{v}</p>
+                <p className="text-[11px]" style={{ color: d.muted }}>
+                  {k}
+                </p>
+                <p
+                  className="text-[11px] font-bold"
+                  style={{
+                    color: v.includes("10")
+                      ? d.accent3
+                      : v === "S"
+                        ? d.accent3
+                        : v === "L"
+                          ? d.accent1
+                          : d.text,
+                  }}
+                >
+                  {v}
+                </p>
               </div>
             ))}
           </div>
@@ -610,24 +814,24 @@ import { notFound } from "next/navigation";
 export default function DesignPreviewPage() {
   if (process.env.NODE_ENV === "production") notFound();
   return (
-    <div className="min-h-screen py-16 px-4 md:px-8" style={{ background: "#0a0a0a" }}>
-      <div className="max-w-5xl mx-auto">
+    <div className="min-h-screen px-4 py-16 md:px-8" style={{ background: "#0a0a0a" }}>
+      <div className="mx-auto max-w-5xl">
         {/* Header */}
         <div className="mb-16">
-          <p className="text-[11px] uppercase tracking-[0.3em] font-semibold text-white/30 mb-3">
+          <p className="mb-3 text-[11px] font-semibold tracking-[0.3em] text-white/30 uppercase">
             Design Preview — Phase 2
           </p>
-          <h1 className="text-5xl font-black text-white mb-4" style={{ letterSpacing: "-0.03em" }}>
+          <h1 className="mb-4 text-5xl font-black text-white" style={{ letterSpacing: "-0.03em" }}>
             3 Directions Artistiques
           </h1>
-          <p className="text-[15px] text-white/50 max-w-2xl">
+          <p className="max-w-2xl text-[15px] text-white/50">
             Chaque direction est un systeme complet issu d&apos;une etude, pas une ambiance.
             Choisissez la direction qui correspond le mieux a votre brief avant de coder.
           </p>
-          <div className="mt-4 px-4 py-3 rounded-xl border border-yellow-500/20 bg-yellow-500/5 inline-block">
+          <div className="mt-4 inline-block rounded-xl border border-yellow-500/20 bg-yellow-500/5 px-4 py-3">
             <p className="text-[12px] text-yellow-400/80">
-              A supprimer apres validation de la direction choisie.
-              Remplacer le contenu des DIRECTIONS par ceux generes par l&apos;agent design-director.
+              A supprimer apres validation de la direction choisie. Remplacer le contenu des
+              DIRECTIONS par ceux generes par l&apos;agent design-director.
             </p>
           </div>
         </div>
@@ -643,7 +847,7 @@ export default function DesignPreviewPage() {
         </div>
 
         {/* Footer */}
-        <div className="mt-20 pt-8 border-t border-white/10 text-center">
+        <div className="mt-20 border-t border-white/10 pt-8 text-center">
           <p className="text-[11px] text-white/20">
             Design Preview — Outil interne — Ne pas deployer en production
           </p>

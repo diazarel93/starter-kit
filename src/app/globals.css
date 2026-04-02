@@ -2,20 +2,20 @@
 
 @theme {
   /* Couleurs */
-  --color-primary: #FF6B35;
-  --color-secondary: #D4A843;
-  --color-accent: #4ECDC4;
+  --color-primary: #ff6b35;
+  --color-secondary: #d4a843;
+  --color-accent: #4ecdc4;
 
-  --color-background: #FFFFFF;
-  --color-foreground: #1A1A2E;
-  --color-muted: #F5F5F7;
-  --color-border: #E5E5E7;
+  --color-background: #ffffff;
+  --color-foreground: #1a1a2e;
+  --color-muted: #f5f5f7;
+  --color-border: #e5e5e7;
 
   /* Dark mode */
-  --color-dark-background: #0F0F1A;
-  --color-dark-foreground: #F5F5F7;
-  --color-dark-muted: #1A1A2E;
-  --color-dark-border: #2A2A3E;
+  --color-dark-background: #0f0f1a;
+  --color-dark-foreground: #f5f5f7;
+  --color-dark-muted: #1a1a2e;
+  --color-dark-border: #2a2a3e;
 
   /* Fonts */
   --font-body: var(--font-body);

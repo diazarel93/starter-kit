@@ -1,4 +1,3 @@
-
 export default async function EquipePage({
   searchParams,
 }: {
@@ -24,30 +23,30 @@ export default async function EquipePage({
     <div className="space-y-6">
       <div>
         <h1 className="font-display text-4xl text-white">ÉQUIPE & ACCÈS</h1>
-        <p className="text-white/40 text-sm mt-1">
+        <p className="mt-1 text-sm text-white/40">
           Rôles, permissions, beta testeurs, sessions actives
         </p>
       </div>
 
       {p && p !== "all" && (
-        <p className="text-xs text-white/20 bg-white/3 border border-white/5 rounded px-3 py-2">
+        <p className="rounded border border-white/5 bg-white/3 px-3 py-2 text-xs text-white/20">
           Vue globale — cette section n&apos;est pas filtrée par projet
         </p>
       )}
 
       {/* Rôles */}
-      <div className="bg-white/3 border border-white/5 rounded-lg p-4">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">
+      <div className="rounded-lg border border-white/5 bg-white/3 p-4">
+        <h3 className="mb-3 text-xs font-semibold tracking-widest text-white/40 uppercase">
           Rôles disponibles
         </h3>
         <div className="space-y-2">
           {roles.map((r) => (
             <div key={r.role} className="flex items-center gap-3">
               <span
-                className="w-2 h-2 rounded-full flex-shrink-0"
+                className="h-2 w-2 flex-shrink-0 rounded-full"
                 style={{ backgroundColor: r.color }}
               />
-              <code className="text-xs text-white/70 bg-white/5 px-2 py-0.5 rounded w-40 flex-shrink-0">
+              <code className="w-40 flex-shrink-0 rounded bg-white/5 px-2 py-0.5 text-xs text-white/70">
                 {r.role}
               </code>
               <span className="text-sm text-white/40">{r.desc}</span>
@@ -57,8 +56,8 @@ export default async function EquipePage({
       </div>
 
       {/* Membres actifs */}
-      <div className="bg-white/3 border border-white/5 rounded-lg p-4">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">
+      <div className="rounded-lg border border-white/5 bg-white/3 p-4">
+        <h3 className="mb-3 text-xs font-semibold tracking-widest text-white/40 uppercase">
           Membres actifs
         </h3>
         <p className="text-sm text-white/20 italic">
@@ -67,8 +66,8 @@ export default async function EquipePage({
       </div>
 
       {/* Beta testeurs */}
-      <div className="bg-white/3 border border-white/5 rounded-lg p-4">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">
+      <div className="rounded-lg border border-white/5 bg-white/3 p-4">
+        <h3 className="mb-3 text-xs font-semibold tracking-widest text-white/40 uppercase">
           Beta testeurs
         </h3>
         <p className="text-sm text-white/20 italic">

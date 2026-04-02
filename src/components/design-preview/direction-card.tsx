@@ -4,10 +4,10 @@
 
 type Score = {
   lisibilite: number; // /5
-  brand: number;      // /5
+  brand: number; // /5
   effort: "S" | "M" | "L";
-  modernite: number;  // /5
-  emotion: number;    // /5
+  modernite: number; // /5
+  emotion: number; // /5
 };
 
 const EFFORT_LABEL = { S: "Rapide < 2h", M: "Moyen 2-8h", L: "Long > 8h" };
@@ -38,18 +38,18 @@ export function DirectionCard({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col rounded-2xl border border-white/10 overflow-hidden bg-white/5">
+    <div className="flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5">
       {/* Header direction */}
-      <div className="px-5 py-4 border-b border-white/10">
-        <p className="text-xs uppercase tracking-widest text-white/40 mb-1">{name}</p>
-        <p className="text-white/80 text-sm leading-snug">{concept}</p>
+      <div className="border-b border-white/10 px-5 py-4">
+        <p className="mb-1 text-xs tracking-widest text-white/40 uppercase">{name}</p>
+        <p className="text-sm leading-snug text-white/80">{concept}</p>
       </div>
 
       {/* Preview composant */}
-      <div className="flex-1 p-4 overflow-hidden">{children}</div>
+      <div className="flex-1 overflow-hidden p-4">{children}</div>
 
       {/* Scores */}
-      <div className="px-5 py-4 border-t border-white/10 space-y-2">
+      <div className="space-y-2 border-t border-white/10 px-5 py-4">
         <div className="flex items-center justify-between text-xs text-white/40">
           <span>Lisibilite</span>
           <ScoreBar value={score.lisibilite} />
