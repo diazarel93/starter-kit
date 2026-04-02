@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1775140849045,
+    "title": "RLS manquante sur nouvelles tables Supabase (Banlieuwood)",
+    "description": "Romain crée une nouvelle table dans Supabase/Banlieuwood et oublie systématiquement de définir les politiques RLS (Row Level Security). Cela cause des erreurs lors des requêtes de sélection/insertion. C'est la 3ème occurrence du même problème.",
+    "frequency": 1,
+    "suggestedAction": "Créer une migration Supabase template avec les politiques RLS pré-configurées (auth.uid(), profiles.user_id). Ajouter une checklist automatique dans le pre-commit hook qui détecte les nouvelles tables sans RLS.",
+    "agent": "db-architect",
+    "project": "Banlieuwood",
+    "firstSeen": "2026-04-02T14:40:49.045Z",
+    "lastSeen": "2026-04-02T14:40:49.045Z",
+    "resolved": false
+  }
+]

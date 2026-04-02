@@ -1,0 +1,21 @@
+{
+  "name": "brain-agent",
+  "version": "1.0.0",
+  "description": "Cerveau autonome — agent AI qui surveille, apprend et agit",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "once": "node index.js --once",
+    "idea": "node idea.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.82.0",
+    "node-telegram-bot-api": "^0.66.0"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.2"
+  }
+}

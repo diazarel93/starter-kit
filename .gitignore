@@ -39,3 +39,8 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# Claude Code — machine-local (ne pas versionner)
+.claude/settings.local.json
+.claude/sessions/
+tsconfig.tsbuildinfo
