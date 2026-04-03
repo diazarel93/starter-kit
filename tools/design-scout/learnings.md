@@ -19,7 +19,7 @@ Historique :
 Prochain palier : 2026-05-03 → passer à 58/70 si 3 sessions consécutives passent facilement
 Règle : augmenter de 2pts par mois si le niveau le permet. Ne jamais baisser.
 
-KB actuelle : 531 sites (2026-04-03) — objectif 500 DÉPASSÉ ✓
+KB actuelle : 613 sites (2026-04-03) — objectif 700 en cours
 Fichiers graphiques permanents :
   - kb-palettes.json       → 15 palettes par mood/secteur
   - kb-typography.json     → systèmes typo par style
@@ -28,7 +28,10 @@ Fichiers graphiques permanents :
   - kb-animations.json     → types d'animation + timing (pending)
 Couverture secteurs : luxury-fashion, streetwear, automotive, cinema, saas, gaming, media,
   art-contemporain, architecture, music, editorial-fashion, web3, civic-nonprofit,
-  sport, health, beauty, food, finance, legal, btp, travel, social, crypto, dating
+  sport, health, beauty, food, finance, legal, btp, travel, social, crypto, dating,
+  craft-beer, coffee-brand, spirits, wine-premium, outdoor, coworking,
+  airlines, dashboard-analytics, pricing-page, indie-gaming,
+  design-history (8 mouvements), global-design-cultures (africa/latam/middle-east)
 ```
 
 **Pour mettre à jour le seuil** : modifier aussi la section "Boucle qualité obligatoire" dans design-director.md et le score minimum dans design-critic.md.
@@ -46,6 +49,51 @@ Couverture secteurs : luxury-fashion, streetwear, automotive, cinema, saas, gami
 - Pas de gradient, pas de shadow, pas de border-radius sur les éléments principaux
 
 **Pattern échoué** : Overlay colorée sur photo → détruit le grain cinéma, uniformise, appauvrit
+
+---
+
+### Sur le craft & beverage design (2026-04-03)
+
+**Pattern craft beer** : Deux écoles diamétralement opposées — rebel/punk (BrewDog, Beavertown : couleurs vives, crânes, typographie agressive) vs nordic/minimal (Mikkeller : une police custom, blanc, zéro image). Les deux sont premium mais signalent des tribus différentes.
+
+**Pattern café specialty** : Le whitespace généreux = signal de luxe dans le café. Tim Wendelboe, Blue Bottle utilisent l'espace vide comme argument de qualité — "on n'a pas besoin de te convaincre". Custom typography (Stumptown, Onyx) crée l'identité là où d'autres utilisent la couleur.
+
+**Règle universelle craft** : Jamais plus de 4 couleurs. Une couleur accent vivante sur palette neutre = différenciation. Plus = dilution.
+
+---
+
+### Sur le design culturel global (2026-04-03)
+
+**Découverte clé** : Aucun studio émergent authentique (Afrique, Amérique Latine, Moyen-Orient) n'utilise de patterns folkloriques directs. L'identité culturelle s'exprime via **palette + philosophie de conception**, pas via décoration ethnique visible.
+
+- Studios africains (Lagos, Cape Town) : minimalisme sophistiqué, afrofuturisme pour le futur imaginé, pas le passé représenté
+- Studios latino (Anagrama, Estudio Doble) : intelligence créative, minimalisme professionnel pour asseoir l'autorité
+- Moyen-Orient (Dubai) : refuse l'orientalisme, positionne comme plateforme d'ouverture contemporaine
+
+**Pour Banlieuwood** : L'orange/teal fonctionne si elle signifie *énergie créative métropolitaine*, pas si elle crie "Afrique décorative".
+
+---
+
+### Sur les mouvements historiques — leur influence contemporaine (2026-04-03)
+
+| Mouvement | Ce qu'il apporte aujourd'hui |
+|-----------|------------------------------|
+| Swiss/International Style | Structure des dashboards, grille des design systems |
+| Constructivisme | Affiches événementielles, editoriaux politisés |
+| Art Nouveau | Marques wellness, beauté organique, luxury botanique |
+| De Stijl | UI minimaliste, landing pages tech brutales |
+| Postmodernisme | Branding "anti-branding", streetwear ironique |
+| Grunge | Zines digitaux, imprimé indie, esthétique lo-fi |
+
+**Règle** : Connaître l'histoire du design permet de choisir une référence consciemment plutôt que de la recycler inconsciemment.
+
+---
+
+### Sur les UI patterns SaaS (2026-04-03)
+
+**Dashboard analytics** : Hierachie données via cards [value + label + chart], pas tableaux. Monospace pour les chiffres critiques. Dark mode systématique pour les sessions longues.
+
+**Pricing pages** : Cascade additive (chaque tier = antérieur + nouvelles features). Badge psychologique ("Most Popular") sur le tier business = 80% des conversions. Free limits explicites > promesses vagues = meilleur taux de conversion.
 
 ---
 

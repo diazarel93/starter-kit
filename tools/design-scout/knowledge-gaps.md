@@ -23,17 +23,17 @@
 
 ### CRITIQUE — Impact direct sur les clients potentiels
 
-- [ ] **Craft beer / brasseries artisanales** — BrewDog, Breweries indé — design barbare vs premium
-- [ ] **Café / coffee brands** — Blue Bottle, Stumptown, Intelligentsia — minimalisme japonisant
-- [ ] **Spiritueux / whisky / gin** — Hendrick's, The Balvenie, Laphroaig — narration terroir
-- [ ] **Vin / cave premium** — Château Petrus, Leroy, vignerons naturels — étiquette = art
+- [x] **Craft beer / brasseries artisanales** — BrewDog, Beavertown, Mikkeller, Firestone Walker ✓ 2026-04-03
+- [x] **Café / coffee brands** — Blue Bottle, Stumptown, Intelligentsia, Onyx, Tim Wendelboe ✓ 2026-04-03
+- [x] **Spiritueux / whisky / gin** — Hendrick's, The Balvenie, Laphroaig, Bruichladdich ✓ 2026-04-03 (en cours merge)
+- [x] **Vin / cave premium** — Château Pichon Baron, Opus One, Cloudy Bay ✓ 2026-04-03
 - [ ] **Alimentation artisanale / épicerie fine** — Fauchon, Hédiard, Dean & DeLuca
-- [ ] **Coworking / tiers-lieux** — WeWork, Morning, Kwerk, Anticafé — community design
+- [x] **Coworking / tiers-lieux** — WeWork, Second Home, Industrious ✓ 2026-04-03
 - [ ] **Consulting premium** — McKinsey, BCG, Bain — austérité = crédibilité
 - [ ] **Logistique / supply chain** — DHL, FedEx brand (pas juste leur logo), UPS
 - [ ] **Télécoms premium** — Orange Studio, Free Pro — comment rendre séxy un opérateur
-- [ ] **Compagnies aériennes** — Air France (rebranding), Swiss, Emirates, ANA Japan
-- [ ] **Marques outdoor / randonnée** — Arc'teryx, Salomon trail, Mammut — fonctionnel premium
+- [x] **Compagnies aériennes** — Air France, Swiss, Emirates, ANA, Singapore Airlines ✓ 2026-04-03 (en cours merge)
+- [x] **Marques outdoor / randonnée** — Arc'teryx, Mammut, Salomon, Patagonia ✓ 2026-04-03
 - [ ] **Marques de surf / snow** — Quiksilver, Billabong actuel, Volcom — contre-culture premium
 - [ ] **Marques de skate design** — Element, Polar Skate Co, Isle Skateboards
 - [ ] **Tatoo / body art culture** — studios de tatouage premium, flash art digital
@@ -69,8 +69,8 @@
 
 ### CRITIQUE
 
-- [ ] **Dashboard analytics design** — comment présenter des data complexes (Mixpanel, Amplitude, Looker)
-- [ ] **Pricing pages** — SaaS pricing tables world-reference (Linear, Notion, Figma)
+- [x] **Dashboard analytics design** — Mixpanel, Amplitude, Looker, Grafana, Metabase ✓ 2026-04-03
+- [x] **Pricing pages** — Linear, Notion, Figma, Vercel, Loom, Raycast ✓ 2026-04-03
 - [ ] **Onboarding flows** — first run experience (Duolingo, Slack, Notion onboarding)
 - [ ] **Empty states design** — écrans vides avec illustration + message (Mailchimp, Dropbox)
 - [ ] **Error pages** — 404/500 créatives et utiles (GitHub, Airbnb, Mailchimp 404)
@@ -101,10 +101,10 @@
 
 ### CRITIQUE
 
-- [ ] **Design africain contemporain** — studios créatifs africains (Nairobi, Lagos, Cape Town)
-- [ ] **Design latino-américain** — studios Brésil, Mexique, Argentine — identité propre
+- [x] **Design africain contemporain** — Haus of Tobi Obi, Chimurenga, Sindiso Khumalo ✓ 2026-04-03
+- [x] **Design latino-américain** — Anagrama, Estudio Doble, Fábrica ✓ 2026-04-03
 - [ ] **Design asiatique hors Japon** — studios coréens, taïwanais, singapouriens
-- [ ] **Design moyen-oriental** — Dubai design scene, Sharjah, Beyrouth avant-guerre
+- [x] **Design moyen-oriental** — Dubai Design Week ✓ 2026-04-03
 - [ ] **Design scandinave pur** — studios suédois, norvégiens, finnois — au-delà de Muuto/Hay
 
 ### ÉLEVÉE
@@ -139,14 +139,14 @@
 
 > Pour comprendre d'où vient le design contemporain
 
-- [ ] **Arts & Crafts (1880s)** — William Morris, contre la révolution industrielle
-- [ ] **Jugendstil / Art Nouveau (1890-1910)** — Mucha, Klimt, Gaudi — ornement organique
-- [ ] **De Stijl (1917)** — Mondrian, Rietveld — grille pure, primaires
-- [ ] **Constructivisme soviétique (1920s)** — Rodchenko, Lissitzky — propagande élégante
-- [ ] **International Style / Swiss Style (1950s)** — Müller-Brockmann — grille + Helvetica
-- [ ] **Psychédélique (1960s)** — Fillmore posters, lettering déformé, couleurs acides
-- [ ] **Postmodernisme (1980s)** — Wolfgang Weingart, David Carson — casser les règles
-- [ ] **Grunge design (1990s)** — Ray Gun, Beach Culture — XL + illisible + cool
+- [x] **Arts & Crafts (1880s)** — William Morris, philosophie + palette + CSS ✓ 2026-04-03
+- [x] **Jugendstil / Art Nouveau (1890-1910)** — Mucha, Klimt — ornement organique ✓ 2026-04-03
+- [x] **De Stijl (1917)** — Mondrian, Rietveld — grille pure, primaires ✓ 2026-04-03
+- [x] **Constructivisme soviétique (1920s)** — Rodchenko, Lissitzky ✓ 2026-04-03
+- [x] **International Style / Swiss Style (1950s)** — Müller-Brockmann — grille + Helvetica ✓ 2026-04-03
+- [x] **Psychédélique (1960s)** — Fillmore posters, couleurs acides ✓ 2026-04-03
+- [x] **Postmodernisme (1980s)** — Wolfgang Weingart, David Carson ✓ 2026-04-03
+- [x] **Grunge design (1990s)** — Ray Gun, Beach Culture ✓ 2026-04-03
 
 ---
 

@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "last_updated": "2026-04-03",
-  "total_sites": 561,
+  "total_sites": 613,
   "sites": [
     {
       "id": "banlieuwood-pencil-cinema-dark-2026-04-03",
@@ -23245,6 +23245,1956 @@
       ],
       "awwwards_award": "Site Of The Day + Developer Award (Mar 6, 2026)",
       "score": 7.32
+    },
+    {
+      "url": "https://www.brewdog.com",
+      "name": "BrewDog",
+      "sector": "craft-beer",
+      "sub_aesthetic": "rebel-industrial-minimalist",
+      "style_tags": [
+        "bold-minimalist",
+        "high-contrast",
+        "geometric-sans",
+        "industrial-chic",
+        "no-nonsense"
+      ],
+      "palette": {
+        "primary": "#111111",
+        "secondary": "#FFFFFF",
+        "accent": "#FF6B35",
+        "background": "#F5F5F5"
+      },
+      "typography": {
+        "heading": "New Grotesk Four",
+        "body": "Inter"
+      },
+      "what_makes_it_exceptional": "Industrial minimalism qui évoque la machinerie de brasserie à travers la géométrie précise et les traits épais. La confiance communiquée par la simplicité radicale, sans décoration, fait de BrewDog une marque immédiatement identifiable dans un marché saturé.",
+      "design_lessons": [
+        "La réduction drastique de palette (noir/blanc/gris) permet une hiérarchie visuelle cristalline",
+        "Les boutons épais avec bordures arrondies créent de la tactilité digitale et signalent l'action",
+        "L'absence de tentatrice ne signifie pas absence de personnalité—la géométrie devient signature"
+      ],
+      "sector_codes": [
+        "craft-beer-rebel-positioning",
+        "high-contrast-cta",
+        "geometric-sans-serif-authority",
+        "industrial-authenticity-through-minimalism"
+      ]
+    },
+    {
+      "url": "https://www.mikkeller.com",
+      "name": "Mikkeller",
+      "sector": "craft-beer",
+      "sub_aesthetic": "nordic-minimalist-craft",
+      "style_tags": [
+        "minimalist-premium",
+        "nordic-restraint",
+        "custom-typography",
+        "high-accessibility",
+        "monochromatic-hierarchy"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#00AA00",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Mikkelwind (custom)",
+        "body": "Mikkelwind (custom)"
+      },
+      "what_makes_it_exceptional": "L'intersection du minimalisme nordique avec la culture bière craft crée une marque raffinée, sans prétention. La typographie sur-mesure 'Mikkelwind' devient l'unique différenciant—c'est le design qui parle, pas la décoration. Le vert minimaliste en focus states rappelle les houblons sans jamais crier.",
+      "design_lessons": [
+        "Une police custom peut porter l'identité entière même en deux couleurs—pas besoin de palette complexe",
+        "Les focus states accessibles (vert vif) peuvent être esthétiques ET fonctionnels",
+        "L'absence d'imagerie force la typo à travailler plus dur—la charge sémantique monte d'autant"
+      ],
+      "sector_codes": [
+        "nordic-craft-identity",
+        "custom-typeface-as-differentiator",
+        "monochrome-functionality",
+        "restraint-as-premium-signal"
+      ]
+    },
+    {
+      "url": "https://www.beavertownbrewery.co.uk",
+      "name": "Beavertown Brewery",
+      "sector": "craft-beer",
+      "sub_aesthetic": "playful-irreverent-premium",
+      "style_tags": [
+        "multi-chromatic-bold",
+        "character-design",
+        "cosmic-imagery",
+        "skull-iconography",
+        "british-contemporary"
+      ],
+      "palette": {
+        "primary": "#FB7C46",
+        "secondary": "#111111",
+        "accent": "#FFDD00",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Beavertown Official / Beavertown Alt (custom)",
+        "body": "Poppins"
+      },
+      "what_makes_it_exceptional": "Beavertown prouve qu'on peut être playful et premium simultanément. Le crâne devient symbole de rébellion sans devenir kitsch. L'imagerie cosmique place la marque dans un univers imaginatif distinct. La palette vibrante multi-chromatic évite la monotonie des bières 'sérieuses' tout en gardant la sophistication.",
+      "design_lessons": [
+        "Un symbole iconique fort (crâne) peut porter l'identité même avec palette riche",
+        "Les juxtapositions (orange + jaune + bleu) fonctionnent si elles servent une narration unique",
+        "L'imagerie (cosmique, imaginative) crée un univers où le produit vit, pas seulement existe"
+      ],
+      "sector_codes": [
+        "craft-beer-character-branding",
+        "irreverence-positioning",
+        "multi-color-harmony",
+        "symbolic-iconography-as-differentiation"
+      ]
+    },
+    {
+      "url": "https://www.firestonewalker.com/",
+      "name": "Firestone Walker",
+      "sector": "craft-beer",
+      "sub_aesthetic": "premium-heritage-contemporary",
+      "style_tags": [
+        "photography-driven",
+        "lifestyle-storytelling",
+        "neutral-foundation",
+        "product-centric",
+        "modular-grid"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#D4A843",
+        "background": "#F5F5F5"
+      },
+      "typography": {
+        "heading": "Recoleta (serif)",
+        "body": "Clean sans-serif"
+      },
+      "what_makes_it_exceptional": "Firestone Walker distingue par le storytelling image-driven plutôt que textuel. Les photos haute-résolution de bouteilles sur fond neutre deviennent héros. Le design épuré architecture supporte cette expérience immersive premium sans concurrence visuelle. La palette neutre laisse le produit parler.",
+      "design_lessons": [
+        "L'imagerie haute-qualité peut être la police-star—laisser l'espace blanc créer du prestige",
+        "Les carousels horizontaux organisent la narration sans overwhelmer",
+        "La photographie lifestyle crée une aspiration émotionnelle que text + color ne peuvent pas"
+      ],
+      "sector_codes": [
+        "premium-craft-positioning",
+        "hero-photography-strategy",
+        "neutral-background-elevation",
+        "heritage-conveyed-through-image"
+      ]
+    },
+    {
+      "url": "https://stumptowncoffee.com",
+      "name": "Stumptown Coffee",
+      "sector": "coffee-brand",
+      "sub_aesthetic": "artisan-warm-handmade",
+      "style_tags": [
+        "earthy-palette",
+        "custom-typeface-family",
+        "artisanal-authenticity",
+        "process-photography",
+        "asymmetrical-layout"
+      ],
+      "palette": {
+        "primary": "#1F1815",
+        "secondary": "#F6F5F3",
+        "accent": "#EA7F7A",
+        "background": "#E3DED7"
+      },
+      "typography": {
+        "heading": "STC-Adso Medium / STC-Canyon (custom)",
+        "body": "STC-Laurell (custom)"
+      },
+      "what_makes_it_exceptional": "Stumptown crée l'authenticité artisanale par la triple investissement: typographies sur-mesure (STC-*), imagerie de process (roasting, production), et palette issue de la physicalité du café. Les textures 'noise' rappellent l'imperfection intentionnelle. 'Hand-selected by our roasters' n'est pas slogan mais manifeste de design.",
+      "design_lessons": [
+        "Une famille de polices custom (STC-*) crée cohésion authentique—pas d'importation de Google Fonts",
+        "Le bruit texture sur background élève 'artisanal' de buzzword à implication physique",
+        "Les asymétries délibérées (whitespace inégal) signalent curation humaine vs algorithme"
+      ],
+      "sector_codes": [
+        "coffee-craft-authenticity",
+        "process-transparency-through-imagery",
+        "hand-selected-messaging",
+        "earthy-palette-coffee-origin"
+      ]
+    },
+    {
+      "url": "https://www.onyxcoffeelab.com",
+      "name": "Onyx Coffee Lab",
+      "sector": "coffee-brand",
+      "sub_aesthetic": "precision-luxury-minimal",
+      "style_tags": [
+        "transparency-theater",
+        "editorial-sophistication",
+        "animated-svg",
+        "generous-whitespace",
+        "methodical-typography"
+      ],
+      "palette": {
+        "primary": "#1A1A1A",
+        "secondary": "#FBFAF3",
+        "accent": "#C85A4C",
+        "background": "#EEE9DF"
+      },
+      "typography": {
+        "heading": "Room-205 / Bajern (custom)",
+        "body": "Kapra / Montserrat"
+      },
+      "what_makes_it_exceptional": "Onyx invente un nouveau vocabulaire: 'transparency theater'—publier cupping scores, roast dates, prix des baristas devient performance. Visuellement: animations SVG subtiles, grilles methodiques, 'whisper don't shout'. Le design refuse de crier car les données parlent. Lignes de tracking épaisses = traçabilité = transparence.",
+      "design_lessons": [
+        "L'animation SVG (loading states) peut renforcer narratif (coffee is living craft) sans distraction",
+        "La générosité whitespace = luxe premium + room to breathe",
+        "La précision typo (tracking serré) communique méticuleusité technique"
+      ],
+      "sector_codes": [
+        "specialty-coffee-transparency",
+        "competition-placement-display",
+        "roast-date-prominence",
+        "editorial-coffee-culture"
+      ]
+    },
+    {
+      "url": "https://www.timwendelboe.no",
+      "name": "Tim Wendelboe",
+      "sector": "coffee-brand",
+      "sub_aesthetic": "minimalist-luxury-nordic",
+      "style_tags": [
+        "architectural-precision",
+        "forest-green-accent",
+        "serif-elegant",
+        "zero-border-radius",
+        "generous-spacing"
+      ],
+      "palette": {
+        "primary": "#24352E",
+        "secondary": "#F6EDE7",
+        "accent": "#E5D9D0",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Instrument Serif",
+        "body": "Instrument Sans"
+      },
+      "what_makes_it_exceptional": "Tim Wendelboe redéfinit luxury par la soustraction totale. Zéro border-radius = aucune douceur cosmétique. Lignes 1px à 15% opacity = architecture invisible. Typography géante (128px) respire. Le vert forest nordique rappelle forêts suédoises—pas de clichés café tropicaux. Substance > ornamentation.",
+      "design_lessons": [
+        "Le zéro border-radius crée netteté architecturale—les angles pointus signalent premium par refus de compromis",
+        "Le serif + sans-serif pairing (Instrument duo) crée élégance sans effronterie",
+        "Padding généreux (20-80px) = respect du lecteur = luxury"
+      ],
+      "sector_codes": [
+        "nordic-minimalism-premium-coffee",
+        "architectural-design-approach",
+        "generous-vertical-rhythm",
+        "restraint-as-ultimate-luxury"
+      ]
+    },
+    {
+      "url": "https://www.intelligentsia.com/",
+      "name": "Intelligentsia Coffee",
+      "sector": "coffee-brand",
+      "sub_aesthetic": "editorial-premium-curatorial",
+      "style_tags": [
+        "minimalist-brutalism",
+        "editorial-integration",
+        "bold-red-accent",
+        "lifestyle-photography",
+        "curated-messaging"
+      ],
+      "palette": {
+        "primary": "#2E2925",
+        "secondary": "#FEFBF9",
+        "accent": "#D42927",
+        "background": "#FEFBF9"
+      },
+      "typography": {
+        "heading": "Sans-serif (clean)",
+        "body": "Sans-serif (clean, 10-20px)"
+      },
+      "what_makes_it_exceptional": "Intelligentsia transforme le coffee e-commerce en editorial curation. 'Hand-selected from around the globe' ne vend pas—ça éduque. Le rouge bold (#D42927) perce le minimalisme crème, créant drama sans chaos. Design épuré confie au contenu éditorial de porter l'identité, pas aux ornementation visuelles.",
+      "design_lessons": [
+        "Un seul accent bold (rouge) peut suffire à organiser la hiérarchie dans palette neutral",
+        "Intégrer blogue/guides = repositionner produit comme éducation, pas commodité",
+        "Photographies lifestyle haute-qualité > pseudo-premium imagery"
+      ],
+      "sector_codes": [
+        "specialty-coffee-education",
+        "hand-selected-curation",
+        "editorial-e-commerce-hybrid",
+        "origin-story-emphasis"
+      ]
+    },
+    {
+      "url": "https://www.dogfish.com",
+      "name": "Dogfish Head",
+      "sector": "craft-beer",
+      "sub_aesthetic": "whimsical-craft-storytelling",
+      "style_tags": [
+        "hand-drawn-illustration",
+        "warm-palette",
+        "playful-irreverence",
+        "narrative-focus",
+        "craft-authenticity"
+      ],
+      "palette": {
+        "primary": "#D4421A",
+        "secondary": "#FFFFFF",
+        "accent": "#FFC520",
+        "background": "#F5EFE0"
+      },
+      "typography": {
+        "heading": "Custom serif / hand-lettered style",
+        "body": "Clean sans-serif"
+      },
+      "what_makes_it_exceptional": "Dogfish Head utilise l'illustration hand-drawn et storytelling narratif pour créer une marque ultra-mémorable. Chaque bière a une histoire épique (Ancient Ales, Theobroma, etc.), et le design reflète cette narration déroutante. L'esthétique 'weird, oddly familiar' devient signature commerciale.",
+      "design_lessons": [
+        "L'illustration hand-drawn crée humanité là où minimalisme crée distance",
+        "Chaque produit avec sa micro-narrative = engagement viral naturel",
+        "Palette warm + illustration = permissionne la playfulness premium"
+      ],
+      "sector_codes": [
+        "narrative-beer-marketing",
+        "hand-drawn-differentiation",
+        "weird-positioning-strategy",
+        "storytelling-as-product-value"
+      ]
+    },
+    {
+      "url": "https://www.bluebottlecoffee.com",
+      "name": "Blue Bottle Coffee",
+      "sector": "coffee-brand",
+      "sub_aesthetic": "minimalist-premium-meticulous",
+      "style_tags": [
+        "typographic-precision",
+        "blue-accent-symbolic",
+        "editorial-layout",
+        "transparency-operations",
+        "craft-documentation"
+      ],
+      "palette": {
+        "primary": "#1A1A1A",
+        "secondary": "#FFFFFF",
+        "accent": "#0074D9",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Custom sans-serif (meticulous)",
+        "body": "Clean sans-serif"
+      },
+      "what_makes_it_exceptional": "Blue Bottle définit coffee luxury par obsession technique: transparence des opérations, focus sur terroir, documentation méticuleuse. Le bleu (inspiré de laboratoire chimie?) crée premium technologique, pas just artisanal. Le minimalisme n'est pas choix stylistique—c'est manifestation de précision.",
+      "design_lessons": [
+        "Accent bleu = technologie + pureté (labo imagery) = repositionne coffee comme science, pas artisanat seul",
+        "Documentation visuelle (processus, timing, température) crée trust",
+        "Grille typographique précise = écho visuel de précision des opérations"
+      ],
+      "sector_codes": [
+        "specialty-coffee-technology",
+        "laboratory-precision-positioning",
+        "transparency-operations-display",
+        "terroir-documentation"
+      ]
+    },
+    {
+      "url": "https://www.squaremilelondon.com",
+      "name": "Square Mile Coffee",
+      "sector": "coffee-brand",
+      "sub_aesthetic": "precision-craft-london-minimal",
+      "style_tags": [
+        "geometric-clarity",
+        "editorial-sophisticated",
+        "understated-british",
+        "competition-driven",
+        "roaster-profiles"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#FF6B35",
+        "background": "#F5F5F5"
+      },
+      "typography": {
+        "heading": "Clean geometric sans-serif",
+        "body": "Precise sans-serif"
+      },
+      "what_makes_it_exceptional": "Square Mile crée prestige par compétition—World Barista Championship winners, Cup of Excellence participation. Le design épuré britannique refuse la décoration pour laisser accomplissements parler. Géométrie nette, typographie précise, absence de frivolité = confiance légitime.",
+      "design_lessons": [
+        "Afficher les accomplissements (championships) au cœur du design = social proof intégré",
+        "L'understatement britannique (pas de fioriture) peut être plus premium que ornamentation",
+        "Précision géométrique = echo visuel de précision de roasting"
+      ],
+      "sector_codes": [
+        "competition-coffee-positioning",
+        "championship-display-strategy",
+        "british-understatement-luxury",
+        "precision-roasting-methodology"
+      ]
+    },
+    {
+      "url": "https://www.proudmarycoffee.com",
+      "name": "Proud Mary Coffee",
+      "sector": "coffee-brand",
+      "sub_aesthetic": "melbourne-coffee-culture-contemporary",
+      "style_tags": [
+        "contemporary-australian",
+        "community-focus",
+        "carousel-layout",
+        "responsive-modern",
+        "poppins-typography"
+      ],
+      "palette": {
+        "primary": "#3D4246",
+        "secondary": "#FFFFFF",
+        "accent": "#FF6B35",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Poppins (modern geometric)",
+        "body": "Poppins"
+      },
+      "what_makes_it_exceptional": "Proud Mary (Melbourne/NYC) capture l'énergie coffee-culture urbain contemporain. Utilisation de Poppins (typeface géométrique accessible) signale design inclusif, pas élitiste. Carousels et grilles modulables = permissionne discovery fluide. Palette charcoal + accent = calme urbain premium.",
+      "design_lessons": [
+        "Poppins seulement (pas de custom fonts) peut rester premium si typographie hiérarchie est nette",
+        "Carousels horizontaux créent narrative fluide vs statique grid",
+        "Charcoal + accent léger = palette modern urbain vs coffee-industry clichés"
+      ],
+      "sector_codes": [
+        "third-wave-coffee-culture",
+        "melbourne-cafe-community",
+        "inclusive-design-approach",
+        "urban-contemporary-positioning"
+      ]
+    },
+    {
+      "url": "https://mixpanel.com",
+      "name": "Mixpanel",
+      "sector": "dashboard-analytics",
+      "sub_aesthetic": "Enterprise analytics, flexible-by-design",
+      "style_tags": [
+        "data-dense",
+        "conversion-focused",
+        "performance-analytics",
+        "real-time"
+      ],
+      "palette": {
+        "primary": "#667DFF",
+        "secondary": "#F5F7FF",
+        "accent": "#00D9A3",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Inter",
+        "body": "Inter",
+        "data": "Inter Mono"
+      },
+      "what_makes_it_exceptional": "Accès rapide aux insights de conversion et rétention sans surcharge technique. Focus sur les patterns comportementaux (funnels, heatmaps, session replay) avec UI dégagée prioritaire à l'accessibilité non-technique.",
+      "ui_patterns": [
+        "Cartes modulaires pour chaque catégorie d'analyse",
+        "Groupement thématique (Product Analytics, Session Replay, Web Analytics)",
+        "Call-to-action progressive : explore > analyze > act",
+        "Visualisations conversion-focused (funnel diagrams, retention curves)"
+      ],
+      "design_lessons": [
+        "Organiser les analyses par cas d'usage utilisateur, pas par puissance technique",
+        "Les métriques complexes gagnent à être visualisées plutôt qu'énumérées"
+      ]
+    },
+    {
+      "url": "https://amplitude.com",
+      "name": "Amplitude",
+      "sector": "dashboard-analytics",
+      "sub_aesthetic": "Product intelligence, action-driven insights",
+      "style_tags": [
+        "scannable",
+        "cards-based",
+        "image-heavy",
+        "spot-light-emphasis"
+      ],
+      "palette": {
+        "primary": "#362FD9",
+        "secondary": "#F0F2FF",
+        "accent": "#00D97E",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Aeonik",
+        "body": "Inter",
+        "data": "Inter"
+      },
+      "what_makes_it_exceptional": "Hiérarchie claire basée sur cartes thématiques isolées ('spotlightCards') réduisant surcharge cognitive. Stratégie de scannabilité : groupement logique (Insights, Action, Data) avec espacements généreux.",
+      "ui_patterns": [
+        "Cartes modulaires avec images/vidéos contextuelles",
+        "Superscripts pour contextualiser métriques (%, +/-, comparaisons)",
+        "Sections détails avec témoignages + chiffres comparatifs",
+        "Alternance image/texte pour contraste dynamique",
+        "Big number emphasis pour statistics clés (174%, 11K)"
+      ],
+      "design_lessons": [
+        "Les chiffres gagnent à être isolés visuellement (cartes distinctes vs contexte)",
+        "Contextualiser les métriques avec comparaison (+X% vs période antérieure) réduit la charge cognitive"
+      ]
+    },
+    {
+      "url": "https://cloud.google.com/looker",
+      "name": "Google Cloud Looker",
+      "sector": "dashboard-analytics",
+      "sub_aesthetic": "Material Design 3, enterprise observability",
+      "style_tags": [
+        "material-design",
+        "AAA-contrast",
+        "dense-information",
+        "real-time"
+      ],
+      "palette": {
+        "primary": "#0B57D0",
+        "secondary": "#FFFFFF",
+        "accent": "#E9EEF6",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Roboto",
+        "body": "Roboto",
+        "data": "Roboto"
+      },
+      "what_makes_it_exceptional": "Contraste AAA certifié (#1f1f1f sur #fff = 21:1). Anti-aliasing aggressive pour nombres (optimizeLegibility) + responsive flexbox. Support dark mode automatique avec contrast ratios maintenus.",
+      "ui_patterns": [
+        "Metric cards : [value] + [label] + [chart] architecture",
+        "Text-rendering: optimizeLegibility pour data-heavy content",
+        "Overflow handling : text-overflow:ellipsis pour labels longs",
+        "Periodic reporting (60s) suggère design pour real-time refresh",
+        "Padding 12px baseline avec refinements 4px",
+        "Icons/secondary text à 75% opacity ou #444746 pour hiérarchie"
+      ],
+      "design_lessons": [
+        "Appliquer anti-aliasing explicite sur nombres crée légibilité premium",
+        "GM3 tokens (primary color #0B57D0 sur 4 niveaux de surface) = scalabilité theming"
+      ]
+    },
+    {
+      "url": "https://grafana.com",
+      "name": "Grafana",
+      "sector": "dashboard-analytics",
+      "sub_aesthetic": "Observability & incident response, confidence-scored insights",
+      "style_tags": [
+        "dark-mode",
+        "confidence-visualization",
+        "performance-metrics",
+        "multi-agent"
+      ],
+      "palette": {
+        "primary": "#8B5CF6",
+        "secondary": "#000000",
+        "accent": "#10B981",
+        "background": "#000000"
+      },
+      "typography": {
+        "heading": "Inter",
+        "body": "Inter",
+        "data": "Courier"
+      },
+      "what_makes_it_exceptional": "Visualisation de confiance (0.91 scoring) + flow diagrams pour multi-agent investigation. Graphes temps-réel avec latency metrics. Dark mode par défaut avec accents purple/blue pour interactivité.",
+      "ui_patterns": [
+        "Time-series graphs avec performance metrics (latency, throughput)",
+        "Bar charts comparatifs (AI vs human incident response)",
+        "Flow diagrams pour architectures multi-agent",
+        "Confidence scoring visualization (0-1.0 range)",
+        "Progressive disclosure : hero → feature cards (3-col grid) → ecosystem"
+      ],
+      "design_lessons": [
+        "Visualiser la confiance des insights (pas juste le nombre) réduit les faux positifs",
+        "Dark mode optimise pour lecture prolongée sur observability dashboards"
+      ]
+    },
+    {
+      "url": "https://metabase.com",
+      "name": "Metabase",
+      "sector": "dashboard-analytics",
+      "sub_aesthetic": "Query-less analytics, accessible business intelligence",
+      "style_tags": [
+        "no-sql-required",
+        "visual-query-builder",
+        "drill-through",
+        "accessible"
+      ],
+      "palette": {
+        "primary": "#509EE3",
+        "secondary": "#FFFFFF",
+        "accent": "#F9D45C",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Barlow",
+        "body": "Barlow",
+        "data": "Courier"
+      },
+      "what_makes_it_exceptional": "Dashboard construction sans SQL via visual query builder. Drill-through interactivity + data model abstraction. Priorité clarté > densité pour personas non-techniques.",
+      "ui_patterns": [
+        "Visual query builder (blocks vs SQL)",
+        "Chart drilldowns pour exploration hiérarchique",
+        "Data models + metrics layer au-dessus de tables brutes",
+        "Dashboard filtering/breakout options intuitives",
+        "Interactive dashboards sans requête manuelle"
+      ],
+      "design_lessons": [
+        "Abstraire SQL = UI wins pour 80% users (business analysts, PMs)",
+        "Drill-through patterns = curiosity-driven data exploration"
+      ]
+    },
+    {
+      "url": "https://redash.io",
+      "name": "Redash",
+      "sector": "dashboard-analytics",
+      "sub_aesthetic": "Query orchestration, collaborative analytics",
+      "style_tags": [
+        "query-focused",
+        "collaboration-first",
+        "open-source",
+        "lightweight"
+      ],
+      "palette": {
+        "primary": "#2C3E50",
+        "secondary": "#ECF0F1",
+        "accent": "#3498DB",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Open Sans",
+        "body": "Open Sans",
+        "data": "Courier"
+      },
+      "what_makes_it_exceptional": "Orchestration de requêtes + partage collaborative. Interface légère optimisée pour équipes data. Refresh scheduling + alertes intégrées.",
+      "ui_patterns": [
+        "Query editor + visualization preview side-by-side",
+        "Dashboard canvas avec drag-drop widget placement",
+        "Scheduled refresh + alert configuration",
+        "Shared query library avec versioning",
+        "Permissionning granulaire par dashboard"
+      ],
+      "design_lessons": [
+        "Équipes data = besoin de collaboration natives (partage, versioning, audit)",
+        "Query + visual preview côte-à-côte = feedback loop rapide"
+      ]
+    },
+    {
+      "url": "https://linear.app/pricing",
+      "name": "Linear",
+      "sector": "pricing-page",
+      "sub_aesthetic": "Developer-first, minimal luxury",
+      "style_tags": [
+        "horizontal-comparison",
+        "sticky-header",
+        "mobile-dropdown",
+        "feature-dense"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#0084FF",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Inter",
+        "body": "Inter",
+        "data": "Inter Mono"
+      },
+      "what_makes_it_exceptional": "Tableau horizontal sticky avec 50+ features scannable. Business tier inversé (CTA button invert) signale recommandation sans agressivité. Mobile: dropdown select vs colonnes parallèles.",
+      "ui_patterns": [
+        "4 tiers horizontaux (Free, Basic, Business, Enterprise)",
+        "Feature rows avec role-based semantics (role=table/row/cell)",
+        "Tooltips sur labels complexes (ex: 'Member = access user')",
+        "Checkmarks/x-marks color-coded (quaternary gray unavailable, secondary available)",
+        "Sticky header desktop, mobile dropdown select",
+        "Specific values (250 issues vs Unlimited) vs vague numbers"
+      ],
+      "design_lessons": [
+        "Sticky comparison table = contexte toujours visible quand scrolling",
+        "Tooltips sur jargon = accessibility + conversion (user confiance)"
+      ]
+    },
+    {
+      "url": "https://www.notion.com/pricing",
+      "name": "Notion",
+      "sector": "pricing-page",
+      "sub_aesthetic": "Workspace productivity, cascade-additive features",
+      "style_tags": [
+        "additive-features",
+        "recommended-badge",
+        "theme-grouped",
+        "collaborative"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#FFAB00",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Neue Haas Grotesk",
+        "body": "Vital",
+        "data": "Vital"
+      },
+      "what_makes_it_exceptional": "Business tier badgé 'Recommended' + highlight visuel = orientation conversion. Features cadenassées : Free → Plus → Business → Enterprise avec cascade additive (chaque tier inclut précédent + features).",
+      "ui_patterns": [
+        "4 tiers : Free (€0), Plus (€9.50), Business (€19.50 'Recommended'), Enterprise",
+        "Feature groups thématiques : Content, Sharing, Notion AI, Database, etc.",
+        "Cascade additive : chaque tier inclut antérieur + nouvelles",
+        "Yearly toggle : 'Save up to 20%' sans obfusquer prix mensuel",
+        "CTA variant par tier : Sign up (Free) vs Get started (Plus/Business) vs Contact (Enterprise)",
+        "Guest limits differentiation : 10 max (Free/Plus) vs Unlimited (Business+)"
+      ],
+      "design_lessons": [
+        "Badge 'Recommended' influence subconsciente = highest conversion (B2B psychology)",
+        "Feature cascade = users comprennent ce qu'ils 'gagnent' à chaque upgrade"
+      ]
+    },
+    {
+      "url": "https://figma.com/pricing",
+      "name": "Figma",
+      "sector": "pricing-page",
+      "sub_aesthetic": "Design-first, dark-footer sophistication",
+      "style_tags": [
+        "variable-typography",
+        "grid-subgrid",
+        "dark-footer",
+        "responsive-cards"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#67FF7F",
+        "background": "#000000"
+      },
+      "typography": {
+        "heading": "Figma Sans",
+        "body": "Figma Sans",
+        "data": "Figma Mono"
+      },
+      "what_makes_it_exceptional": "Variable fonts (320-550 weights) avec negative letter-spacing pour headlines premium. Dark footer (#000000) crée separation. Grid subgrid = cartes hauteur équilibrée. Monospace tier names = distinction visuelle.",
+      "ui_patterns": [
+        "Dark footer section (#000000 bg, #FFFFFF text) vs main light content",
+        "Responsive grid : single-col (mobile) → multi-col (1280px+)",
+        "Monospaced labels (figmaMono) pour tier names uppercase",
+        "Variable font weights (320-550) avec optical adjustments",
+        "Line-height ratio 1.3-1.45 = scannability",
+        "CSS Grid subgrid = cartes aligned baseline (consistent visual weight)",
+        "Border-only secondary buttons vs black primary CTAs"
+      ],
+      "design_lessons": [
+        "Variable fonts + negative letter-spacing = premium headline aesthetic sans surcharge",
+        "Grid subgrid = comparabilité visuelle automatique (colonnes alignées)"
+      ]
+    },
+    {
+      "url": "https://vercel.com/pricing",
+      "sector": "pricing-page",
+      "name": "Vercel",
+      "sub_aesthetic": "Developer infrastructure, hybrid monetization",
+      "style_tags": [
+        "freemium",
+        "usage-based",
+        "sku-normalized",
+        "savings-badge"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#0070F3",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Roc Grotesk",
+        "body": "Roc Grotesk",
+        "data": "Courier"
+      },
+      "what_makes_it_exceptional": "Hybrid : fixed seat ($20/user) + crédit inclus ($20 Pro) + usage pay-per-unit. YAML SKU normalisé rend parsing/comparison automatique mais masque contextes. Enterprise 'Custom' réduit friction (ventes only).",
+      "ui_patterns": [
+        "3 tiers : Hobby (free), Pro ($20/user/month), Enterprise (custom)",
+        "Allocations uniformes : 'X / month included' scan-friendly",
+        "Mixed units (GB, heures, opérations) = complexity trade-off",
+        "Progression logique des limites (3 → 40 → 1000 règles firewall)",
+        "YAML structure : sku, name, allowances per-tier",
+        "Absence tableau visuel = users doivent parser YAML"
+      ],
+      "design_lessons": [
+        "Transparence prix Good; Mix d'unités Bad = fournir convertisseur mental ($/unité)",
+        "Enterprise 'Custom' = réduction friction for high-intent buyers"
+      ]
+    },
+    {
+      "url": "https://loom.com/pricing",
+      "name": "Loom",
+      "sector": "pricing-page",
+      "sub_aesthetic": "Video AI, progressive-disclosure freemium",
+      "style_tags": [
+        "progressive-disclosure",
+        "business-ai-highlighted",
+        "most-popular-badge",
+        "expandable-lists"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#2563EB",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Inter",
+        "body": "Inter",
+        "data": "Courier"
+      },
+      "what_makes_it_exceptional": "Progressive disclosure : 4-5 key differentiators inline + 'See all features' expand. Business+AI badgé 'MOST POPULAR' avec blue accent. Tiers Business & AI overlap (AI = upsell specific). Redundancy (cards → lists → table) = multi-format learning.",
+      "ui_patterns": [
+        "4 tiers vertical card layout : Starter, Business, Business+AI, Enterprise",
+        "MOST POPULAR badge + blue background = Business+AI highlight",
+        "Progressive disclosure : 4-5 features visible + 'See all features' toggle",
+        "Categorical grouping : Workspace, Loom AI, Video Recording, Branding, etc.",
+        "Features appear 3x : marketing cards + expandable lists + comparison table",
+        "NEW badges = recency signal",
+        "Checkmarks (✓) vs absence = binary availability"
+      ],
+      "design_lessons": [
+        "Redundance (3 formats = cards+lists+table) réduit friction décision",
+        "Business+AI positionné comme 'most popular' = psychological pricing (anchor high, show value)"
+      ]
+    },
+    {
+      "url": "https://raycast.com/pricing",
+      "name": "Raycast",
+      "sector": "pricing-page",
+      "sub_aesthetic": "Productivity automation, transparent limits",
+      "style_tags": [
+        "explicit-limits",
+        "clipboard-history",
+        "cloud-sync",
+        "team-progression"
+      ],
+      "palette": {
+        "primary": "#FF6B35",
+        "secondary": "#FFFFFF",
+        "accent": "#4ECDC4",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "SF Pro Display",
+        "body": "SF Pro Display",
+        "data": "Courier"
+      },
+      "what_makes_it_exceptional": "5 tiers (Free → Pro → Team → Team Pro → Enterprise) avec tableau comparatif 15+ critères. Limites Free explicites (ex: 'Clipboard history 3 months') réduisent friction conversion. Économies visibles (20% annual discount).",
+      "ui_patterns": [
+        "5 tiers : Free, Pro ($10/mo), Team ($0/user), Team Pro ($15/user), Enterprise",
+        "Tableau comparatif dense mais scannable avec 15+ critères",
+        "Binary checkmarks (inclus/exclu) vs quantités (30 vs Unlimited)",
+        "Clairement délimiter Free plafonds : 'Up to 30 shared items', '5 notes'",
+        "Annual discount visible (-20%) vs monthly pricing",
+        "Feature sections organisées par domaine (Collaboration, Storage, AI)",
+        "FAQ complète anticipant objections"
+      ],
+      "design_lessons": [
+        "Expliciter Free limits = conversion accelerator (users comprennent où pain point)",
+        "Tableau dense ok si sections thématiques = scannability par besoin utilisateur"
+      ]
+    },
+    {
+      "url": "https://ituenbasi.com",
+      "name": "Ituen Basi",
+      "sector": "fashion-design",
+      "region": "africa",
+      "sub_aesthetic": "luxury-minimalism-african",
+      "style_tags": [
+        "artisanal",
+        "heritage-craftsmanship",
+        "minimalist-elegance",
+        "textile-forward",
+        "contemporary-african"
+      ],
+      "palette": {
+        "primary": "#FFFFFF",
+        "secondary": "#3A3A3A",
+        "accent": "#89B19A",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "EB Garamond",
+        "body": "Josefin Sans"
+      },
+      "what_makes_it_exceptional": "Fusionne l'élégance minimaliste occidentale avec des références au patrimoine artisanal africain. La palette neutre met en avant la texture textile plutôt que la couleur brute, créant une sophistication intemporelle qui valorise le craftsmanship.",
+      "cultural_codes": [
+        "artisanat textiles africains",
+        "héritage et innovation combinées",
+        "craftsmanship comme valeur centrale",
+        "produits luxury sans ostentation"
+      ],
+      "design_lessons": [
+        "La subtilité culturelle surpasse la decoration visuelle directe",
+        "Le minimalisme peut exprimer l'héritage via le craftsmanship plutôt que le pattern",
+        "Les accents naturels (vert sage) renforcent l'authenticité sans cliché"
+      ]
+    },
+    {
+      "url": "https://sindisokhumalo.com",
+      "name": "Sindiso Khumalo",
+      "sector": "textile-design",
+      "region": "africa",
+      "sub_aesthetic": "block-print-minimalism",
+      "style_tags": [
+        "block-printing",
+        "south-african-textile",
+        "gallery-aesthetic",
+        "artisanal-craftsmanship",
+        "traditional-contemporary"
+      ],
+      "palette": {
+        "primary": "#111111",
+        "secondary": "#FFFFFF",
+        "accent": "#478947",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Jost",
+        "body": "System UI Font Stack"
+      },
+      "what_makes_it_exceptional": "Célèbre la tradition sud-africaine du block-printing par un design gallery-like épuré. Les textiles deviennent le protagoniste visuel, tandis que l'interface s'efface pour laisser l'art parler. Référence directe aux techniques artisanales traditionnelles.",
+      "cultural_codes": [
+        "block-printing traditionnel sud-africain",
+        "textile comme medium d'expression politique et culturelle",
+        "galerie d'art comme modèle de présentation",
+        "minimalisme comme respect du craftsmanship"
+      ],
+      "design_lessons": [
+        "Laisser le produit culturel dominer l'interface; ne pas le surcharger",
+        "Le minimalisme respecte mieux l'héritage que la décoration pseudo-culturelle",
+        "Le portfolio textile = galerie d'art, pas e-commerce"
+      ]
+    },
+    {
+      "url": "https://chimurenga.co.za",
+      "name": "Chimurenga",
+      "sector": "publishing-platform",
+      "region": "africa",
+      "sub_aesthetic": "pan-african-editorial",
+      "style_tags": [
+        "intellectual-platform",
+        "editorial-design",
+        "pan-african",
+        "cultural-discourse",
+        "high-contrast-minimalism"
+      ],
+      "palette": {
+        "primary": "#161616",
+        "secondary": "#FFFFFF",
+        "accent": "#F7F7F7",
+        "background": "#161616"
+      },
+      "typography": {
+        "heading": "Playfair Display",
+        "body": "Source Sans Pro"
+      },
+      "what_makes_it_exceptional": "Plateforme intellectuelle pan-africaine qui utilise le contraste extrême (dark mode par défaut) pour signifier la profondeur et le sérieux. Combine la typographie classique (serif éditorial) avec le design contemporain, créant une aura de legacy intellectuel moderne.",
+      "cultural_codes": [
+        "discourse africain intellectuel",
+        "plateforme de pensée critique",
+        "héritage éditorial et modernité",
+        "minimalisme comme rigueur intellectuelle"
+      ],
+      "design_lessons": [
+        "Le dark mode n'est pas un trend, c'est une affirmation culturelle (introspection, poids des idées)",
+        "Serif + sans-serif moderne = tension patrimoine/futur",
+        "La typographie hiérarchique guide le lecteur africain engagé"
+      ]
+    },
+    {
+      "url": "https://anagrama.com",
+      "name": "Anagrama",
+      "sector": "design-studio",
+      "region": "latin-america",
+      "sub_aesthetic": "contemporary-latino-intelligence",
+      "style_tags": [
+        "brand-intelligence",
+        "minimalist-professional",
+        "multi-sector",
+        "customization-forward",
+        "contemporary"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#666666",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Custom (proprietary)",
+        "body": "System sans-serif"
+      },
+      "what_makes_it_exceptional": "Studio mexicain qui se positionne comme 'Brand Intelligence Group'. Refuse l'esthétique folklorique latino; préfère une intelligence transversale adaptée à chaque client (fintech, luxe, food, VC). Prouve qu'on peut être latino-américain sans afficher 'mexicanité visuelle'.",
+      "cultural_codes": [
+        "intelligence créative (intelligence > decoration)",
+        "adaptabilité multi-secteurs",
+        "sophistication latino sans cliché",
+        "design comme stratégie commerciale"
+      ],
+      "design_lessons": [
+        "L'identité culturelle peut être dans la *méthode*, pas dans les couleurs",
+        "La customisation radicale est une signature culturelle (flexibilité latino)",
+        "Minimalisme pro = autorité dans les pays émergents"
+      ]
+    },
+    {
+      "url": "https://estudiodoble.com",
+      "name": "Estudio Doble",
+      "sector": "design-studio",
+      "region": "latin-america",
+      "sub_aesthetic": "minimalist-argentine",
+      "style_tags": [
+        "contemporary-design",
+        "minimalist-professional",
+        "argentina-based",
+        "typography-led",
+        "clean-aesthetic"
+      ],
+      "palette": {
+        "primary": "#494C4B",
+        "secondary": "#54595F",
+        "accent": "#8358B0",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Inter",
+        "body": "Inter"
+      },
+      "what_makes_it_exceptional": "Studio argentin qui privilégie la clarté et l'ordre (héritage de l'architecture Buenos Aires/modernisme). Palette gris-pourpre suggère une sophistication qui refuse le baroque latino traditionnel. Design très épuré = confiance intellectuelle.",
+      "cultural_codes": [
+        "ordre et clarté (héritage architecture porteña)",
+        "rejet du baroque en faveur de la modernité",
+        "sophistication urbaine",
+        "design comme discipline rigoureuse"
+      ],
+      "design_lessons": [
+        "L'Argentine design = minimalisme précis, pas folklore",
+        "Inter + palettes neutres = autorité professionnelle",
+        "La culture se manifeste par l'*absence* de décoration"
+      ]
+    },
+    {
+      "url": "https://fabrica.com",
+      "sector": "design-studio",
+      "name": "Fábrica de Diseño",
+      "region": "latin-america",
+      "sub_aesthetic": "brazilian-modernism",
+      "style_tags": [
+        "earth-tones",
+        "warm-palette",
+        "modernist-luxury",
+        "artisanal-messaging",
+        "contemporary-brazilian"
+      ],
+      "palette": {
+        "primary": "#473D33",
+        "secondary": "#D4C5B8",
+        "accent": "#8B7355",
+        "background": "#F5F1ED"
+      },
+      "typography": {
+        "heading": "System fonts",
+        "body": "System fonts"
+      },
+      "what_makes_it_exceptional": "Studio brésilien qui célèbre les teintes terreuses et chaleureuses (référence à la nature brésilienne sans kitsch). 'Fashion Meets the Floor' crée une poésie du quotidien. Modernisme brésilien (Lucio Costa, Burle Marx) transposé en palette design contemporaine.",
+      "cultural_codes": [
+        "teintes terreuses de la nature brésilienne",
+        "modernisme brésilien (design démocratique)",
+        "chaleur et humanité dans le design",
+        "connexion à la terre (terroir brésilien)"
+      ],
+      "design_lessons": [
+        "Les palettes brésiliennes = teintes naturelles + chaleur, pas saturation",
+        "Modernisme démocratique > luxe occidental (héritage Brasilité)",
+        "Le poétique emerge du quotidien (philosophie brésilienne)"
+      ]
+    },
+    {
+      "url": "https://dubaidesignweek.ae",
+      "name": "Dubai Design Week",
+      "sector": "design-event",
+      "region": "middle-east",
+      "sub_aesthetic": "contemporary-middle-eastern",
+      "style_tags": [
+        "regional-design-platform",
+        "contemporary-aesthetic",
+        "minimalist-professional",
+        "middle-eastern-gateway",
+        "design-intelligence"
+      ],
+      "palette": {
+        "primary": "#FF666B",
+        "secondary": "#F3BEBE",
+        "accent": "#C0ECD4",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Custom (contemporary)",
+        "body": "Custom (contemporary)"
+      },
+      "what_makes_it_exceptional": "Plateforme régionale qui refuse les stéréotypes orientalistes. Palette salmon/rose/menthe crée une modernité douce, accessible. Événement Abwab ('portes' en arabe) positionne le design moyen-oriental comme porte vers la contemporanéité mondiale.",
+      "cultural_codes": [
+        "Abwab = portes (ouverture culturelle)",
+        "modernité post-orientalisme",
+        "design du Moyen-Orient et Afrique du Nord comme mainstream",
+        "sophistication sans exotisme"
+      ],
+      "design_lessons": [
+        "Corail/rose poudré = modernité douce (humanise sans mièvrerie)",
+        "Le design moyen-oriental peut être minimaliste + chaud",
+        "Les événements régionaux = plateformes de power, pas folklorisation"
+      ]
+    },
+    {
+      "url": "https://hausoftobiobi.com",
+      "name": "Haus of Tobi Obi",
+      "sector": "design-collective",
+      "region": "africa",
+      "sub_aesthetic": "afrofuturism-digital",
+      "style_tags": [
+        "afrofuturism",
+        "digital-innovation",
+        "lagos-collective",
+        "contemporary-african",
+        "creative-platform"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#FF6B35",
+        "background": "#111111"
+      },
+      "typography": {
+        "heading": "Custom geometric (afrofuturist)",
+        "body": "Contemporary sans-serif"
+      },
+      "what_makes_it_exceptional": "Collectif Lagos qui embrace l'afrofuturism comme lentille créative. Palette noire/orange électrique signale l'innovation africaine et la technologie. Refuse la nostalgie ; se projette vers un futur africain imagined.",
+      "cultural_codes": [
+        "afrofuturism comme philosophie créative",
+        "innovation technologique africaine",
+        "Lagos comme epicenter créatif",
+        "futurisme africain imaginé"
+      ],
+      "design_lessons": [
+        "L'afrofuturism transcende la couleur ; c'est une philosophie visuelle",
+        "Orange électrique + noir = puissance, énergie, modernité",
+        "Le collectif digital africain n'a pas besoin de références traditionnelles"
+      ]
+    },
+    {
+      "movement": "Arts & Crafts",
+      "period": "1880s-1910s",
+      "key_figures": [
+        "William Morris",
+        "Gustav Stickley",
+        "Charles Voysey"
+      ],
+      "sector": "design-history",
+      "sub_aesthetic": "artisanal-rebellion",
+      "style_tags": [
+        "handmade",
+        "anti-industrial",
+        "nature-inspired",
+        "quality-craftsmanship",
+        "ornamental"
+      ],
+      "philosophy": "Réaction directe contre la production de masse de la Révolution industrielle. Le mouvement prônait le retour à l'artisanat, la beauté fonctionnelle, et l'harmonie entre forme et matériau. Morris croyait que le beau design était un droit de tous, pas un luxe.",
+      "visual_characteristics": [
+        "Motifs floraux et naturels densément ornementés",
+        "Asymétrie équilibrée dans les compositions",
+        "Typographie manuscrite ou calligraphique",
+        "Utilisation de matériaux nobles (bois, cuir, toile)",
+        "Borders et encadrements complexes autour du texte"
+      ],
+      "iconic_works": [
+        "Wallpapers & tapestries William Morris (Willow, Acanthus)",
+        "The Kelmscott Chaucer — livre ilustré monumental",
+        "Meubles Gustav Stickley — mission furniture",
+        "Affiches Privat Livemont pour champagne"
+      ],
+      "palette": {
+        "primary": "#4A7C59",
+        "secondary": "#D4B896",
+        "accent": "#C85A54",
+        "background": "#F5F1E8"
+      },
+      "typography_spirit": "Manuscrite, calligraphique, organique. Les mots sont des formes visuelles autant que du texte. Lettrage large et détaillé.",
+      "contemporary_influence": "Inspire le design minimal-organique actuel, le slow design, l'approche éco-responsable, le retour au fait-main (handmade branding). Visible dans le design de packaging artisanal, identités de marques locales, et mouvements zéro-déchet.",
+      "css_pattern": ".arts-crafts { border: 3px solid #4A7C59; padding: 2rem; background: repeating-linear-gradient(45deg, #F5F1E8 0, #F5F1E8 10px, rgba(74,124,89,.05) 10px, rgba(74,124,89,.05) 20px); font-family: Georgia, serif; letter-spacing: 0.15em; }",
+      "when_to_use": "Design de packaging premium, identité de brand artisanal, publications de prestige, espaces retail haut-de-gamme, branding de craft & wellness.",
+      "what_makes_it_exceptional": "Premier mouvement à critiquer la technologie au nom de l'humanité et de la qualité. A posé les fondations du design thinking moderne centré sur l'utilisateur et la durabilité.",
+      "url": "https://en.wikipedia.org/wiki/Arts_and_Crafts_movement"
+    },
+    {
+      "movement": "Art Nouveau",
+      "period": "1890-1910",
+      "key_figures": [
+        "Alphonse Mucha",
+        "Gustav Klimt",
+        "Henry van de Velde",
+        "Hector Guimard"
+      ],
+      "sector": "design-history",
+      "sub_aesthetic": "organic-elegance",
+      "style_tags": [
+        "organic-forms",
+        "sinuous-lines",
+        "nature-worship",
+        "sensuality",
+        "luxury-decoration"
+      ],
+      "philosophy": "Célébration de la nature à travers des formes courbes et asymétriques. L'Art Nouveau voyait le design comme une expression poétique, fusionnant l'art et l'utilité. C'était le style de l'optimisme fin-de-siècle et de la belle époque parisienne.",
+      "visual_characteristics": [
+        "Courbes sinueuses imitant plantes, fleurs, cheveux longs",
+        "Formes asymétriques en S et arabesques",
+        "Figures féminines en tant que décor principal",
+        "Compositions radiantes avec points focaux organiques",
+        "Ornements floraux volumineux et détaillés"
+      ],
+      "iconic_works": [
+        "Affiches Mucha pour Sarah Bernhardt (Gismonda, Médée)",
+        "Oeuvres Klimt — La Femme d'or, L'Attente",
+        "Métro de Paris — entrées Guimard",
+        "Vases Gallé — art glass avec motifs naturels",
+        "Bijoux Lalique — nature en or et émail"
+      ],
+      "palette": {
+        "primary": "#8B6F47",
+        "secondary": "#D4A574",
+        "accent": "#C1440E",
+        "background": "#FFF8F0"
+      },
+      "typography_spirit": "Lettrage sensuel, courbes élégantes, lignes épaisses et fines alternant. Texte qui respire et épouse la forme générale de la composition. Typographies like Auriol ou Bradley Hand.",
+      "contemporary_influence": "Visible dans les identités luxe contemporaines, packaging haut-de-gamme, illustration de mode, design de joaillerie. Le revival Art Nouveau existe régulièrement dans les tendances de design retro-chic.",
+      "css_pattern": ".art-nouveau { background: linear-gradient(135deg, #FFF8F0 0%, #F0E6D8 100%); border-radius: 50% 30% 40% 50% / 40% 50% 35% 45%; padding: 3rem; box-shadow: inset 0 0 30px rgba(139,111,71,.15); font-style: italic; }",
+      "when_to_use": "Luxe & bijouterie, cosmétiques haut-de-gamme, événementiel glamour, design d'affiches artistiques, packaging édition limitée, branding féminin sensuel.",
+      "what_makes_it_exceptional": "A transformé le design graphique et les arts décoratifs en un langage universel de communication. A prouvé que l'ornement pouvait avoir une valeur commerciale et pas seulement artistique.",
+      "url": "https://en.wikipedia.org/wiki/Art_Nouveau"
+    },
+    {
+      "movement": "De Stijl",
+      "period": "1917-1931",
+      "key_figures": [
+        "Piet Mondrian",
+        "Gerrit Rietveld",
+        "Theo van Doesburg",
+        "Bart van der Leck"
+      ],
+      "sector": "design-history",
+      "sub_aesthetic": "geometric-abstraction",
+      "style_tags": [
+        "grid-based",
+        "primary-colors",
+        "rigid-geometry",
+        "universal-harmony",
+        "abstract-reduction"
+      ],
+      "philosophy": "Système utopiste basé sur l'abstraction géométrique et l'harmonie universelle. De Stijl croyait que la réduction aux éléments fondamentaux (lignes, rectangles, couleurs primaires) pourrait créer un langage visuel universel pouvant améliorer la société. Influence du cubisme et de la théosophie.",
+      "visual_characteristics": [
+        "Grille orthogonale stricte (lignes horizontales et verticales uniquement)",
+        "Rectangles et carrés comme seules formes",
+        "Couleurs primaires uniquement : rouge, bleu, jaune + noir, blanc, gris",
+        "Surfaces planes sans ombre ni perspective",
+        "Espaces négatifs aussi importants que le contenu"
+      ],
+      "iconic_works": [
+        "Compositions Mondrian (Composition with Red, Blue, and Yellow)",
+        "Chaise Red Blue de Rietveld — design de meubles révolutionnaire",
+        "Affiche typographique De Stijl — texte en bloc géométrique",
+        "Bâtiment Rietveld Schröder House — application architecturale",
+        "Revue De Stijl — couvertures épurées"
+      ],
+      "palette": {
+        "primary": "#FF0000",
+        "secondary": "#0000FF",
+        "accent": "#FFFF00",
+        "background": "#FFFFFF"
+      },
+      "typography_spirit": "Sans-serif géométrique, texte aligné à gauche ou en bloc. La typographie suit strictement la grille. Lettres comme éléments architecturaux plutôt que décorés.",
+      "contemporary_influence": "Fondation du design web moderne (grilles CSS, responsive design), design de données/information (dashboards), design systémique, minimalisme digital. Inspire les interfaces épurées type Google Material Design.",
+      "css_pattern": ".de-stijl { display: grid; grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); gap: 0; background: #FFF; } .de-stijl > div { border: 3px solid #000; } .de-stijl .primary { background: #FF0000; } .de-stijl .secondary { background: #0000FF; }",
+      "when_to_use": "Design systémique, interfaces digital épurées, branding tech/innovation, signalétique minimaliste, design de grilles, présentation de données complexes.",
+      "what_makes_it_exceptional": "A prouvé que la contrainte extrême (seulement primaire + grille) pouvait générer une infinité de compositions harmonieuses. Fondateur de la pensée systémique en design.",
+      "url": "https://en.wikipedia.org/wiki/De_Stijl"
+    },
+    {
+      "movement": "Constructivisme Soviétique",
+      "period": "1920s-1930s",
+      "key_figures": [
+        "Alexander Rodchenko",
+        "El Lissitzky",
+        "Kasimir Malevich",
+        "Vladimir Mayakovsky"
+      ],
+      "sector": "design-history",
+      "sub_aesthetic": "revolutionary-propaganda",
+      "style_tags": [
+        "bold-typography",
+        "diagonal-dynamics",
+        "photomontage",
+        "political-messaging",
+        "geometric-abstraction",
+        "red-black-white"
+      ],
+      "philosophy": "Design comme arme révolutionnaire. Le Constructivisme rejetait l'art pour l'art et prônait que le design devait servir la société et la cause communiste. La dynamique visuelle, les diagonales, et la géométrie créaient un sentiment d'urgence et de mouvement révolutionnaire.",
+      "visual_characteristics": [
+        "Typographie large, géométrique, sans-serif en gras",
+        "Diagonales dynamiques créant un effet de mouvement",
+        "Photomontage — superposition de photographies",
+        "Palette rouge-noir-blanc uniquement",
+        "Texte qui épouse les formes géométriques",
+        "Composition déséquilibrée intentionnellement pour créer de la tension"
+      ],
+      "iconic_works": [
+        "Affiches ROSTA de Rodchenko pour Mayakovsky",
+        "Propaganda posters de Lissitzky (Beat the Whites with the Red Wedge)",
+        "Couvertures de magazines (Sovetskoe Foto, Lef)",
+        "Typographie révolutionnaire de Mayakovsky",
+        "Designs industriels de Rodchenko pour cigarettes et produits"
+      ],
+      "palette": {
+        "primary": "#DC1B1B",
+        "secondary": "#000000",
+        "accent": "#FFFFFF",
+        "background": "#1A1A1A"
+      },
+      "typography_spirit": "Sans-serif géométrique massive, poids variables extrêmes. Les lettres sont des formes architecturales. Impact maximal, lisibilité = accessibilité politique. Spacing serré, compositions denses.",
+      "contemporary_influence": "Punk design, street art, protest graphics, design activiste. Visible dans les mouvements sociaux contemporains (Black Lives Matter, climate strikes). Inspire les typographies sans-serif modernes gras et les compositions dynamiques de design politique.",
+      "css_pattern": ".constructivism { transform: skewX(-15deg); background: linear-gradient(135deg, #DC1B1B 0%, #000 50%, #FFF 100%); color: #FFF; font-weight: 900; font-size: 3rem; letter-spacing: -2px; line-height: 0.9; }",
+      "when_to_use": "Campagnes sociales/politiques, design activiste, branding sportif agressif, campagnes jeunesse, design punk/alternative, communication urgence/action.",
+      "what_makes_it_exceptional": "Premier mouvement à théoriser que le design était un outil de transformation sociale. A démocratisé le design en le rendant accessible et urgent plutôt que luxueux.",
+      "url": "https://en.wikipedia.org/wiki/Constructivism_(art)"
+    },
+    {
+      "movement": "International Style / Swiss Style",
+      "period": "1950s-1970s",
+      "key_figures": [
+        "Josef Müller-Brockmann",
+        "Max Bill",
+        "Adrian Frutiger",
+        "Karl Gerstner"
+      ],
+      "sector": "design-history",
+      "sub_aesthetic": "rational-modernism",
+      "style_tags": [
+        "grid-system",
+        "sans-serif-helvetica",
+        "objective-clarity",
+        "modular-design",
+        "information-hierarchy"
+      ],
+      "philosophy": "Design rationnel basé sur des principes scientifiques et mathématiques. Le style Suisse était une réaction humaniste à la complexité du monde post-WW2. L'objectivité visuelle, la clarté, et l'ordre étaient vus comme des vertus morales. Croyance que le bon design pouvait résoudre les problèmes de communication sociaux.",
+      "visual_characteristics": [
+        "Grille mathématique stricte et visible",
+        "Typographie sans-serif (Helvetica, Akzidenz Grotesk) en clair et poids régulier",
+        "Espace blanc généreux (breathing room)",
+        "Éléments alignés sur la grille, jamais au hasard",
+        "Photographie objective, souvent grand format",
+        "Palette minimaliste : noir, blanc, gris, rouge accent"
+      ],
+      "iconic_works": [
+        "Affiches de musée de Müller-Brockmann (Zurich Concert Hall)",
+        "Identité Braun de Rams & Gugelot — design épuré minimaliste",
+        "Polices Helvetica et Univers — typographies définitives",
+        "Grilles de Gerstner (Typographic Grid Handbook)",
+        "Identité Swissair de Walter Herdeg"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#FF0000",
+        "background": "#F5F5F5"
+      },
+      "typography_spirit": "Sans-serif neutre et légitime (Helvetica, Univers). Spacing généreux, alignement strict, hiérarchie claire par taille et poids. Texte respectable, professionnel, universel.",
+      "contemporary_influence": "Base du web design minimaliste, design de SaaS moderne, corporate design, design de signalétique. Helvetica reste la typographie la plus utilisée au monde. Les systèmes de design modernes (Material Design, Apple) sont basés sur les principes Swiss Style.",
+      "css_pattern": ".swiss-style { font-family: 'Helvetica Neue', Arial, sans-serif; letter-spacing: 0.02em; padding: 4rem; background: #FFF; border: 2px solid #000; text-align: left; line-height: 1.6; margin: 2rem 0; }",
+      "when_to_use": "Corporate identity, design systémique, signalétique et wayfinding, design institutionnel, SaaS interfaces, annual reports, branding B2B et gouvernement.",
+      "what_makes_it_exceptional": "Seul mouvement à transformer sa philosophie (rationalité, ordre) en standard global universel. Helvetica est devenue invisible tellement elle est omniprésente — test ultime du design bon/adapté.",
+      "url": "https://en.wikipedia.org/wiki/Swiss_Style_(graphic_design)"
+    },
+    {
+      "movement": "Psychédélique",
+      "period": "1960s-early 1970s",
+      "key_figures": [
+        "Wes Wilson",
+        "Vittorio Moscoso",
+        "Peter Halley",
+        "Neon Rose",
+        "Family Dog Artists"
+      ],
+      "sector": "design-history",
+      "sub_aesthetic": "consciousness-expansion",
+      "style_tags": [
+        "optical-illusion",
+        "vibrant-colors",
+        "distorted-typography",
+        "concert-posters",
+        "countercultural"
+      ],
+      "philosophy": "Expression visuelle de l'expérience psychédélique et du mouvement contreculturel. Le design psychédélique rejetait l'ordre rational suisse. L'illusion optique, la couleur explosive, et la typographie qui danse représentaient la libération, l'expansion de conscience, et la rébellion contre l'establishment.",
+      "visual_characteristics": [
+        "Couleurs fluorescentes/acidiques en contraste maximal",
+        "Lettrage morphé, déformé, qui n'obéit pas aux lois de la géométrie",
+        "Formes organiques entrelacées dans une composition chaotique",
+        "Effets optiques — vibration des couleurs qui crée du mouvement",
+        "Texte qui suit des courbes absurdes, souvent illisible volontairement",
+        "Symétrie et chaos en même temps"
+      ],
+      "iconic_works": [
+        "Fillmore Auditorium posters — affiches de concerts rock classiques",
+        "Wes Wilson — lettering psychédélique déformé",
+        "Album covers de Jefferson Airplane, Grateful Dead",
+        "Moscoso's Optic patterns — carrés colorés créant vertige",
+        "Couvertures Rolling Stone psychédéliques"
+      ],
+      "palette": {
+        "primary": "#FF1493",
+        "secondary": "#00FF00",
+        "accent": "#FFD700",
+        "background": "#1a0033"
+      },
+      "typography_spirit": "Lettering organique, sinueux, complètement libéré des règles. Chaque lettre semble danser. Typographie que le lecteur doit 'décoder'. Couleurs qui clignotent optiquement.",
+      "contemporary_influence": "Album art, design festival/événementiel psychédélique, branding lifestyle/cannabis légal, design underground, illustrationisme. Revival périodique : années 2010s-2020s rave/EDM designs. Visible dans filtres Instagram et design digital saturé.",
+      "css_pattern": ".psychedelic { background: #1a0033; color: #FF1493; text-shadow: 0 0 20px #00FF00, 0 0 40px #FFD700; animation: vibrate 0.1s infinite; transform: skewX(5deg) skewY(3deg); } @keyframes vibrate { 0%, 100% { transform: translate(0); } 25% { transform: translate(-2px, 2px); } 75% { transform: translate(2px, -2px); } }",
+      "when_to_use": "Design festival/événementiel, branding lifestyle contreculturel, album/podcast art, illustration artistique, design subversif, communication jeunesse alternative.",
+      "what_makes_it_exceptional": "Premier mouvement à revendiquer l'illisibilité comme valeur esthétique. A prouvé que le rejet des règles pouvait générer de la beauté puissante et reconnaissable.",
+      "url": "https://en.wikipedia.org/wiki/Psychedelic_art"
+    },
+    {
+      "movement": "Postmodernisme",
+      "period": "1980s-1990s",
+      "key_figures": [
+        "Wolfgang Weingart",
+        "David Carson",
+        "April Greiman",
+        "Paula Scher"
+      ],
+      "sector": "design-history",
+      "sub_aesthetic": "rule-breaking-pluralism",
+      "style_tags": [
+        "anti-design",
+        "layered-complexity",
+        "typographic-rebellion",
+        "historical-remix",
+        "irony-camp"
+      ],
+      "philosophy": "Rejet des règles modernistes Swiss Style. Le postmodernisme disait : pas une seule vérité, pas une seule solution optimale. Le design était autorisé à être compliqué, contradictoire, historiquement référentiel, et ironique. Mélange de styles, rupture de grille, collage numérique.",
+      "visual_characteristics": [
+        "Typographie qui viole la hiérarchie — tailles/poids chaotiques mélangés",
+        "Grille rompue, éléments qui dépassent les limites",
+        "Superposition de multiples textures et images",
+        "Références historiques et pastiche de styles différents",
+        "Typographie inclinée et transformée de façons extrêmes",
+        "Espaces blancs rares — compositions denses et couches multiples"
+      ],
+      "iconic_works": [
+        "Ray Gun magazine de David Carson — la typographie devient illustration",
+        "Beach Culture magazine — design breakthrough de Carson",
+        "Posters Wolfgang Weingart — grille explosée",
+        "Designs April Greiman — numérique + photo + typographie hybride",
+        "Couvertures de disques The Clash — pastiche et remix"
+      ],
+      "palette": {
+        "primary": "#FF00FF",
+        "secondary": "#00FFFF",
+        "accent": "#FFFF00",
+        "background": "#1a1a1a"
+      },
+      "typography_spirit": "Aucune règle. Mélange de typographies, déformation, rotation, overlap. La typographie peut servir d'ornement autant que de communication. Lisibilité secondaire par rapport à l'impact émotionnel.",
+      "contemporary_influence": "Design editorialiste, branding culturel/artistique, typography-first design. Carson a influencé toute une génération. Visible dans le design digital expérimental contemporain, design de mode, magazines créatifs.",
+      "css_pattern": ".postmodern { position: relative; font-family: Georgia, serif; } .postmodern span { position: absolute; transform: rotate(15deg) scale(1.2); mix-blend-mode: multiply; opacity: 0.8; } .postmodern h1 { font-style: italic; text-transform: uppercase; letter-spacing: -3px; color: #FF00FF; }",
+      "when_to_use": "Magazine/editorial design, branding artistique et culturel, design de mode, communication créative, packaging haut-de-gamme, design d'art/galerie, communication contreculturelle.",
+      "what_makes_it_exceptional": "A légitimé le 'mauvais goût' et le chaos comme choix créatifs valides. A libéré les designers de l'obligation de respecter les grilles. David Carson a prouvé qu'on pouvait gagner des awards avec un design 'illisible'.",
+      "url": "https://en.wikipedia.org/wiki/Postmodernism#Design"
+    },
+    {
+      "movement": "Grunge Design",
+      "period": "1990s-early 2000s",
+      "key_figures": [
+        "David Carson",
+        "Rick Poynor",
+        "Ray Gun magazine",
+        "Kurt Cobain aesthetic",
+        "Jamie Reid"
+      ],
+      "sector": "design-history",
+      "sub_aesthetic": "raw-authenticity",
+      "style_tags": [
+        "distressed-textures",
+        "oversized-typography",
+        "illegibility-as-style",
+        "lo-fi-aesthetic",
+        "anti-corporate"
+      ],
+      "philosophy": "Rébellion contre l'hyper-polish du design corporate. Le grunge embrassait l'imperfection, la texture, le bruit, et l'authenticité brute. Influencé par la musique grunge (Nirvana, Pearl Jam), la culture zine, et un rejet de la perfection digitale. 'Bad is good' était le mantra.",
+      "visual_characteristics": [
+        "Typographie énorme, épaisse, disproportionnée",
+        "Textures brutes — grunge, grain, scan désaturés",
+        "Photographie de mauvaise qualité intentionnelle (scan pixelisé, surexposé)",
+        "Espaces blancs ignorés — composition dense et riche",
+        "Couleurs désaturées, vintage, sépia ou sale",
+        "Typographie impossible à lire intentionnellement (overprint, degradé)"
+      ],
+      "iconic_works": [
+        "Ray Gun magazine de David Carson — référence absolue",
+        "Nirvana album art (Nevermind) — aesthetic grunge musical",
+        "The Face magazine — design radical années 90",
+        "Zine culture — photocopies dégradées et chaotiques",
+        "Affiche Trainspotting — typographie brute et énergie crue"
+      ],
+      "palette": {
+        "primary": "#4A4A4A",
+        "secondary": "#8B8B8B",
+        "accent": "#CD5C5C",
+        "background": "#2A2A2A"
+      },
+      "typography_spirit": "Grande, maladroite, souvent illisible. Typographies détériorées, digitalisées mal, dégradées. Font rendering accident transformé en beauté. Impact sur la lisibilité = pas un bug, c'est la feature.",
+      "contemporary_influence": "Visible dans le web design 'authentic' contemporain, design de produits startup (hustle culture), photographie brute, design editorial underground. Revival régulier du grunge aesthetic : années 2010s indie rock, 2020s Y2K revival.",
+      "css_pattern": ".grunge { filter: contrast(1.2) saturate(0.6) brightness(0.9); mix-blend-mode: multiply; text-shadow: -2px -2px 0px rgba(0,0,0,0.5); background-image: url('noise.png'); font-size: 2.5rem; font-weight: 900; line-height: 0.95; letter-spacing: -1px; }",
+      "when_to_use": "Design musical/album art, branding alternative/indie, design editorial underground, photographie brute, design streetwear, gaming design, branding jeunesse anti-establishment.",
+      "what_makes_it_exceptional": "A prouvé que l'imperfection pouvait être plus puissante que la perfection. A montré que le 'mauvais rendu' digital pouvait être un choix esthétique élevé. Influence maximale du design musical sur le design graphique.",
+      "url": "https://en.wikipedia.org/wiki/Grunge_(design)"
+    },
+    {
+      "url": "https://arcteryx.com",
+      "name": "Arc'teryx",
+      "sector": "outdoor",
+      "sub_aesthetic": "Technical minimalism - Alpine heritage meets precision engineering",
+      "style_tags": [
+        "minimalist",
+        "functional",
+        "technical",
+        "monochromatic",
+        "high-contrast"
+      ],
+      "palette": {
+        "primary": "#1A1A1A",
+        "secondary": "#FFFFFF",
+        "accent": "#5B9DD9",
+        "background": "#F5F5F5"
+      },
+      "typography": {
+        "heading": "Elan ITC Pro",
+        "body": "Helvetica Now Display"
+      },
+      "what_makes_it_exceptional": "Élégance austère avec focus sur la photographie produit haute-résolution. Chaque élément visual communique la performance technique sans superflu — espace blanc généreux, transitions lisses (200ms), contrastes élevés pour lisibilité maximale.",
+      "design_lessons": [
+        "La minimalité technique renforce la crédibilité — moins d'ornementation = plus d'autorité",
+        "Photographie de produit en grand format (3:4) devient architecture du design",
+        "Palette monochrome + 3 accents subtils (bleu/rouge/vert) = flexibilité sans chaos",
+        "Overlays semi-transparents sur images créent profondeur sans distraction"
+      ],
+      "sector_codes": [
+        "Alpine minimalism",
+        "Technical specs as design language",
+        "Product-centric layout",
+        "High-altitude clarity aesthetic"
+      ]
+    },
+    {
+      "url": "https://mammut.com",
+      "name": "Mammut",
+      "sector": "outdoor",
+      "sub_aesthetic": "Adventurous functionality - Heritage mountain brand meets modern clarity",
+      "style_tags": [
+        "functional",
+        "sporty",
+        "accessible",
+        "activity-focused",
+        "responsive"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#F0F0F0",
+        "accent": "#FF6B35",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Modern sans-serif (variable weight)",
+        "body": "Accessible sans-serif"
+      },
+      "what_makes_it_exceptional": "Navigation par activité (randonnée, escalade, ski) crée une architecture mentale claire. Design responsive prioritize l'accessibilité via contrastes and typographie lisible. Photographies produit carrées mettent en avant détails techniques.",
+      "design_lessons": [
+        "Catégorisation par activité aide l'utilisateur à se projeter — pas juste un catalogue produit",
+        "Palette d'accent rouge/orange sur gris clair = énergie sans agressivité",
+        "Format carré pour produits crée rythme visuel plus solide que rectangle",
+        "Minimalisme fonctionnel = confiance dans le produit, pas le design"
+      ],
+      "sector_codes": [
+        "Activity-based navigation",
+        "Equipment categorization",
+        "Square product grid",
+        "Sporty accent colors"
+      ]
+    },
+    {
+      "url": "https://salomon.com",
+      "name": "Salomon",
+      "sector": "outdoor",
+      "sub_aesthetic": "Alpine precision - 1947 heritage with contemporary digital accessibility",
+      "style_tags": [
+        "modular",
+        "accessible",
+        "adaptive",
+        "typography-focused",
+        "motion-aware"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#0066CC",
+        "background": "#F5F5F5"
+      },
+      "typography": {
+        "heading": "SalomonSans (variable font, Bold)",
+        "body": "Inter"
+      },
+      "what_makes_it_exceptional": "Police SalomonSans custom (variable font) crée continuité entre branding et interface. Classes typographiques adaptatives (s-typo-adaptative-body4) respectent motion-safe et accessibilité WCAG AA. Grille responsive Tailwind-first.",
+      "design_lessons": [
+        "Variable font custom = flexibilité sans fichiers multiples — économie et cohérence",
+        "motion-safe: classe = respect des préférences utilisateur, pas imposition",
+        "Classe utilitaire Tailwind (s-gap-xs) rend design system lisible et maintenable",
+        "Alpine heritage (depuis Chamonix 1947) intégré via typo, pas via visual clichés"
+      ],
+      "sector_codes": [
+        "Custom variable font",
+        "Adaptive typography classes",
+        "WCAG AA compliance",
+        "Motion-safe design system"
+      ]
+    },
+    {
+      "url": "https://patagonia.com",
+      "name": "Patagonia",
+      "sector": "outdoor",
+      "sub_aesthetic": "Environmental minimalism - Scandinavian purity meets conservation mission",
+      "style_tags": [
+        "minimalist",
+        "transparent",
+        "white-space-dominant",
+        "photo-centric",
+        "movement"
+      ],
+      "palette": {
+        "primary": "#FFFFFF",
+        "secondary": "#000000",
+        "accent": "#DD0000",
+        "background": "#F9F9F9"
+      },
+      "typography": {
+        "heading": "Avenir Next LT W02 Bold (23px, letter-spacing: 1.5px)",
+        "body": "Avenir Next W02 Light / Helvetica"
+      },
+      "what_makes_it_exceptional": "Blanc dominant avec fond photographique fixe crée une immobilité délibérée — contraste avec mouvement du contenu. Typographie espaced (1.5px letter-spacing) communique élégance minimaliste. Design scandinave épuré.",
+      "design_lessons": [
+        "Fond photographique fixe = ancrage émotionnel, pas distraction si choisi avec soin",
+        "Letter-spacing généreusement augmenté (1.5px) = sophistication et respiration",
+        "Absence de 'tricks' visuels renforce le message d'authenticité",
+        "Conversion (white space + call-to-action clair) peut coexister avec minimalisme"
+      ],
+      "sector_codes": [
+        "Fixed background photography",
+        "Generous letter-spacing",
+        "Scandinavian minimalism",
+        "Conservation narrative integration"
+      ]
+    },
+    {
+      "url": "https://pichonbaron.com",
+      "name": "Château Pichon Baron",
+      "sector": "wine-premium",
+      "sub_aesthetic": "Bordeaux classical elegance - Terroir narrative through refined ornament",
+      "style_tags": [
+        "luxe-classique",
+        "ornamental-restraint",
+        "burgundy-accent",
+        "serif-first",
+        "heritage"
+      ],
+      "palette": {
+        "primary": "#FFFFFF",
+        "secondary": "#1E2B33",
+        "accent": "#BD4C26",
+        "background": "#0A0A0A"
+      },
+      "typography": {
+        "heading": "Bellefair (serif, elegant)",
+        "body": "Optima (sans-serif, refined)"
+      },
+      "what_makes_it_exceptional": "Filets décorés (lignes avec points terminaux) et double-filets créent une sophistication graphique sans surcharge. Dégradés noirs/transparence + marron Bordeaux = palette viticole classique. Typo serif + sans-serif = hiérarchie claire.",
+      "design_lessons": [
+        "Filets comme éléments structurels = élégance discrète vs. éléments purement décoratifs",
+        "Teinte marron #BD4C26 (Bordeaux wine) vs. noir pur = identité régionale immediate",
+        "Accents de couleur rares mais décisifs = impact maximal",
+        "Serif pour heading + sans-serif pour body = contraste lisible + tradition"
+      ],
+      "sector_codes": [
+        "Bordeaux terroir color (#BD4C26)",
+        "Decorative filet system",
+        "Château heritage positioning",
+        "Serif/sans-serif hierarchy"
+      ]
+    },
+    {
+      "url": "https://opusonewinery.com",
+      "name": "Opus One Winery",
+      "sector": "wine-premium",
+      "sub_aesthetic": "California luxury minimalism - Napa Valley prestige through restraint",
+      "style_tags": [
+        "luxury-minimalist",
+        "napa-prestige",
+        "white-space-dominant",
+        "photography-driven",
+        "contemporary"
+      ],
+      "palette": {
+        "primary": "#FFFFFF",
+        "secondary": "#000000",
+        "accent": "#333333",
+        "background": "#F5F5F5"
+      },
+      "typography": {
+        "heading": "Serif moderne (42px title size)",
+        "body": "Sans-serif contemporain (22px)"
+      },
+      "what_makes_it_exceptional": "Espace blanc généreux + photographie de vignoble/architecture haute-résolution en paysage = luxe épuré. Double logo (standard + 'scroll version') crée continuité au défilement. Citations des fondateurs intégrées comme éléments graphiques — storytelling discret.",
+      "design_lessons": [
+        "Quotations as design elements = brand voice sans blah-blah marketing",
+        "Logo variant (scroll) = micro-interaction = engagement subtil",
+        "Tailles de typo généreuses (22-42px) = confiance et prestige",
+        "Zéro animation = mouvement du défilement seul = clarté du propos"
+      ],
+      "sector_codes": [
+        "Napa Valley iconography",
+        "Winemaker voice integration",
+        "Logo variants by scroll",
+        "Heritage storytelling"
+      ]
+    },
+    {
+      "url": "https://cloudybay.com",
+      "name": "Cloudy Bay",
+      "sector": "wine-premium",
+      "sub_aesthetic": "Marlborough terroir minimalism - New Zealand wine through clean layout",
+      "style_tags": [
+        "minimalist",
+        "interactive",
+        "terroir-focused",
+        "editorial-flair",
+        "timeline-based"
+      ],
+      "palette": {
+        "primary": "#FFFFFF",
+        "secondary": "#1A1A1A",
+        "accent": "#9FD356",
+        "background": "#F0F0F0"
+      },
+      "typography": {
+        "heading": "Contemporary serif / sans-serif",
+        "body": "Readable sans-serif"
+      },
+      "what_makes_it_exceptional": "Navigation minimale + interactive vineyard timelines créent engagement sans surcharge. Focus sur Marlborough terroir via layout éditorial. Typographie intentionnelle reflète approche méthodique du winemaking.",
+      "design_lessons": [
+        "Interactive timeline = storytelling vs. static info",
+        "Minimalisme layout + editorial flair = crédibilité éducative",
+        "Terroir mention dans hierarchy navigation = marque positionnement",
+        "Clean, uncluttered design renforce craftsmanship"
+      ],
+      "sector_codes": [
+        "Marlborough terroir positioning",
+        "Interactive vineyard timeline",
+        "Editorial flair minimalism",
+        "Winemaking narrative focus"
+      ]
+    },
+    {
+      "url": "https://jancisrobinson.com",
+      "name": "Jancis Robinson (Wine Media)",
+      "sector": "wine-premium",
+      "sub_aesthetic": "Wine criticism authority - Unconventional elegance, no-nonsense credibility",
+      "style_tags": [
+        "authoritative",
+        "unconventional",
+        "not-designed",
+        "editorial",
+        "bright-accents"
+      ],
+      "palette": {
+        "primary": "#FFFFFF",
+        "secondary": "#000000",
+        "accent": "#FF8C00",
+        "accent2": "#00AA00",
+        "background": "#F9F9F9"
+      },
+      "typography": {
+        "heading": "Unusual typeface (per Lisa Sheard design brief)",
+        "body": "Editorial readable sans-serif"
+      },
+      "what_makes_it_exceptional": "Deliberately NOT designed to look like everyone else. Bright oranges/greens + unusual typefaces créent anti-design aesthetic qui renforce crédibilité. Homepage 'bedroom-created' look + blurry iPhone snaps = authenticity over polish. Wine authority voice communicates via design resistance.",
+      "design_lessons": [
+        "Anti-design = design statement — refuser la slickness renforce expertise",
+        "Bright accents (orange/green) = mémorabilité via contraste, pas harmonie",
+        "Imparfection (blurry photos) = humanité et confiance (pas prod studio)",
+        "Visual cacophony communicates 'honest wine criticism, not marketing'"
+      ],
+      "sector_codes": [
+        "Anti-design authority",
+        "Bright orange/green accents",
+        "Editorial imperfection",
+        "No-nonsense wine criticism"
+      ]
+    },
+    {
+      "url": "https://secondhome.io",
+      "name": "Second Home",
+      "sector": "coworking",
+      "sub_aesthetic": "Digital-creative community - Playful minimalism with conversion focus",
+      "style_tags": [
+        "minimalist",
+        "playful",
+        "pink-accent",
+        "modern",
+        "accessible"
+      ],
+      "palette": {
+        "primary": "#FFFFFF",
+        "secondary": "#000000",
+        "accent": "#F93387",
+        "accent2": "#373737",
+        "background": "#FAFAFA"
+      },
+      "typography": {
+        "heading": "System fonts (accessibility-first)",
+        "body": "System sans-serif (generous spacing)"
+      },
+      "what_makes_it_exceptional": "Rose/magenta (#F93387) dominant accent crée playfulness vs. austérité coworking. Buttons arrondis (border-radius 9999px) + ombres subtiles/profondes (6px à 50px) = depth gaming. Logo SVG minimaliste. Focus sur accessibilité (inherited fonts, spacing jusqu'à 5.06rem).",
+      "design_lessons": [
+        "Accent rose = différenciation vs. WeWork/Industrious — signale creative community",
+        "Rounded buttons + variable shadows = playfulness sans unprofessionalism",
+        "System fonts = accessibilité + performance + multilingue native",
+        "Generous spacing (5.06rem) = confiance en product, pas cluttering"
+      ],
+      "sector_codes": [
+        "Pink community signal",
+        "Rounded button design",
+        "Variable shadow depth",
+        "Creative space positioning"
+      ]
+    },
+    {
+      "url": "https://industriousoffice.com",
+      "name": "Industrious",
+      "sector": "coworking",
+      "sub_aesthetic": "Thoughtful workspace design - Teal wellness aesthetic for premium offices",
+      "style_tags": [
+        "calming",
+        "professional",
+        "teal-dominant",
+        "lifestyle-photography",
+        "video-background"
+      ],
+      "palette": {
+        "primary": "#FFFFFF",
+        "secondary": "#006666",
+        "accent": "#E8D5C4",
+        "accent2": "#999999",
+        "background": "#F5F5F5"
+      },
+      "typography": {
+        "heading": "Modern sans-serif (medium, bold, 2.5-4rem)",
+        "body": "Light sans-serif with bold/italic emphasis"
+      },
+      "what_makes_it_exceptional": "Teinte teal/turquoise dominant communique calm et thoughtful design. Teal-5, teal-40, teal-50 classes = subtle palette variations. Vidéo d'arrière-plan (home.mp4) crée immersion sans distraction. SVG logo adaptatif (mobile/desktop). Photographie lifestyle haute-qualité.",
+      "design_lessons": [
+        "Teal palette = wellness optics vs. WeWork black — apaise les utilisateurs",
+        "Background video = mouvement qui humanise (vs. static)",
+        "Logo variants (horizontal + vertical) = flexibilité design system",
+        "Almond/beige secondary (#E8D5C4) = warmth contrast avec teal"
+      ],
+      "sector_codes": [
+        "Teal wellness palette",
+        "Professional minimalism",
+        "Background video hero",
+        "Adaptive logo system"
+      ]
+    },
+    {
+      "url": "https://wework.com",
+      "name": "WeWork",
+      "sector": "coworking",
+      "sub_aesthetic": "Modern collaborative spaces - Playful professional identity with custom typeface",
+      "style_tags": [
+        "vibrant",
+        "hand-drawn",
+        "inclusive",
+        "custom-typeface",
+        "secondary-colors"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "Multiple (custom secondary palette per Franklyn)",
+        "background": "#F5F5F5"
+      },
+      "typography": {
+        "heading": "WeWork Serif (custom typeface by A+)",
+        "body": "WeWork Serif / System sans-serif fallback"
+      },
+      "what_makes_it_exceptional": "Rebrand 2023 par Franklyn + Gretel: logo updated (serifes raccourcis, lowercase maintained). Custom typeface WeWork Serif crée continuité logo ↔ copy. Secondary color palette (chaque teinte = aspect du brand). Hand-drawn illustrations de gens/espaces. Symboles layered = flexibilité vs. marque rigide.",
+      "design_lessons": [
+        "Custom typeface (WeWork Serif) = brand cohérence micro/macro",
+        "Secondary palette (not just accent) = flexibility sans chaos",
+        "Hand-drawn illustrations = humanity vs. sterile coworking clichés",
+        "Logo evolution (serifes raccourcis) = modernité + reconnaissance"
+      ],
+      "sector_codes": [
+        "Custom serif typeface",
+        "Secondary color system",
+        "Hand-drawn illustration layer",
+        "Rebrand 2023 identity",
+        "Member lifestyle imagery"
+      ]
+    },
+    {
+      "url": "https://the-wing.com",
+      "name": "The Wing (Closed)",
+      "sector": "coworking",
+      "sub_aesthetic": "Corporate feminism aesthetic - Jewel-toned girlboss design (2022 closure)",
+      "style_tags": [
+        "feminine-luxury",
+        "girlboss-aesthetic",
+        "jewel-tone",
+        "pastel-accents",
+        "suffrage-graphic"
+      ],
+      "palette": {
+        "primary": "#FFC0CB",
+        "secondary": "#001A4D",
+        "accent": "#7FFFD4",
+        "accent2": "#D4AF37",
+        "background": "#FFFFFF"
+      },
+      "typography": {
+        "heading": "Contemporary serif/sans (feminine elegance)",
+        "body": "Readable sans-serif"
+      },
+      "what_makes_it_exceptional": "30 différentes versions du logo 'W' (nod à diversité membership). Palette: pale pink + minty green + deep navy (ballpoint pen) + mustard gold. Suffrage graphics visual vocabulary. Design intérieur: jewel-toned furniture custom, terrazzo, marbres, bookshelves couleur-codées, arched doorways. Closure 2022 = fin era corporate feminism.",
+      "design_lessons": [
+        "Logo system (30 W's) = inclusivity narrative built into identity",
+        "Jewel-tone + pastel mix = energy sans aggression — 'power femininity'",
+        "Suffrage graphic reference = depth vs. shallow feminism",
+        "Bookshelves by color = Instagram-bait that's also actually functional",
+        "Closure lesson: aesthetic alone ≠ sustainable business (corporate feminism failure)"
+      ],
+      "sector_codes": [
+        "30-variation logo system",
+        "Suffrage graphic vocabulary",
+        "Jewel-tone + pastel combo",
+        "Gender-specific positioning risk",
+        "Girlboss aesthetic peak 2015-2022"
+      ]
     }
   ]
 }
