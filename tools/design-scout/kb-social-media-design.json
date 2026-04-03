@@ -1,0 +1,278 @@
+{
+  "social_formats": [
+    {
+      "platform": "Instagram",
+      "format": "Grid aesthetic",
+      "dimensions": "1080x1080 (carré) ou 1080x1350 (portrait)",
+      "design_rules": [
+        "Voir les 9 posts comme UNE composition unitaire, pas 9 images isolées",
+        "Créer une harmonie chromatique sur 3 colonnes × 3 rangées",
+        "Utiliser des diagonales, formes ou patterns qui traversent les boundaries",
+        "Espacement blanc/négatif constant pour aérer",
+        "Une couleur dominante par colonne (ex: col 1 = bleu, col 2 = jaune, col 3 = rouge)"
+      ],
+      "typography_rules": "Minimiser le texte sur grille (max 2 lignes de 20 caractères par case). Police grande (48px+) pour visibilité à -5m. Contraste blanc/noir obligatoire sur photos",
+      "color_rules": "Saturation cohérente partout (70-85% ou 40-60%). Éviter >3 couleurs primaires. Cadre blanc/noir de 10-20px border si fond coloré",
+      "brands_who_do_it_well": ["Pantone", "Vogue", "@studiobees", "@heygenesis", "@brandblanc"],
+      "mistakes": "1 image par case = pas de plan. Couleurs discord. Texte centré sans respirer. Photos avec proportions différentes (aspect ratio chaos)",
+      "css_or_technique": "Prévisualiser avec 9-case grid layout (CSS Grid 3fr 3fr 3fr). Exporter en 1080×1080, pas plus petit"
+    },
+    {
+      "platform": "Instagram",
+      "format": "Stories (15 sec)",
+      "dimensions": "1080x1920 (9:16 vertical)",
+      "design_rules": [
+        "Texte en haut et bas (safe zone = 200px top + 200px bottom)",
+        "Mouvement ou fade (1-2 sec), pas statique",
+        "Stickers interactifs : poll/question en bas (Call To Action)",
+        "Gradient ou overlay de couleur sur photo si texte blanc",
+        "Une seule idée par story (not an essay)"
+      ],
+      "typography_rules": "48-72px pour titre. 32-40px pour body. Sans-serif moderne (Montserrat, Archivo). Blanc ou couleur haute contrast. Max 3 lignes",
+      "color_rules": "Overlay semi-transparent (40-60% opacity) si besoin de lisibilité sur photo. Couleur unie meilleure que gradient si texte par-dessus",
+      "brands_who_do_it_well": ["@brandblanc", "@aveeno", "@duolingo (gamification)", "@oatly (copywriting)"],
+      "mistakes": "Texte trop petit (illisible en 15 sec). Trop de stickers. Fond blanc uni sans photo (boring). Transito sans lien clair post-story",
+      "css_or_technique": "After Effects ou CapCut : 15 sec max, H264, 9Mbps. Safe area guides : 1080×1920 − 200px top/bottom"
+    },
+    {
+      "platform": "Instagram",
+      "format": "Reels thumbnail (arrêt sur image)",
+      "dimensions": "1080x1920 (9:16)",
+      "design_rules": [
+        "Le premier frame doit piquer curiosité (hook à 0.5 sec)",
+        "Visage ou objet en mouvement ou expression extrême",
+        "Texte d'accroche au-dessus (WHY click / curiosity gap)",
+        "Couleur saturée ou contraste violent pour thumb scrolling",
+        "Logo/watermark discret coin bas (12-16px)"
+      ],
+      "typography_rules": "Texte gras 56-72px. Peut être blanc + shadow noir 3-4px pour lisibilité sur n'importe quel bg. 1-3 mots clés max",
+      "color_rules": "Couleur primaire doit occuper 40-50% du frame. Éviter blend avec skin tone (visage doit POP en avant-plan). Saturation 70%+",
+      "brands_who_do_it_well": ["@mrbeast (surprise face)", "@addictedtofitness (before/after)", "@cosmopolitan (trend alert)", "@hellofresh (food closeup)"],
+      "mistakes": "Texte petit ou gris. Visage neutre ou sourire mou. Bg trop complexe (visage perdu). Pas de curiosity gap textuel",
+      "css_or_technique": "1080×1920. Exporter à 6Mbps H264. Ajouter texte dans After Effects ou CapCut post-production. A/B tester 3 thumnails pour même vidéo"
+    },
+    {
+      "platform": "Instagram",
+      "format": "Carousel swipe (Carousel post)",
+      "dimensions": "1080x1350 (portrait)",
+      "design_rules": [
+        "Slide 1 = hook visuel (image de couverture accrocheuse)",
+        "Slides 2-5 = progression logique (avant > après OU problème > solution OU 5 tips numérotés)",
+        "Chaque slide doit être autonome ET faire envie de swiper",
+        "Numérotation visible (1/6 en haut à droite, couleur claire)",
+        "CTA sur dernière slide (comment commencer, lien bio, etc.)"
+      ],
+      "typography_rules": "Titre slide 1 : 64px. Titres slide 2+ : 48px. Body : 32-40px. Alignement à gauche ou centré (pas justifié). Espacement ligne 1.4x",
+      "color_rules": "Changer couleur primaire par slide (mais rester cohérent). Fond blanc/clair default (contraste texte max). Overlay de couleur max 2 slides/6",
+      "brands_who_do_it_well": ["@heygenesis (5 tips format)", "@redbull (progression visuelle)", "@hvisk (product + lifestyle)", "@theoutdoorco (before/after)"],
+      "mistakes": "Chaque slide est une copie (pas de progression). Texte pas lisible sans lire 5 sec. Glisser ne donne pas envie (slides 2-5 ennuyeuses). Pas de CTA final",
+      "css_or_technique": "Design en Figma avec 6+ artboards 1080×1350. Exporter chaque slide en PNG 72dpi. Vérifier readability sur iPhone 6 (340px width)"
+    },
+    {
+      "platform": "Instagram",
+      "format": "Bio link optimization (Linktree alternative)",
+      "dimensions": "N/A (page de landing)",
+      "design_rules": [
+        "Micro-landing page 1-screen (pas de scroll obligatoire)",
+        "3-5 boutons/liens max (pas 20 liens fouillis)",
+        "Boutons larges 60px h (thumb-friendly)",
+        "Couleur de fond = couleur de marque",
+        "Ordre logique : Shop > Blog > Newsletter > Social > Contact"
+      ],
+      "typography_rules": "Logo/nom 56px centré en haut. Bouton texte 18-20px, sans-serif. Sous-texte 14px (description courte du lien)",
+      "color_rules": "Fond = couleur unique (pas de pattern). Boutons = couleur contraste + hover state (-10% luminosité). Texte blanc si fond dark, noir si fond clair",
+      "brands_who_do_it_well": ["@redbull (linktree custom)", "@glossier (shop-first)", "@theoutdoorco (integrated bio)"],
+      "mistakes": "Linktree default (pas custom branding). Trop de liens. Lien texte tout petit. Pas de CTA clair (qual du premier lien)",
+      "css_or_technique": "Landy.ai, Beacons, ou Notion public page custom avec CSS. Ou simple HTML : 2 col layout, button :hover opacity 0.8, mobile-first"
+    },
+    {
+      "platform": "TikTok",
+      "format": "Thumbnail arrêt sur image (video preview)",
+      "dimensions": "1080x1920 (9:16)",
+      "design_rules": [
+        "Frame clé à 0.5 sec : expression extrême (surprise, rage, rire franc, dégoût)",
+        "Texte gras sur thumbnail (pas de sans-serif mince)",
+        "Visage ou élément en mouvement (suggest motion = higher CTR)",
+        "Couleur chaude (orange, rouge, rose) > couleur froide (bleu, vert)",
+        "Contraste violent obligatoire (blanc texte + shadow, pas gris sur gris)"
+      ],
+      "typography_rules": "Texte 48-64px, bold ou extra-bold. All-caps ou Title Case (pas lowercase). 1-2 lignes max. Outline blanc 2-3px sur couleur foncée",
+      "color_rules": "Saturation 75%+. Éviter pastel sur TikTok (young audience aime vibrant). Fond = color pop (orange, rose, violet, cyan). Peau restera neutre",
+      "brands_who_do_it_well": ["@mrbeast (shocked face)", "@bella.hadid (trendy angle)", "@mcdonalds (funny text overlay)", "@charlidamelio (relatable expression)"],
+      "mistakes": "Sourire mou ou neutre. Texte petit. Couleur desaturée. Pas d'expression faciale (camera juste film le sujet). Clip pas assez court (6 sec+ intro = scroll away)",
+      "css_or_technique": "Exporter clip en 1080×1920, 30fps H264. Ajouter texte dans CapCut (free). A/B test thumbnail avec same video = 2 différentes thumbnails testera reach"
+    },
+    {
+      "platform": "TikTok",
+      "format": "Lower thirds (sous-titres stylisés)",
+      "dimensions": "Taille texte adaptée, positionnement bas",
+      "design_rules": [
+        "Ne pas couvrir 1/3 bas de visage (lèvres, menton doivent rester visibles)",
+        "Fond bar semi-transparent noir 40-60% opacity (readable over any bg)",
+        "Texte blanc ou couleur haute contrast, center-aligned",
+        "Entrée animation : slide from bottom (0.3 sec) ou fade (0.2 sec)",
+        "Duration : 2-4 sec (temps pour lire à voix haute)"
+      ],
+      "typography_rules": "28-36px pour sous-titre principal. 18-22px pour détail. Sans-serif (Roboto, Montserrat). Line-height 1.3",
+      "color_rules": "Fond bar = noir ou couleur très dark. Texte blanc toujours lisible. Outline 1px blanc sur texte si fond dark",
+      "brands_who_do_it_well": ["@tiktok (official captions)", "@jimmyfallon (comedy timing + text)", "@nba (player name + stat)"],
+      "mistakes": "Texte couleur claire sur fond clair. Bar trop haut (couvre les yeux). Texte reste 8+ sec (étrange). Typo qui fluctue taille/couleur shot-to-shot",
+      "css_or_technique": "After Effects : text layer + solid shape layer (black, opacity 50%), position at Y = 1680px (1080×1920), animate entrance"
+    },
+    {
+      "platform": "TikTok",
+      "format": "Transition frame (moment de coupure visuelle)",
+      "dimensions": "1080x1920, 0.5 sec duration",
+      "design_rules": [
+        "Transition doit être PART du contenu (not just technical cut)",
+        "Quatre types efficaces : wipe (diagonal), zoom blur, flip card, match cut (objet/action aligné)",
+        "Vitesse 0.3-0.5 sec (rapide assez pour surprendre mais visible)",
+        "Couleur de transition = couleur de marque ou contraste",
+        "Suivie d'une révélation (setup > punchline format)"
+      ],
+      "typography_rules": "Si texte dans transition : 56px+, très bold, apparaît 0.2 sec avant transition complète",
+      "color_rules": "Transition color (ex: wipe orange) = couleur de marque. Doit contraster avec shot précédent ET suivant",
+      "brands_who_do_it_well": ["@skims (seamless zoom)", "@dolcegabbana (product flip)", "@charlidamelio (quick cuts + music beat)", "@adidas (brand color wipes)"],
+      "mistakes": "Transition lente (perde attention). Transition sans rapport avec contenu (gratuit). Trop de transitions (0.5 sec entre chaque = chaotic). Pas d'effet sonore aligné",
+      "css_or_technique": "After Effects ou CapCut. Zoom transition : scale 1.0 > 1.5 + opacity fade (0.4 sec). Wipe : directional blur + speed ramp. Sync avec beat musical (on 1 ou 2)"
+    },
+    {
+      "platform": "LinkedIn",
+      "format": "Post image (data viz, quote card, before/after)",
+      "dimensions": "1200x628 (landscape, optimal pour feed) OU 1080x1080 (carré)",
+      "design_rules": [
+        "Si data viz : max 3 graphiques par image (pas overwhelm)",
+        "Si quote : blanc/couleur + texte noir/blanc, marque de citation 140px",
+        "Si before/after : ligne de séparation claire (vertical ou diagonal)",
+        "Logo discret coin bas droit (100×100px max)",
+        "Professional = net, lisible, couleurs corp (éviter pastel)"
+      ],
+      "typography_rules": "Quote text 48-56px, serif (Playfair) ou sans-serif gras (Montserrat). Attribution 18-20px sous la quote. Data viz : axis labels 16px, data labels 18-20px",
+      "color_rules": "Data viz : palette 3-4 couleurs (bleu/vert/orange, éviter >5). Quote : fonds unis white/light gray/brand-color. Before/after : pas de couleur psychédélique",
+      "brands_who_do_it_well": ["@mckinsey (data viz expert)", "@linkedin (thought leadership quotes)", "@unbounce (case study before/after)", "@thehubspot (infographic)"],
+      "mistakes": "Data viz trop chargée (impossible lire texte). Quote sans contexte (qui a dit ça ?). Before/after sans label. Logo de client si sponsored pas clair",
+      "css_or_technique": "Figma template 1200×628. Exporter PNG 96dpi pour web. Verifier lisibility sur LinkedIn mobile view (348px width). Utilisez des police sans-serif pour data labels"
+    },
+    {
+      "platform": "LinkedIn",
+      "format": "Newsletter / Article header (Editorial, professionnel)",
+      "dimensions": "1200x628 (landscape) ou 1200x800 (portrait)",
+      "design_rules": [
+        "Header occuppe 40-50% de la vue (image doit être 1ère chose vue)",
+        "Titre : centré ou haut-gauche, blanc/noir haute contrast",
+        "Accroche : 1-2 lignes qui résument l'article",
+        "Élément visuel : photo pro, illustration ou data viz (pas stock photo générique)",
+        "Auteur : mini bio + photo cercle (60px) en bas-gauche ou superposée"
+      ],
+      "typography_rules": "Titre 48-64px. Accroche 24-32px. Auteur 14-16px. Serif pour titres (Playfair Display), sans-serif pour body. Espacement généreux (2x line-height)",
+      "color_rules": "Fond blanc ou très light gray (80-90% luminosité). Titre = marque-couleur ou noir. Pas de gradient (professionnalisme = uni)",
+      "brands_who_do_it_well": ["@thierry-henry-insights", "@harvard-business-review", "@lenny-rachitsky (newsletter)", "@paulgraham-essays (clean minimal)"],
+      "mistakes": "Stock photo générique (screaming sales people). Titre trop petit. Accroche manquante ou vague. Auteur pas visible (qui écrit ?). Gradient ou pattern derrière titre",
+      "css_or_technique": "Figma : 1200×628 landscape. Ajouter bordure gris 1px si sur white bg. Mobile preview : vérifier titre lisible à 320px. Exporter JPEG 85% quality pour vite charger"
+    },
+    {
+      "platform": "Twitter / X",
+      "format": "Thread visual hook (première image = le tout)",
+      "dimensions": "1024x512 (landscape recommandé pour Twitter) OU 1080x1080 (carré)",
+      "design_rules": [
+        "La première image du thread doit résumer la grande idée (fait 60% du click-to-open)",
+        "Texte doit être lisible à thumbnail size (iPhone thumb scrolling)",
+        "Utiliser des chiffres, statistiques ou contraste visuel",
+        "Pas de design trop complexe (Twitter feed = low attention)",
+        "Marque visuelle cohérente : logo ou couleur signature"
+      ],
+      "typography_rules": "Headline 48-56px, bold. Data/stat 64-80px pour l'impact. Body 24-32px. Sans-serif moderne (Inter, Roboto). Haut contraste toujours",
+      "color_rules": "Fond blanc ou brand-color. Texte noir ou blanc selon fond. Si stat graphique : 2-3 couleurs max. Éviter neon/pastel",
+      "brands_who_do_it_well": ["@naval (minimalist quotes)", "@paulg (simple data)", "@elonmusk (fact + number)", "@thierry-henry (stat-focused)"],
+      "mistakes": "Image trop complexe (on voit rien au thumbnail). Texte petit. Couleur qui mix mal avec feed (dark mode vs light mode). Pas de données concrètes",
+      "css_or_technique": "Figma 1024×512. Exporter PNG transparent bg OK. A/B test : 2 versions mêmes stats, design différent = test visual hook impact. Responsive check : 375px width (iPhone)"
+    },
+    {
+      "platform": "Twitter / X",
+      "format": "Quote tweet card design",
+      "dimensions": "1024x512 (landscape) OU 800x400 (carré compact)",
+      "design_rules": [
+        "Citation doit être 1-3 lignes max (lisibilité totale à thumbnail)",
+        "Contraste blanc/noir obligatoire (Twitter quote tweets souvent sur dark mode)",
+        "Guillemets ou marque visuelle de quote (italique, couleur spéciale)",
+        "Source/attribution lisible (qui a dit cette phrase)",
+        "CTA implicite : pourquoi je devrais RT cette quote (controversy? wisdom? humour?)"
+      ],
+      "typography_rules": "Quote text 40-48px, serif (Playfair) ou sans-serif gras. Attribution 16-18px en bas. Line-height 1.5 pour respirabilité",
+      "color_rules": "Fond blanc ou light gray. Texte noir. Guillemet couleur de marque (si visual identity existe). Pas de gradient",
+      "brands_who_do_it_well": ["@tferriss (wisdom quotes)", "@sahillavingia (startup insights)", "@deborahmeier (education)", "@mrbeast (motivational)"],
+      "mistakes": "Quote trop longue (tronquée sur mobile). Attribution manquante ou vague. Fond trop dark et texte grey (illisible). Design conflicte avec contenu (quote triste sur fond rose flashy)",
+      "css_or_technique": "Figma 1024×512. Ajouter soft shadow sous texte (0 2px 10px rgba(0,0,0,0.2)). Exporter PNG avec white background. Test : view en Twitter light + dark mode"
+    },
+    {
+      "platform": "YouTube",
+      "format": "Thumbnail formula (visage + texte + couleur = CTR)",
+      "dimensions": "1280x720 (16:9 optimal) — doit marcher à 168x94px (real YouTube size)",
+      "design_rules": [
+        "Rule 1 : Visage = 50% de la composition (expression extrême : surprise, rage, joy, shock)",
+        "Rule 2 : Texte gras + couleur chaude à contraste max (haut ou bas, pas centre)",
+        "Rule 3 : Fond couleur unique ou gradient (3-couleurs max, saturation 70%+)",
+        "Rule 4 : Élément additionnel (arrow, cercle, box) pointant vers visage ou CTA",
+        "Rule 5 : Logo channel discret (coin haut-droit, 80×80px max)"
+      ],
+      "typography_rules": "Texte 72-96px, sans-serif extra-bold (Montserrat Black, Bebas). ALL CAPS ou Title Case. Outline blanc 3-4px. Max 2-3 mots/lignes",
+      "color_rules": "Couleur dominante = WARM (orange, rouge, jaune, rose) > cool. Visage skin tone light/medium (saturé donne mieux). Fonds vivants 80%+ saturation. Arrow pointeur = contraste opposite",
+      "brands_who_do_it_well": ["@mrbeast (shocked face + red bg + yellow text)", "@vsauce (simple text + clean design)", "@gordon-ramsay (rage face + bold red)", "@mxmtoon (cute anime + pink)"],
+      "mistakes": "Visage neutre ou sourire mou (0 shock value). Texte petit ou gris (illisible sur 168px). Thumbnail trop complexe (5+ éléments = chaos). Couleur pastel ou gris (ennuyeux)",
+      "css_or_technique": "1280×720px. Exporter PNG ou JPG 90% quality. Ajouter outline texte en Photoshop/GIMP : Layer > Layer Style > Stroke 3px white. A/B test : même vidéo, 3 thumbnails designs différents = measure clicks"
+    },
+    {
+      "platform": "YouTube",
+      "format": "End screen template (outro card)",
+      "dimensions": "1280x720 (16:9)",
+      "design_rules": [
+        "Apparaît à 4 sec avant fin (20 sec sur vidéo 1 min)",
+        "Max 4 éléments : 1 subscribe box + 2-3 vidéos recommended",
+        "Fond = semi-transparent noir 30% opacity (voir vidéo derrière)",
+        "Subscribe button = très visible (couleur marque, 200×80px min)",
+        "Video previews = thumbnail 240×135px x3, avec texte blanc overlay"
+      ],
+      "typography_rules": "SUBSCRIBE: 32-40px, bold. Video titles: 16-18px. Sourcing: 12-14px. Sans-serif moderne (Roboto, Montserrat)",
+      "color_rules": "Subscribe = couleur de marque (rouge YouTube default OK). Video boxes = semi-transparent noir sur thumbnail. Texte blanc toujours",
+      "brands_who_do_it_well": ["@mrbeast (clean end screens)", "@vsauce (organized layout)", "@wired (minimal design)", "@ted-talks (professional branding)"],
+      "mistakes": "Too many boxes (4+ vidéos = clutter). Subscribe button too small. End screen opaque (hide video behind). Wrong video suggestions (topic mismatch)",
+      "css_or_technique": "Use YouTube's native End Screen tool first (easiest). Custom design : Figma 1280×720, add elements in After Effects or your video editor. Remember: mobile view hides some elements (safe area = center 960×540)"
+    },
+    {
+      "platform": "YouTube",
+      "format": "Channel banner / Branding (Hero image)",
+      "dimensions": "2560x1440 (desktop), 1546x423 (mobile), 2560x1440 (full safe zone)",
+      "design_rules": [
+        "Safe zone pour texte/logo : 1450×423 (center pour mobile, adjust desktop)",
+        "Channel name, tagline, CTA button sur bannière",
+        "Cohérence visuelle avec thumbnails (2-3 couleurs marque)",
+        "Peut inclure sous-categories ou playlist links (si multi-genre)",
+        "Logo channel 300×300px en haut-gauche ou centre"
+      ],
+      "typography_rules": "Channel name: 64-80px, bold. Tagline: 32-40px, regular. CTA button text: 18-20px. Sans-serif (Montserrat, Roboto). Haut contraste",
+      "color_rules": "Fond = solide ou simple gradient (2 couleurs max). Incorporer couleur marque. Texte blanc si fond dark, noir si fond light. Photo background OK si texture light/simple",
+      "brands_who_do_it_well": ["@vsauce (clean branded)", "@mrbeast (bold simple)", "@linustechtips (organized multi-category)", "@ted-talks (minimalist professional)"],
+      "mistakes": "Banner trop busy (photo + text + logos toutes). Text unreadable on mobile (no safe zone). Mismatch entre banner et thumbnail design language. Logo trop gros (take 50% of banner)",
+      "css_or_technique": "Figma 2560×1440. Outline safe zones: mobile box center, desktop full. Exporter PNG 96dpi. Check on mobile YouTube app (YouTube automatically crops on mobile). Download YouTube banner template from Creator Studio"
+    }
+  ],
+  "meta": {
+    "created": "2026-04-03",
+    "version": "1.0",
+    "total_formats": 15,
+    "platforms_covered": [
+      "Instagram",
+      "TikTok",
+      "LinkedIn",
+      "Twitter/X",
+      "YouTube"
+    ],
+    "key_stats": {
+      "typography_rules_count": 15,
+      "common_mistakes_documented": 15,
+      "brand_examples_per_format": "2-5",
+      "css_techniques_included": true
+    },
+    "usage_notes": "Cette référence peut servir pour : auditer des designs sociaux existants, former des designers, créer des guidelines internes, benchmarker contre les marques élites"
+  }
+}

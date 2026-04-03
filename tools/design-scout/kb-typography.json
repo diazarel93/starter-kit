@@ -1,0 +1,1290 @@
+{
+  "typography_systems": {
+    "metadata": {
+      "version": "1.0",
+      "last_updated": "2026-04-03",
+      "scope": "Complete typography reference for design systems",
+      "classification_method": "by_style_usage_emotion"
+    },
+    "categories": [
+      {
+        "id": 1,
+        "category": "SANS-SERIF Grotesque Neutre",
+        "philosophy": "Formes géométriques pures, neutralité maximale, fonctionnalisme suisse",
+        "fonts": [
+          {
+            "name": "Helvetica Neue",
+            "foundry": "Linotype (Monotype)",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 1983,
+            "designer": "Dietmar Heil, Heiner Goebbels, Christian Schwartz",
+            "use_for": ["corporate", "luxury_brands", "editorial", "wayfinding", "signage"],
+            "avoid_for": ["startups_seeking_personality", "creative_agencies", "youth_marketing"],
+            "pairs_well_with": ["Bodoni", "Didot", "Garamond", "Times"],
+            "emotion": "Élégance austère, neutralité professionnelle, rigueur intemporelle, confiance institutionnelle",
+            "famous_uses": ["Hermès", "Nestlé", "Panasonic", "HSBC", "3M"],
+            "size_recommendation": {
+              "display": "28px-48px (perd caractère en gros)",
+              "headline": "24-28px",
+              "body": "12-14px minimum (très serrée)",
+              "notes": "Exige interlettrage fin, mauvaise performance web sans tuning"
+            },
+            "personality_score": {
+              "neutral": 95,
+              "technical": 80,
+              "warm": 20,
+              "playful": 5
+            }
+          },
+          {
+            "name": "Aktiv Grotesk",
+            "foundry": "Dalton Maag",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 2011,
+            "designer": "Juha Korkeela, Panu Vasquez",
+            "use_for": ["startup_identity", "fintech", "editorial_modern", "app_ui", "branding"],
+            "avoid_for": ["luxury_fashion", "heritage_brands", "children_content"],
+            "pairs_well_with": ["Playfair Display", "Freight Big", "Sentinel"],
+            "emotion": "Modernité confiante, accessibilité dynamique, approche humaine du futur",
+            "famous_uses": ["Slack", "Intercom", "Shopify", "Medium", "Calibre"],
+            "size_recommendation": {
+              "display": "32px+",
+              "headline": "18-32px",
+              "body": "14-16px",
+              "notes": "Excellente lisibilité même petite, 5+ weights disponibles"
+            },
+            "personality_score": {
+              "neutral": 70,
+              "technical": 75,
+              "warm": 50,
+              "playful": 45
+            }
+          },
+          {
+            "name": "Neue Haas Grotesk",
+            "foundry": "Swiss Typefaces",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 2019,
+            "designer": "Christian Schwartz (based on original 1957 design)",
+            "use_for": ["editorial_premium", "publishing", "luxury_tech", "culture", "museum"],
+            "avoid_for": ["mass_market", "youth_marketing", "fun_brands"],
+            "pairs_well_with": ["Saol", "Saol Text", "Lyon"],
+            "emotion": "Précision helvétique moderne, élégance discrète, rigueur bienveillante",
+            "famous_uses": ["Apple (earlier versions)", "Le Monde", "Vogue", "museum branding"],
+            "size_recommendation": {
+              "display": "28-60px",
+              "headline": "18-28px",
+              "body": "13-15px",
+              "notes": "Haute résolution requise, beauté maximale sur papier + digital moderne"
+            },
+            "personality_score": {
+              "neutral": 92,
+              "technical": 85,
+              "warm": 30,
+              "playful": 10
+            }
+          }
+        ],
+        "design_rules": [
+          "Grotesque = confiance institutionnelle, utilisé par leadership global",
+          "Jamais sur headline dramatique (manque de caractère personnalisé)",
+          "Idéal pour systèmes B2B, gouvernements, banques, logiciels sérieux",
+          "Nécessite interlettrage et interlinéage généreux (pas de compact)",
+          "Perte de personnalité en très gros (48px+) — préférer serif ou display",
+          "Combinaison serif + grotesque neutre = efficacité maximale"
+        ]
+      },
+      {
+        "id": 2,
+        "category": "SANS-SERIF Géométrique",
+        "philosophy": "Proportions pures basées sur cercle/carré, minimalisme visuel, modernité intemporelle",
+        "fonts": [
+          {
+            "name": "Futura",
+            "foundry": "Monotype",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 1927,
+            "designer": "Paul Renner",
+            "use_for": ["luxury_branding", "architecture", "design_culture", "editorial", "cinema"],
+            "avoid_for": ["web_body_text", "medical", "conservative_corporate"],
+            "pairs_well_with": ["Garamond", "Saol", "Caslon", "Lyon"],
+            "emotion": "Modernité élégante, optimisme constructiviste, prestige design, ambition rationnelle",
+            "famous_uses": ["Volkswagen", "Absolut Vodka", "NASA", "Dolce&Gabbana", "Vogue"],
+            "size_recommendation": {
+              "display": "48px+",
+              "headline": "32-48px",
+              "body": "éviter pour body",
+              "notes": "Magnifique en titre, terrible petite (manque espace intra-lettres)"
+            },
+            "personality_score": {
+              "neutral": 60,
+              "technical": 70,
+              "warm": 40,
+              "playful": 35
+            }
+          },
+          {
+            "name": "Circular",
+            "foundry": "Lineto (Berlin foundry)",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 2014,
+            "designer": "Laurenz Brunner",
+            "use_for": ["fintech", "app_design", "tech_startup", "luxury_tech", "fashion"],
+            "avoid_for": ["editorial_serious", "heritage_brands", "legal_documents"],
+            "pairs_well_with": ["Saol", "Sentinel", "Freight Display"],
+            "emotion": "Confiance tech-forward, dynamisme inclusif, modernité joviale sans insolence",
+            "famous_uses": ["Spotify (early years)", "IBM", "Figma", "Stripe", "luxury_tech_brands"],
+            "size_recommendation": {
+              "display": "32px+",
+              "headline": "18-40px",
+              "body": "14-16px (lisibilité correcte)",
+              "notes": "6 widths + 8 weights, très flexible"
+            },
+            "personality_score": {
+              "neutral": 65,
+              "technical": 85,
+              "warm": 55,
+              "playful": 60
+            }
+          },
+          {
+            "name": "DM Sans",
+            "foundry": "Colophon Foundry / Google Fonts",
+            "free": true,
+            "google_fonts": true,
+            "year_created": 2020,
+            "designer": "Colophon Foundry (Kostas Bartsokas, Alexei Vanyashin)",
+            "use_for": ["startup_identity", "web_first", "tech_culture", "accessible_design", "data_viz"],
+            "avoid_for": ["luxury_fashion", "heritage", "premium_editorial"],
+            "pairs_well_with": ["Lora", "Cormorant", "EB Garamond"],
+            "emotion": "Accessibilité moderne, dynamisme inclusif, tech-forward sans arrogance",
+            "famous_uses": ["Decathlon", "Protocol Labs", "design_agencies", "Google Material Design"],
+            "size_recommendation": {
+              "display": "28px+",
+              "headline": "16-32px",
+              "body": "14-16px",
+              "notes": "Excellente métrique web, varial disponible"
+            },
+            "personality_score": {
+              "neutral": 70,
+              "technical": 80,
+              "warm": 50,
+              "playful": 55
+            }
+          }
+        ],
+        "design_rules": [
+          "Géométrique = confiance en design moderne, époque futuriste optimiste",
+          "Futura pour prestige + histoire (né avant modernisme numérique)",
+          "Circular/DM Sans pour tech-first, apps, design inclusif",
+          "Jamais combo avec serif trop traditionnel (Didot + Futura = clash)",
+          "Pairing idéal : géométrique display + serif transitional body",
+          "En body text : perdent caractère, fatiguer yeux en petit"
+        ]
+      },
+      {
+        "id": 3,
+        "category": "SANS-SERIF Humaniste",
+        "philosophy": "Proporions inspirées de proportions romaines, flexibilité lisibilité, design centré sur humain",
+        "fonts": [
+          {
+            "name": "Gill Sans",
+            "foundry": "Monotype",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 1928,
+            "designer": "Eric Gill",
+            "use_for": ["editorial_uk", "publishing", "museum", "culture", "bbc_heritage"],
+            "avoid_for": ["american_corporate", "fintech", "playful_brands"],
+            "pairs_well_with": ["Caslon", "Garamond", "Times", "Saol"],
+            "emotion": "Élégance britannique discrète, humanité classique, rigueur bienveillante",
+            "famous_uses": ["BBC", "National Gallery", "UK Government", "Financial Times", "Penguin Classics"],
+            "size_recommendation": {
+              "display": "32-56px",
+              "headline": "18-32px",
+              "body": "12-15px",
+              "notes": "Excellente en petit, riche en nuances, nécessite bon rendu"
+            },
+            "personality_score": {
+              "neutral": 75,
+              "technical": 50,
+              "warm": 65,
+              "playful": 40
+            }
+          },
+          {
+            "name": "Frutiger",
+            "foundry": "Linotype (Monotype)",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 1976,
+            "designer": "Adrian Frutiger",
+            "use_for": ["wayfinding", "signage_systems", "public_space", "airport", "infrastructure"],
+            "avoid_for": ["luxury", "editorial_premium", "fashion"],
+            "pairs_well_with": ["Times", "Georgia", "Sabol"],
+            "emotion": "Clarté fonctionnelle, approche humaine de l'infrastructure, confiance lisibilité",
+            "famous_uses": ["SNCF", "Orly Airport", "Deutsche Telekom", "airports_worldwide"],
+            "size_recommendation": {
+              "display": "24px+",
+              "headline": "14-24px",
+              "body": "10-12px (très lisible petit)",
+              "notes": "Légale signage, optimisée pour petite taille"
+            },
+            "personality_score": {
+              "neutral": 85,
+              "technical": 75,
+              "warm": 60,
+              "playful": 30
+            }
+          },
+          {
+            "name": "Inter",
+            "foundry": "Rasmus Andersson / Open Source",
+            "free": true,
+            "google_fonts": false,
+            "year_created": 2016,
+            "designer": "Rasmus Andersson",
+            "use_for": ["app_ui", "web_first", "tech_startup", "accessible_design", "fintech"],
+            "avoid_for": ["editorial_print", "luxury", "heritage"],
+            "pairs_well_with": ["Lora", "Merriweather", "EB Garamond"],
+            "emotion": "Neutralité professionnelle, accessibilité maximale, design pensé digital-first",
+            "famous_uses": ["Figma", "Vercel", "Stripe", "design_systems_enterprise"],
+            "size_recommendation": {
+              "display": "28px+",
+              "headline": "16-28px",
+              "body": "14-16px",
+              "notes": "Open source, variable font, optimize pour web/app"
+            },
+            "personality_score": {
+              "neutral": 85,
+              "technical": 85,
+              "warm": 55,
+              "playful": 40
+            }
+          }
+        ],
+        "design_rules": [
+          "Humaniste = confiance en design inclusif, accessible, pensé pour humain",
+          "Gill Sans pour UK editorial tradition, musées, culture",
+          "Frutiger pour signage, infrastructure, clarity systems",
+          "Inter pour digital-first, apps, web systems modernes",
+          "Idéal body text : lisibilité supérieure en petite taille",
+          "Pairing : humaniste body + serif display = classique intemporelle"
+        ]
+      },
+      {
+        "id": 4,
+        "category": "SANS-SERIF Condensé Display",
+        "philosophy": "Impact maximal, proportion étroite, dramaticité cinéma/sport, présence forcée",
+        "fonts": [
+          {
+            "name": "Bebas Neue",
+            "foundry": "Dharma Type / Google Fonts",
+            "free": true,
+            "google_fonts": true,
+            "year_created": 2010,
+            "designer": "Ryoichi Tsunekawa",
+            "use_for": ["cinema_title", "sport_branding", "music_poster", "youth_culture", "streetwear"],
+            "avoid_for": ["body_text", "accessible_content", "formal_documents"],
+            "pairs_well_with": ["Merriweather", "Lora", "Bitter", "any serif"],
+            "emotion": "Dramaticité cinématographique, énergie sport, jeunesse rebelle, impact viscéral",
+            "famous_uses": ["Banlieuwood (Romain Ndiaye)", "BBC Cinematics", "sports_networks", "music_festivals"],
+            "size_recommendation": {
+              "display": "56px+",
+              "headline": "32-64px",
+              "body": "jamais",
+              "notes": "Une weight, très étroite, exige grand format pour caractère"
+            },
+            "personality_score": {
+              "neutral": 20,
+              "technical": 40,
+              "warm": 35,
+              "playful": 80
+            }
+          },
+          {
+            "name": "Barlow Condensed",
+            "foundry": "Jlreq / Google Fonts",
+            "free": true,
+            "google_fonts": true,
+            "year_created": 2017,
+            "designer": "Jeremy Tribby",
+            "use_for": ["sport_branding", "tech_startup", "music", "youth", "magazine_design"],
+            "avoid_for": ["body_text", "luxury", "heritage"],
+            "pairs_well_with": ["Merriweather", "Bitter", "Playfair Display"],
+            "emotion": "Énergie moderne, dynamisme sans insolence, sport-tech vibe",
+            "famous_uses": ["Design agencies", "sports brands", "music platforms"],
+            "size_recommendation": {
+              "display": "48px+",
+              "headline": "28-56px",
+              "body": "jamais",
+              "notes": "12 weights + italics, très flexible en display"
+            },
+            "personality_score": {
+              "neutral": 50,
+              "technical": 75,
+              "warm": 40,
+              "playful": 65
+            }
+          },
+          {
+            "name": "Oswald",
+            "foundry": "Vernon Adams / Google Fonts",
+            "free": true,
+            "google_fonts": true,
+            "year_created": 2011,
+            "designer": "Vernon Adams",
+            "use_for": ["sport_identity", "headline_impact", "poster", "street_culture", "indie_branding"],
+            "avoid_for": ["editorial_serious", "luxury", "body_text"],
+            "pairs_well_with": ["Merriweather", "Lora", "PT Serif"],
+            "emotion": "Jeunesse brute, sport raw, presence imposante, rock&roll visuel",
+            "famous_uses": ["Sports networks", "indie_magazines", "street_brands"],
+            "size_recommendation": {
+              "display": "52px+",
+              "headline": "28-64px",
+              "body": "jamais",
+              "notes": "6 weights, proportions très étroites"
+            },
+            "personality_score": {
+              "neutral": 30,
+              "technical": 45,
+              "warm": 30,
+              "playful": 75
+            }
+          }
+        ],
+        "design_rules": [
+          "Condensé display = dramaturgie cinéma, sport, jeunesse brute",
+          "JAMAIS en body text = fatigue yeux, inaccessible",
+          "Bebas Neue pour cinéma français, Banlieuwood, dramaticité maximale",
+          "Besoin pairing serif humaniste ou classique pour équilibre",
+          "Interlettrage serré volontaire = force visuelle",
+          "En petite taille (< 32px) : perd efficacité dramatique"
+        ]
+      },
+      {
+        "id": 5,
+        "category": "SERIF Old Style",
+        "philosophy": "Humanisme Renaissance, traces calligraphiques, prestige littéraire, intemporalité",
+        "fonts": [
+          {
+            "name": "Garamond",
+            "foundry": "Multiple (Monotype, Adobe, Linotype)",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 1534,
+            "designer": "Claude Garamond (original punches), modernes : Jean-Luc Garamond (Linotype), Ralph M. Unger",
+            "use_for": ["editorial_print", "book_publishing", "luxury_brand", "culture", "literary"],
+            "avoid_for": ["web_small_sizes", "startup_casual", "children"],
+            "pairs_well_with": ["Helvetica", "Aktiv Grotesk", "Futura", "Gotham"],
+            "emotion": "Élégance intemporelle, prestige littéraire, humanité classique, continuité civilisation",
+            "famous_uses": ["Penguin Classics", "Vogue", "haute_couture", "musées", "galeries_art"],
+            "size_recommendation": {
+              "display": "28-72px",
+              "headline": "18-32px",
+              "body": "14-16px (print), 13-15px (digital)",
+              "notes": "Magnifique print, nécessite rendu haut res web, sensible petit"
+            },
+            "personality_score": {
+              "neutral": 50,
+              "technical": 30,
+              "warm": 85,
+              "playful": 30
+            }
+          },
+          {
+            "name": "Caslon",
+            "foundry": "Multiple (Monotype, Adobe, Hoefler&Co)",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 1722,
+            "designer": "William Caslon (original), modernes : Carol Twombly (Adobe), Hoefler&Co",
+            "use_for": ["editorial_premium", "luxury_fashion", "literary", "museum", "heritage"],
+            "avoid_for": ["startup_tech", "fintech", "children_content"],
+            "pairs_well_with": ["Gotham", "Futura", "Aktiv Grotesk"],
+            "emotion": "Prestige britannique, littérature immortelle, humanité chaleureuse, légitimité historique",
+            "famous_uses": ["Declaration of Independence (original)", "Penguin", "Harper's Bazaar", "luxury_brands"],
+            "size_recommendation": {
+              "display": "32-68px",
+              "headline": "18-32px",
+              "body": "14-16px (print optimal)",
+              "notes": "Légende type print, magnifique quads + ligatures"
+            },
+            "personality_score": {
+              "neutral": 55,
+              "technical": 25,
+              "warm": 90,
+              "playful": 25
+            }
+          },
+          {
+            "name": "Lyon",
+            "foundry": "Colophon Foundry",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 2016,
+            "designer": "Kai Bernau, Berton Hasebe, Thomas Thiemroth",
+            "use_for": ["editorial_contemporary", "luxury_publishing", "design_culture", "institution"],
+            "avoid_for": ["startup_casual", "web_only", "mass_market"],
+            "pairs_well_with": ["DM Sans", "Aktiv Grotesk", "Neue Haas"],
+            "emotion": "Modernité respectueuse, design contemporain avec ancrage historique, finesse nuancée",
+            "famous_uses": ["Frieze", "design_magazines", "luxury_brands", "museums"],
+            "size_recommendation": {
+              "display": "24-60px",
+              "headline": "16-32px",
+              "body": "13-15px",
+              "notes": "Moderne interpretation old style, variable font"
+            },
+            "personality_score": {
+              "neutral": 65,
+              "technical": 40,
+              "warm": 75,
+              "playful": 35
+            }
+          }
+        ],
+        "design_rules": [
+          "Old style = prestige littéraire, humanité classique, intemporalité",
+          "Garamond pour édition traditionnelle, prestige histoire typographie",
+          "Caslon pour luxe britannique, heritage, littérature immortelle",
+          "Lyon pour contemporary editorial avec ancrage design moderne",
+          "Idéal body text : lisibilité impeccable, humanité chaleureuse",
+          "Pairing sans-serif grotesque ou géométrique = classique équilibrée"
+        ]
+      },
+      {
+        "id": 6,
+        "category": "SERIF Transitional",
+        "philosophy": "Pont entre old style humaniste et modern didone, équilibre timeless pour news/editorial",
+        "fonts": [
+          {
+            "name": "Times New Roman",
+            "foundry": "Monotype",
+            "free": true,
+            "google_fonts": false,
+            "year_created": 1932,
+            "designer": "Stanley Morison, Victor Lardent",
+            "use_for": ["news_print", "editorial_standard", "academic", "legal_documents", "archival"],
+            "avoid_for": ["luxury_brand", "emotional_content", "contemporary_design"],
+            "pairs_well_with": ["Arial", "Helvetica", "any sans-serif neutral"],
+            "emotion": "Neutralité journalistique, légalité institutionnelle, continuité presse mondiale",
+            "famous_uses": ["The Times", "newspapers_worldwide", "academic_papers", "legal_docs"],
+            "size_recommendation": {
+              "display": "24-48px",
+              "headline": "16-24px",
+              "body": "12px (news), 14-15px (editorial)",
+              "notes": "Default web, très optimisée petit, mais peu caractérisée"
+            },
+            "personality_score": {
+              "neutral": 95,
+              "technical": 60,
+              "warm": 40,
+              "playful": 15
+            }
+          },
+          {
+            "name": "Georgia",
+            "foundry": "Monotype",
+            "free": true,
+            "google_fonts": true,
+            "year_created": 1993,
+            "designer": "Matthew Carter",
+            "use_for": ["web_editorial", "blog", "reading_content", "long_form", "accessibility"],
+            "avoid_for": ["luxury_brand", "high_end_print", "display_dramatic"],
+            "pairs_well_with": ["Verdana", "Arial", "Helvetica Neue", "Trebuchet"],
+            "emotion": "Warmth accessibilité, humanité web-first, lisibilité généreuse",
+            "famous_uses": ["early_web_standards", "blog_platforms", "medium", "long_form_digital"],
+            "size_recommendation": {
+              "display": "28-52px",
+              "headline": "18-28px",
+              "body": "14-16px",
+              "notes": "Dessinée pour écran, excellente lisibilité web, warm that Times"
+            },
+            "personality_score": {
+              "neutral": 80,
+              "technical": 55,
+              "warm": 65,
+              "playful": 30
+            }
+          },
+          {
+            "name": "Sabol",
+            "foundry": "Monotype",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 1994,
+            "designer": "John Quaranda",
+            "use_for": ["editorial_contemporary", "publishing_premium", "editorial_culture"],
+            "avoid_for": ["startup", "casual_web", "mass_market"],
+            "pairs_well_with": ["Frutiger", "Aktiv Grotesk", "Neue Haas"],
+            "emotion": "Modernité tranquille, warmth lisibilité, prestige editorial actualisé",
+            "famous_uses": ["Fortune", "editorial_magazines", "contemporary_publishing"],
+            "size_recommendation": {
+              "display": "24-48px",
+              "headline": "16-24px",
+              "body": "14-16px",
+              "notes": "Contemporary interpretation transitional, très lisible"
+            },
+            "personality_score": {
+              "neutral": 75,
+              "technical": 50,
+              "warm": 70,
+              "playful": 35
+            }
+          }
+        ],
+        "design_rules": [
+          "Transitional = pont humaniste <-> moderne, équilibre journalistique",
+          "Times pour news traditionnelle, documents légaux, neutralité maximale",
+          "Georgia pour web editorial warm, blogs, long-form digital",
+          "Sabol pour editorial contemporain avec prestige",
+          "Idéal body text : lisibilité excellente, humanité détendue",
+          "Pairing sans-serif neutre grotesque = combo journalistique classique"
+        ]
+      },
+      {
+        "id": 7,
+        "category": "SERIF Slab Serif",
+        "philosophy": "Robustesse mécanique, serifs épais blocs, caractère vintage-futur, modernité retro",
+        "fonts": [
+          {
+            "name": "Rockwell",
+            "foundry": "Monotype",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 1934,
+            "designer": "Frank Pierpont, Morris Fuller Benton",
+            "use_for": ["vintage_branding", "poster_design", "sport_design", "retro_tech", "editorial_feature"],
+            "avoid_for": ["body_text", "formal_documents", "luxury_delicate"],
+            "pairs_well_with": ["Helvetica", "Futura", "any grotesque"],
+            "emotion": "Robustesse vintage, futurisme retro, sécurité mécanique, warmth vintage",
+            "famous_uses": ["Volkswagen (early)", "national_parks", "vintage_brands", "retro_design"],
+            "size_recommendation": {
+              "display": "32-72px",
+              "headline": "20-40px",
+              "body": "jamais",
+              "notes": "Magnifique grand, caractère très présent"
+            },
+            "personality_score": {
+              "neutral": 50,
+              "technical": 65,
+              "warm": 75,
+              "playful": 60
+            }
+          },
+          {
+            "name": "Clarendon",
+            "foundry": "Monotype / Bitstream",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 1845,
+            "designer": "Robert Besley (original), modernes : multiple",
+            "use_for": ["editorial_feature", "magazine_design", "poster", "vintage_luxury"],
+            "avoid_for": ["body_long_form", "formal_corporate"],
+            "pairs_well_with": ["Helvetica", "Gotham", "Futura"],
+            "emotion": "Élégance vintage, warmth serif classique, prestige avec caractère",
+            "famous_uses": ["The Economist", "luxury_magazines", "premium_editorial"],
+            "size_recommendation": {
+              "display": "28-64px",
+              "headline": "18-32px",
+              "body": "jamais",
+              "notes": "Excellente lisibilité malgré slab, belle en medium size"
+            },
+            "personality_score": {
+              "neutral": 60,
+              "technical": 50,
+              "warm": 80,
+              "playful": 50
+            }
+          },
+          {
+            "name": "Courier Prime",
+            "foundry": "Typemag / Open Source",
+            "free": true,
+            "google_fonts": true,
+            "year_created": 2012,
+            "designer": "Typemag",
+            "use_for": ["screenplay_writing", "creative_writing", "retro_tech", "hacker_culture", "typewriter_nostalgia"],
+            "avoid_for": ["body_elegant", "luxury_brand", "formal"],
+            "pairs_well_with": ["Georgia", "Lora", "serif body"],
+            "emotion": "Nostalgie machine à écrire, créativité brute, hacker-writer culture",
+            "famous_uses": ["screenplay_standard", "creative_platforms", "writer_community"],
+            "size_recommendation": {
+              "display": "18px+ (monospace rules)",
+              "headline": "jamais",
+              "body": "14-16px (si vouloir effet typewriter)",
+              "notes": "Monospace courtoisie, moins mécanique que Courier standard"
+            },
+            "personality_score": {
+              "neutral": 55,
+              "technical": 85,
+              "warm": 60,
+              "playful": 70
+            }
+          }
+        ],
+        "design_rules": [
+          "Slab serif = robustesse mécanique, vintage-futur, caractère présent",
+          "Rockwell pour design rétro dynamique, sport, poster",
+          "Clarendon pour editorial prestige, magazine, luxury vintage",
+          "Courier Prime pour screenplay, writing, hacker culture",
+          "Jamais body long-form : trop présent, fatigant",
+          "Idéal pairing : slab display + sans-serif neutre body"
+        ]
+      },
+      {
+        "id": 8,
+        "category": "SERIF Didone (Modern)",
+        "philosophy": "Élégance verticale, contraste maximal fine/heavy, luxe mode, théâtralité dramatique",
+        "fonts": [
+          {
+            "name": "Didot",
+            "foundry": "Multiple (Linotype, Adobe, Hoefler&Co)",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 1000,
+            "designer": "Firmin Didot (original punches, 1853), modernes : Linotype, Hoefler&Co",
+            "use_for": ["luxury_fashion", "haute_couture", "beauty", "editorial_prestige", "museum"],
+            "avoid_for": ["body_text", "web_small", "accessible_content"],
+            "pairs_well_with": ["Gotham", "Neue Haas", "Aktiv Grotesk", "any modern sans"],
+            "emotion": "Élégance absolue, dramaticité théâtrale, luxe intemporel, féminité prestige",
+            "famous_uses": ["Vogue", "Harper's Bazaar", "haute_couture_houses", "luxury_brands_worldwide"],
+            "size_recommendation": {
+              "display": "48-96px",
+              "headline": "32-48px",
+              "body": "jamais",
+              "notes": "Magnifique grand uniquement, très sensible rendu petit"
+            },
+            "personality_score": {
+              "neutral": 30,
+              "technical": 20,
+              "warm": 65,
+              "playful": 40
+            }
+          },
+          {
+            "name": "Bodoni",
+            "foundry": "Multiple (Monotype, Adobe, ITC)",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 1790,
+            "designer": "Giambattista Bodoni (original), modernes : multiple",
+            "use_for": ["luxury_brand", "perfume_beauty", "editorial_prestige", "poster_dramatic"],
+            "avoid_for": ["body_text", "accessibility", "casual_brands"],
+            "pairs_well_with": ["Helvetica Neue", "Gotham", "Neue Haas"],
+            "emotion": "Prestige intemporel, dramaticité élégante, luxe français, féminité sophistiquée",
+            "famous_uses": ["Chanel", "Dior", "luxury_fashion_houses", "perfume_brands"],
+            "size_recommendation": {
+              "display": "52-100px",
+              "headline": "36-52px",
+              "body": "jamais",
+              "notes": "Ultra-sensible petit, nécessite haut contraste et grand format"
+            },
+            "personality_score": {
+              "neutral": 25,
+              "technical": 15,
+              "warm": 60,
+              "playful": 35
+            }
+          },
+          {
+            "name": "Saol",
+            "foundry": "Ligne Type",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 2021,
+            "designer": "Olivier Gourvil, Jonathan Perez",
+            "use_for": ["editorial_contemporary", "luxury_contemporary", "design_culture", "art_direction"],
+            "avoid_for": ["mass_market", "casual_brand", "tech_startup"],
+            "pairs_well_with": ["DM Sans", "Aktiv Grotesk", "Neue Haas"],
+            "emotion": "Modernité respectueuse, prestige design, élégance avant-garde, finesse contemporaine",
+            "famous_uses": ["Contemporary_design_studios", "editorial_design", "luxury_brands"],
+            "size_recommendation": {
+              "display": "32-64px",
+              "headline": "18-36px",
+              "body": "13-15px (possible, mais pas idéal)",
+              "notes": "Didone moderne, variable font, plus lisible que didone classic"
+            },
+            "personality_score": {
+              "neutral": 50,
+              "technical": 50,
+              "warm": 70,
+              "playful": 40
+            }
+          }
+        ],
+        "design_rules": [
+          "Didone = luxe théâtral, dramaticité élégance, mode prestige",
+          "Didot pour fashion haute couture, prestige intemporel",
+          "Bodoni pour perfume, beauty, luxe absolu",
+          "Saol pour contemporary didone, design culture moderne",
+          "JAMAIS en petit : perd caractère, devient illisible",
+          "Idéal : didone display + sans-serif neutre body = contraste élégant"
+        ]
+      },
+      {
+        "id": 9,
+        "category": "DISPLAY & EXPRESSIVE — Blackletter/Gothic",
+        "philosophy": "Histoire médiévale, culture profonde, prestige traditionnel, gravité spirituelle",
+        "fonts": [
+          {
+            "name": "Old English Text",
+            "foundry": "Multiple",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 1300,
+            "designer": "Medieval scribes (original), digital : multiple",
+            "use_for": ["luxury_tradition", "heritage_branding", "sports_identity", "beer_label", "gothic_culture"],
+            "avoid_for": ["body_text", "accessibility", "contemporary_casual"],
+            "pairs_well_with": ["Garamond", "Caslon", "any serif"],
+            "emotion": "Prestige historique, gravité tradition, authenticité ancienne, respect héritage",
+            "famous_uses": ["brewery_labels", "heritage_brands", "sports_teams", "university_seals"],
+            "size_recommendation": {
+              "display": "36px+",
+              "headline": "24-48px",
+              "body": "jamais",
+              "notes": "Extrêmement riche visuellement, peu lisible, usage très ciblé"
+            },
+            "personality_score": {
+              "neutral": 40,
+              "technical": 30,
+              "warm": 80,
+              "playful": 20
+            }
+          },
+          {
+            "name": "Gutenberg Blackletter",
+            "foundry": "Google Fonts / Open Source",
+            "free": true,
+            "google_fonts": true,
+            "year_created": 2017,
+            "designer": "Alec Julien",
+            "use_for": ["literary_prestige", "publishing_art", "cultural_branding", "streetwear"],
+            "avoid_for": ["body_text", "digital_casual", "accessibility"],
+            "pairs_well_with": ["Georgia", "Lora", "serif body"],
+            "emotion": "Profondeur littéraire, prestige cultural, histoire humaniste, sophistication brute",
+            "famous_uses": ["Design studios", "independent_publishers", "streetwear_brands"],
+            "size_recommendation": {
+              "display": "40px+",
+              "headline": "28-48px",
+              "body": "jamais",
+              "notes": "Open source, excellent rendu digital"
+            },
+            "personality_score": {
+              "neutral": 45,
+              "technical": 35,
+              "warm": 85,
+              "playful": 25
+            }
+          }
+        ],
+        "design_rules": [
+          "Blackletter = prestige historique, gravité tradition, peu lisible volontaire",
+          "Usage très ciblé : décoration, label, identité héritage",
+          "Jamais large body text : totalement inaccessible",
+          "Combinaison historique : blackletter + serif classique = continuité",
+          "Excellente pour branding luxury tradition, craftsmanship",
+          "Attention sélection : beaucoup de versions mauvaises qualité"
+        ]
+      },
+      {
+        "id": 10,
+        "category": "DISPLAY & EXPRESSIVE — Script/Calligraphique",
+        "philosophy": "Humanité handmade, warmth personnel, artisanat, élégance fluide ou playfulness",
+        "fonts": [
+          {
+            "name": "Baskerville Script",
+            "foundry": "Multiple",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 2000,
+            "designer": "Modern interpretation",
+            "use_for": ["luxury_invitation", "beauty_luxury", "editorial_prestige", "wedding_branding"],
+            "avoid_for": ["body_text", "app_ui", "startup"],
+            "pairs_well_with": ["Baskerville", "Didot", "Caslon"],
+            "emotion": "Élégance fluide, humanité chaleureuse, sophistication artisanale, prestige doux",
+            "famous_uses": ["wedding_invitations", "luxury_beauty", "prestige_brands"],
+            "size_recommendation": {
+              "display": "32-64px",
+              "headline": "24-40px",
+              "body": "jamais",
+              "notes": "Lisibilité modérée, usage accent/hero uniquement"
+            },
+            "personality_score": {
+              "neutral": 20,
+              "technical": 15,
+              "warm": 95,
+              "playful": 50
+            }
+          },
+          {
+            "name": "Freestyle Script",
+            "foundry": "ITC / Monotype",
+            "free": false,
+            "google_fonts": false,
+            "year_created": 1974,
+            "designer": "Ned Robbins, Hermann Zapf",
+            "use_for": ["playful_branding", "restaurant_hospitality", "music_culture", "youth_brands"],
+            "avoid_for": ["corporate_serious", "formal_documents", "accessibility"],
+            "pairs_well_with": ["Georgia", "any serif body"],
+            "emotion": "Playfulness authentique, humanité brute, jeunesse candide, warmth informel",
+            "famous_uses": ["restaurants", "hospitality", "music_brands", "creative_agencies"],
+            "size_recommendation": {
+              "display": "24-48px",
+              "headline": "18-32px",
+              "body": "jamais",
+              "notes": "Très playful, lisibilité réduite"
+            },
+            "personality_score": {
+              "neutral": 15,
+              "technical": 10,
+              "warm": 85,
+              "playful": 90
+            }
+          },
+          {
+            "name": "Brush Script MT",
+            "foundry": "Monotype",
+            "free": true,
+            "google_fonts": true,
+            "year_created": 1942,
+            "designer": "Robert E. Smith",
+            "use_for": ["elegant_casual", "invitation", "artisanal_branding", "calligraphy_style"],
+            "avoid_for": ["body_text", "app_ui", "corporate"],
+            "pairs_well_with": ["Georgia", "Saol", "serif elegant"],
+            "emotion": "Artisanat contemporain, humanité chaleureuse, prestige doux, héritage handmade",
+            "famous_uses": ["invitation_design", "artisanal_branding", "hospitality"],
+            "size_recommendation": {
+              "display": "28-56px",
+              "headline": "20-36px",
+              "body": "jamais",
+              "notes": "Lisibilité modérée, sensible rendu petit"
+            },
+            "personality_score": {
+              "neutral": 20,
+              "technical": 10,
+              "warm": 90,
+              "playful": 60
+            }
+          }
+        ],
+        "design_rules": [
+          "Script/Calligraphique = humanité handmade, warmth personnel, artisanat",
+          "Élégant classique pour luxury invitation, beauty, hospitality",
+          "Playful pour youth branding, music, casual warmth",
+          "JAMAIS body text : trop fatigant, peu accessible",
+          "Usage limité : headline, logo, accent prestige uniquement",
+          "Qualité critique : mauvaises versions script = amateurisme instant"
+        ]
+      },
+      {
+        "id": 11,
+        "category": "DISPLAY & EXPRESSIVE — Expérimental/Custom",
+        "philosophy": "Signature de marque, unicité visuelle, storytelling typographique, innovation contrôlée",
+        "fonts": [
+          {
+            "name": "Linotype Custom Typeface Service",
+            "foundry": "Linotype / Monotype",
+            "free": false,
+            "google_fonts": false,
+            "year_created": "custom",
+            "designer": "Commission artists",
+            "use_for": ["luxury_brand_flagship", "corporate_identity_flagship", "architecture_branding", "fashion_house"],
+            "avoid_for": ["mass_market", "budget_constraints"],
+            "pairs_well_with": ["custom serif", "custom display"],
+            "emotion": "Unicité marque, signature identité, innovation contrôlée, prestige custom",
+            "famous_uses": ["Apple", "Hermès", "luxury_houses", "architecture_studios"],
+            "size_recommendation": {
+              "display": "variable",
+              "headline": "variable",
+              "body": "rarement",
+              "notes": "Commission: 20k-50k€+, cycle 6-12 mois"
+            },
+            "personality_score": {
+              "neutral": 0,
+              "technical": 60,
+              "warm": "variable",
+              "playful": "variable"
+            }
+          },
+          {
+            "name": "Variable Font Custom (Commissions récentes)",
+            "foundry": "Indie foundries (Dinamo, Typomania, FontStand)",
+            "free": false,
+            "google_fonts": false,
+            "year_created": "2020+",
+            "designer": "Indie type designers",
+            "use_for": ["contemporary_brand", "design_culture", "tech_forward_identity"],
+            "avoid_for": ["conservative_corporate"],
+            "pairs_well_with": ["custom sans", "any serif"],
+            "emotion": "Innovation moderne, design culture forward, flexibilité univers",
+            "famous_uses": ["design_studios", "tech_startups", "indie_brands"],
+            "size_recommendation": {
+              "display": "variable",
+              "headline": "variable",
+              "body": "possible si design inclut",
+              "notes": "Commission: 5k-20k€, cycle 3-6 mois"
+            },
+            "personality_score": {
+              "neutral": 0,
+              "technical": 85,
+              "warm": "variable",
+              "playful": "variable"
+            }
+          }
+        ],
+        "design_rules": [
+          "Custom typeface = investissement prestige, 5-50k€ minimum",
+          "Justifié uniquement pour flagship brand, architecture/fashion/luxury",
+          "Délai : 6-12 mois pour qualité excellence",
+          "Alternative économique : variable font custom (20-30% moins cher, 3-6 mois)",
+          "Indie foundries (Dinamo, Typomania) = meilleur rapport qualité-prix",
+          "ROI : unicité visuelle, protection copyright, prestige à long terme"
+        ]
+      },
+      {
+        "id": 12,
+        "category": "MONOSPACE — Code/Tech",
+        "philosophy": "Clarté mécanique, lisibilité caractère, distinction glyphes, readability code",
+        "fonts": [
+          {
+            "name": "JetBrains Mono",
+            "foundry": "JetBrains",
+            "free": true,
+            "google_fonts": false,
+            "year_created": 2020,
+            "designer": "JetBrains Team",
+            "use_for": ["code_editor", "ide", "terminal", "technical_documentation", "developer_culture"],
+            "avoid_for": ["body_text", "editorial", "casual_brands"],
+            "pairs_well_with": ["Inter", "DM Sans", "any sans display"],
+            "emotion": "Professionnalisme developer, clarté technique, modernité élégante, culture code",
+            "famous_uses": ["JetBrains IDEs", "developer_community", "technical_platforms"],
+            "size_recommendation": {
+              "display": "12-16px (code)",
+              "headline": "jamais",
+              "body": "jamais",
+              "notes": "8 weights, excellent web rendering, ligatures code"
+            },
+            "personality_score": {
+              "neutral": 85,
+              "technical": 95,
+              "warm": 40,
+              "playful": 35
+            }
+          },
+          {
+            "name": "Fira Code",
+            "foundry": "Mozilla / Tonsky",
+            "free": true,
+            "google_fonts": true,
+            "year_created": 2015,
+            "designer": "Nikita Prokopov",
+            "use_for": ["code_editor", "technical_content", "developer_tools", "technical_blogs"],
+            "avoid_for": ["body_text", "editorial", "formal"],
+            "pairs_well_with": ["Inter", "DM Sans", "system sans"],
+            "emotion": "Accessibilité developer, clarté mécanique, culture tech open-source",
+            "famous_uses": ["developer_community", "technical_blogs", "open_source_projects"],
+            "size_recommendation": {
+              "display": "12-15px (code)",
+              "headline": "jamais",
+              "body": "jamais",
+              "notes": "Open source, excellentes ligatures code, web-optimisée"
+            },
+            "personality_score": {
+              "neutral": 85,
+              "technical": 90,
+              "warm": 35,
+              "playful": 40
+            }
+          },
+          {
+            "name": "Source Code Pro",
+            "foundry": "Adobe",
+            "free": true,
+            "google_fonts": true,
+            "year_created": 2012,
+            "designer": "Paul D. Hunt",
+            "use_for": ["code_editor", "documentation", "technical_writing", "developer_tools"],
+            "avoid_for": ["body_text", "editorial", "brand"],
+            "pairs_well_with": ["Source Sans Pro", "Inter"],
+            "emotion": "Clarté épurée, professionnalisme technique, famille cohérente",
+            "famous_uses": ["documentation", "developer_platforms", "technical_content"],
+            "size_recommendation": {
+              "display": "11-14px (code)",
+              "headline": "jamais",
+              "body": "jamais",
+              "notes": "7 weights, variable disponible"
+            },
+            "personality_score": {
+              "neutral": 90,
+              "technical": 92,
+              "warm": 30,
+              "playful": 30
+            }
+          }
+        ],
+        "design_rules": [
+          "Monospace = clarté code, distinction glyphe 0/O, 1/l/I",
+          "JetBrains Mono pour IDE professionnels, élégance moderne",
+          "Fira Code pour developer culture open-source, ligatures actives",
+          "Source Code Pro pour documentation, cohérence familia",
+          "Taille : 12-16px optimal, jamais < 11px",
+          "Ligatures code : utiliser si support terminal/IDE"
+        ]
+      },
+      {
+        "id": 13,
+        "category": "SYSTÈMES ÉPROUVÉS — Pairings Classiques",
+        "philosophy": "Combinaisons testées par temps, équilibre visuel, harmonie, maximiser lisibilité système",
+        "pairings": [
+          {
+            "name": "Serif Prestige + Sans Neutre (Intemporel)",
+            "display_font": "Didot",
+            "body_font": "Helvetica Neue",
+            "use_for": ["luxury_brand", "haute_couture", "editorial_prestige", "museum"],
+            "emotion": "Prestige maximal, neutralité professionnelle, élégance contrastée, confiance institutionnelle",
+            "famous_uses": ["Vogue", "luxury_houses", "Hermès", "financial_institutions"],
+            "when_to_use": "Brand flagship, luxury goods, haute couture, prestige editorial",
+            "why_works": "Contraste maximal (fine serif vs geometric sans), confiance doubles couches"
+          },
+          {
+            "name": "Serif Classique + Sans Humaniste (Editorial)",
+            "display_font": "Garamond",
+            "body_font": "Gill Sans",
+            "use_for": ["editorial_literary", "publishing_prestige", "university", "museum", "culture"],
+            "emotion": "Humanité classique, prestige littéraire, accessibilité générouse, warmth",
+            "famous_uses": ["Penguin Classics", "literary_magazines", "academic_publishing"],
+            "when_to_use": "Editorial prestige, publishing literary, academic, cultural institutions",
+            "why_works": "Harmonie humaniste, proportions équilibrées, lisibilité généreuse"
+          },
+          {
+            "name": "Serif Old Style + Sans Géométrique (Moderne Classique)",
+            "display_font": "Caslon",
+            "body_font": "Futura",
+            "use_for": ["luxury_tech", "contemporary_brand", "editorial_forward", "design_culture"],
+            "emotion": "Intemporalité + modernité, prestige design, confiance avant-garde, sophistication",
+            "famous_uses": ["design_studios", "luxury_tech", "contemporary_brands"],
+            "when_to_use": "Brand contemporary premium, design culture, luxury tech",
+            "why_works": "Tension classique/moderne crée sophistication, proportions complémentaires"
+          },
+          {
+            "name": "Serif Slab + Sans Grotesque (Vintage-Futur)",
+            "display_font": "Rockwell",
+            "body_font": "Aktiv Grotesk",
+            "use_for": ["vintage_brand", "sport_design", "poster", "editorial_feature", "indie_culture"],
+            "emotion": "Robustesse brute, énergie vintage, dynamisme moderne, caractère présent",
+            "famous_uses": ["sports_design", "vintage_brands", "indie_magazines"],
+            "when_to_use": "Sport branding, vintage prestige, indie culture, poster design",
+            "why_works": "Slab donne robustesse, sans modern ajoute dynamisme contemporain"
+          },
+          {
+            "name": "Serif Didone + Sans Humaniste (Élégance Soft)",
+            "display_font": "Bodoni",
+            "body_font": "Inter",
+            "use_for": ["beauty_luxury", "fashion_contemporary", "luxury_web", "modern_elegant"],
+            "emotion": "Élégance douce, modernité respectueuse, prestige accessible, humanité luxe",
+            "famous_uses": ["contemporary_luxury_brands", "beauty_platforms", "fashion_web"],
+            "when_to_use": "Luxury beauty, contemporary fashion, luxury web platforms",
+            "why_works": "Didone dramatique adoucie par Inter warmth, élégance + accessible"
+          }
+        ],
+        "design_rules": [
+          "Pairing = harmonie contraste, jamais même catégorie (2 serif = faible)",
+          "Idéal : serif display (prestige) + sans body (lisibilité)",
+          "Contraste émotionnel = sophistication (Didot + Helvetica)",
+          "Harmonie humaniste = warmth (Garamond + Gill Sans)",
+          "Vintage-futur = tension créative (Rockwell + modern sans)",
+          "Testing : checker petit écran, mobile, print avant validation"
+        ]
+      },
+      {
+        "id": 14,
+        "category": "VARIABLE FONTS — Avantages & Usage",
+        "philosophy": "Flexibilité univers, réduction fichiers, systèmes adaptatifs, futur typographie web",
+        "overview": {
+          "what_are": "Single fichier font contient continuum weights/widths/opticals, scalable par axe (weight, width, optical-sizing)",
+          "file_size": "1 VF ≈ 5-7 static fonts (économie 60-80% bandwidth)",
+          "browser_support": "98%+ modern browsers (2024+), IE11 nécessite fallback",
+          "performance": "Chargement unique, moins reqûetes, animation smooth weight"
+        },
+        "top_variable_fonts": [
+          {
+            "name": "Inter",
+            "foundry": "Rasmus Andersson",
+            "use_for": ["ui_design", "app", "web_first", "design_systems"],
+            "advantages": ["open_source", "18_weights", "optical_sizing", "super_lisible_petit"],
+            "optical_sizing": "Auto light petit, bold grand = lisibilité constante",
+            "cost": "Free / Open Source"
+          },
+          {
+            "name": "DM Sans",
+            "foundry": "Colophon / Google Fonts",
+            "use_for": ["startup_identity", "web", "tech_culture"],
+            "advantages": ["google_fonts", "flexible_weight", "modern_design"],
+            "optical_sizing": "Non (VF simple)",
+            "cost": "Free / Google Fonts"
+          },
+          {
+            "name": "Saol",
+            "foundry": "Ligne Type",
+            "use_for": ["editorial_contemporary", "luxury_web", "design_culture"],
+            "advantages": ["modern_didone", "weight_width_axes", "sophistication"],
+            "optical_sizing": "Oui (variable style)",
+            "cost": "$100-300 license"
+          }
+        ],
+        "when_use_variable": [
+          "Web first product : économie 60% bw, performance boost",
+          "Design system avec weight dynamique (responsive weight)",
+          "Animation typography (smooth weight transition)",
+          "Responsive design (small font < 14px = light auto)",
+          "Performance critique (mobile first, slow networks)"
+        ],
+        "when_avoid_variable": [
+          "Print design uniquement (non pertinent)",
+          "Legacy browser support critique (IE11)",
+          "Single weight only usage (pas d'intérêt)"
+        ],
+        "design_rules": [
+          "VF = réduction fichier + animation typographique + adaptabilité",
+          "Optical sizing = game-changer (auto light petit, bold grand)",
+          "Fallback obligatoire pour IE11 / très vieux browsers",
+          "Animation weight = tendance 2024+ (smooth, pas rigide)",
+          "Performance: mesurer impact réel (CLS, LCP) avant décision"
+        ]
+      },
+      {
+        "id": 15,
+        "category": "SOURCES TYPOGRAPHIES — Guide de Choix",
+        "philosophy": "Naviguer jungle fonderies, coût, légal, qualité, licensing, performance",
+        "comparison": [
+          {
+            "source": "Google Fonts",
+            "pricing": "Free / 100% open source",
+            "selection": "~1500 fonts (croissance lente)",
+            "quality": "★★★★☆ (très inégal, excellent designs parmi mediocre)",
+            "licensing": "OFL - commercial use libre, modification possible",
+            "web_performance": "★★★★★ (CDN optimisé, fast delivery)",
+            "pros": ["completement_gratuit", "web_optimise", "cdn_rapide", "massive_selection"],
+            "cons": ["qualite_inegale", "designs_trends_fast", "peu_nouveautes_premium"],
+            "use_for": ["startup_budget", "web_first", "open_source_project"],
+            "famous_fonts": ["Roboto", "Inter", "Playfair Display", "Lora"]
+          },
+          {
+            "source": "Adobe Fonts",
+            "pricing": "$55/month (Creative Cloud inclus) ou $20.99/month standalone",
+            "selection": "~20000 fonts (meilleur variety)",
+            "quality": "★★★★★ (très élevée, curation excellence)",
+            "licensing": "Licensing varié, commerical use check par font",
+            "web_performance": "★★★★☆ (très bon CDN, mais souvent Adobe stack)",
+            "pros": ["enorme_selection", "haute_qualite", "licensing_clear", "synchron_desktop"],
+            "cons": ["couteux", "liaison_creative_cloud", "moins_google_optimization"],
+            "use_for": ["agency_professional", "premium_design", "desktop_sync_important"],
+            "famous_fonts": ["Helvetica", "Garamond", "Gotham", "Futura"]
+          },
+          {
+            "source": "Monotype Fonts",
+            "pricing": "$99-299/license ou $499/month unlimited",
+            "selection": "~10000 fonts (excellent qualité)",
+            "quality": "★★★★★ (excellence historique)",
+            "licensing": "Professional standard, licensing très clear",
+            "web_performance": "★★★★☆ (bon CDN)",
+            "pros": ["qualite_historique", "licensing_professionnel", "support_excellent"],
+            "cons": ["cher", "moins_inegale_google", "moins_trendy"],
+            "use_for": ["corporate_brand", "professional_agency", "prestige_brand"],
+            "famous_fonts": ["Times New Roman", "Helvetica Neue", "Georgia", "Rockwell"]
+          },
+          {
+            "source": "Linotype (Monotype subsidiary)",
+            "pricing": "$199-599 perpetual ou $100/month subscription",
+            "selection": "~9000 fonts (excellente curation)",
+            "quality": "★★★★★ (prestige classique)",
+            "licensing": "Professional, commercial clear",
+            "web_performance": "★★★☆☆ (bon, mais moins optimisé Google)",
+            "pros": ["prestige_historique", "licensing_pro", "custom_services"],
+            "cons": ["cher", "moins_web_natif", "interface_dated"],
+            "use_for": ["luxury_brand", "corporate_flagship", "custom_commission"],
+            "famous_fonts": ["Akzidenz Grotesk", "Frutiger", "Univers"]
+          },
+          {
+            "source": "Indie Foundries (Dinamo, Typomania, FontStand)",
+            "pricing": "$30-150 perpetual ou $5-20/month subscription",
+            "selection": "★★★☆☆ (petit mais très curated, niche excellence)",
+            "quality": "★★★★★ (ultra prestige, cutting-edge)",
+            "licensing": "Varié, check par foundry",
+            "web_performance": "★★★★☆ (bon, mais moins CDN optimize)",
+            "pros": ["qualite_artisanale", "design_avant_garde", "support_designer", "rapport_qualite_prix"],
+            "cons": ["petit_selection", "moins_stability", "support_moins_corporate"],
+            "use_for": ["design_culture", "indie_brand", "contemporary_luxury"],
+            "famous_fonts": ["Dinamo: Circular, GT Pressura", "Typomania: custom work"]
+          },
+          {
+            "source": "Open Source / GitHub Foundries",
+            "pricing": "Free (SIL OFL License)",
+            "selection": "~500-1000 (croissance continue)",
+            "quality": "★★★☆☆ (très variable)",
+            "licensing": "OFL - modification et commercial use libre",
+            "web_performance": "★★★★☆ (excellente si bien hébergée)",
+            "pros": ["gratuit", "modification_libre", "communaute_active"],
+            "cons": ["qualite_inegale", "support_communaute", "moins_stability"],
+            "use_for": ["open_source_project", "budget_zero", "experimental_work"],
+            "famous_fonts": ["Fira Sans", "Source Code Pro", "Roboto"]
+          }
+        ],
+        "decision_matrix": {
+          "budget_zero": "Google Fonts + Open Source",
+          "startup_budget": "Google Fonts + Adobe Fonts student",
+          "agency_professional": "Adobe Fonts + Monotype",
+          "luxury_brand": "Monotype + Linotype + Indie Commission",
+          "design_culture": "Indie Foundries (Dinamo, Typomania)",
+          "web_first_startup": "Google Fonts + Inter VF + DM Sans"
+        },
+        "design_rules": [
+          "Google Fonts : meilleur ROI startup, performance web imbattable",
+          "Adobe Fonts : professionnel standard, synchronisation desktop valeur ajoutée",
+          "Monotype/Linotype : corporate, prestige, custom services",
+          "Indie foundries : design culture, artisanat qualité, avantgarde",
+          "Licensing : TOUJOURS lire terms, surtout web+commercial use",
+          "Performance : tester réel impact web, pas juste fichier size"
+        ]
+      }
+    ],
+    "master_rules": [
+      "Grotesque neutre = confiance institutionnelle, neutralité maximale",
+      "Géométrique = modernité élégante, prestige design historique",
+      "Humaniste = accessibilité, lisibilité généreuse, warmth nuancée",
+      "Condensé display = impact dramatique cinéma/sport, JAMAIS body",
+      "Old style serif = prestige littéraire, intemporalité classique",
+      "Transitional serif = édition journalistique, équilibre neutre",
+      "Slab serif = robustesse mécanique, vintage-futur, caractère présent",
+      "Didone = luxe théâtral, dramaticité, mode prestige, très sensible petit",
+      "Blackletter = prestige historique, gravité tradition, peu lisible volontaire",
+      "Script = humanité handmade, warmth personnel, accent uniquement",
+      "Custom typeface = investissement prestige 5-50k€, justifié flagship brand",
+      "Monospace = clarté code, distinction glyphes, jamais body editorial",
+      "Pairing = harmonie contraste (serif display + sans body, jamais même catégorie)",
+      "Variable fonts = 60% économie bw, animation smooth, optical-sizing game-changer",
+      "Google Fonts = meilleur ROI startup, ~1500 designs, free + CDN rapide",
+      "Adobe Fonts = professionnel standard, 20k+ fonts, synchronisation desktop",
+      "Indie foundries = design culture avantgarde, artisanat qualité, custom commission",
+      "Performance critique : tester réel impact web (CLS, LCP, FCP) avant décision",
+      "Licensing : TOUJOURS vérifier web + commercial use terms",
+      "Design psychology : émotions + usage + accessibilité = trifecta décision"
+    ],
+    "quick_reference": {
+      "when_prestige": "Didot + Helvetica (max), ou Caslon + Gill Sans (warmth)",
+      "when_modern_startup": "DM Sans + Lora, ou Inter + Saol",
+      "when_editorial_literary": "Garamond + Gill Sans, ou Lyon + DM Sans",
+      "when_vintage_sport": "Rockwell + Aktiv Grotesk, ou Oswald + sans",
+      "when_luxury_web": "Saol + Inter, ou Bodoni + DM Sans",
+      "when_accessibility_critical": "Inter VF (optical sizing!), ou Georgia + Helvetica",
+      "when_custom_justified": "Budget 10k-50k€, délai 6-12 mois, Linotype/indie commission",
+      "when_performance_critical": "Variable font (60% bw economy), Google Fonts (CDN), lazy load"
+    }
+  }
+}

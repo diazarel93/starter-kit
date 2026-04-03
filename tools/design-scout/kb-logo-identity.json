@@ -1,0 +1,474 @@
+{
+  "logo_types": [
+    {
+      "id": 1,
+      "name": "Wordmark",
+      "description": "Nom de marque seul, stylisé typographiquement, sans symbole",
+      "examples": [
+        {
+          "brand": "Google",
+          "why_works": "Typo sans-serif colorée, moderne, lisible, deviendra synonyme du web. Chaque lettre une couleur primaire (CMYK). Très reconnaissable.",
+          "visual_strategy": "Sérif doux, arrondi, technologique mais chaleureux"
+        },
+        {
+          "brand": "FedEx",
+          "why_works": "Utilise une flèche cachée dans les espaces négatifs. Sophistiqué. Fonctionne en monochromepur.",
+          "visual_strategy": "Typography custom, espaces négatifs intelligents, minimaliste"
+        },
+        {
+          "brand": "Coca-Cola",
+          "why_works": "Script calligraphique classique. Marque très ancienne (1886). L'effet de courbe + rouge = instant recognition.",
+          "visual_strategy": "Script dynamique, courbures organiques, serif épais"
+        }
+      ],
+      "when_to_use": [
+        "Marques établies avec forte reconnaissance de nom",
+        "Secteurs: technologie, luxe, santé",
+        "Quand le nom est court et mémorable",
+        "Usage: web-first, digital-native brands"
+      ],
+      "what_it_communicates": [
+        "Maturité et confiance (pas besoin de symbole)",
+        "Sophistication (typo custom = investissement)",
+        "Modernité ou héritage (selon style typographique)"
+      ],
+      "technical_constraints": [
+        "Doit rester lisible à 16px minimum",
+        "Monochrome obligatoirement (réduction couleurs)",
+        "Espaces négatifs essentiels pour scalabilité",
+        "Police custom idéale (vs système fonts)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Lettermark",
+      "description": "Initiales ou lettres seules, transformées en symbole mémorable",
+      "examples": [
+        {
+          "brand": "IBM",
+          "why_works": "3 traits horizontaux = I+B+M. Géométrique parfait. Représente la puissance computationnelle (3 traits = stabilité). Bleu → sérieux, corporatif.",
+          "visual_strategy": "Géométrie stricte, proportion d'or, monochrome intégral"
+        },
+        {
+          "brand": "HBO",
+          "why_works": "Lettres intégrées dans une boîte carrée. Retro, mémorable, écho du média de la télévision. Fond noir → élitisme.",
+          "visual_strategy": "Lettres épaisses, sérif, carré/boîte, contraste maximal"
+        },
+        {
+          "brand": "NASA",
+          "why_works": "Red worm = lettres simplifiées. Futuriste années 70. Deviendra emblématique de l'exploration spatiale.",
+          "visual_strategy": "Géométrique ultra-moderne, sans-serif, minimaliste"
+        },
+        {
+          "brand": "Louis Vuitton (LV)",
+          "why_works": "Entrelacement des 2 lettres en monogramme. Luxe. Aucun espace blanc = densité = valeur. Marque par le pattern.",
+          "visual_strategy": "Symétrie parfaite, entrelacs complexe, or ou monochrome"
+        }
+      ],
+      "when_to_use": [
+        "Noms longs qui ont besoin d'abréviation",
+        "Marques d'entreprise corporates",
+        "Luxe et haute joaillerie (monogrammes)",
+        "Secteurs: finance, tech, médias"
+      ],
+      "what_it_communicates": [
+        "Professionnalisme et structure",
+        "Accessibilité (plus simple qu'un wordmark stylisé)",
+        "Héritage et stabilité (souvent usado par vieilles marques)"
+      ],
+      "technical_constraints": [
+        "Doit distinguer chaque lettre même en très petit (<20px)",
+        "Proportion du carré/rectangle critique",
+        "Monochrome + couleur primaire testée obligatoirement",
+        "Risque: confusion avec autres lettermarks proches (IBM vs autres)"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Pictogramme / Marque symbolique",
+      "description": "Symbole ou icône seule, sans texte. Le symbole EST la marque.",
+      "examples": [
+        {
+          "brand": "Apple",
+          "why_works": "Pomme avec morsure. Référence à Newton (science) + couleur trop simple. La morsure = humanité (byte/morsure de données). Parfait en petit.",
+          "visual_strategy": "Géométrie simple (cercle + morsure), monochrome, évolutif en couleur"
+        },
+        {
+          "brand": "Nike Swoosh",
+          "why_works": "Courbe dynamique unique. Dérivée de la Victoire ailée. Mouvement capturé. Fonctionne sur textile, petits espaces, vêtements.",
+          "visual_strategy": "Ligne courbe épurée, mouvement implicite, universellement reconnaissable"
+        },
+        {
+          "brand": "Twitter (X)",
+          "why_works": "Oiseau en vol simplifié. Représente le message, la communication, la liberté. Très scalable. Évoqué avant le rebranding en X.",
+          "visual_strategy": "Silhouette épurée, ailes en perspective, géométrique"
+        },
+        {
+          "brand": "Target",
+          "why_works": "Cibles concentriques rouges + blanches. Métaphore parfaite: toucher la cible = réussite. Hyper scalable, lisible à tout taille.",
+          "visual_strategy": "Géométrie parfaite (cercles concentriques), couleurs primaires, ultra-simple"
+        }
+      ],
+      "when_to_use": [
+        "Marques très établies (reconnaissance pure)",
+        "Secteurs: tech, sport, retail, luxe",
+        "Usage intensif sur petits supports (favicon, app icon, textile)",
+        "Quand le symbole est unique et mémorable"
+      ],
+      "what_it_communicates": [
+        "Confiance extrême (pas besoin du nom)",
+        "Innovation (symbole custom = investissement R&D)",
+        "Universalité (au-delà de la langue)"
+      ],
+      "technical_constraints": [
+        "Doit être reconnaissable à 16×16px minimum (favicon)",
+        "Monochrome obligatoire (pas de dégradés, pas de nuances)",
+        "Symétrie recommandée (facilite reconnaissance)",
+        "Doit fonctionner sur tous supports (tissu, papier, écran, métal)",
+        "Risque: confusion avec symboles existants"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Logo combiné",
+      "description": "Symbole ET texte, côte à côte ou intégrés, travaillant ensemble",
+      "examples": [
+        {
+          "brand": "Adidas",
+          "why_works": "3 bandes (traitement du mouvement) + texte. Les 3 bandes = mouvement diagonal. Texte sans-serif épais. Fonctionne avec ou sans texte seul.",
+          "visual_strategy": "Symbole géométrique + typ. sans-serif carrée, même épaisseur, même dynamique"
+        },
+        {
+          "brand": "Mastercard",
+          "why_works": "2 cercles chevauchants (intersection = pont entre mondes) + texte. Symbole et texte peuvent fonctionner séparément.",
+          "visual_strategy": "Géométrie simple (2 cercles) + texte moderne sans-serif"
+        },
+        {
+          "brand": "Amazon",
+          "why_works": "Flèche dans 'A→Z' (from A to Z = tout). Flèche cachée dans espace négatif. Texte modern sans-serif.",
+          "visual_strategy": "Texte custom avec flèche intégrée, espace négatif intelligent"
+        }
+      ],
+      "when_to_use": [
+        "Marques en croissance (pas assez de reconnaissance pour symbole seul)",
+        "Secteurs: retail, fintech, consumer brands",
+        "Quand symbole + texte se renforcent mutuellement",
+        "Besoin flexibilité: symbole seul OU logo complet"
+      ],
+      "what_it_communicates": [
+        "Équilibre entre accessibilité (texte) et sophistication (symbole)",
+        "Marque claire et déterminée",
+        "Évolutivité (symbole peut devenir emblématique plus tard)"
+      ],
+      "technical_constraints": [
+        "Symbole doit fonctionner seul en petit (min 20×20px)",
+        "Texte doit être lisible même en monochrome",
+        "Ratio hauteur symbole/texte critique (généralement 1:1.2)",
+        "Spacing entre symbole et texte: minimum 1/4 de la hauteur"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Emblème / Blason",
+      "description": "Tout intégré dans une forme unique (badge, bouclier, blason). Très codifié.",
+      "examples": [
+        {
+          "brand": "Harley-Davidson",
+          "why_works": "Bouclier gothique avec aigle + texte intégré. Héritage, tradition, rébellion. Chaque élément raconte une histoire.",
+          "visual_strategy": "Forme traditionnelle (bouclier) + symbole (aigle) + texte, multi-couches"
+        },
+        {
+          "brand": "Starbucks",
+          "why_works": "Sirène (Melusine) dans cercle brun-vert. Mythe + commerce. Texte en cercle. Hermétique = univers clos + accueillant.",
+          "visual_strategy": "Cercle contenant figure mythologique + texte circulaire"
+        },
+        {
+          "brand": "NFL (National Football League)",
+          "why_works": "Bouclier football américain, texte intégré, géométrique. Représente l'autorité, le sport, l'Amérique.",
+          "visual_strategy": "Forme traditionnelle (bouclier sport) + minimalisme moderne"
+        }
+      ],
+      "when_to_use": [
+        "Institutions historiques ou traditionnelles",
+        "Secteurs: sports, luxe héritage, institutions publiques",
+        "Quand histoire + mystique = valeur",
+        "Usage: uniform, badge, officiel"
+      ],
+      "what_it_communicates": [
+        "Héritage et tradition (surtout avec bouclier)",
+        "Autorité et stabilité",
+        "Prestige (emblème = hiérarchie)"
+      ],
+      "technical_constraints": [
+        "Doit rester lisible en petit (min 30×30px) car complexe",
+        "Tous éléments doivent contribuer (pas de déco)",
+        "Monochrome plus difficile (complexité augmente)",
+        "Peut nécessiter version simplifiée pour petits supports"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Abstrait / Géométrique",
+      "description": "Formes pures, absence de représentation figurative. Très moderne.",
+      "examples": [
+        {
+          "brand": "Pepsi",
+          "why_works": "Cercle divisé (yin-yang moderne). Représente équilibre, mouvement, énergie. Couleurs: bleu + rouge = enfance + passion. Évolué plusieurs fois.",
+          "visual_strategy": "Cercle géométrique divisé, symétrie radiale, 2 couleurs primaires"
+        },
+        {
+          "brand": "BP (British Petroleum)",
+          "why_works": "Tournesol abstrait (hélios = soleil = énergie). Vert + jaune = nature + progrès. Géométrique parfait.",
+          "visual_strategy": "Pétales géométriques, couleurs nature, symétrie 6 ou 8 axes"
+        },
+        {
+          "brand": "Mitsubishi",
+          "why_works": "3 diamants. Référence au blason du clan (Iwasaki). Géométrie parfaite, symétrie triangulaire, reconnaissance instantanée.",
+          "visual_strategy": "3 diamants identiques, symétrie 3 axes, minimaliste extrême"
+        }
+      ],
+      "when_to_use": [
+        "Marques technologiques ou futures",
+        "Secteurs: énérgie, tech, pharma, luxe",
+        "Quand représentation figurative trop limitante",
+        "Logo doit transcender cultures et langues"
+      ],
+      "what_it_communicates": [
+        "Modernité et futurisme",
+        "Innovation et technologie",
+        "Universalité (au-delà du figuratif)",
+        "Sophistication (abstraction = réflexion)"
+      ],
+      "technical_constraints": [
+        "Doit être immédiatement compréhensible (abstraction ≠ chaos)",
+        "Symétrie hautement recommandée",
+        "Palette couleur critique (2-3 couleurs max)",
+        "Doit avoir une 'gestalt' claire (reconnaissance d'ensemble)"
+      ]
+    }
+  ],
+  "iconic_logos": [
+    {
+      "rank": 1,
+      "brand": "FedEx",
+      "logo_type": "Wordmark + symbole caché",
+      "why_memorable": "Flèche cachée dans l'espace négatif entre 'e' et 'x'. Subconscience = excellence.",
+      "hidden_message_intentional": "Flèche = mouvement, rapidité, direction. Entre rouge et bleu = split de couleur traduit la vitesse.",
+      "why_works_2026": [
+        "Timeless: aucune mise à jour depuis 1994, preuve absolue d'efficacité",
+        "Multi-sensorialité: on voit la flèche UNE FOIS et ne peut plus la 'désvoir'",
+        "Scalabilité: fonctionne à tous les tailles (camion, enveloppe, favicon)",
+        "Asymétrie intentionnelle: 'e' + 'x' ne sont pas symétriques mais logos= parfait équilibre"
+      ],
+      "design_lesson": "L'espace négatif c'est du contenu, pas du vide. Utiliser les espaces entre les lettres."
+    },
+    {
+      "rank": 2,
+      "brand": "Amazon",
+      "logo_type": "Wordmark custom avec symbole intégré",
+      "why_memorable": "Flèche A→Z. Littéral: on vend tout. Curve = smile = bonheur client.",
+      "hidden_message_intentional": "A to Z = universe complète. Flèche = livraison + mouvement. Courbe = humain, pas froid.",
+      "why_works_2026": [
+        "Simplicité feinte: paraît simple mais contient 3 messages (A-Z, flèche, smile)",
+        "Couleur orange = chaleur, pas froid corporate bleu",
+        "Evolution graduelle: wordmark + flèche, puis flèche seule avec le Smile (app)",
+        "Émotionnel: smile en courbe = psychologie de Gestalt inconsciente"
+      ],
+      "design_lesson": "Mettre 3-4 messages dans UNE forme = génie. Voir Amazon Smile logo seul."
+    },
+    {
+      "rank": 3,
+      "brand": "Nike Swoosh",
+      "logo_type": "Pictogramme / symbole seul",
+      "why_memorable": "Courbe unique. Victoria (déesse) ailée = succès. '90s = sneaker culture.",
+      "hidden_message_intentional": "Wingmark + check = victoire cochée. Tailwind (mouvement constant). Évoque aussi aile de Hermes.",
+      "why_works_2026": [
+        "Universalité: aucun mot, fonctionne globalement (120+ pays, langues différentes)",
+        "Textile: parfait sur vêtement, chaussure, sac (petit, grand, brodé, imprimé)",
+        "Evolution: Swoosh seul est suffisant (pas besoin du mot Nike)",
+        "Psychologie: courbe = mouvement biologique (pas géométrique froid)"
+      ],
+      "design_lesson": "Un symbol doit suffire seul. Le swoosh n'a jamais eu besoin de texte après 1985."
+    },
+    {
+      "rank": 4,
+      "brand": "Apple",
+      "logo_type": "Pictogramme avec détail clé (la morsure)",
+      "why_memorable": "Pomme + morsure. Newton (science) + humanité. Couleur arc-en-ciel (original) ou gris/noir (modern).",
+      "hidden_message_intentional": "Morsure = byte (donnée informatique, jeu de mot). Taille = morsure humaine = taille UX. Référence Eden (connaissance).",
+      "why_works_2026": [
+        "Simplification progressive: 6 couleurs → monochrome. Fonctionne MIEUX en simple",
+        "Psychologie: pomme = fruit commun, pas élitiste, mais morsure = rebellion",
+        "Scalabilité ultime: 512×512 à 16×16, reste reconnaissable",
+        "Intemporelle: même logo depuis 1977 (sauf couleur)"
+      ],
+      "design_lesson": "Détail + morsure = human touch. Un petit imperfection (pas cercle parfait) = mieux qu'un design lissé."
+    },
+    {
+      "rank": 5,
+      "brand": "Audi (4 anneaux)",
+      "logo_type": "Pictogramme abstrait / géométrique",
+      "why_memorable": "4 anneaux entrecroisés. Chaque anneau = une compagnie fusionnée (1932). Chaîne = union.",
+      "hidden_message_intentional": "4 anneaux = 4 compagnies (Auto Union + Wanderer + Horck + Audi). Force par l'union. Argent = technologie, prestige.",
+      "why_works_2026": [
+        "Narratif: le logo raconte l'histoire des 4 fondateurs (Easter egg)",
+        "Géométrie: cercles entrecroisés = très difficile à copier (protection naturelle)",
+        "Patrimoine: 90+ années sans changement (sauf finitions)",
+        "Luxury positioning: entrelacs = délicatesse, précision, Allemagne"
+      ],
+      "design_lesson": "Symbole géométrique compliqué (pas juste 4 cercles) = protégeant la marque. Cercles simples = copiable."
+    },
+    {
+      "rank": 6,
+      "brand": "Olympic Rings",
+      "logo_type": "Pictogramme / symbole géométrique",
+      "why_memorable": "5 anneaux enlacés. Représente les 5 continents. Couleurs olympiques (bleu, noir, rouge, jaune, vert).",
+      "hidden_message_intentional": "5 anneaux = 5 continents. Enlacés = union, paix. Pas de hiérarchie (tous anneaux même taille). Crée par Coubertin (1913).",
+      "why_works_2026": [
+        "Universalité mondiale: reconnu instantanément dans 195 pays",
+        "Symbolique profonde: paix + diversité + unité (3 messages)",
+        "Géométrie intemporelle: aucun changement depuis 113 ans",
+        "Pluriculturalisme: couleurs = tous pays (chaque drapeau contient au moins une couleur olympique)"
+      ],
+      "design_lesson": "Simplicité géométrique + profondeur symbolique = intemporelle. Les 5 anneaux c'est juste 5 cercles, mais WOW."
+    },
+    {
+      "rank": 7,
+      "brand": "Shell (coquille)",
+      "logo_type": "Pictogramme / symbole stylisé",
+      "why_memorable": "Coquille saint-jacques stylisée. Jaune + rouge. Dynamique, organique. Fondée par trading shell (coquillages).",
+      "hidden_message_intentional": "Coquille = nature, mer, pétrole (fossiles). Jaune + rouge = chaleur, énergie. Saint-Jacques = voyage, commerce.",
+      "why_works_2026": [
+        "Héritage narratif: le nom vient de vraies coquilles (1833 Shell Transport and Trading)",
+        "Géométrie vivante: coquille n'est pas parfaitement symétrique = organique",
+        "Couleurs énergétiques: jaune + rouge = plus chaud que bleu (énergie)",
+        "Évolution légère: design 1971 quasi-identique à aujourd'hui, refinement minimaliste"
+      ],
+      "design_lesson": "Symbole tiré de l'histoire réelle de la marque (shell = coquille à l'origine). Authentiquement organique."
+    },
+    {
+      "rank": 8,
+      "brand": "Target (cible)",
+      "logo_type": "Pictogramme géométrique / symbole",
+      "why_memorable": "3 cercles concentriques rouges + blancs. Bull's eye = toucher la cible. Hyper simple, hyper efficace.",
+      "hidden_message_intentional": "Cible = atteindre l'objectif. Bullseye = precision, excellence. Rouge + blanc = contraste maximal = clarté mission.",
+      "why_works_2026": [
+        "Métaphore parfaite: marque = aider clients atteindre leurs objectifs",
+        "Scalabilité : 1024×1024 ou 16×16, reste identique",
+        "Minimalisme extrême: juste 3 cercles + 2 couleurs",
+        "Intemporalité: logo 1962 quasi-identique en 2026 (juste refinement de proportions)"
+      ],
+      "design_lesson": "Métaphore directe (cible = marque) + géométrie ultra-simple = intemporelle. Pas besoin de complexité."
+    },
+    {
+      "rank": 9,
+      "brand": "Airbnb (A + coeur + personne)",
+      "logo_type": "Wordmark stylisé + symbole caché",
+      "why_memorable": "A rouge, mais aussi = heart (coeur) + personne = belongings (appartenance). Triple sens avec lettre simple.",
+      "hidden_message_intentional": "A = start de 'Airbnb'. Coeur = hospitalité, amour du foyer. Personne = humain, connection. Belongings = sentir chez soi.",
+      "why_works_2026": [
+        "Evolution: le 'Bélo' (nom du symbole) a grandi pour devenir logo principal (2014)",
+        "Multi-sensorialité: chaque élément = message (A + coeur + personne = 3 en 1)",
+        "Modernité: créé en 2009, déjà iconic pour Gen Z",
+        "Inclusivité couleur: rouge universelle (passion, accueil, chaleur)"
+      ],
+      "design_lesson": "Symbole caché dans lettre = genius. Bélo peut vivre seul ou avec texte. Flexibilité + profondeur."
+    },
+    {
+      "rank": 10,
+      "brand": "Spotify (ondes sonores)",
+      "logo_type": "Pictogramme / symbole géométrique",
+      "why_memorable": "Cercle vert + 3 lignes courbes = ondes sonores. Représente son, musique, liberté. Vert = vie, énergie.",
+      "hidden_message_intentional": "Ondes sonores = musique invisible rendue visible. Vert = croissance, optimisme, renouveau. Cercle = univers musical complète.",
+      "why_works_2026": [
+        "Minimalisme sonore: symbole ÉVOQUE la musique sans l'être littéralement",
+        "Couleur identitaire: vert Spotify est protégé (Pantone 130C), unique dans industrie audio",
+        "Flexibilité: symbole seul OR Spotify en minuscule + cercle vert",
+        "Scalabilité: créé en 2011, reste modern et digital-native"
+      ],
+      "design_lesson": "Abstraction de concept (son) en forme simple (ondes) = élégant. Couleur propriétaire (vert unique) = branding ultra-fort."
+    }
+  ],
+  "logo_rules": [
+    {
+      "rank": 1,
+      "rule": "LISIBILITÉ EXTRÊME (Readability at smallest size)",
+      "description": "Un logo doit rester parfaitement lisible à 16×16 pixels (favicon). Si ça marche en petit, ça marche partout.",
+      "why_critical": "Logo doit fonctionner sur: favicon, app icon, textile brodé (1cm²), panneau public (5m). Même design pour toutes tailles.",
+      "test": "Imprimer logo en 1cm × 1cm. Si encore lisible et reconnaissable, ✓ Pass. Si flou ou détails perdus, ✗ Fail.",
+      "violation_example": "Quelques logos avec 20+ couleurs (ancien Pepsi avant simplification). Impossible à broder, impossible en petit."
+    },
+    {
+      "rank": 2,
+      "rule": "MONOCHROMATIQUE (Monochrome functionality)",
+      "description": "Un bon logo doit fonctionner en noir sur blanc ET en blanc sur noir. Pas de dégradés, pas de nuances.",
+      "why_critical": "Papier blanc + encre noire = test ultime. Pas de couleur dispo: il faut distinguer avec forme seule.",
+      "test": "Imprimer logo en noir et blanc. Puis inverser (blanc sur noir). Tous détails visibles ? ✓ Pass.",
+      "violation_example": "Logos avec dégradés (ex: ancien style 2000s) perdent identité en monochrome. Doivent être redessinés."
+    },
+    {
+      "rank": 3,
+      "rule": "SCALABILITÉ SANS PERTE (Scalable to any size)",
+      "description": "Logo doit être vectoriel (SVG/PDF), pas raster. Doit rester identique à 1cm ET 10m de haut.",
+      "why_critical": "Logo peut être: favicon (16×16), app icon (192×192), vêtement (5cm), panneau route (5m), immeuble (30m).",
+      "test": "Ouvrir en Illustrator/Figma. Zoomer à 1% puis 1000%. À chaque scale, même clarté ? ✓ Pass.",
+      "violation_example": "Logos PNG raster = dégradation. Logo avec trop de détails fins = lisible à 512×512 mais pas à 16×16."
+    },
+    {
+      "rank": 4,
+      "rule": "DISTINZIONE (Distinctive and unique)",
+      "description": "Logo doit être reconnaissable entre concurrents. Test: cachez le texte, reconnaissez-vous la marque ?",
+      "why_critical": "5000+ marques existent. Votre logo ne doit ressembler à aucune autre. Risque légal de trademark conflict.",
+      "test": "Montrer logo à 50 personnes sans nom. Combien le reconnaissent ? 80%+ = ✓ Pass.",
+      "violation_example": "Logos géométriques trop simples (3 barres = Adidas mais aussi: boulangerie, gym, assurance). Besoin de couleur ou détail."
+    },
+    {
+      "rank": 5,
+      "rule": "PERTINENCE SÉMANTIQUE (Semantic relevance)",
+      "description": "Logo doit communiquer quoi que vous faites. Symbole doit avoir relation logique avec secteur/marque.",
+      "why_critical": "Logo = premier impression. Doit orienter vers le bon secteur (pas besoin de texte pour deviner industrie).",
+      "test": "Montrer logo à quelqu'un qui n'existe pas. Peuvent-ils deviner secteur ? Tech ? Luxe ? Sport ? Enfants ?",
+      "violation_example": "Cabinet d'avocat avec logo de pirogue = confus. Cabinet avec symbole de law (balance, livre) = clair."
+    },
+    {
+      "rank": 6,
+      "rule": "MÉMORABILITÉ (Memorability & distinctiveness)",
+      "description": "Logo doit être oubliable DIFFICILE. Après 1 view, devrait rester dans mémoire visuelle. Test = recall sans voir.",
+      "why_critical": "Marketing goal = recognition instantanée. Besoin de few exposures, pas 100. Bon logo = vos clients le dessinent de mémoire.",
+      "test": "Montrer logo 5 secondes. Cacher. Peuvent-ils redessiner approximativement ? ✓ Pass.",
+      "violation_example": "Apple: facile. Microsoft: facile. 1000 startups avec carrés bleus? Impossible à différencier."
+    },
+    {
+      "rank": 7,
+      "rule": "TIMELESSNESS (Intemporalité — non-datation)",
+      "description": "Logo ne doit pas 'dater'. Doit rester relevant dans 20+ ans. Pas de trends, pas d'effet 3D qui sera vieux.",
+      "why_critical": "Rebranding coûte millions (tous supports, brand guidelines, équipe, temps). Un bon logo = 50+ ans d'investissement.",
+      "test": "Imaginer logo en 2046 (20 ans). Sera-t-il encore moderne ou 'dated' ?",
+      "violation_example": "Logos 2000 avec dégradés + ombres = looks 'Y2K' en 2026. Apple minimal = looks actuel. Nike Swoosh depuis 1971 = forever."
+    },
+    {
+      "rank": 8,
+      "rule": "VERSATILITÉ MÉDIAS (Multi-medium flexibility)",
+      "description": "Logo doit fonctionner sur: web, print, textile, metal, verre, animation, merch, tout. Version horizontale AND verticale.",
+      "why_critical": "Marketing touchpoints = infini. Logo sur mur, tshirt, favicon, billboard, podcast cover, NFT, métaverse. Tous visuels différents.",
+      "test": "Concevoir 5 layouts: horiz (site header), vertical (icon), carré (app icon), texte + symbol (business card), symbol seul (merch).",
+      "violation_example": "Logo trop horizontal = impossible en carré (app icon). Logo trop détaillé = impossible à broder (textile). Doit avoir 4-5 versions."
+    },
+    {
+      "rank": 9,
+      "rule": "COHÉRENCE IDENTITAIRE (Brand system alignment)",
+      "description": "Logo doit harmoniser avec palette couleur, typographie, et tone-of-voice marque. Pas de dissonance.",
+      "why_critical": "Logo ≠ isolated. C'est une pièce d'une identité complète (colors, fonts, patterns, photography, motion). Tout doit converger.",
+      "test": "Placer logo à côté: palette couleur, fonts, patterns. Tous éléments 'feel' de la même famille ? ✓ Pass.",
+      "violation_example": "Startup tech avec logo géométrique ultra-modern + website retro 90s. Dissonance complète."
+    },
+    {
+      "rank": 10,
+      "rule": "SIMPLICITÉ INTENTIONNELLE (Simplicity without oversimplification)",
+      "description": "Logo doit être simple (max 2-3 formes/concepts) MAIS pas vide de sens. Équilibre: épuré + profond.",
+      "why_critical": "Tentación = over-simplify. Résultat = generic (4 carrés bleus, tous se ressemblent). Besoin d'UN détail clé qui fait la différence.",
+      "test": "Décrire logo en 1 phrase. Si trop court ('cercle') = trop simple. Si trop long = trop complexe.",
+      "violation_example": "Pepsi cercle divisé = simple (2 formes) mais profond (yin-yang, balance, mouvement). NOT 'juste un cercle'."
+    }
+  ]
+}

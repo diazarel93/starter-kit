@@ -1,0 +1,323 @@
+{
+  "illustration_styles": [
+    {
+      "style": "Flat design",
+      "description": "Simplification maximale des formes, sans ombres, dégradés ni textures. Couleurs unies, lignes épurées. Basé sur les principes de Material Design.",
+      "emotion": "Moderne, accessible, épuré, approachable, universel",
+      "best_sectors": ["SaaS", "fintech", "mobile apps", "UI/UX", "startup"],
+      "avoid_sectors": ["luxury", "haut de gamme", "tradition", "artisanat premium"],
+      "famous_examples": ["Material Design (Google)", "Stripe", "Figma", "Airbnb early brand", "Mailchimp recent style"],
+      "tools": ["Adobe Illustrator", "Figma", "Sketch", "Affinity Designer"],
+      "cost_to_produce": "low",
+      "when_to_use_vs_photo": "Quand il faut expliquer des concepts abstraits, itérer rapidement sur UI, ou créer une cohérence maximale entre illustration et composants",
+      "design_rules": [
+        "Pas d'ombres portées, max une ombre plate légère",
+        "Couleurs primaires limitées (3-5)",
+        "Géométries simples (cercle, carré, triangle)",
+        "Tracés épais homogènes (2-3px)",
+        "Respirer du blanc autour des éléments"
+      ],
+      "css_if_applicable": "Reproductible en SVG + CSS (border-radius, clip-path, linear-gradient)",
+      "color_palette": "Couleurs vives saturées ou pastels doux",
+      "animation_potential": "Transitions douces, micro-interactions légères"
+    },
+    {
+      "style": "Isométrique",
+      "description": "Projection 3D pseudo-réaliste sans perspective linéaire. Axes fixes (30/60°), chaque axe = même échelle. Utilisé pour la data viz tech et l'illustration de concepts spatiaux.",
+      "emotion": "Technique, futuriste, données, clarté spatiale, abstraction 3D",
+      "best_sectors": ["data visualization", "tech", "architecture", "gaming indie", "infographie"],
+      "avoid_sectors": ["luxury", "organic", "wellness", "traditional"],
+      "famous_examples": ["Slack illustrations", "Figma 3D isometric diagrams", "Google Cloud Platform docs", "GitHub illustrations"],
+      "tools": ["Adobe Illustrator (plugin Astute Graphics)", "Blender (camera iso)", "CSS 3D Transforms"],
+      "cost_to_produce": "medium",
+      "when_to_use_vs_photo": "Expliquer l'architecture d'un système, montrer des objets 3D complexes de façon claire, data viz où la perspective distortionne",
+      "design_rules": [
+        "Angles fixes : ±30° horizontal, ±90° vertical",
+        "Pas de perspective convergente (pas d'horizon)",
+        "Profondeur = décalage + couleur plus sombre côté arrière",
+        "Éclairage unique cohérent",
+        "Géométries régulières (cubes, cylindres, prismes)"
+      ],
+      "css_if_applicable": "Complexe mais faisable avec CSS 3D Transforms (transform: rotateX/Y/Z, perspective)",
+      "grid_logic": "Basée sur grille hexagonale ou grid cartésien 30°"
+    },
+    {
+      "style": "Line art",
+      "description": "Contours minimalistes, pas de remplissage (ou remplissage très léger). L'art du trait épuré, souvent monochromatique ou 2-3 couleurs.",
+      "emotion": "Élégance, minimalisme, sophistication, délicatesse, modernité épurée",
+      "best_sectors": ["fashion", "luxury", "mode", "architecture", "premium SaaS", "editorial"],
+      "avoid_sectors": ["fun/playful", "enfants", "energetic"],
+      "famous_examples": ["Ligne Roset logo", "Architecture Digest covers", "Dieline magazine", "Rick Owens aesthetic", "Hermès campaigns"],
+      "tools": ["Adobe Illustrator", "Procreate (Apple Pencil)", "Ink/calligraphie traditionnelle"],
+      "cost_to_produce": "medium",
+      "when_to_use_vs_photo": "Pour une immédiateté élégante, isoler un sujet de son contexte, créer du luxe visuel, ou communiquer raffinement",
+      "design_rules": [
+        "Tracés épais et réguliers (1.5-2.5px) ou variation intentionnelle",
+        "Pas de remplissage ou remplissage 5-20% opacité",
+        "Contraste par densité de ligne, pas de couleur",
+        "Espaces négatifs généreux",
+        "Alignement impeccable"
+      ],
+      "color_strategy": "Monochromatique noir/gris ou 1 couleur accent haute saturation",
+      "stroke_variation": "Énumérateur pour imiter l'épaisseur du pinceau calligraphique"
+    },
+    {
+      "style": "Hand-drawn / Sketch",
+      "description": "Aspect dessiné à la main, imparfaitement régulier. Peut être crayon, stylo, aquarelle ou digital imitant le sketch. Humanité brute, authenticité apparente.",
+      "emotion": "Authentique, personnel, artisanal, accessible, créatif, chaleureux, DIY",
+      "best_sectors": ["startup early stage", "wellness", "nature", "artisanat", "communauté", "humanité", "SaaS créatif"],
+      "avoid_sectors": ["finance strict", "médical formel", "corporate ultra-sérieux", "luxury ultra-cher"],
+      "famous_examples": ["Slack logo redesign (hand-drawn feel)", "Dropbox illustrations", "Zapier visual style", "Basecamp branding", "Old Mailchimp mascot"],
+      "tools": ["Procreate", "Adobe Fresco", "Clip Studio Paint", "Crayon/papier scanné", "Affinity Designer"],
+      "cost_to_produce": "medium",
+      "when_to_use_vs_photo": "Pour créer une connexion humaine, montrer que c'est créé par des gens, ou émuler le processus créatif brut",
+      "design_rules": [
+        "Irrégularités intentionnelles dans les lignes (tremolo, variation d'épaisseur)",
+        "Pas de perfection géométrique",
+        "Texture de papier ou trait visible",
+        "Imperfections = charme, non défaut",
+        "Légère distorsion perspective acceptable"
+      ],
+      "texture_overlay": "Papier, kraft, canvas pour ajouter matière",
+      "animation": "Peut être animée stroke-by-stroke pour révéler le processus créatif"
+    },
+    {
+      "style": "Geometric / Abstract",
+      "description": "Formes géométriques pures : carrés, cercles, triangles, losanges assemblés selon logique. Souvent asymétrique, composition dynamique. Style moderniste constructiviste.",
+      "emotion": "Structure, futurisme, avant-garde, intellectualité, création de sens par composition",
+      "best_sectors": ["tech", "art/culture", "branding moderne", "editorial de prestige", "architecture"],
+      "avoid_sectors": ["entertainment léger", "enfants classiques", "tradition"],
+      "famous_examples": ["Bauhaus tradition", "Swiss Style", "Constructivisme soviétique", "Pentagram designs", "ABC News branding"],
+      "tools": ["Adobe Illustrator", "Affinity Designer", "Processing/p5.js", "CSS Grid/Flexbox"],
+      "cost_to_produce": "low-medium",
+      "when_to_use_vs_photo": "Pour représenter structure abstraite, créer identité forte, ou explorer composabilité/systématique",
+      "design_rules": [
+        "Grille sous-jacente, même si invisible",
+        "Proportions mathématiques (nombre d'or, ratios simples)",
+        "Asymétrie calculée pour dynamisme",
+        "Espace blanc comme élément actif",
+        "Palette couleur limitée et saturée"
+      ],
+      "modularity": "Composants géométriques réutilisables = scalabilité de système",
+      "css_implementation": "SVG + clip-path, mask, transform + animation fluide"
+    },
+    {
+      "style": "Character design",
+      "description": "Création de personnages cohérents avec traits distinctifs, personnalité, récurrence. Mascotte, avatar, créature. Du manga au cartoon au stylisé réaliste.",
+      "emotion": "Empathie, relation, fun, mémorisation, identification",
+      "best_sectors": ["gaming", "kids apps", "brand mascots", "SaaS friendly", "education", "entertainment"],
+      "avoid_sectors": ["finance B2B strict", "services professionnels premium sans contexte"],
+      "famous_examples": ["Google Assistant", "Mailchimp Freddie", "MailerLite Lily", "Duolingo Duo", "League of Legends champions"],
+      "tools": ["Procreate", "Clip Studio Paint", "Adobe Animate", "Blender (3D)", "Spine (rigging animation)"],
+      "cost_to_produce": "high",
+      "when_to_use_vs_photo": "Quand il faut une relation affective, mascotte mémorable, ou univers cohérent avec règles artistiques propres",
+      "design_rules": [
+        "Traits distinctifs reconnaissables à petite taille",
+        "Palette couleur limité (3-4 couleurs max)",
+        "Exagération intentionnelle de traits (manga large yeux, cartoon grimaces)",
+        "Cohérence anatomique ou intentionnel cartoon-break",
+        "Range émotions diverse (joie, neutre, surprise, confusion)"
+      ],
+      "animation_ready": "Rig pour animation, guide de mouvement, expressions",
+      "guidelines_document": "Essentiel : sheet de caractère, turnaround (4 angles), mouvements clés"
+    },
+    {
+      "style": "Editorial illustration",
+      "description": "Illustration pour article, livre, magazine. Souvent narrative, complexe, style personnel de l'illustrateur. New York Times style : sophistication, perspective, narrativité.",
+      "emotion": "Narration, profondeur, sophistication, contemplation, poésie visuelle",
+      "best_sectors": ["presse", "magazine", "livre", "contenu long-form", "think tank", "article opinion"],
+      "avoid_sectors": ["UI/UX produit", "marketing flash", "SaaS rapide"],
+      "famous_examples": ["New York Times illustrations (Christoph Niemann, etc.)", "The Guardian", "Wired cover art", "Books dust jackets"],
+      "tools": ["Procreate", "Adobe Fresco", "Ink/watercolor traditionnel", "Adobe Illustrator"],
+      "cost_to_produce": "high",
+      "when_to_use_vs_photo": "Raconter une histoire complexe, donner perspective subjective, ou créer ambiance spécifique qu'une photo ne peut pas",
+      "design_rules": [
+        "Composition équilibrée mais dynamique",
+        "Perspective progressive (plans avant/mid/arrière)",
+        "Narration visuelle : le « pourquoi » doit être clair",
+        "Liberté de style personnelle respectée",
+        "Texture/détail adaptés au message"
+      ],
+      "storytelling": "Doit communiquer la thèse ou émotion de l'article",
+      "versatility": "De réaliste à abstrait, tant qu'il sert la narration"
+    },
+    {
+      "style": "Infographie / Data visualization",
+      "description": "Représentation visuelle de données complexes, statistiques, processus. Peut combiner chart, icon, texte. Clarté avant esthétique, mais élégance importante.",
+      "emotion": "Clarté, expertise, confiance, compréhension, maîtrise de données",
+      "best_sectors": ["rapport", "presse", "finance", "science", "tech", "journalisme données"],
+      "avoid_sectors": ["luxury sans contexte", "luxury purement émotionnel"],
+      "famous_examples": ["FT.com infographics", "The Economist", "FlowingData visualizations", "Apple financial reports"],
+      "tools": ["D3.js", "Observable", "Tableau", "Adobe Illustrator + Datawrapper", "P5.js"],
+      "cost_to_produce": "medium-high",
+      "when_to_use_vs_photo": "Photo est statique ; infographie révèle la structure cachée des données, permet la comparaison, exploration",
+      "design_rules": [
+        "Hiérarchie claire (principal > secondaire > contexte)",
+        "Couleurs = variable, pas décoration (diverging, sequential, categorical)",
+        "Légendes indispensables et proximales",
+        "Aspect ratio choisi pour lectabilité (pas carré = confusion)",
+        "Réduction bruit (chartjunk interdit sauf design très intentionnel)"
+      ],
+      "accessibility": "Contraste sufficient, patterns en + de couleur, annotations texte",
+      "interactivity": "Hover states, zoom, filtrage augmentent valeur"
+    },
+    {
+      "style": "3D render",
+      "description": "Modèle 3D rendu photoréaliste ou stylisé. Blender, Cinema 4D, 3DS Max. Utilisé Apple, luxury, tech haut de gamme. Peut être cartoon 3D aussi.",
+      "emotion": "Luxe, futurisme, sophistication, présence matérielle, rêve technologique",
+      "best_sectors": ["luxury tech", "Apple", "automotive", "beauty", "premium SaaS", "architecture preview"],
+      "avoid_sectors": ["budget low", "DIY", "urgent", "local"],
+      "famous_examples": ["Apple product renders", "Luxury brand campaigns", "Architecture renders", "Car design renders"],
+      "tools": ["Blender (free, professionnel)", "Cinema 4D", "3DS Max", "RenderMan", "Unreal Engine"],
+      "cost_to_produce": "high",
+      "when_to_use_vs_photo": "Produit n'existe pas encore, créer ambiance/émotion plutôt que réalité crue, ou contrôle parfait de lumière",
+      "design_rules": [
+        "Éclairage tri-light classique ou cinématographique (key, fill, rim light)",
+        "Matériaux/shader cohérents et crédibles",
+        "Environnement (HDRI) soigné pour reflet",
+        "Perspective et profondeur de champ (DoF) comme en photo",
+        "Post-production légère : color grade, denoise"
+      ],
+      "rendertime": "15 min à quelques heures par frame, optimiser avec baking/light cache",
+      "photorealism_vs_stylized": "Photo = crédible, stylisé = mémorable"
+    },
+    {
+      "style": "Photomontage / Collage",
+      "description": "Assemblage de photographies, textures, papier découpé, éléments 2D/3D. Peut être surréaliste, dadaiste, conceptuel. Technique mixte.",
+      "emotion": "Surréalité, poésie visuelle, transgression, créativité débridée, absurde, critique",
+      "best_sectors": ["mode/editorial", "magazine culturel", "art", "advertising créatif", "book covers"],
+      "avoid_sectors": ["corporate standard", "finance", "produit UI/UX"],
+      "famous_examples": ["Paolo Cirio art", "Magazine covers (i-D, Dazed)", "Tibor Kalman design", "Surrealist artists", "Kentridge animation"],
+      "tools": ["Photoshop", "Procreate", "Collage physique + scanner", "After Effects"],
+      "cost_to_produce": "high",
+      "when_to_use_vs_photo": "Exprimer concept abstrait via surréalité, montrer juxtaposition inattendue, créer débat/émotion nuancée",
+      "design_rules": [
+        "Cohérence de style visual (même si surréaliste)",
+        "Transitions/blending lisses ou intentionnellement crues",
+        "Narratif clair malgré absurdité (le pourquoi doit se sentir)",
+        "Échelle et perspective jeu : exagération intentionnelle",
+        "Composition soignée même dans chaos apparent"
+      ],
+      "meaning_layers": "Surface = beauté, profondeur = message (en art critique)",
+      "digital_physical_hybrid": "Mélanger real + digital = force majeure"
+    },
+    {
+      "style": "Pixel art",
+      "description": "Art rétro limité à grille pixel. Peut être 8-bit, 16-bit, ou délibérément pixelisé. Utilisé gaming indie, nostalgie, NFT. Charme rétro-futuriste.",
+      "emotion": "Nostalgie, indie, authentique gaming, DIY, rétro-futurisme, mignon (cute), challenge technique",
+      "best_sectors": ["gaming indie", "retro brands", "NFT/blockchain art", "SaaS quirky", "education"],
+      "avoid_sectors": ["luxury", "haute résolution", "photo-réalisme"],
+      "famous_examples": ["Hollow Knight", "Celeste", "Stardew Valley", "CryptoPunks NFT", "Tamagotchi"],
+      "tools": ["Aseprite", "PyxelEdit", "GraphicsGale", "Piskel (web)", "Procreate avec grille"],
+      "cost_to_produce": "low-medium",
+      "when_to_use_vs_photo": "Créer univers cohérent stylisé, nostalgérique rétro, ou contrainte artistique = force créative",
+      "design_rules": [
+        "Grille régulière (souvent 16x16, 32x32 pixels)",
+        "Palette couleur limitée (16-256 couleurs max)",
+        "Anti-aliasing rare (effet blocky intentionnel)",
+        "Animat pixel-perfect (no smoothing)",
+        "Sprite sheets avec registre cohérent"
+      ],
+      "animation": "Frame-by-frame, timing crucial pour feel",
+      "scalability": "Scale 2x, 3x, 4x sans interpolation = pixels nets"
+    },
+    {
+      "style": "Watercolor / Aquarelle",
+      "description": "Aquarelle traditionnel ou imitation digitale. Lavis transparents, diffusion, accident contrôlé. Organique, doux, naturel.",
+      "emotion": "Calme, nature, wellness, douceur, organicité, mélancolie, rêverie",
+      "best_sectors": ["wellness", "nature", "beauté", "lifestyle", "slow living", "book illustration"],
+      "avoid_sectors": ["tech hardcore", "corporate strict", "gaming action"],
+      "famous_examples": ["Illustration livres enfants (Eric Carle, etc.)", "Spa brands", "Botanical illustration historique"],
+      "tools": ["Procreate Watercolor brushes", "Adobe Fresco (live brushes)", "Watercolor traditionnel + scanner", "Clip Studio Paint"],
+      "cost_to_produce": "low-medium",
+      "when_to_use_vs_photo": "Communiquer calme/nature où photo serait trop crue ou réaliste, créer ambiance rêveuse",
+      "design_rules": [
+        "Couches transparentes (layering de couleur translucide)",
+        "Edges soft, pas de tracé net obligatoire",
+        "Accidents/diffusion = charme, non erreur",
+        "Blanc du papier = lumière (pas peint)",
+        "Harmonie couleur harmonieuse (voisines ou complémentaires souples)"
+      ],
+      "traditional_hybrid": "Scanné aquarelle + retouche digitale léger = sweet spot",
+      "texture_authentic": "Véritables variations d'eau et papier impossible en digital pur"
+    },
+    {
+      "style": "Comics / BD",
+      "description": "Narration séquentielle via panels, bulles, onomatopées. Style ligne claire franco-belge, manga, comics US, ou manga-inspired.",
+      "emotion": "Narration, action, humour, drame, épopée, accessibilité, aventure",
+      "best_sectors": ["kids content", "adventure", "education comic books", "webcomics", "marketing storytelling"],
+      "avoid_sectors": ["fintech UI", "SaaS sérieux"],
+      "famous_examples": ["Tintin (Hergé ligne claire)", "Asterix", "Manga series (One Piece, My Hero)", "Marvel comics", "The Incal (Moebius)"],
+      "tools": ["Clip Studio Paint", "Adobe Animate", "Procreate", "Manga Studio", "Toon Boom"],
+      "cost_to_produce": "high",
+      "when_to_use_vs_photo": "Raconter histoire sur longue durée, montrer action dynamique, ou créer univers stylisé cohérent",
+      "design_rules": [
+        "Layout panel logic (Z-reading, eye flow)",
+        "Proportions anatomiques (exagérées ou stylisées, consistantes)",
+        "Ligne noire claire (ink) et color flat ou dégradé léger",
+        "Bulles typographie lisible avec positioning clear",
+        "Transitions panel = time/space navigation claire"
+      ],
+      "pacing": "Panel taille/distribution = rythme narration",
+      "multimodal": "Image + texte + onomatopée travaillent ensemble"
+    },
+    {
+      "style": "Ukiyo-e / Estampe japonaise",
+      "description": "Style gravure japonaise Edo, dégradés de couleur par superposition, perspective flottante, sujets nature/acteurs/erotica. Historique mais réimaginé moderne.",
+      "emotion": "Poésie, culture, élégance, fluidité, harmonie nature, atemporalité",
+      "best_sectors": ["art/culture", "luxury spirituel", "editorial de prestige", "brand haut de gamme zen"],
+      "avoid_sectors": ["corporate rapide", "tech urgence", "marketing mainstream"],
+      "famous_examples": ["Grande Vague Hokusai", "Hiroshige pluie", "Mucha posters (art nouveau proche)", "Modernes reinterpretations"],
+      "tools": ["Photoshop avec brushes custom", "Procreate (textures bois)", "Affinity Photo", "Gravure traditionnelle + scan"],
+      "cost_to_produce": "high",
+      "when_to_use_vs_photo": "Évoquer calme, profondeur, tradition, ou perspective non-occidentale sur sujet",
+      "design_rules": [
+        "Perspective flottante (pas linéaire occidentale)",
+        "Dégradés blocs couleur net (registration precise historique)",
+        "Ligne noire esthétique (pas contour utilitaire)",
+        "Composition minimaliste : espace négatif = respiration",
+        "Sujets asymétriques, équilibre tension"
+      ],
+      "color_harmony": "Palettes limitées historiquement (Prussian blue, etc.)",
+      "texture_woodblock": "Patterns répétés, felt paper = spécificité support"
+    },
+    {
+      "style": "Brutalist illustration",
+      "description": "Raw, irrégulier, antidesign intentionnel, asymétrique, typographie punk, textures brutes. Anti-lissé, anti-commercial. DIY punk/zine aesthetic.",
+      "emotion": "Authenticité brute, rébellion, DIY, anti-establishment, honnêteté brutale, punk, rébellion",
+      "best_sectors": ["indie music", "underground culture", "zine/art", "political activism", "rebellion brands"],
+      "avoid_sectors": ["luxury", "corporate", "beauty", "kiddie"],
+      "famous_examples": ["Punk zine aesthetics", "Poster art rébellion", "David Carson Raygun design", "Underground comix (S.Clay Wilson)"],
+      "tools": ["Photocopie + collage manuel", "Photoshop destruction intentionnelle", "Risographie (riso printing)"],
+      "cost_to_produce": "low",
+      "when_to_use_vs_photo": "Communiquer authenticité rebelle, rejeter perfection corporate, créer tension visuelle intentionnelle",
+      "design_rules": [
+        "Imperfections = feature, pas bug",
+        "Typographie dépareillée intentionnée (mixed fonts, sizes)",
+        "Grille cassée ou absent (chaos calculé)",
+        "Photocopy artifacts, noise, degradation = charm",
+        "Couleur harsh ou monochromatique crue"
+      ],
+      "materiality": "Fait doit se voir (collage, grain, photocopie, risographie)",
+      "anti_rules": "Aucune règle n'est inviolable sauf l'authenticité brute"
+    }
+  ],
+  "meta": {
+    "version": "1.0",
+    "created": "2026-04-03",
+    "use_cases": {
+      "designer_selection": "Choisir le style adapté au brief selon secteur, émotion, budget, timing",
+      "style_guide": "Document de référence pour équipes design et product",
+      "cost_planning": "Estimer budget production par style",
+      "emotion_targeting": "Mapper émotion désirée → styles compatibles",
+      "hybrid_opportunities": "Combiner 2-3 styles pour singularité (ex: flat + hand-drawn = friendly professional)"
+    },
+    "best_practices": {
+      "avoid_mixing_too_many": "Max 2-3 styles par projet, autrement = chaos",
+      "consistency_key": "Style doit être appliqué systématique partout (UI + marketing + print)",
+      "context_matters": "iPhone 13 app != restaurant branding != editorial magazine",
+      "tool_matters": "Procreate pour sketch/editorial, Illustrator pour flat/geometric, Blender pour 3D",
+      "hybrid_power": "Line art + flat = élégance accessible; Hand-drawn + geometric = quirkiness contrôlée"
+    }
+  }
+}

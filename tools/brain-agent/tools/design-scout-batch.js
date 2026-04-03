@@ -5,7 +5,8 @@
  */
 import Anthropic from "@anthropic-ai/sdk";
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
-import { resolve, dirname } from "path";
+import { resolve, dirname, join } from "path";
+import { chromium } from "playwright";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -212,8 +213,20 @@ function saveKB(kb) {
 }
 
 function loadAgentPrompt() {
-  if (!existsSync(AGENT_PATH)) return "Tu es design-scout, expert en analyse de design visuel.";
-  return readFileSync(AGENT_PATH, "utf-8").replace(/^---[\s\S]*?---\n/, "").trim();
+  // Prompt compact pour batch — évite les 20KB du fichier complet
+  return `Tu es design-scout, expert mondial en design visuel et branding.
+
+Pour chaque site analysé :
+1. fetch_url → lit le contenu HTML
+2. Si le site a un design distinctif → add_to_knowledge_base avec :
+   - Palette couleurs (bg, text, accent)
+   - Typographie notable (famille, usage)
+   - Ce qui le rend exceptionnel (1-2 phrases)
+   - 1-2 patterns réutilisables
+3. Sinon → skip_site (site générique, inaccessible, ou pas distinctif)
+
+Niveau : world-reference = top 1% mondial | excellent = top 10% | good = au-dessus de la moyenne
+Analyse vite, sois précis, ne t'attarde pas sur les sites génériques.`;
 }
 
 const SCOUT_TOOLS = [
@@ -252,83 +265,154 @@ const SCOUT_TOOLS = [
   },
 ];
 
-// ─── Agent pour un batch de sites ────────────────────────────────────────────
+// ─── Retry avec exponential backoff ──────────────────────────────────────────
+
+async function withRetry(fn, maxRetries = 5) {
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (e) {
+      if (e.status === 429 && attempt < maxRetries) {
+        // Lire le retry-after depuis les headers si disponible
+        const retryAfter = parseInt(e.headers?.get?.("retry-after") ?? "30", 10);
+        const delay = Math.max(retryAfter * 1000, Math.min(1000 * 2 ** attempt, 120000));
+        console.log(`  [rate-limit] 429 → retry dans ${Math.round(delay / 1000)}s (tentative ${attempt + 1}/${maxRetries})`);
+        await new Promise((r) => setTimeout(r, delay));
+      } else {
+        throw e;
+      }
+    }
+  }
+}
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// ─── Screenshot Playwright ────────────────────────────────────────────────────
+
+let _browser = null;
+async function getBrowser() {
+  if (!_browser) _browser = await chromium.launch({ headless: true });
+  return _browser;
+}
+
+async function screenshotSite(url) {
+  let page;
+  try {
+    const browser = await getBrowser();
+    page = await browser.newPage();
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 20000 });
+    await page.waitForTimeout(2000);
+    const buffer = await page.screenshot({ type: "jpeg", quality: 70, clip: { x: 0, y: 0, width: 1440, height: 900 } });
+    return buffer.toString("base64");
+  } catch (e) {
+    return null;
+  } finally {
+    if (page) await page.close().catch(() => {});
+  }
+}
+
+// ─── Agent pour un batch de sites (vision) ───────────────────────────────────
+
+async function analyzeSiteWithVision(client, site, batchId, systemPrompt) {
+  console.log(`  [batch-${batchId}] → ${site.url}`);
+  const imgBase64 = await screenshotSite(site.url);
+
+  if (!imgBase64) {
+    console.log(`  [batch-${batchId}] ✗ inaccessible: ${site.url}`);
+    return null;
+  }
+
+  const response = await withRetry(() =>
+    client.messages.create({
+      model: "claude-haiku-4-5-20251001",
+      max_tokens: 1024,
+      system: systemPrompt,
+      messages: [{
+        role: "user",
+        content: [
+          {
+            type: "image",
+            source: { type: "base64", media_type: "image/jpeg", data: imgBase64 },
+          },
+          {
+            type: "text",
+            text: `Analyse ce screenshot de ${site.url} (style attendu: ${site.style}, secteur: ${site.sector}, priorité: ${site.priority}).
+
+Réponds en JSON strict (pas de markdown) :
+{
+  "add": true/false,
+  "title": "...",
+  "style_tags": ["..."],
+  "palette": { "bg": "#...", "text_primary": "#...", "accent_primary": "#...", "mood": "chaud|froid|neutre" },
+  "typography": { "heading_family": "...", "notable": "..." },
+  "layout": { "grid": "symmetric|asymmetric", "density": "airy|standard|dense", "hero": "..." },
+  "what_makes_it_exceptional": "...",
+  "reusable_patterns": [{ "name": "...", "description": "...", "when_to_use": "..." }],
+  "level": "world-reference|excellent|good",
+  "best_for": ["..."],
+  "skip_reason": "..."
+}
+
+Si le design n'est pas distinctif ou si la page est un écran de chargement/cookie → add: false + skip_reason.`,
+          },
+        ],
+      }],
+    })
+  );
+
+  const text = response.content[0]?.text ?? "";
+  try {
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) return null;
+    const data = JSON.parse(jsonMatch[0]);
+    return data;
+  } catch {
+    return null;
+  }
+}
 
 async function analyzeBatch(client, sites, batchId, systemPrompt) {
-  const siteList = sites.map((s, i) => `${i + 1}. ${s.url} (style: ${s.style}, priorité: ${s.priority})`).join("\n");
-  const messages = [{
-    role: "user",
-    content: `Tu es en mode analyse intensive. Analyse ces ${sites.length} sites UN PAR UN et ajoute les meilleurs à la knowledge-base.
-
-Sites à analyser (batch ${batchId}) :
-${siteList}
-
-Pour chaque site :
-1. fetch_url pour voir le contenu
-2. Si le site est exceptionnel ou remarquable → add_to_knowledge_base avec analyse détaillée
-3. Si le site est inaccessible ou générique → skip_site
-4. Passe au suivant immédiatement
-
-Critère : ne garder que ce qui est VRAIMENT distinctif. Un pattern réutilisable doit être identifiable.
-Vas-y, analyse les ${sites.length} sites sans t'arrêter.`,
-  }];
-
   let added = 0;
   let skipped = 0;
 
-  for (let turn = 0; turn < 60; turn++) {
-    const response = await client.messages.create({
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: 4096,
-      system: systemPrompt,
-      tools: SCOUT_TOOLS,
-      messages,
-    });
+  for (const site of sites) {
+    const data = await analyzeSiteWithVision(client, site, batchId, systemPrompt);
+    await sleep(3000); // 3s entre chaque appel vision
 
-    messages.push({ role: "assistant", content: response.content });
+    if (!data) { skipped++; continue; }
 
-    if (response.stop_reason === "end_turn") break;
-    if (response.stop_reason !== "tool_use") break;
-
-    const toolResults = [];
-    for (const block of response.content) {
-      if (block.type !== "tool_use") continue;
-
-      let result;
-      if (block.name === "fetch_url") {
-        try {
-          const res = await fetch(block.input.url, {
-            headers: { "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" },
-            signal: AbortSignal.timeout(12000),
-          });
-          const text = await res.text();
-          const clean = text.replace(/<script[\s\S]*?<\/script>/gi, "").replace(/<style[\s\S]*?<\/style>/gi, "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, 6000);
-          result = { ok: true, content: clean, status: res.status };
-        } catch (e) {
-          result = { ok: false, error: e.message };
-        }
-      } else if (block.name === "add_to_knowledge_base") {
-        const kb = loadKB();
-        const exists = kb.sites.find((s) => s.id === block.input.id || s.url === block.input.url);
-        if (exists) {
-          result = { ok: false, message: "Déjà dans la base" };
-        } else {
-          kb.sites.push({ ...block.input, date_observed: new Date().toISOString().split("T")[0] });
-          saveKB(kb);
-          added++;
-          console.log(`  [batch-${batchId}] ✓ ${block.input.title} (${kb.sites.length} total)`);
-          result = { ok: true, total: kb.sites.length };
-        }
-      } else if (block.name === "skip_site") {
-        skipped++;
-        console.log(`  [batch-${batchId}] ⟶ skip: ${block.input.url} — ${block.input.reason}`);
-        result = { ok: true };
-      }
-
-      toolResults.push({ type: "tool_result", tool_use_id: block.id, content: JSON.stringify(result) });
+    if (!data.add) {
+      skipped++;
+      console.log(`  [batch-${batchId}] ⟶ skip: ${site.url} — ${data.skip_reason ?? "non distinctif"}`);
+      continue;
     }
 
-    messages.push({ role: "user", content: toolResults });
+    const kb = loadKB();
+    const exists = kb.sites.find((s) => s.url === site.url);
+    if (exists) { skipped++; continue; }
+
+    const id = `${site.url.replace(/https?:\/\//,"").replace(/[^a-z0-9]/gi,"-").slice(0,40)}-${new Date().toISOString().split("T")[0]}`;
+    kb.sites.push({
+      id,
+      url: site.url,
+      title: data.title ?? site.url,
+      source: "batch-vision",
+      sector: site.sector,
+      country: site.country,
+      style_tags: data.style_tags ?? [site.style],
+      palette: data.palette,
+      typography: data.typography,
+      layout: data.layout,
+      what_makes_it_exceptional: data.what_makes_it_exceptional,
+      reusable_patterns: data.reusable_patterns ?? [],
+      level: data.level ?? "good",
+      best_for: data.best_for ?? [],
+      date_observed: new Date().toISOString().split("T")[0],
+    });
+    saveKB(kb);
+    added++;
+    console.log(`  [batch-${batchId}] ✓ ${data.title} [${data.level}] (${kb.sites.length} total)`);
   }
 
   return { added, skipped };
@@ -349,27 +433,26 @@ export async function runBatchScout(apiKey) {
   console.log(`[design-scout-batch] ${total} sites curatés`);
   console.log(`[design-scout-batch] ${kb.total_sites} déjà dans la base`);
   console.log(`[design-scout-batch] ${toAnalyze.length} à analyser`);
-  console.log(`[design-scout-batch] Lancement 4 agents Haiku en parallèle...`);
+  // 10 sites à la fois, séquentiellement — safe sur rate limit
+  const CHUNK = 10;
+  const batches = [];
+  for (let i = 0; i < toAnalyze.length; i += CHUNK) {
+    batches.push(toAnalyze.slice(i, i + CHUNK));
+  }
 
-  // Découper en 4 batches
-  const batchSize = Math.ceil(toAnalyze.length / 4);
-  const batches = [
-    toAnalyze.slice(0, batchSize),
-    toAnalyze.slice(batchSize, batchSize * 2),
-    toAnalyze.slice(batchSize * 2, batchSize * 3),
-    toAnalyze.slice(batchSize * 3),
-  ].filter((b) => b.length > 0);
-
-  console.log(`[design-scout-batch] ${batches.length} batches de ~${batchSize} sites`);
+  console.log(`[design-scout-batch] ${batches.length} groupes de ${CHUNK} sites — séquentiel`);
   const start = Date.now();
 
-  // Lancer tous les batches en parallèle
-  const results = await Promise.all(
-    batches.map((batch, i) => {
-      console.log(`[design-scout-batch] Batch ${i + 1} — ${batch.length} sites`);
-      return analyzeBatch(client, batch, i + 1, systemPrompt);
-    })
-  );
+  const results = [];
+  for (let i = 0; i < batches.length; i++) {
+    console.log(`\n[design-scout-batch] Groupe ${i + 1}/${batches.length} — ${batches[i].length} sites`);
+    const r = await analyzeBatch(client, batches[i], i + 1, systemPrompt);
+    results.push(r);
+    if (i < batches.length - 1) {
+      console.log(`[design-scout-batch] ⏸  Pause 30s avant groupe ${i + 2}...`);
+      await sleep(30000);
+    }
+  }
 
   const totalAdded = results.reduce((sum, r) => sum + r.added, 0);
   const totalSkipped = results.reduce((sum, r) => sum + r.skipped, 0);
@@ -401,6 +484,8 @@ ${JSON.stringify(finalKb.sites.reduce((acc, s) => { acc[s.sector] = (acc[s.secto
 ${JSON.stringify(finalKb.sites.flatMap((s) => s.style_tags).reduce((acc, t) => { acc[t] = (acc[t] ?? 0) + 1; return acc; }, {}), null, 2)}
 `;
   writeFileSync(resolve(REPORTS_DIR, `batch-${new Date().toISOString().split("T")[0]}.md`), report);
+
+  if (_browser) await _browser.close().catch(() => {});
 
   return { total_added: totalAdded, total_sites: finalKb.total_sites, duration };
 }
