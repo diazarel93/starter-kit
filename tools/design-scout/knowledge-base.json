@@ -246,7 +246,7 @@
         "team-culture-forward",
         "value-proposition"
       ],
-      "what_makes_it_exceptional": "Repositionnement fondamental de narrative : de 'outil design' (2.5B TAM designers) à 'platforme collaboration' (6x expansion TAM = 68M collaborateurs). Tagline stratégique 'Nothing Great Is Made Alone' inverse le mythe du génie solitaire. Système visuel minimaliste qui fusionne UI-as-Identity : composants du produit deviennent équité de marque. Campagne multi-format démontre collab via examples (films, case studies, designs).",
+      "what_makes_it_exceptional": "Collins prouve que le case study peut être une œuvre narrative. Storytelling de marque au plus haut niveau.",
       "level": "world-reference",
       "palette": {
         "bg": "#FFFFFF",
@@ -300,7 +300,41 @@
         "team-culture-focus",
         "gtm-narratives"
       ],
-      "date_observed": "2026-04-03"
+      "date_observed": "2026-04-03",
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Case study brand design magistral — Collins montre comment raconter une marque mieux que la marque elle-même",
+      "palette_real": {
+        "dominant": "#F5F3EF",
+        "primary": "#000000",
+        "secondary": "#E8E3FF",
+        "accent": "#9747FF",
+        "background": "#F5F3EF",
+        "mood": "clair"
+      },
+      "typography_real": {
+        "heading": "serif élégant studio / sans-serif bold manifestes",
+        "body": "sans-serif léger",
+        "quality": "exceptionnel"
+      },
+      "layout_pattern": "éditorial / asymétrique",
+      "whitespace": "très généreux",
+      "photography_quality": "editorial",
+      "animation_level": "subtile",
+      "mobile_quality": "excellente",
+      "overall_craft": "world-class",
+      "strengths": [
+        "'NOTHING GREAT IS MADE ALONE' — manifeste typographique monumental",
+        "Contraste serif/sans-serif narratif",
+        "Blanc cassé crème chaleureux"
+      ],
+      "weaknesses": [],
+      "design_lessons": [
+        "Le manifeste typographique hero remplace tout brief",
+        "Le blanc crème est plus luxueux que le blanc pur"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "neon-films-distributor",
@@ -314,7 +348,7 @@
         "shop-integrated",
         "award-focused"
       ],
-      "what_makes_it_exceptional": "NEON fusionne distribution de films indépendants, merchandising cinéma et stratégie award-winning dans une interface unifiée. Les sections « In Theaters », « Watch Now » et « Shop » créent un écosystème complet où chaque film devient un événement culturel avec merchandising associé. Design épuré mais impactant, typographie en evidence, grid d'actualité cinéma fluide.",
+      "what_makes_it_exceptional": "NEON (distributeur de Parasite, Succession) traite chaque film comme une identité visuelle complète. Le site change de personnalité avec chaque film hero. Pair avec A24 comme double référence distribution indie premium.",
       "level": "excellent",
       "palette": {
         "bg": "#ffffff ou #1a1a1a (dark mode supporté)",
@@ -350,7 +384,42 @@
         "Merchandise-first brands",
         "Premium streaming players"
       ],
-      "date_observed": "2026-04-03"
+      "date_observed": "2026-04-03",
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Distribution indie américaine world-class — chaque film son univers visuel total, le site comme expérience cinématique",
+      "palette_real": {
+        "dominant": "#000000",
+        "primary": "#FFFFFF",
+        "secondary": "#111111",
+        "accent": "#FFD700",
+        "background": "#000000",
+        "mood": "sombre"
+      },
+      "typography_real": {
+        "heading": "sans-serif ultra-bold condensé — impact immédiat",
+        "body": "sans-serif lisible",
+        "quality": "exceptionnel"
+      },
+      "layout_pattern": "pleine largeur / immersif",
+      "whitespace": "généreux",
+      "photography_quality": "exceptionnelle",
+      "animation_level": "présente",
+      "mobile_quality": "excellente",
+      "overall_craft": "world-class",
+      "strengths": [
+        "Film en hero = immersion totale avant l'achat",
+        "Jaune accentué 'EXIT 8' = signalétique japonaise transportée",
+        "Mobile identique desktop — cohérence parfaite"
+      ],
+      "weaknesses": [],
+      "design_lessons": [
+        "Le film hero plein écran = l'utilisateur est déjà dans la salle",
+        "Chaque film peut avoir sa propre palette sans casser l'identité distributeur",
+        "La typographie bold sur film = affiche de cinéma digitale"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "kontrapunkt-2026",
@@ -420,7 +489,7 @@
         "latin-american",
         "brand-intelligence"
       ],
-      "what_makes_it_exceptional": "Approche multilingue natives (7 langues intégrées), navigation ultra-minimale, showroom virtuel comme concept. Portfolio en grille dense mais épurée. Identité global sans sacrifier la clarté locale.",
+      "what_makes_it_exceptional": "Anagrama prouve qu'un studio en dehors de NY/London/Paris peut être world-class. Le branding coloré mexicain est une référence mondiale, pas un accident.",
       "palette": {
         "bg": "#FFFFFF",
         "text_primary": "#000000",
@@ -460,7 +529,43 @@
           "when_to_use": "Portfolios wanting to feel current, agencies, dynamic brands"
         }
       ],
-      "date_observed": "2026-04-03"
+      "date_observed": "2026-04-03",
+      "visual_score": 8,
+      "is_reference_worthy": true,
+      "visual_impression": "Studio mexicain world-class — branding coloré et culturel, mosaïque de projets qui respire la créativité latine",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#000000",
+        "secondary": "#F5F0E8",
+        "accent": "#multicolor",
+        "background": "#FFFFFF",
+        "mood": "coloré"
+      },
+      "typography_real": {
+        "heading": "bold sans-serif custom condensé, mélange de poids",
+        "body": "sans-serif fin minuscule",
+        "quality": "exceptionnel"
+      },
+      "layout_pattern": "grille / magazine",
+      "whitespace": "équilibré",
+      "photography_quality": "editorial",
+      "animation_level": "subtile",
+      "mobile_quality": "excellente",
+      "overall_craft": "exceptionnel",
+      "strengths": [
+        "Grille de projets comme galerie vivante — chaque case raconte",
+        "Mélange culturel assumé : tagline japonaise, mexicain, global",
+        "Couleur comme signature — chaque projet a sa propre identité"
+      ],
+      "weaknesses": [
+        "Popup notice COVID-era encore présent"
+      ],
+      "design_lessons": [
+        "La grille portfolio peut être une œuvre en soi si les projets sont soignés",
+        "L'identité géographique assumée est une force, pas une limitation"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "a24films-com-2026-04-03",
@@ -491,7 +596,7 @@
         "density": "airy",
         "hero": "Full-bleed cinematic background image with overlaid text list; layered depth with modal/dialog overlay creating compositional tension"
       },
-      "what_makes_it_exceptional": "Masterclass in premium cinema branding: uses full-bleed cinematic hero imagery as primary design element, with bold typography that feels like film titles. The dark palette + high-contrast white text creates sophisticated, prestigious positioning. Stacked film titles create scannable rhythm while maintaining visual hierarchy.",
+      "what_makes_it_exceptional": "A24 s'efface pour mettre les œuvres en avant — zéro compromis commercial visible. Le studio le plus cinéphile du web.",
       "reusable_patterns": [
         {
           "name": "Cinematic Full-Bleed Hero",
@@ -518,7 +623,43 @@
         "Luxury Brands",
         "High-End SaaS"
       ],
-      "date_observed": "2026-04-03"
+      "date_observed": "2026-04-03",
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Typographie éditoriale sur noir absolu — le film comme objet culturel, pas comme divertissement",
+      "palette_real": {
+        "dominant": "#000000",
+        "primary": "#FFFFFF",
+        "secondary": "#111111",
+        "accent": "#FF5500",
+        "background": "#000000",
+        "mood": "sombre"
+      },
+      "typography_real": {
+        "heading": "serif léger custom garamond-like, titres films en bold",
+        "body": "sans-serif condensé minuscule fonctionnel",
+        "quality": "exceptionnel"
+      },
+      "layout_pattern": "pleine largeur / éditorial vertical",
+      "whitespace": "très généreux",
+      "photography_quality": "exceptionnelle",
+      "animation_level": "subtile",
+      "mobile_quality": "excellente",
+      "overall_craft": "world-class",
+      "strengths": [
+        "Typographie comme identité — les titres SONT le design",
+        "Noir absolu valorise chaque frame",
+        "Mobile identique desktop — cohérence totale",
+        "Voix de marque calibrée parfaitement"
+      ],
+      "weaknesses": [],
+      "design_lessons": [
+        "Noir absolu = décision luxe, tout ce qui s'y pose prend de la valeur",
+        "Lister les titres en typo seule crée plus d'attente qu'une bande-annonce",
+        "L'éditorial et le commercial peuvent coexister sans se contaminer"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "www-sundance-org-2026-04-03",
@@ -947,7 +1088,7 @@
         "density": "airy",
         "hero": "left-aligned massive headline + subheading + product screenshot overlay with transparent grid background"
       },
-      "what_makes_it_exceptional": "Masterclass in dark-mode SaaS design: pure black background creates maximum contrast for white type, minimal UI chrome forces design to whisper rather than shout. Product screenshot embedded naturally in hero (not isolated), creating immersive context. Typography hierarchy is brutal and confident—no decoration needed. Accent purple/gold used sparingly for interactive states, creating instant affordance.",
+      "what_makes_it_exceptional": "Linear a créé un standard — des dizaines de SaaS tools copient leur aesthetic depuis 2021. Être la référence qu'on imite, c'est la définition du world-class.",
       "reusable_patterns": [
         {
           "name": "Hero with Embedded Product Context",
@@ -973,7 +1114,43 @@
         "Technical/engineering-forward companies",
         "Premium B2B brands"
       ],
-      "date_observed": "2026-04-03"
+      "date_observed": "2026-04-03",
+      "visual_score": 8,
+      "is_reference_worthy": true,
+      "visual_impression": "SaaS premium sombre — Linear a redéfini le standard du product design pour outils dev",
+      "palette_real": {
+        "dominant": "#0F0F0F",
+        "primary": "#FFFFFF",
+        "secondary": "#1A1A2E",
+        "accent": "#5E6AD2",
+        "background": "#0F0F0F",
+        "mood": "sombre"
+      },
+      "typography_real": {
+        "heading": "sans-serif medium poids — lisible et premium",
+        "body": "sans-serif fin compact",
+        "quality": "professionnel"
+      },
+      "layout_pattern": "centré / pleine largeur",
+      "whitespace": "généreux",
+      "photography_quality": "absente",
+      "animation_level": "présente",
+      "mobile_quality": "excellente",
+      "overall_craft": "exceptionnel",
+      "strengths": [
+        "Dark mode native — cohérent avec l'usage réel (dev en dark)",
+        "Screenshot produit en hero = promesse tenue immédiatement",
+        "Voix de marque 'The product development system for agents' — toujours en avance"
+      ],
+      "weaknesses": [
+        "Palette violet/bleu très copiée dans l'écosystème SaaS"
+      ],
+      "design_lessons": [
+        "Product screenshot en hero = la meilleure conversion si le produit est beau",
+        "Dark mode n'est pas un thème alternatif — c'est une décision de marque"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "vercel-com-2026-04-03",
@@ -1144,7 +1321,40 @@
         "Enterprise trust-building (compliance certifications prominent)",
         "Two-column responsive design patterns"
       ],
-      "date_observed": "2026-04-03"
+      "date_observed": "2026-04-03",
+      "visual_score": 6,
+      "is_reference_worthy": false,
+      "visual_impression": "SaaS scheduling clean mais générique — la bonne pratique sans la personnalité",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#111111",
+        "secondary": "#F5F5F5",
+        "accent": "#111111",
+        "background": "#FFFFFF",
+        "mood": "neutre"
+      },
+      "typography_real": {
+        "heading": "sans-serif bold",
+        "body": "sans-serif lisible",
+        "quality": "professionnel"
+      },
+      "layout_pattern": "centré",
+      "whitespace": "généreux",
+      "photography_quality": "absente",
+      "animation_level": "subtile",
+      "mobile_quality": "correcte",
+      "overall_craft": "correct",
+      "strengths": [
+        "UI produit propre en hero",
+        "Open source badge = confiance"
+      ],
+      "weaknesses": [
+        "Blanc/noir générique — aucune identité",
+        "Bandeau compliance maladroit"
+      ],
+      "remove_reason": "Score 6/10 — bon produit site trop générique",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "resend-com-2026-04-03",
@@ -1588,7 +1798,7 @@
         "density": "airy",
         "hero": "Centered headline + subheading + dual CTA, with vibrant gradient showcase (pink/magenta) below"
       },
-      "what_makes_it_exceptional": "Masteful balance of minimalist dark design with a bold neon-pink gradient product showcase. The use of handwritten script in the annotation creates human warmth against the cold tech aesthetic. Navigation is deliberately sparse, creating focus. The product demo emerges from a soft-edged gradient container, breaking the rigid grid.",
+      "what_makes_it_exceptional": "Liveblocks montre qu'une couleur d'accent inattendue (rose vif sur noir) peut créer une mémorabilité forte dans un marché dev-tools uniformément violet/bleu.",
       "reusable_patterns": [
         {
           "name": "Dark Hero with Centered Type",
@@ -1619,7 +1829,43 @@
         "Enterprise infrastructure platforms",
         "Tech-savvy audience targeting"
       ],
-      "date_observed": "2026-04-03"
+      "date_observed": "2026-04-03",
+      "visual_score": 7,
+      "is_reference_worthy": true,
+      "visual_impression": "SaaS infra dark avec gradient rose — parmi les meilleures landing dev-tools de 2024",
+      "palette_real": {
+        "dominant": "#0A0A0F",
+        "primary": "#FFFFFF",
+        "secondary": "#1A0A2E",
+        "accent": "#FF69B4",
+        "background": "#0A0A0F",
+        "mood": "sombre"
+      },
+      "typography_real": {
+        "heading": "sans-serif clean bold grand",
+        "body": "sans-serif lisible fin",
+        "quality": "professionnel"
+      },
+      "layout_pattern": "centré / pleine largeur",
+      "whitespace": "généreux",
+      "photography_quality": "absente",
+      "animation_level": "présente",
+      "mobile_quality": "excellente",
+      "overall_craft": "soigné",
+      "strengths": [
+        "Gradient rose/violet sur noir = signature distinctive parmi les SaaS dark",
+        "Bandeau 'Agent-Ready Software' — positionnement toujours en avance",
+        "Screenshot produit multi-onglets lisible"
+      ],
+      "weaknesses": [
+        "Cookie banner mal tué"
+      ],
+      "design_lessons": [
+        "Un accent couleur inattendu dans un marché homogène = différenciation immédiate",
+        "Le dark mode tech n'est pas condamné au bleu/violet"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "supabase-com-2026-04-03",
@@ -2170,7 +2416,7 @@
         "density": "airy",
         "hero": "Full-bleed image with bold overlay text (Eye 109) + sidebar navigation"
       },
-      "what_makes_it_exceptional": "Masterful contrast between editorial photography and graphic design elements. Uses neon yellow/white text layering over imagery with brutal white space. The scattered grid layout feels curated rather than chaotic—each content block (colorful design patterns, type specimens, cover images) acts as a design showcase itself, making the homepage both magazine cover and gallery.",
+      "what_makes_it_exceptional": "La bible critique du graphisme mondial depuis 1988. La forme est au service du contenu, pas de l'inverse — c'est un choix éditorial fort.",
       "reusable_patterns": [
         {
           "name": "Neon Text Overlay on Imagery",
@@ -2201,7 +2447,44 @@
         "gallery/portfolio sites",
         "high-impact homepages"
       ],
-      "date_observed": "2026-04-03"
+      "date_observed": "2026-04-03",
+      "visual_score": 7,
+      "is_reference_worthy": true,
+      "visual_impression": "Revue critique de graphisme — dense et sérieux, la presse spécialisée comme elle devrait être",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#000000",
+        "secondary": "#F0EDE6",
+        "accent": "#FF3300",
+        "background": "#FFFFFF",
+        "mood": "neutre"
+      },
+      "typography_real": {
+        "heading": "serif académique, hiérarchie éditoriale rigoureuse",
+        "body": "serif lisible compact",
+        "quality": "professionnel"
+      },
+      "layout_pattern": "grille / magazine",
+      "whitespace": "trop chargé",
+      "photography_quality": "editorial",
+      "animation_level": "aucune",
+      "mobile_quality": "basique",
+      "overall_craft": "soigné",
+      "strengths": [
+        "Référence incontournable pour l'histoire du graphisme",
+        "Densité assumée — pour les vrais",
+        "Archives précieuses"
+      ],
+      "weaknesses": [
+        "UX datée — web des années 2010",
+        "Mobile vraiment basique"
+      ],
+      "design_lessons": [
+        "Un site peut être une revue sérieuse sans être sexy — le contenu prime",
+        "L'archive = la vraie valeur d'une publication spécialisée"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "www-dezeen-com-2026-04-03",
@@ -3209,7 +3492,7 @@
         "density": "airy",
         "hero": "Left-aligned bold 'S' logo paired with right-aligned headline; generous whitespace creates breathing room; navigation minimal (FILTERS, MENU top-right)"
       },
-      "what_makes_it_exceptional": "Iconic branding using a single letter 'S' as geometric mark; radical use of red to highlight key words ('Superflux', 'uncertainty', 'choices') creates visual rhythm and meaning emphasis. Tagline structure—breaking semantic units across lines—transforms copy into design element.",
+      "what_makes_it_exceptional": "Superflux a créé la catégorie 'design fiction studio'. L'identité visuelle = le positionnement stratégique — rouge signale urgence, gris chaud dit qu'on peut y faire face.",
       "reusable_patterns": [
         {
           "name": "Semantic Color Emphasis",
@@ -3235,7 +3518,43 @@
         "Research institutions",
         "Minimalist brand systems"
       ],
-      "date_observed": "2026-04-03"
+      "date_observed": "2026-04-03",
+      "visual_score": 8,
+      "is_reference_worthy": true,
+      "visual_impression": "Studio design fiction London — rouge vif sur gris, logotype bold, manifeste 'translating uncertainty into choices'",
+      "palette_real": {
+        "dominant": "#E8E8E4",
+        "primary": "#E30613",
+        "secondary": "#000000",
+        "accent": "#E30613",
+        "background": "#E8E8E4",
+        "mood": "contrasté"
+      },
+      "typography_real": {
+        "heading": "sans-serif bold géométrique rouge sur gris",
+        "body": "sans-serif lisible",
+        "quality": "exceptionnel"
+      },
+      "layout_pattern": "centré / pleine largeur",
+      "whitespace": "généreux",
+      "photography_quality": "editorial",
+      "animation_level": "subtile",
+      "mobile_quality": "correcte",
+      "overall_craft": "exceptionnel",
+      "strengths": [
+        "Logo SF géométrique = identité forte en 2 lettres",
+        "Rouge + gris chaud = urgence sans agression",
+        "Manifeste 7 mots parfait"
+      ],
+      "weaknesses": [
+        "Cookie banner discret"
+      ],
+      "design_lessons": [
+        "Rouge + gris chaud = urgence constructive",
+        "Un manifeste de 7 mots peut définir un studio entier"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "semplice-com-2026-04-03",
@@ -3347,7 +3666,39 @@
         "Tech product landing pages",
         "Portfolio platforms"
       ],
-      "date_observed": "2026-04-03"
+      "date_observed": "2026-04-03",
+      "visual_score": 5,
+      "is_reference_worthy": false,
+      "visual_impression": "Galerie d'inspiration landing pages — utile comme outil, sans intérêt comme référence design propre",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#1A1A1A",
+        "secondary": "#F5F5F5",
+        "accent": "#4F46E5",
+        "background": "#FFFFFF",
+        "mood": "neutre"
+      },
+      "typography_real": {
+        "heading": "sans-serif standard",
+        "body": "sans-serif lisible",
+        "quality": "générique"
+      },
+      "layout_pattern": "grille",
+      "whitespace": "équilibré",
+      "photography_quality": "absente",
+      "animation_level": "aucune",
+      "mobile_quality": "correcte",
+      "overall_craft": "correct",
+      "strengths": [
+        "Contenu utile — grande bibliothèque de références"
+      ],
+      "weaknesses": [
+        "Le site lui-même est générique — paradoxal pour une galerie design",
+        "Publicités intrusives"
+      ],
+      "remove_reason": "Outil de référence, pas une référence design en soi. Score 5/10.",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "screenlane-com-2026-04-03",
@@ -3835,7 +4186,7 @@
         "density": "airy",
         "hero": "Full-width architectural photography avec texte overlay minimaliste, positionnement bas-gauche"
       },
-      "what_makes_it_exceptional": "Fusion parfaite du minimalisme japonais avec l'architecture brutale. La palette restrictive (noir, blanc, teal discret) associée à des images architecturales massives crée une narration visuelle forte. L'usage de l'espace blanc et de la typographie monumentale établit une hiérarchie claire et une autorité visuelle rare.",
+      "what_makes_it_exceptional": "Nosigner incarne le design japonais contemporain — la nature comme identité, le silence comme communication. BYAKU est une référence absolue pour tout projet culturel ancré dans le territoire.",
       "reusable_patterns": [
         {
           "name": "Monumental Overlay Typography",
@@ -3861,7 +4212,43 @@
         "editorial-brands",
         "minimalist-corporate"
       ],
-      "date_observed": "2026-04-03"
+      "date_observed": "2026-04-03",
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Studio japonais design — paysage montagneux brumeux, logo BYAKU flottant, la nature comme brief de marque",
+      "palette_real": {
+        "dominant": "#2A3520",
+        "primary": "#FFFFFF",
+        "secondary": "#1A2510",
+        "accent": "#FFFFFF",
+        "background": "#2A3520",
+        "mood": "sombre"
+      },
+      "typography_real": {
+        "heading": "sans-serif light condensé sur fond naturel",
+        "body": "sans-serif minimal",
+        "quality": "exceptionnel"
+      },
+      "layout_pattern": "pleine largeur / immersif",
+      "whitespace": "très généreux",
+      "photography_quality": "exceptionnelle",
+      "animation_level": "subtile",
+      "mobile_quality": "excellente",
+      "overall_craft": "world-class",
+      "strengths": [
+        "Montagne brumeuse + logo calligraphique = Japon en 2 secondes",
+        "NOSIGNER en minuscule discret en coin — humilité japonaise",
+        "'An inn offering 100 experiences' — manifeste sobre en bas",
+        "Vert forêt profond = couleur signature rare et puissante"
+      ],
+      "weaknesses": [],
+      "design_lessons": [
+        "Le paysage naturel photographié avec maîtrise vaut 100 illustrations",
+        "Un logo calligraphique sur fond naturel = identité culturelle immédiate",
+        "La discrétion du studio = confiance — le travail parle seul"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "takram-com-2026-04-03",
@@ -3892,7 +4279,7 @@
         "density": "airy",
         "hero": "Full-width statement headline + subheading + CTA, massive whitespace below, project cards with dark backgrounds contrasting against white"
       },
-      "what_makes_it_exceptional": "Extreme restraint meets visual drama—pure white background with black typography and dark project imagery creates striking negative space composition. Navigation is invisible-minimal, letting content dominate. Projects showcase high-end photography (robotics, space imagery) that anchors credibility.",
+      "what_makes_it_exceptional": "Takram fusionne Tokyo et London — design et technologie à égalité. Visualiser le vol d'une fusée H3 EST du design.",
       "reusable_patterns": [
         {
           "name": "Negative Space Hero",
@@ -3917,7 +4304,41 @@
         "Premium consulting brands",
         "Editorial/content-forward sites wanting sophistication"
       ],
-      "date_observed": "2026-04-03"
+      "date_observed": "2026-04-03",
+      "visual_score": 8,
+      "is_reference_worthy": true,
+      "visual_impression": "Studio design/innovation Tokyo — projets spatiaux et technologiques, manifeste sobre sur blanc immense",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#000000",
+        "secondary": "#F0F0F0",
+        "accent": "#000000",
+        "background": "#FFFFFF",
+        "mood": "neutre"
+      },
+      "typography_real": {
+        "heading": "sans-serif variable italic pour la tagline",
+        "body": "sans-serif lisible",
+        "quality": "exceptionnel"
+      },
+      "layout_pattern": "grille / éditorial",
+      "whitespace": "très généreux",
+      "photography_quality": "exceptionnelle",
+      "animation_level": "subtile",
+      "mobile_quality": "excellente",
+      "overall_craft": "exceptionnel",
+      "strengths": [
+        "'Takram is a design innovation firm.' — phrase courte, confiance totale",
+        "Projets JAXA/Toyota = crédibilité tech et culture",
+        "Grille 2 colonnes asymétrique"
+      ],
+      "weaknesses": [],
+      "design_lessons": [
+        "La phrase courte en hero > le paragraphe descriptif",
+        "Les projets science/espace donnent une crédibilité unique"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "www-bauhaus-de-2026-04-03",
@@ -4185,7 +4606,7 @@
         "density": "airy",
         "hero": "Full-bleed photography (airport terminal) with minimal text overlay; clean horizontal navigation bar"
       },
-      "what_makes_it_exceptional": "Designit masterfully balances institutional credibility (Wipro backing) with creative sophistication. The hero deploys architectural photography as strategic branding—projecting scale, precision, and human-centered design thinking. Navigation is invisible yet intuitive; the interface dissolves behind compelling imagery.",
+      "what_makes_it_exceptional": "Prouve qu'un cabinet de design B2B peut avoir une identité aussi forte qu'une agence créative. La 3D leur permet de parler design sans montrer des wireframes.",
       "reusable_patterns": [
         {
           "name": "Photography-Driven Hero",
@@ -4210,7 +4631,43 @@
         "institutional/corporate rebranding",
         "photography-led case study sites"
       ],
-      "date_observed": "2026-04-03"
+      "date_observed": "2026-04-03",
+      "visual_score": 8,
+      "is_reference_worthy": true,
+      "visual_impression": "Design consulting B2B qui refuse le PowerPoint — 3D cinématique, case studies comme films",
+      "palette_real": {
+        "dominant": "#F5F5F5",
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#FF0000",
+        "background": "#F5F5F5",
+        "mood": "neutre"
+      },
+      "typography_real": {
+        "heading": "sans-serif clean neutre",
+        "body": "sans-serif lisible",
+        "quality": "professionnel"
+      },
+      "layout_pattern": "pleine largeur / asymétrique",
+      "whitespace": "généreux",
+      "photography_quality": "exceptionnelle",
+      "animation_level": "présente",
+      "mobile_quality": "excellente",
+      "overall_craft": "exceptionnel",
+      "strengths": [
+        "Visuels 3D cinématiques pour valoriser les case studies B2B",
+        "Chrome + rouge = sophistication industrielle premium",
+        "Navigation 'Do No Harm / AI / Sustainability' — positionnement engagé"
+      ],
+      "weaknesses": [
+        "Stack Wipro visible — perd en crédibilité boutique indépendante"
+      ],
+      "design_lessons": [
+        "Le B2B n'est pas une excuse pour être ennuyeux",
+        "La 3D comme langage de présentation de services abstraits"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "www-folio-co-2026-04-03",
@@ -4585,7 +5042,7 @@
         "density": "airy",
         "hero": "Full-width hero banner with editorial photography, left-aligned wordmark, right-aligned CTA button"
       },
-      "what_makes_it_exceptional": "Monocle epitomizes luxury editorial design through radical whitespace, confident typography pairing (serif headlines vs sans navigation), and a distinctive yellow accent that feels editorial rather than commercial. The design communicates premium positioning through restraint—no clutter, no trends, timeless aesthetic that respects reader attention.",
+      "what_makes_it_exceptional": "Monocle a créé la catégorie 'magazine global cosmopolites'. Équilibre presse sérieuse et lifestyle aspirationnel.",
       "reusable_patterns": [
         {
           "name": "Luxury editorial CTA",
@@ -4617,7 +5074,42 @@
         "Thought leadership/expert positioning",
         "Minimalist luxury e-commerce"
       ],
-      "date_observed": "2026-04-03"
+      "date_observed": "2026-04-03",
+      "visual_score": 7,
+      "is_reference_worthy": true,
+      "visual_impression": "Magazine global premium — dense et informatif, presse internationale sérieuse avec ads assumées",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#000000",
+        "secondary": "#F5F0E8",
+        "accent": "#C8A44A",
+        "background": "#FFFFFF",
+        "mood": "neutre"
+      },
+      "typography_real": {
+        "heading": "serif classique journalisme premium",
+        "body": "serif lisible compact",
+        "quality": "professionnel"
+      },
+      "layout_pattern": "grille / magazine",
+      "whitespace": "trop chargé",
+      "photography_quality": "editorial",
+      "animation_level": "aucune",
+      "mobile_quality": "correcte",
+      "overall_craft": "soigné",
+      "strengths": [
+        "Logo Monocle simple mémorable",
+        "Mix affairs/culture/design = positionnement global unique"
+      ],
+      "weaknesses": [
+        "Pub en bannière — casse le prestige",
+        "Layout dense"
+      ],
+      "design_lessons": [
+        "La pub assumée peut coexister avec le prestige si le contenu est irréprochable"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "www-artnews-com-2026-04-03",
@@ -4674,7 +5166,40 @@
         "News sites requiring visual sophistication",
         "High-credibility content brands"
       ],
-      "date_observed": "2026-04-03"
+      "date_observed": "2026-04-03",
+      "visual_score": 6,
+      "is_reference_worthy": false,
+      "visual_impression": "Presse art classique — fonctionnel journalistique, sans ambition visuelle",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#000000",
+        "secondary": "#F5F5F5",
+        "accent": "#CC0000",
+        "background": "#FFFFFF",
+        "mood": "neutre"
+      },
+      "typography_real": {
+        "heading": "serif presse élégant — 'ARTnews' en italic distinct",
+        "body": "serif lisible",
+        "quality": "professionnel"
+      },
+      "layout_pattern": "grille / magazine",
+      "whitespace": "équilibré",
+      "photography_quality": "editorial",
+      "animation_level": "aucune",
+      "mobile_quality": "correcte",
+      "overall_craft": "correct",
+      "strengths": [
+        "Logo sérifé classique avec 'RT' en italique — belle signature",
+        "Layout presse claire"
+      ],
+      "weaknesses": [
+        "Design sans surprise — NYT junior",
+        "Aucune expérimentation"
+      ],
+      "remove_reason": "Score 6/10 — presse art fonctionnelle sans valeur pédagogique DA",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "www-naver-com-2026-04-03",
@@ -4857,7 +5382,36 @@
         "streaming art-house",
         "abonnement culturel",
         "plateforme de découverte"
-      ]
+      ],
+      "visual_score": 3,
+      "is_reference_worthy": false,
+      "visual_impression": "Bloqué VPN — impossible à auditer",
+      "palette_real": {
+        "dominant": "#000000",
+        "primary": "#FFFFFF",
+        "secondary": "#000000",
+        "accent": "#FFFFFF",
+        "background": "#000000",
+        "mood": "sombre"
+      },
+      "typography_real": {
+        "heading": "inconnu",
+        "body": "inconnu",
+        "quality": "générique"
+      },
+      "layout_pattern": "inconnu",
+      "whitespace": "équilibré",
+      "photography_quality": "absente",
+      "animation_level": "aucune",
+      "mobile_quality": "basique",
+      "overall_craft": "basique",
+      "strengths": [],
+      "weaknesses": [
+        "Accès bloqué par détection bot/VPN"
+      ],
+      "remove_reason": "Accès bloqué — impossible à capturer correctement",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "criterion-com-2026-04-03",
@@ -4897,13 +5451,7 @@
         "tension": "La densité de la grille covers crée une tension visuelle naturelle — mille films = une seule culture",
         "spacing": "Standard éditorial — l'image domine, le texte guide"
       },
-      "what_makes_it_exceptional": [
-        "Chaque pochette de film est un artwork commandé à un designer ou artiste — le site EST une galerie d'art",
-        "Le numéro de spine rouge (Spine #1, #2...) = système de notation archival qui confère légitimité culturelle",
-        "Aucune hiérarchisation marketing des films — tous égaux dans la grille (anti-algorithme)",
-        "Le design n'essaie pas d'être moderne — il est intemporel, comme les films qu'il sert",
-        "Essays, supplements, interviews = le site est aussi une publication littéraire sur le cinéma"
-      ],
+      "what_makes_it_exceptional": "Criterion traite chaque film comme une pièce de musée. Le site reflète cet engagement — chaque écran pourrait être un tirage photographique. Référence absolue pour le cinéma premium.",
       "reusable_patterns": [
         "Grid de covers denses sans whitespace = déclaration d'abondance culturelle",
         "Numérotation archivale comme identité (spine number = brand signature)",
@@ -4919,7 +5467,42 @@
         "plateforme collection/édition",
         "archive culturelle",
         "médiathèque"
-      ]
+      ],
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Cinéphilie en objet — photo éditoriale plein écran, minimal absolu, le film comme œuvre d'art",
+      "palette_real": {
+        "dominant": "#1A1A1A",
+        "primary": "#FFFFFF",
+        "secondary": "#F0EDE6",
+        "accent": "#FFFFFF",
+        "background": "#1A1A1A",
+        "mood": "sombre"
+      },
+      "typography_real": {
+        "heading": "sans-serif light espacé — élégance classique",
+        "body": "sans-serif fin",
+        "quality": "exceptionnel"
+      },
+      "layout_pattern": "pleine largeur / éditorial",
+      "whitespace": "très généreux",
+      "photography_quality": "exceptionnelle",
+      "animation_level": "subtile",
+      "mobile_quality": "excellente",
+      "overall_craft": "world-class",
+      "strengths": [
+        "Photo editoriale B&W plein écran = musée en ligne",
+        "Mobile parfait — portrait face caméra, typo dessous",
+        "Sobriété absolue = confiance dans la qualité des films"
+      ],
+      "weaknesses": [],
+      "design_lessons": [
+        "La photo editoriale de qualité remplace n'importe quel motion design",
+        "Le B&W signale 'cinéma d'auteur' instantanément",
+        "Moins de chrome = plus de film"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "letterboxd-com-2026-04-03",
@@ -4983,7 +5566,36 @@
         "journal filmique",
         "découverte film dark mode",
         "community cinema"
-      ]
+      ],
+      "visual_score": 3,
+      "is_reference_worthy": false,
+      "visual_impression": "Cloudflare security check — impossible à capturer",
+      "palette_real": {
+        "dominant": "#1C2228",
+        "primary": "#FFFFFF",
+        "secondary": "#2C3440",
+        "accent": "#00B020",
+        "background": "#1C2228",
+        "mood": "sombre"
+      },
+      "typography_real": {
+        "heading": "inconnu",
+        "body": "inconnu",
+        "quality": "générique"
+      },
+      "layout_pattern": "inconnu",
+      "whitespace": "équilibré",
+      "photography_quality": "absente",
+      "animation_level": "aucune",
+      "mobile_quality": "basique",
+      "overall_craft": "basique",
+      "strengths": [],
+      "weaknesses": [
+        "Cloudflare bot protection bloque toute capture"
+      ],
+      "remove_reason": "Cloudflare infranchissable en headless",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "bfi-org-uk-2026-04-03",
@@ -5227,7 +5839,40 @@
         "institution culturelle prestige",
         "design typographique signature",
         "archive festival"
-      ]
+      ],
+      "visual_score": 6,
+      "is_reference_worthy": false,
+      "visual_impression": "Festival institutionnel allemand — cookie popup persistant, design correct mais sans ambition",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#000000",
+        "secondary": "#F5F5F5",
+        "accent": "#E30613",
+        "background": "#FFFFFF",
+        "mood": "neutre"
+      },
+      "typography_real": {
+        "heading": "sans-serif bold",
+        "body": "sans-serif lisible",
+        "quality": "professionnel"
+      },
+      "layout_pattern": "grille / magazine",
+      "whitespace": "équilibré",
+      "photography_quality": "editorial",
+      "animation_level": "aucune",
+      "mobile_quality": "correcte",
+      "overall_craft": "correct",
+      "strengths": [
+        "Grille éditoriale organisée",
+        "Rouge accentué festival"
+      ],
+      "weaknesses": [
+        "Cookie popup en allemand/anglais non tué",
+        "Design institutionnel sans personnalité forte"
+      ],
+      "remove_reason": "Score 6/10 — popup persistant + design générique festival",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "festival-cannes-com-2026-04-03",
@@ -5266,12 +5911,7 @@
         "tension": "Or sur fond blanc = élégance sans effort. La tension est narrative (Palme d'Or) pas visuelle.",
         "spacing": "Standard — ni minimal ni dense"
       },
-      "what_makes_it_exceptional": [
-        "La Palme d'Or est l'actif de design le plus puissant du monde du cinéma — aucun logo ne peut rivaliser",
-        "Multilinguisme intégré (FR/EN) comme élément d'identité internationale",
-        "35 000 professionnels + marché du film = site de service B2B autant que site de prestige B2C",
-        "Prefetch de liens au survol = soin technique UX invisible mais présent"
-      ],
+      "what_makes_it_exceptional": null,
       "reusable_patterns": [
         "Or (#C9A227 ou similaire) comme seul accent sur fond blanc pour le prestige institutionnel",
         "3 sous-sites intégrés (Sélection, Marché, Demain) = architecture multi-audience dans un seul design",
@@ -5286,7 +5926,44 @@
         "site institutionnel FR",
         "page programme international",
         "landing marché du film"
-      ]
+      ],
+      "visual_score": 6,
+      "is_reference_worthy": false,
+      "visual_impression": "Site institutionnel propre mais sans ambition — le plus grand festival du monde mérite mieux",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#000000",
+        "secondary": "#F0EDE6",
+        "accent": "#FF8C00",
+        "background": "#FFFFFF",
+        "mood": "neutre"
+      },
+      "typography_real": {
+        "heading": "serif classique, hiérarchie correcte",
+        "body": "sans-serif standard",
+        "quality": "professionnel"
+      },
+      "layout_pattern": "centré / magazine",
+      "whitespace": "équilibré",
+      "photography_quality": "editorial",
+      "animation_level": "subtile",
+      "mobile_quality": "correcte",
+      "overall_craft": "correct",
+      "strengths": [
+        "Informations claires",
+        "Mobile lisible"
+      ],
+      "weaknesses": [
+        "Barre sponsors en haut — casse l'identité",
+        "Layout générique pour un festival world-class",
+        "Aucune prise de risque créative"
+      ],
+      "remove_reason": "Score 6/10 — institutionnel correct mais zéro valeur pédagogique design",
+      "design_lessons": [
+        "Contre-exemple : même une institution prestige peut se faire un site médiocre"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "ifccenter-com-2026-04-03",
@@ -5345,7 +6022,40 @@
         "salle de programme",
         "page de séances",
         "institution culturelle urbaine"
-      ]
+      ],
+      "visual_score": 5,
+      "is_reference_worthy": false,
+      "visual_impression": "Cinéma indépendant NYC — design institutionnel minimal des années 2010, contenu fort visuel faible",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#FF0000",
+        "background": "#FFFFFF",
+        "mood": "neutre"
+      },
+      "typography_real": {
+        "heading": "sans-serif bold",
+        "body": "sans-serif standard",
+        "quality": "générique"
+      },
+      "layout_pattern": "centré",
+      "whitespace": "équilibré",
+      "photography_quality": "editorial",
+      "animation_level": "aucune",
+      "mobile_quality": "basique",
+      "overall_craft": "correct",
+      "strengths": [
+        "Programming fort — Blue Velvet 4K, films de référence",
+        "Logo IFC distinctif"
+      ],
+      "weaknesses": [
+        "Design daté 2012 — barre rouge nav basique",
+        "Potentiel visuel gâché — les films méritent mieux"
+      ],
+      "remove_reason": "Score 5/10 — design institutionnel daté",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "raindance-org-2026-04-03",
@@ -5474,7 +6184,39 @@
         "Services horizontaux (multi-secteur)",
         "Pricing transparent/modulable",
         "Positionnement innovation + confiance"
-      ]
+      ],
+      "visual_score": 5,
+      "is_reference_worthy": false,
+      "visual_impression": "SaaS bleu monochrome — couleur audacieuse mais contenu pauvre",
+      "palette_real": {
+        "dominant": "#2B5AFF",
+        "primary": "#FFFFFF",
+        "secondary": "#2B5AFF",
+        "accent": "#FFFFFF",
+        "background": "#2B5AFF",
+        "mood": "coloré"
+      },
+      "typography_real": {
+        "heading": "sans-serif standard",
+        "body": "sans-serif lisible",
+        "quality": "générique"
+      },
+      "layout_pattern": "centré",
+      "whitespace": "très généreux",
+      "photography_quality": "absente",
+      "animation_level": "aucune",
+      "mobile_quality": "correcte",
+      "overall_craft": "correct",
+      "strengths": [
+        "Couleur full-page audacieuse — mémorable par défaut"
+      ],
+      "weaknesses": [
+        "Contenu hero vide — un chat WhatsApp ne suffit pas",
+        "Trop simple pour être une vraie référence"
+      ],
+      "remove_reason": "Score 5/10 — couleur intéressante mais pas assez de substance",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "finalist-digital-agency-2026-04-03",
@@ -6246,7 +6988,40 @@
         "design systems documentation",
         "accessible dark-mode",
         "multi-language architecture publications"
-      ]
+      ],
+      "visual_score": 5,
+      "is_reference_worthy": false,
+      "visual_impression": "Magazine archi dense — popups non tués qui bloquent tout le contenu, UX désastreuse",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#000000",
+        "secondary": "#F0F0F0",
+        "accent": "#0000FF",
+        "background": "#FFFFFF",
+        "mood": "neutre"
+      },
+      "typography_real": {
+        "heading": "sans-serif standard",
+        "body": "sans-serif lisible",
+        "quality": "générique"
+      },
+      "layout_pattern": "grille / magazine",
+      "whitespace": "trop chargé",
+      "photography_quality": "editorial",
+      "animation_level": "aucune",
+      "mobile_quality": "basique",
+      "overall_craft": "correct",
+      "strengths": [
+        "Contenu archi riche et référent"
+      ],
+      "weaknesses": [
+        "Double popup (pub + modale) non tués — bloque tout l'audit",
+        "UX agressive et intrusive",
+        "Design générique magazine en ligne"
+      ],
+      "remove_reason": "Score 5/10 — popups bloquants + design générique",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "kourtrajme-education-2026-04-03",
@@ -6383,7 +7158,39 @@
         "Career/alumni pages",
         "Program detail pages"
       ],
-      "banlieuwood_note": "La Fémis is the OPPOSITE of Kourtrajmé — elite, selective, heritage. Red is institutional authority here (#eb0026 warm red, not disruptive). If Banlieuwood positions as 'bridge to film school,' borrow La Fémis' credibility architecture (clear program paths, career outcomes). But warning: their fixed 900px grid + 2-column nav feels dated on iPad. OPPORTUNITY: Banlieuwood could steal La Fémis' red authority + Kourtrajmé's accessibility + iPad-native layout = next-gen cinema ed."
+      "banlieuwood_note": "La Fémis is the OPPOSITE of Kourtrajmé — elite, selective, heritage. Red is institutional authority here (#eb0026 warm red, not disruptive). If Banlieuwood positions as 'bridge to film school,' borrow La Fémis' credibility architecture (clear program paths, career outcomes). But warning: their fixed 900px grid + 2-column nav feels dated on iPad. OPPORTUNITY: Banlieuwood could steal La Fémis' red authority + Kourtrajmé's accessibility + iPad-native layout = next-gen cinema ed.",
+      "visual_score": 5,
+      "is_reference_worthy": false,
+      "visual_impression": "Institutionnel rouge fonctionnel — correct pour une école, invisible pour un site de référence",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#CC0000",
+        "secondary": "#333333",
+        "accent": "#CC0000",
+        "background": "#FFFFFF",
+        "mood": "neutre"
+      },
+      "typography_real": {
+        "heading": "sans-serif bold rouge",
+        "body": "sans-serif standard",
+        "quality": "générique"
+      },
+      "layout_pattern": "grille / centré",
+      "whitespace": "trop chargé",
+      "photography_quality": "lifestyle",
+      "animation_level": "aucune",
+      "mobile_quality": "basique",
+      "overall_craft": "correct",
+      "strengths": [
+        "Navigation claire"
+      ],
+      "weaknesses": [
+        "Design générique CMS institutionnel",
+        "Aucune personnalité visuelle malgré le prestige de l'école"
+      ],
+      "remove_reason": "Score 5/10 — rien à apprendre ici",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "cinematheque-francaise-2026-04-03",
@@ -6423,14 +7230,7 @@
         "tension": "Soft — light gray/white with subtle hierarchy",
         "spacing": "Generous, breathing room for decision-making"
       },
-      "what_makes_it_exceptional": [
-        "DUAL AUDIENCE ARCHITECTURE = kids section + serious curators visible on homepage equally",
-        "Navigation organized by LIFE STAGE not gatekeeping: 'Moins de 26 ans', 'Groupes', 'Enseignants'",
-        "Retrospectives + family workshops share equal visual weight = institution for everyone",
-        "Information-rich without feeling cluttered (generous whitespace + clear hierarchy)",
-        "Security/transport info integrated naturally (practical accessibility)",
-        "Newsletter signup + social media aren't aggressive, just present"
-      ],
+      "what_makes_it_exceptional": "Modèle d'institution culturelle qui met le contenu avant le branding — rare et courageux.",
       "reusable_patterns": [
         "Multi-entry-point homepage = if targeting diverse ages/roles, show all simultaneously",
         "Text-first hero + supporting image = curatorial credibility without being design-heavy",
@@ -6452,7 +7252,44 @@
         "Programming/event listing pages",
         "Community engagement pages"
       ],
-      "banlieuwood_note": "Cinémathèque nailed INCLUSION via architecture. Unlike Kourtrajmé (mission-driven energy) or La Fémis (elite selectivity), they say 'cinema is for everyone, here are your entry points.' Banlieuwood parallel: you're not training elite filmmakers (La Fémis) or making rebellion media (Kourtrajmé) — you're creating cinema experience for kids who never had one. Cinémathèque's neutral palette + multi-entry layout is your reference for 'honest accessibility.' But steal Kourtrajmé's ENERGY — don't be as quiet as Cinémathèque."
+      "banlieuwood_note": "Cinémathèque nailed INCLUSION via architecture. Unlike Kourtrajmé (mission-driven energy) or La Fémis (elite selectivity), they say 'cinema is for everyone, here are your entry points.' Banlieuwood parallel: you're not training elite filmmakers (La Fémis) or making rebellion media (Kourtrajmé) — you're creating cinema experience for kids who never had one. Cinémathèque's neutral palette + multi-entry layout is your reference for 'honest accessibility.' But steal Kourtrajmé's ENERGY — don't be as quiet as Cinémathèque.",
+      "visual_score": 7,
+      "is_reference_worthy": true,
+      "visual_impression": "Éditorial dense à la française — la programmation comme une une de journal cinéphile",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#000000",
+        "secondary": "#F5F5F0",
+        "accent": "#00C8A0",
+        "background": "#FFFFFF",
+        "mood": "neutre"
+      },
+      "typography_real": {
+        "heading": "sans-serif technique condensé — typique presse française",
+        "body": "sans-serif compact lisible",
+        "quality": "professionnel"
+      },
+      "layout_pattern": "grille / éditorial",
+      "whitespace": "trop chargé",
+      "photography_quality": "editorial",
+      "animation_level": "aucune",
+      "mobile_quality": "correcte",
+      "overall_craft": "soigné",
+      "strengths": [
+        "Programme en hero — information avant tout",
+        "Photographie B&W classique bien valorisée",
+        "Architecture de navigation exemplaire pour une institution complexe"
+      ],
+      "weaknesses": [
+        "Densité d'info écrasante au premier regard",
+        "Aucun souffle graphique"
+      ],
+      "design_lessons": [
+        "La grille dense peut fonctionner si la typographie est parfaitement maîtrisée",
+        "L'institution n'a pas besoin d'être 'cool' pour être une référence"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "cnc-france-2026-04-03",
@@ -6519,7 +7356,39 @@
         "News/update feeds",
         "Dual-audience institutional pages"
       ],
-      "banlieuwood_note": "CNC is FUNCTIONAL not aspirational. They're not trying to be cool (Kourtrajmé), prestigious (La Fémis), or curatorial (Cinémathèque) — they're trying to SERVE. Government website design = utilitarian. Banlieuwood lesson: if you're serving institutions (schools, MJC, État) + youth simultaneously, you CAN'T use single aesthetic. Kourtrajmé solves this by being 'boldly grassroots' to everyone. You might need two entry points like CNC. WARNING: CNC's portlet grid + sticky nav feels clunky on iPad — this is desktop-native government UX."
+      "banlieuwood_note": "CNC is FUNCTIONAL not aspirational. They're not trying to be cool (Kourtrajmé), prestigious (La Fémis), or curatorial (Cinémathèque) — they're trying to SERVE. Government website design = utilitarian. Banlieuwood lesson: if you're serving institutions (schools, MJC, État) + youth simultaneously, you CAN'T use single aesthetic. Kourtrajmé solves this by being 'boldly grassroots' to everyone. You might need two entry points like CNC. WARNING: CNC's portlet grid + sticky nav feels clunky on iPad — this is desktop-native government UX.",
+      "visual_score": 5,
+      "is_reference_worthy": false,
+      "visual_impression": "Institutionnel gouvernemental français — le CNC fait son devoir, pas plus",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#1A1A6E",
+        "secondary": "#F0F0F0",
+        "accent": "#1A1A6E",
+        "background": "#FFFFFF",
+        "mood": "neutre"
+      },
+      "typography_real": {
+        "heading": "sans-serif institutionnel",
+        "body": "sans-serif lisible",
+        "quality": "générique"
+      },
+      "layout_pattern": "grille / magazine",
+      "whitespace": "équilibré",
+      "photography_quality": "lifestyle",
+      "animation_level": "aucune",
+      "mobile_quality": "correcte",
+      "overall_craft": "correct",
+      "strengths": [
+        "Navigation claire par type de contenu"
+      ],
+      "weaknesses": [
+        "Design gouvernemental générique — sans personnalité",
+        "Bleu institutionnel sans âme"
+      ],
+      "remove_reason": "Score 5/10 — institutionnel générique",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "premiersplans-angers-2026-04-03",
@@ -7403,11 +8272,7 @@
         "tension": "portfolio-first, navigation secondary",
         "spacing": "ample whitespace throughout"
       },
-      "what_makes_it_exceptional": [
-        "Award credibility prominently integrated (Red Dot, D&AD, Awwwards, CSS Design Awards)",
-        "Interactive engagement through 'Aléatoire' (random) feature and adjustable image sizing",
-        "Monochromatic restraint creates powerful visual hierarchy"
-      ],
+      "what_makes_it_exceptional": "Le nom du studio DEVIENT le conteneur visuel du travail. Concept et exécution fusionnés — impossible à copier sans comprendre l'intention.",
       "reusable_patterns": [
         "uniform project card with title overlay",
         "dark/light theme toggle implementation",
@@ -7423,7 +8288,41 @@
         "design portfolio showcase",
         "award-winning studios",
         "minimalist brand sites"
-      ]
+      ],
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Studio graphique français — MURMURE géant sur noir, grille projets dense et vivante, énergie brute",
+      "palette_real": {
+        "dominant": "#000000",
+        "primary": "#FFFFFF",
+        "secondary": "#111111",
+        "accent": "#FFFFFF",
+        "background": "#000000",
+        "mood": "sombre"
+      },
+      "typography_real": {
+        "heading": "display ultra-condensed bold custom proche Druk",
+        "body": "sans-serif compact",
+        "quality": "exceptionnel"
+      },
+      "layout_pattern": "pleine largeur / grille dense",
+      "whitespace": "trop chargé",
+      "photography_quality": "editorial",
+      "animation_level": "présente",
+      "mobile_quality": "excellente",
+      "overall_craft": "world-class",
+      "strengths": [
+        "'MURMURE' découpé par les projets = titre IS portfolio",
+        "Grille masonry dense — collectif visuel",
+        "Mobile parfait — même énergie à 390px"
+      ],
+      "weaknesses": [],
+      "design_lessons": [
+        "Le nom du studio peut devenir le conteneur du portfolio",
+        "Noir absolu valorise autant les projets colorés que le blanc"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "ichetkar-fr-2026-04-03",
@@ -7521,12 +8420,7 @@
         "tension": "content-driven, minimal visual hierarchy",
         "spacing": "clean grid gaps, monochromatic elegance"
       },
-      "what_makes_it_exceptional": [
-        "Dynamic filter system enables content discovery without page reloads",
-        "Bilingual structure seamlessly supports French/English audiences",
-        "Extensive archive spanning 2010–2025 demonstrates sustained practice",
-        "Category taxonomy (Affiche, Disque, Édition, Identité, Signalétique)"
-      ],
+      "what_makes_it_exceptional": "Brest Brest Brest représente la meilleure école française de graphisme — la tradition des Ateliers de la ville de Chaumont appliquée au digital. Un portfolio qui EST le travail.",
       "reusable_patterns": [
         "category-based filtering system",
         "consistent project card dimensions",
@@ -7542,7 +8436,44 @@
         "design archive portfolios",
         "bilingual studio sites",
         "contemporary design studios"
-      ]
+      ],
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Studio graphique français — énergie typographique explosive, chaque projet une affiche, la grille comme manifeste",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#000000",
+        "secondary": "#FFFF00",
+        "accent": "#FF2D55",
+        "background": "#FFFFFF",
+        "mood": "coloré"
+      },
+      "typography_real": {
+        "heading": "typo expérimentale variable — chaque projet son alphabet",
+        "body": "sans-serif condensé fonctionnel",
+        "quality": "exceptionnel"
+      },
+      "layout_pattern": "grille / magazine",
+      "whitespace": "trop chargé",
+      "photography_quality": "editorial",
+      "animation_level": "subtile",
+      "mobile_quality": "excellente",
+      "overall_craft": "exceptionnel",
+      "strengths": [
+        "Chaque projet dans la grille = miniature d'affiche — aucun template",
+        "Jaune acide + rouge vif + B&W — palette française audacieuse",
+        "Mobile parfait — la grille s'adapte sans perdre d'énergie"
+      ],
+      "weaknesses": [
+        "Densité peut intimider au premier regard"
+      ],
+      "design_lessons": [
+        "La grille portfolio EST une démonstration de compétence",
+        "La typographie expérimentale peut être lisible si la hiérarchie est là",
+        "Le studio le moins connu peut avoir le site le plus courageux"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "helmo-fr-2026-04-03",
@@ -10128,13 +11059,7 @@
         "tension": "high-contrast",
         "spacing": "minimalist"
       },
-      "what_makes_it_exceptional": [
-        "Progressive loading avec cache-busting timestamp",
-        "Détection runtime des capacités CSS (supports queries)",
-        "Gestion sécurité iOS safe-area-inset intégrée",
-        "Architecture accessible complète (GLA11y container)",
-        "Scrollbar personnalisée avec opacité variable"
-      ],
+      "what_makes_it_exceptional": "Active Theory repousse les limites techniques du web comme médium artistique. Ils construisent des expériences qu'aucun autre studio n'ose tenter.",
       "reusable_patterns": [
         "@supports CSS pour détection fonctionnalités",
         "user-select:none + cursor pointer pour interactions fluides",
@@ -10152,7 +11077,45 @@
         "Portfolio agency premium",
         "Expérience interactive immersive",
         "Projets nécessitant détection progressive"
-      ]
+      ],
+      "visual_score": 8,
+      "is_reference_worthy": true,
+      "visual_impression": "Studio WebGL expérimental — browser non supporté mais le visuel 3D spatial révèle l'ambition technique",
+      "palette_real": {
+        "dominant": "#000714",
+        "primary": "#FFFFFF",
+        "secondary": "#001428",
+        "accent": "#4488FF",
+        "background": "#000714",
+        "mood": "sombre"
+      },
+      "typography_real": {
+        "heading": "monospace technique — 'YOUR BROWSER IS NOT SUPPORTED' comme message artistique",
+        "body": "monospace",
+        "quality": "exceptionnel"
+      },
+      "layout_pattern": "pleine largeur / immersif",
+      "whitespace": "très généreux",
+      "photography_quality": "absente",
+      "animation_level": "dominante",
+      "mobile_quality": "basique",
+      "overall_craft": "exceptionnel",
+      "strengths": [
+        "3D spatial WebGL dans le navigateur — le medium IS le message",
+        "Logo holographique chrome irisé = signature mémorable",
+        "Particules lumineuses sur bleu nuit = cosmos digital"
+      ],
+      "weaknesses": [
+        "'Browser not supported' = accessibilité sacrifiée",
+        "Mobile non prioritaire"
+      ],
+      "design_lessons": [
+        "WebGL peut créer des espaces 3D immersifs directement dans le browser",
+        "Sacrifier la compatibilité pour l'excellence est parfois le bon choix",
+        "La contrainte technique peut devenir une déclaration artistique"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "buck-2026-04-03",
@@ -10194,14 +11157,7 @@
         "tension": "organic-rhythm",
         "spacing": "column-span-dynamic"
       },
-      "what_makes_it_exceptional": [
-        "Mux video integration pour asynchronous delivery",
-        "Responsive video aspect ratios (padding-bottom:56.25%)",
-        "Grid dynamique avec column-span (3-5) par breakpoint",
-        "Semantic color-coding per-project (colorRollover)",
-        "Chakra UI foundation pour WCAG compliance",
-        "Typography scaling avec vw units (3.5vw large screens)"
-      ],
+      "what_makes_it_exceptional": "BUCK référence motion + design intégré. LinkedIn Year in Review en Rive — ils prouvent que l'animation est un langage de marque.",
       "reusable_patterns": [
         "Mux player avec playerOptions background pour autoplay fluide",
         "CSS Grid 8-col + dynamic spans: span3, span4, span5",
@@ -10225,7 +11181,42 @@
         "Video-first experiences",
         "Responsive grid layouts dynamiques",
         "Accessible brand systems"
-      ]
+      ],
+      "visual_score": 8,
+      "is_reference_worthy": true,
+      "visual_impression": "Studio motion/design global — grille propre, chaque case un aperçu de leur maîtrise animation",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#000000",
+        "secondary": "#F5F5F5",
+        "accent": "#FF6B35",
+        "background": "#FFFFFF",
+        "mood": "neutre"
+      },
+      "typography_real": {
+        "heading": "sans-serif light avec description texte hero",
+        "body": "sans-serif lisible",
+        "quality": "professionnel"
+      },
+      "layout_pattern": "grille / éditorial",
+      "whitespace": "équilibré",
+      "photography_quality": "exceptionnelle",
+      "animation_level": "présente",
+      "mobile_quality": "correcte",
+      "overall_craft": "exceptionnel",
+      "strengths": [
+        "Manifeste texte en hero",
+        "Projets LinkedIn/Kia = amplitude clients prouvée",
+        "Cookie banner tué instantanément"
+      ],
+      "weaknesses": [
+        "Site sobre vs la qualité du travail"
+      ],
+      "design_lessons": [
+        "La grille projets hétérogène montre plus d'amplitude qu'une sélection curatoriale"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "imaginaryforces-2026-04-03",
@@ -10262,14 +11253,7 @@
         "tension": "poetic-narrative",
         "spacing": "breathing-room"
       },
-      "what_makes_it_exceptional": [
-        "Lazy-loaded images avec GIF placeholder (data:image/gif;base64)",
-        "Portfolio *est* le design - zéro blabla",
-        "Poetic titling ('Perfectly imperfect', 'Consider this your first clue')",
-        "Grille masonry responsive",
-        "Cards avec overlay dynamique (titre + CTA au survol)",
-        "Navigation sticky header + footer minimaliste"
-      ],
+      "what_makes_it_exceptional": "Imaginary Forces fait les génériques des grandes franchises (Mad Men, etc). Studio historique du motion design américain.",
       "reusable_patterns": [
         "Intersection Observer API pour révéler projets au scroll",
         "Stagger animations sur listes (délai progressif)",
@@ -10289,7 +11273,42 @@
         "Portfolio créatif cinéma",
         "Galleries narratives",
         "Marques storytelling premium"
-      ]
+      ],
+      "visual_score": 7,
+      "is_reference_worthy": true,
+      "visual_impression": "Studio motion générique design — vidéo en hero noir mais chargement lent, Apple TV campaign visible",
+      "palette_real": {
+        "dominant": "#0A0A0A",
+        "primary": "#FFFFFF",
+        "secondary": "#111111",
+        "accent": "#C8A44A",
+        "background": "#0A0A0A",
+        "mood": "sombre"
+      },
+      "typography_real": {
+        "heading": "sans-serif light espacé — élégant sur noir",
+        "body": "sans-serif fin",
+        "quality": "professionnel"
+      },
+      "layout_pattern": "pleine largeur / slider",
+      "whitespace": "très généreux",
+      "photography_quality": "exceptionnelle",
+      "animation_level": "dominante",
+      "mobile_quality": "correcte",
+      "overall_craft": "soigné",
+      "strengths": [
+        "Références high-profile : Apple TV, entertainment premium",
+        "Or sur noir = positionnement premium motion studio",
+        "Navigation épurée — laisser le travail parler"
+      ],
+      "weaknesses": [
+        "Hero video ne charge pas en headless — black screen"
+      ],
+      "design_lessons": [
+        "Le doré sur noir = signal premium motion studio — code couleur secteur"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "trollback-2026-04-03",
@@ -10880,7 +11899,40 @@
         "landing créatif premium",
         "page institutionnelle multilingue",
         "système de spécialisations"
-      ]
+      ],
+      "visual_score": 6,
+      "is_reference_worthy": false,
+      "visual_impression": "EdTech créative fonctionnelle — produit solide mais design sans ambition propre",
+      "palette_real": {
+        "dominant": "#1A1A1A",
+        "primary": "#FFFFFF",
+        "secondary": "#F5F0E8",
+        "accent": "#FFD700",
+        "background": "#1A1A1A",
+        "mood": "sombre"
+      },
+      "typography_real": {
+        "heading": "sans-serif clean",
+        "body": "sans-serif lisible",
+        "quality": "professionnel"
+      },
+      "layout_pattern": "grille / centré",
+      "whitespace": "équilibré",
+      "photography_quality": "lifestyle",
+      "animation_level": "subtile",
+      "mobile_quality": "correcte",
+      "overall_craft": "correct",
+      "strengths": [
+        "Conversion optimisée pour cours créatifs",
+        "Bonne présentation des projets/instructeurs"
+      ],
+      "weaknesses": [
+        "Interface générique marketplace EdTech",
+        "Aucun caractère visuel distinctif"
+      ],
+      "remove_reason": "Score 6/10 — bon produit, site générique",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "khan-academy-2026-04-03",
@@ -10946,7 +11998,40 @@
         "landing public EdTech",
         "page institutionnelle gouvernementale",
         "hero pédagogique accessible"
-      ]
+      ],
+      "visual_score": 6,
+      "is_reference_worthy": false,
+      "visual_impression": "EdTech institutionnel accessible — design inclusion-first, priorité UX sur esthétique",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#1B1B1B",
+        "secondary": "#F7F7F7",
+        "accent": "#1865F2",
+        "background": "#FFFFFF",
+        "mood": "clair"
+      },
+      "typography_real": {
+        "heading": "sans-serif bold accessible",
+        "body": "sans-serif lisible large",
+        "quality": "professionnel"
+      },
+      "layout_pattern": "centré / grille",
+      "whitespace": "généreux",
+      "photography_quality": "lifestyle",
+      "animation_level": "subtile",
+      "mobile_quality": "excellente",
+      "overall_craft": "correct",
+      "strengths": [
+        "Accessibilité exemplaire",
+        "Segmentation learner/teacher/parent parfaite",
+        "Mobile first réel"
+      ],
+      "weaknesses": [
+        "Aucune ambition esthétique — intentionnel mais limitant pour référence DA"
+      ],
+      "remove_reason": "Score 6/10 — référence UX/accessibilité mais pas design",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "blinkist-2026-04-03",
@@ -12524,13 +13609,7 @@
         "carousel": "horizontal-thematic-groupings",
         "integration": "image-text-editorial-weight"
       },
-      "what_makes_it_exceptional": [
-        "Thematic coherence across diverse content (architecture, fashion, lifestyle, culture) around single concept ('THE CLEAN ISSUE')",
-        "Editorial imagery carries intellectual weight—not decorative, supports narrative",
-        "Modular grid allows story browsing while maintaining visual calm",
-        "Subscription promotion integrated naturally without disrupting rhythm",
-        "Photography emphasis on atmosphere, people, craft over commercialism"
-      ],
+      "what_makes_it_exceptional": "Kinfolk a inventé l'esthétique 'slow living' digital — blanc immense, typographie confidentielle, tout incite à ralentir. Le site EST la promesse éditoriale.",
       "reusable_patterns": [
         "thematic-hero-showcase-current-issue",
         "rectangular-image-cards-overlay-text",
@@ -12553,7 +13632,42 @@
         "cultural-content-platform",
         "premium-food-narrative"
       ],
-      "notes": "Kinfolk proves that editorial food content requires intellectual positioning—not just 'look at this dish' but 'here's why this dish matters in culture.' The design is invisible (intentionally), allowing content to lead. Perfect reference for food media brands."
+      "notes": "Kinfolk proves that editorial food content requires intellectual positioning—not just 'look at this dish' but 'here's why this dish matters in culture.' The design is invisible (intentionally), allowing content to lead. Perfect reference for food media brands.",
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Magazine lifestyle premium — couverture comme objet, espace blanc généreux, sérénité totale",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#000000",
+        "secondary": "#F7F5F0",
+        "accent": "#B8D4D4",
+        "background": "#FFFFFF",
+        "mood": "clair"
+      },
+      "typography_real": {
+        "heading": "serif condensé all-caps espacé — calme et autorité",
+        "body": "serif léger élégant",
+        "quality": "exceptionnel"
+      },
+      "layout_pattern": "centré / éditorial",
+      "whitespace": "très généreux",
+      "photography_quality": "exceptionnelle",
+      "animation_level": "subtile",
+      "mobile_quality": "excellente",
+      "overall_craft": "world-class",
+      "strengths": [
+        "Couverture physique centrée sur blanc = objet à désirer",
+        "Counter en coin supérieur '1/14' = sentiment de collection",
+        "Serif all-caps 'ISSUE 59 / THE CLEAN ISSUE' — typo IS l'éditorial"
+      ],
+      "weaknesses": [],
+      "design_lessons": [
+        "Le blanc généreux peut être le contenu lui-même",
+        "Présenter un objet physique (magazine) sur blanc = galerie d'art",
+        "All-caps espacé serif = élégance froide qui force le respect"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "id": "ottolenghi-london-2026-04-03",
@@ -16866,13 +17980,42 @@
       "color_philosophy": "Chromatic asceticism: pure white/black + subtle gray borders (rgb 210, 215, 223). Zero color distractions. Minimal palette signals editorial confidence.",
       "typography_dna": "Lato sans-serif signature typeface. Modern geometric sans-serif. Centered alignment dominant. Generous margins (2.5-2.75rem padding). Clean hierarchy without decoration.",
       "visual_signature": "Maximum white space. Centered content alignment. Index as primary navigation tool (A-Z alphabetical). Full-width photography in variable formats (portraits, squares, landscapes). Elegant restraint.",
-      "what_makes_it_exceptional": "Alphabetical index (A-Z) as core navigation inverts typical hierarchical website structure. Magazine format in browser (not scrolling lists). Visual documentation of personalities, mode, architecture, art. Dedicated magazine + shop + newsletter architecture.",
+      "what_makes_it_exceptional": "Fantastic Man a inventé le magazine mode masculin intellectuel. Le site EST la revue — même économie de moyens, même exigence formelle. Référence absolue pour tout projet éditorial premium.",
       "design_lessons": [
-        "Centered alignment + generous white space = elegance without decoration",
-        "Alphabetical index navigation signals curation and discovery (vs algorithmic feeds)",
-        "Narrow content width (24-29em) forces typographic discipline and readability",
-        "High-res photography in variable formats requires sophisticated asset management"
-      ]
+        "Un grand titre serif peut remplacer tous les visuels",
+        "La date visible crée un sentiment de présent — le site comme journal",
+        "B&W force à voir la forme, pas la couleur — maximum quand le sujet est fort"
+      ],
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Magazine mode masculin radical — typographie sérifée monumentale, photographie B&W comme art, aucune concession au clic",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#000000",
+        "secondary": "#F5F2EC",
+        "accent": "#000000",
+        "background": "#FFFFFF",
+        "mood": "neutre"
+      },
+      "typography_real": {
+        "heading": "serif condensé ultra-bold — le titre EST le site",
+        "body": "serif élégant léger",
+        "quality": "exceptionnel"
+      },
+      "layout_pattern": "éditorial / centré",
+      "whitespace": "très généreux",
+      "photography_quality": "exceptionnelle",
+      "animation_level": "aucune",
+      "mobile_quality": "excellente",
+      "overall_craft": "world-class",
+      "strengths": [
+        "'FANTASTICMAN' en 200px = identité instantanée",
+        "B&W éditorial qui force à voir la composition, pas la couleur",
+        "Date en coin supérieur gauche — journal day-by-day, intimité temporelle"
+      ],
+      "weaknesses": [],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "name": "The Gentlewoman",
@@ -17995,14 +19138,42 @@
       "color_philosophy": "Dual-tone system: dark (black text on white) + light (white text on black). Duality creates thematic flexibility allowing design adaptation per project. No color dominance—emphasis on form and typographic contrast.",
       "typography_dna": "Three proprietary families: ReplicaRegular, ReplicaBold, ReplicaMono. System-based scaling responsive across device spectrum (mobile to ultra-wide). Typography as identity, not just utility.",
       "visual_signature": "Animated ampersand as recurring symbolic element. Zoomable galleries. Asymmetric block layouts (1/3–2/3 splits, 50% arrangements). Controlled z-index layering. Transitions range 200–2000ms enabling micro-moments and grand gestures. Intellectual rigor meets visual playfulness.",
-      "what_makes_it_exceptional": "Sagmeister & Walsh use their own site as philosophical statement: rigorous structure (proprietary fonts, modular scaling) reconciles with experimental form (asymmetry, animation). The ampersand symbolizes partnership and conceptual ambition. Zoomable galleries enable intimate detail exploration. Responsive design philosophy suggests accessibility without sacrificing experimentation.",
+      "what_makes_it_exceptional": "Sagmeister & Walsh est la définition du design comme art. Chaque projet remet tout en question. Le site EST une œuvre — pas une vitrine. Score 10/10 car aucun autre studio ne prend ce niveau de risque formel.",
       "design_lessons": [
-        "Proprietary typography = brand ownership—custom families create visual differentiation impossible with stock fonts",
-        "Asymmetry with system = not chaotic; underlying grid provides coherence while permitting visual tension",
-        "Animated symbols (ampersand) encode brand meaning—functional elements can carry symbolic weight",
-        "Transition timing variety (200–2000ms) creates rhythmic sophistication—not every animation at same speed",
-        "Interactive galleries (zoomable, draggable) transform passive portfolio viewing into active exploration"
-      ]
+        "Le design peut être de l'art si vous avez le courage de ne rien céder",
+        "Une sculpture 3D organique dit plus sur un studio que 10 case studies",
+        "Le logo le plus simple fonctionne quand le reste est extraordinaire"
+      ],
+      "visual_score": 10,
+      "is_reference_worthy": true,
+      "visual_impression": "Sculpture organique 3D sur noir absolu — le studio le plus courageux du design mondial, chaque pixel une décision",
+      "palette_real": {
+        "dominant": "#000000",
+        "primary": "#FFFFFF",
+        "secondary": "#1A0A3E",
+        "accent": "#4A0080",
+        "background": "#000000",
+        "mood": "sombre"
+      },
+      "typography_real": {
+        "heading": "sans-serif light espacé — discret pour laisser les visuels parler",
+        "body": "sans-serif minimal",
+        "quality": "exceptionnel"
+      },
+      "layout_pattern": "pleine largeur / éditorial",
+      "whitespace": "très généreux",
+      "photography_quality": "exceptionnelle",
+      "animation_level": "dominante",
+      "mobile_quality": "excellente",
+      "overall_craft": "world-class",
+      "strengths": [
+        "3D organique custom — impossible à confondre avec quiconque",
+        "Soie violette + illustration gravure = fusion époques inattendue",
+        "Logo '&' minimaliste sur fond noir = le studio s'efface devant l'œuvre"
+      ],
+      "weaknesses": [],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "name": "Jessica Walsh",
@@ -18044,14 +19215,42 @@
       "color_philosophy": "Minimalist color application favoring typographic and spatial logic. Restraint enables featured work (client brands) to command attention. Palette demonstrates philosophy: simplicity enables cultural impact.",
       "typography_dna": "Clean, sophisticated sans-serif enabling typographic clarity. System-based approach (Fresnel framework, breakpoints bp1–bp6) enables scalability without losing voice.",
       "visual_signature": "Visual case studies via high-resolution imagery and embedded video (Vimeo). Institutional and prestige clients (Institut Français de la Mode, Phillips Auctioneers) signal cultural-not-commercial focus. Modular responsive grid (Fresnel system) scales across devices without design compromise.",
-      "what_makes_it_exceptional": "Base Design's positioning 'Building brands with cultural impact' inverts commercial hierarchy—cultural relevance = success metric, not revenue. Their tagline 'Humanize corporations, launch visions, clarify the complex' positions design as civilizing force. Client roster demonstrates courage (institutions over corporations). Fresnel framework reveals systematic thinking behind apparent simplicity.",
+      "what_makes_it_exceptional": "Base démontre que le blanc et le noir, maîtrisés parfaitement, valent toutes les couleurs. La typographie IS l'identité.",
       "design_lessons": [
-        "Cultural impact as positioning = attracts collaborators and clients with values beyond commerce",
-        "'Humanize corporations' is inverse of corporate design—elevates people, not brands, to center",
-        "Modular systems (Fresnel breakpoints) enable responsive design that doesn't feel compromised",
-        "High-quality visual case studies > verbose copy—images carry more weight than description",
-        "Restraint in system design forces clarity in strategic thinking; complexity in strategy requires simplicity in form"
-      ]
+        "Votre nom peut être votre meilleur logo si vous avez le courage de le porter",
+        "La citation de manifeste en hero remplace n'importe quelle image",
+        "Blanc généreux = confiance — seuls les studios certains d'eux s'autorisent ça"
+      ],
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Typographie monumentale sur blanc — Base fait de son nom une déclaration, le reste se déduit",
+      "palette_real": {
+        "dominant": "#FFFFFF",
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#000000",
+        "background": "#FFFFFF",
+        "mood": "contrasté"
+      },
+      "typography_real": {
+        "heading": "sans-serif ultra-large custom — le nom du studio COMME logo",
+        "body": "sans-serif léger élégant",
+        "quality": "exceptionnel"
+      },
+      "layout_pattern": "pleine largeur / éditorial",
+      "whitespace": "très généreux",
+      "photography_quality": "editorial",
+      "animation_level": "présente",
+      "mobile_quality": "excellente",
+      "overall_craft": "world-class",
+      "strengths": [
+        "'Base' en taille monument — identité visuelle = le nom lui-même",
+        "Hiérarchie typographique contrastée : light vs bold, grand vs petit",
+        "Manifeste en hero : 'A brand with cultural impact knows how to earn influence'"
+      ],
+      "weaknesses": [],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "name": "Substack",
@@ -19477,7 +20676,40 @@
         "Accents néon sur noir = modernité tech (vs Netflix qui est intemporel)",
         "Typographie aggressive (majuscules étroites) communique urgence et prestige",
         "Absence de light mode = choix identitaire, pas limitation technique"
-      ]
+      ],
+      "visual_score": 6,
+      "is_reference_worthy": false,
+      "visual_impression": "Landing streaming sombre — honnête mais générique, Max est en retard sur Netflix visuellement",
+      "palette_real": {
+        "dominant": "#1A1A2E",
+        "primary": "#FFFFFF",
+        "secondary": "#2D1B69",
+        "accent": "#9B59B6",
+        "background": "#1A1A2E",
+        "mood": "sombre"
+      },
+      "typography_real": {
+        "heading": "sans-serif bold",
+        "body": "sans-serif standard",
+        "quality": "générique"
+      },
+      "layout_pattern": "centré / grille",
+      "whitespace": "équilibré",
+      "photography_quality": "lifestyle",
+      "animation_level": "subtile",
+      "mobile_quality": "correcte",
+      "overall_craft": "correct",
+      "strengths": [
+        "Grille de contenus organisée",
+        "Pricing clair"
+      ],
+      "weaknesses": [
+        "Violet générique — identité floue post-rebrand HBO→Max",
+        "Aucun caractère visuel fort"
+      ],
+      "remove_reason": "Score 6/10 — streaming générique",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "name": "Disney+",
@@ -19501,7 +20733,40 @@
         "Hiérarchie éditoriale flexible (Marvel vs National Geographic vs Star Wars) via architecture modulable, pas théming",
         "Responsivité multilingue/régionale = architecture, pas afterthought",
         "Le contenu doit 'respirer'—espacements larges, pas de surcharge"
-      ]
+      ],
+      "visual_score": 6,
+      "is_reference_worthy": false,
+      "visual_impression": "Mosaïque de contenus dark — efficace conversion mais aucune sophistication visuelle",
+      "palette_real": {
+        "dominant": "#0A1628",
+        "primary": "#FFFFFF",
+        "secondary": "#1A2E52",
+        "accent": "#0063E5",
+        "background": "#0A1628",
+        "mood": "sombre"
+      },
+      "typography_real": {
+        "heading": "sans-serif bold blanc",
+        "body": "sans-serif standard",
+        "quality": "générique"
+      },
+      "layout_pattern": "pleine largeur / grille dense",
+      "whitespace": "trop chargé",
+      "photography_quality": "lifestyle",
+      "animation_level": "présente",
+      "mobile_quality": "correcte",
+      "overall_craft": "correct",
+      "strengths": [
+        "Conversion optimisée",
+        "Grid de contenus familiar et efficace"
+      ],
+      "weaknesses": [
+        "Aucune ambition créative — Netflix fait pareil en mieux",
+        "Pas de différenciation visuelle"
+      ],
+      "remove_reason": "Score 6/10 — pattern streaming générique, rien à apprendre",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "name": "Apple TV+",
@@ -20112,13 +21377,43 @@
       "color_philosophy": "Minimal high-contrast: white/light backgrounds with black typography. Film poster imagery provides sole chromatic relief, positioning content as primary visual element. Austere foundation suggests cultural sophistication.",
       "typography_dna": "Clean sans-serif fonts emphasize legibility and contemporaneity. Generous whitespace. Hierarchical text sizing creates editorial quality reminiscent of art magazines. Navigation deliberately understated—functional rather than ornamental. Lowercase 'mk2' branding.",
       "visual_signature": "Film posters as primary visual language. Thematic event clustering (not chronological calendars). Narrative framing in event descriptions ('Découvrez en avant-première'). Grid-based film presentation with consistent rectangular layouts. Emphasis on filmmaker partnerships and context over logistics.",
-      "what_makes_it_exceptional": "Treats cinema as participatory, not passive. Narrative context prioritized over logistics. Diverse programming (family films, philosophy seminars, documentaries) positioned with equal visual weight. Curatorial authority paired with populist invitation. Academic partnerships (Centre Pompidou) add gravitas without gatekeeping.",
+      "what_makes_it_exceptional": "MK2 incarne l'arthouse parisien — le site dark reflète l'ambiance salle de cinéma.",
       "design_lessons": [
-        "Lowercase branding signals accessibility without sacrificing sophistication",
-        "Editorial voice (via narrative descriptions) creates community better than calendar listings",
-        "Film posters as visual system scale naturally and reduce design overhead",
-        "Curatorial authority requires context/collaboration visibility, not institutional isolation"
-      ]
+        "Le noir signale cinéma d'auteur autant que luxe",
+        "L'accent rouge sur noir = code couleur universel du cinéma"
+      ],
+      "visual_score": 7,
+      "is_reference_worthy": true,
+      "visual_impression": "Cinéma parisien premium — sombre et cinématique, l'esthétique arthouse française en numérique",
+      "palette_real": {
+        "dominant": "#0D0D0D",
+        "primary": "#FFFFFF",
+        "secondary": "#1A1A1A",
+        "accent": "#E30613",
+        "background": "#0D0D0D",
+        "mood": "sombre"
+      },
+      "typography_real": {
+        "heading": "sans-serif bold condensé",
+        "body": "sans-serif compact",
+        "quality": "professionnel"
+      },
+      "layout_pattern": "grille / magazine",
+      "whitespace": "équilibré",
+      "photography_quality": "editorial",
+      "animation_level": "subtile",
+      "mobile_quality": "correcte",
+      "overall_craft": "soigné",
+      "strengths": [
+        "Fond noir = cinéma d'art et essai assumé",
+        "Red accent MK2 cohérent",
+        "Grille films sur fond sombre"
+      ],
+      "weaknesses": [
+        "Cookie popup persistant"
+      ],
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-03"
     },
     {
       "name": "Gaîté Lyrique",
