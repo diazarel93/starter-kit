@@ -86,9 +86,13 @@ async function killPopups(page) {
   // 1. Playwright locator text (le plus fiable — cherche dans tout le DOM rendu)
   const clickTexts = [
     // Cookies — priorité absolue
-    "Accept All", "Accept all", "Accept All Cookies", "Accepter tout",
-    "Tout accepter", "Alle akzeptieren", "Allow all", "Allow All",
-    "I agree", "Got it", "OK", "Okay",
+    "Accept All", "Accept all", "Accept All Cookies", "Accept all cookies",
+    "Accept selected cookies", "Accepter tout", "Tout accepter",
+    "Alle akzeptieren", "Alle Cookies akzeptieren",
+    "Allow all", "Allow All", "Allow cookies", "Allow Cookies", "Allow all cookies",
+    "I agree", "Got it", "OK", "Okay", "Sure",
+    "J'accepte", "Accepter", "Accepter les cookies", "Accepter tous les cookies",
+    "Alle akzeptieren", "Zustimmen",
     // Age gate — après cookie
     "YES", "Yes", "OUI", "Oui",
     "Yes, I am", "Yes, I'm", "I'm 18+", "I am 18",
