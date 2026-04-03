@@ -25,9 +25,8 @@ mkdirSync(CAPTURES_DIR, { recursive: true });
 // ─── POPUP KILLING — agressif (cookie gates, age gates, modales, newsletters) ──
 
 async function killAllPopups(page) {
-  // Patterns de boutons "accepter / fermer" en plusieurs langues
-  const acceptPatterns = [
-    // Cookie consent
+  // ÉTAPE 1 — Cookie consent (sélecteurs CSS connus)
+  const cookieSelectors = [
     '#onetrust-accept-btn-handler',
     '.cc-dismiss', '.cc-allow',
     '[data-testid="cookie-accept"]',
@@ -35,53 +34,69 @@ async function killAllPopups(page) {
     'button[class*="accept-all"]',
     'button[class*="acceptAll"]',
     '[data-action="accept-cookies"]',
-    // Génériques
-    'button[aria-label="Close"]',
-    'button[aria-label="close"]',
-    'button[aria-label="Dismiss"]',
-    'button[aria-label="dismiss"]',
-    '[aria-label="Close dialog"]',
-    '[data-dismiss="modal"]',
-    '.modal-close', '.popup-close',
-    'button[class*="close-btn"]',
-    'button[class*="closeBtn"]',
-    // Age gates — chercher bouton YES/OUI/J'AI + ANS
-    'button[value="yes"]',
-    'a[href*="age-verified"]',
+    '[id*="accept"][id*="cookie"]',
+    '[class*="consent"] button[class*="primary"]',
   ];
-
-  // Cliquer sur tous les boutons trouvés
-  for (const sel of acceptPatterns) {
+  for (const sel of cookieSelectors) {
     try {
       const el = await page.$(sel);
-      if (el && await el.isVisible()) {
-        await el.click();
-        await page.waitForTimeout(400);
+      if (el && await el.isVisible()) { await el.click(); await page.waitForTimeout(500); }
+    } catch {}
+  }
+
+  // ÉTAPE 2 — Recherche par texte (cookie + age gate en 2 passes)
+  // Passe 1 : cookies (Accept All, Tout accepter, J'accepte...)
+  const cookieTexts = /^(accept all|accept cookies|tout accepter|j'accepte|ok|got it|i agree|alle akzeptieren|alle cookies akzeptieren|accepter tout)$/i;
+  // Passe 2 : age gates (YES, Oui, Enter, I am 18+...)
+  const ageGateTexts = /^(yes|oui|yes,? i am|i'?m 18|enter|enter site|j'ai \d+|i am of legal age|confirm age|yes,? i'?m)$/i;
+  // Passe 3 : fermetures génériques
+  const closeTexts = /^(close|fermer|dismiss|no thanks|non merci|×|✕)$/i;
+
+  for (const pattern of [cookieTexts, ageGateTexts, closeTexts]) {
+    try {
+      const buttons = await page.$$('button, a[role="button"], input[type="button"], input[type="submit"]');
+      for (const btn of buttons) {
+        try {
+          const text = (await btn.textContent() || "").trim();
+          if (pattern.test(text) && await btn.isVisible()) {
+            await btn.click();
+            await page.waitForTimeout(600); // laisser le temps à l'age gate d'apparaître
+          }
+        } catch {}
       }
     } catch {}
   }
 
-  // Recherche par texte pour age gates et newsletters
-  const textPatterns = [
-    /^(accept all|tout accepter|j'accepte|ok|got it|i agree|yes, i am|i'm 18|yes i am)/i,
-    /^(yes|oui|continue|enter|enter site)$/i,
-    /^(no thanks|non merci|close|fermer|dismiss)$/i,
+  // ÉTAPE 3 — Sélecteurs génériques fermeture modales
+  const closeSelectors = [
+    'button[aria-label="Close"]', 'button[aria-label="close"]',
+    'button[aria-label="Dismiss"]', '[aria-label="Close dialog"]',
+    '[data-dismiss="modal"]', '.modal-close', '.popup-close',
+    'button[class*="close-btn"]', 'button[class*="closeBtn"]',
+    'button[class*="newsletter-close"]',
   ];
+  for (const sel of closeSelectors) {
+    try {
+      const el = await page.$(sel);
+      if (el && await el.isVisible()) { await el.click(); await page.waitForTimeout(300); }
+    } catch {}
+  }
 
+  // ÉTAPE 4 — Supprimer les overlays résiduels via JS (age gates Shopify, overlays custom)
   try {
-    const buttons = await page.$$('button, a[role="button"]');
-    for (const btn of buttons) {
-      try {
-        const text = (await btn.textContent() || "").trim();
-        if (textPatterns.some(p => p.test(text)) && await btn.isVisible()) {
-          await btn.click();
-          await page.waitForTimeout(300);
-        }
-      } catch {}
-    }
+    await page.evaluate(() => {
+      // Supprimer les overlays fixes qui bloquent le contenu
+      document.querySelectorAll('[class*="age-gate"], [id*="age-gate"], [class*="age-verification"], [class*="overlay"], [class*="modal"][style*="display: block"]').forEach(el => {
+        const style = window.getComputedStyle(el);
+        if (style.position === 'fixed' || style.position === 'absolute') el.remove();
+      });
+      // Restaurer le scroll si bloqué par les popups
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    });
   } catch {}
 
-  // ESC pour fermer les modales résiduelles
+  // ESC pour fermer ce qui reste
   await page.keyboard.press("Escape");
   await page.waitForTimeout(300);
 }
