@@ -1,359 +1,359 @@
 /**
- * visual-analyzer.mjs — Capture complète + analyse DA via Claude Code vision
+ * visual-analyzer.mjs — Capture Playwright complète pour analyse DA
  *
- * Pipeline :
- *   1. Playwright → hero + sections + footer + mobile + sous-pages (screenshot.js logic)
- *   2. Claude Code lit les images → analyse DA (abonnement Max, pas API)
+ * Captures par site :
+ *   - hero desktop (1440×900)
+ *   - full page scrollée desktop
+ *   - sections 25% / 50% / 75% / footer
+ *   - mobile hero (390×844)
+ *   - mobile full page
+ *   - sous-pages prioritaires (About, Work, Studio...) avec hero + mobile
+ *
+ * Gestion des blocages :
+ *   - Cookie banners (5 stratégies combinées)
+ *   - Age gates (YES / OUI / Enter)
+ *   - Modales newsletters
+ *   - Overlays JS custom
  *
  * Usage :
- *   node visual-analyzer.mjs <url>              → capture + manifest
- *   node visual-analyzer.mjs <url> --quick      → hero + mobile seulement (rapide)
+ *   node visual-analyzer.mjs <url>
  *   echo '["url1","url2"]' | node visual-analyzer.mjs --batch
  */
 
 import { chromium } from "playwright";
-import { writeFileSync, mkdirSync, readFileSync, existsSync } from "fs";
+import { writeFileSync, mkdirSync, existsSync, readdirSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const CAPTURES_DIR = resolve(__dirname, "captures/visual-analysis");
-const KB_PATH = resolve(__dirname, "knowledge-base.json");
+const OUT_DIR = resolve(__dirname, "captures/visual-analysis");
+mkdirSync(OUT_DIR, { recursive: true });
 
-mkdirSync(CAPTURES_DIR, { recursive: true });
+// ─── CONFIGURATION ────────────────────────────────────────────────────────────
 
-// ─── POPUP KILLING — agressif (cookie gates, age gates, modales, newsletters) ──
+const DESKTOP = { width: 1440, height: 900 };
+const MOBILE  = { width: 390,  height: 844 };
+const DESKTOP_UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
+const MOBILE_UA  = "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1";
 
-async function killAllPopups(page) {
-  // ÉTAPE 1 — Cookie consent (sélecteurs CSS connus)
-  const cookieSelectors = [
-    '#onetrust-accept-btn-handler',
-    '.cc-dismiss', '.cc-allow',
-    '[data-testid="cookie-accept"]',
-    'button[class*="cookie-accept"]',
-    'button[class*="accept-all"]',
-    'button[class*="acceptAll"]',
-    '[data-action="accept-cookies"]',
-    '[id*="accept"][id*="cookie"]',
-    '[class*="consent"] button[class*="primary"]',
-  ];
-  for (const sel of cookieSelectors) {
-    try {
-      const el = await page.$(sel);
-      if (el && await el.isVisible()) { await el.click(); await page.waitForTimeout(500); }
-    } catch {}
+// ─── HELPERS ──────────────────────────────────────────────────────────────────
+
+function slug(url) {
+  return url.replace(/https?:\/\/(www\.)?/, "").replace(/[^a-z0-9]/gi, "-").slice(0, 50).replace(/-+$/, "");
+}
+
+async function newPage(browser, mobile = false) {
+  const page = await browser.newPage();
+  await page.setViewportSize(mobile ? MOBILE : DESKTOP);
+  await page.setExtraHTTPHeaders({
+    "User-Agent": mobile ? MOBILE_UA : DESKTOP_UA,
+    "Accept-Language": "fr-FR,fr;q=0.9,en-US;q=0.8",
+  });
+  return page;
+}
+
+async function goto(page, url) {
+  try {
+    await page.goto(url, { waitUntil: "networkidle", timeout: 35000 });
+  } catch {
+    try { await page.goto(url, { waitUntil: "domcontentloaded", timeout: 25000 }); } catch {}
   }
+  // Attendre que JS + fonts soient chargés
+  await page.waitForTimeout(3500);
+}
 
-  // ÉTAPE 2 — Recherche par texte (cookie + age gate en 2 passes)
-  // Passe 1 : cookies (Accept All, Tout accepter, J'accepte...)
-  const cookieTexts = /^(accept all|accept cookies|tout accepter|j'accepte|ok|got it|i agree|alle akzeptieren|alle cookies akzeptieren|accepter tout)$/i;
-  // Passe 2 : age gates (YES, Oui, Enter, I am 18+...)
-  const ageGateTexts = /^(yes|oui|yes,? i am|i'?m 18|enter|enter site|j'ai \d+|i am of legal age|confirm age|yes,? i'?m)$/i;
-  // Passe 3 : fermetures génériques
-  const closeTexts = /^(close|fermer|dismiss|no thanks|non merci|×|✕)$/i;
+async function scrollFull(page) {
+  const h = await page.evaluate(() => document.documentElement.scrollHeight);
+  for (let y = 0; y < Math.min(h, 10000); y += 400) {
+    await page.evaluate(y => window.scrollTo({ top: y, behavior: "instant" }), y);
+    await page.waitForTimeout(60);
+  }
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  await page.waitForTimeout(500);
+}
 
-  for (const pattern of [cookieTexts, ageGateTexts, closeTexts]) {
+async function shot(page, path, opts = {}) {
+  try {
+    await page.screenshot({ type: "jpeg", quality: 85, ...opts, path });
+    return true;
+  } catch { return false; }
+}
+
+// ─── KILL POPUPS — 5 stratégies dans l'ordre ─────────────────────────────────
+
+async function killPopups(page) {
+
+  // 1. Playwright locator text (le plus fiable — cherche dans tout le DOM rendu)
+  const clickTexts = [
+    // Cookies — priorité absolue
+    "Accept All", "Accept all", "Accept All Cookies", "Accepter tout",
+    "Tout accepter", "Alle akzeptieren", "Allow all", "Allow All",
+    "I agree", "Got it", "OK", "Okay",
+    // Age gate — après cookie
+    "YES", "Yes", "OUI", "Oui",
+    "Yes, I am", "Yes, I'm", "I'm 18+", "I am 18",
+    "Enter", "Enter Site", "Enter the site",
+    "I am of legal age", "Confirm my age",
+    // Fermetures
+    "No thanks", "Non merci", "Close", "Fermer", "Dismiss",
+    "Not now", "Maybe later", "×", "✕", "✖",
+  ];
+
+  for (const txt of clickTexts) {
     try {
-      const buttons = await page.$$('button, a[role="button"], input[type="button"], input[type="submit"]');
-      for (const btn of buttons) {
-        try {
-          const text = (await btn.textContent() || "").trim();
-          if (pattern.test(text) && await btn.isVisible()) {
-            await btn.click();
-            await page.waitForTimeout(600); // laisser le temps à l'age gate d'apparaître
-          }
-        } catch {}
+      // getByText est plus précis que text= (correspondance exacte)
+      const el = page.getByRole("button", { name: txt, exact: true }).first();
+      if (await el.isVisible({ timeout: 400 })) {
+        await el.click({ force: true });
+        await page.waitForTimeout(700);
+        continue;
+      }
+    } catch {}
+    try {
+      // Fallback : locator text
+      const el = page.locator(`text="${txt}"`).first();
+      if (await el.isVisible({ timeout: 300 })) {
+        await el.click({ force: true });
+        await page.waitForTimeout(700);
       }
     } catch {}
   }
 
-  // ÉTAPE 3 — Sélecteurs génériques fermeture modales
-  const closeSelectors = [
-    'button[aria-label="Close"]', 'button[aria-label="close"]',
-    'button[aria-label="Dismiss"]', '[aria-label="Close dialog"]',
-    '[data-dismiss="modal"]', '.modal-close', '.popup-close',
-    'button[class*="close-btn"]', 'button[class*="closeBtn"]',
-    'button[class*="newsletter-close"]',
+  // 2. Sélecteurs CSS connus (onetrust, cc-cookie, Shopify age-gate...)
+  const cssSelectors = [
+    "#onetrust-accept-btn-handler",
+    ".cc-dismiss", ".cc-allow", ".cc-btn.cc-allow",
+    "[data-testid='cookie-accept']",
+    "button[class*='AcceptAll']", "button[class*='accept-all']",
+    "button[class*='acceptAll']", "button[class*='accept_all']",
+    "[id*='accept'][id*='cookie']",
+    // Fermetures modales (✕, ×, close button)
+    "button[aria-label='Close']", "button[aria-label='close']",
+    "button[aria-label='Dismiss']", "button[aria-label='dismiss']",
+    "button[aria-label='×']", "button[aria-label='✕']",
+    "[data-dismiss='modal']", ".modal__close", ".popup__close",
+    "button[class*='close']", "button[class*='Close']",
+    "button[class*='modal-close']", "button[class*='popup-close']",
+    "button[class*='newsletter-close']", "button[class*='dialog-close']",
+    // Shopify age verifier
+    ".age-verifier__yes", "button[data-age-verify='yes']",
   ];
-  for (const sel of closeSelectors) {
+  for (const sel of cssSelectors) {
     try {
       const el = await page.$(sel);
-      if (el && await el.isVisible()) { await el.click(); await page.waitForTimeout(300); }
+      if (el && await el.isVisible()) {
+        await el.click({ force: true });
+        await page.waitForTimeout(600);
+      }
     } catch {}
   }
 
-  // ÉTAPE 4 — Supprimer les overlays résiduels via JS (age gates Shopify, overlays custom)
+  // 3. Scan JS : chercher tous boutons/liens visibles avec texte correspondant
   try {
-    await page.evaluate(() => {
-      // Supprimer les overlays fixes qui bloquent le contenu
-      document.querySelectorAll('[class*="age-gate"], [id*="age-gate"], [class*="age-verification"], [class*="overlay"], [class*="modal"][style*="display: block"]').forEach(el => {
-        const style = window.getComputedStyle(el);
-        if (style.position === 'fixed' || style.position === 'absolute') el.remove();
-      });
-      // Restaurer le scroll si bloqué par les popups
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
+    const clicked = await page.evaluate(() => {
+      const hits = [];
+      const patterns = [
+        /^(accept all|accept cookies|tout accepter|allow all|i agree|got it|okay)$/i,
+        /^(yes|oui|enter|enter site|yes[,\s]+i am|i'?m 18|confirm age)$/i,
+        /^(close|fermer|dismiss|no thanks|non merci)$/i,
+      ];
+      const els = document.querySelectorAll('button, a[role="button"], input[type="submit"], [role="button"]');
+      for (const el of els) {
+        const txt = (el.textContent || el.value || el.getAttribute("aria-label") || "").trim();
+        if (patterns.some(p => p.test(txt))) {
+          const rect = el.getBoundingClientRect();
+          if (rect.width > 0 && rect.height > 0) {
+            el.click();
+            hits.push(txt);
+          }
+        }
+      }
+      return hits;
     });
+    if (clicked.length) await page.waitForTimeout(700);
   } catch {}
 
-  // ESC pour fermer ce qui reste
-  await page.keyboard.press("Escape");
+  // 4. Supprimer les overlays résiduels via JS
+  try {
+    await page.evaluate(() => {
+      const selectors = [
+        "[class*='age-gate']", "[id*='age-gate']",
+        "[class*='age-verification']", "[id*='age-verification']",
+        "[class*='ageVerif']", "[class*='AgeVerif']",
+        "[class*='cookie-banner']", "[id*='cookie-banner']",
+        "[class*='CookieBanner']", "[class*='consent-overlay']",
+      ];
+      selectors.forEach(sel => {
+        document.querySelectorAll(sel).forEach(el => {
+          const s = window.getComputedStyle(el);
+          if (s.position === "fixed" || s.position === "absolute") el.remove();
+        });
+      });
+      // Dégeler le scroll
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      document.body.style.position = "";
+    });
+    await page.waitForTimeout(300);
+  } catch {}
+
+  // 5. ESC de secours
+  try { await page.keyboard.press("Escape"); } catch {}
   await page.waitForTimeout(300);
 }
 
-// ─── SETUP PAGE ─────────────────────────────────────────────────────────────────
+// ─── CAPTURE D'UNE PAGE ───────────────────────────────────────────────────────
 
-async function setupPage(browser, mobile = false) {
-  const page = await browser.newPage();
-  if (mobile) {
-    await page.setViewportSize({ width: 390, height: 844 });
-    await page.setExtraHTTPHeaders({
-      "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
-      "Accept-Language": "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7",
-    });
-  } else {
-    await page.setViewportSize({ width: 1440, height: 900 });
-    await page.setExtraHTTPHeaders({
-      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-      "Accept-Language": "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7",
-    });
-  }
-  return page;
-}
-
-// ─── GOTO avec fallback ───────────────────────────────────────────────────────
-
-async function gotoSafe(page, url) {
-  try {
-    await page.goto(url, { waitUntil: "networkidle", timeout: 30000 });
-  } catch {
-    try { await page.goto(url, { waitUntil: "domcontentloaded", timeout: 20000 }); } catch {}
-  }
-  await page.waitForTimeout(2500);
-}
-
-// ─── SCROLL PROGRESSIF (déclenche lazy loads) ────────────────────────────────
-
-async function triggerLazyLoads(page) {
-  const totalH = await page.evaluate(() => document.documentElement.scrollHeight);
-  const step = 500;
-  for (let y = 0; y < Math.min(totalH, 8000); y += step) {
-    await page.evaluate((yy) => window.scrollTo({ top: yy, behavior: "instant" }), y);
-    await page.waitForTimeout(80);
-  }
-  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
-  await page.waitForTimeout(500);
-}
-
-// ─── CAPTURE UNE PAGE COMPLÈTE ───────────────────────────────────────────────
-
-async function capturePage(browser, url, prefix, dir, quickMode = false) {
+async function capturePage(browser, url, prefix, dir) {
   const captures = {};
-  const W = 1440, H = 900;
 
   // ── Desktop ────────────────────────────────────────────────────────────────
-  const page = await setupPage(browser, false);
-  await gotoSafe(page, url);
-  await killAllPopups(page);
-  await page.waitForTimeout(500);
-  await killAllPopups(page); // 2ème passe
-  await triggerLazyLoads(page);
+  const dp = await newPage(browser, false);
+  try {
+    await goto(dp, url);
 
-  // Hero (above the fold)
-  const heroPath = resolve(dir, `${prefix}-hero.jpg`);
-  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
-  await page.waitForTimeout(400);
-  await page.screenshot({ path: heroPath, type: "jpeg", quality: 88, clip: { x: 0, y: 0, width: W, height: H } });
-  captures.hero = heroPath;
+    // 2 passes de killPopups : avant scroll + après scroll
+    await killPopups(dp);
+    await dp.waitForTimeout(500);
+    await killPopups(dp); // 2ème passe — age gate peut apparaître après cookie accept
 
-  if (!quickMode) {
-    // Full page (scroll + fullPage)
+    await scrollFull(dp); // déclenche lazy loads
+
+    // Hero
+    const heroPath = resolve(dir, `${prefix}-hero.jpg`);
+    await shot(dp, heroPath, { clip: { x: 0, y: 0, width: DESKTOP.width, height: DESKTOP.height } });
+    captures.hero = heroPath;
+
+    // Full page
     const fullPath = resolve(dir, `${prefix}-full.jpg`);
-    try {
-      await page.screenshot({ path: fullPath, type: "jpeg", quality: 72, fullPage: true });
-      captures.full = fullPath;
-    } catch {}
+    await shot(dp, fullPath, { fullPage: true, quality: 72 });
+    captures.full = fullPath;
 
-    // Sections intermédiaires (25% / 50% / 75% / footer)
-    const pageH = await page.evaluate(() => document.documentElement.scrollHeight);
-    for (const [i, ratio] of [[2, 0.25], [3, 0.5], [4, 0.75]]) {
-      const y = Math.floor(pageH * ratio);
-      await page.evaluate((yy) => window.scrollTo({ top: yy, behavior: "instant" }), y);
-      await page.waitForTimeout(400);
-      const sPath = resolve(dir, `${prefix}-s${i}.jpg`);
-      await page.screenshot({ path: sPath, type: "jpeg", quality: 80, clip: { x: 0, y: 0, width: W, height: H } });
-      captures[`section_${i}`] = sPath;
+    // Sections intermédiaires
+    const pageH = await dp.evaluate(() => document.documentElement.scrollHeight);
+    for (const [i, r] of [[2, 0.25], [3, 0.5], [4, 0.75]]) {
+      await dp.evaluate(y => window.scrollTo({ top: y, behavior: "instant" }), Math.floor(pageH * r));
+      await dp.waitForTimeout(350);
+      const sp = resolve(dir, `${prefix}-s${i}.jpg`);
+      await shot(dp, sp, { clip: { x: 0, y: 0, width: DESKTOP.width, height: DESKTOP.height } });
+      captures[`section${i}`] = sp;
     }
 
     // Footer
-    await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "instant" }));
-    await page.waitForTimeout(400);
+    await dp.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "instant" }));
+    await dp.waitForTimeout(350);
     const footerPath = resolve(dir, `${prefix}-footer.jpg`);
-    await page.screenshot({ path: footerPath, type: "jpeg", quality: 80, clip: { x: 0, y: 0, width: W, height: H } });
+    await shot(dp, footerPath, { clip: { x: 0, y: 0, width: DESKTOP.width, height: DESKTOP.height } });
     captures.footer = footerPath;
-  }
 
-  await page.close();
+  } finally { await dp.close(); }
 
   // ── Mobile ─────────────────────────────────────────────────────────────────
-  const mobilePage = await setupPage(browser, true);
-  await gotoSafe(mobilePage, url);
-  await killAllPopups(mobilePage);
-  await mobilePage.waitForTimeout(500);
-  const mobilePath = resolve(dir, `${prefix}-mobile.jpg`);
-  await mobilePage.screenshot({ path: mobilePath, type: "jpeg", quality: 85, clip: { x: 0, y: 0, width: 390, height: 844 } });
-  captures.mobile = mobilePath;
+  const mp = await newPage(browser, true);
+  try {
+    await goto(mp, url);
+    await killPopups(mp);
+    await mp.waitForTimeout(400);
+    await killPopups(mp);
 
-  if (!quickMode) {
+    // Mobile hero
+    const mhPath = resolve(dir, `${prefix}-mobile.jpg`);
+    await shot(mp, mhPath, { clip: { x: 0, y: 0, width: MOBILE.width, height: MOBILE.height } });
+    captures.mobile = mhPath;
+
     // Mobile full
-    const mobileFullPath = resolve(dir, `${prefix}-mobile-full.jpg`);
-    try {
-      await triggerLazyLoads(mobilePage);
-      await mobilePage.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
-      await mobilePage.screenshot({ path: mobileFullPath, type: "jpeg", quality: 70, fullPage: true });
-      captures.mobile_full = mobileFullPath;
-    } catch {}
-  }
+    await scrollFull(mp);
+    const mfPath = resolve(dir, `${prefix}-mobile-full.jpg`);
+    await shot(mp, mfPath, { fullPage: true, quality: 70 });
+    captures.mobile_full = mfPath;
 
-  await mobilePage.close();
+  } finally { await mp.close(); }
+
   return captures;
 }
 
-// ─── DISCOVER SOUS-PAGES ──────────────────────────────────────────────────────
+// ─── SOUS-PAGES ───────────────────────────────────────────────────────────────
 
-async function discoverSubPages(browser, url, maxPages = 3) {
-  const page = await setupPage(browser, false);
-  await gotoSafe(page, url);
-  const baseUrl = new URL(url).origin;
-
-  const links = await page.evaluate((base) => {
-    return [...new Set(
-      Array.from(document.querySelectorAll('a[href]'))
+async function getSubPages(browser, url, max = 3) {
+  const base = new URL(url).origin;
+  const p = await newPage(browser, false);
+  try {
+    await goto(p, url);
+    const links = await p.evaluate(base => [...new Set(
+      Array.from(document.querySelectorAll("a[href]"))
         .map(a => a.href)
-        .filter(h => h.startsWith(base) && h !== base && !h.includes('#') && !h.match(/\.(pdf|png|jpg|zip|gif)$/i))
-    )].slice(0, 10);
-  }, baseUrl);
-
-  await page.close();
-
-  // Priorité : pages qui ressemblent à About, Work, Studio, Products, Collection
-  const priority = links.filter(l => /about|work|studio|collection|products|shop|services|projects/i.test(l));
-  const rest = links.filter(l => !priority.includes(l));
-  return [...priority, ...rest].slice(0, maxPages);
+        .filter(h => h.startsWith(base) && h !== base && !h.includes("#") && !/\.(pdf|zip|jpg|png|gif)$/i.test(h))
+    )], base);
+    const priority = links.filter(l => /about|work|studio|collection|shop|project|service|portfolio|case/i.test(l));
+    return [...priority, ...links.filter(l => !priority.includes(l))].slice(0, max);
+  } finally { await p.close(); }
 }
 
 // ─── CAPTURE COMPLÈTE D'UN SITE ──────────────────────────────────────────────
 
-async function captureWebsite(url, quickMode = false) {
-  const slug = url.replace(/https?:\/\//, "").replace(/[^a-z0-9]/gi, "-").slice(0, 50);
-  const dir = resolve(CAPTURES_DIR, slug);
+async function captureWebsite(url) {
+  const s = slug(url);
+  const dir = resolve(OUT_DIR, s);
+
+  // Skip si déjà capturé avec assez d'images (> 5)
+  if (existsSync(dir)) {
+    const imgs = readdirSync(dir).filter(f => f.endsWith(".jpg")).length;
+    if (imgs > 5) {
+      console.log(`  ⏭  Déjà capturé (${imgs} imgs) : ${s}`);
+      return;
+    }
+  }
   mkdirSync(dir, { recursive: true });
 
-  console.log(`\n📸 Capture : ${url}`);
+  console.log(`\n📸 ${url}`);
   const browser = await chromium.launch({ headless: true });
-
-  const allCaptures = {};
+  const manifest = { url, slug: s, captured_at: new Date().toISOString(), pages: {} };
 
   try {
     // Page principale
-    console.log("  → Page principale...");
-    allCaptures.main = await capturePage(browser, url, "00-main", dir, quickMode);
+    console.log("  → main page...");
+    manifest.pages.main = await capturePage(browser, url, "00-main", dir);
 
-    if (!quickMode) {
-      // Sous-pages
-      const subPages = await discoverSubPages(browser, url);
-      console.log(`  → ${subPages.length} sous-pages trouvées`);
-
-      for (let i = 0; i < subPages.length; i++) {
-        const subUrl = subPages[i];
-        const subSlug = subUrl.replace(new URL(url).origin, "").replace(/[^a-z0-9]/gi, "-").slice(1, 25) || `page-${i + 1}`;
-        console.log(`  → Sous-page : ${subUrl}`);
-        try {
-          allCaptures[`sub_${i + 1}`] = await capturePage(browser, subUrl, `0${i + 1}-${subSlug}`, dir, true);
-          allCaptures[`sub_${i + 1}`]._url = subUrl;
-        } catch (e) {
-          console.log(`    ✗ Erreur : ${e.message}`);
-        }
-      }
+    // Sous-pages
+    const subs = await getSubPages(browser, url);
+    console.log(`  → ${subs.length} sous-pages`);
+    for (let i = 0; i < subs.length; i++) {
+      const su = subs[i];
+      const sp = su.replace(new URL(url).origin, "").replace(/[^a-z0-9]/gi, "-").slice(1, 20) || `p${i+1}`;
+      try {
+        console.log(`  → ${su}`);
+        manifest.pages[`sub${i+1}`] = await capturePage(browser, su, `0${i+1}-${sp}`, dir);
+        manifest.pages[`sub${i+1}`]._url = su;
+      } catch (e) { console.log(`    ✗ ${e.message}`); }
     }
 
-    // Manifest pour l'agent Claude Code
-    const manifest = {
-      url,
-      slug,
-      captured_at: new Date().toISOString(),
-      quick_mode: quickMode,
-      captures_dir: dir,
-      pages: allCaptures,
-      analysis_prompt: `Tu es un directeur artistique senior. Analyse visuellement ce site (${url}).
-
-Pour chaque image :
-- hero : impression globale, palette dominante, typo visible, layout
-- full : structure complète, répétitions, système de grid
-- sections : cohérence entre blocs, qualité des transitions
-- footer : informations présentes, typographie secondaire
-- mobile : adaptation responsive, UX mobile, différences desktop/mobile
-- sous-pages : cohérence du design system, variations autorisées
-
-Réponds en JSON avec ces champs :
-{
-  "visual_impression": "1-2 phrases DA — impression immédiate",
-  "palette_real": { "dominant": "#HEX", "primary": "#HEX", "secondary": "#HEX", "accent": "#HEX", "background": "#HEX", "palette_mood": "..." },
-  "typography_real": { "heading_style": "...", "body_style": "...", "type_hierarchy": "forte/moyenne/faible", "type_quality": "basique/professionnel/exceptionnel" },
-  "composition": { "layout": "...", "whitespace": "généreux/équilibré/dense", "hero_type": "...", "scroll_pattern": "..." },
-  "visual_quality": { "photography": "absente/générique/lifestyle/editorial/product", "illustration": "absente/icons/custom/editorial/3D", "animation_visible": "aucune/subtile/présente/dominante", "overall_craft": "basique/correct/soigné/exceptionnel" },
-  "mobile_experience": { "adaptation": "excellente/correcte/basique/cassée", "key_differences": "..." },
-  "da_verdict": { "score_visuel": 0-10, "forces": ["..."], "faiblesses": ["..."], "positionnement_reel": "...", "comparable_a": "..." },
-  "what_makes_it_exceptional": "...",
-  "design_lessons": ["...", "...", "..."]
-}`
-    };
+    const imgTotal = readdirSync(dir).filter(f => f.endsWith(".jpg")).length;
+    console.log(`  ✅ ${imgTotal} captures → ${s}`);
     writeFileSync(resolve(dir, "manifest.json"), JSON.stringify(manifest, null, 2));
-    console.log(`  ✅ ${Object.keys(allCaptures).length} pages capturées → ${dir}`);
 
-    return manifest;
-  } finally {
-    await browser.close();
-  }
+  } finally { await browser.close(); }
 }
 
 // ─── CLI ──────────────────────────────────────────────────────────────────────
 
 const args = process.argv.slice(2);
-const quickMode = args.includes("--quick");
-const batchMode = args.includes("--batch");
 const url = args.find(a => a.startsWith("http"));
+const batchMode = args.includes("--batch");
 
 if (batchMode) {
-  let input = "";
-  process.stdin.on("data", chunk => input += chunk);
+  let raw = "";
+  process.stdin.on("data", c => raw += c);
   process.stdin.on("end", async () => {
-    const urls = JSON.parse(input);
+    const urls = JSON.parse(raw);
+    let done = 0;
     for (const u of urls) {
-      try { await captureWebsite(u, quickMode); }
-      catch (e) { console.error(`  ✗ ${u}: ${e.message}`); }
+      try { await captureWebsite(u); done++; }
+      catch (e) { console.error(`  ✗ ${u} : ${e.message}`); }
     }
-    console.log("\n✅ Batch terminé. Demande à Claude Code d'analyser les images dans captures/visual-analysis/");
+    console.log(`\n✅ ${done}/${urls.length} sites capturés`);
   });
 } else if (url) {
-  const manifest = await captureWebsite(url, quickMode);
-  console.log(`\n→ Pour analyser, dis à Claude Code :`);
-  console.log(`  "Analyse visuellement ${manifest.slug} — lis les images dans ${manifest.captures_dir}"`);
+  await captureWebsite(url);
 } else {
-  console.log(`
-visual-analyzer.mjs — Capture complète + analyse vision Max
-
-Usage :
-  node visual-analyzer.mjs <url>           # Capture complète (hero, sections, footer, mobile, sous-pages)
-  node visual-analyzer.mjs <url> --quick   # Capture rapide (hero + mobile seulement)
-  echo '["url1","url2"]' | node visual-analyzer.mjs --batch
-
-Exemples :
-  node visual-analyzer.mjs https://arcteryx.com
-  node visual-analyzer.mjs https://linear.app --quick
-  echo '["https://mikkeller.com","https://stumptowncoffee.com"]' | node visual-analyzer.mjs --batch
-
-Étape 2 (Claude Code lit les images) :
-  "Analyse visuellement arcteryx-com — lis les JPG dans captures/visual-analysis/arcteryx-com/"
-`);
+  console.log("Usage :\n  node visual-analyzer.mjs <url>\n  echo '[\"url1\"]' | node visual-analyzer.mjs --batch");
 }
