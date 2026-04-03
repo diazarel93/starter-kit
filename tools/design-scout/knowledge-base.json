@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "last_updated": "2026-04-03",
-  "total_sites": 613,
+  "total_sites": 634,
   "sites": [
     {
       "id": "banlieuwood-pencil-cinema-dark-2026-04-03",
@@ -25194,6 +25194,744 @@
         "Jewel-tone + pastel combo",
         "Gender-specific positioning risk",
         "Girlboss aesthetic peak 2015-2022"
+      ]
+    },
+    {
+      "url": "https://lanserhof.com",
+      "name": "Lanserhof",
+      "sector": "aesthetic-medicine",
+      "sub_aesthetic": "Medical Spa / Wellness Resort",
+      "style_tags": [
+        "minimalist-luxury",
+        "nature-centric",
+        "wellness-focused",
+        "high-end-european",
+        "clinical-elegance"
+      ],
+      "palette": {
+        "primary": "#FFFFFF",
+        "secondary": "#F5F5F5",
+        "accent": "#000000",
+        "background": "#FAFAFA",
+        "accent_warm": "#C8A882"
+      },
+      "typography": {
+        "heading": "Sans-serif modern (unspecified but clearly high-end)",
+        "body": "Sans-serif modern minimal"
+      },
+      "what_makes_it_exceptional": "Balances scientific rigor with aspirational wellness through generous whitespace and nature imagery. The design whispers luxury rather than shouting it—positioning as 'Herausragende Exzellenz' through restraint and clarity.",
+      "trust_signals": [
+        "Minimalist typography hierarchy conveys professionalism",
+        "High-quality photography of facilities and nature",
+        "German precision in layout and spacing",
+        "Scientific positioning without medical jargon overload",
+        "Clear positioning statement: excellence in preventive health"
+      ],
+      "design_lessons": [
+        "Medical luxury doesn't need loud colors—whitespace and quality imagery create premium perception",
+        "Blend clinical credibility with aspirational wellness through visual storytelling",
+        "European minimalism (clean lines, generous spacing) reads as premium and trustworthy",
+        "Nature imagery softens medical positioning without compromising expertise"
+      ]
+    },
+    {
+      "url": "https://theskinnerd.com",
+      "name": "The Skin Nerd",
+      "sector": "aesthetic-medicine",
+      "sub_aesthetic": "Educational Skincare / Dermatology",
+      "style_tags": [
+        "clinical-modern",
+        "educational-friendly",
+        "navy-centric",
+        "accessible-expertise",
+        "contemporary-professional"
+      ],
+      "palette": {
+        "primary": "#244673",
+        "secondary": "#293F60",
+        "accent": "#FFFFFF",
+        "background": "#F7F7F7",
+        "text_muted": "#5C5C5C"
+      },
+      "typography": {
+        "heading": "Lato (sans-serif), weights 300/700",
+        "body": "Lato, weight 400 at 1.5-1.6rem"
+      },
+      "what_makes_it_exceptional": "Bridges professional dermatology with approachable education. Deep navy conveys clinical authority while generous whitespace and light typography weight make complex skincare science feel accessible, not intimidating.",
+      "trust_signals": [
+        "Deep navy primary (#244673) = clinical authority",
+        "Clean Lato typography = accessibility without loss of credibility",
+        "Minimal color palette = scientific, not trendy",
+        "High contrast (navy on white) = legibility and professionalism",
+        "Educational positioning through clear content hierarchy"
+      ],
+      "design_lessons": [
+        "Professional skincare brands succeed by making clinical knowledge accessible—typography weight and spacing matter more than color",
+        "Navy + light backgrounds = premium clinical feel without coldness",
+        "Gentle letter-spacing and breathing room in layout democratizes expertise",
+        "Consistent color use (navy CTA buttons, consistent link treatment) builds trust through predictability"
+      ]
+    },
+    {
+      "url": "https://medik8.com",
+      "name": "Medik8",
+      "sector": "aesthetic-medicine",
+      "sub_aesthetic": "Clinical Skincare / Dermatological Products",
+      "style_tags": [
+        "luxury-minimal",
+        "dark-modern",
+        "clinical-sophistication",
+        "high-contrast",
+        "product-focused"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#0A3526",
+        "background": "#FFFFFF",
+        "dark_mode_bg": "#0A3526"
+      },
+      "typography": {
+        "heading": "System stack: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto",
+        "body": "System stack for optimal cross-platform readability"
+      },
+      "what_makes_it_exceptional": "Luxury cosmeceuticals use high-contrast black/white with deep forest green for dark mode to evoke clinical precision and premium positioning. Design hierarchy is ruthlessly minimal—letting product formulations and efficacy take center stage.",
+      "trust_signals": [
+        "Extreme black/white contrast = pharmaceutical/clinical credibility",
+        "System fonts (no decorative typefaces) = scientific, not marketing-driven",
+        "Deep green accent (#0A3526) = natural ingredients without compromising luxury feel",
+        "Large, restrained logo treatment = premium confidence",
+        "Product-centric layout with minimal ornament = efficacy-focused"
+      ],
+      "design_lessons": [
+        "Clinical skincare brands must choose between warmth (approachable wellness) and pure clinical feel—Medik8 chooses clinical and wins trust through that specificity",
+        "System fonts and high contrast are not boring in luxury—they signal precision and lack of pretense",
+        "Dark mode + subtle earth-tone accent = premium clinical luxury (different from bright wellness spas)",
+        "Product imagery and clear information architecture build credibility better than atmospheric branding"
+      ]
+    },
+    {
+      "url": "https://kornferry.com",
+      "name": "Korn Ferry",
+      "sector": "executive-search",
+      "sub_aesthetic": "Global Executive Search / Leadership Consulting",
+      "style_tags": [
+        "corporate-minimalist",
+        "contemporary-authority",
+        "nature-inspired",
+        "dark-green-accent",
+        "human-centric"
+      ],
+      "palette": {
+        "primary": "#053328",
+        "secondary": "#05C690",
+        "accent": "#FFFFFF",
+        "background": "#FFFFFF",
+        "accent_tertiary": "#DAD8D6"
+      },
+      "typography": {
+        "heading": "Modern sans-serif, weights 400/500, sizes 1.75rem–4.5rem",
+        "body": "Modern sans-serif for contemporary corporate feel"
+      },
+      "what_makes_it_exceptional": "Uses dark forest green + vibrant teal accent to create authority with warmth. Unlike pure corporate navy, this palette suggests growth, nature, and forward momentum while maintaining institutional credibility. Video hero sections and semi-transparent overlays add contemporary sophistication.",
+      "trust_signals": [
+        "Dark green (#053328) = stability, growth, nature-connected (not sterile corporate)",
+        "Bright teal accent (#05C690) = innovation and forward momentum",
+        "Large-scale photography and video = human-centered approach to executive search",
+        "Feature cards with semi-transparent green overlays = contemporary design + accessibility",
+        "Responsive, spacious layout = premium digital experience"
+      ],
+      "design_lessons": [
+        "Executive search firms differentiate through color: Korn Ferry's green palette avoids overdone navy/gray corporate, suggesting growth mindset",
+        "Video hero sections + transparent overlays = premium consulting without sterility",
+        "Combining natural color (green) with vibrant accent (teal) bridges trust + innovation",
+        "Human-centric imagery paired with minimal typography = leadership focus, not process focus"
+      ]
+    },
+    {
+      "url": "https://spencerstuart.com",
+      "name": "Spencer Stuart",
+      "sector": "executive-search",
+      "sub_aesthetic": "Premium Executive Search / Leadership Advisory",
+      "style_tags": [
+        "minimalist-corporate",
+        "gold-accent",
+        "white-space-luxury",
+        "understated-authority",
+        "heritage-elegance"
+      ],
+      "palette": {
+        "primary": "#FFFFFF",
+        "secondary": "#000000",
+        "accent": "#FFC933",
+        "background": "#FFFFFF",
+        "accent_tertiary": "#D3D3D3"
+      },
+      "typography": {
+        "heading": "Helvetica Neue or equivalent (implied corporate modern sans-serif)",
+        "body": "Contemporary professional sans-serif"
+      },
+      "what_makes_it_exceptional": "Projects authority through understatement rather than visual excess. Gold accent (#FFC933) used sparingly as visual punctuation breaks the white/dark minimalism, creating 'premium executive search' through restraint. Consistent grid-based research cards (616x434px) suggest systematic excellence.",
+      "trust_signals": [
+        "Gold accent color used strategically = heritage + luxury without ostentation",
+        "Abundant whitespace = confidence and established authority",
+        "Consistent thumbnail sizing and grid layout = systematic methodology",
+        "Professional imagery of business leaders = human expertise",
+        "Hierarchical navigation with nested menus = organizational sophistication"
+      ],
+      "design_lessons": [
+        "Luxury consulting (especially European heritage firms) succeeds through restraint: one accent color (gold), lots of white",
+        "Consistent grid systems and card sizing suggest reliability and systematic approach—critical for executive search trust",
+        "Professional photography + minimal design = focus on human expertise, not visual spectacle",
+        "Gold as accent (not primary) = premium positioning without appearing nouveau riche"
+      ]
+    },
+    {
+      "url": "https://egonzehnder.com",
+      "name": "Egon Zehnder",
+      "sector": "executive-search",
+      "sub_aesthetic": "Global Leadership Consulting / Executive Placement",
+      "style_tags": [
+        "red-signature",
+        "corporate-minimalist",
+        "human-focused",
+        "contemporary-professional",
+        "international-authority"
+      ],
+      "palette": {
+        "primary": "#FFFFFF",
+        "secondary": "#000000",
+        "accent": "#E63946",
+        "background": "#FFFFFF",
+        "text_secondary": "#666666"
+      },
+      "typography": {
+        "heading": "Modern sans-serif, high contrast",
+        "body": "Clean sans-serif with generous spacing"
+      },
+      "what_makes_it_exceptional": "Red accent (#E63946) is distinctive in executive search (most firms use navy/green). This bold choice paired with white-space-heavy layouts and human-centric photography creates 'trusted expertise'—authoritative yet approachable. Consistent red iconography (search, location, globe) guides UX while building brand recognition.",
+      "trust_signals": [
+        "Distinctive red accent in sea of corporate blues/greens = memorable authority",
+        "White-space-heavy layouts = confidence, professionalism, breathing room",
+        "High-quality leadership photography = human-centered consulting",
+        "Consistent red icon system = systematic approach to information architecture",
+        "Clean navigation with organized mega-menus = organized expertise"
+      ],
+      "design_lessons": [
+        "Red in executive search is bold but works when paired with minimalism—it signals confidence + distinctive brand positioning",
+        "Consistent iconography in brand color = visual system that builds recognition + trust",
+        "Large photography + minimal typography = human expertise, not process-heavy",
+        "White space + single bold accent color = premium luxury without appearing trendy"
+      ]
+    },
+    {
+      "url": "https://y7studio.com",
+      "name": "Y7 Studio",
+      "sector": "yoga-pilates",
+      "sub_aesthetic": "Dark Yoga / Candlelight Fitness",
+      "style_tags": [
+        "dark-luxe",
+        "wellness-contemporary",
+        "terracotta-modern",
+        "minimalist-studio",
+        "urban-spiritual"
+      ],
+      "palette": {
+        "primary": "#E46D30",
+        "secondary": "#000000",
+        "accent": "#EBB93D",
+        "background": "#F5F6F8",
+        "dark_accent": "#313131"
+      },
+      "typography": {
+        "heading": "Arial, weight 600, 32px",
+        "body": "Modern sans-serif, clean and minimal"
+      },
+      "what_makes_it_exceptional": "Balances urban fitness (terracotta orange + gold accents) with wellness spirituality through minimalist layout. Generous spacing (0.44rem–5.06rem variables) and soft shadows (6px 6px 9px natural) create 'premium dark yoga experience.' Candlelit class positioning elevates beyond standard fitness.",
+      "trust_signals": [
+        "Warm terracotta (#E46D30) = human warmth, not clinical coldness",
+        "Gold secondary accent (#EBB93D) = spiritual elevation, luxury wellness",
+        "Minimal layout with generous spacing = premium experience",
+        "Soft natural shadows = contemporary, not harsh fitness branding",
+        "Image-forward storytelling = community and transformation focus"
+      ],
+      "design_lessons": [
+        "Premium wellness (yoga/pilates) differs from clinical: terracotta + gold suggests luxury retreat, not medical precision",
+        "Warm color palettes (orange, gold) paired with minimalist layout = accessible luxury",
+        "Soft shadows and generous spacing = premium wellness feeling without coldness",
+        "Candlelight positioning = differentiator that elevates beyond standard 'fitness' into 'experience'"
+      ]
+    },
+    {
+      "url": "https://corepoweryoga.com",
+      "name": "CorePower Yoga",
+      "sector": "yoga-pilates",
+      "sub_aesthetic": "Power Yoga / Fitness-Focused Wellness",
+      "style_tags": [
+        "energetic-orange",
+        "warm-wellness",
+        "accessible-luxury",
+        "community-focused",
+        "transformative"
+      ],
+      "palette": {
+        "primary": "#FF8404",
+        "secondary": "#E6883B",
+        "accent": "#DDECED",
+        "background": "#FFFFFF",
+        "neutral_warm": "#E7DFCF"
+      },
+      "typography": {
+        "heading": "Modern geometric sans-serif (implied Inter, Helvetica Neue family)",
+        "body": "Contemporary clean sans-serif"
+      },
+      "what_makes_it_exceptional": "Uses high-energy orange (#FF8404) to convey power + transformation without abandoning wellness. Secondary orange (#E6883B) for class-type highlights + soft beige/teal backgrounds create 'mind-body-spirit integration.' Photography-driven hero sections featuring diverse practitioners = inclusive, transformative positioning.",
+      "trust_signals": [
+        "Bold orange accent = energetic, transformative (matches 'power transformation' messaging)",
+        "Warm secondary tones (beige, soft teal) = balance intensity with calm",
+        "Diverse practitioner photography = inclusive community",
+        "Clean navigation + carousel presentation = contemporary UX + accessibility",
+        "SVG icons + high-quality photography = premium digital experience"
+      ],
+      "design_lessons": [
+        "Power fitness (yoga/pilates) brands use warm orange/gold to signal transformation, not cold efficiency",
+        "Balancing bold accent colors with neutral backgrounds = energy + accessibility (CorePower's beige works with orange)",
+        "Class/program highlights in secondary color = visual navigation system that builds brand consistency",
+        "Large hero photography with diverse bodies = trust signal for inclusive, transformative brand"
+      ]
+    },
+    {
+      "url": "https://pilatesanytime.com",
+      "name": "Pilates Anytime",
+      "sector": "yoga-pilates",
+      "sub_aesthetic": "Online Pilates Community / Instructional Platform",
+      "style_tags": [
+        "minimalist-digital",
+        "community-platform",
+        "elegant-neutral",
+        "educational-accessible",
+        "professional-modest"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#444444",
+        "background": "#FFFFFF",
+        "text_secondary": "#666666"
+      },
+      "typography": {
+        "heading": "Headlines 2.5rem weight 500, clean sans-serif",
+        "body": "Sublines 2rem weight 400, system defaults for accessibility"
+      },
+      "what_makes_it_exceptional": "Deliberately minimal black/white + gray palette positions Pilates Anytime as 'educational platform, not lifestyle brand.' Logo flexibility (black/white SVG versions) + responsive 768px breakpoints + high-quality instructor photography convey '200+ teachers, quality pedagogy over marketing.' Trust through content, not visual spectacle.",
+      "trust_signals": [
+        "Pure black/white palette = educational credibility, not lifestyle aspiration",
+        "Minimal color hierarchy = focus on instructors and content, not branding",
+        "Flexible logo system (SVG black/white) = professional, scalable approach",
+        "High-quality photography of diverse instructors = human expertise focus",
+        "Clean modal interfaces for video previews = contemporary UX + accessibility"
+      ],
+      "design_lessons": [
+        "Online educational platforms (Pilates Anytime) succeed by being visually humble—trust comes from content depth, not design spectacle",
+        "Minimalist palette (B&W + gray) = platform/community positioning vs. brand-driven lifestyle",
+        "SVG flexibility + responsive breakpoints = contemporary digital maturity signals",
+        "Instructor-centric photography > brand imagery = expert positioning"
+      ]
+    },
+    {
+      "url": "https://www.quiksilver.com",
+      "name": "Quiksilver",
+      "sector": "surf-snow",
+      "sub_aesthetic": "digital-premium-minimalist",
+      "style_tags": [
+        "dark-mode-first",
+        "blue-accent-electric",
+        "clean-geometric",
+        "youth-contemporary"
+      ],
+      "palette": {
+        "primary": "#141414",
+        "secondary": "#f6f6f6",
+        "accent": "#2563EB",
+        "background": "#333333"
+      },
+      "typography": {
+        "heading": "Inter (600-700)",
+        "body": "Inter (400)"
+      },
+      "what_makes_it_exceptional": "Rebrand actuel qui capture la surf/snow premium en mode digital-first. L'accent bleu électrique sur fond noir crée une tension visuelle qui signale 'jeune fortune' sans laisser la contre-culture.",
+      "tribe_codes": [
+        "dark-interface = tech-fluent youth",
+        "no-serif = post-skate modernism",
+        "blue-accent = crypto-era premium",
+        "rounded-corners (6-8px) = app-native mindset"
+      ],
+      "design_lessons": [
+        "La contre-culture premium doit être numériquement native — pas de skeuomorphisme",
+        "L'accent doit vibrer, pas se fondre — cela signale l'authenticité"
+      ]
+    },
+    {
+      "url": "https://www.billabong.com",
+      "name": "Billabong",
+      "sector": "surf-snow",
+      "sub_aesthetic": "heritage-action-sports",
+      "style_tags": [
+        "dark-mode",
+        "blue-accent",
+        "heritage-positioning",
+        "action-sports-lifestyle"
+      ],
+      "palette": {
+        "primary": "#141414",
+        "secondary": "#ffffff",
+        "accent": "#2563EB",
+        "background": "#333333"
+      },
+      "typography": {
+        "heading": "Inter (600)",
+        "body": "Inter (400)"
+      },
+      "what_makes_it_exceptional": "Billabong clone le playbook Quiksilver = dark + blue. La vraie différence n'est pas visuelle mais narrative: Billabong = action/tube riders, Quiksilver = lifestyle.",
+      "tribe_codes": [
+        "consistent-dark-theme = premium-heritage",
+        "action-sports-photography = authenticity-signal",
+        "community-first-copy = tribe-belonging"
+      ],
+      "design_lessons": [
+        "Design identique n'est pas un bug — c'est une convergence vers une seule bonne direction",
+        "Le différenciel réel est dans la photographie et le copywriting, pas la palette"
+      ]
+    },
+    {
+      "url": "https://www.volcom.com",
+      "name": "Volcom",
+      "sector": "surf-snow",
+      "sub_aesthetic": "rebellious-graphic-bold",
+      "style_tags": [
+        "punk-typography",
+        "stark-minimalism",
+        "uppercase-authority",
+        "angular-rebellion"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#ffffff",
+        "accent": "#A80000",
+        "background": "#282828"
+      },
+      "typography": {
+        "heading": "Garage Gothic Bold (uppercase)",
+        "body": "DIN OT (Regular/Bold)"
+      },
+      "what_makes_it_exceptional": "Volcom refute le design 'cool' mou. Garage Gothic Bold + uppercase + zéro border-radius = agressivité contrôlée. L'accent rouge #A80000 n'est pas joyeux, c'est du sang.",
+      "tribe_codes": [
+        "uppercase-everywhere = punk-defiance",
+        "sharp-corners (0px border-radius) = no-softening",
+        "red-accent-specific = danger/blood-not-fun",
+        "garage-gothic = blue-collar-youth-anger"
+      ],
+      "design_lessons": [
+        "La contre-culture vraie est UGLY — refuser le arrondi et le doux est un acte politique",
+        "Red/A80000 communique différemment que blue — couleur = message politique"
+      ]
+    },
+    {
+      "url": "https://www.hurley.com",
+      "name": "Hurley",
+      "sector": "surf-snow",
+      "sub_aesthetic": "warm-premium-sophisticated",
+      "style_tags": [
+        "warm-palette-earth",
+        "gold-bronze-warm",
+        "refined-minimalism",
+        "heritage-subtle"
+      ],
+      "palette": {
+        "primary": "#fcfbf9",
+        "secondary": "#212121",
+        "accent": "#ab8c52",
+        "background": "#f5f2ec"
+      },
+      "typography": {
+        "heading": "Roboto (700, uppercase)",
+        "body": "Roboto (400)"
+      },
+      "what_makes_it_exceptional": "Seul brand surf/snow utilisant chauds (gold/bronze #ab8c52) au lieu de bleu. Positionne Hurley comme 'mature, settled, beach-community' vs 'tech-first young guns'.",
+      "tribe_codes": [
+        "warm-palette = established-community",
+        "bronze-accent = legacy-craftsman",
+        "sharp-corners (0px) = functional-not-trendy",
+        "light-mode = daylight-beach-ethos"
+      ],
+      "design_lessons": [
+        "Temperature de couleur = positionnement d'âge/statut — gold vs blue est blue-collar vs white-collar",
+        "La contre-culture premium a une palette géographique: Hawaï (warm) vs California coast (blue)"
+      ]
+    },
+    {
+      "url": "https://usa.polarskateco.com/",
+      "name": "Polar Skate Co",
+      "sector": "skate-brand",
+      "sub_aesthetic": "scandinavian-minimalist-diy",
+      "style_tags": [
+        "helvetica-grid",
+        "black-and-white-stark",
+        "uppercase-sans",
+        "art-collaboration"
+      ],
+      "palette": {
+        "primary": "#ffffff",
+        "secondary": "#000000",
+        "accent": "#f7f7f7",
+        "background": "#ffffff"
+      },
+      "typography": {
+        "heading": "Helvetica (700, uppercase)",
+        "body": "Arial/Helvetica Sans (400)"
+      },
+      "what_makes_it_exceptional": "Polar incarne le minimalisme scandinave appliqué au skate: Helvetica pure, grille Swiss, zéro ornement. La fondatrice Pontus Alv illustre tout lui-même — design = skateboard direct.",
+      "tribe_codes": [
+        "helvetica-exact = swiss-grid-rigor",
+        "0.2em letter-spacing = scandinavian-coldness",
+        "artist-collaboration-explicit = skate-as-art-movement",
+        "b/w-only = no-compromise-aesthetic"
+      ],
+      "design_lessons": [
+        "La contre-culture scandinave refuse la couleur comme distraction — design = message pur",
+        "DIY visible dans le design esthétique (pas juste discours) — illustré à la main, pas AI"
+      ]
+    },
+    {
+      "url": "https://www.quasiskateboards.com",
+      "name": "Quasi Skateboards",
+      "sector": "skate-brand",
+      "sub_aesthetic": "boutique-skateboard-minimal",
+      "style_tags": [
+        "shopify-professional",
+        "product-focused",
+        "category-hierarchy",
+        "international-distribution"
+      ],
+      "palette": {
+        "primary": "#ffffff",
+        "secondary": "#000000",
+        "accent": "N/A",
+        "background": "#ffffff"
+      },
+      "typography": {
+        "heading": "Sans-serif (modern)",
+        "body": "Sans-serif (clean)"
+      },
+      "what_makes_it_exceptional": "Quasi est le contre-exemple: design minimaliste mais CORPORATE. Shopify template qui marche mais zéro personnalité visuelle. Vs Polar qui rayonne l'art.",
+      "tribe_codes": [
+        "shopify-infrastructure = professionalized-skate",
+        "category-driven = commercial-not-creative",
+        "multi-region-sites = scaled-not-artisanal"
+      ],
+      "design_lessons": [
+        "Minimalisme bureaucratique ≠ minimalisme artistique — l'absence de design peut être absence de vision",
+        "Counter-culture requiert une signature visuelle personnelle, pas un template"
+      ]
+    },
+    {
+      "url": "http://shop.bronze56k.com/",
+      "name": "Bronze 56K",
+      "sector": "skate-brand",
+      "sub_aesthetic": "y2k-glitch-streetwear-raw",
+      "style_tags": [
+        "neon-yellow-black",
+        "zero-border-radius",
+        "oswald-geometric",
+        "glitch-aesthetic"
+      ],
+      "palette": {
+        "primary": "#1f1f21",
+        "secondary": "#ffffff",
+        "accent": "#E3FC02",
+        "background": "#1f1f21"
+      },
+      "typography": {
+        "heading": "Oswald (500, medium)",
+        "body": "Figtree (500-800, italic variants)"
+      },
+      "what_makes_it_exceptional": "Bronze56K est la contre-culture VRAIE du skate numérique. Neon jaune #E3FC02 sur noir = agressif. Zéro arrondi. Noms de cart 'Sack' = brand voice. Tout respire l'underground NYC 2010s.",
+      "tribe_codes": [
+        "neon-yellow = 90s dial-up nostalgia",
+        "zero-radius = refuse softness",
+        "oswald-geometric = DIY-print-poster",
+        "flat-design = web-native-skate",
+        "'sack' terminology = tribe-language"
+      ],
+      "design_lessons": [
+        "Neon sur noir est hostile — c'est l'intérêt. Pas de 'friendly' en underground.",
+        "Tri-bunal markers: Y2K-reference + NYC-specific + anti-design-design = skateable"
+      ]
+    },
+    {
+      "url": "https://welcomeskateboards.com/",
+      "name": "Welcome Skateboards",
+      "sector": "skate-brand",
+      "sub_aesthetic": "mystical-occult-illustration-art",
+      "style_tags": [
+        "illustrated-graphics",
+        "occult-mysticism",
+        "serif-halant-display",
+        "creature-design-focus"
+      ],
+      "palette": {
+        "primary": "#ffffff",
+        "secondary": "#111111",
+        "accent": "#000000",
+        "background": "#f5f5f5"
+      },
+      "typography": {
+        "heading": "Halant (serif, 400, uppercase)",
+        "body": "Instrument Sans (regular/bold, italic)"
+      },
+      "what_makes_it_exceptional": "Welcome est ILLUSTRÉE. Chaque deck = original art de Jason Celaya: créatures magiques, références Twin Peaks, occultisme vintage. Design = skate-as-folklore, pas sport.",
+      "tribe_codes": [
+        "creature-illustration = mystical-community",
+        "deep-curves-shapes = function-is-art",
+        "40+ unique-shapes = obsessive-detail",
+        "folklore-references = cult-knowledge-required",
+        "occult-aesthetic = outsider-philosophy"
+      ],
+      "design_lessons": [
+        "Skateable = illutable shape design — Welcome redéfinit le shape, pas juste la couleur",
+        "Occultisme/mysticism utilise visuellement différent que branding: ça crée une 'world', pas juste ID"
+      ]
+    },
+    {
+      "url": "https://www.eastrivertattoo.com",
+      "name": "East River Tattoo",
+      "sector": "tattoo-studio",
+      "sub_aesthetic": "vintage-brooklyn-traditional",
+      "style_tags": [
+        "retro-web-aesthetic",
+        "decorative-dividers",
+        "blog-post-hierarchy",
+        "social-integration"
+      ],
+      "palette": {
+        "primary": "#ffffff",
+        "secondary": "#000000",
+        "accent": "#808080",
+        "background": "#ffffff"
+      },
+      "typography": {
+        "heading": "Web-safe serif",
+        "body": "Web-safe serif"
+      },
+      "what_makes_it_exceptional": "East River refute le 'sleek premium'. Site vintage, textures GIF, dividers ASCII-era. C'est intentionnel: design = apprenticeship/legacy, pas luxury resort.",
+      "tribe_codes": [
+        "retro-gif-assets = earned-patina",
+        "no-design-update = tradition-over-trend",
+        "brooklyn-location-first = neighborhood-rooted",
+        "social-links-visible = community-not-gatekeeping"
+      ],
+      "design_lessons": [
+        "Tattoo premium peut être anti-design — vintage branding communique 'we've been here forever'",
+        "Aesthetic de blog > aesthetic de flagship = credibility"
+      ]
+    },
+    {
+      "url": "https://www.shamrocksocialclub.com",
+      "name": "Shamrock Social Club (Dr. Woo)",
+      "sector": "tattoo-studio",
+      "sub_aesthetic": "luxury-minimalist-heritage",
+      "style_tags": [
+        "black-and-white-contrast",
+        "minimalist-layout",
+        "iconic-positioning",
+        "high-quality-photography"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#ffffff",
+        "accent": "N/A",
+        "background": "#000000"
+      },
+      "typography": {
+        "heading": "Modern serif or sans (custom)",
+        "body": "Modern serif or sans (clean)"
+      },
+      "what_makes_it_exceptional": "Shamrock Social Club (Mark Mahoney/Dr. Woo) = luxury tattoo authenticité. Design noir/blanc. Logo minimaliste. Chaque section respire l'exclusivité sans être fermé.",
+      "tribe_codes": [
+        "shamrock-logo = established-icon",
+        "west-hollywood-location = sunset-strip-legacy",
+        "minimalist-negative-space = 'we-don't-need-to-try'",
+        "high-res-photography = artisan-display"
+      ],
+      "design_lessons": [
+        "Luxury tatouage premium = refuser le 'trendy' — noir/blanc pur communique 'intemporel'",
+        "Heritage piece locations (Sunset Strip, NYC) = design leur fait honneur via minimalisme"
+      ]
+    },
+    {
+      "url": "https://www.bangbangforever.com/",
+      "name": "Bang Bang Tattoo",
+      "sector": "tattoo-studio",
+      "sub_aesthetic": "celebrity-accessible-premium",
+      "style_tags": [
+        "dark-mode-hero",
+        "gallery-centric",
+        "white-typography-contrast",
+        "accessible-premium"
+      ],
+      "palette": {
+        "primary": "#151515",
+        "secondary": "#ffffff",
+        "accent": "#808080",
+        "background": "#151515"
+      },
+      "typography": {
+        "heading": "Custom typekit (lju2owr)",
+        "body": "Custom typekit (clean)"
+      },
+      "what_makes_it_exceptional": "Bang Bang est ACCESSIBLE premium: célèbres + walk-ins. Dark mode hero. Portfolio-first. Keith McCurdy ('Bang Bang') a pour Vogue tatoué Rihanna, LeBron, Adele — design dit 'famous mais viens'.",
+      "tribe_codes": [
+        "dark-gallery-layout = celebrity-backstage",
+        "portfolio-dominance = artistry-over-talk",
+        "walk-ins-accepted = no-gatekeeping",
+        "instagram-2M = tribe-size-visible"
+      ],
+      "design_lessons": [
+        "Luxury premium ne signifie pas exclusif — Bang Bang mélange célèbres + street walk-ins visuel.",
+        "Portfolio qualité >> layout design — la majorité du design est de l'image, pas CSS"
+      ]
+    },
+    {
+      "url": "https://monolithstudio.com",
+      "name": "Monolith Studio",
+      "sector": "tattoo-studio",
+      "sub_aesthetic": "contemporary-fine-art-collective",
+      "style_tags": [
+        "minimalist-modern",
+        "fine-line-specialization",
+        "collaborative-positioning",
+        "smooth-animations"
+      ],
+      "palette": {
+        "primary": "#ffffff",
+        "secondary": "#000000",
+        "accent": "#f0f0f0",
+        "background": "#ffffff"
+      },
+      "typography": {
+        "heading": "Modern sans-serif (refined)",
+        "body": "Modern sans-serif (clean)"
+      },
+      "what_makes_it_exceptional": "Monolith Studio fondée par Okan Uçkun (micro-realism) + Oscar Akermo (fine-line). Design = clean/contemporary/refined. Contre-culture premium 'fine art' pas 'street tattoo'.",
+      "tribe_codes": [
+        "fine-line-specialization = technical-credibility",
+        "international-artist-collective = global-not-local",
+        "smooth-animations = digital-native-studio",
+        "contemporary-aesthetic = post-punk-not-punk"
+      ],
+      "design_lessons": [
+        "Tattoo premium peut être galerie-d'art au lieu de parlor — design adapte pour ça",
+        "Fine-line tribe markers = technique spécialisée, pas juste lifestyle"
       ]
     }
   ]
