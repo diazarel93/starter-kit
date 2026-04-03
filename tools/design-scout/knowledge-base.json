@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "last_updated": "2026-04-03",
-  "total_sites": 634,
+  "total_sites": 641,
   "sites": [
     {
       "id": "banlieuwood-pencil-cinema-dark-2026-04-03",
@@ -25933,6 +25933,328 @@
         "Tattoo premium peut être galerie-d'art au lieu de parlor — design adapte pour ça",
         "Fine-line tribe markers = technique spécialisée, pas juste lifestyle"
       ]
+    },
+    {
+      "url": "https://www.mckinsey.com",
+      "name": "McKinsey & Company",
+      "sector": "management-consulting",
+      "sub_aesthetic": "institutional-modern-minimalist",
+      "style_tags": [
+        "heritage-grounded",
+        "tech-forward-accents",
+        "high-contrast",
+        "geometric-precision",
+        "algorithmic-reliability"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "#7EF473",
+        "tertiary": "#64CFDA",
+        "neutral_dark": "#212427",
+        "neutral_light": "#F2F2F2",
+        "alert_red": "#D82216",
+        "warning_amber": "#FFCF24",
+        "success_green": "#21BF61"
+      },
+      "typography": {
+        "heading": "henderson-bcg-headline (serif fallback: Cambria, Times)",
+        "body": "henderson-bcg-sans (weight: 300-400)",
+        "scale_approach": "dramatic-hierarchy (H1: 38px mobile → 128px desktop)"
+      },
+      "icon_system": {
+        "style": "rounded-soft-geometric",
+        "button_radius": "15px",
+        "animation_timing": "0.35s",
+        "focus_state": "green-500 with white border"
+      },
+      "what_makes_it_exceptional": "Embeds contemporary UX sophistication (smooth animations, light weights, bright accents) within traditional credibility markers (serif headlines, restrained spacing). The lime green and teal accents break institutional austerity without compromising trust.",
+      "authority_signals": [
+        "Consistent 8px–72px spacing system reflects methodical architecture",
+        "Serif typography anchors formal institutional positioning",
+        "Subtle shadow definition (0px 1px 2px rgba(0,0,0,0.12)) adds depth without ostentation",
+        "Functional color coding (alerts, warnings, success) demonstrates transparent communication",
+        "Global partner network implied through spatial precision"
+      ],
+      "design_lessons": [
+        "Light font weights (300) soften institutional formality while maintaining authority",
+        "Bright accent colors (lime, teal) signal innovation without undermining credibility",
+        "Serif headlines + sans-serif body creates modern-classic tension that reads as 'evolved institution'",
+        "Shadow hierarchy (minimal but deliberate) signals thoughtfulness at every level"
+      ],
+      "classic_modern_ratio": "60% institutional / 40% contemporary",
+      "risk_of_being_boring": "Mitigated by bright accent colors and light typography. Avoids sterility through strategic micro-interactions."
+    },
+    {
+      "url": "https://www.bcg.com",
+      "name": "Boston Consulting Group (BCG)",
+      "sector": "management-consulting",
+      "sub_aesthetic": "institutional-modern-minimalist",
+      "style_tags": [
+        "heritage-financial-services",
+        "tech-forward-signaling",
+        "restraint-with-vibrancy",
+        "contemporary-ux",
+        "accessible-authority"
+      ],
+      "palette": {
+        "primary": "#212427",
+        "secondary": "#FFFFFF",
+        "accent_bright_green": "#7EF473",
+        "accent_muted_green": "#71DC68",
+        "accent_teal": "#64CFDA",
+        "neutral_light": "#F2F2F2",
+        "neutral_mid": "#323232",
+        "alert_red": "#D82216",
+        "warning_amber": "#FFCF24",
+        "success_green": "#21BF61",
+        "focus_state_green": "#197A56"
+      },
+      "typography": {
+        "heading": "henderson-bcg-headline (serif-rooted)",
+        "body": "henderson-bcg-sans (weight: 300–400)",
+        "hierarchy_philosophy": "Light weights + large scale = modern restraint"
+      },
+      "icon_system": {
+        "style": "rounded-soft-modern",
+        "button_radius": "15px",
+        "animation": "smooth arrow animations (0.35s timing)",
+        "focus": "green-500 with white border for accessibility"
+      },
+      "what_makes_it_exceptional": "Perfect synthesis: heritage financial-services aesthetics (black, white, serif) balanced with contemporary tech vibrancy (lime green, teal accents, light typography). Demonstrates how to signal 'established yet evolving' without appearing trapped in the past.",
+      "authority_signals": [
+        "Serif typography conveys heritage; light weights signal modernity",
+        "Consistent spacing system (8px–72px) reflects methodical consulting architecture",
+        "Bright accent colors (lime #7EF473, teal #64CFDA) inject innovation energy",
+        "Semantic color coding (red/amber/green) emphasizes transparent communication",
+        "Accessible focus states (green + white border) = considerate authority"
+      ],
+      "design_lessons": [
+        "Accent colors work best when strategically sparse—bright green/teal on mostly black/white creates emphasis",
+        "Light typography (300 weight) softens formality without losing authority",
+        "Rounded buttons (15px) on otherwise strict geometric system = approachability without sloppiness",
+        "Shadow subtlety (0px 1px 2px) = confidence without decoration"
+      ],
+      "classic_modern_ratio": "60% institutional / 40% contemporary",
+      "risk_of_being_boring": "Completely mitigated by strategic color pops and refined typography choices."
+    },
+    {
+      "url": "https://www.bain.com",
+      "name": "Bain & Company",
+      "sector": "management-consulting",
+      "sub_aesthetic": "classic-authority-minimalist",
+      "style_tags": [
+        "high-contrast-legacy",
+        "red-signature",
+        "innovation-centered",
+        "case-study-driven",
+        "quantified-credibility"
+      ],
+      "palette": {
+        "primary": "#FFFFFF",
+        "secondary": "#000000",
+        "accent": "#D32F2F",
+        "note": "Distinctive red logo (logo_red_bain.svg) is the only accent—radical restraint"
+      },
+      "typography": {
+        "heading": "Modern sans-serif (generous scale hierarchy)",
+        "body": "Sans-serif optimized for digital clarity",
+        "philosophy": "Generous sizing = accessibility + authority"
+      },
+      "icon_system": {
+        "style": "geometric-minimal",
+        "approach": "Minimal iconography; emphasis on typography over visual noise"
+      },
+      "what_makes_it_exceptional": "Radical minimalism: white, black, red only. This Spartan palette is so distinctive that Bain's red logo becomes instantly recognizable. The simplicity signals 'we don't need visual decoration—our ideas are the design.' Very bold strategy.",
+      "authority_signals": [
+        "Schema.org structured data embedding organization authority",
+        "60+ global offices enumerated (implicit scale)",
+        "Quantified client results ('$300M saved over two years') demonstrate real impact",
+        "Case studies replace promotional prose—substance over marketing",
+        "Central positioning of AI/agentic innovation signals forward-thinking"
+      ],
+      "design_lessons": [
+        "Radical color restriction (white/black/red) can be more memorable than complex palettes",
+        "Single accent color (red) becomes a signature element when used sparingly",
+        "Generous typography hierarchy creates perceived authority + accessibility",
+        "Quantified outcomes (not claims) build credibility—design should support this, not distract"
+      ],
+      "classic_modern_ratio": "55% institutional / 45% contemporary (innovation through content, not aesthetics)",
+      "risk_of_being_boring": "Significant risk, mitigated by strong content strategy (case studies, insights, podcast integration)."
+    },
+    {
+      "url": "https://www.rolandberger.com",
+      "name": "Roland Berger",
+      "sector": "management-consulting",
+      "sub_aesthetic": "institutional-gravitas-monochromatic",
+      "style_tags": [
+        "austere-authority",
+        "information-density",
+        "global-precision",
+        "founded-1967-heritage",
+        "expert-network-emphasis"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "Minimal—relies on photographic imagery for visual interest"
+      },
+      "typography": {
+        "heading": "Functional sans-serif",
+        "body": "Sans-serif prioritizing readability over ornamentation",
+        "philosophy": "Hierarchy through information structure, not decoration"
+      },
+      "icon_system": {
+        "style": "minimal-functional",
+        "approach": "Iconography subordinate to content; navigation clarity prioritized"
+      },
+      "what_makes_it_exceptional": "Foundational gravitas through monochromatic design + deep information architecture. The site layout mirrors consulting precision: Industries → Services → Global Topics creates intellectual scaffolding. Design is 'invisible infrastructure' for trust.",
+      "authority_signals": [
+        "JSON-LD schema embedding 3,500+ employees founding date 1967",
+        "Executive leadership prominently displayed",
+        "Geographically distributed office network reinforces €2B+ institutional scale",
+        "Nested menu precision reflects consulting methodology",
+        "Awards/certifications embedded in identity"
+      ],
+      "design_lessons": [
+        "Monochromatic palettes communicate 'trust through restraint' better than color complexity",
+        "Information architecture (nested menus, topic segmentation) can function as visual authority",
+        "Formal navigation hierarchies signal expertise depth + organizational precision",
+        "Contemporary touches (podcasts, events, dynamic carousels) prevent dated appearance without visual noise"
+      ],
+      "classic_modern_ratio": "70% institutional / 30% contemporary",
+      "risk_of_being_boring": "High—mitigated by robust content strategy (podcasts, events, expert carousels)."
+    },
+    {
+      "url": "https://www.oliverwyman.com",
+      "name": "Oliver Wyman",
+      "sector": "management-consulting",
+      "sub_aesthetic": "established-evolving-modern",
+      "style_tags": [
+        "black-white-minimalist",
+        "transformation-focused",
+        "heritage-1984",
+        "marsh-affiliation",
+        "dynamic-content-rich"
+      ],
+      "palette": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF",
+        "accent": "Vibrant colors in call-to-action elements + photographic accents"
+      },
+      "typography": {
+        "heading": "Bold, large-scale serif or modern sans-serif",
+        "body": "Clean hierarchy emphasizing clarity",
+        "philosophy": "Bold headlines signal 'transformative moments' positioning"
+      },
+      "icon_system": {
+        "style": "adapted-context",
+        "approach": "Logo variations (white/black) adapt across contexts; navigation clarity prioritized"
+      },
+      "what_makes_it_exceptional": "Balances heritage (founded 1984, founder names Oliver/Wyman) with contemporary sophistication (dynamic content, carousel-based insights, international scope). The 'Real impact in transformative moments' messaging is reflected in bold typography choices.",
+      "authority_signals": [
+        "Deutsche Bank case study anchors expertise in high-stakes transformation",
+        "Founder names (Alex Oliver, Bill Wyman) invoke institutional heritage",
+        "Marsh corporate affiliation elevates institutional weight",
+        "International accessibility (16+ regions) signals global operation",
+        "Featured Perspectives carousel modernizes traditional insight presentation"
+      ],
+      "design_lessons": [
+        "Founder attribution (name-bearing) creates personal credibility alongside institutional authority",
+        "Corporate parent affiliation (Marsh) adds institutional weight without visual clutter",
+        "Minimal ornamentation + bold content positioning = 'established yet evolving' signal",
+        "Dynamic carousels prevent static-site perception while maintaining formality"
+      ],
+      "classic_modern_ratio": "60% institutional / 40% contemporary",
+      "risk_of_being_boring": "Mitigated by strong case studies + international scope positioning."
+    },
+    {
+      "url": "https://www.lw.com",
+      "name": "Latham & Watkins",
+      "sector": "legal-premium",
+      "sub_aesthetic": "institutional-modernism-minimalist",
+      "style_tags": [
+        "minimaliste-épuré",
+        "dark-neutral-foundation",
+        "responsive-sophistication",
+        "achievements-highlighted",
+        "international-scope"
+      ],
+      "palette": {
+        "primary": "#FFFFFF",
+        "secondary": "#555455",
+        "tertiary": "#000000",
+        "note": "Minimal accent colors; professional neutrality throughout"
+      },
+      "typography": {
+        "heading": "Sans-serif hierarchy (no prominent serifs)",
+        "body": "Maximized legibility across all devices",
+        "philosophy": "Responsive design sophistication; clarity on all screen sizes"
+      },
+      "icon_system": {
+        "style": "simple-geometric",
+        "approach": "SVG scalables (search, social) preserve netness; functional minimalism"
+      },
+      "what_makes_it_exceptional": "Synthesizes institutional rigor (strict hierarchy, ingueur graphique) with tech innovation (Coveo search, sophisticated responsive design, animations). Communicates 'classical legal structure + modern capability.' Very balanced approach.",
+      "authority_signals": [
+        "Rankings prominently featured (Chambers USA, Law360, Financial Times)",
+        "30+ international bureaux enumerated",
+        "Major transaction carousel ($7.2B Medline IPO, Waymo funding)",
+        "Client prestige citations integrated seamlessly",
+        "Responsive design + Coveo search = technical capability signal"
+      ],
+      "design_lessons": [
+        "Rankings/certifications should be integrated into hero sections, not buried",
+        "Major transactions function as case studies—showcase quantified impact",
+        "Sophisticated responsive design (mobile-first) signals technical capability",
+        "Subtle animations enhance without breaking institutional gravity"
+      ],
+      "classic_modern_ratio": "60% institutional / 40% contemporary",
+      "risk_of_being_boring": "Mitigated by transaction showcase + certification display."
+    },
+    {
+      "url": "https://www.gide.com",
+      "name": "Gide Loyrette Nouel (Gide)",
+      "sector": "legal-premium",
+      "sub_aesthetic": "austere-institutional-minimalist",
+      "style_tags": [
+        "slate-gray-foundation",
+        "restricted-palette",
+        "spacing-generous",
+        "professional-photography",
+        "chambers-certified"
+      ],
+      "palette": {
+        "primary": "#FFFFFF",
+        "secondary": "#32373C",
+        "tertiary": "#000000",
+        "note": "Intentionally restricted palette; no bright accents—pure professional restraint"
+      },
+      "typography": {
+        "heading": "Hierarchical sans-serif (small 13px → x-large 42px)",
+        "body": "Clear progressive scaling",
+        "philosophy": "Generous spacing (0.44rem–5.06rem CSS variables) signals confidence + breathing room"
+      },
+      "icon_system": {
+        "style": "minimal-professional",
+        "approach": "Logo-scale SVG only; no decorative icons. Collaborator photography dominates visual communication."
+      },
+      "what_makes_it_exceptional": "Most austere of the cohort. Slate gray + white + professional photography of collaborators. No gradients, no animations, no trends. Communicates: 'We are so established we don't need visual tricks.' Risky but effective for B2B institutional trust.",
+      "authority_signals": [
+        "Chambers Global 2025 + Legal 500 EMEA 2026 certifications displayed",
+        "Quantified scope: '500 avocats', '10 bureaux', '$830M' client (Mistral AI)",
+        "Professional collaborator photography = human credibility at scale",
+        "Generous spacing suggests institutional confidence + resource availability"
+      ],
+      "design_lessons": [
+        "Most minimal palettes can be most memorable (Spartan principle)",
+        "Generously spaced typography signals confidence + available attention",
+        "Professional photography (collaborators) humanizes institutional gravity",
+        "Certifications/rankings should be primary content, not secondary",
+        "Lack of decoration = implicit statement: 'Our work speaks for itself'"
+      ],
+      "classic_modern_ratio": "75% institutional / 25% contemporary",
+      "risk_of_being_boring": "Highest risk in cohort—mitigated by collaborator photography + certification prominence."
     }
   ]
 }

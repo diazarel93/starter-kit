@@ -19,7 +19,7 @@ Historique :
 Prochain palier : 2026-05-03 → passer à 58/70 si 3 sessions consécutives passent facilement
 Règle : augmenter de 2pts par mois si le niveau le permet. Ne jamais baisser.
 
-KB actuelle : 613 sites (2026-04-03) — objectif 700 en cours
+KB actuelle : 641 sites (2026-04-03) — objectif 700 en cours
 Fichiers graphiques permanents :
   - kb-palettes.json       → 15 palettes par mood/secteur
   - kb-typography.json     → systèmes typo par style
@@ -31,7 +31,10 @@ Couverture secteurs : luxury-fashion, streetwear, automotive, cinema, saas, gami
   sport, health, beauty, food, finance, legal, btp, travel, social, crypto, dating,
   craft-beer, coffee-brand, spirits, wine-premium, outdoor, coworking,
   airlines, dashboard-analytics, pricing-page, indie-gaming,
-  design-history (8 mouvements), global-design-cultures (africa/latam/middle-east)
+  design-history (8 mouvements), global-design-cultures (africa/latam/middle-east),
+  aesthetic-medicine, executive-search, yoga-pilates,
+  surf-snow, skate-brand, tattoo-studio,
+  management-consulting, legal-premium
 ```
 
 **Pour mettre à jour le seuil** : modifier aussi la section "Boucle qualité obligatoire" dans design-director.md et le score minimum dans design-critic.md.
@@ -86,6 +89,32 @@ Couverture secteurs : luxury-fashion, streetwear, automotive, cinema, saas, gami
 | Grunge | Zines digitaux, imprimé indie, esthétique lo-fi |
 
 **Règle** : Connaître l'histoire du design permet de choisir une référence consciemment plutôt que de la recycler inconsciemment.
+
+---
+
+### Sur la contre-culture premium (2026-04-03)
+
+**Règle fondamentale** : Authenticité = refuser le arrondi. Zero `border-radius` en contre-culture. Le "friendly" détruit la tribu.
+
+**Couleur = positionnement politique** — Volcom choisit rouge sang (#A80000) pas bleu lifestyle. Ce choix signale une posture, pas une esthétique.
+
+**Skateable vs Lifestyle** : deux mondes distincts. Skateable (Polar, Bronze56K) = utilité et épure. Lifestyle (Welcome) = mystique et illustration. Ne pas mélanger.
+
+**Tattoo premium** : 3 stratégies gagnantes — Legacy (patine vintage intentionnelle), Fine Art contemporain (spécialisation technique), Celebrity Accessible (portfolio-hero + walk-in).
+
+**Tribe markers** : micro-codes d'appartenance (Helvetica pur = rigor scandinave, neon yellow = Y2K nostalgia, GIF retro = patina earned). Ces codes ne se feignent pas.
+
+---
+
+### Sur le consulting & legal premium (2026-04-03)
+
+**Paradoxe de l'ennui** : Les meilleurs cabinets (McKinsey, BCG, Bain) évitent le boring par un accent chromatique inattendu — lime (#7EF473 BCG), teal, rouge pur. Pas de multicolore, UNE couleur forte.
+
+**Legal vs Consulting** :
+- Legal : blanc/gris + zéro accent = restraint maximum = confiance absolue
+- Consulting : accent vibrante + contenu riche (podcasts, insights) = modernité crédible
+
+**Pour Banlieuwood** : L'orange #FF6B35 est déjà plus vibrant que n'importe quel concurrent B2B. La mitigation = photographie authentique (élèves en atelier) + métriques quantifiées + typographie légère et généreuse.
 
 ---
 

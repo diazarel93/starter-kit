@@ -29,14 +29,14 @@
 - [x] **Vin / cave premium** — Château Pichon Baron, Opus One, Cloudy Bay ✓ 2026-04-03
 - [ ] **Alimentation artisanale / épicerie fine** — Fauchon, Hédiard, Dean & DeLuca
 - [x] **Coworking / tiers-lieux** — WeWork, Second Home, Industrious ✓ 2026-04-03
-- [ ] **Consulting premium** — McKinsey, BCG, Bain — austérité = crédibilité
+- [x] **Consulting premium** — McKinsey, BCG, Bain, Roland Berger, Oliver Wyman + 5 cabinets juridiques ✓ 2026-04-03
 - [ ] **Logistique / supply chain** — DHL, FedEx brand (pas juste leur logo), UPS
 - [ ] **Télécoms premium** — Orange Studio, Free Pro — comment rendre séxy un opérateur
 - [x] **Compagnies aériennes** — Air France, Swiss, Emirates, ANA, Singapore Airlines ✓ 2026-04-03 (en cours merge)
 - [x] **Marques outdoor / randonnée** — Arc'teryx, Mammut, Salomon, Patagonia ✓ 2026-04-03
-- [ ] **Marques de surf / snow** — Quiksilver, Billabong actuel, Volcom — contre-culture premium
-- [ ] **Marques de skate design** — Element, Polar Skate Co, Isle Skateboards
-- [ ] **Tatoo / body art culture** — studios de tatouage premium, flash art digital
+- [x] **Marques de surf / snow** — Quiksilver, Billabong, Volcom, Hurley ✓ 2026-04-03
+- [x] **Marques de skate design** — Polar Skate Co, Bronze 56K, Welcome, Quasi ✓ 2026-04-03
+- [x] **Tatoo / body art culture** — Bang Bang NYC, East River, Monolith Studio ✓ 2026-04-03
 
 ### ÉLEVÉE — Secteurs fréquents en freelance
 
