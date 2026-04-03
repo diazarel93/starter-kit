@@ -1,0 +1,76 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-04-03",
+  "total_sites": 1,
+  "sites": [
+    {
+      "id": "banlieuwood-pencil-cinema-dark-2026-04-03",
+      "url": "internal",
+      "title": "Banlieuwood Landing — Pencil Cinematic Redesign",
+      "source": "manual",
+      "studio": "internal",
+      "country": "FR",
+      "sector": "cinema",
+      "date_observed": "2026-04-03",
+      "style_tags": ["cinema-dark", "editorial", "asymmetric", "type-forward"],
+      "palette": {
+        "bg": "#0D0B09",
+        "surface": "#1A1714",
+        "text_primary": "#F5F0EB",
+        "text_secondary": "#8A8278",
+        "accent_primary": "#FF6B35",
+        "accent_secondary": "#D4A843",
+        "mood": "chaud",
+        "saturation": "désaturé"
+      },
+      "typography": {
+        "heading_family": "Bebas Neue",
+        "heading_weight": "400",
+        "heading_size_approx": "120px desktop",
+        "heading_case": "uppercase",
+        "body_family": "Plus Jakarta Sans",
+        "body_weight": "400",
+        "ratio": "8:1 (très dramatique)",
+        "notable": "Titre condensed sans-serif en uppercase crée un impact cinématique sans agressivité"
+      },
+      "layout": {
+        "grid": "asymmetric",
+        "density": "airy",
+        "hero": "full-screen",
+        "scroll": "classic",
+        "structure_description": "Hero plein écran photo rue nocturne, texte ancré en bas-gauche, bouton CTA orange"
+      },
+      "sections": ["nav", "hero-fullscreen", "about-2col", "films-grid", "testimonials-editorial", "cta-newsletter", "footer-minimal"],
+      "what_makes_it_exceptional": "Le fond #0D0B09 (noir chaud, pas froid) crée une profondeur cinématique. L'orange #FF6B35 sur fond très sombre a un impact maximal sans être agressif. Le tagline 'Là où le béton rencontre la pellicule' ancre l'identité en 7 mots.",
+      "reusable_patterns": [
+        {
+          "name": "hero-cinema-anchored",
+          "description": "Photo plein écran avec texte ancré en bas-gauche (pas centré), overlay gradient bottom-to-top",
+          "when_to_use": "Landing cinema, festival, art-house, événement culturel",
+          "css_hint": "relative h-screen | absolute inset-0 bg-gradient-to-t from-[#0D0B09] | absolute bottom-12 left-12"
+        },
+        {
+          "name": "stats-bold-inline",
+          "description": "KPIs alignés horizontalement, chiffre en grand, label en petit en-dessous, séparés par de l'espace",
+          "when_to_use": "Section sociale proof, chiffres clés d'un projet",
+          "css_hint": "flex gap-12 | text-6xl font-bold | text-sm text-white/50 uppercase tracking-wider"
+        },
+        {
+          "name": "press-quotes-editorial",
+          "description": "Citations presse en italique, nom du média en majuscules petits, séparateurs fins",
+          "when_to_use": "Testimonials premium, presse, crédibilité",
+          "css_hint": "italic text-xl text-white/70 | uppercase text-xs tracking-widest text-orange-400 mt-2"
+        },
+        {
+          "name": "cta-newsletter-dark",
+          "description": "Surface légèrement plus claire (#1A1714), input sans bordure arrondie, bouton CTA couleur pleine",
+          "when_to_use": "CTA newsletter sur fond très sombre",
+          "css_hint": "bg-[#1A1714] px-8 py-12 | input bg-transparent border-b border-white/20 | button bg-[#FF6B35] rounded-none px-6 py-3"
+        }
+      ],
+      "level": "excellent",
+      "best_for": ["cinema landing", "festival", "art-house", "culture"],
+      "avoid_for": ["dashboard", "SaaS B2B", "edtech enfants"]
+    }
+  ]
+}
