@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banlieuwood — Techniques</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --o: #FF6B35; --g: #D4A843; --t: #4ECDC4;
+  --ink: #080705; --fc: 'Bebas Neue',sans-serif;
+  --fb: 'Plus Jakarta Sans',sans-serif; --fm: 'Space Mono',monospace;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--ink); color: white; font-family: var(--fb); overflow-x: hidden; cursor: none; }
+
+/* ── GRAIN ────────────────────────────────────────── */
+#grain {
+  position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.04'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  animation: grain 0.08s steps(1) infinite;
+}
+@keyframes grain {
+  0%{transform:translate(0,0)} 14%{transform:translate(-2%,-3%)} 28%{transform:translate(3%,1%)}
+  42%{transform:translate(-1%,3%)} 57%{transform:translate(2%,-2%)} 71%{transform:translate(-3%,2%)}
+  85%{transform:translate(1%,-1%)} 100%{transform:translate(0,0)}
+}
+
+/* ── CURSOR ───────────────────────────────────────── */
+#c { position:fixed;width:6px;height:6px;background:var(--o);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s,background .15s; }
+#cr { position:fixed;width:28px;height:28px;border:1px solid rgba(255,107,53,.35);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);transition:all .1s ease-out; }
+body.hovering #c { width:4px;height:4px;background:white; }
+body.hovering #cr { width:44px;height:44px;border-color:rgba(255,255,255,.2); }
+
+/* ── INTRO SPLASH ─────────────────────────────────── */
+#splash {
+  position: fixed; inset: 0; z-index: 10000; background: #000;
+  display: flex; align-items: center; justify-content: center;
+  animation: splash-out 0.8s 1.8s cubic-bezier(0.76,0,0.24,1) forwards;
+}
+#splash-logo { font-family: var(--fc); font-size: 14px; letter-spacing: 8px; color: rgba(255,255,255,0.5); text-transform: uppercase; animation: splash-fade 1.2s 0.3s ease forwards; opacity: 0; }
+@keyframes splash-fade { to { opacity: 1; } }
+@keyframes splash-out { to { transform: translateY(-100%); } }
+
+/* ── NAV ──────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9000;
+  background: rgba(8,7,5,0.96); backdrop-filter: blur(24px) saturate(1.5);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  padding: 0 48px; display: flex; align-items: stretch; height: 48px;
+}
+nav a { padding: 0 16px; font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.55); text-decoration: none; display: flex; align-items: center; border-right: 1px solid rgba(255,255,255,0.06); transition: color .15s, background .15s; font-family: var(--fm); white-space: nowrap; cursor: pointer; }
+nav a:hover { color: white; background: rgba(255,107,53,0.08); }
+nav a:active { color: var(--o); }
+nav .pipe { width: 1px; background: rgba(255,255,255,0.04); }
+nav .cat { font-size: 7px; letter-spacing: 4px; color: rgba(255,107,53,0.5); padding: 0 14px; border-right: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; text-transform: uppercase; font-family: var(--fm); }
+nav .logo { font-family: var(--fc); font-size: 13px; letter-spacing: 4px; color: white; display: flex; align-items: center; padding-right: 24px; border-right: 1px solid rgba(255,255,255,0.06); margin-right: 8px; }
+body { padding-top: 48px; }
+
+/* ── SECTION LABEL ────────────────────────────────── */
+.lbl { position: absolute; top: 24px; left: 28px; z-index: 50; display: flex; align-items: center; gap: 10px; pointer-events: none; }
+.lbl-num { font-family: var(--fm); font-size: 8px; color: var(--o); letter-spacing: 2px; }
+.lbl-txt { font-family: var(--fm); font-size: 8px; color: rgba(255,255,255,0.2); letter-spacing: 2px; text-transform: uppercase; }
+
+/* ── CAT SEPARATOR ────────────────────────────────── */
+.cat-sep {
+  background: #000; padding: 40px 48px; border-top: 1px solid rgba(255,255,255,0.04);
+  display: flex; align-items: baseline; gap: 24px;
+}
+.cat-sep h3 { font-family: var(--fc); font-size: clamp(32px,5vw,72px); color: rgba(255,255,255,0.06); line-height: 1; }
+.cat-sep h3 em { color: rgba(255,255,255,0.5); font-style: normal; }
+.cat-sep span { font-family: var(--fm); font-size: 9px; letter-spacing: 4px; color: var(--o); text-transform: uppercase; margin-left: auto; }
+
+.sep { height: 1px; background: rgba(255,255,255,0.04); }
+
+/* ════════════════════════════════════════════════════
+   T01 — VIDEO SCRUB AU SCROLL
+════════════════════════════════════════════════════ */
+#t01 { height: 400vh; position: relative; }
+#t01-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; background: #000; }
+#t01-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(0) contrast(1.08) brightness(0.72); }
+#t01-top, #t01-bot { position: absolute; left: 0; right: 0; background: #000; z-index: 10; }
+#t01-top { top: 0; height: 9vh; }
+#t01-bot { bottom: 0; height: 9vh; }
+#t01-vignette { position: absolute; inset: 0; z-index: 5; pointer-events: none; background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.65) 100%); }
+#t01-prog { position: absolute; bottom: 9vh; left: 0; z-index: 20; height: 1px; background: var(--o); width: 0%; }
+#t01-timecode { position: absolute; bottom: calc(9vh + 12px); right: 48px; z-index: 20; font-family: var(--fm); font-size: 9px; color: rgba(255,255,255,0.25); letter-spacing: 2px; }
+#t01-title { position: absolute; bottom: 9vh; left: 0; right: 0; z-index: 15; padding: 0 8vw 7vh; pointer-events: none; }
+#t01-title h2 { font-family: var(--fc); font-size: clamp(60px,13vw,210px); line-height: 0.83; color: white; }
+#t01-title h2 em { color: var(--o); font-style: normal; }
+
+/* ════════════════════════════════════════════════════
+   T02 — VIDEO INSIDE TEXT (SVG MASK)
+════════════════════════════════════════════════════ */
+#t02 { height: 80vh; background: #000; position: relative; overflow: hidden; }
+#t02 svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+#t02-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(1.3) contrast(1.1) saturate(1.2); }
+
+/* ════════════════════════════════════════════════════
+   T03 — CSS BACKGROUND-CLIP TEXT (photo dans les lettres)
+════════════════════════════════════════════════════ */
+#t03 { height: 60vh; background: #000; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+#t03-bg { position: absolute; inset: -5%; width: 110%; height: 110%; object-fit: cover; filter: brightness(1.1) saturate(1.2) contrast(1.05); }
+#t03-text {
+  position: relative; z-index: 10;
+  font-family: var(--fc); font-size: clamp(80px,18vw,300px); line-height: 0.85; text-align: center;
+  background-image: url('making-of/frame_005.jpg');
+  background-size: cover; background-position: center;
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  filter: brightness(1.3) contrast(1.1);
+}
+#t03-overlay { position: absolute; inset: 0; z-index: 5; background: rgba(0,0,0,0.55); pointer-events: none; }
+
+/* ════════════════════════════════════════════════════
+   T04 — VHS / CRT
+════════════════════════════════════════════════════ */
+#t04 { height: 75vh; background: #000; position: relative; overflow: hidden; }
+#t04-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.75) brightness(0.65) contrast(1.25); }
+#t04-scan { position: absolute; inset: 0; z-index: 10; pointer-events: none;
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 4px); }
+#t04-aberr { position: absolute; inset: 0; z-index: 11; pointer-events: none; animation: aberr .09s steps(1) infinite; }
+@keyframes aberr {
+  0%  { box-shadow: inset 3px 0 rgba(255,0,60,.09), inset -3px 0 rgba(0,255,255,.09); }
+  33% { box-shadow: inset -4px 0 rgba(255,0,60,.13), inset 4px 0 rgba(0,255,255,.13); transform: translateX(1px); }
+  66% { box-shadow: inset 2px 0 rgba(255,0,60,.07), inset -2px 0 rgba(0,255,255,.07); transform: translateX(-1px); }
+  100%{ box-shadow: inset 3px 0 rgba(255,0,60,.09), inset -3px 0 rgba(0,255,255,.09); }
+}
+#t04-glitch { position: absolute; inset: 0; z-index: 12; pointer-events: none; animation: vhs-glitch 5s steps(1) infinite; }
+@keyframes vhs-glitch {
+  0%,96%{ clip-path:none; transform:none; opacity:1; }
+  97%{ clip-path:inset(22% 0 58% 0); transform:translateX(-5px); opacity:.9; }
+  97.5%{ clip-path:inset(55% 0 25% 0); transform:translateX(5px); }
+  98%{ clip-path:inset(38% 0 40% 0); transform:translateX(-3px); }
+  98.5%{ clip-path:none; transform:none; opacity:1; }
+}
+#t04-htrack { position: absolute; top: 0; left: 0; right: 0; z-index: 13; height: 2px; background: rgba(255,255,255,0.06); animation: htrack 3s linear infinite; pointer-events: none; }
+@keyframes htrack { 0%{ top: -2px; } 100%{ top: 100%; } }
+#t04-ts { position: absolute; top: 18px; left: 18px; z-index: 20; font-family: var(--fm); font-size: 10px; color: rgba(255,255,255,0.55); letter-spacing: 1px; }
+#t04-rec { position: absolute; top: 18px; right: 18px; z-index: 20; display: flex; align-items: center; gap: 7px; font-family: var(--fm); font-size: 10px; color: white; }
+#t04-dot { width: 7px; height: 7px; background: red; border-radius: 50%; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+#t04-bars { position: absolute; bottom: 0; left: 0; right: 0; z-index: 20; height: 6px; display: flex; }
+.bar { flex: 1; }
+.bar:nth-child(1){background:#fff}.bar:nth-child(2){background:#ff0}.bar:nth-child(3){background:#0ff}
+.bar:nth-child(4){background:#0f0}.bar:nth-child(5){background:#f0f}.bar:nth-child(6){background:#f00}.bar:nth-child(7){background:#00f}
+
+/* ════════════════════════════════════════════════════
+   T05 — GLITCH PHOTO AU CLIC
+════════════════════════════════════════════════════ */
+#t05 { height: 70vh; background: #000; position: relative; overflow: hidden; cursor: pointer; }
+#t05-base { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(0) contrast(1.2) brightness(0.7); }
+#t05-r, #t05-b { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+#t05.glitching #t05-r { animation: g-r .35s steps(4) forwards; opacity: 1; mix-blend-mode: screen; filter: saturate(0) contrast(1.5) hue-rotate(340deg) brightness(1.5); }
+#t05.glitching #t05-b { animation: g-b .35s steps(4) forwards; opacity: 1; mix-blend-mode: screen; filter: saturate(0) contrast(1.5) hue-rotate(160deg) brightness(1.5); }
+#t05.glitching #t05-base { animation: g-main .35s steps(4); }
+@keyframes g-r { 0%{transform:translateX(10px) scaleX(1.015) skewY(.5deg)} 40%{transform:translateX(-6px)} 70%{transform:translateX(8px) skewY(-1deg)} 100%{transform:none;opacity:0} }
+@keyframes g-b { 0%{transform:translateX(-10px) scaleX(1.015) skewY(-.5deg)} 40%{transform:translateX(6px)} 70%{transform:translateX(-8px) skewY(1deg)} 100%{transform:none;opacity:0} }
+@keyframes g-main { 0%{transform:skewX(1.5deg)} 25%{transform:skewX(-2deg)} 50%{transform:skewX(1deg)} 75%{transform:skewX(.5deg)} 100%{transform:none} }
+#t05-slices { position: absolute; inset: 0; z-index: 10; pointer-events: none; }
+.t05-slice { position: absolute; left: 0; right: 0; opacity: 0; background: inherit; }
+#t05.glitching .t05-slice { animation: slice-anim .35s steps(2) forwards; }
+#t05-hint { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 20; font-family: var(--fm); font-size: 8px; letter-spacing: 4px; color: rgba(255,255,255,0.2); white-space: nowrap; }
+
+/* ════════════════════════════════════════════════════
+   T06 — PARALLAX 3D SOURIS
+════════════════════════════════════════════════════ */
+#t06 { height: 65vh; background: var(--ink); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; perspective: 1000px; }
+#t06-bg { position: absolute; inset: -5%; width: 110%; height: 110%; object-fit: cover; filter: saturate(0) brightness(0.15); }
+#t06-word { font-family: var(--fc); font-size: clamp(70px,13vw,200px); line-height: 0.85; text-align: center; position: relative; z-index: 10; transform-style: preserve-3d; transition: transform .08s ease-out; user-select: none; }
+#t06-word em { color: var(--o); font-style: normal; display: block; }
+#t06-shadow { position: absolute; font-family: var(--fc); font-size: clamp(70px,13vw,200px); line-height: 0.85; text-align: center; color: transparent; -webkit-text-stroke: 1px rgba(255,107,53,.1); user-select: none; top: 50%; left: 50%; transform: translate(-50%,-50%) translateZ(-120px) scale(1.04); }
+
+/* ════════════════════════════════════════════════════
+   T07 — REVEAL AU SCROLL
+════════════════════════════════════════════════════ */
+#t07 { min-height: 65vh; background: #000; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 0 8vw; position: relative; overflow: hidden; }
+#t07-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(0) brightness(0.08); }
+.r-line { overflow: hidden; line-height: 1; }
+.r-span { display: block; font-family: var(--fc); font-size: clamp(50px,9vw,140px); color: white; transform: translateY(105%); transition: transform 1s cubic-bezier(0.16,1,0.3,1); }
+.r-line.in .r-span { transform: translateY(0); }
+.r-line:nth-child(2) .r-span { transition-delay: .1s; color: rgba(255,255,255,0.35); }
+.r-line:nth-child(3) .r-span { transition-delay: .2s; color: var(--o); }
+.r-line:nth-child(4) .r-span { transition-delay: .3s; font-size: clamp(20px,3vw,42px); color: rgba(255,255,255,0.2); letter-spacing: 6px; font-family: var(--fm); margin-top: 16px; }
+
+/* ════════════════════════════════════════════════════
+   T08 — GLITCH TEXTE CSS
+════════════════════════════════════════════════════ */
+#t08 { height: 45vh; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.gtxt { font-family: var(--fc); font-size: clamp(55px,11vw,170px); color: white; position: relative; user-select: none; }
+.gtxt::before { content: attr(data-t); position: absolute; top: 0; left: 0; color: rgba(255,0,80,.8); animation: ga 3.5s infinite; clip-path: polygon(0 0,100% 0,100% 42%,0 42%); }
+.gtxt::after { content: attr(data-t); position: absolute; top: 0; left: 0; color: rgba(0,255,255,.8); animation: gb 3.5s infinite; clip-path: polygon(0 58%,100% 58%,100% 100%,0 100%); }
+@keyframes ga {
+  0%,90%{transform:none;opacity:0} 91%{transform:translateX(-4px);opacity:.9}
+  92%{transform:translateX(4px) scaleX(1.02);opacity:.7} 93%{transform:translateX(-3px);opacity:.95}
+  94%,100%{transform:none;opacity:0}
+}
+@keyframes gb {
+  0%,88%{transform:none;opacity:0} 89%{transform:translateX(5px);opacity:.8}
+  90%{transform:translateX(-4px) scaleX(1.01);opacity:.6} 91%{transform:translateX(3px);opacity:.85}
+  92%,100%{transform:none;opacity:0}
+}
+
+/* ════════════════════════════════════════════════════
+   T09 — DUOTONE × 4
+════════════════════════════════════════════════════ */
+#t09 { display: grid; grid-template-columns: repeat(4,1fr); height: 50vh; }
+.dt { position: relative; overflow: hidden; cursor: pointer; }
+.dt img { width: 100%; height: 100%; object-fit: cover; transition: all .6s cubic-bezier(0.25,0.46,0.45,0.94); }
+.dt:nth-child(1) img { filter: saturate(0) brightness(0.65) contrast(1.2); }
+.dt:nth-child(2) img { filter: sepia(1) hue-rotate(295deg) saturate(4) brightness(0.72) contrast(1.1); }
+.dt:nth-child(3) img { filter: sepia(1) hue-rotate(155deg) saturate(5) brightness(0.62) contrast(1.15); }
+.dt:nth-child(4) img { filter: sepia(1) hue-rotate(22deg) saturate(3.5) brightness(0.72) contrast(1.1); }
+.dt:hover img { filter: none !important; transform: scale(1.03); }
+.dt-lbl { position: absolute; bottom: 16px; left: 16px; font-family: var(--fm); font-size: 7px; letter-spacing: 3px; color: rgba(255,255,255,.45); z-index: 10; text-transform: uppercase; }
+.dt::after { content:''; position:absolute; inset:0; background: linear-gradient(transparent 60%,rgba(0,0,0,.5)); pointer-events:none; }
+
+/* ════════════════════════════════════════════════════
+   T10 — SPLIT BANDES DÉCALÉES
+════════════════════════════════════════════════════ */
+#t10 { height: 70vh; display: grid; grid-template-rows: 1fr 1fr 1fr; cursor: pointer; }
+.t10s { overflow: hidden; position: relative; }
+.t10s img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0) brightness(0.65) contrast(1.15); transition: all .9s cubic-bezier(0.16,1,0.3,1); }
+.t10s:nth-child(1) img { transform: translateX(-18px); object-position: center 20%; transition-delay: 0s; }
+.t10s:nth-child(2) img { transform: translateX(14px); object-position: center 50%; transition-delay: .05s; }
+.t10s:nth-child(3) img { transform: translateX(-10px); object-position: center 80%; transition-delay: .1s; }
+#t10:hover .t10s img { filter: saturate(1) brightness(0.85); transform: translateX(0) !important; }
+.t10-line { height: 1px; background: rgba(255,255,255,0.06); }
+
+/* ════════════════════════════════════════════════════
+   T11 — POLAROIDS DRAGGABLES
+════════════════════════════════════════════════════ */
+#t11 { min-height: 75vh; background: #0a0907; position: relative; overflow: hidden; }
+.pol { position: absolute; background: white; padding: 10px 10px 38px; box-shadow: 0 20px 60px rgba(0,0,0,.85), 0 4px 12px rgba(0,0,0,.5); cursor: grab; user-select: none; transition: box-shadow .2s; }
+.pol:active { cursor: grabbing; box-shadow: 0 40px 100px rgba(0,0,0,.95); z-index: 100 !important; }
+.pol img { display: block; width: 220px; height: 148px; object-fit: cover; filter: saturate(0.7) contrast(1.05); }
+.pol-name { font-family: var(--fm); font-size: 8px; letter-spacing: 2px; color: #555; text-align: center; margin-top: 10px; text-transform: uppercase; }
+/* Tape effect */
+.pol::before { content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%); width: 40px; height: 14px; background: rgba(255,240,180,.45); border-radius: 1px; }
+
+/* ════════════════════════════════════════════════════
+   T12 — HORIZONTAL SCROLL
+════════════════════════════════════════════════════ */
+#t12 { height: 300vh; position: relative; }
+#t12-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; }
+#t12-track { display: flex; gap: 3px; will-change: transform; }
+.t12-frame { width: 60vw; height: 80vh; flex-shrink: 0; overflow: hidden; position: relative; }
+.t12-frame img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.15) brightness(0.65) contrast(1.15); transition: filter .6s; }
+.t12-frame:hover img { filter: saturate(1) brightness(0.85); }
+.t12-frame:first-child { width: 80vw; }
+.t12-num { position: absolute; top: 20px; left: 20px; font-family: var(--fm); font-size: 9px; color: rgba(255,255,255,.25); letter-spacing: 2px; }
+#t12-title { position: absolute; top: 48px; left: 0; z-index: 10; padding: 0 8vw; pointer-events: none; }
+#t12-title h2 { font-family: var(--fc); font-size: clamp(48px,8vw,120px); color: white; line-height: 0.85; }
+#t12-title h2 em { color: var(--o); font-style: normal; }
+#t12-scrollbar { position: absolute; bottom: 40px; left: 8vw; right: 8vw; height: 1px; background: rgba(255,255,255,.08); z-index: 10; }
+#t12-scrollthumb { height: 100%; background: var(--o); width: 0%; transition: width .05s; }
+
+/* ════════════════════════════════════════════════════
+   T13 — STAGGERED PHOTO GRID
+════════════════════════════════════════════════════ */
+#t13 { background: #000; padding: 80px 48px; }
+#t13-grid { display: grid; grid-template-columns: 1.8fr 1fr 1.4fr 1fr; grid-template-rows: 280px 200px; gap: 3px; }
+.t13-cell { overflow: hidden; position: relative; opacity: 0; transform: translateY(30px); transition: opacity .8s cubic-bezier(0.16,1,0.3,1), transform .8s cubic-bezier(0.16,1,0.3,1); }
+.t13-cell.in { opacity: 1; transform: none; }
+.t13-cell img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.1) brightness(0.55) contrast(1.2); transition: filter .7s; }
+.t13-cell:hover img { filter: saturate(0.9) brightness(0.8) contrast(1.05); }
+.t13-cell:nth-child(1) { grid-row: 1/3; }
+.t13-cell:nth-child(5) { grid-column: 3/5; }
+.t13-cell:nth-child(1) { transition-delay: 0s; }
+.t13-cell:nth-child(2) { transition-delay: .08s; }
+.t13-cell:nth-child(3) { transition-delay: .16s; }
+.t13-cell:nth-child(4) { transition-delay: .24s; }
+.t13-cell:nth-child(5) { transition-delay: .32s; }
+
+/* ════════════════════════════════════════════════════
+   T14 — COMPTEURS
+════════════════════════════════════════════════════ */
+#t14 { background: #000; padding: 100px 0; display: flex; justify-content: center; gap: 0; }
+.cnt { text-align: center; padding: 0 60px; border-right: 1px solid rgba(255,255,255,0.06); }
+.cnt:last-child { border: none; }
+.cnt-n { font-family: var(--fc); font-size: clamp(72px,10vw,150px); color: white; line-height: 1; display: block; }
+.cnt-n em { color: var(--o); font-style: normal; }
+.cnt-l { font-family: var(--fm); font-size: 8px; letter-spacing: 5px; color: rgba(255,255,255,.2); margin-top: 8px; text-transform: uppercase; display: block; }
+
+/* ════════════════════════════════════════════════════
+   T15 — FILMSTRIP MARQUEE DOUBLE
+════════════════════════════════════════════════════ */
+#t15 { background: #000; overflow: hidden; padding: 3px 0; }
+.mq-track { display: flex; gap: 3px; width: max-content; }
+.mq-track-a { animation: mq-fwd 40s linear infinite; }
+.mq-track-b { animation: mq-rev 55s linear infinite; margin-top: 3px; }
+.mq-track:hover { animation-play-state: paused; }
+.mq-frame { flex-shrink: 0; overflow: hidden; position: relative; }
+.mq-frame img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(0) brightness(0.75); transition: filter .5s; }
+.mq-frame:hover img { filter: saturate(1) brightness(0.9); }
+.mq-frame-a { width: 300px; height: 190px; }
+.mq-frame-b { width: 190px; height: 120px; }
+.mq-frame::before, .mq-frame::after { content:''; position:absolute;left:0;right:0;z-index:10;pointer-events:none;
+  background:repeating-linear-gradient(to right,#000 0,#000 7px,transparent 7px,transparent 20px); }
+.mq-frame::before { top:0;height:10px; } .mq-frame::after { bottom:0;height:10px; }
+@keyframes mq-fwd { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+@keyframes mq-rev { from{transform:translateX(-50%)} to{transform:translateX(0)} }
+
+/* ════════════════════════════════════════════════════
+   T16 — LIGHT LEAK
+════════════════════════════════════════════════════ */
+#t16 { height: 75vh; background: #000; position: relative; overflow: hidden; }
+#t16-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5) saturate(0.6) contrast(1.1); }
+.ll { position: absolute; z-index: 10; pointer-events: none; border-radius: 50%; filter: blur(70px); }
+.ll1 { width: 500px; height: 700px; background: radial-gradient(circle,rgba(255,130,40,.32) 0%,transparent 70%); top:-150px; right:-80px; animation: llp 8s ease-in-out infinite; }
+.ll2 { width: 350px; height: 350px; background: radial-gradient(circle,rgba(255,210,60,.2) 0%,transparent 70%); bottom:-60px; left:10%; animation: llp 10s ease-in-out 2s infinite; }
+.ll3 { width: 250px; height: 500px; background: radial-gradient(circle,rgba(255,60,10,.22) 0%,transparent 70%); top:15%; left:-80px; animation: llp 12s ease-in-out 5s infinite; }
+@keyframes llp { 0%,100%{opacity:.6;transform:scale(1)} 50%{opacity:1;transform:scale(1.18)} }
+#t16-vig { position: absolute; inset: 0; z-index: 8; pointer-events: none; background: radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.7) 100%); }
+#t16-txt { position: absolute; inset: 0; z-index: 20; display: flex; align-items: flex-end; padding: 0 60px 64px; pointer-events: none; }
+#t16-txt h2 { font-family: var(--fc); font-size: clamp(56px,10vw,160px); line-height: 0.83; }
+
+/* ════════════════════════════════════════════════════
+   T17 — PARTICULES CANVAS
+════════════════════════════════════════════════════ */
+#t17 { height: 65vh; background: #020201; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+#t17-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+#t17-txt { position: relative; z-index: 10; font-family: var(--fc); font-size: clamp(80px,16vw,240px); color: rgba(255,255,255,.88); text-align: center; pointer-events: none; letter-spacing: -2px; }
+
+/* ════════════════════════════════════════════════════
+   T18 — FILM BURN
+════════════════════════════════════════════════════ */
+#t18 { height: 70vh; background: #000; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+#t18-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5) saturate(0.6); }
+.burn { position: absolute; z-index: 10; pointer-events: none; border-radius: 50%; filter: blur(30px); mix-blend-mode: screen; }
+.b1 { width: 380px; height: 500px; background: radial-gradient(ellipse,rgba(255,130,0,.95) 0%,rgba(255,40,0,.7) 30%,transparent 65%); top:-100px; left:5%; animation: brn 9s ease-in-out infinite; }
+.b2 { width: 300px; height: 400px; background: radial-gradient(ellipse,rgba(255,200,0,.85) 0%,rgba(255,80,0,.6) 35%,transparent 60%); bottom:-80px; right:10%; animation: brn 9s ease-in-out 4.5s infinite; }
+.b3 { width: 150px; height: 200px; background: radial-gradient(circle,rgba(255,255,200,.9) 0%,rgba(255,160,0,.7) 40%,transparent 70%); top:20%; right:25%; animation: brn2 6s ease-in-out 2s infinite; }
+@keyframes brn { 0%,100%{opacity:0;transform:scale(0.8)} 15%{opacity:1;transform:scale(1)} 40%{opacity:0} 55%{opacity:.7;transform:scale(1.1)} 70%{opacity:0} }
+@keyframes brn2 { 0%,100%{opacity:0} 30%{opacity:1} 60%{opacity:0} }
+#t18-txt { position: relative; z-index: 20; font-family: var(--fm); font-size: 9px; letter-spacing: 5px; color: rgba(255,255,255,.25); text-transform: uppercase; }
+
+/* ════════════════════════════════════════════════════
+   T19 — SCAN LINE RADAR
+════════════════════════════════════════════════════ */
+#t19 { height: 65vh; background: #000; position: relative; overflow: hidden; }
+#t19-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(0) brightness(0.35) contrast(1.4); }
+#t19-grid { position: absolute; inset: 0; z-index: 5; pointer-events: none;
+  background: repeating-linear-gradient(0deg,transparent,transparent 34px,rgba(78,205,196,.04) 34px,rgba(78,205,196,.04) 35px),
+              repeating-linear-gradient(90deg,transparent,transparent 34px,rgba(78,205,196,.04) 34px,rgba(78,205,196,.04) 35px); }
+#t19-line { position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(to right,transparent 0%,rgba(78,205,196,.6) 20%,rgba(78,205,196,1) 50%,rgba(78,205,196,.6) 80%,transparent 100%); z-index: 10; box-shadow: 0 0 24px rgba(78,205,196,.5); animation: scan 3.5s linear infinite; }
+@keyframes scan { 0%{top:-2px} 100%{top:100%} }
+#t19-txt { position: absolute; top: 28px; left: 28px; z-index: 20; font-family: var(--fm); font-size: 9px; color: rgba(78,205,196,.6); letter-spacing: 3px; text-transform: uppercase; }
+
+/* ════════════════════════════════════════════════════
+   T20 — SLOW ZOOM + SPLIT REVEAL
+════════════════════════════════════════════════════ */
+#t20 { height: 70vh; background: #000; position: relative; overflow: hidden; cursor: ew-resize; }
+#t20-before { position: absolute; inset: 0; }
+#t20-before img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0) brightness(0.65) contrast(1.1); animation: kbr 24s ease-in-out infinite alternate; transform-origin: center; }
+@keyframes kbr { 0%{transform:scale(1)} 100%{transform:scale(1.1)} }
+#t20-after { position: absolute; inset: 0; overflow: hidden; clip-path: inset(0 50% 0 0); }
+#t20-after img { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.1) brightness(0.8) contrast(1.05); animation: kbr 24s ease-in-out infinite alternate; transform-origin: center; }
+#t20-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: white; z-index: 20; transform: translateX(-50%); }
+#t20-handle::after { content:'◁  ▷'; position: absolute; top: 50%; transform: translateY(-50%) translateX(-50%); background: white; color: black; padding: 6px 10px; font-size: 9px; font-family: var(--fm); letter-spacing: 1px; white-space: nowrap; }
+#t20-lbl { position: absolute; top: 24px; left: 50%; transform: translateX(-50%); z-index: 25; font-family: var(--fm); font-size: 8px; letter-spacing: 4px; color: rgba(255,255,255,.2); white-space: nowrap; pointer-events: none; }
+
+/* ════════════════════════════════════════════════════
+   T21 — MAGAZINE GRID
+════════════════════════════════════════════════════ */
+#t21 { background: #000; }
+#t21-grid { display: grid; grid-template-columns: 2.2fr 1fr 1.4fr; grid-template-rows: 320px 220px; gap: 2px; }
+.mg { overflow: hidden; position: relative; cursor: pointer; }
+.mg img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.1) brightness(0.55) contrast(1.2); transition: all .7s cubic-bezier(0.25,0.46,0.45,0.94); transform: scale(1.04); }
+.mg:hover img { filter: saturate(0.85) brightness(0.8); transform: scale(1); }
+.mg:nth-child(1) { grid-row: 1/3; }
+.mg:nth-child(4) { grid-column: 2/4; }
+.mg-cap { position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 18px; background: linear-gradient(transparent, rgba(0,0,0,.75)); font-family: var(--fm); font-size: 7px; letter-spacing: 3px; color: rgba(255,255,255,.35); text-transform: uppercase; pointer-events: none; }
+.mg:nth-child(1)::after { content:''; position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--o); }
+
+/* ════════════════════════════════════════════════════
+   T22 — TEXT MARQUEE INFINI
+════════════════════════════════════════════════════ */
+#t22 { background: #000; padding: 60px 0; overflow: hidden; border-top: 1px solid rgba(255,255,255,.04); border-bottom: 1px solid rgba(255,255,255,.04); }
+.mq-text { display: flex; width: max-content; animation: mq-text 20s linear infinite; }
+.mq-text-r { animation-direction: reverse; animation-duration: 28s; }
+.mq-text span { font-family: var(--fc); font-size: clamp(60px,9vw,130px); color: rgba(255,255,255,.06); white-space: nowrap; padding: 0 40px; line-height: 1; }
+.mq-text span em { color: rgba(255,107,53,.2); font-style: normal; }
+@keyframes mq-text { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ════════════════════════════════════════════════════
+   T23 — 3D HOVER CARDS
+════════════════════════════════════════════════════ */
+#t23 { background: var(--ink); padding: 100px 80px; }
+#t23-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
+.card3d { position: relative; height: 420px; border-radius: 0; overflow: hidden; cursor: pointer; transform-style: preserve-3d; transition: transform .05s ease-out; }
+.card3d img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.2) brightness(0.6) contrast(1.15); transition: filter .5s; }
+.card3d:hover img { filter: saturate(0.8) brightness(0.75); }
+.card3d-hl { position: absolute; inset: 0; z-index: 10; pointer-events: none; background: radial-gradient(ellipse at var(--mx,50%) var(--my,50%), rgba(255,255,255,.08) 0%, transparent 60%); opacity: 0; transition: opacity .3s; }
+.card3d:hover .card3d-hl { opacity: 1; }
+.card3d-info { position: absolute; bottom: 0; left: 0; right: 0; z-index: 20; padding: 28px 24px; background: linear-gradient(transparent, rgba(0,0,0,.85)); }
+.card3d-num { font-family: var(--fm); font-size: 7px; color: var(--o); letter-spacing: 3px; display: block; margin-bottom: 6px; }
+.card3d-title { font-family: var(--fc); font-size: 22px; color: white; letter-spacing: 1px; }
+.card3d-border { position: absolute; inset: 0; border: 1px solid rgba(255,255,255,0); z-index: 30; transition: border-color .3s; pointer-events: none; }
+.card3d:hover .card3d-border { border-color: rgba(255,255,255,.12); }
+</style>
+</head>
+<body>
+
+<div id="grain"></div>
+<div id="c"></div>
+<div id="cr"></div>
+
+<!-- SPLASH A24 -->
+<div id="splash"><div id="splash-logo">Banlieuwood — Techniques</div></div>
+
+<nav>
+  <div class="logo">BW</div>
+  <div class="cat">Vidéo</div>
+  <a href="#t01">Scrub</a><a href="#t02">Vidéo/Texte</a><a href="#t03">BG Clip</a><a href="#t04">VHS</a><a href="#t05">Glitch</a>
+  <div class="cat">Typo</div>
+  <a href="#t06">3D</a><a href="#t07">Reveal</a><a href="#t08">Glitch txt</a>
+  <div class="cat">Photo</div>
+  <a href="#t09">Duotone</a><a href="#t10">Split</a><a href="#t11">Polaroids</a>
+  <div class="cat">Motion</div>
+  <a href="#t12">H.Scroll</a><a href="#t13">Grid</a><a href="#t14">Compteurs</a>
+  <div class="cat">FX</div>
+  <a href="#t15">Filmstrip</a><a href="#t16">Light leak</a><a href="#t17">Particules</a><a href="#t18">Film burn</a><a href="#t19">Scan</a><a href="#t20">Split reveal</a>
+  <div class="cat">Layout</div>
+  <a href="#t21">Magazine</a><a href="#t22">Marquee</a><a href="#t23">Cards 3D</a>
+</nav>
+
+<!-- ─── CAT VIDÉO ─── -->
+<div class="cat-sep"><h3><em>01</em> — Vidéo</h3><span>5 techniques</span></div>
+
+<!-- T01 VIDEO SCRUB -->
+<section style="position:relative" id="t01">
+  <div class="lbl"><span class="lbl-num">T01</span><span class="lbl-txt">Video scrub — avance avec le scroll</span></div>
+  <div id="t01-sticky">
+    <video id="t01-vid" muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(0) contrast(1.08) brightness(.72)">
+      <source src="making-of/passage.mp4" type="video/mp4">
+    </video>
+    <div id="t01-top"></div><div id="t01-bot"></div>
+    <div id="t01-vignette"></div>
+    <div id="t01-prog"></div>
+    <div id="t01-timecode">00:00</div>
+    <div id="t01-title"><h2>BANLIEUWOOD<br><em>PASSAGE</em></h2></div>
+  </div>
+</section>
+<div class="sep"></div>
+
+<!-- T02 VIDEO DANS LE TEXTE (SVG MASK CORRECT) -->
+<section style="position:relative" id="t02">
+  <div class="lbl"><span class="lbl-num">T02</span><span class="lbl-txt">Vidéo visible uniquement dans les lettres</span></div>
+  <div style="height:80vh;background:#000;position:relative;overflow:hidden;">
+    <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(1.3) contrast(1.1) saturate(1.2)">
+      <source src="making-of/passage.mp4" type="video/mp4">
+    </video>
+    <!-- Black mask with text holes = video shows through letters -->
+    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:10">
+      <defs>
+        <mask id="tm">
+          <rect fill="white" width="100%" height="100%"/>
+          <text x="50%" y="52%" text-anchor="middle" dominant-baseline="middle"
+            font-family="'Bebas Neue'" font-size="21vw" fill="black" letter-spacing="-0.01em">ÉCOLE</text>
+          <text x="50%" y="78%" text-anchor="middle" dominant-baseline="middle"
+            font-family="'Bebas Neue'" font-size="10vw" fill="black" letter-spacing="0.05em">BANLIEUWOOD</text>
+        </mask>
+      </defs>
+      <rect fill="black" width="100%" height="100%" mask="url(#tm)"/>
+    </svg>
+    <div style="position:absolute;inset:0;z-index:5;background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,.7) 100%);pointer-events:none"></div>
+  </div>
+</section>
+<div class="sep"></div>
+
+<!-- T03 BACKGROUND-CLIP TEXT -->
+<section style="position:relative" id="t03">
+  <div class="lbl"><span class="lbl-num">T03</span><span class="lbl-txt">Photo à l'intérieur des lettres — CSS background-clip</span></div>
+  <div style="height:60vh;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;">
+    <div id="t03-text">PASSAGE<br>2024</div>
+    <div id="t03-overlay"></div>
+  </div>
+</section>
+<div class="sep"></div>
+
+<!-- T04 VHS -->
+<section style="position:relative" id="t04">
+  <div class="lbl"><span class="lbl-num">T04</span><span class="lbl-txt">VHS / CRT — scanlines + aberration + glitch</span></div>
+  <video id="t04-vid" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.75) brightness(.65) contrast(1.25)">
+    <source src="making-of/passage.mp4" type="video/mp4">
+  </video>
+  <div id="t04-scan"></div><div id="t04-aberr"></div><div id="t04-glitch"></div><div id="t04-htrack"></div>
+  <div id="t04-ts"></div>
+  <div id="t04-rec"><div id="t04-dot"></div>REC</div>
+  <div id="t04-bars"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+</section>
+<div class="sep"></div>
+
+<!-- T05 GLITCH PHOTO -->
+<section style="position:relative" id="t05">
+  <div class="lbl"><span class="lbl-num">T05</span><span class="lbl-txt">Glitch photo RGB — cliquez</span></div>
+  <img id="t05-base" src="making-of/frame_005.jpg" alt="">
+  <img id="t05-r" src="making-of/frame_005.jpg" alt="">
+  <img id="t05-b" src="making-of/frame_010.jpg" alt="">
+  <div id="t05-hint">CLIQUEZ</div>
+</section>
+<div class="sep"></div>
+
+<!-- ─── CAT TYPO ─── -->
+<div class="cat-sep"><h3><em>02</em> — Typographie</h3><span>3 techniques</span></div>
+
+<!-- T06 3D SOURIS -->
+<section style="position:relative" id="t06">
+  <div class="lbl"><span class="lbl-num">T06</span><span class="lbl-txt">Titre 3D qui suit la souris</span></div>
+  <img id="t06-bg" src="making-of/frame_025.jpg" alt="" style="position:absolute;inset:-5%;width:110%;height:110%;object-fit:cover;filter:saturate(0) brightness(.15)">
+  <div id="t06-word">BANLIEUWOOD<br><em>CINÉMA</em></div>
+  <div id="t06-shadow">BANLIEUWOOD<br>CINÉMA</div>
+</section>
+<div class="sep"></div>
+
+<!-- T07 REVEAL SCROLL -->
+<section style="position:relative" id="t07">
+  <div class="lbl"><span class="lbl-num">T07</span><span class="lbl-txt">Texte masqué — jaillit au scroll</span></div>
+  <img id="t07-bg" src="making-of/frame_030.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(0) brightness(.08)">
+  <div class="r-line"><span class="r-span">LE CINÉMA</span></div>
+  <div class="r-line"><span class="r-span">COMME</span></div>
+  <div class="r-line"><span class="r-span">ÉCOLE</span></div>
+  <div class="r-line"><span class="r-span">DEPUIS 2016</span></div>
+</section>
+<div class="sep"></div>
+
+<!-- T08 GLITCH TEXTE -->
+<section style="position:relative" id="t08">
+  <div class="lbl"><span class="lbl-num">T08</span><span class="lbl-txt">Glitch texte CSS automatique</span></div>
+  <div class="gtxt" data-t="BANLIEUWOOD">BANLIEUWOOD</div>
+</section>
+<div class="sep"></div>
+
+<!-- ─── CAT PHOTO ─── -->
+<div class="cat-sep"><h3><em>03</em> — Photo</h3><span>3 techniques</span></div>
+
+<!-- T09 DUOTONE -->
+<section style="position:relative" id="t09">
+  <div class="lbl" style="z-index:100"><span class="lbl-num">T09</span><span class="lbl-txt">Duotone × 4 — hover pour révéler</span></div>
+  <div class="dt"><img src="making-of/frame_005.jpg" alt=""><div class="dt-lbl">Noir cinéma</div></div>
+  <div class="dt"><img src="making-of/frame_010.jpg" alt=""><div class="dt-lbl">Magenta</div></div>
+  <div class="dt"><img src="making-of/frame_015.jpg" alt=""><div class="dt-lbl">Teal</div></div>
+  <div class="dt"><img src="making-of/frame_020.jpg" alt=""><div class="dt-lbl">Or sépia</div></div>
+</section>
+<div class="sep"></div>
+
+<!-- T10 SPLIT BANDES -->
+<section style="position:relative" id="t10">
+  <div class="lbl"><span class="lbl-num">T10</span><span class="lbl-txt">3 bandes décalées — hover pour aligner</span></div>
+  <div class="t10s"><img src="making-of/frame_005.jpg" alt=""></div>
+  <div class="t10-line"></div>
+  <div class="t10s"><img src="making-of/frame_005.jpg" alt=""></div>
+  <div class="t10-line"></div>
+  <div class="t10s"><img src="making-of/frame_005.jpg" alt=""></div>
+</section>
+<div class="sep"></div>
+
+<!-- T11 POLAROIDS -->
+<section style="position:relative;min-height:75vh;" id="t11">
+  <div class="lbl"><span class="lbl-num">T11</span><span class="lbl-txt">Polaroids draggables</span></div>
+  <div class="pol" style="top:80px;left:8%;transform:rotate(-3.5deg);z-index:4" data-drag>
+    <img src="making-of/frame_005.jpg" alt=""><div class="pol-name">Scène 1</div>
+  </div>
+  <div class="pol" style="top:60px;left:28%;transform:rotate(2deg);z-index:3" data-drag>
+    <img src="making-of/frame_010.jpg" alt=""><div class="pol-name">Tournage</div>
+  </div>
+  <div class="pol" style="top:120px;left:48%;transform:rotate(-1.2deg);z-index:2" data-drag>
+    <img src="making-of/frame_015.jpg" alt=""><div class="pol-name">Équipe</div>
+  </div>
+  <div class="pol" style="top:80px;left:66%;transform:rotate(3deg);z-index:5" data-drag>
+    <img src="making-of/frame_020.jpg" alt=""><div class="pol-name">Élèves</div>
+  </div>
+  <div class="pol" style="top:200px;left:20%;transform:rotate(-2deg);z-index:6" data-drag>
+    <img src="making-of/frame_025.jpg" alt=""><div class="pol-name">Passage</div>
+  </div>
+</section>
+<div class="sep"></div>
+
+<!-- ─── CAT MOTION ─── -->
+<div class="cat-sep"><h3><em>04</em> — Motion</h3><span>3 techniques</span></div>
+
+<!-- T12 HORIZONTAL SCROLL -->
+<section style="position:relative" id="t12">
+  <div id="t12-sticky">
+    <div id="t12-title"><h2>MAKING<br><em>OF</em></h2></div>
+    <div id="t12-track">
+      <div class="t12-frame"><img src="making-of/frame_005.jpg" alt=""><div class="t12-num">001</div></div>
+      <div class="t12-frame"><img src="making-of/frame_010.jpg" alt=""><div class="t12-num">002</div></div>
+      <div class="t12-frame"><img src="making-of/frame_015.jpg" alt=""><div class="t12-num">003</div></div>
+      <div class="t12-frame"><img src="making-of/frame_020.jpg" alt=""><div class="t12-num">004</div></div>
+      <div class="t12-frame"><img src="making-of/frame_025.jpg" alt=""><div class="t12-num">005</div></div>
+      <div class="t12-frame"><img src="making-of/frame_030.jpg" alt=""><div class="t12-num">006</div></div>
+    </div>
+    <div id="t12-scrollbar"><div id="t12-scrollthumb"></div></div>
+  </div>
+</section>
+<div class="sep"></div>
+
+<!-- T13 STAGGERED GRID -->
+<section style="position:relative" id="t13">
+  <div class="lbl"><span class="lbl-num">T13</span><span class="lbl-txt">Grille staggered — apparaît au scroll</span></div>
+  <div id="t13-grid">
+    <div class="t13-cell"><img src="making-of/frame_005.jpg" alt=""></div>
+    <div class="t13-cell"><img src="making-of/frame_010.jpg" alt=""></div>
+    <div class="t13-cell"><img src="making-of/frame_015.jpg" alt=""></div>
+    <div class="t13-cell"><img src="making-of/frame_020.jpg" alt=""></div>
+    <div class="t13-cell"><img src="making-of/frame_025.jpg" alt=""></div>
+  </div>
+</section>
+<div class="sep"></div>
+
+<!-- T14 COMPTEURS -->
+<section style="position:relative" id="t14">
+  <div class="lbl"><span class="lbl-num">T14</span><span class="lbl-txt">Compteurs animés au scroll</span></div>
+  <div class="cnt"><span class="cnt-n" data-target="1200"><em>0</em></span><span class="cnt-l">Élèves formés</span></div>
+  <div class="cnt"><span class="cnt-n" data-target="8"><em>0</em></span><span class="cnt-l">Villes</span></div>
+  <div class="cnt"><span class="cnt-n" data-target="2016"><em>0</em></span><span class="cnt-l">Depuis</span></div>
+  <div class="cnt"><span class="cnt-n" data-target="47"><em>0</em></span><span class="cnt-l">Ateliers</span></div>
+</section>
+<div class="sep"></div>
+
+<!-- ─── CAT FX ─── -->
+<div class="cat-sep"><h3><em>05</em> — Effets</h3><span>6 techniques</span></div>
+
+<!-- T15 FILMSTRIP DOUBLE -->
+<section style="position:relative" id="t15">
+  <div class="lbl"><span class="lbl-num">T15</span><span class="lbl-txt">Filmstrip double sens — hover pour pause</span></div>
+  <div class="mq-track mq-track-a">
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_001.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_005.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_008.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_012.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_016.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_020.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_025.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_030.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_035.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_038.jpg" alt=""></div>
+    <!-- duplicate -->
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_001.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_005.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_008.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_012.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_016.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_020.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_025.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_030.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_035.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-a"><img src="making-of/frame_038.jpg" alt=""></div>
+  </div>
+  <div class="mq-track mq-track-b">
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_003.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_007.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_010.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_014.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_018.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_022.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_027.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_032.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_036.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_003.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_007.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_010.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_014.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_018.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_022.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_027.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_032.jpg" alt=""></div>
+    <div class="mq-frame mq-frame-b"><img src="making-of/frame_036.jpg" alt=""></div>
+  </div>
+</section>
+<div class="sep"></div>
+
+<!-- T16 LIGHT LEAK -->
+<section style="position:relative" id="t16">
+  <div class="lbl"><span class="lbl-num">T16</span><span class="lbl-txt">Light leak — fuite lumière film analogique</span></div>
+  <img id="t16-img" src="making-of/frame_030.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.5) saturate(.6) contrast(1.1)">
+  <div class="ll ll1"></div><div class="ll ll2"></div><div class="ll ll3"></div>
+  <div id="t16-vig"></div>
+  <div id="t16-txt"><h2>BANLIEUWOOD</h2></div>
+</section>
+<div class="sep"></div>
+
+<!-- T17 PARTICULES -->
+<section style="position:relative" id="t17">
+  <div class="lbl"><span class="lbl-num">T17</span><span class="lbl-txt">Particules canvas — poussière de film</span></div>
+  <canvas id="t17-canvas"></canvas>
+  <div id="t17-txt">PASSAGE</div>
+</section>
+<div class="sep"></div>
+
+<!-- T18 FILM BURN -->
+<section style="position:relative" id="t18">
+  <div class="lbl"><span class="lbl-num">T18</span><span class="lbl-txt">Film burn — combustion pellicule</span></div>
+  <img id="t18-img" src="making-of/frame_015.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.5) saturate(.6)">
+  <div class="burn b1"></div><div class="burn b2"></div><div class="burn b3"></div>
+  <div id="t18-txt">FILM BURN — PASSAGE — 2024</div>
+</section>
+<div class="sep"></div>
+
+<!-- T19 SCAN -->
+<section style="position:relative" id="t19">
+  <div class="lbl"><span class="lbl-num">T19</span><span class="lbl-txt">Scan radar teal — surveillance cinématique</span></div>
+  <img id="t19-img" src="making-of/frame_010.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(0) brightness(.35) contrast(1.4)">
+  <div id="t19-grid"></div><div id="t19-line"></div>
+  <div id="t19-txt">SCANNING — PASSAGE — 00:00</div>
+</section>
+<div class="sep"></div>
+
+<!-- T20 SPLIT REVEAL -->
+<section style="position:relative" id="t20">
+  <div class="lbl"><span class="lbl-num">T20</span><span class="lbl-txt">Split reveal — glissez la souris</span></div>
+  <div id="t20-before"><img src="making-of/frame_025.jpg" alt=""></div>
+  <div id="t20-after"><img src="making-of/frame_025.jpg" alt=""></div>
+  <div id="t20-handle"></div>
+  <div id="t20-lbl">← B&W vs COULEUR →</div>
+</section>
+<div class="sep"></div>
+
+<!-- ─── CAT LAYOUT ─── -->
+<div class="cat-sep"><h3><em>06</em> — Layout</h3><span>3 techniques</span></div>
+
+<!-- T21 MAGAZINE -->
+<section style="position:relative" id="t21">
+  <div class="lbl"><span class="lbl-num">T21</span><span class="lbl-txt">Grille magazine asymétrique — hover couleur</span></div>
+  <div id="t21-grid">
+    <div class="mg"><img src="making-of/frame_005.jpg" alt=""><div class="mg-cap">Scène 1 — Passage 2024</div></div>
+    <div class="mg"><img src="making-of/frame_010.jpg" alt=""><div class="mg-cap">Making of</div></div>
+    <div class="mg"><img src="making-of/frame_015.jpg" alt=""><div class="mg-cap">Tournage</div></div>
+    <div class="mg"><img src="making-of/frame_020.jpg" alt=""><div class="mg-cap">Élèves</div></div>
+    <div class="mg"><img src="making-of/frame_025.jpg" alt=""><div class="mg-cap">Atelier cinéma</div></div>
+  </div>
+</section>
+<div class="sep"></div>
+
+<!-- T22 TEXT MARQUEE -->
+<section style="position:relative" id="t22">
+  <div class="lbl"><span class="lbl-num">T22</span><span class="lbl-txt">Marquee texte infini</span></div>
+  <div class="mq-text">
+    <span>BANLIEUWOOD</span><span><em>CINÉMA</em></span><span>PASSAGE</span><span>ÉCOLE</span><span>BANLIEUWOOD</span><span><em>CINÉMA</em></span><span>PASSAGE</span><span>ÉCOLE</span>
+    <span>BANLIEUWOOD</span><span><em>CINÉMA</em></span><span>PASSAGE</span><span>ÉCOLE</span><span>BANLIEUWOOD</span><span><em>CINÉMA</em></span><span>PASSAGE</span><span>ÉCOLE</span>
+  </div>
+  <div class="mq-text mq-text-r" style="margin-top:0">
+    <span>DEPUIS 2016</span><span><em>1200 ÉLÈVES</em></span><span>8 VILLES</span><span>47 ATELIERS</span><span>DEPUIS 2016</span><span><em>1200 ÉLÈVES</em></span><span>8 VILLES</span><span>47 ATELIERS</span>
+    <span>DEPUIS 2016</span><span><em>1200 ÉLÈVES</em></span><span>8 VILLES</span><span>47 ATELIERS</span><span>DEPUIS 2016</span><span><em>1200 ÉLÈVES</em></span><span>8 VILLES</span><span>47 ATELIERS</span>
+  </div>
+</section>
+<div class="sep"></div>
+
+<!-- T23 3D HOVER CARDS -->
+<section style="position:relative" id="t23">
+  <div class="lbl"><span class="lbl-num">T23</span><span class="lbl-txt">Cards 3D — bougez la souris sur les cartes</span></div>
+  <div id="t23-grid">
+    <div class="card3d" data-card>
+      <img src="making-of/frame_005.jpg" alt="">
+      <div class="card3d-hl"></div>
+      <div class="card3d-info"><span class="card3d-num">001 — PASSAGE</span><div class="card3d-title">SCÈNE D'OUVERTURE</div></div>
+      <div class="card3d-border"></div>
+    </div>
+    <div class="card3d" data-card>
+      <img src="making-of/frame_015.jpg" alt="">
+      <div class="card3d-hl"></div>
+      <div class="card3d-info"><span class="card3d-num">002 — ÉQUIPE</span><div class="card3d-title">TOURNAGE</div></div>
+      <div class="card3d-border"></div>
+    </div>
+    <div class="card3d" data-card>
+      <img src="making-of/frame_020.jpg" alt="">
+      <div class="card3d-hl"></div>
+      <div class="card3d-info"><span class="card3d-num">003 — ÉLÈVES</span><div class="card3d-title">ATELIER CINÉMA</div></div>
+      <div class="card3d-border"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div style="height:80px;background:#000;border-top:1px solid rgba(255,255,255,.04);display:flex;align-items:center;padding:0 48px;gap:24px;">
+  <span style="font-family:var(--fm);font-size:8px;letter-spacing:4px;color:rgba(255,255,255,.1)">BANLIEUWOOD — 23 TECHNIQUES</span>
+  <span style="font-family:var(--fm);font-size:8px;color:var(--o);letter-spacing:2px">DESIGN BLOCKS V1</span>
+  <span style="margin-left:auto;font-family:var(--fm);font-size:8px;color:rgba(255,255,255,.06);letter-spacing:2px">2026</span>
+</div>
+
+<script>
+// ── CURSOR ─────────────────────────────────────────
+const cur = document.getElementById('c');
+const ring = document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+(function animRing(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); })();
+document.querySelectorAll('a,button,[data-card],[data-drag],[id^="t0"],[id^="t1"],[id^="t2"]').forEach(el=>{ el.addEventListener('mouseenter',()=>document.body.classList.add('hovering')); el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering')); });
+
+// ── T01 VIDEO SCRUB ────────────────────────────────
+const v01 = document.getElementById('t01-vid');
+const p01 = document.getElementById('t01-prog');
+const tc01 = document.getElementById('t01-timecode');
+v01.addEventListener('loadedmetadata',()=>{
+  window.addEventListener('scroll',()=>{
+    const sec = document.getElementById('t01');
+    const pct = Math.max(0,Math.min(1,-sec.getBoundingClientRect().top/(sec.offsetHeight-window.innerHeight)));
+    if(v01.duration){ v01.currentTime=v01.duration*pct; p01.style.width=(pct*100)+'%'; const s=Math.floor(v01.currentTime); tc01.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); }
+  });
+});
+
+// ── T04 TIMESTAMP ──────────────────────────────────
+setInterval(()=>{ const ts=document.getElementById('t04-ts'); if(!ts)return; const n=new Date(),p=n=>String(n).padStart(2,'0'); ts.textContent=`${p(n.getHours())}:${p(n.getMinutes())}:${p(n.getSeconds())}:${p(Math.floor(n.getMilliseconds()/10))}`; },33);
+
+// ── T05 GLITCH ─────────────────────────────────────
+const t05 = document.getElementById('t05');
+const imgs = ['making-of/frame_005.jpg','making-of/frame_010.jpg','making-of/frame_015.jpg','making-of/frame_020.jpg','making-of/frame_025.jpg','making-of/frame_030.jpg'];
+let gi=0;
+t05.addEventListener('click',()=>{
+  gi=(gi+1)%imgs.length;
+  document.getElementById('t05-base').src=imgs[gi];
+  document.getElementById('t05-r').src=imgs[gi];
+  document.getElementById('t05-b').src=imgs[(gi+1)%imgs.length];
+  t05.classList.add('glitching');
+  setTimeout(()=>t05.classList.remove('glitching'),380);
+});
+
+// ── T06 3D SOURIS ──────────────────────────────────
+const t06=document.getElementById('t06'),w06=document.getElementById('t06-word');
+t06.addEventListener('mousemove',e=>{
+  const r=t06.getBoundingClientRect();
+  const dx=(e.clientX-r.left-r.width/2)/r.width;
+  const dy=(e.clientY-r.top-r.height/2)/r.height;
+  w06.style.transform=`rotateY(${dx*22}deg) rotateX(${-dy*14}deg) translateZ(30px)`;
+});
+t06.addEventListener('mouseleave',()=>{ w06.style.transform='rotateY(0) rotateX(0) translateZ(0)'; });
+
+// ── T12 HORIZONTAL SCROLL ──────────────────────────
+const t12sec=document.getElementById('t12'),t12track=document.getElementById('t12-track'),t12thumb=document.getElementById('t12-scrollthumb');
+const totalSlide=()=>t12track.scrollWidth-window.innerWidth;
+window.addEventListener('scroll',()=>{
+  const r=t12sec.getBoundingClientRect();
+  const pct=Math.max(0,Math.min(1,-r.top/(t12sec.offsetHeight-window.innerHeight)));
+  t12track.style.transform=`translateX(${-pct*totalSlide()}px)`;
+  t12thumb.style.width=(pct*100)+'%';
+});
+
+// ── T20 SPLIT REVEAL ───────────────────────────────
+const t20=document.getElementById('t20'),t20a=document.getElementById('t20-after'),t20h=document.getElementById('t20-handle');
+const splitMove=e=>{
+  const r=t20.getBoundingClientRect();
+  const x=Math.max(0,Math.min(e.clientX-r.left,r.width));
+  const pct=(x/r.width)*100;
+  t20a.style.clipPath=`inset(0 ${100-pct}% 0 0)`;
+  t20h.style.left=pct+'%';
+};
+t20.addEventListener('mousemove',splitMove);
+t20.addEventListener('touchmove',e=>{ e.preventDefault(); const r=t20.getBoundingClientRect(); const x=Math.max(0,Math.min(e.touches[0].clientX-r.left,r.width)); const pct=(x/r.width)*100; t20a.style.clipPath=`inset(0 ${100-pct}% 0 0)`; t20h.style.left=pct+'%'; },{passive:false});
+
+// ── T17 PARTICULES ─────────────────────────────────
+const canvas=document.getElementById('t17-canvas');
+const ctx=canvas.getContext('2d');
+const resizeCv=()=>{ canvas.width=canvas.parentElement.offsetWidth; canvas.height=canvas.parentElement.offsetHeight; };
+new ResizeObserver(resizeCv).observe(canvas.parentElement);
+resizeCv();
+let parts=[];
+const initParts=()=>{ parts=Array.from({length:160},()=>({ x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*1.2+0.15, vx:(Math.random()-.5)*.25, vy:-Math.random()*.4-.05, a:Math.random()*.5+.1, })); };
+initParts();
+new ResizeObserver(()=>{ resizeCv(); initParts(); }).observe(canvas.parentElement);
+(function animP(){ ctx.clearRect(0,0,canvas.width,canvas.height); parts.forEach(p=>{ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle=`rgba(255,255,255,${p.a})`; ctx.fill(); p.x+=p.vx; p.y+=p.vy; if(p.y<-5){ p.y=canvas.height+5; p.x=Math.random()*canvas.width; } }); requestAnimationFrame(animP); })();
+
+// ── POLAROIDS DRAG ─────────────────────────────────
+document.querySelectorAll('[data-drag]').forEach(el=>{
+  let drag=false,ox,oy;
+  el.addEventListener('mousedown',e=>{ drag=true; const r=el.getBoundingClientRect(),pr=el.parentElement.getBoundingClientRect(); ox=e.clientX-(r.left-pr.left); oy=e.clientY-(r.top-pr.top); el.style.transition='none'; el.style.zIndex=999; e.preventDefault(); });
+  document.addEventListener('mousemove',e=>{ if(!drag)return; const pr=el.parentElement.getBoundingClientRect(); el.style.left=(e.clientX-ox)+'px'; el.style.top=(e.clientY-oy)+'px'; el.style.transform=`rotate(${((e.clientX-ox)/20)%6}deg)`; });
+  document.addEventListener('mouseup',()=>{ drag=false; el.style.transition=''; el.style.zIndex=''; });
+});
+
+// ── 3D CARDS ──────────────────────────────────────
+document.querySelectorAll('[data-card]').forEach(card=>{
+  const hl=card.querySelector('.card3d-hl');
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const dx=(e.clientX-r.left)/r.width-.5;
+    const dy=(e.clientY-r.top)/r.height-.5;
+    card.style.transform=`perspective(800px) rotateY(${dx*14}deg) rotateX(${-dy*10}deg) translateZ(8px)`;
+    const mx=((e.clientX-r.left)/r.width*100).toFixed(1)+'%';
+    const my=((e.clientY-r.top)/r.height*100).toFixed(1)+'%';
+    card.style.setProperty('--mx',mx); card.style.setProperty('--my',my);
+  });
+  card.addEventListener('mouseleave',()=>{ card.style.transform=''; });
+});
+
+// ── INTERSECTION OBSERVER ──────────────────────────
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(!en.isIntersecting)return;
+    const id=en.target.id;
+
+    // T07 reveal lines
+    if(id==='t07') en.target.querySelectorAll('.r-line').forEach((l,i)=>setTimeout(()=>l.classList.add('in'),i*120));
+
+    // T13 staggered grid
+    if(id==='t13') en.target.querySelectorAll('.t13-cell').forEach((c,i)=>setTimeout(()=>c.classList.add('in'),i*80));
+
+    // T14 counters
+    if(id==='t14') en.target.querySelectorAll('[data-target]').forEach(el=>{
+      const target=parseInt(el.dataset.target),span=el.querySelector('em'),dur=2200,start=Date.now();
+      (function tick(){ const p=Math.min(1,(Date.now()-start)/dur),e=1-Math.pow(1-p,3); span.textContent=Math.round(e*target).toLocaleString('fr-FR'); if(p<1)requestAnimationFrame(tick); })();
+    });
+
+    io.unobserve(en.target);
+  });
+},{threshold:.25});
+['t07','t13','t14'].forEach(id=>{ const el=document.getElementById(id); if(el)io.observe(el); });
+</script>
+</body>
+</html>

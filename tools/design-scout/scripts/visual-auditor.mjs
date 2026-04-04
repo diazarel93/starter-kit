@@ -18,8 +18,8 @@ import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const CAPTURES_DIR = resolve(__dirname, "captures/visual-analysis");
-const KB_PATH = resolve(__dirname, "knowledge-base.json");
+const CAPTURES_DIR = resolve(__dirname, "../captures/visual-analysis");
+const KB_PATH = resolve(__dirname, "../knowledge/knowledge-base.json");
 
 // ─── PROMPT D'AUDIT DA ───────────────────────────────────────────────────────
 

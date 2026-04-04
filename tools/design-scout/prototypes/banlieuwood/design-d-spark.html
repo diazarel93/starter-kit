@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direction D — SPARK</title>
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap');
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   DIRECTION D — SPARK
+   Arc Browser + Annapurna Interactive + Teenage Engineering
+   ═══════════════════════════════════════════ */
+
+:root {
+  /* Fond */
+  --bg-deep: #0D0F1A;
+  --bg-surface: #161929;
+  --bg-elevated: #1E2137;
+  --bg-overlay: #252842;
+
+  /* Accents */
+  --violet: #7C3AED;
+  --violet-glow: rgba(124, 58, 237, 0.35);
+  --spark: #C4FF47;
+  --spark-glow: rgba(196, 255, 71, 0.25);
+  --orange: #FF6B35;
+
+  /* Texte */
+  --text-primary: #F0F0FF;
+  --text-secondary: #8B92B8;
+  --text-muted: #5A6080;
+
+  /* Disciplines */
+  --cinema: #7C3AED;
+  --jeu-video: #C4FF47;
+  --medias: #FF6B35;
+  --mode: #EC4899;
+  --design: #06B6D4;
+  --musique: #F59E0B;
+  --theatre: #10B981;
+
+  /* Borders */
+  --border-subtle: rgba(255,255,255,0.08);
+  --border-medium: rgba(255,255,255,0.12);
+
+  /* Typo */
+  --font-display: 'Clash Display', 'Syne', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  /* Radius */
+  --radius-card: 16px;
+  --radius-pill: 999px;
+  --radius-btn: 12px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── NAVIGATION ONGLETS ── */
+.tab-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 24px;
+  background: rgba(13, 15, 26, 0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.tab-nav-brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--spark);
+  margin-right: 24px;
+  letter-spacing: -0.02em;
+}
+
+.tab-btn {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-pill);
+  transition: all 0.25s ease;
+  letter-spacing: 0.01em;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.05);
+}
+
+.tab-btn.active {
+  background: var(--violet);
+  color: white;
+  font-weight: 600;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* ═══════════════════════════════════════════
+   TAB 1 — LANDING PAGE
+   ═══════════════════════════════════════════ */
+
+/* ── Hero ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+  overflow: hidden;
+}
+
+/* Geometric floating shapes */
+.hero-shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.shape {
+  position: absolute;
+  opacity: 0.08;
+}
+
+.shape-diamond {
+  width: 180px;
+  height: 180px;
+  background: var(--violet);
+  transform: rotate(45deg);
+  border-radius: 8px;
+  top: 12%;
+  left: 8%;
+  animation: float-slow 18s ease-in-out infinite;
+}
+
+.shape-diamond-sm {
+  width: 80px;
+  height: 80px;
+  background: var(--spark);
+  transform: rotate(45deg);
+  border-radius: 4px;
+  top: 25%;
+  right: 15%;
+  animation: float-slow 14s ease-in-out infinite reverse;
+}
+
+.shape-triangle {
+  width: 0;
+  height: 0;
+  border-left: 70px solid transparent;
+  border-right: 70px solid transparent;
+  border-bottom: 120px solid var(--violet);
+  opacity: 0.06;
+  bottom: 20%;
+  right: 10%;
+  animation: float-slow 20s ease-in-out infinite;
+}
+
+.shape-circle {
+  width: 240px;
+  height: 240px;
+  border: 2px solid var(--spark);
+  border-radius: 50%;
+  opacity: 0.05;
+  bottom: 15%;
+  left: 5%;
+  animation: float-slow 22s ease-in-out infinite reverse;
+}
+
+.shape-dot-grid {
+  top: 60%;
+  right: 25%;
+  display: grid;
+  grid-template-columns: repeat(4, 8px);
+  gap: 12px;
+  opacity: 0.1;
+  animation: float-slow 16s ease-in-out infinite;
+}
+
+.shape-dot-grid span {
+  width: 4px;
+  height: 4px;
+  background: var(--violet);
+  border-radius: 50%;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(var(--rotation, 45deg)); }
+  50% { transform: translateY(-20px) rotate(var(--rotation, 45deg)); }
+}
+
+.shape-triangle { --rotation: 0deg; }
+.shape-circle { --rotation: 0deg; }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(124, 58, 237, 0.15);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--violet);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  font-family: var(--font-mono);
+}
+
+.hero-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--spark);
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.4); }
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(48px, 7vw, 88px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+
+.hero h1 .accent-spark {
+  color: var(--spark);
+}
+
+.hero h1 .accent-violet {
+  color: var(--violet);
+}
+
+.hero-sub {
+  font-size: clamp(17px, 2vw, 20px);
+  color: var(--text-secondary);
+  max-width: 580px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 14px 32px;
+  background: var(--violet);
+  color: white;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.01em;
+}
+
+.btn-primary:hover {
+  background: #6D28D9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px var(--violet-glow);
+}
+
+.btn-ghost {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  padding: 14px 32px;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-ghost:hover {
+  border-color: var(--violet);
+  color: var(--violet);
+  background: rgba(124, 58, 237, 0.08);
+}
+
+/* ── Marquee disciplines ── */
+.marquee-wrap {
+  padding: 40px 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow: hidden;
+  margin-top: -1px;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 48px;
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+
+.marquee-item {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.marquee-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── Section Disciplines ── */
+.section {
+  padding: 100px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--violet);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(32px, 4vw, 48px);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.section-desc {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* Discipline cards — 4+3 grid, bottom row centered */
+.disciplines-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.disciplines-grid .disc-card:nth-child(n+5) {
+  /* bottom row: 3 items centered in 4-col grid */
+}
+
+.disc-bottom-row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.disc-bottom-row .disc-card {
+  width: calc(25% - 15px);
+}
+
+.disc-card {
+  position: relative;
+  padding: 32px 24px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
+
+.disc-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  transition: opacity 0.35s ease;
+  border-radius: var(--radius-card);
+}
+
+.disc-card:hover {
+  transform: scale(1.02);
+  border-color: transparent;
+}
+
+.disc-card:hover::before { opacity: 0.15; }
+
+.disc-card[data-disc="cinema"]::before { background: var(--cinema); }
+.disc-card[data-disc="cinema"]:hover { box-shadow: 0 0 40px rgba(124,58,237,0.2); }
+
+.disc-card[data-disc="jeu-video"]::before { background: var(--jeu-video); }
+.disc-card[data-disc="jeu-video"]:hover { box-shadow: 0 0 40px rgba(196,255,71,0.15); }
+
+.disc-card[data-disc="medias"]::before { background: var(--medias); }
+.disc-card[data-disc="medias"]:hover { box-shadow: 0 0 40px rgba(255,107,53,0.2); }
+
+.disc-card[data-disc="mode"]::before { background: var(--mode); }
+.disc-card[data-disc="mode"]:hover { box-shadow: 0 0 40px rgba(236,72,153,0.2); }
+
+.disc-card[data-disc="design"]::before { background: var(--design); }
+.disc-card[data-disc="design"]:hover { box-shadow: 0 0 40px rgba(6,182,212,0.2); }
+
+.disc-card[data-disc="musique"]::before { background: var(--musique); }
+.disc-card[data-disc="musique"]:hover { box-shadow: 0 0 40px rgba(245,158,11,0.2); }
+
+.disc-card[data-disc="theatre"]::before { background: var(--theatre); }
+.disc-card[data-disc="theatre"]:hover { box-shadow: 0 0 40px rgba(16,185,129,0.2); }
+
+.disc-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.disc-card[data-disc="cinema"] .disc-icon { background: rgba(124,58,237,0.2); }
+.disc-card[data-disc="jeu-video"] .disc-icon { background: rgba(196,255,71,0.15); }
+.disc-card[data-disc="medias"] .disc-icon { background: rgba(255,107,53,0.2); }
+.disc-card[data-disc="mode"] .disc-icon { background: rgba(236,72,153,0.2); }
+.disc-card[data-disc="design"] .disc-icon { background: rgba(6,182,212,0.2); }
+.disc-card[data-disc="musique"] .disc-icon { background: rgba(245,158,11,0.2); }
+.disc-card[data-disc="theatre"] .disc-icon { background: rgba(16,185,129,0.2); }
+
+.disc-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.disc-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.disc-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.disc-card[data-disc="cinema"] .disc-tag { background: rgba(124,58,237,0.2); color: #A78BFA; }
+.disc-card[data-disc="jeu-video"] .disc-tag { background: rgba(196,255,71,0.15); color: #C4FF47; }
+.disc-card[data-disc="medias"] .disc-tag { background: rgba(255,107,53,0.2); color: #FF8F6B; }
+.disc-card[data-disc="mode"] .disc-tag { background: rgba(236,72,153,0.2); color: #F472B6; }
+.disc-card[data-disc="design"] .disc-tag { background: rgba(6,182,212,0.2); color: #22D3EE; }
+.disc-card[data-disc="musique"] .disc-tag { background: rgba(245,158,11,0.2); color: #FBBF24; }
+.disc-card[data-disc="theatre"] .disc-tag { background: rgba(16,185,129,0.2); color: #34D399; }
+
+/* ── Pipeline M1-M8 ── */
+.pipeline-section {
+  padding: 100px 24px;
+  background: var(--bg-surface);
+}
+
+.pipeline-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.pipeline-track {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  position: relative;
+  justify-content: space-between;
+}
+
+.pipeline-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  flex: 1;
+}
+
+.pipeline-step::after {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: var(--border-subtle);
+}
+
+.pipeline-step:last-child::after { display: none; }
+
+.pipeline-num {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  background: var(--bg-elevated);
+  border: 2px solid var(--border-medium);
+  position: relative;
+  z-index: 2;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.pipeline-step.active .pipeline-num {
+  background: var(--violet);
+  border-color: var(--violet);
+  box-shadow: 0 0 20px var(--violet-glow);
+}
+
+.pipeline-step.done .pipeline-num {
+  background: rgba(124,58,237,0.2);
+  border-color: var(--violet);
+  color: var(--violet);
+}
+
+.pipeline-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 4px;
+  letter-spacing: 0.01em;
+}
+
+.pipeline-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  max-width: 100px;
+  font-family: var(--font-mono);
+}
+
+/* ── Stats ── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 80px 24px 0;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 32px 16px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-subtle);
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 42px;
+  letter-spacing: -0.03em;
+  margin-bottom: 4px;
+}
+
+.stat-value.violet { color: var(--violet); }
+.stat-value.spark { color: var(--spark); }
+.stat-value.orange { color: var(--orange); }
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════
+   TAB 2 — DASHBOARD INSTITUTION
+   ═══════════════════════════════════════════ */
+
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+  padding-top: 56px;
+}
+
+/* Sidebar — contraste 10%+ vs fond */
+.dash-sidebar {
+  background: #0A0C14; /* plus sombre que --bg-deep #0D0F1A = contraste OK */
+  border-right: 1px solid var(--border-subtle);
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dash-sidebar-logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--spark);
+  margin-bottom: 32px;
+  padding-left: 12px;
+}
+
+.dash-sidebar-section {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 16px 12px 8px;
+}
+
+.dash-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dash-nav-item:hover {
+  background: rgba(255,255,255,0.04);
+  color: var(--text-primary);
+}
+
+.dash-nav-item.active {
+  background: rgba(124, 58, 237, 0.12);
+  color: var(--violet);
+  font-weight: 600;
+}
+
+.dash-nav-icon {
+  width: 20px;
+  text-align: center;
+  font-size: 16px;
+}
+
+/* Dashboard main */
+.dash-main {
+  padding: 32px 40px;
+  background: var(--bg-deep);
+  overflow-y: auto;
+}
+
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.dash-header-left h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
+
+.dash-header-left p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.dash-header-gradient {
+  height: 3px;
+  background: linear-gradient(90deg, var(--violet), var(--spark));
+  border-radius: 2px;
+  margin-bottom: 32px;
+}
+
+/* Stats cards */
+.dash-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.dash-stat-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-subtle);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dash-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+.dash-stat-card[data-color="violet"]::before { background: var(--violet); }
+.dash-stat-card[data-color="spark"]::before { background: var(--spark); }
+.dash-stat-card[data-color="orange"]::before { background: var(--orange); }
+.dash-stat-card[data-color="cyan"]::before { background: var(--design); }
+
+.dash-stat-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 36px;
+  letter-spacing: -0.03em;
+}
+
+.dash-stat-card[data-color="violet"] .dash-stat-value { color: var(--violet); }
+.dash-stat-card[data-color="spark"] .dash-stat-value { color: var(--spark); }
+.dash-stat-card[data-color="orange"] .dash-stat-value { color: var(--orange); }
+.dash-stat-card[data-color="cyan"] .dash-stat-value { color: var(--design); }
+
+.dash-stat-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.dash-stat-delta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--theatre);
+  margin-top: 8px;
+}
+
+/* Ateliers actifs */
+.dash-section-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.dash-ateliers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.dash-atelier-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-subtle);
+  padding: 20px;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.dash-atelier-card:hover {
+  transform: scale(1.02);
+}
+
+.atelier-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.atelier-disc-tag {
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 10px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.atelier-disc-tag.cinema { background: rgba(124,58,237,0.2); color: #A78BFA; }
+.atelier-disc-tag.musique { background: rgba(245,158,11,0.2); color: #FBBF24; }
+.atelier-disc-tag.theatre { background: rgba(16,185,129,0.2); color: #34D399; }
+
+.atelier-live {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--theatre);
+  font-family: var(--font-mono);
+}
+
+.atelier-live-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--theatre);
+  border-radius: 50%;
+  animation: pulse-live 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+  50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(16,185,129,0); }
+}
+
+.atelier-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.atelier-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.atelier-progress {
+  height: 4px;
+  background: var(--bg-elevated);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.atelier-progress-bar {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+.atelier-progress-bar.cinema { background: var(--cinema); }
+.atelier-progress-bar.musique { background: var(--musique); }
+.atelier-progress-bar.theatre { background: var(--theatre); }
+
+/* Graph barres CSS */
+.dash-graph {
+  background: var(--bg-surface);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-subtle);
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.graph-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 160px;
+  padding-top: 16px;
+}
+
+.graph-bar-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.graph-bar {
+  width: 100%;
+  max-width: 48px;
+  border-radius: 6px 6px 0 0;
+  transition: height 0.5s ease;
+}
+
+.graph-bar-label {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.graph-bar-value {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* Bouton planifier */
+.btn-plan {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--violet);
+  color: white;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-plan:hover {
+  background: #6D28D9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--violet-glow);
+}
+
+/* ═══════════════════════════════════════════
+   TAB 3 — COCKPIT INTERVENANT
+   ═══════════════════════════════════════════ */
+
+.cockpit {
+  min-height: 100vh;
+  padding-top: 56px;
+  background: var(--bg-deep);
+  display: flex;
+  flex-direction: column;
+}
+
+.cockpit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 40px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.cockpit-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cockpit-mode-pill {
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: rgba(124,58,237,0.2);
+  color: #A78BFA;
+}
+
+.cockpit-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+}
+
+/* Chrono — 88px+, DM Mono, vert-jaune, UN SEUL */
+.cockpit-chrono {
+  font-family: var(--font-mono);
+  font-size: 92px;
+  font-weight: 500;
+  color: var(--spark);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 40px var(--spark-glow);
+}
+
+/* Pipeline dots */
+.cockpit-pipeline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 24px 40px;
+}
+
+.cockpit-pipe-step {
+  display: flex;
+  align-items: center;
+}
+
+.cockpit-pipe-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--bg-elevated);
+  border: 2px solid var(--border-medium);
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+
+.cockpit-pipe-dot.done {
+  background: rgba(124,58,237,0.15);
+  border-color: var(--violet);
+  color: var(--violet);
+}
+
+.cockpit-pipe-dot.active {
+  background: var(--violet);
+  border-color: var(--violet);
+  color: white;
+  box-shadow: 0 0 20px var(--violet-glow);
+  transform: scale(1.15);
+}
+
+.cockpit-pipe-line {
+  width: 40px;
+  height: 2px;
+  background: var(--border-subtle);
+}
+
+.cockpit-pipe-line.done {
+  background: var(--violet);
+}
+
+/* Zone centrale instruction */
+.cockpit-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.cockpit-instruction-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 20px;
+}
+
+.cockpit-instruction {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(32px, 4vw, 44px);
+  line-height: 1.15;
+  max-width: 700px;
+  letter-spacing: -0.02em;
+}
+
+/* Participants grid */
+.cockpit-participants {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 24px 40px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cockpit-participant {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.cockpit-participant.active {
+  background: rgba(16,185,129,0.2);
+  border: 2px solid var(--theatre);
+  color: var(--theatre);
+}
+
+.cockpit-participant.inactive {
+  background: var(--bg-elevated);
+  border: 2px solid var(--border-subtle);
+  color: var(--text-muted);
+}
+
+/* Controles sticky bottom — 56px hauteur, 180px min-width */
+.cockpit-controls {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 40px;
+  background: rgba(13, 15, 26, 0.95);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.cockpit-ctrl-btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  min-height: 56px;
+  min-width: 180px;
+  padding: 0 28px;
+  border: none;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.cockpit-ctrl-prev {
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-medium);
+}
+
+.cockpit-ctrl-prev:hover {
+  background: var(--bg-overlay);
+  color: var(--text-primary);
+}
+
+.cockpit-ctrl-next {
+  background: var(--violet);
+  color: white;
+}
+
+.cockpit-ctrl-next:hover {
+  background: #6D28D9;
+  box-shadow: 0 4px 20px var(--violet-glow);
+}
+
+.cockpit-ctrl-center {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cockpit-step-indicator {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.cockpit-step-indicator strong {
+  color: var(--violet);
+}
+
+/* ═══════════════════════════════════════════
+   TAB 4 — MANIFESTE
+   ═══════════════════════════════════════════ */
+
+.manifeste {
+  padding-top: 56px;
+  background: var(--bg-deep);
+}
+
+.manifeste-hero {
+  padding: 120px 24px 80px;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.manifeste-hero h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 40px;
+}
+
+.manifeste-hero h1 .spark-word {
+  color: var(--spark);
+  display: block;
+}
+
+.manifeste-text {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+.manifeste-paragraph {
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.manifeste-paragraph strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.manifeste-divider {
+  width: 48px;
+  height: 3px;
+  background: var(--violet);
+  border-radius: 2px;
+  margin: 48px auto;
+}
+
+/* Disciplines manifeste */
+.manifeste-disciplines {
+  padding: 80px 24px;
+  background: var(--bg-surface);
+}
+
+.manifeste-disc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.manifeste-disc-bottom {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 16px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.manifeste-disc-bottom .mdisc-item {
+  width: calc(25% - 12px);
+}
+
+.mdisc-item {
+  padding: 28px 20px;
+  border-radius: var(--radius-card);
+  text-align: center;
+  border: 1px solid var(--border-subtle);
+  transition: all 0.3s ease;
+}
+
+.mdisc-item:hover {
+  transform: scale(1.02);
+}
+
+.mdisc-emoji {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.mdisc-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.mdisc-item[data-c="cinema"] { background: rgba(124,58,237,0.08); }
+.mdisc-item[data-c="cinema"] .mdisc-name { color: #A78BFA; }
+
+.mdisc-item[data-c="jeu-video"] { background: rgba(196,255,71,0.06); }
+.mdisc-item[data-c="jeu-video"] .mdisc-name { color: var(--spark); }
+
+.mdisc-item[data-c="medias"] { background: rgba(255,107,53,0.08); }
+.mdisc-item[data-c="medias"] .mdisc-name { color: #FF8F6B; }
+
+.mdisc-item[data-c="mode"] { background: rgba(236,72,153,0.08); }
+.mdisc-item[data-c="mode"] .mdisc-name { color: #F472B6; }
+
+.mdisc-item[data-c="design"] { background: rgba(6,182,212,0.08); }
+.mdisc-item[data-c="design"] .mdisc-name { color: #22D3EE; }
+
+.mdisc-item[data-c="musique"] { background: rgba(245,158,11,0.08); }
+.mdisc-item[data-c="musique"] .mdisc-name { color: #FBBF24; }
+
+.mdisc-item[data-c="theatre"] { background: rgba(16,185,129,0.08); }
+.mdisc-item[data-c="theatre"] .mdisc-name { color: #34D399; }
+
+/* CTA final */
+.manifeste-cta {
+  padding: 100px 24px;
+  text-align: center;
+}
+
+.manifeste-cta h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 44px);
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.manifeste-cta p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .dashboard-layout {
+    grid-template-columns: 220px 1fr;
+  }
+
+  .dash-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dash-ateliers {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pipeline-track {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .pipeline-step::after { display: none; }
+}
+
+@media (max-width: 768px) {
+  .tab-nav {
+    padding: 10px 16px;
+    gap: 2px;
+    overflow-x: auto;
+  }
+
+  .tab-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+    white-space: nowrap;
+  }
+
+  .dashboard-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .dash-sidebar {
+    display: none;
+  }
+
+  .disciplines-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .disc-bottom-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .disc-bottom-row .disc-card {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .dash-ateliers {
+    grid-template-columns: 1fr;
+  }
+
+  .manifeste-disc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .manifeste-disc-bottom {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .manifeste-disc-bottom .mdisc-item {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .cockpit-chrono {
+    font-size: 88px;
+  }
+
+  .cockpit-controls {
+    padding: 12px 20px;
+  }
+
+  .cockpit-ctrl-btn {
+    min-width: 140px;
+  }
+}
+
+/* ── Utility ── */
+.text-gradient-violet {
+  background: linear-gradient(135deg, var(--violet), #A78BFA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     NAVIGATION ONGLETS
+     ════════════════════════════════════════════ -->
+<nav class="tab-nav">
+  <span class="tab-nav-brand">SPARK</span>
+  <button class="tab-btn active" data-tab="landing">Landing</button>
+  <button class="tab-btn" data-tab="dashboard">Dashboard</button>
+  <button class="tab-btn" data-tab="cockpit">Cockpit</button>
+  <button class="tab-btn" data-tab="manifeste">Manifeste</button>
+</nav>
+
+<!-- ════════════════════════════════════════════
+     TAB 1 — LANDING PAGE
+     ════════════════════════════════════════════ -->
+<div class="tab-content active" id="tab-landing">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-shapes">
+      <div class="shape shape-diamond"></div>
+      <div class="shape shape-diamond-sm"></div>
+      <div class="shape shape-triangle"></div>
+      <div class="shape shape-circle"></div>
+      <div class="shape shape-dot-grid">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">Plateforme ateliers creatifs</div>
+      <h1>
+        L'atelier ou tout<br>
+        <span class="accent-spark">commence.</span>
+      </h1>
+      <p class="hero-sub">
+        Sept disciplines. Un pipeline. Des milliers de jeunes qui passent
+        de spectateurs a auteurs. Votre institution merite un outil a la hauteur de ses ambitions.
+      </p>
+      <div class="hero-ctas">
+        <button class="btn-primary">Demander une demo</button>
+        <button class="btn-ghost">Voir le manifeste</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="marquee-item"><span class="marquee-dot" style="background:var(--cinema)"></span>Cinema</span>
+      <span class="marquee-item"><span class="marquee-dot" style="background:var(--jeu-video)"></span>Jeu video</span>
+      <span class="marquee-item"><span class="marquee-dot" style="background:var(--medias)"></span>Medias</span>
+      <span class="marquee-item"><span class="marquee-dot" style="background:var(--mode)"></span>Mode</span>
+      <span class="marquee-item"><span class="marquee-dot" style="background:var(--design)"></span>Design</span>
+      <span class="marquee-item"><span class="marquee-dot" style="background:var(--musique)"></span>Musique</span>
+      <span class="marquee-item"><span class="marquee-dot" style="background:var(--theatre)"></span>Theatre</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="marquee-item"><span class="marquee-dot" style="background:var(--cinema)"></span>Cinema</span>
+      <span class="marquee-item"><span class="marquee-dot" style="background:var(--jeu-video)"></span>Jeu video</span>
+      <span class="marquee-item"><span class="marquee-dot" style="background:var(--medias)"></span>Medias</span>
+      <span class="marquee-item"><span class="marquee-dot" style="background:var(--mode)"></span>Mode</span>
+      <span class="marquee-item"><span class="marquee-dot" style="background:var(--design)"></span>Design</span>
+      <span class="marquee-item"><span class="marquee-dot" style="background:var(--musique)"></span>Musique</span>
+      <span class="marquee-item"><span class="marquee-dot" style="background:var(--theatre)"></span>Theatre</span>
+    </div>
+  </div>
+
+  <!-- Disciplines -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label">Disciplines</div>
+      <h2 class="section-title">Sept mondes. Un seul outil.</h2>
+      <p class="section-desc">Chaque discipline a son identite, sa couleur, ses codes. La plateforme les respecte tous.</p>
+    </div>
+
+    <div class="disciplines-grid">
+      <div class="disc-card" data-disc="cinema">
+        <div class="disc-icon">&#127916;</div>
+        <div class="disc-name">Cinema</div>
+        <div class="disc-desc">Courts-metrages, mise en scene, montage, narration visuelle.</div>
+        <span class="disc-tag">7 modules</span>
+      </div>
+      <div class="disc-card" data-disc="jeu-video">
+        <div class="disc-icon">&#127918;</div>
+        <div class="disc-name">Jeu video</div>
+        <div class="disc-desc">Game design, level design, prototypage, narration interactive.</div>
+        <span class="disc-tag">6 modules</span>
+      </div>
+      <div class="disc-card" data-disc="medias">
+        <div class="disc-icon">&#127897;</div>
+        <div class="disc-name">Medias</div>
+        <div class="disc-desc">Podcast, web-doc, journalisme, investigation multimedia.</div>
+        <span class="disc-tag">5 modules</span>
+      </div>
+      <div class="disc-card" data-disc="mode">
+        <div class="disc-icon">&#9986;</div>
+        <div class="disc-name">Mode</div>
+        <div class="disc-desc">Stylisme, upcycling, direction artistique, defile.</div>
+        <span class="disc-tag">6 modules</span>
+      </div>
+    </div>
+
+    <div class="disc-bottom-row">
+      <div class="disc-card" data-disc="design">
+        <div class="disc-icon">&#9998;</div>
+        <div class="disc-name">Design</div>
+        <div class="disc-desc">Graphisme, identite visuelle, direction artistique numerique.</div>
+        <span class="disc-tag">6 modules</span>
+      </div>
+      <div class="disc-card" data-disc="musique">
+        <div class="disc-icon">&#127925;</div>
+        <div class="disc-name">Musique</div>
+        <div class="disc-desc">Production, beatmaking, ecriture, enregistrement studio.</div>
+        <span class="disc-tag">7 modules</span>
+      </div>
+      <div class="disc-card" data-disc="theatre">
+        <div class="disc-icon">&#127917;</div>
+        <div class="disc-name">Theatre</div>
+        <div class="disc-desc">Improvisation, ecriture scenique, mise en espace, voix.</div>
+        <span class="disc-tag">5 modules</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pipeline M1-M8 -->
+  <section class="pipeline-section">
+    <div class="pipeline-inner">
+      <div class="section-header">
+        <div class="section-label">Pipeline creatif</div>
+        <h2 class="section-title">Du premier souffle a l'oeuvre finale.</h2>
+        <p class="section-desc">8 moments. Chacun construit sur le precedent. Pas de raccourci.</p>
+      </div>
+
+      <div class="pipeline-track">
+        <div class="pipeline-step done">
+          <div class="pipeline-num">1</div>
+          <div class="pipeline-label">Decouverte</div>
+          <div class="pipeline-sub">Explorer, observer</div>
+        </div>
+        <div class="pipeline-step done">
+          <div class="pipeline-num">2</div>
+          <div class="pipeline-label">Inspiration</div>
+          <div class="pipeline-sub">References, mood</div>
+        </div>
+        <div class="pipeline-step done">
+          <div class="pipeline-num">3</div>
+          <div class="pipeline-label">Ideation</div>
+          <div class="pipeline-sub">Brainstorm, pitch</div>
+        </div>
+        <div class="pipeline-step active">
+          <div class="pipeline-num">4</div>
+          <div class="pipeline-label">Prototype</div>
+          <div class="pipeline-sub">Premier essai</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">5</div>
+          <div class="pipeline-label">Production</div>
+          <div class="pipeline-sub">Realiser, creer</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">6</div>
+          <div class="pipeline-label">Critique</div>
+          <div class="pipeline-sub">Feedback pairs</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">7</div>
+          <div class="pipeline-label">Iteration</div>
+          <div class="pipeline-sub">Ameliorer, polir</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">8</div>
+          <div class="pipeline-label">Projection</div>
+          <div class="pipeline-sub">Montrer au monde</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-value violet">2 400+</div>
+      <div class="stat-label">Jeunes accompagnes</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value spark">340</div>
+      <div class="stat-label">Ateliers realises</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value orange">42</div>
+      <div class="stat-label">Institutions partenaires</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value violet">7</div>
+      <div class="stat-label">Disciplines</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════════════════════════════════════════
+     TAB 2 — DASHBOARD INSTITUTION
+     ════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-dashboard">
+  <div class="dashboard-layout">
+
+    <!-- Sidebar -->
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-logo">SPARK</div>
+
+      <div class="dash-sidebar-section">Principal</div>
+      <div class="dash-nav-item active">
+        <span class="dash-nav-icon">&#9632;</span>
+        <span>Tableau de bord</span>
+      </div>
+      <div class="dash-nav-item">
+        <span class="dash-nav-icon">&#9654;</span>
+        <span>Ateliers</span>
+      </div>
+      <div class="dash-nav-item">
+        <span class="dash-nav-icon">&#9679;</span>
+        <span>Participants</span>
+      </div>
+
+      <div class="dash-sidebar-section">Pilotage</div>
+      <div class="dash-nav-item">
+        <span class="dash-nav-icon">&#9776;</span>
+        <span>Rapports</span>
+      </div>
+      <div class="dash-nav-item">
+        <span class="dash-nav-icon">&#9881;</span>
+        <span>Parametres</span>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="dash-main">
+      <div class="dash-header">
+        <div class="dash-header-left">
+          <h2>College Jean Moulin</h2>
+          <p>Tableau de bord — Trimestre 2, 2025-2026</p>
+        </div>
+        <button class="btn-plan">+ Planifier un atelier</button>
+      </div>
+      <div class="dash-header-gradient"></div>
+
+      <!-- Stats -->
+      <div class="dash-stats">
+        <div class="dash-stat-card" data-color="violet">
+          <div class="dash-stat-value">128</div>
+          <div class="dash-stat-label">Participants actifs</div>
+          <div class="dash-stat-delta">+12% vs T1</div>
+        </div>
+        <div class="dash-stat-card" data-color="spark">
+          <div class="dash-stat-value">24</div>
+          <div class="dash-stat-label">Ateliers ce trimestre</div>
+          <div class="dash-stat-delta">+6 vs T1</div>
+        </div>
+        <div class="dash-stat-card" data-color="orange">
+          <div class="dash-stat-value">89%</div>
+          <div class="dash-stat-label">Taux de completion</div>
+          <div class="dash-stat-delta">+4pts vs T1</div>
+        </div>
+        <div class="dash-stat-card" data-color="cyan">
+          <div class="dash-stat-value">4.6</div>
+          <div class="dash-stat-label">Satisfaction /5</div>
+          <div class="dash-stat-delta">Stable</div>
+        </div>
+      </div>
+
+      <!-- Ateliers actifs -->
+      <div class="dash-section-title">Ateliers en cours</div>
+      <div class="dash-ateliers">
+        <div class="dash-atelier-card">
+          <div class="atelier-top">
+            <span class="atelier-disc-tag cinema">Cinema</span>
+            <div class="atelier-live">
+              <span class="atelier-live-dot"></span>
+              Live
+            </div>
+          </div>
+          <div class="atelier-title">Court-metrage documentaire</div>
+          <div class="atelier-meta">3e B — M5/M8 — 18 participants</div>
+          <div class="atelier-progress">
+            <div class="atelier-progress-bar cinema" style="width:62%"></div>
+          </div>
+        </div>
+        <div class="dash-atelier-card">
+          <div class="atelier-top">
+            <span class="atelier-disc-tag musique">Musique</span>
+            <div class="atelier-live">
+              <span class="atelier-live-dot"></span>
+              Live
+            </div>
+          </div>
+          <div class="atelier-title">Beatmaking & ecriture</div>
+          <div class="atelier-meta">4e A — M3/M8 — 22 participants</div>
+          <div class="atelier-progress">
+            <div class="atelier-progress-bar musique" style="width:38%"></div>
+          </div>
+        </div>
+        <div class="dash-atelier-card">
+          <div class="atelier-top">
+            <span class="atelier-disc-tag theatre">Theatre</span>
+          </div>
+          <div class="atelier-title">Impro & mise en scene</div>
+          <div class="atelier-meta">5e C — M7/M8 — 16 participants</div>
+          <div class="atelier-progress">
+            <div class="atelier-progress-bar theatre" style="width:87%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Graph -->
+      <div class="dash-section-title">Repartition par discipline</div>
+      <div class="dash-graph">
+        <div class="graph-bars">
+          <div class="graph-bar-wrap">
+            <div class="graph-bar-value">34</div>
+            <div class="graph-bar" style="height:85%;background:var(--cinema)"></div>
+            <div class="graph-bar-label">Cine</div>
+          </div>
+          <div class="graph-bar-wrap">
+            <div class="graph-bar-value">22</div>
+            <div class="graph-bar" style="height:55%;background:var(--jeu-video)"></div>
+            <div class="graph-bar-label">JV</div>
+          </div>
+          <div class="graph-bar-wrap">
+            <div class="graph-bar-value">18</div>
+            <div class="graph-bar" style="height:45%;background:var(--medias)"></div>
+            <div class="graph-bar-label">Media</div>
+          </div>
+          <div class="graph-bar-wrap">
+            <div class="graph-bar-value">15</div>
+            <div class="graph-bar" style="height:38%;background:var(--mode)"></div>
+            <div class="graph-bar-label">Mode</div>
+          </div>
+          <div class="graph-bar-wrap">
+            <div class="graph-bar-value">12</div>
+            <div class="graph-bar" style="height:30%;background:var(--design)"></div>
+            <div class="graph-bar-label">Design</div>
+          </div>
+          <div class="graph-bar-wrap">
+            <div class="graph-bar-value">28</div>
+            <div class="graph-bar" style="height:70%;background:var(--musique)"></div>
+            <div class="graph-bar-label">Musi</div>
+          </div>
+          <div class="graph-bar-wrap">
+            <div class="graph-bar-value">16</div>
+            <div class="graph-bar" style="height:40%;background:var(--theatre)"></div>
+            <div class="graph-bar-label">Thea</div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     TAB 3 — COCKPIT INTERVENANT
+     ════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-cockpit">
+  <div class="cockpit">
+
+    <!-- Header -->
+    <div class="cockpit-header">
+      <div class="cockpit-header-left">
+        <span class="cockpit-mode-pill">Cinema</span>
+        <span class="cockpit-title">Court-metrage documentaire</span>
+      </div>
+      <!-- CHRONO UNIQUE — 92px, DM Mono, vert-jaune -->
+      <div class="cockpit-chrono">04:32</div>
+    </div>
+
+    <!-- Pipeline dots M1-M8 -->
+    <div class="cockpit-pipeline">
+      <div class="cockpit-pipe-step">
+        <div class="cockpit-pipe-dot done">1</div>
+        <div class="cockpit-pipe-line done"></div>
+      </div>
+      <div class="cockpit-pipe-step">
+        <div class="cockpit-pipe-dot done">2</div>
+        <div class="cockpit-pipe-line done"></div>
+      </div>
+      <div class="cockpit-pipe-step">
+        <div class="cockpit-pipe-dot done">3</div>
+        <div class="cockpit-pipe-line done"></div>
+      </div>
+      <div class="cockpit-pipe-step">
+        <div class="cockpit-pipe-dot done">4</div>
+        <div class="cockpit-pipe-line done"></div>
+      </div>
+      <div class="cockpit-pipe-step">
+        <div class="cockpit-pipe-dot active">5</div>
+        <div class="cockpit-pipe-line"></div>
+      </div>
+      <div class="cockpit-pipe-step">
+        <div class="cockpit-pipe-dot">6</div>
+        <div class="cockpit-pipe-line"></div>
+      </div>
+      <div class="cockpit-pipe-step">
+        <div class="cockpit-pipe-dot">7</div>
+        <div class="cockpit-pipe-line"></div>
+      </div>
+      <div class="cockpit-pipe-step">
+        <div class="cockpit-pipe-dot">8</div>
+      </div>
+    </div>
+
+    <!-- Instruction centrale -->
+    <div class="cockpit-main">
+      <div class="cockpit-instruction-label">Instruction en cours</div>
+      <div class="cockpit-instruction">
+        Filmez votre scene d'ouverture.<br>
+        Cadrage fixe, pas de dialogue.
+      </div>
+    </div>
+
+    <!-- Participants -->
+    <div class="cockpit-participants">
+      <div class="cockpit-participant active">A1</div>
+      <div class="cockpit-participant active">A2</div>
+      <div class="cockpit-participant active">A3</div>
+      <div class="cockpit-participant active">B1</div>
+      <div class="cockpit-participant active">B2</div>
+      <div class="cockpit-participant inactive">B3</div>
+      <div class="cockpit-participant active">C1</div>
+      <div class="cockpit-participant active">C2</div>
+      <div class="cockpit-participant active">C3</div>
+      <div class="cockpit-participant active">D1</div>
+      <div class="cockpit-participant inactive">D2</div>
+      <div class="cockpit-participant active">D3</div>
+      <div class="cockpit-participant active">E1</div>
+      <div class="cockpit-participant active">E2</div>
+      <div class="cockpit-participant active">E3</div>
+      <div class="cockpit-participant active">F1</div>
+      <div class="cockpit-participant active">F2</div>
+      <div class="cockpit-participant inactive">F3</div>
+    </div>
+
+    <!-- Controles sticky bottom — 56px hauteur, 180px min-width -->
+    <div class="cockpit-controls">
+      <button class="cockpit-ctrl-btn cockpit-ctrl-prev">&#8592; Etape precedente</button>
+      <div class="cockpit-ctrl-center">
+        <span class="cockpit-step-indicator">Etape <strong>5</strong> / 8</span>
+      </div>
+      <button class="cockpit-ctrl-btn cockpit-ctrl-next">Etape suivante &#8594;</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     TAB 4 — MANIFESTE
+     ════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-manifeste">
+  <div class="manifeste">
+
+    <div class="manifeste-hero">
+      <h1>
+        On ne forme pas<br>des spectateurs.
+        <span class="spark-word">On allume des auteurs.</span>
+      </h1>
+    </div>
+
+    <div class="manifeste-text">
+      <p class="manifeste-paragraph">
+        <strong>Il y a des gamins qui n'ont jamais tenu une camera.</strong>
+        Des ados qui n'ont jamais ecrit une scene. Des jeunes qui pensent
+        que creer, c'est pour les autres.
+      </p>
+      <p class="manifeste-paragraph">
+        On construit l'outil qui change ca. Pas une app de plus. Pas un
+        gadget EdTech avec des confettis et des badges. <strong>Un vrai
+        outil de travail</strong> pour les intervenants qui sont en salle,
+        face a 25 regards qui attendent qu'on leur montre que leur voix compte.
+      </p>
+
+      <div class="manifeste-divider"></div>
+
+      <p class="manifeste-paragraph">
+        <strong>Sept disciplines.</strong> Cinema, jeu video, medias, mode,
+        design, musique, theatre. Chaque atelier suit le meme pipeline en
+        8 temps : decouvrir, s'inspirer, imaginer, prototyper, produire,
+        critiquer, iterer, projeter.
+      </p>
+      <p class="manifeste-paragraph">
+        <strong>Pas de classement.</strong> Pas de podium. Pas de notation.
+        On ne compare pas les eleves entre eux. On les accompagne chacun
+        dans leur propre trajectoire creative.
+      </p>
+      <p class="manifeste-paragraph">
+        L'intervenant pilote la seance depuis un cockpit concu pour la
+        salle de classe — lisible a 3 metres, pilotable d'un geste.
+        L'institution suit l'impact global sans jamais acceder aux donnees
+        individuelles des jeunes.
+      </p>
+
+      <div class="manifeste-divider"></div>
+
+      <p class="manifeste-paragraph">
+        <strong>On croit que chaque jeune a quelque chose a dire.</strong>
+        Notre travail, c'est de construire l'espace ou il peut le dire.
+      </p>
+    </div>
+
+    <!-- Disciplines -->
+    <div class="manifeste-disciplines">
+      <div class="section-header">
+        <div class="section-label">Les disciplines</div>
+        <h2 class="section-title">Sept voies. Une promesse.</h2>
+      </div>
+
+      <div class="manifeste-disc-grid">
+        <div class="mdisc-item" data-c="cinema">
+          <div class="mdisc-emoji">&#127916;</div>
+          <div class="mdisc-name">Cinema</div>
+        </div>
+        <div class="mdisc-item" data-c="jeu-video">
+          <div class="mdisc-emoji">&#127918;</div>
+          <div class="mdisc-name">Jeu video</div>
+        </div>
+        <div class="mdisc-item" data-c="medias">
+          <div class="mdisc-emoji">&#127897;</div>
+          <div class="mdisc-name">Medias</div>
+        </div>
+        <div class="mdisc-item" data-c="mode">
+          <div class="mdisc-emoji">&#9986;</div>
+          <div class="mdisc-name">Mode</div>
+        </div>
+      </div>
+
+      <div class="manifeste-disc-bottom">
+        <div class="mdisc-item" data-c="design">
+          <div class="mdisc-emoji">&#9998;</div>
+          <div class="mdisc-name">Design</div>
+        </div>
+        <div class="mdisc-item" data-c="musique">
+          <div class="mdisc-emoji">&#127925;</div>
+          <div class="mdisc-name">Musique</div>
+        </div>
+        <div class="mdisc-item" data-c="theatre">
+          <div class="mdisc-emoji">&#127917;</div>
+          <div class="mdisc-name">Theatre</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA final -->
+    <div class="manifeste-cta">
+      <h2>Pret a allumer la premiere <span class="text-gradient-violet">etincelle</span> ?</h2>
+      <p>Rejoignez les institutions qui font confiance a la creation pour transformer les trajectoires.</p>
+      <button class="btn-primary">Demander une demo</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT — Navigation onglets
+     ════════════════════════════════════════════ -->
+<script>
+(function() {
+  const tabs = document.querySelectorAll('.tab-btn');
+  const contents = document.querySelectorAll('.tab-content');
+
+  tabs.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var target = this.getAttribute('data-tab');
+
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      contents.forEach(function(c) { c.classList.remove('active'); });
+
+      this.classList.add('active');
+      document.getElementById('tab-' + target).classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

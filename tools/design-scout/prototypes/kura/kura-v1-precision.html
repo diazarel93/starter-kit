@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KURA — Certitude Instantanee. Infaillible.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   KURA V1 — PRECISION
+   Direction : clinique suisse x Apple Health
+   8 techniques cinematiques
+   ═══════════════════════════════════════════════ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --white-medical: #F8F9FA;
+  --white-pure: #FFFFFF;
+  --noir: #0A0A0F;
+  --gris-texte: #6B7280;
+  --gris-light: #9CA3AF;
+  --bleu-kura: #0070F3;
+  --bleu-kura-hover: #005ED4;
+  --bleu-bg-light: #EFF6FF;
+  --vert-autorise: #00875A;
+  --rouge-interdit: #DE350B;
+  --orange-conditionnel: #FF991F;
+  --border: #E5E7EB;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.1);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 100px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--noir);
+  background: var(--white-medical);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── T7 : Scroll Reveals ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.25,1,0.5,1), transform 0.8s cubic-bezier(0.25,1,0.5,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.8s cubic-bezier(0.25,1,0.5,1), transform 0.8s cubic-bezier(0.25,1,0.5,1);
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.8s cubic-bezier(0.25,1,0.5,1), transform 0.8s cubic-bezier(0.25,1,0.5,1);
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.8s cubic-bezier(0.25,1,0.5,1), transform 0.8s cubic-bezier(0.25,1,0.5,1);
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Stagger delays ── */
+.stagger-1 { transition-delay: 0.05s; }
+.stagger-2 { transition-delay: 0.1s; }
+.stagger-3 { transition-delay: 0.15s; }
+.stagger-4 { transition-delay: 0.2s; }
+.stagger-5 { transition-delay: 0.25s; }
+
+/* ── Utilities ── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--bleu-kura);
+  margin-bottom: 12px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.3px;
+}
+.badge--autorise { background: var(--vert-autorise); }
+.badge--interdit { background: var(--rouge-interdit); }
+.badge--conditionnel { background: var(--orange-conditionnel); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  border-radius: var(--radius-sm);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn--primary {
+  background: var(--bleu-kura);
+  color: #fff;
+}
+.btn--primary:hover {
+  background: var(--bleu-kura-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,112,243,0.3);
+}
+.btn--white {
+  background: #fff;
+  color: var(--bleu-kura);
+}
+.btn--white:hover {
+  background: #F0F0F0;
+  transform: translateY(-1px);
+}
+.btn--outline {
+  background: transparent;
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,0.4);
+}
+.btn--outline:hover {
+  border-color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+.btn--large {
+  padding: 14px 36px;
+  font-size: 16px;
+  border-radius: var(--radius);
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--bleu-kura);
+  border: 1.5px solid var(--bleu-kura);
+}
+.btn--ghost:hover {
+  background: var(--bleu-bg-light);
+}
+
+/* ═══════════════════════════════════════════════
+   1. LOADING SCREEN
+   ═══════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════
+   2. NAV
+   ═══════════════════════════════════════════════ */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(248,249,250,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transform: translateY(-100%);
+  transition: transform 0.5s cubic-bezier(0.25,1,0.5,1);
+}
+.nav.visible {
+  transform: translateY(0);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.nav__logo {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--noir);
+  text-decoration: none;
+}
+.nav__logo span {
+  color: var(--bleu-kura);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+.nav__links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gris-texte);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav__links a:hover {
+  color: var(--noir);
+}
+
+/* ═══════════════════════════════════════════════
+   3. HERO — split layout
+   ═══════════════════════════════════════════════ */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  min-height: 100vh;
+  padding: 120px 80px 80px;
+  background: var(--white-medical);
+}
+
+.hero__content {
+  max-width: 540px;
+}
+
+.hero__tagline {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--bleu-kura);
+  margin-bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.hero__headline {
+  font-size: clamp(40px, 5.5vw, 60px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -2px;
+  color: var(--noir);
+  margin-bottom: 24px;
+}
+.hero__headline em {
+  font-style: normal;
+  color: var(--bleu-kura);
+}
+
+.hero__sub {
+  font-size: clamp(17px, 2vw, 19px);
+  font-weight: 400;
+  color: var(--gris-texte);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.hero__trust {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 13px;
+  color: var(--gris-light);
+  font-weight: 500;
+}
+.hero__trust-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 50%;
+}
+
+.hero__visual {
+  position: relative;
+}
+
+.hero__video-frame {
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  position: relative;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.12);
+}
+
+.hero__video-frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.6) brightness(0.85);
+}
+
+.medical-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,112,243,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,112,243,0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* Verdict flottant sur la video */
+.hero__verdict-float {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  border-left: 3px solid var(--vert-autorise);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+.hero__verdict-float .vf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.hero__verdict-float .vf-substance {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--noir);
+}
+.hero__verdict-float .vf-confidence {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vert-autorise);
+}
+.hero__verdict-float .vf-meta {
+  font-size: 12px;
+  color: var(--gris-texte);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ═══════════════════════════════════════════════
+   4. STATS BAR
+   ═══════════════════════════════════════════════ */
+
+.stats-bar {
+  background: var(--bleu-kura);
+  padding: 56px 0;
+  position: relative;
+  overflow: hidden;
+}
+.stats-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.stats-bar__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.stat__number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat__label {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.4;
+}
+
+/* ═══════════════════════════════════════════════
+   5. STATEMENT — dark inverse avec video
+   ═══════════════════════════════════════════════ */
+
+.statement {
+  background: var(--noir);
+  position: relative;
+  overflow: hidden;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statement video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  filter: saturate(0.3);
+}
+
+.statement__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 800px;
+  padding: 0 40px;
+}
+
+.statement__text {
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 800;
+  line-height: 1.25;
+  color: rgba(255,255,255,0.15);
+}
+
+.sw {
+  display: inline-block;
+  transition: color 0.6s cubic-bezier(0.25,1,0.5,1), opacity 0.6s cubic-bezier(0.25,1,0.5,1);
+}
+.sw.visible {
+  color: rgba(255,255,255,0.95) !important;
+}
+.sw.accent-w.visible {
+  color: var(--bleu-kura) !important;
+}
+
+/* ═══════════════════════════════════════════════
+   6. PROBLEME
+   ═══════════════════════════════════════════════ */
+
+.probleme {
+  background: var(--white-medical);
+  padding: 120px 0;
+}
+
+.probleme__header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 56px;
+}
+
+.probleme__headline {
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+
+.probleme__sub {
+  font-size: 17px;
+  color: var(--gris-texte);
+  line-height: 1.6;
+}
+
+.probleme__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 56px;
+}
+
+.probleme__card {
+  background: var(--white-pure);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  padding: 28px;
+  border-left: 3px solid var(--rouge-interdit);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.probleme__card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.probleme__card-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.probleme__card-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--rouge-interdit);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.probleme__card-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--noir);
+  margin-bottom: 6px;
+}
+
+.probleme__card-desc {
+  font-size: 14px;
+  color: var(--gris-texte);
+  line-height: 1.5;
+}
+
+.probleme__quote {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.probleme__quote blockquote {
+  font-size: 18px;
+  font-style: italic;
+  color: var(--gris-texte);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.probleme__quote cite {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gris-light);
+  font-style: normal;
+}
+
+/* ═══════════════════════════════════════════════
+   7. PIPELINE
+   ═══════════════════════════════════════════════ */
+
+.pipeline {
+  background: var(--white-pure);
+  padding: 120px 0;
+}
+
+.pipeline__header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 64px;
+}
+
+.pipeline__headline {
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+
+.pipeline__sub {
+  font-size: 17px;
+  color: var(--gris-texte);
+}
+
+.pipeline__steps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 56px;
+  position: relative;
+}
+
+.pipeline__steps::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 48px;
+  right: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--bleu-kura), var(--vert-autorise));
+  opacity: 0.3;
+}
+
+.pipeline__step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.pipeline__step-number {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--bleu-kura);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.pipeline__step:hover .pipeline__step-number {
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px rgba(0,112,243,0.3);
+}
+
+.pipeline__step-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--noir);
+  margin-bottom: 6px;
+}
+
+.pipeline__step-desc {
+  font-size: 13px;
+  color: var(--gris-texte);
+  line-height: 1.5;
+  max-width: 180px;
+  margin: 0 auto;
+}
+
+.pipeline__guarantee {
+  background: var(--bleu-bg-light);
+  border-radius: var(--radius);
+  padding: 24px 32px;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+  border: 1px solid rgba(0,112,243,0.1);
+}
+
+.pipeline__guarantee p {
+  font-size: 16px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--bleu-kura);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════
+   8. BRAND REVEAL — full dark + scan video
+   ═══════════════════════════════════════════════ */
+
+.brand-reveal {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--noir);
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-reveal video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.25;
+  filter: saturate(0.4);
+}
+
+.brand-reveal__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.brand-reveal__title {
+  font-size: clamp(80px, 12vw, 140px);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  font-family: 'Inter', sans-serif;
+  line-height: 1;
+}
+
+.brand-reveal__subtitle {
+  font-size: 14px;
+  letter-spacing: 0.3em;
+  color: rgba(255,255,255,0.5);
+  margin-top: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+/* Scan line animation */
+.brand-reveal::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--bleu-kura), transparent);
+  animation: scanLine 4s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+@keyframes scanLine {
+  0%, 100% { top: 10%; }
+  50% { top: 90%; }
+}
+
+/* ═══════════════════════════════════════════════
+   9. DATA / DOMAINES — dark + capsule video
+   ═══════════════════════════════════════════════ */
+
+.data-section {
+  position: relative;
+  overflow: hidden;
+  background: var(--noir);
+  padding: 120px 80px;
+}
+
+.data-section video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.15;
+  filter: saturate(0.2);
+}
+
+.data-section__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.data-section__header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.data-section__label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--bleu-kura);
+  margin-bottom: 12px;
+}
+
+.data-section__headline {
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+
+.data-section__sub {
+  font-size: 17px;
+  color: rgba(255,255,255,0.5);
+}
+
+/* Barres horizontales */
+.data-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto 64px;
+}
+
+.data-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.data-bar__label {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  width: 160px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.data-bar__track {
+  flex: 1;
+  height: 8px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.data-bar__fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--bleu-kura);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.2s cubic-bezier(0.25,1,0.5,1);
+}
+.data-bar__fill.visible {
+  transform: scaleX(1);
+}
+
+.data-bar__value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bleu-kura);
+  width: 60px;
+}
+
+/* Bento grid domaines */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.bento-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: border-color 0.3s, background 0.3s;
+}
+.bento-card:hover {
+  border-color: rgba(0,112,243,0.3);
+  background: rgba(255,255,255,0.06);
+}
+.bento-card--large {
+  grid-column: span 2;
+}
+
+.bento-card__icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.bento-card__title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.bento-card__desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+}
+
+.bento-card__stat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--bleu-kura);
+  margin-top: 12px;
+}
+
+/* ═══════════════════════════════════════════════
+   10. DEMO + CTA + FOOTER
+   ═══════════════════════════════════════════════ */
+
+.demo-cta {
+  background: var(--white-medical);
+  padding: 120px 0;
+  text-align: center;
+}
+
+.demo-cta__headline {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  color: var(--noir);
+  margin-bottom: 16px;
+}
+
+.demo-cta__sub {
+  font-size: 18px;
+  color: var(--gris-texte);
+  margin-bottom: 48px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+.demo-cta__actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.demo-cta__note {
+  font-size: 13px;
+  color: var(--gris-light);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Demo card inline */
+.demo-card {
+  max-width: 640px;
+  margin: 0 auto 56px;
+  background: var(--white-pure);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.demo-card__header {
+  padding: 16px 20px;
+  background: var(--noir);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.demo-card__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.demo-card__dot--red { background: #FF5F56; }
+.demo-card__dot--yellow { background: #FFBD2E; }
+.demo-card__dot--green { background: #27C93F; }
+
+.demo-card__url {
+  flex: 1;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+}
+
+.demo-card__body {
+  padding: 24px;
+}
+
+.demo-card__search {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--noir);
+  background: var(--white-medical);
+  outline: none;
+  margin-bottom: 16px;
+  transition: border-color 0.2s;
+}
+.demo-card__search:focus {
+  border-color: var(--bleu-kura);
+  box-shadow: 0 0 0 3px rgba(0,112,243,0.1);
+}
+
+.demo-card__result {
+  padding: 16px;
+  border-left: 3px solid var(--vert-autorise);
+  background: rgba(0,135,90,0.04);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.demo-card__result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.demo-card__result-substance {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.demo-card__result-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vert-autorise);
+}
+
+.demo-card__result-meta {
+  font-size: 12px;
+  color: var(--gris-texte);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Footer */
+.footer {
+  background: var(--noir);
+  padding: 64px 0 32px;
+}
+
+.footer__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.footer__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 48px;
+  gap: 48px;
+}
+
+.footer__brand {
+  max-width: 300px;
+}
+
+.footer__logo {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+.footer__logo span {
+  color: var(--bleu-kura);
+}
+
+.footer__desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+}
+
+.footer__columns {
+  display: flex;
+  gap: 64px;
+}
+
+.footer__col-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 16px;
+}
+
+.footer__col-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer__col-links a {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer__col-links a:hover {
+  color: #fff;
+}
+
+.footer__bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__copy {
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+}
+
+.footer__legal {
+  display: flex;
+  gap: 24px;
+}
+.footer__legal a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer__legal a:hover {
+  color: rgba(255,255,255,0.6);
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 100px 24px 60px;
+  }
+  .hero__visual {
+    order: -1;
+  }
+  .hero__video-frame {
+    aspect-ratio: 16/9;
+    max-height: 300px;
+  }
+  .stats-bar__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .probleme__grid {
+    grid-template-columns: 1fr;
+  }
+  .pipeline__steps {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  .pipeline__steps::before {
+    display: none;
+  }
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .bento-card--large {
+    grid-column: span 1;
+  }
+  .data-section {
+    padding: 80px 24px;
+  }
+  .footer__top {
+    flex-direction: column;
+  }
+  .footer__columns {
+    gap: 40px;
+  }
+  .footer__bottom {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+  .statement__text {
+    font-size: clamp(24px, 6vw, 36px);
+  }
+  .demo-cta__actions {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     1. LOADING SCREEN
+     ═══════════════════════════════════════════════ -->
+<div id="loader" style="position:fixed;inset:0;background:#fff;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.6s ease">
+  <div style="font-family:Inter,sans-serif;font-weight:800;font-size:28px;color:#0A0A0F;letter-spacing:0.08em;margin-bottom:20px;overflow:hidden">
+    <span class="lr">K</span><span class="lr">U</span><span class="lr">R</span><span class="lr">A</span>
+  </div>
+  <div style="width:160px;height:2px;background:#E5E7EB;position:relative;overflow:hidden;border-radius:2px">
+    <div id="loader-bar" style="position:absolute;height:100%;width:0;background:#0070F3;transition:width 1.6s ease;border-radius:2px"></div>
+  </div>
+  <div style="margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#9CA3AF;letter-spacing:0.15em;text-transform:uppercase" id="loader-status">Initialisation...</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     2. NAV
+     ═══════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="#" class="nav__logo">KUR<span>A</span></a>
+    <ul class="nav__links">
+      <li><a href="#pipeline">Pipeline</a></li>
+      <li><a href="#domaines">Domaines</a></li>
+      <li><a href="#data">Data</a></li>
+      <li><a href="#demo" class="btn btn--primary">Essayer</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════════
+     3. HERO — split texte + video
+     ═══════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero__content">
+    <div class="hero__tagline reveal stagger-1">Compliance Intelligence</div>
+    <h1 class="hero__headline reveal stagger-2">
+      Certitude<br><em>instantanee.</em><br>Infaillible.
+    </h1>
+    <p class="hero__sub reveal stagger-3">
+      Verifiez n'importe quelle substance en 0.3 seconde.<br>
+      248 000+ substances. 119 pays. Zero doute.
+    </p>
+    <div class="hero__actions reveal stagger-4">
+      <a href="#demo" class="btn btn--primary btn--large">Tester maintenant</a>
+      <a href="#pipeline" class="btn btn--ghost btn--large">Comment ca marche</a>
+    </div>
+    <div class="hero__trust reveal stagger-5">
+      <span>WADA/AMA</span>
+      <span class="hero__trust-dot"></span>
+      <span>119 pays</span>
+      <span class="hero__trust-dot"></span>
+      <span>99.97% fiabilite</span>
+    </div>
+  </div>
+
+  <div class="hero__visual reveal-right">
+    <div class="hero__video-frame">
+      <video autoplay muted loop playsinline>
+        <source src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/hero-athlete.mp4" type="video/mp4">
+      </video>
+      <div class="medical-grid-overlay"></div>
+
+      <!-- Verdict flottant -->
+      <div class="hero__verdict-float">
+        <div class="vf-header">
+          <span class="vf-substance">Paracetamol</span>
+          <span class="vf-confidence">99.8%</span>
+        </div>
+        <span class="badge badge--autorise" style="font-size:11px;padding:2px 10px;margin-bottom:4px">AUTORISE</span>
+        <div class="vf-meta">WADA 2024 / France / Hors competition</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     4. STATS BAR — compteurs animes bleu
+     ═══════════════════════════════════════════════ -->
+<section class="stats-bar" id="stats">
+  <div class="container">
+    <div class="stats-bar__grid">
+      <div class="reveal stagger-1">
+        <div class="stat__number" data-target="248" data-suffix="K">0</div>
+        <div class="stat__label">Substances indexees</div>
+      </div>
+      <div class="reveal stagger-2">
+        <div class="stat__number" data-target="119">0</div>
+        <div class="stat__label">Pays couverts</div>
+      </div>
+      <div class="reveal stagger-3">
+        <div class="stat__number" data-target="5">0</div>
+        <div class="stat__label">Guardrails actifs</div>
+      </div>
+      <div class="reveal stagger-4">
+        <div class="stat__number" data-target="0" data-prefix="" data-suffix=".3s">0</div>
+        <div class="stat__label">Temps de reponse</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     5. STATEMENT — dark inverse + video stade
+     ═══════════════════════════════════════════════ -->
+<section class="statement" id="statement">
+  <video autoplay muted loop playsinline>
+    <source src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/statement-stadium.mp4" type="video/mp4">
+  </video>
+  <div class="statement__content">
+    <p class="statement__text">
+      <span class="sw">La</span>
+      <span class="sw">certitude</span>
+      <span class="sw">qui</span>
+      <span class="sw accent-w">protege</span>
+      <span class="sw">les</span>
+      <span class="sw">carrieres.</span>
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     6. PROBLEME
+     ═══════════════════════════════════════════════ -->
+<section class="probleme" id="probleme">
+  <div class="container">
+    <div class="probleme__header">
+      <div class="section-label reveal">Le probleme</div>
+      <h2 class="probleme__headline reveal">Le dopage involontaire detruit des carrieres</h2>
+      <p class="probleme__sub reveal">Chaque annee, des athletes sont sanctionnes pour des substances qu'ils ignoraient avoir consommees. Le systeme actuel est opaque, lent, et impardonnable.</p>
+    </div>
+
+    <div class="probleme__grid">
+      <div class="probleme__card reveal stagger-1">
+        <div class="probleme__card-icon">&#9888;</div>
+        <div class="probleme__card-number">41%</div>
+        <div class="probleme__card-label">Sanctions involontaires</div>
+        <div class="probleme__card-desc">Des controles positifs proviennent de medicaments courants ou supplements mal etiquetes.</div>
+      </div>
+      <div class="probleme__card reveal stagger-2">
+        <div class="probleme__card-icon">&#128337;</div>
+        <div class="probleme__card-number">72h</div>
+        <div class="probleme__card-label">Delai moyen de verification</div>
+        <div class="probleme__card-desc">Les methodes classiques prennent des jours. Kura repond en moins d'une seconde.</div>
+      </div>
+      <div class="probleme__card reveal stagger-3">
+        <div class="probleme__card-icon">&#127760;</div>
+        <div class="probleme__card-number">119</div>
+        <div class="probleme__card-label">Reglementations differentes</div>
+        <div class="probleme__card-desc">Chaque pays adapte les regles WADA. Les athletes doivent naviguer un labyrinthe juridique.</div>
+      </div>
+    </div>
+
+    <div class="probleme__quote reveal">
+      <blockquote>"J'ai pris un sirop pour la toux avant une competition. Ma carriere a failli s'arreter ce jour-la."</blockquote>
+      <cite>Athlete Olympique, 2023</cite>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     7. PIPELINE
+     ═══════════════════════════════════════════════ -->
+<section class="pipeline" id="pipeline">
+  <div class="container">
+    <div class="pipeline__header">
+      <div class="section-label reveal">Architecture</div>
+      <h2 class="pipeline__headline reveal">5 couches de certitude</h2>
+      <p class="pipeline__sub reveal">Chaque requete traverse un pipeline multi-verification. Aucun raccourci, aucune approximation.</p>
+    </div>
+
+    <div class="pipeline__steps">
+      <div class="pipeline__step reveal stagger-1">
+        <div class="pipeline__step-number">01</div>
+        <div class="pipeline__step-title">Truth Layer</div>
+        <div class="pipeline__step-desc">Base de donnees WADA officielle. Source unique de verite.</div>
+      </div>
+      <div class="pipeline__step reveal stagger-2">
+        <div class="pipeline__step-number">02</div>
+        <div class="pipeline__step-title">Detection</div>
+        <div class="pipeline__step-desc">Identification de la substance, synonymes et metabolites.</div>
+      </div>
+      <div class="pipeline__step reveal stagger-3">
+        <div class="pipeline__step-number">03</div>
+        <div class="pipeline__step-title">RAG Multi-pass</div>
+        <div class="pipeline__step-desc">3 passes de verification croisee dans la documentation legale.</div>
+      </div>
+      <div class="pipeline__step reveal stagger-4">
+        <div class="pipeline__step-number">04</div>
+        <div class="pipeline__step-title">LLM Analysis</div>
+        <div class="pipeline__step-desc">Claude analyse le contexte : pays, sport, periode de competition.</div>
+      </div>
+      <div class="pipeline__step reveal stagger-5">
+        <div class="pipeline__step-number">05</div>
+        <div class="pipeline__step-title">Guardrails</div>
+        <div class="pipeline__step-desc">5 regles non-negotiables. Zero faux positif sur les interdits.</div>
+      </div>
+    </div>
+
+    <div class="pipeline__guarantee reveal">
+      <p>"Si un doute subsiste apres les 5 couches, la reponse sera toujours : A verifier avec un professionnel."</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     8. BRAND REVEAL — dark + scan video
+     ═══════════════════════════════════════════════ -->
+<section class="brand-reveal">
+  <video autoplay muted loop playsinline>
+    <source src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/hero-scan.mp4" type="video/mp4">
+  </video>
+  <div class="brand-reveal__content">
+    <h2 class="brand-reveal__title reveal-scale">KURA</h2>
+    <p class="brand-reveal__subtitle reveal" style="transition-delay:0.3s">Infallible Compliance &middot; Pure Performance</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     9. DATA / DOMAINES — dark + capsule video
+     ═══════════════════════════════════════════════ -->
+<section class="data-section" id="data">
+  <video autoplay muted loop playsinline>
+    <source src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/demo-capsule.mp4" type="video/mp4">
+  </video>
+  <div class="data-section__inner">
+    <div class="data-section__header">
+      <div class="data-section__label reveal">Data Intelligence</div>
+      <h2 class="data-section__headline reveal">Couverture mondiale, precision locale</h2>
+      <p class="data-section__sub reveal">Chaque regle, chaque exception, chaque pays — indexe et verifie en temps reel.</p>
+    </div>
+
+    <!-- Barres horizontales animees -->
+    <div class="data-bars">
+      <div class="data-bar reveal stagger-1">
+        <div class="data-bar__label">Substances WADA</div>
+        <div class="data-bar__track"><div class="data-bar__fill" style="width:95%" data-bar></div></div>
+        <div class="data-bar__value">248K</div>
+      </div>
+      <div class="data-bar reveal stagger-2">
+        <div class="data-bar__label">Pays couverts</div>
+        <div class="data-bar__track"><div class="data-bar__fill" style="width:82%" data-bar></div></div>
+        <div class="data-bar__value">119</div>
+      </div>
+      <div class="data-bar reveal stagger-3">
+        <div class="data-bar__label">Sports supports</div>
+        <div class="data-bar__track"><div class="data-bar__fill" style="width:88%" data-bar></div></div>
+        <div class="data-bar__value">47</div>
+      </div>
+      <div class="data-bar reveal stagger-4">
+        <div class="data-bar__label">Fiabilite verdict</div>
+        <div class="data-bar__track"><div class="data-bar__fill" style="width:99.97%" data-bar></div></div>
+        <div class="data-bar__value">99.97%</div>
+      </div>
+    </div>
+
+    <!-- Bento domaines -->
+    <div class="bento-grid" id="domaines">
+      <div class="bento-card bento-card--large reveal stagger-1">
+        <div class="bento-card__icon">&#127942;</div>
+        <div class="bento-card__title">Sport professionnel</div>
+        <div class="bento-card__desc">Federations, clubs, equipes nationales. Verification instantanee des protocoles medicaux pour chaque athlete.</div>
+        <div class="bento-card__stat">47 sports</div>
+      </div>
+      <div class="bento-card reveal stagger-2">
+        <div class="bento-card__icon">&#9878;</div>
+        <div class="bento-card__title">Medical</div>
+        <div class="bento-card__desc">Medecins du sport et pharmaciens. Prescriptions compatibles competition.</div>
+      </div>
+      <div class="bento-card reveal stagger-3">
+        <div class="bento-card__icon">&#128218;</div>
+        <div class="bento-card__title">Juridique</div>
+        <div class="bento-card__desc">Avocats sportifs. Dossiers de defense documentes et sourced.</div>
+      </div>
+      <div class="bento-card reveal stagger-4">
+        <div class="bento-card__icon">&#127981;</div>
+        <div class="bento-card__title">Institutions</div>
+        <div class="bento-card__desc">ONAD, AFLD, USADA. Surveillance et audit de conformite automatises.</div>
+        <div class="bento-card__stat">23 ONAD</div>
+      </div>
+      <div class="bento-card bento-card--large reveal stagger-5">
+        <div class="bento-card__icon">&#128138;</div>
+        <div class="bento-card__title">Industrie pharmaceutique</div>
+        <div class="bento-card__desc">Laboratoires et fabricants de supplements. Verification pre-commercialisation pour eviter les contaminations croisees.</div>
+        <div class="bento-card__stat">12 labos partenaires</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     10. DEMO + CTA + FOOTER
+     ═══════════════════════════════════════════════ -->
+<section class="demo-cta" id="demo">
+  <div class="container">
+    <div class="section-label reveal">Essayez</div>
+    <h2 class="demo-cta__headline reveal">Testez. Maintenant.</h2>
+    <p class="demo-cta__sub reveal">Entrez une substance, un medicament, un supplement. Kura vous repond en 0.3 seconde.</p>
+
+    <!-- Demo card -->
+    <div class="demo-card reveal-scale">
+      <div class="demo-card__header">
+        <div class="demo-card__dot demo-card__dot--red"></div>
+        <div class="demo-card__dot demo-card__dot--yellow"></div>
+        <div class="demo-card__dot demo-card__dot--green"></div>
+        <div class="demo-card__url">kura.ai/ask</div>
+      </div>
+      <div class="demo-card__body">
+        <input type="text" class="demo-card__search" placeholder="Entrez une substance... ex: Ibuprofen" id="demo-input">
+        <div class="demo-card__result" id="demo-result" style="display:none">
+          <div class="demo-card__result-header">
+            <span class="demo-card__result-substance" id="demo-substance">Ibuprofen</span>
+            <span class="demo-card__result-status" id="demo-status">AUTORISE</span>
+          </div>
+          <div class="demo-card__result-meta" id="demo-meta">WADA 2024 / Tous sports / Toutes periodes / Confiance: 99.9%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-cta__actions reveal">
+      <a href="#" class="btn btn--primary btn--large">Demander une demo</a>
+      <a href="#" class="btn btn--ghost btn--large">Documentation API</a>
+    </div>
+    <div class="demo-cta__note reveal">Pas de carte bancaire requise &middot; Setup en 5 minutes</div>
+  </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <div class="footer__logo">KUR<span>A</span></div>
+        <p class="footer__desc">Compliance intelligence pour le sport mondial. Precision. Fiabilite. Zero compromis.</p>
+      </div>
+      <div class="footer__columns">
+        <div>
+          <div class="footer__col-title">Produit</div>
+          <ul class="footer__col-links">
+            <li><a href="#">Pipeline /ask</a></li>
+            <li><a href="#">API Reference</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Pricing</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Ressources</div>
+          <ul class="footer__col-links">
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">Changelog</a></li>
+            <li><a href="#">Status</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Legal</div>
+          <ul class="footer__col-links">
+            <li><a href="#">Confidentialite</a></li>
+            <li><a href="#">CGU</a></li>
+            <li><a href="#">Securite</a></li>
+            <li><a href="#">RGPD</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__copy">&copy; 2024 Kura Technologies. Tous droits reserves.</div>
+      <div class="footer__legal">
+        <a href="#">Mentions legales</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════
+     SCRIPTS — 8 techniques cinematiques
+     ═══════════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  // ── T1 : LOADING SCREEN ──
+  const loader = document.getElementById('loader');
+  const loaderBar = document.getElementById('loader-bar');
+  const loaderStatus = document.getElementById('loader-status');
+  const nav = document.getElementById('nav');
+
+  const statuses = [
+    { at: 0, text: 'Initialisation...' },
+    { at: 30, text: 'Chargement des donnees WADA...' },
+    { at: 60, text: 'Activation des guardrails...' },
+    { at: 85, text: 'Pipeline ready.' },
+  ];
+
+  // Start loader bar
+  requestAnimationFrame(() => {
+    loaderBar.style.width = '100%';
+  });
+
+  // Status updates
+  statuses.forEach(s => {
+    setTimeout(() => {
+      loaderStatus.textContent = s.text;
+    }, s.at * 16);
+  });
+
+  // ── T2 : LOGO REVEAL ──
+  document.querySelectorAll('.lr').forEach((l, i) => {
+    l.style.cssText = 'opacity:0;display:inline-block;transform:translateY(20px)';
+    setTimeout(() => {
+      l.style.transition = 'all 0.5s cubic-bezier(0.16,1,0.3,1)';
+      l.style.opacity = '1';
+      l.style.transform = 'translateY(0)';
+    }, 400 + i * 80);
+  });
+
+  // Dismiss loader
+  setTimeout(() => {
+    loader.style.opacity = '0';
+    loader.style.pointerEvents = 'none';
+    setTimeout(() => {
+      loader.style.display = 'none';
+      // Show nav
+      nav.classList.add('visible');
+    }, 600);
+  }, 1900);
+
+
+  // ── T7 : SCROLL REVEALS (IntersectionObserver) ──
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+    revealObserver.observe(el);
+  });
+
+
+  // ── T4 : STATEMENT — scroll words ──
+  const swObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Animate words sequentially
+        const words = entry.target.querySelectorAll('.sw');
+        words.forEach((w, i) => {
+          setTimeout(() => {
+            w.classList.add('visible');
+          }, i * 150);
+        });
+        swObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.5
+  });
+
+  const statementEl = document.querySelector('.statement');
+  if (statementEl) swObserver.observe(statementEl);
+
+
+  // ── T8 : COMPTEURS ANIMES ──
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const suffix = el.dataset.suffix || '';
+    const prefix = el.dataset.prefix || '';
+    const duration = 2000;
+    const start = performance.now();
+
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(target * eased);
+      el.textContent = prefix + current.toLocaleString('fr-FR') + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.stat__number[data-target]').forEach(el => {
+    counterObserver.observe(el);
+  });
+
+
+  // ── DATA BARS animation ──
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bars = entry.target.querySelectorAll('[data-bar]');
+        bars.forEach((bar, i) => {
+          setTimeout(() => {
+            bar.classList.add('visible');
+          }, i * 200);
+        });
+        barObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const dataBarsEl = document.querySelector('.data-bars');
+  if (dataBarsEl) barObserver.observe(dataBarsEl);
+
+
+  // ── DEMO interaction ──
+  const demoInput = document.getElementById('demo-input');
+  const demoResult = document.getElementById('demo-result');
+  const demoSubstance = document.getElementById('demo-substance');
+  const demoStatus = document.getElementById('demo-status');
+  const demoMeta = document.getElementById('demo-meta');
+
+  const demoData = {
+    'ibuprofen': { status: 'AUTORISE', color: '#00875A', conf: '99.9%' },
+    'paracetamol': { status: 'AUTORISE', color: '#00875A', conf: '99.8%' },
+    'cafeine': { status: 'AUTORISE', color: '#00875A', conf: '99.5%' },
+    'aspirine': { status: 'AUTORISE', color: '#00875A', conf: '99.7%' },
+    'testosterone': { status: 'INTERDIT', color: '#DE350B', conf: '99.9%' },
+    'epo': { status: 'INTERDIT', color: '#DE350B', conf: '99.9%' },
+    'nandrolone': { status: 'INTERDIT', color: '#DE350B', conf: '99.9%' },
+    'stanozolol': { status: 'INTERDIT', color: '#DE350B', conf: '99.8%' },
+    'pseudoephedrine': { status: 'CONDITIONNEL', color: '#FF991F', conf: '98.2%' },
+    'salbutamol': { status: 'CONDITIONNEL', color: '#FF991F', conf: '97.8%' },
+  };
+
+  let demoTimeout;
+  if (demoInput) {
+    demoInput.addEventListener('input', function() {
+      clearTimeout(demoTimeout);
+      const val = this.value.toLowerCase().trim();
+
+      if (val.length < 2) {
+        demoResult.style.display = 'none';
+        return;
+      }
+
+      demoTimeout = setTimeout(() => {
+        const match = demoData[val];
+        if (match) {
+          demoSubstance.textContent = this.value;
+          demoStatus.textContent = match.status;
+          demoStatus.style.color = match.color;
+          demoResult.style.borderLeftColor = match.color;
+          demoResult.style.background = match.color + '0A';
+          demoMeta.textContent = 'WADA 2024 / Tous sports / Toutes periodes / Confiance: ' + match.conf;
+          demoResult.style.display = 'block';
+          demoResult.style.animation = 'fadeInUp 0.4s ease';
+        } else if (val.length >= 3) {
+          demoSubstance.textContent = this.value;
+          demoStatus.textContent = 'A VERIFIER';
+          demoStatus.style.color = '#FF991F';
+          demoResult.style.borderLeftColor = '#FF991F';
+          demoResult.style.background = 'rgba(255,153,31,0.04)';
+          demoMeta.textContent = 'Substance non trouvee dans la base — consultez un professionnel';
+          demoResult.style.display = 'block';
+          demoResult.style.animation = 'fadeInUp 0.4s ease';
+        }
+      }, 300);
+    });
+  }
+
+
+  // ── Nav scroll behavior ──
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const current = window.scrollY;
+    if (current > 100) {
+      nav.style.background = 'rgba(248,249,250,0.95)';
+    } else {
+      nav.style.background = 'rgba(248,249,250,0.85)';
+    }
+    lastScroll = current;
+  }, { passive: true });
+
+
+  // ── Keyframe for demo result ──
+  const style = document.createElement('style');
+  style.textContent = '@keyframes fadeInUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}';
+  document.head.appendChild(style);
+
+})();
+</script>
+
+</body>
+</html>

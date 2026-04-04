@@ -1,0 +1,2297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIGNAL — Direction C | Plateforme Ateliers Creatifs</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Syne:wght@400;500;600;700;800&display=swap');
+</style>
+
+<style>
+/* ============================================
+   RESET & TOKENS
+   ============================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --nuit: #0F0F14;
+  --nuit-deep: #0A0A0E;
+  --creme: #FAFAF7;
+  --magenta: #FF4D6A;
+  --magenta-hover: #ff6b83;
+  --bleu: #3B82F6;
+  --jaune: #FBBF24;
+  --vert: #22C55E;
+  --violet: #A855F7;
+  --orange: #F97316;
+  --rose: #EC4899;
+  --creme-06: rgba(250,250,247,0.06);
+  --creme-10: rgba(250,250,247,0.1);
+  --creme-12: rgba(250,250,247,0.12);
+  --creme-15: rgba(250,250,247,0.15);
+  --creme-25: rgba(250,250,247,0.25);
+  --creme-35: rgba(250,250,247,0.35);
+  --creme-45: rgba(250,250,247,0.45);
+  --creme-50: rgba(250,250,247,0.5);
+  --creme-60: rgba(250,250,247,0.6);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-full: 100px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--nuit);
+  color: var(--creme);
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   VIEW NAVIGATION
+   ============================================ */
+.view-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  background: rgba(15,15,20,0.92);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(250,250,247,0.06);
+}
+
+.view-btn {
+  flex: 1;
+  padding: 18px 24px;
+  background: none;
+  border: none;
+  color: var(--creme-35);
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.view-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  width: 70%;
+  height: 2px;
+  background: var(--magenta);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.view-btn.active {
+  color: var(--creme);
+}
+
+.view-btn.active::after {
+  transform: scaleX(1);
+}
+
+.view-btn:hover {
+  color: var(--creme-60);
+}
+
+/* Views */
+.view {
+  display: none;
+  min-height: 100vh;
+  padding-top: 56px;
+}
+
+.view.active {
+  display: block;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes float {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(20px,-30px) scale(1.05); }
+  66% { transform: translate(-15px,20px) scale(0.95); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translate(0,0) scale(1) rotate(0deg); }
+  50% { transform: translate(30px,-20px) scale(1.08) rotate(3deg); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255,77,106,0.3); }
+  50% { box-shadow: 0 0 40px rgba(255,77,106,0.5); }
+}
+
+@keyframes timeline-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,77,106,0.4); }
+  50% { transform: scale(1.15); box-shadow: 0 0 0 12px rgba(255,77,106,0); }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.04; }
+  50% { opacity: 0.08; }
+}
+
+@keyframes chrono-tick {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* ============================================
+   SHARED COMPONENTS
+   ============================================ */
+.shape-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.section-tag {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--jaune);
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+/* ============================================
+   VIEW 1 — LANDING PAGE
+   ============================================ */
+
+/* --- Hero --- */
+.landing-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 120px 6vw 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-hero .shape-blob.s1 { width: 550px; height: 550px; background: var(--magenta); top: -12%; right: -8%; opacity: 0.3; animation: float 8s ease-in-out infinite; }
+.landing-hero .shape-blob.s2 { width: 420px; height: 420px; background: var(--bleu); bottom: -8%; left: -6%; opacity: 0.25; animation: float 8s ease-in-out infinite 2s; }
+.landing-hero .shape-blob.s3 { width: 320px; height: 320px; background: var(--jaune); top: 38%; left: 28%; opacity: 0.12; animation: float 8s ease-in-out infinite 4s; }
+.landing-hero .shape-blob.s4 { width: 200px; height: 200px; background: var(--vert); bottom: 20%; right: 15%; opacity: 0.08; animation: float-slow 12s ease-in-out infinite; }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  animation: fade-in-up 0.8s ease-out;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border: 1px solid var(--creme-12);
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--creme-60);
+  margin-bottom: 40px;
+  backdrop-filter: blur(8px);
+  background: rgba(15,15,20,0.3);
+}
+
+.hero-badge .dot {
+  width: 6px; height: 6px;
+  background: var(--magenta);
+  border-radius: 50%;
+  animation: pulse-dot 1.5s infinite;
+}
+
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(52px, 10vw, 140px);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  margin-bottom: 32px;
+}
+
+.hero-title .line-1 { display: block; color: var(--creme); }
+
+.hero-title .line-2 {
+  display: block;
+  background: linear-gradient(135deg, var(--magenta) 0%, var(--bleu) 50%, var(--jaune) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-title .line-3 {
+  display: block;
+  font-style: italic;
+  font-weight: 400;
+  font-family: 'Fraunces', serif;
+  font-size: 0.55em;
+  color: var(--creme-35);
+}
+
+.hero-sub {
+  font-size: clamp(16px, 1.6vw, 20px);
+  line-height: 1.7;
+  color: var(--creme-50);
+  max-width: 560px;
+  margin: 0 auto 48px;
+}
+
+.cta-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  background: var(--magenta);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-primary:hover {
+  background: var(--magenta-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(255,77,106,0.35);
+}
+
+.cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: var(--creme-06);
+  color: var(--creme);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid var(--creme-10);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.cta-secondary:hover {
+  background: var(--creme-10);
+  border-color: rgba(250,250,247,0.2);
+}
+
+/* --- Marquee --- */
+.marquee-section {
+  padding: 24px 0;
+  overflow: hidden;
+  border-top: 1px solid var(--creme-06);
+  border-bottom: 1px solid var(--creme-06);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 48px;
+  animation: marquee 25s linear infinite;
+  width: max-content;
+}
+
+.marquee-item {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--creme-15);
+}
+
+.marquee-item .sep {
+  color: var(--magenta);
+  margin: 0 16px;
+}
+
+/* --- 7 Disciplines --- */
+.disciplines {
+  padding: 120px 6vw;
+  position: relative;
+}
+
+.disciplines-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.disciplines-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.disc-card {
+  padding: 36px 28px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: default;
+  color: #fff;
+}
+
+.disc-card:hover {
+  transform: translateY(-6px) scale(1.04);
+}
+
+/* Colored backgrounds per discipline */
+.disc-card[data-color="bleu"]    { background: var(--bleu); }
+.disc-card[data-color="magenta"] { background: var(--magenta); }
+.disc-card[data-color="jaune"]   { background: var(--jaune); color: var(--nuit); }
+.disc-card[data-color="violet"]  { background: var(--violet); }
+.disc-card[data-color="vert"]    { background: var(--vert); color: var(--nuit); }
+.disc-card[data-color="orange"]  { background: var(--orange); }
+.disc-card[data-color="rose"]    { background: var(--rose); }
+
+/* Colored box-shadow on hover */
+.disc-card[data-color="bleu"]:hover    { box-shadow: 0 24px 64px rgba(59,130,246,0.4); }
+.disc-card[data-color="magenta"]:hover { box-shadow: 0 24px 64px rgba(255,77,106,0.4); }
+.disc-card[data-color="jaune"]:hover   { box-shadow: 0 24px 64px rgba(251,191,36,0.4); }
+.disc-card[data-color="violet"]:hover  { box-shadow: 0 24px 64px rgba(168,85,247,0.4); }
+.disc-card[data-color="vert"]:hover    { box-shadow: 0 24px 64px rgba(34,197,94,0.4); }
+.disc-card[data-color="orange"]:hover  { box-shadow: 0 24px 64px rgba(249,115,22,0.4); }
+.disc-card[data-color="rose"]:hover    { box-shadow: 0 24px 64px rgba(236,72,153,0.4); }
+
+.disc-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  background: rgba(255,255,255,0.2);
+}
+
+/* Dark text disciplines get dark icon bg */
+.disc-card[data-color="jaune"] .disc-icon,
+.disc-card[data-color="vert"] .disc-icon { background: rgba(0,0,0,0.12); }
+
+/* Flagship badge for Cinema (bleu) */
+.disc-card[data-color="bleu"]::after {
+  content: '\2605  FLAGSHIP';
+  position: absolute;
+  top: 16px; right: 16px;
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--creme);
+  opacity: 0.7;
+  background: rgba(255,255,255,0.15);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.disc-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+}
+
+.disc-card p {
+  font-size: 14px;
+  line-height: 1.65;
+  opacity: 0.85;
+}
+
+/* --- Pipeline M1-M8 Timeline --- */
+.pipeline-section {
+  padding: 120px 6vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.pipeline-section .shape-blob.bg1 {
+  width: 600px; height: 600px;
+  background: var(--bleu);
+  top: 10%; right: -15%;
+  opacity: 0.06;
+  animation: float-slow 15s ease-in-out infinite;
+}
+
+.pipeline-header {
+  text-align: center;
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.pipeline-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 900px) {
+  .pipeline-track { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 500px) {
+  .pipeline-track { grid-template-columns: 1fr; }
+}
+
+.moment-card {
+  text-align: center;
+  padding: 32px 20px;
+  border-radius: var(--radius);
+  background: rgba(250,250,247,0.02);
+  border: 1px solid var(--creme-06);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.moment-card:hover {
+  background: var(--creme-06);
+  transform: translateY(-4px);
+}
+
+.moment-blob {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  position: relative;
+}
+
+.moment-blob::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  opacity: 0.15;
+}
+
+.moment-card:nth-child(1) .moment-blob { background: var(--magenta); }
+.moment-card:nth-child(2) .moment-blob { background: var(--bleu); }
+.moment-card:nth-child(3) .moment-blob { background: var(--jaune); color: var(--nuit); }
+.moment-card:nth-child(4) .moment-blob { background: var(--vert); }
+.moment-card:nth-child(5) .moment-blob { background: var(--violet); }
+.moment-card:nth-child(6) .moment-blob { background: var(--orange); }
+.moment-card:nth-child(7) .moment-blob { background: var(--rose); }
+.moment-card:nth-child(8) .moment-blob { background: linear-gradient(135deg, var(--magenta), var(--bleu)); }
+
+.moment-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.moment-emotion {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--creme-45);
+}
+
+/* --- Stats --- */
+.stats-section {
+  padding: 80px 6vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  text-align: center;
+  border-top: 1px solid var(--creme-06);
+}
+
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--magenta), var(--jaune));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--creme-35);
+}
+
+/* ============================================
+   VIEW 2 — DASHBOARD INSTITUTION
+   ============================================ */
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+@media (max-width: 900px) {
+  .dashboard-layout { grid-template-columns: 1fr; }
+  .dash-sidebar { display: none; }
+}
+
+/* Sidebar */
+.dash-sidebar {
+  background: #1A1A24;
+  border-right: 1px solid var(--creme-06);
+  padding: 32px 0;
+  position: sticky;
+  top: 56px;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+}
+
+.dash-sidebar-brand {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 0 24px;
+  margin-bottom: 40px;
+  color: var(--creme);
+}
+
+.dash-nav-section {
+  margin-bottom: 32px;
+}
+
+.dash-nav-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(250,250,247,0.3);
+  padding: 0 24px;
+  margin-bottom: 12px;
+}
+
+.dash-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 24px;
+  font-size: 14px;
+  color: rgba(250,250,247,0.7);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.dash-nav-item:hover {
+  color: var(--creme);
+  background: var(--creme-06);
+}
+
+.dash-nav-item.active {
+  color: var(--magenta);
+  background: rgba(255,77,106,0.15);
+  border-left-color: var(--magenta);
+}
+
+.dash-nav-item .nav-icon {
+  width: 20px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.dash-nav-item:hover .nav-icon {
+  opacity: 1;
+}
+
+.dash-nav-item.active .nav-icon {
+  opacity: 1;
+  color: var(--magenta);
+}
+
+.dash-nav-item .nav-badge {
+  margin-left: auto;
+  background: var(--magenta);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+/* Main content */
+.dash-main {
+  padding: 0;
+  background: var(--nuit);
+}
+
+.dash-header {
+  background: linear-gradient(135deg, var(--magenta), var(--bleu));
+  padding: 32px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dash-header h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.dash-header-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 4px;
+}
+
+.dash-header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.dash-btn-new {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: #fff;
+  color: var(--magenta);
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dash-btn-new:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.dash-content {
+  padding: 32px 40px;
+}
+
+@media (max-width: 900px) {
+  .dash-content { padding: 24px 20px; }
+  .dash-header { padding: 24px 20px; }
+}
+
+/* Stats cards */
+.dash-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.dash-stat-card {
+  padding: 24px;
+  border-radius: var(--radius);
+  background: var(--creme-06);
+  border: 1px solid var(--creme-06);
+  transition: all 0.3s ease;
+}
+
+.dash-stat-card:hover {
+  border-color: var(--creme-12);
+  transform: translateY(-2px);
+}
+
+.dash-stat-card .stat-icon {
+  width: 40px; height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.dash-stat-card:nth-child(1) .stat-icon { background: rgba(255,77,106,0.12); color: var(--magenta); }
+.dash-stat-card:nth-child(2) .stat-icon { background: rgba(59,130,246,0.12); color: var(--bleu); }
+.dash-stat-card:nth-child(3) .stat-icon { background: rgba(251,191,36,0.12); color: var(--jaune); }
+.dash-stat-card:nth-child(4) .stat-icon { background: rgba(52,211,153,0.12); color: var(--vert); }
+
+.dash-stat-card .stat-value {
+  font-family: 'Syne', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 4px;
+}
+
+.dash-stat-card:nth-child(1) .stat-value { color: var(--magenta); }
+.dash-stat-card:nth-child(2) .stat-value { color: var(--bleu); }
+.dash-stat-card:nth-child(3) .stat-value { color: var(--jaune); }
+.dash-stat-card:nth-child(4) .stat-value { color: var(--vert); }
+
+.dash-stat-card .stat-desc {
+  font-size: 13px;
+  color: var(--creme-45);
+}
+
+/* Ateliers en cours */
+.dash-section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dash-section-title .count {
+  background: var(--creme-06);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  color: var(--creme-50);
+}
+
+.dash-ateliers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+.atelier-card {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--creme-06);
+  background: var(--creme-06);
+  transition: all 0.4s ease;
+}
+
+.atelier-card:hover {
+  border-color: var(--creme-12);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.25);
+}
+
+.atelier-cover {
+  height: 120px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+.atelier-card:nth-child(1) .atelier-cover { background: linear-gradient(135deg, var(--magenta), #c9184a); }
+.atelier-card:nth-child(2) .atelier-cover { background: linear-gradient(135deg, var(--bleu), #1d4ed8); }
+.atelier-card:nth-child(3) .atelier-cover { background: linear-gradient(135deg, var(--jaune), var(--orange)); }
+.atelier-card:nth-child(4) .atelier-cover { background: linear-gradient(135deg, var(--vert), #059669); }
+
+.atelier-mode-tag {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(8px);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  color: #fff;
+}
+
+.atelier-body {
+  padding: 20px;
+}
+
+.atelier-body h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.atelier-meta {
+  font-size: 13px;
+  color: var(--creme-45);
+  line-height: 1.6;
+}
+
+.atelier-meta strong {
+  color: var(--creme-60);
+  font-weight: 500;
+}
+
+.atelier-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  border-top: 1px solid var(--creme-06);
+  font-size: 12px;
+  color: var(--creme-35);
+}
+
+.atelier-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.atelier-status .live-dot {
+  width: 6px; height: 6px;
+  background: var(--vert);
+  border-radius: 50%;
+  animation: pulse-dot 1.5s infinite;
+}
+
+/* Chart placeholder */
+.dash-chart-area {
+  border-radius: var(--radius);
+  background: var(--creme-06);
+  border: 1px solid var(--creme-06);
+  padding: 32px;
+  margin-bottom: 40px;
+}
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  height: 180px;
+  padding-top: 20px;
+}
+
+.chart-bar-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.chart-bar {
+  width: 100%;
+  max-width: 48px;
+  border-radius: 8px 8px 4px 4px;
+  transition: all 0.4s ease;
+  cursor: default;
+  position: relative;
+}
+
+.chart-bar:hover {
+  filter: brightness(1.2);
+  transform: scaleY(1.05);
+  transform-origin: bottom;
+}
+
+.chart-bar-label {
+  font-size: 11px;
+  color: var(--creme-35);
+  font-weight: 500;
+  text-align: center;
+}
+
+/* ============================================
+   VIEW 3 — COCKPIT INTERVENANT
+   ============================================ */
+.cockpit-layout {
+  background: var(--nuit-deep);
+  min-height: calc(100vh - 56px);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background shapes */
+.cockpit-layout .bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  opacity: 0.04;
+  animation: breathe 8s ease-in-out infinite;
+}
+
+.cockpit-layout .bg-shape.bg1 { width: 500px; height: 500px; background: var(--magenta); top: -10%; right: -5%; }
+.cockpit-layout .bg-shape.bg2 { width: 400px; height: 400px; background: var(--bleu); bottom: -10%; left: -5%; animation-delay: 3s; }
+.cockpit-layout .bg-shape.bg3 { width: 300px; height: 300px; background: var(--jaune); top: 50%; left: 50%; animation-delay: 5s; }
+
+/* Cockpit header */
+.cockpit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--creme-06);
+  position: relative;
+  z-index: 2;
+}
+
+.cockpit-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cockpit-mode-badge {
+  width: 40px; height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  background: rgba(59,130,246,0.15);
+  color: var(--bleu);
+}
+
+.cockpit-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.cockpit-subtitle {
+  font-size: 12px;
+  color: var(--creme-45);
+  margin-top: 2px;
+}
+
+.cockpit-header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.cockpit-chrono-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.cockpit-chrono-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--creme);
+  opacity: 0.5;
+}
+
+.cockpit-chrono {
+  font-family: 'Syne', sans-serif;
+  font-size: 88px;
+  font-weight: 700;
+  color: var(--creme);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.cockpit-chrono .tick {
+  animation: chrono-tick 1s infinite;
+}
+
+/* Color states: >5min = creme, 1-5min = jaune, <1min = magenta */
+.cockpit-chrono.warn { color: var(--jaune); }
+.cockpit-chrono.critical { color: var(--magenta); }
+
+.cockpit-chrono-bar {
+  width: 100%;
+  height: 4px;
+  background: var(--creme-10);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.cockpit-chrono-bar-fill {
+  height: 100%;
+  width: 65%;
+  background: var(--creme);
+  border-radius: 2px;
+  transition: width 1s linear, background 0.3s ease;
+}
+
+.cockpit-chrono.warn ~ .cockpit-chrono-bar .cockpit-chrono-bar-fill { background: var(--jaune); }
+.cockpit-chrono.critical ~ .cockpit-chrono-bar .cockpit-chrono-bar-fill { background: var(--magenta); }
+
+.cockpit-participants {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--creme-60);
+  background: var(--creme-06);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+}
+
+.cockpit-participants .dot-live {
+  width: 8px; height: 8px;
+  background: var(--vert);
+  border-radius: 50%;
+  animation: pulse-dot 1.5s infinite;
+}
+
+/* Pipeline M1-M8 horizontal */
+.cockpit-pipeline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--creme-06);
+  position: relative;
+  z-index: 2;
+  flex-wrap: wrap;
+}
+
+.pip-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pip-circle {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  border: 2px solid var(--creme-12);
+  color: var(--creme-35);
+  transition: all 0.3s ease;
+  cursor: default;
+  position: relative;
+}
+
+.pip-circle.done {
+  background: var(--creme-10);
+  border-color: var(--creme-25);
+  color: var(--creme-60);
+}
+
+.pip-circle.active {
+  background: var(--magenta);
+  border-color: var(--magenta);
+  color: #fff;
+  animation: timeline-pulse 2s infinite;
+}
+
+.pip-circle.upcoming {
+  border-style: dashed;
+}
+
+.pip-connector {
+  width: 24px;
+  height: 2px;
+  background: var(--creme-10);
+  border-radius: 1px;
+}
+
+.pip-connector.done { background: var(--creme-25); }
+
+.pip-label {
+  position: absolute;
+  bottom: -22px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--creme-25);
+}
+
+.pip-circle.active .pip-label {
+  color: var(--magenta);
+}
+
+/* Cockpit central zone */
+.cockpit-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.cockpit-instruction-tag {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--jaune);
+  margin-bottom: 24px;
+}
+
+.cockpit-instruction {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: clamp(28px, 4.5vw, 56px);
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--creme);
+  max-width: 740px;
+  margin-bottom: 48px;
+}
+
+.cockpit-instruction em {
+  font-style: normal;
+  color: var(--magenta);
+}
+
+/* Participants grid */
+.cockpit-participants-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 500px;
+  margin-bottom: 16px;
+}
+
+.participant-dot {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.participant-dot.active {
+  background: var(--vert);
+  color: var(--nuit);
+}
+
+.participant-dot.idle {
+  background: var(--creme-10);
+  color: var(--creme-35);
+}
+
+.participant-dot.responding {
+  background: var(--bleu);
+  color: #fff;
+  animation: pulse-dot 1s infinite;
+}
+
+.participants-legend {
+  font-size: 12px;
+  color: var(--creme-25);
+  margin-top: 8px;
+}
+
+.participants-legend span {
+  margin: 0 10px;
+}
+
+.participants-legend .legend-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+/* Cockpit controls */
+.cockpit-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px 32px;
+  border-top: 1px solid rgba(250,250,247,0.1);
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  background: rgba(10,10,14,0.95);
+  backdrop-filter: blur(16px);
+  flex-wrap: wrap;
+}
+
+.cockpit-step-current {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--creme);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.cockpit-btn {
+  height: 52px;
+  padding: 0 32px;
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cockpit-btn-prev {
+  background: transparent;
+  color: var(--creme-60);
+  border: 1px solid var(--magenta);
+}
+
+.cockpit-btn-prev:hover {
+  background: rgba(255,77,106,0.1);
+  color: var(--creme);
+}
+
+.cockpit-btn-next {
+  background: var(--magenta);
+  color: #fff;
+  padding: 0 40px;
+}
+
+.cockpit-btn-next:hover {
+  background: var(--magenta-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255,77,106,0.3);
+}
+
+.cockpit-btn-pause {
+  background: var(--jaune);
+  color: var(--nuit);
+}
+
+.cockpit-btn-pause:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+.cockpit-btn-end {
+  background: rgba(250,250,247,0.04);
+  color: var(--creme-35);
+  border: 1px solid var(--creme-06);
+  font-size: 13px;
+  height: 40px;
+}
+
+.cockpit-btn-end:hover {
+  color: var(--magenta);
+  border-color: var(--magenta);
+}
+
+/* ============================================
+   VIEW 4 — FOOTER / MANIFESTE
+   ============================================ */
+.manifeste-view {
+  padding-top: 56px;
+}
+
+.manifeste-hero {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 120px 6vw 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.manifeste-hero .shape-blob.m1 { width: 600px; height: 600px; background: var(--magenta); top: -15%; left: -10%; opacity: 0.15; animation: float 10s ease-in-out infinite; }
+.manifeste-hero .shape-blob.m2 { width: 500px; height: 500px; background: var(--bleu); bottom: -15%; right: -10%; opacity: 0.12; animation: float 10s ease-in-out infinite 3s; }
+.manifeste-hero .shape-blob.m3 { width: 250px; height: 250px; background: var(--jaune); top: 50%; left: 50%; transform: translate(-50%,-50%); opacity: 0.08; animation: float-slow 14s ease-in-out infinite; }
+
+.manifeste-content {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+}
+
+.manifeste-content h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(40px, 7vw, 80px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 40px;
+}
+
+.manifeste-content h1 span {
+  display: block;
+}
+
+.manifeste-content h1 .m-accent {
+  background: linear-gradient(135deg, var(--magenta), var(--bleu));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.manifeste-text {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.8;
+  color: var(--creme-50);
+  margin-bottom: 48px;
+}
+
+.manifeste-values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  padding: 80px 6vw;
+}
+
+@media (max-width: 600px) {
+  .manifeste-values { grid-template-columns: 1fr; }
+}
+
+.value-card {
+  text-align: center;
+  padding: 40px 24px;
+  border-radius: var(--radius);
+  background: var(--creme-06);
+  border: 1px solid var(--creme-06);
+  transition: all 0.4s ease;
+}
+
+.value-card:hover {
+  border-color: var(--creme-12);
+  transform: translateY(-6px);
+}
+
+.value-icon {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.value-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.value-card p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--creme-45);
+}
+
+/* Footer */
+.footer {
+  padding: 80px 6vw 40px;
+  border-top: 1px solid var(--creme-06);
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 64px;
+}
+
+@media (max-width: 768px) {
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+
+.footer-brand {
+  font-family: 'Syne', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--magenta), var(--bleu));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer-desc {
+  font-size: 14px;
+  color: var(--creme-35);
+  line-height: 1.7;
+  max-width: 280px;
+}
+
+.footer h4 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--creme-25);
+  margin-bottom: 20px;
+}
+
+.footer a {
+  display: block;
+  color: var(--creme-50);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 5px 0;
+  transition: color 0.2s ease;
+}
+
+.footer a:hover { color: var(--magenta); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 32px;
+  border-top: 1px solid var(--creme-06);
+  font-size: 12px;
+  color: var(--creme-25);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-social {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  border: 1px solid rgba(250,250,247,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  color: var(--creme-50);
+}
+
+.footer-social:hover {
+  border-color: var(--magenta);
+  color: var(--magenta);
+}
+
+/* CTA final */
+.footer-cta {
+  text-align: center;
+  padding: 80px 6vw;
+}
+
+.footer-cta h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+.footer-cta p {
+  font-size: 16px;
+  color: var(--creme-45);
+  margin-bottom: 32px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* ============================================
+   SCORE BADGE
+   ============================================ */
+.score-badge {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  background: rgba(10,10,14,0.92);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--creme-12);
+  border-radius: 14px;
+  padding: 16px 20px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--creme-50);
+  line-height: 1.7;
+}
+
+.score-badge strong {
+  color: var(--magenta);
+  font-size: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================================
+     VIEW NAVIGATION
+     ============================================ -->
+<nav class="view-nav">
+  <button class="view-btn active" onclick="switchView('landing')">Landing</button>
+  <button class="view-btn" onclick="switchView('dashboard')">Dashboard</button>
+  <button class="view-btn" onclick="switchView('cockpit')">Cockpit</button>
+  <button class="view-btn" onclick="switchView('manifeste')">Manifeste</button>
+</nav>
+
+<!-- ============================================
+     SCORE BADGE
+     ============================================ -->
+<div class="score-badge">
+  <strong>Direction C — SIGNAL</strong><br>
+  Score vise : 68+/70<br>
+  4 vues &middot; Standalone &middot; 0 deps
+</div>
+
+<!-- ============================================
+     VIEW 1 — LANDING PAGE
+     ============================================ -->
+<section id="view-landing" class="view active">
+
+  <!-- Hero -->
+  <div class="landing-hero">
+    <div class="shape-blob s1"></div>
+    <div class="shape-blob s2"></div>
+    <div class="shape-blob s3"></div>
+    <div class="shape-blob s4"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Plateforme ouverte &middot; 7 disciplines
+      </div>
+
+      <h1 class="hero-title">
+        <span class="line-1">Quelque chose</span>
+        <span class="line-2">se passe ici.</span>
+        <span class="line-3">Ateliers creatifs pour toutes les jeunesses</span>
+      </h1>
+
+      <p class="hero-sub">
+        Une plateforme universelle pour animer, suivre et celebrer
+        les ateliers creatifs. Cinema, jeu video, musique, theatre,
+        mode, design, medias.
+      </p>
+
+      <div class="cta-row">
+        <button class="cta-primary">Decouvrir la plateforme &rarr;</button>
+        <button class="cta-secondary">Voir une demo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marquee -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <span class="marquee-item">Cinema <span class="sep">&bull;</span></span>
+      <span class="marquee-item">Jeu video <span class="sep">&bull;</span></span>
+      <span class="marquee-item">Medias <span class="sep">&bull;</span></span>
+      <span class="marquee-item">Mode <span class="sep">&bull;</span></span>
+      <span class="marquee-item">Design <span class="sep">&bull;</span></span>
+      <span class="marquee-item">Musique <span class="sep">&bull;</span></span>
+      <span class="marquee-item">Theatre <span class="sep">&bull;</span></span>
+      <span class="marquee-item">Cinema <span class="sep">&bull;</span></span>
+      <span class="marquee-item">Jeu video <span class="sep">&bull;</span></span>
+      <span class="marquee-item">Medias <span class="sep">&bull;</span></span>
+      <span class="marquee-item">Mode <span class="sep">&bull;</span></span>
+      <span class="marquee-item">Design <span class="sep">&bull;</span></span>
+      <span class="marquee-item">Musique <span class="sep">&bull;</span></span>
+      <span class="marquee-item">Theatre <span class="sep">&bull;</span></span>
+    </div>
+  </div>
+
+  <!-- 7 Disciplines -->
+  <section class="disciplines">
+    <div class="disciplines-header">
+      <p class="section-tag">7 modes disciplinaires</p>
+      <h2 class="section-title">Chaque discipline,<br>son univers.</h2>
+    </div>
+
+    <div class="disciplines-grid">
+      <div class="disc-card" data-color="bleu">
+        <div class="disc-icon">&#127909;</div>
+        <h3>Cinema</h3>
+        <p>De l'ecriture au montage. Realisation, cadrage, narration visuelle — le 7e art en atelier.</p>
+      </div>
+      <div class="disc-card" data-color="magenta">
+        <div class="disc-icon">&#127918;</div>
+        <h3>Jeu video</h3>
+        <p>Game design, level design, narration interactive. Creer des mondes jouables.</p>
+      </div>
+      <div class="disc-card" data-color="jaune">
+        <div class="disc-icon">&#127897;</div>
+        <h3>Medias</h3>
+        <p>Podcast, radio, journalisme. Donner la parole, structurer un recit audio ou ecrit.</p>
+      </div>
+      <div class="disc-card" data-color="violet">
+        <div class="disc-icon">&#128085;</div>
+        <h3>Mode</h3>
+        <p>Stylisme, upcycling, direction artistique textile. L'habit comme langage.</p>
+      </div>
+      <div class="disc-card" data-color="vert">
+        <div class="disc-icon">&#9999;&#65039;</div>
+        <h3>Design</h3>
+        <p>Graphisme, identite visuelle, design d'espace. Donner forme aux idees.</p>
+      </div>
+      <div class="disc-card" data-color="orange">
+        <div class="disc-icon">&#127925;</div>
+        <h3>Musique</h3>
+        <p>Composition, MAO, beatmaking, ecriture. Le son comme matiere premiere.</p>
+      </div>
+      <div class="disc-card" data-color="rose">
+        <div class="disc-icon">&#127917;</div>
+        <h3>Theatre</h3>
+        <p>Improvisation, mise en scene, ecriture dramatique. Le corps et la voix en jeu.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pipeline M1-M8 -->
+  <section class="pipeline-section">
+    <div class="shape-blob bg1"></div>
+
+    <div class="pipeline-header">
+      <p class="section-tag">Pipeline pedagogique</p>
+      <h2 class="section-title">8 moments,<br>une experience.</h2>
+    </div>
+
+    <div class="pipeline-track">
+      <div class="moment-card">
+        <div class="moment-blob">M1</div>
+        <p class="moment-label">Ouverture</p>
+        <p class="moment-emotion">Curiosite</p>
+      </div>
+      <div class="moment-card">
+        <div class="moment-blob">M2</div>
+        <p class="moment-label">Decouverte</p>
+        <p class="moment-emotion">Emerveillement</p>
+      </div>
+      <div class="moment-card">
+        <div class="moment-blob">M3</div>
+        <p class="moment-label">Exploration</p>
+        <p class="moment-emotion">Audace</p>
+      </div>
+      <div class="moment-card">
+        <div class="moment-blob">M4</div>
+        <p class="moment-label">Explosion creative</p>
+        <p class="moment-emotion">Effervescence</p>
+      </div>
+      <div class="moment-card">
+        <div class="moment-blob">M5</div>
+        <p class="moment-label">Production</p>
+        <p class="moment-emotion">Concentration</p>
+      </div>
+      <div class="moment-card">
+        <div class="moment-blob">M6</div>
+        <p class="moment-label">Affinage</p>
+        <p class="moment-emotion">Precision</p>
+      </div>
+      <div class="moment-card">
+        <div class="moment-blob">M7</div>
+        <p class="moment-label">Partage</p>
+        <p class="moment-emotion">Fierte</p>
+      </div>
+      <div class="moment-card">
+        <div class="moment-blob">M8</div>
+        <p class="moment-label">Celebration</p>
+        <p class="moment-emotion">Joie collective</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats-section">
+    <div>
+      <div class="stat-num">7</div>
+      <div class="stat-label">Disciplines creatives</div>
+    </div>
+    <div>
+      <div class="stat-num">8</div>
+      <div class="stat-label">Moments par atelier</div>
+    </div>
+    <div>
+      <div class="stat-num">3</div>
+      <div class="stat-label">Types d'utilisateurs</div>
+    </div>
+    <div>
+      <div class="stat-num">&#8734;</div>
+      <div class="stat-label">Possibilites creatives</div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ============================================
+     VIEW 2 — DASHBOARD INSTITUTION
+     ============================================ -->
+<section id="view-dashboard" class="view">
+  <div class="dashboard-layout">
+
+    <!-- Sidebar -->
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-brand">Signal</div>
+
+      <div class="dash-nav-section">
+        <div class="dash-nav-label">General</div>
+        <div class="dash-nav-item active">
+          <span class="nav-icon">&#9633;</span> Vue d'ensemble
+        </div>
+        <div class="dash-nav-item">
+          <span class="nav-icon">&#128218;</span> Ateliers
+          <span class="nav-badge">12</span>
+        </div>
+        <div class="dash-nav-item">
+          <span class="nav-icon">&#128101;</span> Intervenants
+        </div>
+        <div class="dash-nav-item">
+          <span class="nav-icon">&#128200;</span> Statistiques
+        </div>
+      </div>
+
+      <div class="dash-nav-section">
+        <div class="dash-nav-label">Administration</div>
+        <div class="dash-nav-item">
+          <span class="nav-icon">&#128736;</span> Parametres
+        </div>
+        <div class="dash-nav-item">
+          <span class="nav-icon">&#128274;</span> Acces & roles
+        </div>
+        <div class="dash-nav-item">
+          <span class="nav-icon">&#128176;</span> Facturation
+        </div>
+      </div>
+
+      <div class="dash-nav-section">
+        <div class="dash-nav-label">Support</div>
+        <div class="dash-nav-item">
+          <span class="nav-icon">&#10067;</span> Aide
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="dash-main">
+      <div class="dash-header">
+        <div>
+          <h1>MJC Val-de-Marne</h1>
+          <p class="dash-header-sub">12 ateliers actifs &middot; Saison 2025-2026</p>
+        </div>
+        <div class="dash-header-actions">
+          <button class="dash-btn-new">+ Nouvel atelier</button>
+        </div>
+      </div>
+
+      <div class="dash-content">
+        <!-- Stats -->
+        <div class="dash-stats">
+          <div class="dash-stat-card">
+            <div class="stat-icon">&#127909;</div>
+            <div class="stat-value">12</div>
+            <div class="stat-desc">Ateliers actifs</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-icon">&#128101;</div>
+            <div class="stat-value">186</div>
+            <div class="stat-desc">Participants inscrits</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-icon">&#128100;</div>
+            <div class="stat-value">8</div>
+            <div class="stat-desc">Intervenants</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-icon">&#9989;</div>
+            <div class="stat-value">94%</div>
+            <div class="stat-desc">Taux de completion</div>
+          </div>
+        </div>
+
+        <!-- Ateliers en cours -->
+        <h3 class="dash-section-title">
+          Ateliers en cours <span class="count">4 actifs</span>
+        </h3>
+
+        <div class="dash-ateliers">
+          <div class="atelier-card">
+            <div class="atelier-cover">
+              <span class="atelier-mode-tag">Cinema</span>
+            </div>
+            <div class="atelier-body">
+              <h3>Court-metrage documentaire</h3>
+              <div class="atelier-meta">
+                <strong>Karim Benziane</strong> &middot; 18 participants<br>
+                M4 — Explosion creative
+              </div>
+            </div>
+            <div class="atelier-footer">
+              <div class="atelier-status">
+                <span class="live-dot"></span> En seance
+              </div>
+              <span>Depuis 45 min</span>
+            </div>
+          </div>
+
+          <div class="atelier-card">
+            <div class="atelier-cover">
+              <span class="atelier-mode-tag">Jeu video</span>
+            </div>
+            <div class="atelier-body">
+              <h3>Game Jam narrative</h3>
+              <div class="atelier-meta">
+                <strong>Leila Fontaine</strong> &middot; 14 participants<br>
+                M5 — Production
+              </div>
+            </div>
+            <div class="atelier-footer">
+              <div class="atelier-status">
+                <span class="live-dot"></span> En seance
+              </div>
+              <span>Depuis 1h20</span>
+            </div>
+          </div>
+
+          <div class="atelier-card">
+            <div class="atelier-cover">
+              <span class="atelier-mode-tag">Musique</span>
+            </div>
+            <div class="atelier-body">
+              <h3>Beatmaking & ecriture</h3>
+              <div class="atelier-meta">
+                <strong>Mehdi Sakho</strong> &middot; 22 participants<br>
+                M3 — Exploration
+              </div>
+            </div>
+            <div class="atelier-footer">
+              <span>Prochaine seance : jeudi</span>
+              <span>15:00</span>
+            </div>
+          </div>
+
+          <div class="atelier-card">
+            <div class="atelier-cover">
+              <span class="atelier-mode-tag">Theatre</span>
+            </div>
+            <div class="atelier-body">
+              <h3>Impro & mise en scene</h3>
+              <div class="atelier-meta">
+                <strong>Aisha Diallo</strong> &middot; 16 participants<br>
+                M6 — Affinage
+              </div>
+            </div>
+            <div class="atelier-footer">
+              <span>Prochaine seance : vendredi</span>
+              <span>14:00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart -->
+        <h3 class="dash-section-title">Repartition par discipline</h3>
+
+        <div class="dash-chart-area">
+          <div class="chart-bars">
+            <div class="chart-bar-group">
+              <div class="chart-bar" style="height:85%; background: var(--magenta);"></div>
+              <span class="chart-bar-label">Cinema</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" style="height:65%; background: var(--bleu);"></div>
+              <span class="chart-bar-label">Jeu video</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" style="height:45%; background: var(--jaune);"></div>
+              <span class="chart-bar-label">Medias</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" style="height:35%; background: var(--vert);"></div>
+              <span class="chart-bar-label">Mode</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" style="height:55%; background: var(--violet);"></div>
+              <span class="chart-bar-label">Design</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" style="height:75%; background: var(--orange);"></div>
+              <span class="chart-bar-label">Musique</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" style="height:60%; background: var(--rose);"></div>
+              <span class="chart-bar-label">Theatre</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     VIEW 3 — COCKPIT INTERVENANT
+     ============================================ -->
+<section id="view-cockpit" class="view">
+  <div class="cockpit-layout">
+
+    <!-- Background shapes -->
+    <div class="bg-shape bg1"></div>
+    <div class="bg-shape bg2"></div>
+    <div class="bg-shape bg3"></div>
+
+    <!-- Header -->
+    <div class="cockpit-header">
+      <div class="cockpit-header-left">
+        <div class="cockpit-mode-badge">&#127909;</div>
+        <div>
+          <div class="cockpit-title">Court-metrage documentaire</div>
+          <div class="cockpit-subtitle">Cinema &middot; MJC Val-de-Marne &middot; Groupe B</div>
+        </div>
+      </div>
+      <div class="cockpit-header-right">
+        <div class="cockpit-participants">
+          <span class="dot-live"></span>
+          16/18 connectes
+        </div>
+        <div class="cockpit-chrono-block">
+          <span class="cockpit-chrono-label">Temps restant</span>
+          <div class="cockpit-chrono">12<span class="tick">:</span>47</div>
+          <div class="cockpit-chrono-bar"><div class="cockpit-chrono-bar-fill"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pipeline -->
+    <div class="cockpit-pipeline">
+      <div class="pip-step">
+        <div class="pip-circle done">
+          <span>M1</span>
+          <span class="pip-label">Ouverture</span>
+        </div>
+      </div>
+      <div class="pip-connector done"></div>
+      <div class="pip-step">
+        <div class="pip-circle done">
+          <span>M2</span>
+          <span class="pip-label">Decouverte</span>
+        </div>
+      </div>
+      <div class="pip-connector done"></div>
+      <div class="pip-step">
+        <div class="pip-circle done">
+          <span>M3</span>
+          <span class="pip-label">Exploration</span>
+        </div>
+      </div>
+      <div class="pip-connector done"></div>
+      <div class="pip-step">
+        <div class="pip-circle active">
+          <span>M4</span>
+          <span class="pip-label">Explosion</span>
+        </div>
+      </div>
+      <div class="pip-connector"></div>
+      <div class="pip-step">
+        <div class="pip-circle upcoming">
+          <span>M5</span>
+          <span class="pip-label">Production</span>
+        </div>
+      </div>
+      <div class="pip-connector"></div>
+      <div class="pip-step">
+        <div class="pip-circle upcoming">
+          <span>M6</span>
+          <span class="pip-label">Affinage</span>
+        </div>
+      </div>
+      <div class="pip-connector"></div>
+      <div class="pip-step">
+        <div class="pip-circle upcoming">
+          <span>M7</span>
+          <span class="pip-label">Partage</span>
+        </div>
+      </div>
+      <div class="pip-connector"></div>
+      <div class="pip-step">
+        <div class="pip-circle upcoming">
+          <span>M8</span>
+          <span class="pip-label">Fete</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Central zone -->
+    <div class="cockpit-center">
+      <p class="cockpit-instruction-tag">Moment 4 — Explosion creative</p>
+
+      <h2 class="cockpit-instruction">
+        Filmez une scene de 30 secondes<br>
+        qui raconte <em>votre quartier</em><br>
+        sans un seul mot.
+      </h2>
+
+      <!-- Participants grid -->
+      <div class="cockpit-participants-grid">
+        <div class="participant-dot responding">Ya</div>
+        <div class="participant-dot active">So</div>
+        <div class="participant-dot active">Ka</div>
+        <div class="participant-dot responding">Le</div>
+        <div class="participant-dot active">Am</div>
+        <div class="participant-dot idle">Di</div>
+        <div class="participant-dot active">Fa</div>
+        <div class="participant-dot responding">Ma</div>
+        <div class="participant-dot active">Is</div>
+        <div class="participant-dot active">Ai</div>
+        <div class="participant-dot idle">No</div>
+        <div class="participant-dot active">Ju</div>
+        <div class="participant-dot active">Sa</div>
+        <div class="participant-dot responding">Ry</div>
+        <div class="participant-dot active">Ad</div>
+        <div class="participant-dot active">Li</div>
+        <div class="participant-dot active">Mo</div>
+        <div class="participant-dot active">Ch</div>
+      </div>
+
+      <div class="participants-legend">
+        <span><span class="legend-dot" style="background:var(--vert)"></span> Actif</span>
+        <span><span class="legend-dot" style="background:var(--bleu)"></span> En train de repondre</span>
+        <span><span class="legend-dot" style="background:var(--creme-10)"></span> Inactif</span>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="cockpit-controls">
+      <button class="cockpit-btn cockpit-btn-prev">&larr; M3 Exploration</button>
+      <button class="cockpit-btn cockpit-btn-pause">&#9208; PAUSE</button>
+      <span class="cockpit-step-current">M4 &middot; EXPLOSION CR&Eacute;ATIVE</span>
+      <button class="cockpit-btn cockpit-btn-next">M5 Production &rarr;</button>
+      <button class="cockpit-btn cockpit-btn-end">Terminer la seance</button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================
+     VIEW 4 — MANIFESTE + FOOTER
+     ============================================ -->
+<section id="view-manifeste" class="view manifeste-view">
+
+  <div class="manifeste-hero">
+    <div class="shape-blob m1"></div>
+    <div class="shape-blob m2"></div>
+    <div class="shape-blob m3"></div>
+
+    <div class="manifeste-content">
+      <h1>
+        <span>La creativite</span>
+        <span class="m-accent">n'est pas un luxe.</span>
+      </h1>
+
+      <p class="manifeste-text">
+        Chaque jeune porte en lui un monde. Notre travail n'est pas
+        de lui apprendre a creer — c'est de lui donner l'espace,
+        les outils et la confiance pour le faire.
+        Pas de classement. Pas de podium.
+        Juste l'etincelle.
+      </p>
+
+      <div class="cta-row">
+        <button class="cta-primary">Rejoindre le mouvement &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Values -->
+  <div class="manifeste-values">
+    <div class="value-card">
+      <div class="value-icon">&#9734;</div>
+      <h3>Inclusif</h3>
+      <p>Chaque jeunesse a sa place. Pas de selection, pas de prerequis. On commence ensemble.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">&#9775;</div>
+      <h3>Vivant</h3>
+      <p>L'atelier est un espace d'energie. On bouge, on cree, on rate, on recommence. C'est la que ca se passe.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">&#10047;</div>
+      <h3>Genereux</h3>
+      <p>On partage les savoirs, les outils, les decouvertes. La creation est collective ou elle n'est pas.</p>
+    </div>
+  </div>
+
+  <!-- CTA final -->
+  <div class="footer-cta">
+    <h2>Pret a lancer<br>quelque chose ?</h2>
+    <p>Institutions, collectivites, fondations — la plateforme est prete. Vos ateliers aussi.</p>
+    <div class="cta-row">
+      <button class="cta-primary">Demander une demo &rarr;</button>
+      <button class="cta-secondary">Nous contacter</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Signal</div>
+        <p class="footer-desc">
+          Plateforme universelle d'ateliers creatifs.
+          7 disciplines. 8 moments. Des milliers de possibilites.
+        </p>
+      </div>
+      <div>
+        <h4>Plateforme</h4>
+        <a href="#">Disciplines</a>
+        <a href="#">Pipeline M1-M8</a>
+        <a href="#">Cockpit live</a>
+        <a href="#">Dashboard</a>
+      </div>
+      <div>
+        <h4>Institution</h4>
+        <a href="#">Tarifs</a>
+        <a href="#">Demo</a>
+        <a href="#">Temoignages</a>
+        <a href="#">FAQ</a>
+      </div>
+      <div>
+        <h4>Ressources</h4>
+        <a href="#">Blog</a>
+        <a href="#">Documentation</a>
+        <a href="#">API</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 Signal — Plateforme Ateliers Creatifs</span>
+      <div class="footer-socials">
+        <div class="footer-social">&#120143;</div>
+        <div class="footer-social">&#9679;</div>
+        <div class="footer-social">&#9654;</div>
+        <div class="footer-social">&#128279;</div>
+      </div>
+    </div>
+  </footer>
+
+</section>
+
+
+<!-- ============================================
+     JAVASCRIPT — View switching
+     ============================================ -->
+<script>
+function switchView(viewId) {
+  // Hide all views
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+
+  // Show target
+  const target = document.getElementById('view-' + viewId);
+  if (target) target.classList.add('active');
+
+  // Activate tab
+  const btns = document.querySelectorAll('.view-btn');
+  const map = { landing: 0, dashboard: 1, cockpit: 2, manifeste: 3 };
+  if (map[viewId] !== undefined && btns[map[viewId]]) {
+    btns[map[viewId]].classList.add('active');
+  }
+
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>

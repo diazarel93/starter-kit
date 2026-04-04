@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banlieuwood — Video Showcase</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --orange: #FF6B35;
+  --gold: #D4A843;
+  --ink: #0D0B09;
+  --font-c: 'Bebas Neue', sans-serif;
+  --font-b: 'Plus Jakarta Sans', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--ink); color: white; font-family: var(--font-b); overflow-x: hidden; }
+
+/* ──────────────────────────────────────────────────
+   GRAIN — couche permanente
+────────────────────────────────────────────────── */
+.grain {
+  position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.048'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  animation: grain-flicker 0.08s steps(1) infinite;
+}
+@keyframes grain-flicker {
+  0%   { transform: translate(0, 0); }
+  10%  { transform: translate(-2%, -3%); }
+  20%  { transform: translate(3%, 1%); }
+  30%  { transform: translate(-1%, 2%); }
+  40%  { transform: translate(2%, -1%); }
+  50%  { transform: translate(-3%, 3%); }
+  60%  { transform: translate(1%, -2%); }
+  70%  { transform: translate(-2%, 1%); }
+  80%  { transform: translate(3%, -3%); }
+  90%  { transform: translate(-1%, 2%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ──────────────────────────────────────────────────
+   SECTION 1 — HERO VIDÉO PLEIN ÉCRAN
+   Fullscreen video loop, B&W, cinescope bars, titre
+────────────────────────────────────────────────── */
+.s1 {
+  position: relative; width: 100%; height: 100vh;
+  overflow: hidden; background: #000;
+}
+.s1-video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(0) brightness(0.7) contrast(1.15);
+}
+/* Cinemascope bars */
+.s1-bars-top, .s1-bars-bottom {
+  position: absolute; left: 0; right: 0; z-index: 10;
+  background: #000; pointer-events: none;
+}
+.s1-bars-top { top: 0; height: 12vh; }
+.s1-bars-bottom { bottom: 0; height: 12vh; }
+/* Vignette */
+.s1-vignette {
+  position: absolute; inset: 0; z-index: 5; pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.75) 100%);
+}
+/* Orange flash en bas */
+.s1-line {
+  position: absolute; bottom: 12vh; left: 0; right: 0; z-index: 20;
+  height: 2px; background: var(--orange); opacity: 0.8;
+}
+/* Titre */
+.s1-title {
+  position: absolute; inset: 0; z-index: 30;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: flex-start;
+  padding: 0 8vw;
+}
+.s1-eyebrow {
+  font-size: 11px; letter-spacing: 6px; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); margin-bottom: 16px;
+}
+.s1-h1 {
+  font-family: var(--font-c);
+  font-size: clamp(80px, 14vw, 220px);
+  line-height: 0.85; color: white;
+  white-space: nowrap;
+  text-shadow: none;
+}
+.s1-h1 span { color: var(--orange); }
+.s1-sub {
+  margin-top: 24px;
+  font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+/* Scroll hint */
+.s1-scroll {
+  position: absolute; bottom: 14vh; right: 40px; z-index: 30;
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  writing-mode: vertical-rl;
+}
+
+/* ──────────────────────────────────────────────────
+   SECTION 2 — FILMSTRIP DÉFILANT
+   Strip de 38 frames qui tourne en boucle
+────────────────────────────────────────────────── */
+.s2 {
+  background: #000; overflow: hidden;
+  padding: 0; position: relative;
+}
+.s2-label {
+  padding: 40px 60px 20px;
+  font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+}
+.filmstrip-track {
+  display: flex; gap: 3px;
+  width: max-content;
+  animation: strip-scroll 45s linear infinite;
+}
+.filmstrip-track:hover { animation-play-state: paused; }
+.filmstrip-track .frame {
+  width: 280px; height: 175px; flex-shrink: 0;
+  overflow: hidden; position: relative;
+  cursor: pointer;
+}
+.filmstrip-track .frame img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(0) brightness(0.8);
+  transition: filter 0.5s;
+}
+.filmstrip-track .frame:hover img {
+  filter: saturate(1) brightness(1);
+}
+/* Holes perfo film */
+.filmstrip-track .frame::before,
+.filmstrip-track .frame::after {
+  content: '';
+  position: absolute; left: 0; right: 0; z-index: 10;
+  height: 10px;
+  background: repeating-linear-gradient(
+    to right,
+    #000 0, #000 8px,
+    transparent 8px, transparent 22px
+  );
+  pointer-events: none;
+}
+.filmstrip-track .frame::before { top: 0; }
+.filmstrip-track .frame::after { bottom: 0; }
+
+@keyframes strip-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ──────────────────────────────────────────────────
+   SECTION 3 — FILMSTRIP INVERSÉ
+   Même chose, sens opposé, couleur (teal grade)
+────────────────────────────────────────────────── */
+.s3 {
+  background: #000; overflow: hidden; padding-bottom: 0;
+}
+.filmstrip-track-rev {
+  display: flex; gap: 3px;
+  width: max-content;
+  animation: strip-scroll-rev 55s linear infinite;
+}
+.filmstrip-track-rev:hover { animation-play-state: paused; }
+.filmstrip-track-rev .frame {
+  width: 180px; height: 112px; flex-shrink: 0;
+  overflow: hidden; position: relative; cursor: pointer;
+}
+.filmstrip-track-rev .frame img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: sepia(0.6) hue-rotate(160deg) brightness(0.75) contrast(1.1);
+  transition: filter 0.5s;
+}
+.filmstrip-track-rev .frame:hover img {
+  filter: saturate(1) brightness(1.05);
+}
+.filmstrip-track-rev .frame::before,
+.filmstrip-track-rev .frame::after {
+  content: '';
+  position: absolute; left: 0; right: 0; z-index: 10;
+  height: 7px;
+  background: repeating-linear-gradient(
+    to right,
+    #000 0, #000 6px,
+    transparent 6px, transparent 16px
+  );
+  pointer-events: none;
+}
+.filmstrip-track-rev .frame::before { top: 0; }
+.filmstrip-track-rev .frame::after { bottom: 0; }
+
+@keyframes strip-scroll-rev {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* ──────────────────────────────────────────────────
+   SECTION 4 — MOSAIC MASQUÉE
+   Grille asymétrique, frames avec masques + hover
+────────────────────────────────────────────────── */
+.s4 {
+  background: var(--ink); padding: 80px 0;
+}
+.mosaic {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr;
+  grid-template-rows: 320px 220px;
+  gap: 3px;
+  max-width: 1400px; margin: 0 auto;
+  padding: 0 40px;
+}
+.mosaic-cell {
+  overflow: hidden; position: relative; cursor: pointer;
+  background: #111;
+}
+.mosaic-cell img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(0) brightness(0.6) contrast(1.2);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: scale(1.05);
+}
+.mosaic-cell:hover img {
+  filter: saturate(0.8) brightness(0.9) contrast(1.05);
+  transform: scale(1);
+}
+.mosaic-cell::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(13,11,9,0.4) 0%, transparent 60%);
+  pointer-events: none;
+}
+.mosaic-cell:nth-child(1) { grid-row: 1 / 3; }
+.mosaic-cell:nth-child(4) { grid-column: 2 / 4; }
+
+/* Orange accent line sur premier cell */
+.mosaic-cell:nth-child(1)::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
+  height: 2px; background: var(--orange);
+}
+
+/* ──────────────────────────────────────────────────
+   SECTION 5 — SPLIT REVEAL (Color vs B&W)
+   Draggable divider, gauche = couleur, droite = B&W
+────────────────────────────────────────────────── */
+.s5 {
+  background: #000; position: relative; height: 70vh;
+  overflow: hidden; cursor: ew-resize;
+}
+.s5-label {
+  position: absolute; top: 30px; left: 50%; transform: translateX(-50%);
+  z-index: 30; font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.25); white-space: nowrap;
+  pointer-events: none;
+}
+.s5-before {
+  position: absolute; inset: 0;
+  overflow: hidden;
+}
+.s5-before img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(0) brightness(0.75) contrast(1.1);
+}
+.s5-after {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  clip-path: inset(0 50% 0 0);
+  transition: clip-path 0.05s linear;
+}
+.s5-after img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(1.1) brightness(0.85) contrast(1.05);
+}
+.s5-handle {
+  position: absolute; top: 0; bottom: 0; z-index: 20;
+  left: 50%; transform: translateX(-50%);
+  width: 2px; background: white;
+  pointer-events: none;
+  transition: left 0.05s linear;
+}
+.s5-handle::before {
+  content: '◀  ▶';
+  position: absolute; top: 50%; transform: translateY(-50%) translateX(-50%);
+  background: white; color: black;
+  padding: 8px 12px; font-size: 10px; letter-spacing: 2px;
+  white-space: nowrap;
+  font-family: var(--font-b);
+}
+
+/* ──────────────────────────────────────────────────
+   SECTION 6 — COLLAGE SUPER-IMPOSÉ
+   Frames qui se superposent avec rotation légère
+────────────────────────────────────────────────── */
+.s6 {
+  background: var(--ink); padding: 100px 60px;
+  min-height: 80vh; position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.collage {
+  position: relative; width: 900px; height: 600px;
+}
+.collage-img {
+  position: absolute; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+  cursor: pointer; transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.collage-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(0.1) brightness(0.7) contrast(1.15);
+  transition: filter 0.4s;
+}
+.collage-img:hover {
+  z-index: 100; transform: scale(1.08) rotate(0deg) !important;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.9);
+}
+.collage-img:hover img { filter: saturate(1) brightness(1) contrast(1); }
+
+/* Positions — effet table de montage */
+.ci-1 { width: 420px; height: 280px; top: 0; left: 0; transform: rotate(-2.5deg); }
+.ci-2 { width: 320px; height: 210px; top: 40px; left: 360px; transform: rotate(1.8deg); }
+.ci-3 { width: 260px; height: 175px; top: 0; right: 0; transform: rotate(-1.2deg); }
+.ci-4 { width: 380px; height: 250px; bottom: 0; left: 40px; transform: rotate(2deg); }
+.ci-5 { width: 300px; height: 200px; bottom: 20px; right: 60px; transform: rotate(-1.5deg); }
+.ci-6 { width: 220px; height: 145px; top: 200px; left: 150px; transform: rotate(3deg); z-index: 10; }
+
+/* Orange post-it sur une carte */
+.ci-1::after {
+  content: 'PASSAGE — 2024';
+  position: absolute; bottom: -28px; left: 0;
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+
+/* ──────────────────────────────────────────────────
+   SECTION 7 — HERO VERSION ORANGE TINTED
+   Variante chaude pour tester l'effet couleur
+────────────────────────────────────────────────── */
+.s7 {
+  position: relative; width: 100%; height: 100vh;
+  overflow: hidden; background: #000;
+}
+.s7-video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(0.55) contrast(1.1) sepia(0.3);
+}
+/* Tint orange par-dessus */
+.s7-tint {
+  position: absolute; inset: 0; z-index: 5; pointer-events: none;
+  background: rgba(255, 107, 53, 0.08);
+  mix-blend-mode: color;
+}
+.s7-bars-top, .s7-bars-bottom {
+  position: absolute; left: 0; right: 0; z-index: 10;
+  background: #000; pointer-events: none;
+}
+.s7-bars-top { top: 0; height: 10vh; }
+.s7-bars-bottom { bottom: 0; height: 10vh; }
+.s7-vignette {
+  position: absolute; inset: 0; z-index: 6; pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.85) 100%);
+}
+.s7-title {
+  position: absolute; inset: 0; z-index: 30;
+  display: flex; flex-direction: column;
+  justify-content: flex-end; align-items: flex-start;
+  padding: 0 8vw 8vh;
+}
+.s7-h1 {
+  font-family: var(--font-c);
+  font-size: clamp(60px, 10vw, 160px);
+  line-height: 0.88; color: white;
+  white-space: nowrap;
+}
+.s7-h1-accent {
+  font-family: var(--font-c);
+  font-size: clamp(60px, 10vw, 160px);
+  line-height: 0.88;
+  color: var(--gold);
+}
+.s7-tagline {
+  margin-top: 20px;
+  font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+/* Selector nav */
+.nav-select {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
+  background: rgba(0,0,0,0.9); backdrop-filter: blur(20px);
+  border-bottom: 1px solid #1a1a1a;
+  padding: 10px 40px; display: flex; gap: 8px; align-items: center;
+}
+.nav-select a {
+  padding: 6px 16px; font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: #444; text-decoration: none;
+  border: 1px solid #1a1a1a; transition: all 0.2s;
+  font-family: var(--font-b);
+}
+.nav-select a:hover { color: white; border-color: #333; }
+.nav-select span { margin-left: auto; font-size: 10px; color: #222; letter-spacing: 2px; }
+body { padding-top: 44px; }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<nav class="nav-select">
+  <a href="#s1">Noir B&W</a>
+  <a href="#s2">Filmstrip ×1</a>
+  <a href="#s3">Filmstrip ×2</a>
+  <a href="#s4">Mosaïque</a>
+  <a href="#s5">Split Reveal</a>
+  <a href="#s6">Collage</a>
+  <a href="#s7">Teinté Or</a>
+  <span>PASSAGE — MAKING OF — BANLIEUWOOD</span>
+</nav>
+
+<!-- ─── S1 : HERO VIDÉO B&W ─── -->
+<section class="s1" id="s1">
+  <video class="s1-video" autoplay muted loop playsinline preload="auto">
+    <source src="making-of/passage.mp4" type="video/mp4">
+  </video>
+  <div class="s1-bars-top"></div>
+  <div class="s1-bars-bottom"></div>
+  <div class="s1-vignette"></div>
+  <div class="s1-line"></div>
+  <div class="s1-title">
+    <span class="s1-eyebrow">Banlieuwood — Making of</span>
+    <h1 class="s1-h1">PASSAGE<br><span>2024</span></h1>
+    <p class="s1-sub">Le cinéma comme langage universel</p>
+  </div>
+  <div class="s1-scroll">SCROLL</div>
+</section>
+
+<!-- ─── S2 : FILMSTRIP DÉFILANT (large) ─── -->
+<section class="s2" id="s2">
+  <p class="s2-label">Filmstrip — 38 frames × 1/8 sec</p>
+  <div class="filmstrip-track">
+    <!-- Row 1 (originals) -->
+    <div class="frame"><img src="making-of/frame_001.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_002.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_003.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_004.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_005.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_006.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_007.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_008.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_009.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_010.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_011.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_012.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_013.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_014.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_015.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_016.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_017.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_018.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_019.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_020.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_021.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_022.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_023.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_024.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_025.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_026.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_027.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_028.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_029.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_030.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_031.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_032.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_033.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_034.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_035.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_036.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_037.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_038.jpg" alt=""></div>
+    <!-- Duplicate pour loop infinie -->
+    <div class="frame"><img src="making-of/frame_001.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_002.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_003.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_004.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_005.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_006.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_007.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_008.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_009.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_010.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_011.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_012.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_013.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_014.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_015.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_016.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_017.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_018.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_019.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_020.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_021.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_022.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_023.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_024.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_025.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_026.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_027.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_028.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_029.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_030.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_031.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_032.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_033.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_034.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_035.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_036.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_037.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_038.jpg" alt=""></div>
+  </div>
+</section>
+
+<!-- ─── S3 : FILMSTRIP INVERSÉ TEAL ─── -->
+<section class="s3" id="s3">
+  <div class="filmstrip-track-rev">
+    <div class="frame"><img src="making-of/frame_020.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_018.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_030.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_005.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_015.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_025.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_008.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_032.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_012.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_038.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_003.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_022.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_035.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_010.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_028.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_016.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_007.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_033.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_001.jpg" alt=""></div>
+    <!-- duplicate -->
+    <div class="frame"><img src="making-of/frame_020.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_018.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_030.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_005.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_015.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_025.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_008.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_032.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_012.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_038.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_003.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_022.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_035.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_010.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_028.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_016.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_007.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_033.jpg" alt=""></div>
+    <div class="frame"><img src="making-of/frame_001.jpg" alt=""></div>
+  </div>
+</section>
+
+<!-- ─── S4 : MOSAÏQUE ASYMÉTRIQUE ─── -->
+<section class="s4" id="s4">
+  <div class="mosaic">
+    <div class="mosaic-cell"><img src="making-of/frame_005.jpg" alt=""></div>
+    <div class="mosaic-cell"><img src="making-of/frame_010.jpg" alt=""></div>
+    <div class="mosaic-cell"><img src="making-of/frame_020.jpg" alt=""></div>
+    <div class="mosaic-cell"><img src="making-of/frame_025.jpg" alt=""></div>
+    <div class="mosaic-cell"><img src="making-of/frame_015.jpg" alt=""></div>
+  </div>
+</section>
+
+<!-- ─── S5 : SPLIT REVEAL (B&W vs Couleur) ─── -->
+<section class="s5" id="s5">
+  <p class="s5-label">← GLISSEZ POUR RÉVÉLER →</p>
+  <div class="s5-before">
+    <img src="making-of/frame_005.jpg" alt="">
+  </div>
+  <div class="s5-after" id="s5-after">
+    <img src="making-of/frame_005.jpg" alt="">
+  </div>
+  <div class="s5-handle" id="s5-handle"></div>
+</section>
+
+<!-- ─── S6 : COLLAGE TABLE DE MONTAGE ─── -->
+<section class="s6" id="s6">
+  <div class="collage">
+    <div class="collage-img ci-1"><img src="making-of/frame_005.jpg" alt=""></div>
+    <div class="collage-img ci-2"><img src="making-of/frame_015.jpg" alt=""></div>
+    <div class="collage-img ci-3"><img src="making-of/frame_025.jpg" alt=""></div>
+    <div class="collage-img ci-4"><img src="making-of/frame_020.jpg" alt=""></div>
+    <div class="collage-img ci-5"><img src="making-of/frame_010.jpg" alt=""></div>
+    <div class="collage-img ci-6"><img src="making-of/frame_030.jpg" alt=""></div>
+  </div>
+</section>
+
+<!-- ─── S7 : HERO TEINTÉ OR ─── -->
+<section class="s7" id="s7">
+  <video class="s7-video" autoplay muted loop playsinline preload="none">
+    <source src="making-of/passage.mp4" type="video/mp4">
+  </video>
+  <div class="s7-tint"></div>
+  <div class="s7-bars-top"></div>
+  <div class="s7-bars-bottom"></div>
+  <div class="s7-vignette"></div>
+  <div class="s7-title">
+    <h1 class="s7-h1">LE CINÉMA</h1>
+    <h1 class="s7-h1-accent">COMME ÉCOLE</h1>
+    <p class="s7-tagline">Depuis 2016 · 1200 élèves · 8 villes</p>
+  </div>
+</section>
+
+<script>
+// ─── SPLIT REVEAL ───────────────────────────────────
+const s5 = document.querySelector('.s5');
+const after = document.getElementById('s5-after');
+const handle = document.getElementById('s5-handle');
+
+s5.addEventListener('mousemove', e => {
+  const rect = s5.getBoundingClientRect();
+  const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+  const pct = (x / rect.width) * 100;
+  after.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+  handle.style.left = `${pct}%`;
+});
+
+s5.addEventListener('touchmove', e => {
+  const rect = s5.getBoundingClientRect();
+  const x = Math.max(0, Math.min(e.touches[0].clientX - rect.left, rect.width));
+  const pct = (x / rect.width) * 100;
+  after.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+  handle.style.left = `${pct}%`;
+  e.preventDefault();
+}, { passive: false });
+</script>
+
+</body>
+</html>

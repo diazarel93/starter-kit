@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banlieuwood — Nos Programmes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+/* ── DESIGN SYSTEM (identique landing C) ── */
+:root {
+  --bw-ink:    #0D0B09;
+  --bw-cream:  #F2EBD9;
+  --bw-warm:   #EDE4CF;
+  --bw-orange: #FF6B35;
+  --bw-gold:   #D4A843;
+  --bw-teal:   #4ECDC4;
+  --font-c: 'Bebas Neue', sans-serif;
+  --font-b: 'Plus Jakarta Sans', sans-serif;
+  --font-m: 'Space Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-b); background: var(--bw-cream); color: var(--bw-ink); overflow-x: hidden; }
+
+/* ── NAV ── */
+.p-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(13,11,9,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid #1a1714;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px; height: 56px;
+}
+.p-nav-logo { font-family: var(--font-c); font-size: 18px; letter-spacing: 3px; color: white; text-decoration: none; }
+.p-nav-links { display: flex; gap: 36px; }
+.p-nav-link { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; font-family: var(--font-m); }
+.p-nav-link:hover, .p-nav-link.active { color: white; }
+.p-nav-cta { background: var(--bw-orange); color: white; border: none; padding: 9px 24px; font-family: var(--font-c); font-size: 14px; letter-spacing: 1px; cursor: pointer; }
+
+/* ── GRAIN ── */
+#p-grain {
+  position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* ── BREADCRUMB ── */
+.p-breadcrumb {
+  font-family: var(--font-m); font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(0,0,0,0.28);
+  padding: 92px 60px 0;
+}
+.p-breadcrumb a { color: inherit; text-decoration: none; }
+.p-breadcrumb span { opacity: 0.5; margin: 0 8px; }
+
+/* ─────────────────────────────────────────
+   S01 — HERO
+───────────────────────────────────────── */
+.s-hero {
+  background: var(--bw-cream); min-height: 90vh;
+  padding: 60px 60px 100px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end;
+  position: relative; overflow: hidden;
+  border-top: 3px solid var(--bw-orange);
+}
+.s-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(0,0,0,0.025) 79px, rgba(0,0,0,0.025) 80px),
+                    repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(0,0,0,0.025) 79px, rgba(0,0,0,0.025) 80px);
+  pointer-events: none;
+}
+.s-hero-left { position: relative; z-index: 2; }
+.s-hero-tag { font-family: var(--font-m); font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: rgba(0,0,0,0.35); margin-bottom: 24px; display: block; }
+.s-hero-h1 { font-family: var(--font-c); font-size: clamp(72px, 9vw, 140px); line-height: 0.9; color: var(--bw-ink); margin-bottom: 40px; }
+.s-hero-h1 em { color: var(--bw-orange); font-style: normal; }
+.s-hero-sub { font-size: 15px; color: rgba(0,0,0,0.55); line-height: 1.75; max-width: 420px; margin-bottom: 40px; }
+.s-hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+.s-hero-btn-primary { background: var(--bw-ink); color: white; border: none; padding: 16px 40px; font-family: var(--font-c); font-size: 18px; letter-spacing: 1px; cursor: pointer; transition: background 0.2s; }
+.s-hero-btn-primary:hover { background: #1a1612; }
+.s-hero-btn-sec { background: transparent; border: 1px solid rgba(0,0,0,0.2); color: var(--bw-ink); padding: 16px 32px; font-family: var(--font-c); font-size: 18px; letter-spacing: 1px; cursor: pointer; }
+.s-hero-right { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 16px; padding-bottom: 8px; }
+.s-hero-badge { border: 1px solid rgba(0,0,0,0.1); padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.5); }
+.s-hero-badge-lbl { font-family: var(--font-m); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(0,0,0,0.4); }
+.s-hero-badge-val { font-family: var(--font-c); font-size: 20px; color: var(--bw-ink); letter-spacing: 1px; }
+.s-hero-badge-val em { color: var(--bw-orange); font-style: normal; }
+.s-hero-stats { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid rgba(0,0,0,0.08); margin-top: 60px; }
+.s-hero-stat { padding: 28px 0 28px 60px; border-right: 1px solid rgba(0,0,0,0.08); }
+.s-hero-stat:last-child { border-right: none; }
+.s-hero-stat:first-child { padding-left: 60px; }
+.s-hero-stat-val { font-family: var(--font-c); font-size: 56px; color: var(--bw-ink); display: block; line-height: 1; }
+.s-hero-stat-lbl { font-size: 11px; color: rgba(0,0,0,0.38); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; font-family: var(--font-m); }
+
+/* ─────────────────────────────────────────
+   S02 — 3 FORMATS
+───────────────────────────────────────── */
+.s-formats {
+  background: var(--bw-ink); padding: 100px 60px;
+  border-top: 3px solid var(--bw-orange);
+}
+.s-formats-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; }
+.s-formats-h { font-family: var(--font-c); font-size: clamp(56px, 7vw, 96px); color: white; line-height: 0.9; }
+.s-formats-sub { font-family: var(--font-m); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.3); text-align: right; max-width: 200px; line-height: 1.8; }
+.s-formats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.s-format-card {
+  border-left: 1px solid #1a1a1a; padding: 48px 40px;
+  background: #0a0806; position: relative;
+  transition: border-color 0.25s, background 0.25s;
+  cursor: default;
+}
+.s-format-card:hover { border-left-color: var(--bw-orange); background: #0e0b07; }
+.s-format-badge {
+  position: absolute; top: 48px; right: 40px;
+  background: var(--bw-orange); color: white;
+  font-family: var(--font-m); font-size: 8px; letter-spacing: 2px;
+  padding: 4px 10px; text-transform: uppercase; display: none;
+}
+.s-format-card.recommended .s-format-badge { display: block; }
+.s-format-n { font-family: var(--font-m); font-size: 9px; letter-spacing: 4px; color: rgba(255,255,255,0.2); text-transform: uppercase; margin-bottom: 32px; }
+.s-format-title { font-family: var(--font-c); font-size: 52px; color: white; line-height: 0.9; margin-bottom: 12px; }
+.s-format-duration { font-family: var(--font-m); font-size: 10px; color: rgba(78,205,196,0.7); letter-spacing: 2px; margin-bottom: 28px; }
+.s-format-desc { font-size: 13px; color: #666; line-height: 1.75; margin-bottom: 32px; }
+.s-format-meta { font-family: var(--font-m); font-size: 9px; letter-spacing: 3px; color: rgba(78,205,196,0.4); text-transform: uppercase; padding-top: 24px; border-top: 1px solid #141414; }
+
+/* ─────────────────────────────────────────
+   S03 — 5 PHASES
+───────────────────────────────────────── */
+.s-phases { background: var(--bw-cream); padding: 100px 60px; }
+.s-phases-head { margin-bottom: 80px; }
+.s-phases-lbl { font-family: var(--font-m); font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: rgba(0,0,0,0.3); display: block; margin-bottom: 16px; }
+.s-phases-h { font-family: var(--font-c); font-size: clamp(64px, 8vw, 120px); color: var(--bw-ink); line-height: 0.9; }
+.s-phases-h em { color: var(--bw-orange); font-style: normal; }
+.s-phases-intro { font-size: 14px; color: rgba(0,0,0,0.45); max-width: 480px; line-height: 1.75; margin-top: 24px; }
+
+/* Timeline progress bar */
+.s-phases-bar { display: flex; gap: 8px; margin-bottom: 64px; }
+.s-phases-bar-item { height: 3px; flex: 1; background: rgba(0,0,0,0.1); cursor: pointer; transition: background 0.25s; }
+.s-phases-bar-item.active { background: var(--bw-orange); }
+.s-phases-bar-item:hover { background: rgba(255,107,53,0.5); }
+
+.s-phase {
+  display: grid; grid-template-columns: 100px 1fr 1fr;
+  gap: 48px; padding: 48px 0; border-top: 1px solid rgba(0,0,0,0.07);
+  align-items: start;
+}
+.s-phase:last-child { border-bottom: 1px solid rgba(0,0,0,0.07); }
+.s-phase-n { font-family: var(--font-c); font-size: 96px; color: rgba(0,0,0,0.05); line-height: 1; }
+.s-phase-body {}
+.s-phase-ann { font-family: var(--font-m); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(0,0,0,0.25); margin-bottom: 16px; }
+.s-phase-title { font-family: var(--font-c); font-size: 48px; color: var(--bw-ink); line-height: 0.9; margin-bottom: 8px; }
+.s-phase-dur { font-family: var(--font-m); font-size: 9px; color: rgba(78,205,196,0.8); letter-spacing: 2px; margin-bottom: 20px; }
+.s-phase-desc { font-size: 13px; color: rgba(0,0,0,0.55); line-height: 1.75; }
+.s-phase-detail {}
+.s-phase-detail-item { padding: 16px 0; border-top: 1px solid rgba(0,0,0,0.06); }
+.s-phase-detail-item:first-child { border-top: none; }
+.s-phase-detail-lbl { font-family: var(--font-m); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(0,0,0,0.3); margin-bottom: 6px; }
+.s-phase-detail-val { font-size: 13px; color: rgba(0,0,0,0.65); line-height: 1.65; }
+.s-phase-cockpit-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(78,205,196,0.08); border: 1px solid rgba(78,205,196,0.2); padding: 6px 12px; margin-top: 12px; }
+.s-phase-cockpit-tag span { font-family: var(--font-m); font-size: 9px; color: var(--bw-teal); letter-spacing: 2px; text-transform: uppercase; }
+.s-phase-cockpit-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--bw-teal); animation: livePulse 2s ease-in-out infinite; }
+@keyframes livePulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* ─────────────────────────────────────────
+   S04 — POUR QUI
+───────────────────────────────────────── */
+.s-pourqui { background: var(--bw-warm); padding: 100px 60px; }
+.s-pourqui-h { font-family: var(--font-c); font-size: clamp(56px, 7vw, 96px); color: var(--bw-ink); line-height: 0.9; margin-bottom: 64px; }
+.s-pourqui-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; margin-bottom: 40px; }
+.s-pourqui-card { background: #FAF6EE; padding: 40px 32px; border-top: 2px solid transparent; transition: border-color 0.25s; }
+.s-pourqui-card.orange { border-top-color: var(--bw-orange); }
+.s-pourqui-card.teal { border-top-color: var(--bw-teal); }
+.s-pourqui-card.gold { border-top-color: var(--bw-gold); }
+.s-pourqui-card.ink { border-top-color: var(--bw-ink); }
+.s-pourqui-card-type { font-family: var(--font-m); font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: rgba(0,0,0,0.3); margin-bottom: 20px; }
+.s-pourqui-card-h { font-family: var(--font-c); font-size: 28px; color: var(--bw-ink); margin-bottom: 16px; line-height: 1; }
+.s-pourqui-card-desc { font-size: 12px; color: rgba(0,0,0,0.52); line-height: 1.7; }
+.s-pourqui-note { font-size: 12px; color: rgba(0,0,0,0.38); font-style: italic; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 24px; }
+
+/* ─────────────────────────────────────────
+   S05 — FINANCEMENT
+───────────────────────────────────────── */
+.s-finance {
+  background: var(--bw-ink); padding: 100px 60px;
+  border-top: 3px solid var(--bw-orange);
+}
+.s-finance-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 100px; align-items: start; }
+.s-finance-left {}
+.s-finance-lbl { font-family: var(--font-m); font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.25); display: block; margin-bottom: 20px; }
+.s-finance-h { font-family: var(--font-c); font-size: clamp(56px, 7vw, 96px); color: white; line-height: 0.9; margin-bottom: 32px; }
+.s-finance-h em { color: var(--bw-orange); font-style: normal; }
+.s-finance-intro { font-size: 13px; color: #555; line-height: 1.8; margin-bottom: 32px; }
+.s-finance-note {
+  background: rgba(255,107,53,0.07); border-left: 3px solid var(--bw-orange);
+  padding: 20px 24px;
+}
+.s-finance-note p { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.7; font-style: italic; }
+.s-finance-right { display: flex; flex-direction: column; gap: 2px; }
+.s-finance-block { background: #0a0806; border: 1px solid #111; padding: 32px 36px; cursor: default; }
+.s-finance-block-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.s-finance-block-org { font-family: var(--font-c); font-size: 28px; color: white; }
+.s-finance-block-badge { font-family: var(--font-m); font-size: 8px; letter-spacing: 2px; color: var(--bw-gold); border: 1px solid rgba(212,168,67,0.3); padding: 4px 10px; text-transform: uppercase; white-space: nowrap; }
+.s-finance-block-amount { font-family: var(--font-c); font-size: 40px; color: var(--bw-orange); line-height: 1; margin-bottom: 12px; }
+.s-finance-block-for { font-size: 12px; color: #555; line-height: 1.65; margin-bottom: 16px; }
+.s-finance-block-bw { font-family: var(--font-m); font-size: 9px; letter-spacing: 2px; color: rgba(78,205,196,0.6); text-transform: uppercase; padding-top: 16px; border-top: 1px solid #141414; }
+
+/* ─────────────────────────────────────────
+   S06 — TÉMOIGNAGE
+───────────────────────────────────────── */
+.s-testi { background: var(--bw-cream); padding: 100px 60px; }
+.s-testi-inner { display: grid; grid-template-columns: 1.5fr 1fr; gap: 80px; align-items: center; }
+.s-testi-left {}
+.s-testi-line { width: 48px; height: 3px; background: var(--bw-orange); margin-bottom: 40px; }
+.s-testi-quote { font-family: var(--font-c); font-size: clamp(36px, 4.5vw, 64px); color: var(--bw-ink); line-height: 1.05; margin-bottom: 32px; }
+.s-testi-attr { font-family: var(--font-m); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(0,0,0,0.35); }
+.s-testi-right { text-align: center; }
+.s-testi-big { font-family: var(--font-c); font-size: clamp(96px, 14vw, 180px); color: var(--bw-ink); line-height: 0.9; display: block; }
+.s-testi-big-lbl { font-size: 12px; color: rgba(0,0,0,0.38); max-width: 220px; margin: 16px auto 0; line-height: 1.65; }
+
+/* ─────────────────────────────────────────
+   S07 — FAQ
+───────────────────────────────────────── */
+.s-faq { background: var(--bw-warm); padding: 100px 60px; }
+.s-faq-head { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; margin-bottom: 64px; }
+.s-faq-h { font-family: var(--font-c); font-size: clamp(56px, 7vw, 88px); color: var(--bw-ink); line-height: 0.9; }
+.s-faq-sub { font-size: 14px; color: rgba(0,0,0,0.45); line-height: 1.75; padding-top: 8px; }
+.s-faq-list { display: flex; flex-direction: column; }
+.s-faq-item { border-top: 1px solid rgba(0,0,0,0.08); }
+.s-faq-item:last-child { border-bottom: 1px solid rgba(0,0,0,0.08); }
+.s-faq-q {
+  font-family: var(--font-c); font-size: 28px; color: var(--bw-ink);
+  padding: 24px 0; cursor: pointer; display: flex; justify-content: space-between;
+  align-items: center; user-select: none;
+}
+.s-faq-arrow { font-size: 18px; color: var(--bw-orange); transition: transform 0.3s; flex-shrink: 0; }
+.s-faq-item.open .s-faq-arrow { transform: rotate(180deg); }
+.s-faq-a { font-size: 13px; color: rgba(0,0,0,0.58); line-height: 1.8; max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; }
+.s-faq-item.open .s-faq-a { max-height: 300px; padding-bottom: 28px; }
+
+/* ─────────────────────────────────────────
+   S08 — FORMULAIRE
+───────────────────────────────────────── */
+.s-form {
+  background: var(--bw-ink); padding: 100px 60px;
+  border-top: 3px solid var(--bw-orange);
+}
+.s-form-inner { display: grid; grid-template-columns: 1fr 1.2fr; gap: 100px; align-items: start; }
+.s-form-left {}
+.s-form-lbl { font-family: var(--font-m); font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.25); display: block; margin-bottom: 20px; }
+.s-form-h { font-family: var(--font-c); font-size: clamp(56px, 7vw, 96px); color: white; line-height: 0.9; margin-bottom: 24px; }
+.s-form-h em { color: var(--bw-orange); font-style: normal; }
+.s-form-promise { font-size: 13px; color: rgba(255,255,255,0.38); line-height: 1.75; }
+.s-form-promise strong { color: rgba(78,205,196,0.8); font-weight: 500; }
+
+/* Form fields */
+form#prog-form { display: flex; flex-direction: column; gap: 12px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-field { display: flex; flex-direction: column; gap: 6px; }
+.form-label { font-family: var(--font-m); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+.form-input, .form-select, .form-textarea {
+  background: #0e0b08; border: 1px solid #1a1714; color: white;
+  padding: 14px 16px; font-family: var(--font-b); font-size: 13px;
+  width: 100%; outline: none; transition: border-color 0.2s;
+  -webkit-appearance: none; appearance: none;
+}
+.form-input::placeholder, .form-textarea::placeholder { color: #333; }
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--bw-orange); }
+.form-select { cursor: pointer; }
+.form-textarea { resize: none; height: 80px; }
+.form-submit {
+  background: var(--bw-orange); color: white; border: none;
+  padding: 18px; font-family: var(--font-c); font-size: 22px;
+  letter-spacing: 2px; cursor: pointer; width: 100%;
+  transition: filter 0.2s, transform 0.2s; margin-top: 4px;
+}
+.form-submit:hover { filter: brightness(1.12); transform: translateY(-2px); }
+.form-legal { font-family: var(--font-m); font-size: 10px; color: rgba(255,255,255,0.2); line-height: 1.6; margin-top: 12px; }
+#form-success { display: none; padding: 32px; border: 1px solid rgba(78,205,196,0.3); background: rgba(78,205,196,0.05); }
+#form-success p { font-family: var(--font-m); font-size: 11px; letter-spacing: 2px; color: var(--bw-teal); line-height: 1.75; text-transform: uppercase; }
+
+/* ─────────────────────────────────────────
+   S09 — FOOTER
+───────────────────────────────────────── */
+.s-footer {
+  background: var(--bw-warm); padding: 60px;
+  border-top: 3px solid var(--bw-orange);
+  display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 80px;
+}
+.s-footer-logo { font-family: var(--font-c); font-size: 22px; letter-spacing: 3px; color: var(--bw-ink); margin-bottom: 12px; }
+.s-footer-tag { font-size: 12px; color: rgba(0,0,0,0.38); line-height: 1.65; max-width: 280px; }
+.s-footer-col-h { font-family: var(--font-m); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(0,0,0,0.3); margin-bottom: 20px; }
+.s-footer-links { display: flex; flex-direction: column; gap: 10px; }
+.s-footer-link { font-size: 13px; color: rgba(0,0,0,0.55); text-decoration: none; transition: color 0.2s; }
+.s-footer-link:hover { color: var(--bw-ink); }
+.s-footer-link.active { color: var(--bw-ink); font-weight: 600; }
+.s-footer-bottom { grid-column: 1/-1; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+.s-footer-copy { font-family: var(--font-m); font-size: 10px; color: rgba(0,0,0,0.28); letter-spacing: 1px; }
+
+/* ── SCROLL REVEAL ── */
+.sr { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.sr.visible { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .p-nav { padding: 0 24px; }
+  .p-nav-links { display: none; }
+  .s-hero, .s-finance-inner, .s-form-inner, .s-testi-inner, .s-faq-head { grid-template-columns: 1fr; gap: 40px; }
+  .s-hero { padding: 80px 24px 60px; }
+  .s-formats-grid, .s-pourqui-grid { grid-template-columns: 1fr; }
+  .s-phase { grid-template-columns: 60px 1fr; }
+  .s-phase-n { font-size: 60px; }
+  .s-phase-detail { grid-column: 2; }
+  .s-footer { grid-template-columns: 1fr; gap: 40px; padding: 40px 24px; }
+  .s-hero-stats { grid-template-columns: repeat(3,1fr); }
+  .s-hero-stat { padding: 24px 0 24px 24px; }
+  .s-formats, .s-phases, .s-pourqui, .s-finance, .s-testi, .s-faq, .s-form { padding: 60px 24px; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div id="p-grain"></div>
+
+<!-- NAV -->
+<nav class="p-nav">
+  <a href="design-choices-v3.html" class="p-nav-logo">BANLIEUWOOD</a>
+  <div class="p-nav-links">
+    <a href="design-choices-v3.html" class="p-nav-link">Accueil</a>
+    <a href="#" class="p-nav-link active">Programmes</a>
+    <a href="#" class="p-nav-link">Le Cockpit</a>
+    <a href="#" class="p-nav-link">Films</a>
+    <a href="#" class="p-nav-link">Contact</a>
+  </div>
+  <button class="p-nav-cta" onclick="document.getElementById('prog-form').scrollIntoView({behavior:'smooth'})">Demander un programme</button>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="p-breadcrumb">
+  <a href="design-choices-v3.html">Accueil</a><span>/</span>Nos Programmes
+</div>
+
+<!-- S01 — HERO -->
+<section class="s-hero">
+  <div class="s-hero-left sr">
+    <span class="s-hero-tag">Atelier · 8 à 36 semaines · Île-de-France & national</span>
+    <h1 class="s-hero-h1">Programme<br><em>Cinéma</em><br>Clé en Main</h1>
+    <p class="s-hero-sub">Un cursus complet qui transforme votre établissement en maison de production. Pas une animation ponctuelle. Un vrai programme.</p>
+    <div class="s-hero-btns">
+      <button class="s-hero-btn-primary" onclick="document.getElementById('prog-form').scrollIntoView({behavior:'smooth'})">Demander un programme</button>
+      <button class="s-hero-btn-sec" onclick="document.querySelector('.s-formats').scrollIntoView({behavior:'smooth'})">Voir les formats</button>
+    </div>
+  </div>
+  <div class="s-hero-right sr" style="transition-delay:.12s">
+    <div class="s-hero-badge">
+      <span class="s-hero-badge-lbl">Durée</span>
+      <span class="s-hero-badge-val">8 à 36 <em>semaines</em></span>
+    </div>
+    <div class="s-hero-badge">
+      <span class="s-hero-badge-lbl">Groupe</span>
+      <span class="s-hero-badge-val">10 à 28 <em>jeunes</em></span>
+    </div>
+    <div class="s-hero-badge">
+      <span class="s-hero-badge-lbl">Matériel</span>
+      <span class="s-hero-badge-val">Fourni par <em>Banlieuwood</em></span>
+    </div>
+    <div class="s-hero-badge">
+      <span class="s-hero-badge-lbl">Cockpit numérique</span>
+      <span class="s-hero-badge-val">13 modules <em>live</em></span>
+    </div>
+    <div class="s-hero-badge">
+      <span class="s-hero-badge-lbl">Film produit</span>
+      <span class="s-hero-badge-val">Court-métrage <em>finalisé</em></span>
+    </div>
+  </div>
+  <div class="s-hero-stats sr" style="grid-column:1/-1;transition-delay:.22s">
+    <div class="s-hero-stat">
+      <span class="s-hero-stat-val">3</span>
+      <span class="s-hero-stat-lbl">Disciplines — fiction, documentaire, clip</span>
+    </div>
+    <div class="s-hero-stat">
+      <span class="s-hero-stat-val">100%</span>
+      <span class="s-hero-stat-lbl">Des films diffusés publiquement</span>
+    </div>
+    <div class="s-hero-stat">
+      <span class="s-hero-stat-val">0 €</span>
+      <span class="s-hero-stat-lbl">Pour les participants</span>
+    </div>
+  </div>
+</section>
+
+<!-- S02 — FORMATS -->
+<section class="s-formats">
+  <div class="s-formats-head sr">
+    <h2 class="s-formats-h">Choisir<br>son Format</h2>
+    <div class="s-formats-sub">Durée · Intensité · Discipline<br>Diagnostic gratuit de 2h avant engagement</div>
+  </div>
+  <div class="s-formats-grid">
+    <div class="s-format-card sr">
+      <span class="s-format-n">FORMAT A</span>
+      <h3 class="s-format-title">Découverte</h3>
+      <div class="s-format-duration">8 SEMAINES · 1 JOUR/SEMAINE</div>
+      <p class="s-format-desc">Initiation au langage cinéma. Court-métrage 3 minutes, fiction ou clip. Idéal pour une première expérience — 4e, 3e, groupes MJC débutants. Une scénariste + une équipe technique.</p>
+      <div class="s-format-meta">EXT · QUARTIER · 2024</div>
+    </div>
+    <div class="s-format-card recommended sr" style="transition-delay:.08s">
+      <div class="s-format-badge">Recommandé</div>
+      <span class="s-format-n">FORMAT B</span>
+      <h3 class="s-format-title">Immersion</h3>
+      <div class="s-format-duration">16 SEMAINES · 2 JOURS/SEMAINE</div>
+      <p class="s-format-desc">Programme complet. Film 8 à 12 minutes, tous rôles couverts (scénario, caméra, son, montage). Idéal lycée, MJC adultes, structures avec groupes réguliers. Cockpit activé sur les 13 modules.</p>
+      <div class="s-format-meta">INT · STUDIO · 2024</div>
+    </div>
+    <div class="s-format-card sr" style="transition-delay:.16s">
+      <span class="s-format-n">FORMAT C</span>
+      <h3 class="s-format-title">Résidence</h3>
+      <div class="s-format-duration">36 SEMAINES · 3 JOURS/SEMAINE</div>
+      <p class="s-format-desc">Logique de studio professionnel. 2 projets minimum, format long, accompagnement festival (Regard Jeune, Short Film Corner Cannes). Pour les établissements avec ambition de créer une véritable filière cinéma.</p>
+      <div class="s-format-meta">FESTIVAL · SOIR · 2024</div>
+    </div>
+  </div>
+</section>
+
+<!-- S03 — 5 PHASES -->
+<section class="s-phases">
+  <div class="s-phases-head sr">
+    <span class="s-phases-lbl">Méthode Banlieuwood · Depuis 2016</span>
+    <h2 class="s-phases-h">La Méthode<br>en <em>5 Actes</em></h2>
+    <p class="s-phases-intro">De rien à festival. Chaque phase dure de 1 à 8 semaines selon le format. Le Cockpit numérique orchestre chaque séance en temps réel.</p>
+  </div>
+  <div class="s-phases-bar">
+    <div class="s-phases-bar-item active"></div>
+    <div class="s-phases-bar-item"></div>
+    <div class="s-phases-bar-item"></div>
+    <div class="s-phases-bar-item"></div>
+    <div class="s-phases-bar-item"></div>
+  </div>
+
+  <div class="s-phase sr">
+    <div class="s-phase-n">01</div>
+    <div class="s-phase-body">
+      <div class="s-phase-ann">INT · SALLE · JOUR</div>
+      <h3 class="s-phase-title">Découverte</h3>
+      <div class="s-phase-dur">1 À 3 SEMAINES</div>
+      <p class="s-phase-desc">Analyse filmique active. Les jeunes décortiquent 3 extraits de films — plans, sons, montage. Premier exercice caméra sans enjeu. On regarde avant de faire.</p>
+    </div>
+    <div class="s-phase-detail">
+      <div class="s-phase-detail-item">
+        <div class="s-phase-detail-lbl">Ils produisent</div>
+        <div class="s-phase-detail-val">Fiche d'analyse filmique + 1 plan filmé (30 secondes)</div>
+      </div>
+      <div class="s-phase-detail-item">
+        <div class="s-phase-detail-lbl">Pour l'établissement</div>
+        <div class="s-phase-detail-val">Zéro préparation requise. L'intervenant arrive avec tout le matériel et la progression pédagogique.</div>
+      </div>
+      <div class="s-phase-cockpit-tag">
+        <div class="s-phase-cockpit-dot"></div>
+        <span>Module M1 · Cockpit Live</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-phase sr">
+    <div class="s-phase-n">02</div>
+    <div class="s-phase-body">
+      <div class="s-phase-ann">INT · ATELIER · MATIN</div>
+      <h3 class="s-phase-title">Écriture</h3>
+      <div class="s-phase-dur">2 À 4 SEMAINES</div>
+      <p class="s-phase-desc">Du pitch (3 lignes) à la continuité dialoguée. Méthode Banlieuwood : récits ancrés dans le territoire et le vécu. Pas de clichés imposés — les histoires viennent des jeunes.</p>
+    </div>
+    <div class="s-phase-detail">
+      <div class="s-phase-detail-item">
+        <div class="s-phase-detail-lbl">Ils produisent</div>
+        <div class="s-phase-detail-val">Scénario 3–12 pages + plan de tournage + liste matériel</div>
+      </div>
+      <div class="s-phase-detail-item">
+        <div class="s-phase-detail-lbl">Différenciant</div>
+        <div class="s-phase-detail-val">L'IA Gemini génère des exercices d'écriture adaptés au niveau du groupe en temps réel via le Cockpit.</div>
+      </div>
+      <div class="s-phase-cockpit-tag">
+        <div class="s-phase-cockpit-dot"></div>
+        <span>Modules M2–M4 · Gemini AI</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-phase sr">
+    <div class="s-phase-n">03</div>
+    <div class="s-phase-body">
+      <div class="s-phase-ann">EXT · QUARTIER · JOUR</div>
+      <h3 class="s-phase-title">Tournage</h3>
+      <div class="s-phase-dur">2 À 6 SEMAINES</div>
+      <p class="s-phase-desc">Caméras Sony A7, lumière HMI, son Rode. Équipes de 4 à 5 jeunes. Rôles rotatifs — tout le monde passe derrière la caméra. Le Cockpit orchestre les équipes en temps réel sur iPad.</p>
+    </div>
+    <div class="s-phase-detail">
+      <div class="s-phase-detail-item">
+        <div class="s-phase-detail-lbl">Matériel fourni</div>
+        <div class="s-phase-detail-val">Sony A7IV · DJI Ronin · Rode NTG4 · HMI 200W · MacBook Pro dédié</div>
+      </div>
+      <div class="s-phase-detail-item">
+        <div class="s-phase-detail-lbl">Pour l'établissement</div>
+        <div class="s-phase-detail-val">Gestion des autorisations parentales et protocole sécurité terrain intégré au Cockpit.</div>
+      </div>
+      <div class="s-phase-cockpit-tag">
+        <div class="s-phase-cockpit-dot"></div>
+        <span>Modules M5–M7 · Fiches tournage</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-phase sr">
+    <div class="s-phase-n">04</div>
+    <div class="s-phase-body">
+      <div class="s-phase-ann">INT · STUDIO · NUIT</div>
+      <h3 class="s-phase-title">Montage</h3>
+      <div class="s-phase-dur">2 À 6 SEMAINES</div>
+      <p class="s-phase-desc">Premiere Pro ou Final Cut selon l'équipement disponible. Étalonnage couleur (LUT cinéma Banlieuwood fournie). Mixage son. Générique. Export festival — DCP léger + MP4 Vimeo.</p>
+    </div>
+    <div class="s-phase-detail">
+      <div class="s-phase-detail-item">
+        <div class="s-phase-detail-lbl">Ils produisent</div>
+        <div class="s-phase-detail-val">Film finalisé + dossier pédagogique (intentions, making-of écrit)</div>
+      </div>
+      <div class="s-phase-detail-item">
+        <div class="s-phase-detail-lbl">Pour le prof référent</div>
+        <div class="s-phase-detail-val">Compte rendu automatique post-séance généré par le Cockpit après chaque session.</div>
+      </div>
+      <div class="s-phase-cockpit-tag">
+        <div class="s-phase-cockpit-dot"></div>
+        <span>Modules M8–M12 · Post-prod</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-phase sr">
+    <div class="s-phase-n">05</div>
+    <div class="s-phase-body">
+      <div class="s-phase-ann">FESTIVAL · SOIR</div>
+      <h3 class="s-phase-title">Diffusion</h3>
+      <div class="s-phase-dur">1 À 2 SEMAINES</div>
+      <p class="s-phase-desc">Soumission aux festivals partenaires. Projection publique organisée avec l'établissement — familles, élus locaux invités. Le film existe dans le monde, pas juste sur un disque dur.</p>
+    </div>
+    <div class="s-phase-detail">
+      <div class="s-phase-detail-item">
+        <div class="s-phase-detail-lbl">Festivals partenaires</div>
+        <div class="s-phase-detail-val">Regard Jeune · Short Film Corner Cannes (Format Résidence) · circuits locaux</div>
+      </div>
+      <div class="s-phase-detail-item">
+        <div class="s-phase-detail-lbl">Pour l'établissement</div>
+        <div class="s-phase-detail-val">Dossier presse, affiche et invitation clés en main. Attestation de participation pour chaque élève.</div>
+      </div>
+      <div class="s-phase-cockpit-tag">
+        <div class="s-phase-cockpit-dot"></div>
+        <span>Module M13 · Récap film</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S04 — POUR QUI -->
+<section class="s-pourqui">
+  <h2 class="s-pourqui-h sr">Pour quels<br>Établissements ?</h2>
+  <div class="s-pourqui-grid">
+    <div class="s-pourqui-card orange sr">
+      <div class="s-pourqui-card-type">Temps scolaire</div>
+      <h3 class="s-pourqui-card-h">Collège &amp; Lycée</h3>
+      <p class="s-pourqui-card-desc">Classes de 4e, 3e, Seconde. Options cinéma, PEAC, dispositifs ASS. S'intègre dans le temps scolaire ou extrascolaire. Conventionné Éducation Nationale.</p>
+    </div>
+    <div class="s-pourqui-card teal sr" style="transition-delay:.08s">
+      <div class="s-pourqui-card-type">Hors temps scolaire</div>
+      <h3 class="s-pourqui-card-h">MJC &amp; Centre Social</h3>
+      <p class="s-pourqui-card-desc">Groupes 14–25 ans. Séances soir ou weekend. Financement CNAF possible à 80%. Intervenants formés aux publics en QPV et hors scolarité.</p>
+    </div>
+    <div class="s-pourqui-card gold sr" style="transition-delay:.16s">
+      <div class="s-pourqui-card-type">Publics spécifiques</div>
+      <h3 class="s-pourqui-card-h">Fondation &amp; RSE</h3>
+      <p class="s-pourqui-card-desc">Décrocheurs, jeunes sous main de justice, dispositifs PLIE. Rapport d'impact fourni. Programmes co-construits avec les équipes éducatives.</p>
+    </div>
+    <div class="s-pourqui-card ink sr" style="transition-delay:.24s">
+      <div class="s-pourqui-card-type">Appels à projets</div>
+      <h3 class="s-pourqui-card-h">Mairie &amp; Institution</h3>
+      <p class="s-pourqui-card-desc">Programmes pluriannuels. Co-financement CNC + collectivités. Dossier de demande accompagné de A à Z. Indicateurs d'impact livrés.</p>
+    </div>
+  </div>
+  <p class="s-pourqui-note sr">Chaque programme est adapté après un diagnostic gratuit de 2h avec votre équipe.</p>
+</section>
+
+<!-- S05 — FINANCEMENT -->
+<section class="s-finance">
+  <div class="s-finance-inner">
+    <div class="s-finance-left sr">
+      <span class="s-finance-lbl">Budget &amp; Financement</span>
+      <h2 class="s-finance-h">Comment<br>le <em>Financer</em></h2>
+      <p class="s-finance-intro">Le programme Banlieuwood est conçu pour être financé à 100% par des dispositifs existants. Vous n'avez pas à inventer le budget.</p>
+      <div class="s-finance-note">
+        <p>"Banlieuwood accompagne le montage des dossiers. Ce service est compris dans le programme — pas de surcoût."</p>
+      </div>
+    </div>
+    <div class="s-finance-right sr" style="transition-delay:.1s">
+      <div class="s-finance-block">
+        <div class="s-finance-block-head">
+          <span class="s-finance-block-org">CNAF</span>
+          <span class="s-finance-block-badge">Action sociale · CAF</span>
+        </div>
+        <div class="s-finance-block-amount">Jusqu'à 80%</div>
+        <p class="s-finance-block-for">MJC, centres sociaux, associations agréées CAF. Financement du coût total du programme sur dossier de conventionnement.</p>
+        <div class="s-finance-block-bw">Banlieuwood fournit : budget prévisionnel CAF + fiche activité + indicateurs impact</div>
+      </div>
+      <div class="s-finance-block">
+        <div class="s-finance-block-head">
+          <span class="s-finance-block-org">CNC</span>
+          <span class="s-finance-block-badge">Éducation artistique</span>
+        </div>
+        <div class="s-finance-block-amount">2 000 – 25 000€</div>
+        <p class="s-finance-block-for">Collèges, lycées, structures EAC. Dispositifs Ciné-lycées, Éducation à l'image, Cinéma et territoire. Dépôts octobre &amp; mars.</p>
+        <div class="s-finance-block-bw">Banlieuwood fournit : dossier pré-rempli + lettres de soutien</div>
+      </div>
+      <div class="s-finance-block">
+        <div class="s-finance-block-head">
+          <span class="s-finance-block-org">DAAC / DRAC</span>
+          <span class="s-finance-block-badge">Éducation nationale</span>
+        </div>
+        <div class="s-finance-block-amount">5 000 – 40 000€</div>
+        <p class="s-finance-block-for">Établissements scolaires via rectorat. PEAC, résidences d'artistes, Parcours Avenir. Convention artiste-établissement conforme.</p>
+        <div class="s-finance-block-bw">Banlieuwood fournit : convention rectorat + objectifs pédagogiques alignés programmes scolaires</div>
+      </div>
+      <div class="s-finance-block">
+        <div class="s-finance-block-head">
+          <span class="s-finance-block-org">Collectivités</span>
+          <span class="s-finance-block-badge">Région · Département · Commune</span>
+        </div>
+        <div class="s-finance-block-amount">20 – 40% complémentaire</div>
+        <p class="s-finance-block-for">Fonds culturel régional, politique de la ville (QPV), ANCT. Cartographie des financeurs de votre territoire fournie.</p>
+        <div class="s-finance-block-bw">Banlieuwood fournit : cartographie financeurs + mise en relation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S06 — TÉMOIGNAGE -->
+<section class="s-testi">
+  <div class="s-testi-inner">
+    <div class="s-testi-left sr">
+      <div class="s-testi-line"></div>
+      <blockquote class="s-testi-quote">"On cherchait un partenaire qui apporte la pédagogie, le matériel et l'humain. Banlieuwood arrive avec les trois."</blockquote>
+      <div class="s-testi-attr">— Responsable culturel, MJC de Montreuil — Programme Immersion 2023</div>
+    </div>
+    <div class="s-testi-right sr" style="transition-delay:.1s">
+      <span class="s-testi-big">92%</span>
+      <p class="s-testi-big-lbl">des établissements renouvellent le programme l'année suivante</p>
+    </div>
+  </div>
+</section>
+
+<!-- S07 — FAQ -->
+<section class="s-faq">
+  <div class="s-faq-head sr">
+    <h2 class="s-faq-h">Vos<br>Questions</h2>
+    <p class="s-faq-sub">Les vraies questions que posent les directeurs d'établissement et responsables MJC avant de signer.</p>
+  </div>
+  <div class="s-faq-list sr" style="transition-delay:.1s">
+    <div class="s-faq-item">
+      <div class="s-faq-q">Faut-il du matériel dans l'établissement ? <span class="s-faq-arrow">↓</span></div>
+      <div class="s-faq-a">Non. Banlieuwood arrive avec tout : caméras Sony A7, son Rode, lumière HMI, ordinateurs de montage. Vous avez besoin d'une salle et d'une prise électrique.</div>
+    </div>
+    <div class="s-faq-item">
+      <div class="s-faq-q">Combien de temps pour un professeur référent ? <span class="s-faq-arrow">↓</span></div>
+      <div class="s-faq-a">2 heures par semaine maximum. La plupart des établissements désignent un CPE ou un prof d'arts. Le Cockpit l'informe automatiquement après chaque séance avec un compte rendu généré.</div>
+    </div>
+    <div class="s-faq-item">
+      <div class="s-faq-q">Et si le groupe est difficile ? <span class="s-faq-arrow">↓</span></div>
+      <div class="s-faq-a">La méthode Banlieuwood est conçue pour les groupes hétérogènes et en rupture scolaire. Nos intervenants sont formés aux publics QPV, SEGPA et ITEP. La caméra crée un cadre que les jeunes respectent naturellement.</div>
+    </div>
+    <div class="s-faq-item">
+      <div class="s-faq-q">Le financement est-il garanti ? <span class="s-faq-arrow">↓</span></div>
+      <div class="s-faq-a">Aucun financement n'est garanti — c'est une réalité administrative. Mais nous avons un taux de succès de 87% sur les dossiers que nous accompagnons. Et nous pouvons échelonner les paiements si nécessaire.</div>
+    </div>
+    <div class="s-faq-item">
+      <div class="s-faq-q">Peut-on adapter le programme à notre calendrier ? <span class="s-faq-arrow">↓</span></div>
+      <div class="s-faq-a">Oui. Le planning est construit lors du diagnostic initial de 2h. La seule contrainte : ne pas couper la phase de tournage en deux — elle demande de la continuité pour les jeunes.</div>
+    </div>
+    <div class="s-faq-item">
+      <div class="s-faq-q">Qu'est-ce que le Cockpit numérique exactement ? <span class="s-faq-arrow">↓</span></div>
+      <div class="s-faq-a">Le Cockpit est l'outil numérique Banlieuwood que l'intervenant utilise pendant chaque séance sur iPad. Il orchestre 13 modules pédagogiques en temps réel — les équipes de jeunes répondent, votent, construisent le film collectivement. L'IA Gemini génère des exercices adaptés au niveau du groupe. Vous avez accès au dashboard après chaque séance.</div>
+    </div>
+  </div>
+</section>
+
+<!-- S08 — FORMULAIRE -->
+<section class="s-form">
+  <div class="s-form-inner">
+    <div class="s-form-left sr">
+      <span class="s-form-lbl">Contact · Demande de programme</span>
+      <h2 class="s-form-h">Demander<br>un <em>Programme</em></h2>
+      <p class="s-form-promise">Réponse en 48h.<br><strong>Diagnostic de 2h offert</strong> avant tout engagement.<br><br>Nous adaptons chaque programme à votre établissement, votre groupe, votre budget. Le premier échange ne coûte rien.</p>
+      <br><br>
+      <p class="s-form-promise" style="color:rgba(255,255,255,0.2);font-size:12px;">contact@banlieuwood.fr<br>Réponse en 48h ouvrées</p>
+    </div>
+    <div class="s-form-right sr" style="transition-delay:.1s">
+      <div id="form-success">
+        <p>Votre demande a été transmise.<br>Un membre de l'équipe vous contacte d'ici 48h.</p>
+      </div>
+      <form id="prog-form" novalidate>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" for="f-nom">Prénom &amp; Nom</label>
+            <input class="form-input" id="f-nom" type="text" placeholder="Marie Dupont" required>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="f-email">Email professionnel</label>
+            <input class="form-input" id="f-email" type="email" placeholder="m.dupont@etablissement.fr" required>
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="f-etab">Établissement</label>
+          <input class="form-input" id="f-etab" type="text" placeholder="Collège Victor Hugo / MJC de..." required>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" for="f-type">Type d'établissement</label>
+            <select class="form-select" id="f-type">
+              <option value="">Choisir...</option>
+              <option>Collège</option>
+              <option>Lycée</option>
+              <option>MJC / Centre social</option>
+              <option>Fondation / Mécénat</option>
+              <option>Mairie / Institution</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="f-ville">Ville &amp; département</label>
+            <input class="form-input" id="f-ville" type="text" placeholder="Montreuil, 93">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" for="f-jeunes">Nombre de jeunes</label>
+            <input class="form-input" id="f-jeunes" type="number" min="8" max="100" placeholder="Ex: 20">
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="f-periode">Période souhaitée</label>
+            <select class="form-select" id="f-periode">
+              <option value="">Choisir...</option>
+              <option>Rentrée septembre 2025</option>
+              <option>Janvier 2026</option>
+              <option>Printemps (mars–juin 2026)</option>
+              <option>À définir ensemble</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="f-msg">Message (optionnel)</label>
+          <textarea class="form-textarea" id="f-msg" placeholder="Budget envisagé, contexte particulier, questions..."></textarea>
+        </div>
+        <button class="form-submit" type="submit">Envoyer la demande</button>
+        <p class="form-legal">Vos données ne sont utilisées que pour traiter votre demande. Association loi 1901.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- S09 — FOOTER -->
+<footer class="s-footer">
+  <div>
+    <div class="s-footer-logo">BANLIEUWOOD</div>
+    <p class="s-footer-tag">Association loi 1901 — Cinéma, transmission et création pour les jeunes des quartiers populaires.</p>
+  </div>
+  <div>
+    <div class="s-footer-col-h">Navigation</div>
+    <div class="s-footer-links">
+      <a href="design-choices-v3.html" class="s-footer-link">Accueil</a>
+      <a href="#" class="s-footer-link active">Nos Programmes</a>
+      <a href="#" class="s-footer-link">Le Cockpit</a>
+      <a href="#" class="s-footer-link">Films produits</a>
+    </div>
+  </div>
+  <div>
+    <div class="s-footer-col-h">Contact</div>
+    <div class="s-footer-links">
+      <a href="mailto:contact@banlieuwood.fr" class="s-footer-link">contact@banlieuwood.fr</a>
+      <a href="#" class="s-footer-link">Mentions légales</a>
+      <a href="#" class="s-footer-link">Accès intervenant</a>
+    </div>
+  </div>
+  <div class="s-footer-bottom">
+    <span class="s-footer-copy">© 2026 BANLIEUWOOD — ASSOCIATION LOI 1901</span>
+    <span class="s-footer-copy">PARIS · SEINE-SAINT-DENIS · IDF</span>
+  </div>
+</footer>
+
+<script>
+/* ── FAQ accordéon ── */
+document.querySelectorAll('.s-faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.s-faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+/* ── Phases bar hover ── */
+const barItems = document.querySelectorAll('.s-phases-bar-item');
+const phases = document.querySelectorAll('.s-phase');
+barItems.forEach((bar, i) => {
+  bar.addEventListener('mouseenter', () => {
+    barItems.forEach(b => b.classList.remove('active'));
+    bar.classList.add('active');
+    if (phases[i]) phases[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+});
+
+/* ── Formulaire ── */
+document.getElementById('prog-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const email = document.getElementById('f-email').value;
+  const nom = document.getElementById('f-nom').value;
+  const etab = document.getElementById('f-etab').value;
+  if (!email || !nom || !etab || !/\S+@\S+\.\S+/.test(email)) {
+    const first = !nom ? 'f-nom' : !email ? 'f-email' : 'f-etab';
+    document.getElementById(first).focus();
+    document.getElementById(first).style.borderColor = '#FF6B35';
+    return;
+  }
+  document.getElementById('prog-form').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+});
+
+/* ── Scroll reveal ── */
+const srObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); srObs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.sr').forEach(el => srObs.observe(el));
+
+/* ── Nav highlight on scroll ── */
+window.addEventListener('scroll', () => {
+  document.querySelector('.p-nav').style.borderBottomColor = window.scrollY > 20 ? '#1a1714' : 'transparent';
+});
+</script>
+</body>
+</html>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Banlieuwood — 3 Directions V3</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<title>Banlieuwood — 3 Directions V3 (Motion + Effects)</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -61,23 +61,35 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
   position: relative; overflow: hidden;
   display: flex; flex-direction: column;
 }
+/* Monolith upgrade — photo cinéma qui saigne sous la typo */
+.a-hero-cinematic {
+  position: absolute; inset: 0; z-index: 1;
+  background-image: url('photos/_1177608.JPG');
+  background-size: cover; background-position: center 25%;
+  filter: saturate(0) brightness(0.28) contrast(1.2);
+  mix-blend-mode: normal;
+}
+.a-hero-cinematic::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(6,5,4,0.7) 0%, rgba(6,5,4,0.1) 60%, rgba(6,5,4,0.8) 100%);
+}
 .a-hero-bg-word {
   position: absolute; top: 50%; left: -4vw; transform: translateY(-50%);
-  font-family: var(--font-c); font-size: 32vw; color: rgba(255,107,53,0.068);
+  font-family: var(--font-c); font-size: 32vw; color: rgba(255,255,255,0.025);
   line-height: 1; white-space: nowrap; pointer-events: none; user-select: none;
   letter-spacing: -2px;
 }
 .a-nav {
-  position: relative; z-index: 10; padding: 28px 60px;
+  position: relative; z-index: 20; padding: 28px 60px;
   display: flex; justify-content: space-between; align-items: center;
 }
 .a-logo { font-family: var(--font-c); font-size: 16px; letter-spacing: 5px; color: white; }
 .a-nav-r { font-size: 11px; color: #2a2a2a; letter-spacing: 2px; text-transform: uppercase; }
 .a-hero-content {
-  position: absolute; bottom: 0; left: 0; z-index: 10;
+  position: absolute; bottom: 0; left: 0; z-index: 20;
   padding: 0 60px 56px;
 }
-.a-eyebrow { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--bw-orange); margin-bottom: 12px; display: block; }
+.a-eyebrow { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 12px; display: block; }
 .a-h1 {
   font-family: var(--font-c);
   font-size: clamp(100px, 16vw, 240px);
@@ -85,6 +97,7 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
   margin-bottom: 0;
   /* Déborde à droite */
   white-space: nowrap;
+  text-shadow: none;
 }
 .a-h1-2 {
   font-family: var(--font-c);
@@ -99,15 +112,15 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 }
 .a-sub { font-size: 13px; color: #888; line-height: 1.7; max-width: 320px; }
 .a-cta-link {
-  font-family: var(--font-c); font-size: 18px; letter-spacing: 2px;
-  color: var(--bw-orange); cursor: pointer; white-space: nowrap;
-  border-bottom: 1px solid var(--bw-orange); padding-bottom: 2px;
-  background: none; border-top: none; border-left: none; border-right: none;
+  font-family: var(--font-c); font-size: 15px; letter-spacing: 2px;
+  color: white; cursor: pointer; white-space: nowrap;
+  background: var(--bw-orange); border: none;
+  padding: 16px 40px; display: inline-block;
 }
 
 /* A hero — crédit vertical rotatif (affiche de film) */
 .a-hero-credit {
-  position: absolute; right: 52px; top: 50%; z-index: 10;
+  position: absolute; right: 52px; top: 50%; z-index: 20;
   transform: translateY(-50%) rotate(90deg);
   font-size: 8px; color: rgba(255,255,255,0.07); letter-spacing: 5px;
   text-transform: uppercase; white-space: nowrap; pointer-events: none;
@@ -121,21 +134,21 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 }
 .a-ticker-inner { display: inline-flex; gap: 0; animation: ticker 20s linear infinite; }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.a-ticker-item { font-family: var(--font-c); font-size: 18px; letter-spacing: 3px; color: rgba(255,255,255,0.06); padding: 0 40px; }
-.a-ticker-sep { color: rgba(255,107,53,0.18); font-size: 8px; align-self: center; }
+.a-ticker-item { font-family: var(--font-c); font-size: 18px; letter-spacing: 3px; color: rgba(255,255,255,0.13); padding: 0 40px; }
+.a-ticker-sep { color: rgba(255,255,255,0.08); font-size: 8px; align-self: center; }
 
 /* A03 — MANIFESTE — full-width, pas de colonne ghost */
-.a-manifeste { background: #060504; padding: 100px 60px 80px; border-top: 1px solid #0f0f0f; position: relative; }
+.a-manifeste { background: #060504; padding: 56px 60px 44px; border-top: 1px solid #0f0f0f; position: relative; }
 /* Annotation editoriale — preuve face à la déclaration */
-.a-manifeste-annotation { position: absolute; right: 60px; bottom: 80px; font-family: var(--font-c); font-size: 12px; color: rgba(255,107,53,0.28); letter-spacing: 3px; text-transform: uppercase; text-align: right; line-height: 1.8; pointer-events: none; }
-.a-manifeste-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--bw-orange); margin-bottom: 48px; display: block; }
+.a-manifeste-annotation { position: absolute; right: 60px; bottom: 80px; font-family: var(--font-c); font-size: 12px; color: rgba(255,255,255,0.15); letter-spacing: 3px; text-transform: uppercase; text-align: right; line-height: 1.8; pointer-events: none; }
+.a-manifeste-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.2); margin-bottom: 48px; display: block; }
 .a-manifeste-text {
   font-family: var(--font-c);
   font-size: clamp(72px, 8.5vw, 130px);
   line-height: 0.92; color: white;
   max-width: 1000px;
 }
-.a-manifeste-text em { color: var(--bw-orange); font-style: normal; }
+.a-manifeste-text em { color: rgba(255,255,255,0.7); font-style: normal; }
 
 /* A04 — STATS — layout éditorial (1 chiffre domine) */
 .a-stats { background: #060504; border-top: 1px solid #111; }
@@ -152,11 +165,11 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 .a-stat-sec { padding: 36px 60px; border-right: 1px solid #111; flex: 1; }
 .a-stat-sec:last-child { border-right: none; }
 .a-stat-sec-val { font-family: var(--font-c); font-size: 110px; color: white; line-height: 0.92; display: block; }
-.a-stat-sec-lbl { font-size: 11px; color: #666; letter-spacing: 1px; text-transform: uppercase; margin-top: 8px; }
+.a-stat-sec-lbl { font-size: 11px; color: rgba(255,255,255,0.38); letter-spacing: 1px; text-transform: uppercase; margin-top: 8px; }
 
 /* A05 — FILMS (titres empilés, A24 pure) */
 .a-films { background: #060504; padding: 80px 60px; border-top: 1px solid #0f0f0f; }
-.a-films-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #555; margin-bottom: 60px; display: block; }
+.a-films-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.2); margin-bottom: 60px; display: block; }
 .a-film-list { display: flex; flex-direction: column; }
 .a-film-item {
   display: flex; align-items: baseline; justify-content: space-between;
@@ -164,7 +177,7 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
   transition: all 0.2s;
 }
 .a-film-item:last-child { border-bottom: 1px solid #0f0f0f; }
-.a-film-item:hover .a-film-name { color: var(--bw-orange); }
+.a-film-item:hover .a-film-name { color: rgba(255,255,255,0.6); }
 .a-film-name { font-family: var(--font-c); font-size: clamp(64px, 7vw, 100px); color: white; line-height: 1; }
 .a-film-meta { font-size: 11px; color: #555; letter-spacing: 1px; text-align: right; }
 
@@ -196,11 +209,11 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 
 /* A06 — MÉTHODE (traitement de film — numéros qui saignent) */
 .a-method { background: #060504; padding: 80px 0; border-top: 1px solid #0f0f0f; position: relative; }
-/* Perforation pellicule — ligne verticale orange ghost sur toute la hauteur */
+/* Perforation pellicule — ligne verticale ghost sur toute la hauteur */
 .a-method::before {
   content: '';
   position: absolute; left: 28px; top: 0; bottom: 0;
-  width: 2px; background: linear-gradient(to bottom, transparent, rgba(255,107,53,0.18) 15%, rgba(255,107,53,0.18) 85%, transparent);
+  width: 2px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1) 15%, rgba(255,255,255,0.1) 85%, transparent);
   pointer-events: none;
 }
 .a-method-h { font-family: var(--font-c); font-size: clamp(64px, 8vw, 120px); color: white; line-height: 0.9; margin-bottom: 0; padding: 0 60px 48px; }
@@ -209,7 +222,7 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 .a-phase:last-child { border-bottom: 1px solid #0f0f0f; }
 .a-phase-n {
   font-family: var(--font-c); font-size: clamp(120px, 14vw, 200px);
-  color: rgba(255,107,53,0.1); line-height: 1;
+  color: rgba(255,255,255,0.06); line-height: 1;
   padding: 20px 0 20px 60px;
   display: flex; align-items: center;
   border-right: 1px solid #141414;
@@ -220,24 +233,24 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 
 /* A06b — VOIX HUMAINE — témoignage avant le cockpit */
 .a-testimony { background: #030201; padding: 80px 60px; border-top: 1px solid #0a0a0a; }
-.a-test-mark { font-family: var(--font-c); font-size: 120px; color: rgba(255,107,53,0.1); line-height: 0.7; display: block; margin-bottom: 24px; }
+.a-test-mark { font-family: var(--font-c); font-size: 120px; color: rgba(255,255,255,0.06); line-height: 0.7; display: block; margin-bottom: 24px; }
 .a-test-quote { font-family: var(--font-c); font-size: clamp(36px, 4.5vw, 60px); color: white; line-height: 1.08; max-width: 760px; margin-bottom: 28px; }
-.a-test-quote em { color: var(--bw-orange); font-style: normal; }
+.a-test-quote em { color: rgba(255,255,255,0.6); font-style: normal; }
 .a-test-attr { font-size: 12px; color: #555; display: flex; align-items: center; gap: 12px; }
-.a-test-dash { width: 28px; height: 1px; background: var(--bw-orange); display: block; }
+.a-test-dash { width: 28px; height: 1px; background: rgba(255,255,255,0.25); display: block; }
 
 /* A07 — COCKPIT (seul visuel) */
 .a-cockpit { background: #030201; padding: 80px 60px; border-top: 1px solid #0f0f0f; }
 .a-cockpit-inner { display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px; align-items: start; }
-.a-cockpit-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--bw-teal); margin-bottom: 20px; display: block; }
+.a-cockpit-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.2); margin-bottom: 20px; display: block; }
 .a-cockpit-h { font-family: var(--font-c); font-size: clamp(56px, 6vw, 88px); color: white; line-height: 0.9; margin-bottom: 24px; }
 .a-cockpit-sub { font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 32px; }
-.a-cockpit-cta { background: var(--bw-orange); color: white; border: none; padding: 14px 36px; font-family: var(--font-b); font-size: 12px; font-weight: 600; cursor: pointer; letter-spacing: 0.5px; }
+.a-cockpit-cta { background: rgba(255,255,255,0.08); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 14px 36px; font-family: var(--font-b); font-size: 12px; font-weight: 600; cursor: pointer; letter-spacing: 0.5px; }
 /* Specs typographiques — pur, sans UI mock */
 .a-cockpit-specs { display: flex; flex-direction: column; gap: 0; }
 .a-cockpit-spec { display: flex; align-items: flex-start; gap: 28px; border-top: 1px solid #111; padding: 28px 0; }
 .a-cockpit-spec:last-child { border-bottom: 1px solid #111; }
-.a-cockpit-spec-n { font-family: var(--font-c); font-size: 72px; color: rgba(255,107,53,0.12); line-height: 1; min-width: 90px; flex-shrink: 0; }
+.a-cockpit-spec-n { font-family: var(--font-c); font-size: 72px; color: rgba(255,255,255,0.06); line-height: 1; min-width: 90px; flex-shrink: 0; }
 .a-cockpit-spec-val { font-family: var(--font-c); font-size: 36px; color: white; line-height: 1; margin-bottom: 8px; letter-spacing: 1px; }
 .a-cockpit-spec-desc { font-size: 12px; color: #555; line-height: 1.65; max-width: 300px; }
 @keyframes blink { 50% { opacity: 0; } }
@@ -252,14 +265,14 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 
 /* A09b — STRIP INSTITUTIONNEL — confiance établissements */
 .a-inst-strip { background: #060504; border-top: 1px solid #0a0a0a; border-bottom: 1px solid #0a0a0a; padding: 20px 60px; display: flex; align-items: center; gap: 0; }
-.a-inst-label { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: #2a2a2a; margin-right: 48px; white-space: nowrap; }
+.a-inst-label { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.15); margin-right: 48px; white-space: nowrap; }
 .a-inst-items { display: flex; gap: 48px; flex-wrap: wrap; }
-.a-inst-item { font-family: var(--font-c); font-size: 13px; color: #444; letter-spacing: 2px; transition: color 0.2s; }
-.a-inst-item:hover { color: #777; }
+.a-inst-item { font-family: var(--font-c); font-size: 13px; color: rgba(255,255,255,0.45); letter-spacing: 2px; transition: color 0.2s; }
+.a-inst-item:hover { color: rgba(255,255,255,0.8); }
 
 /* A09 — FOOTER — document d'archive, bord orange, année fantôme */
 .a-footer { background: #030201; padding: 60px; border-top: 3px solid var(--bw-orange); display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; position: relative; overflow: hidden; }
-.a-footer::before { content: '2016'; position: absolute; right: 48px; top: 40px; font-family: var(--font-c); font-size: 140px; color: rgba(255,107,53,0.04); line-height: 1; pointer-events: none; user-select: none; }
+.a-footer::before { content: '2016'; position: absolute; right: 48px; top: 40px; font-family: var(--font-c); font-size: 140px; color: rgba(255,255,255,0.03); line-height: 1; pointer-events: none; user-select: none; }
 .a-footer-logo { font-family: var(--font-c); font-size: 22px; letter-spacing: 4px; margin-bottom: 16px; }
 .a-footer-tag { font-size: 11px; color: #555; line-height: 1.8; max-width: 280px; }
 .a-footer-col-h { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #444; margin-bottom: 20px; }
@@ -285,19 +298,28 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
   position: absolute; inset: 0;
   background-image: url('photos/_1177594.JPG');
   background-size: cover; background-position: center 40%;
-  filter: saturate(0.7) brightness(0.55);
+  filter: saturate(0.6) brightness(0.65) contrast(1.1);
 }
 .b-hero-bg::after {
   content: ''; position: absolute; inset: 0;
   background:
-    linear-gradient(to right, rgba(10,8,6,0.92) 0%, rgba(10,8,6,0.3) 55%, rgba(10,8,6,0) 100%),
-    linear-gradient(to top, rgba(10,8,6,0.95) 0%, transparent 40%);
+    linear-gradient(to right, rgba(10,8,6,0.65) 0%, rgba(10,8,6,0.15) 50%, rgba(10,8,6,0) 100%),
+    linear-gradient(to top, rgba(10,8,6,0.85) 0%, transparent 35%);
 }
 /* Grain cinéma */
 .b-hero-grain {
   position: absolute; inset: 0; z-index: 2; pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.07'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.04'/%3E%3C/svg%3E");
 }
+/* B3 — Mot fantôme structurant grille typographique hero */
+.b-hero-grid-word {
+  position: absolute; right: -2vw; top: 10%; z-index: 3;
+  font-family: var(--font-c); font-size: 18vw;
+  color: rgba(212,168,67,0.06); line-height: 1;
+  pointer-events: none; user-select: none;
+  letter-spacing: -3px;
+}
+
 /* Personne "détourée" — photo avec mask CSS en prototype */
 .b-person {
   position: absolute; right: 5%; bottom: 0; z-index: 3;
@@ -388,12 +410,12 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
   position: absolute; inset: 0;
   background-image: url('photos/_1177495.JPG');
   background-size: cover; background-position: center 40%;
-  filter: saturate(0.65) brightness(0.6);
+  filter: saturate(0.75) brightness(0.72);
 }
 .b-full-photo-bg::after {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(8,6,4,0.97) 0%, rgba(8,6,4,0.0) 55%),
-              linear-gradient(to right, rgba(8,6,4,0.5) 0%, transparent 60%);
+  background: linear-gradient(to top, rgba(8,6,4,0.82) 0%, rgba(8,6,4,0.0) 60%),
+              linear-gradient(to right, rgba(8,6,4,0.35) 0%, transparent 60%);
 }
 .b-full-photo-content { position: relative; z-index: 5; padding: 60px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; align-items: end; }
 .b-full-h2 { font-family: var(--font-c); font-size: clamp(72px, 10vw, 148px); line-height: 0.88; color: white; }
@@ -423,10 +445,10 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 .b-phase-img.p5 { background-image: url('photos/_1177599.JPG'); background-position: center; }
 .b-phase-img::after { content: ''; position: absolute; inset: 0; background: rgba(8,6,4,0.3); }
 .b-phase-txt { padding: 48px 60px; display: flex; flex-direction: column; justify-content: center; background: #0a0806; }
-.b-phase-n { font-family: var(--font-c); font-size: 96px; color: rgba(255,107,53,0.14); line-height: 1; margin-bottom: 8px; }
+.b-phase-n { font-family: var(--font-c); font-size: 96px; color: rgba(212,168,67,0.14); line-height: 1; margin-bottom: 8px; }
 .b-phase-name { font-family: var(--font-c); font-size: 40px; color: white; margin-bottom: 12px; }
 .b-phase-desc { font-size: 13px; color: #555; line-height: 1.7; max-width: 380px; }
-.b-phase-tag { margin-top: 16px; font-size: 10px; color: var(--bw-gold); letter-spacing: 2px; text-transform: uppercase; }
+.b-phase-tag { margin-top: 16px; font-size: 10px; color: rgba(255,255,255,0.2); letter-spacing: 2px; text-transform: uppercase; }
 
 /* B06 — COCKPIT */
 .b-cockpit { background: #050302; padding: 100px 60px; border-top: 1px solid #0a0a0a; }
@@ -435,7 +457,7 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 .b-cockpit-h { font-family: var(--font-c); font-size: clamp(48px, 5.5vw, 80px); line-height: 0.95; margin-bottom: 24px; }
 .b-cockpit-sub { font-size: 14px; color: #444; line-height: 1.7; margin-bottom: 32px; }
 .b-cockpit-cta { background: var(--bw-gold); color: var(--bw-ink); border: none; padding: 14px 36px; font-family: var(--font-b); font-size: 12px; font-weight: 700; cursor: pointer; }
-.b-screen { background: #080604; border: 1px solid #141210; border-radius: 6px; overflow: hidden; }
+.b-screen { background: #080604; border: 1px solid #141210; border-radius: 0; overflow: hidden; }
 .b-screen-top { background: #0e0b08; border-bottom: 1px solid #141210; padding: 12px 20px; display: flex; align-items: center; gap: 8px; }
 .b-screen-dots { display: flex; gap: 5px; }
 .b-screen-dot { width: 9px; height: 9px; border-radius: 50%; }
@@ -447,6 +469,8 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 .badge-o { background: rgba(255,107,53,0.15); color: var(--bw-orange); }
 .badge-t { background: rgba(78,205,196,0.12); color: var(--bw-teal); }
 .badge-g { background: rgba(80,80,80,0.2); color: #444; }
+/* B — badge EN COURS → gold (pas orange) */
+#page-b .badge-o { background: rgba(212,168,67,0.15); color: var(--bw-gold); }
 .b-screen-bar { background: #0e0b08; border-top: 1px solid #141210; padding: 10px 16px; display: flex; gap: 8px; align-items: center; }
 .b-screen-live { width: 6px; height: 6px; border-radius: 50%; background: var(--bw-teal); }
 .b-screen-status { font-size: 9px; color: #5a5550; letter-spacing: 1px; }
@@ -517,7 +541,7 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
   margin-bottom: 0;
 }
 .c-hero-left { max-width: 100%; }
-.c-hero-tag { display: inline-block; background: rgba(255,107,53,0.1); color: var(--bw-orange); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 6px 14px; margin-bottom: 20px; }
+.c-hero-tag { display: inline-block; background: rgba(0,0,0,0.06); color: rgba(0,0,0,0.45); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 6px 14px; margin-bottom: 20px; }
 .c-h1 {
   font-family: var(--font-c);
   font-size: clamp(100px, 14vw, 200px);
@@ -542,34 +566,14 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 }
 .c-hero-stat { padding-right: 48px; border-right: 1px solid rgba(0,0,0,0.08); margin-right: 48px; }
 .c-hero-stat:last-child { border-right: none; padding-right: 0; margin-right: 0; }
-.c-hero-stat-val { font-family: var(--font-c); font-size: 48px; color: var(--bw-ink); line-height: 1; }
+.c-hero-stat-val { font-family: var(--font-c); font-size: 56px; color: var(--bw-ink); line-height: 1; }
 .c-hero-stat-lbl { font-size: 11px; color: rgba(0,0,0,0.4); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
 .c-sub { font-size: 15px; color: rgba(0,0,0,0.52); line-height: 1.6; max-width: 460px; flex: 1; margin-bottom: 0; }
 .c-hero-btns { display: flex; gap: 14px; flex-shrink: 0; }
 .c-btn-main { background: var(--bw-orange); color: white; border: none; padding: 14px 36px; font-family: var(--font-b); font-size: 13px; font-weight: 700; cursor: pointer; }
 .c-btn-sec { background: transparent; border: 2px solid rgba(0,0,0,0.12); color: var(--bw-ink); padding: 12px 32px; font-family: var(--font-b); font-size: 13px; cursor: pointer; }
 /* Zone mockup incliné — retirée du hero, mockup uniquement dans sa section dédiée */
-.c-hero-mock-wrap {
-  display: none;
-}
-/* Mockup cockpit — incliné, grand, sort du cadre */
-.c-cockpit-mock {
-  background: #0a0806; border-radius: 12px 12px 0 0; overflow: hidden;
-  box-shadow: -40px -20px 120px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.12);
-  width: 72%; transform: perspective(1400px) rotateY(-6deg) rotateX(4deg);
-  transform-origin: bottom right;
-}
-.c-mock-top { background: #0e0c09; border-bottom: 1px solid #1a1714; padding: 14px 20px; display: flex; align-items: center; gap: 8px; }
-.c-mock-dots { display: flex; gap: 6px; }
-.c-mock-dot { width: 10px; height: 10px; border-radius: 50%; }
-.c-mock-title { font-family: var(--font-c); font-size: 11px; letter-spacing: 3px; color: #252220; margin-left: 12px; }
-.c-mock-body { padding: 20px; display: flex; flex-direction: column; gap: 8px; }
-.c-mock-row { background: #111; border: 1px solid #1a1714; border-radius: 3px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
-.c-mock-lbl { font-size: 11px; color: #4a4440; flex: 1; }
-.c-mock-badge { font-size: 8px; padding: 3px 10px; border-radius: 8px; font-weight: 700; letter-spacing: 1px; }
-.c-mock-bar { background: #0e0c09; border-top: 1px solid #1a1714; padding: 12px 20px; display: flex; gap: 8px; align-items: center; }
-.c-mock-live { width: 7px; height: 7px; border-radius: 50%; background: var(--bw-teal); box-shadow: 0 0 8px rgba(78,205,196,0.5); }
-.c-mock-status { font-size: 10px; color: #3e3830; letter-spacing: 1px; }
+
 
 /* C01b — FILMSTRIP cinéma — moment WOW entre hero et partenaires */
 .c-filmstrip {
@@ -597,14 +601,14 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 
 /* C02 — STRIP partenaires (sombre) — plus visible = confiance institutionnelle */
 .c-strip { background: var(--bw-ink); padding: 22px 60px; display: flex; align-items: center; gap: 0; overflow: hidden; border-bottom: 1px solid #111; }
-.c-strip-label { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: #3a3a3a; margin-right: 48px; white-space: nowrap; }
+.c-strip-label { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.22); margin-right: 48px; white-space: nowrap; font-family: monospace; }
 .c-strip-items { display: flex; gap: 56px; align-items: center; }
-.c-strip-item { font-family: var(--font-c); font-size: 17px; color: #888; letter-spacing: 2px; }
+.c-strip-item { font-family: var(--font-c); font-size: 17px; color: rgba(255,255,255,0.52); letter-spacing: 2px; }
 
 /* C03 — POURQUOI (clair, éditorial) */
 .c-why { background: var(--bw-cream); padding: 100px 60px; }
 .c-why-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
-.c-why-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: rgba(0,0,0,0.3); padding-top: 8px; }
+.c-why-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: rgba(0,0,0,0.3); padding-top: 8px; font-family: monospace; }
 .c-why-right {}
 .c-why-h { font-family: var(--font-c); font-size: clamp(56px, 6.5vw, 96px); color: var(--bw-ink); line-height: 0.95; margin-bottom: 40px; }
 .c-why-h em { color: var(--bw-orange); font-style: normal; }
@@ -637,16 +641,16 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
   position: absolute; inset: 0;
   background-image: url('photos/_1177608.JPG');
   background-size: cover; background-position: center 40%;
-  filter: saturate(0.6) brightness(0.6);
+  filter: saturate(0.65) brightness(0.68);
 }
-.c-photo-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,6,4,0.95) 0%, rgba(8,6,4,0.0) 55%), linear-gradient(to right, rgba(8,6,4,0.3) 0%, transparent 60%); }
+.c-photo-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,6,4,0.78) 0%, rgba(8,6,4,0.0) 60%), linear-gradient(to right, rgba(8,6,4,0.2) 0%, transparent 60%); }
 .c-photo-content { position: relative; z-index: 5; padding: 60px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; align-items: end; }
 .c-photo-h { font-family: var(--font-c); font-size: clamp(48px, 6vw, 88px); line-height: 0.9; color: white; }
 .c-photo-right { text-align: right; }
 .c-photo-sub { font-size: 13px; color: rgba(255,255,255,0.62); line-height: 1.7; max-width: 300px; margin-left: auto; }
 
 /* C06 — MÉTHODE (clair, timeline propre) */
-.c-method { background: var(--bw-warm); padding: 100px 60px; }
+.c-method { background: var(--bw-warm); padding: 100px 60px; overflow: hidden; }
 .c-method-head { margin-bottom: 72px; display: flex; justify-content: space-between; align-items: flex-end; }
 .c-method-h { font-family: var(--font-c); font-size: clamp(48px, 6vw, 88px); color: var(--bw-ink); line-height: 0.9; }
 .c-method-sub { font-size: 13px; color: rgba(0,0,0,0.35); max-width: 240px; text-align: right; line-height: 1.65; }
@@ -659,7 +663,7 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 }
 .c-scene:last-child { border-bottom: 1px solid rgba(0,0,0,0.07); }
 .c-scene:hover { background: rgba(0,0,0,0.02); margin: 0 -60px; padding-left: 60px; padding-right: 60px; }
-.c-scene-n { font-family: var(--font-c); font-size: 48px; color: rgba(0,0,0,0.06); line-height: 1; }
+.c-scene-n { font-family: monospace; font-size: 48px; color: rgba(0,0,0,0.06); line-height: 1; }
 .c-scene-body {}
 .c-scene-name { font-family: var(--font-c); font-size: clamp(28px, 3vw, 42px); color: var(--bw-ink); line-height: 1; margin-bottom: 6px; }
 .c-scene-desc { font-size: 13px; color: rgba(0,0,0,0.4); line-height: 1.6; }
@@ -668,7 +672,7 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 /* C07 — COCKPIT FOCUS (sombre) */
 .c-cockpit-section { background: var(--bw-ink); padding: 100px 60px; }
 .c-cockpit-inner { display: grid; grid-template-columns: 1fr 1.3fr; gap: 80px; align-items: center; }
-.c-cockpit-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--bw-teal); margin-bottom: 20px; display: block; }
+.c-cockpit-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--bw-teal); margin-bottom: 20px; display: block; font-family: monospace; }
 .c-cockpit-h { font-family: var(--font-c); font-size: clamp(48px, 5.5vw, 80px); color: white; line-height: 0.95; margin-bottom: 24px; }
 .c-cockpit-sub { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 36px; }
 /* Specs numériques — éditorial, pas dot list SaaS */
@@ -677,7 +681,7 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 .c-feat:last-child { border-bottom: 1px solid #111; }
 .c-feat-icon { display: none; }
 .c-feat-dot { display: none; }
-.c-feat-num { font-family: var(--font-c); font-size: 56px; color: rgba(78,205,196,0.15); line-height: 1; }
+.c-feat-num { font-family: monospace; font-size: 56px; color: rgba(78,205,196,0.15); line-height: 1; }
 .c-feat-title { font-family: var(--font-c); font-size: 30px; color: white; line-height: 1; margin-bottom: 6px; letter-spacing: 0.5px; }
 .c-feat-desc { font-size: 12px; color: #666; line-height: 1.65; }
 /* Grand mockup */
@@ -742,10 +746,10 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 /* MARQUES DE CADRAGE CINÉMA — coins L, standard print/pellicule */
 .frame-marks { position: absolute; inset: 24px; pointer-events: none; z-index: 10; }
 .frame-mark { position: absolute; width: 20px; height: 20px; }
-.frame-mark.tl { top: 0; left: 0; border-top: 1px solid rgba(255,107,53,0.22); border-left: 1px solid rgba(255,107,53,0.22); }
-.frame-mark.tr { top: 0; right: 0; border-top: 1px solid rgba(255,107,53,0.22); border-right: 1px solid rgba(255,107,53,0.22); }
-.frame-mark.bl { bottom: 0; left: 0; border-bottom: 1px solid rgba(255,107,53,0.22); border-left: 1px solid rgba(255,107,53,0.22); }
-.frame-mark.br { bottom: 0; right: 0; border-bottom: 1px solid rgba(255,107,53,0.22); border-right: 1px solid rgba(255,107,53,0.22); }
+.frame-mark.tl { top: 0; left: 0; border-top: 1px solid rgba(255,255,255,0.10); border-left: 1px solid rgba(255,255,255,0.10); }
+.frame-mark.tr { top: 0; right: 0; border-top: 1px solid rgba(255,255,255,0.10); border-right: 1px solid rgba(255,255,255,0.10); }
+.frame-mark.bl { bottom: 0; left: 0; border-bottom: 1px solid rgba(255,255,255,0.10); border-left: 1px solid rgba(255,255,255,0.10); }
+.frame-mark.br { bottom: 0; right: 0; border-bottom: 1px solid rgba(255,255,255,0.10); border-right: 1px solid rgba(255,255,255,0.10); }
 
 /* A — FILM ITEMS hover — ligne orange qui se dessine de gauche à droite */
 .a-film-item { position: relative; overflow: hidden; transition: padding-left 0.35s cubic-bezier(0.25,0.46,0.45,0.94); }
@@ -758,11 +762,11 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 .a-phase { position: relative; }
 .a-phase-anno {
   position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
-  font-size: 8px; letter-spacing: 4px; color: rgba(255,107,53,0);
+  font-size: 8px; letter-spacing: 4px; color: rgba(255,255,255,0);
   text-transform: uppercase; font-family: monospace;
   transition: color 0.4s; white-space: nowrap; pointer-events: none;
 }
-.a-phase:hover .a-phase-anno { color: rgba(255,107,53,0.32); }
+.a-phase:hover .a-phase-anno { color: rgba(255,255,255,0.22); }
 
 /* C — HERO GRID — overlay grille de précision, instrument technique */
 .c-hero::after {
@@ -786,7 +790,7 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 ─────────────────────────────────────────────────────────── */
 .a-film-strip-l {
   position: absolute; left: 0; top: 0; bottom: 0; width: 22px; pointer-events: none; z-index: 6;
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='32'%3E%3Crect x='6' y='8' width='10' height='16' rx='2' fill='none' stroke='%23FF6B35' stroke-opacity='0.18' stroke-width='0.8'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='32'%3E%3Crect x='6' y='8' width='10' height='16' rx='2' fill='none' stroke='%23ffffff' stroke-opacity='0.10' stroke-width='0.8'/%3E%3C/svg%3E");
   background-size: 22px 32px;
   background-repeat: repeat-y;
 }
@@ -798,12 +802,12 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
   display: inline-block; width: 20px; height: 20px; position: relative; flex-shrink: 0;
 }
 .reg-mark::before, .reg-mark::after {
-  content: ''; position: absolute; background: var(--bw-orange); opacity: 0.25;
+  content: ''; position: absolute; background: rgba(255,255,255,0.10); opacity: 1;
 }
 .reg-mark::before { left: 50%; top: 0; bottom: 0; width: 1px; transform: translateX(-50%); }
 .reg-mark::after { top: 50%; left: 0; right: 0; height: 1px; transform: translateY(-50%); }
 .reg-circle {
-  position: absolute; inset: 3px; border: 0.8px solid rgba(255,107,53,0.25); border-radius: 50%;
+  position: absolute; inset: 3px; border: 0.8px solid rgba(255,255,255,0.10); border-radius: 50%;
 }
 
 /* ── DIAGRAMME OUVERTURE OBJECTIF — C cockpit ────────────
@@ -851,8 +855,8 @@ body { background: #060504; font-family: var(--font-b); color: white; overflow-x
 .counting { font-variant-numeric: tabular-nums; }
 
 /* ── NUMÉROS DE FILMS — détail éditorial A24 */
-.a-film-n { font-family: monospace; font-size: 11px; color: rgba(255,107,53,0.25); letter-spacing: 3px; min-width: 36px; flex-shrink: 0; transition: color 0.3s; }
-.a-film-item:hover .a-film-n { color: rgba(255,107,53,0.6); }
+.a-film-n { font-family: monospace; font-size: 11px; color: rgba(255,255,255,0.15); letter-spacing: 3px; min-width: 36px; flex-shrink: 0; transition: color 0.3s; }
+.a-film-item:hover .a-film-n { color: rgba(255,255,255,0.35); }
 .a-film-name-wrap { display: flex; align-items: baseline; gap: 20px; }
 
 /* ── BUTTON HOVER — finition universelle, micro-élévation */
@@ -871,8 +875,8 @@ button { cursor: pointer; }
 }
 .c-nav-cta { transition: background 0.2s, transform 0.18s; }
 .c-nav-cta:hover { background: #2a2a2a; transform: translateY(-1px); }
-.a-cta-link { transition: opacity 0.2s, transform 0.18s; }
-.a-cta-link:hover { opacity: 0.7; transform: translateX(4px); }
+.a-cta-link { transition: background 0.2s, transform 0.18s; }
+.a-cta-link:hover { background: #e05a28; transform: translateX(4px); }
 
 /* ── LIVE DOT PULSE — mockup vivant */
 @keyframes livePulse {
@@ -908,7 +912,7 @@ button { cursor: pointer; }
 /* On B hero grain — ne pas filter */
 
 /* ── B POUR-ETAB — section institutionnelle éditoriale */
-.b-pour-etab { background: #060402; padding: 80px 60px; border-top: 1px solid #0f0f0f; }
+.b-pour-etab { background: #0e0a05; padding: 80px 60px; border-top: 1px solid #1a1410; }
 .b-pour-etab-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
 .b-pour-etab-label { font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: rgba(212,168,67,0.5); display: block; margin-bottom: 32px; }
 .b-pour-etab-h { font-family: var(--font-c); font-size: clamp(48px, 6vw, 80px); color: white; line-height: 0.93; }
@@ -922,15 +926,15 @@ button { cursor: pointer; }
 .c-filmstrip-credit {
   background: var(--bw-ink); padding: 10px 24px;
   display: flex; align-items: center; gap: 16px;
-  border-top: 1px solid rgba(255,107,53,0.1);
+  border-top: 1px solid rgba(255,255,255,0.06);
 }
-.c-filmstrip-credit-n { font-family: var(--font-c); font-size: 11px; letter-spacing: 3px; color: var(--bw-orange); opacity: 0.55; }
-.c-filmstrip-credit-sep { font-size: 8px; color: rgba(255,107,53,0.2); }
+.c-filmstrip-credit-n { font-family: var(--font-c); font-size: 11px; letter-spacing: 3px; color: white; opacity: 0.4; }
+.c-filmstrip-credit-sep { font-size: 8px; color: rgba(255,255,255,0.1); }
 .c-filmstrip-credit-loc, .c-filmstrip-credit-years { font-family: monospace; font-size: 9px; letter-spacing: 3px; color: rgba(255,255,255,0.22); text-transform: uppercase; }
 
 /* ── TICKER hover — item s'illumine */
 .a-ticker-item { transition: color 0.25s; cursor: default; }
-.a-ticker-item:hover { color: rgba(255,255,255,0.22); }
+.a-ticker-item:hover { color: rgba(255,255,255,0.20); }
 
 /* ── KEN BURNS — photos vivantes sans clic ──────────────────
    Ambiance vidéo via animation CSS — association cinéma, pas SaaS
@@ -979,7 +983,7 @@ button { cursor: pointer; }
 .reveal-fast.visible { opacity: 1; transform: translateY(0); }
 
 /* A — TICKER item hover — un item s'allume au passage du curseur */
-.a-ticker-item:hover { color: rgba(255,255,255,0.2); transition: color 0.2s; }
+.a-ticker-item:hover { color: rgba(255,255,255,0.18); transition: color 0.2s; }
 
 /* C — STRIP items hover */
 .c-strip-item { transition: color 0.25s; cursor: default; }
@@ -987,7 +991,7 @@ button { cursor: pointer; }
 
 /* A — MANIFESTE — text subtle underline on em */
 .a-manifeste-text em { position: relative; }
-.a-manifeste-text em::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--bw-orange); opacity: 0.3; }
+.a-manifeste-text em::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.15); opacity: 1; }
 
 /* C — Scene hover — highlight plein fond */
 .c-scene { position: relative; }
@@ -1049,7 +1053,6 @@ button { cursor: pointer; }
   .c-h1 { font-size: clamp(64px, 18vw, 120px); white-space: normal; }
   .c-hero-right { flex-direction: column; gap: 24px; align-items: flex-start; margin-bottom: 24px; }
   .c-sub { max-width: 100%; }
-  .c-hero-mock-wrap { justify-content: center; }
   .c-cockpit-mock { width: 100%; transform: none; }
   .c-nav { padding: 20px 24px; }
   .c-why { padding: 60px 24px; }
@@ -1069,9 +1072,122 @@ button { cursor: pointer; }
   .c-cta-h { font-size: clamp(48px, 12vw, 80px); }
   .c-footer { grid-template-columns: 1fr; gap: 32px; padding: 48px 24px; }
 }
+
+/* V2 — VERSION C UPGRADE — Brilliant.org style : UI incrustée dans la typo */
+.c-hero-cockpit-embed {
+  position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+  width: min(480px, 38vw); z-index: 10;
+  background: rgba(8,8,10,0.92);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04);
+}
+.c-embed-bar {
+  height: 36px; background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; padding: 0 14px; gap: 8px;
+}
+.c-embed-dot { width: 10px; height: 10px; border-radius: 50%; }
+.c-embed-dot:nth-child(1) { background: rgba(255,95,87,0.7); }
+.c-embed-dot:nth-child(2) { background: rgba(255,189,68,0.5); }
+.c-embed-dot:nth-child(3) { background: rgba(39,201,63,0.5); }
+.c-embed-label { margin-left: 8px; font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 1px; font-family: var(--font-b); }
+.c-embed-body { padding: 20px; }
+.c-embed-session {
+  background: rgba(255,107,53,0.08); border: 1px solid rgba(255,107,53,0.15);
+  border-radius: 8px; padding: 12px 14px; margin-bottom: 12px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.c-embed-session-title { font-size: 11px; color: rgba(255,255,255,0.6); font-family: var(--font-b); }
+.c-embed-session-live { font-size: 9px; color: var(--bw-orange); letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 5px; }
+.c-embed-session-live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--bw-orange); animation: pulse-dot 1.5s ease-in-out infinite; }
+@keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+.c-embed-students { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.c-embed-student { background: rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 8px; text-align: center; }
+.c-embed-student-name { font-size: 10px; color: rgba(255,255,255,0.5); font-family: var(--font-b); }
+.c-embed-student-score { font-family: var(--font-c); font-size: 22px; color: white; line-height: 1; margin-top: 4px; }
+.c-embed-student-score.hot { color: var(--bw-orange); }
+.c-embed-action { background: var(--bw-orange); color: white; border: none; width: 100%; padding: 10px; font-family: var(--font-b); font-size: 11px; font-weight: 600; border-radius: 6px; cursor: pointer; letter-spacing: 0.5px; }
+
+/* V2 — C hero title plus grand + cockpit visible */
+
+/* ═══ V3 ADDITIONS ══════════════════════════════════════════
+   Cursor trail · Halftone canvas · Split-flap · Filmstrip réel · Noise distortion
+═══════════════════════════════════════════════════════════ */
+
+/* GRAIN overlay V3 */
+#v3-grain { position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.038;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay; animation:v3-grain-anim .08s steps(1) infinite; }
+@keyframes v3-grain-anim { 0%{transform:translate(0,0)} 20%{transform:translate(-2%,-3%)} 40%{transform:translate(3%,1%)} 60%{transform:translate(-1%,3%)} 80%{transform:translate(2%,-2%)} }
+
+/* CURSOR TRAIL */
+.v3-trail { position:fixed;pointer-events:none;z-index:9990;background-size:cover;background-position:center;filter:saturate(0) brightness(.62);border:1px solid rgba(255,255,255,.07);transform:translate(-50%,-50%) rotate(var(--rot));transition:opacity .55s,transform .55s; }
+
+/* A — HALFTONE SECTION */
+.a-halftone { height:100vh;background:#000;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center; }
+#a-ht-canvas { position:absolute;inset:0;width:100%;height:100%; }
+.a-ht-ovl { position:absolute;inset:0;z-index:4;pointer-events:none;background:radial-gradient(ellipse at center,transparent 20%,rgba(0,0,0,.6) 100%); }
+.a-ht-content { position:relative;z-index:10;text-align:center;pointer-events:none; }
+.a-ht-content h2 { font-family:var(--font-c);font-size:clamp(56px,10vw,148px);line-height:.85;color:white;mix-blend-mode:difference; }
+.a-ht-lbl { position:absolute;bottom:28px;left:36px;z-index:20;font-size:8px;color:rgba(255,255,255,.2);letter-spacing:4px;text-transform:uppercase;font-family:monospace; }
+.a-ht-hint { position:absolute;bottom:28px;right:36px;z-index:20;font-size:8px;color:rgba(255,255,255,.12);letter-spacing:3px;text-transform:uppercase;font-family:monospace; }
+
+/* B — FILMSTRIP MAKING-OF */
+.b-filmstrip-v3 { background:#000;overflow:hidden;position:relative;border-top:1px solid #0a0806; }
+.b-filmstrip-v3::before,.b-filmstrip-v3::after { content:'';position:absolute;top:0;bottom:0;width:100px;z-index:10;pointer-events:none; }
+.b-filmstrip-v3::before { left:0;background:linear-gradient(to right,#000,transparent); }
+.b-filmstrip-v3::after { right:0;background:linear-gradient(to left,#000,transparent); }
+.b-strip-row { display:flex;gap:3px; }
+.b-strip-row.fwd { animation:bstrip-fwd 30s linear infinite; }
+.b-strip-row.rev { animation:bstrip-fwd 22s linear infinite reverse; }
+@keyframes bstrip-fwd { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.b-strip-cell { width:200px;height:130px;flex-shrink:0;overflow:hidden; }
+.b-strip-cell img { width:100%;height:100%;object-fit:cover;filter:saturate(.35) brightness(.62) contrast(1.1);transition:filter .4s; }
+.b-strip-cell:hover img { filter:saturate(.8) brightness(.85); }
+
+/* B — HOVER TINT on collage (Safari-safe, replaces SVG filter) */
+.b-col-noise {
+  position:absolute;inset:0;z-index:6;opacity:0;transition:opacity .35s;pointer-events:none;
+  background: linear-gradient(135deg, rgba(255,107,53,0.18) 0%, rgba(212,168,67,0.12) 100%);
+  mix-blend-mode: overlay;
+}
+.b-col-cell:hover .b-col-noise { opacity:1; }
+
+/* C — SPLIT-FLAP SECTION */
+.c-splitflap { min-height:100vh;background:#0a0806;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:80px 40px; }
+.c-sf-bg { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(0) brightness(.12) contrast(1.2); }
+.c-sf-lbl { font-family:monospace;font-size:8px;letter-spacing:5px;color:rgba(255,107,53,.5);text-transform:uppercase;margin-bottom:40px;position:relative;z-index:10; }
+#c-sf-display { display:flex;gap:3px;position:relative;z-index:10;flex-wrap:nowrap;justify-content:center; }
+.c-sf-char { width:clamp(26px,3.8vw,68px);height:clamp(36px,5.2vw,92px);background:#111;border:1px solid #1a1a1a;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0; }
+.c-sf-char-inner { font-family:var(--font-c);font-size:clamp(20px,3vw,52px);color:white;line-height:1;position:relative;z-index:2; }
+.c-sf-char::after { content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.8);z-index:3;pointer-events:none; }
+.c-sf-char.flipping .c-sf-char-inner { animation:csf-flip .08s ease-in-out; }
+@keyframes csf-flip { 0%{transform:scaleY(1)} 40%{transform:scaleY(0);opacity:.5} 60%{transform:scaleY(0);opacity:.5} 100%{transform:scaleY(1)} }
+.c-sf-char.sp { background:transparent;border-color:transparent;width:clamp(10px,1.8vw,28px); }
+.c-sf-word-lbl { font-family:monospace;font-size:8px;letter-spacing:4px;color:rgba(255,255,255,.12);margin-top:28px;position:relative;z-index:10;text-transform:uppercase; }
+.c-sf-ctr { font-family:monospace;font-size:8px;color:var(--bw-orange);letter-spacing:2px;margin-top:8px;position:relative;z-index:10; }
+
+/* C filmstrip — upgrade avec making-of frames */
+.c-film-cell-bg.mof { background-size:cover!important; filter:saturate(0) brightness(.62) contrast(1.2)!important; }
 </style>
 </head>
 <body>
+<!-- V3 grain + SVG noise filters -->
+<div id="v3-grain"></div>
+<svg style="display:none;position:absolute">
+  <defs>
+    <filter id="v3-noise-A" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="3" seed="2" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="28" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="v3-noise-B" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="3" seed="9" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="18" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
 <div class="cursor" id="cursor"></div>
 
 <nav class="chooser">
@@ -1085,7 +1201,8 @@ button { cursor: pointer; }
 <!-- ══════════════ PAGE A — BÉTON BRUT ══════════════ -->
 <div class="page active" id="page-a">
 
-  <section class="a-hero">
+  <section class="a-hero" id="a-hero-sec">
+    <div class="a-hero-cinematic"></div>
     <div class="a-hero-bg-word">BWD</div>
     <span class="a-hero-credit">Association Banlieuwood — Cinéma — Seine-Saint-Denis — Depuis 2016</span>
     <div class="frame-marks"><div class="frame-mark tl"></div><div class="frame-mark tr"></div><div class="frame-mark bl"></div><div class="frame-mark br"></div></div>
@@ -1191,8 +1308,10 @@ button { cursor: pointer; }
 
   <!-- REEL SECTION — vidéo ambiante ou Ken Burns fallback, autoplay sans clic -->
   <section class="a-reel">
-    <!-- <video class="a-reel-video" autoplay muted loop playsinline src="video/reel.mp4"></video> -->
-    <div class="a-reel-fallback"></div>
+    <video class="a-reel-video" autoplay muted loop playsinline style="filter:saturate(0.2) brightness(.55)">
+      <source src="making-of/passage.mp4" type="video/mp4">
+    </video>
+    <div class="a-reel-fallback" style="opacity:0"></div>
     <div class="a-reel-overlay"></div>
     <div class="a-reel-content">
       <div>
@@ -1250,8 +1369,9 @@ button { cursor: pointer; }
     <div class="frame-marks" style="inset:20px;"><div class="frame-mark tl"></div><div class="frame-mark tr"></div><div class="frame-mark bl"></div><div class="frame-mark br"></div></div>
     <h2 class="a-cta-h"><em>1200</em> vies<br>transformées.<br>La prochaine ?</h2>
     <div class="a-cta-bottom">
-      <button class="a-btn-ink">Rejoindre Banlieuwood</button>
+      <button class="a-btn-ink">Contacter notre équipe</button>
       <button class="a-btn-o">Voir nos films</button>
+      <p style="font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.28);font-family:monospace;margin-top:20px;">contact@banlieuwood.fr · Réponse en 48h</p>
     </div>
   </section>
 
@@ -1272,6 +1392,7 @@ button { cursor: pointer; }
   <section class="b-hero">
     <div class="b-hero-bg"></div>
     <div class="b-hero-grain"></div>
+    <div class="b-hero-grid-word">VÉRITÉ</div>
     <nav class="b-nav">
       <span class="b-logo">BANLIEUWOOD</span>
       <div class="b-nav-right">
@@ -1282,34 +1403,40 @@ button { cursor: pointer; }
       </div>
     </nav>
     <div class="b-hero-content">
-      <span class="b-eyebrow">Association · Seine-Saint-Denis · Depuis 2016</span>
+      <span class="b-eyebrow">Programmes pédagogiques cinéma · Établissements &amp; MJC · Seine-Saint-Denis</span>
       <h1 class="b-h1">Filmer<br><em>Sa Vérité</em></h1>
       <div class="b-hero-bottom">
-        <p class="b-sub">Ateliers cinéma pour jeunes des quartiers populaires. Du scénario au festival.</p>
-        <button class="b-hero-btn">Rejoindre</button>
+        <p class="b-sub">Ateliers cinéma clé en main pour jeunes des quartiers populaires. Du scénario au festival.</p>
+        <button class="b-hero-btn">Demander un programme</button>
       </div>
     </div>
   </section>
 
   <div class="b-collage" style="position:relative;">
     <span class="b-folio">BANLIEUWOOD · 01</span>
+    <!-- V3 : photos originales V2 conservées + noise distortion hover -->
     <div class="b-col-cell span2" style="background-image:url('photos/_1177495.JPG');background-size:cover;background-position:center;">
+      <div class="b-col-noise"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,6,4,0.75) 0%,transparent 50%);"></div>
       <div class="b-col-meta"><div class="b-col-title">Sur le plateau</div><div class="b-col-sub">Tournage 2024</div></div>
     </div>
     <div class="b-col-cell" style="background-image:url('photos/_1177442.JPG');background-size:cover;background-position:center 30%;filter:saturate(0.6) brightness(0.7);">
+      <div class="b-col-noise"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,6,4,0.8) 0%,transparent 50%);"></div>
       <div class="b-col-meta"><div class="b-col-title">Prise de son</div><div class="b-col-sub">Atelier 2023</div></div>
     </div>
     <div class="b-col-cell" style="background-image:url('photos/_1177257.JPG');background-size:cover;background-position:center;filter:saturate(0.6) brightness(0.7);">
+      <div class="b-col-noise"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,6,4,0.8) 0%,transparent 50%);"></div>
       <div class="b-col-meta"><div class="b-col-title">Maquillage</div><div class="b-col-sub">Making-of</div></div>
     </div>
     <div class="b-col-cell" style="background-image:url('photos/P1011059.jpg');background-size:cover;background-position:center top;filter:saturate(0.5) brightness(0.7);">
+      <div class="b-col-noise"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,6,4,0.8) 0%,transparent 50%);"></div>
       <div class="b-col-meta"><div class="b-col-title">Casting</div><div class="b-col-sub">Studio 2022</div></div>
     </div>
     <div class="b-col-cell" style="background-image:url('photos/_1177608.JPG');background-size:cover;background-position:center;filter:saturate(0.6) brightness(0.65);">
+      <div class="b-col-noise"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,6,4,0.8) 0%,transparent 50%);"></div>
       <div class="b-col-meta"><div class="b-col-title">Voir la Mer</div><div class="b-col-sub">Court 2023</div></div>
     </div>
@@ -1326,17 +1453,6 @@ button { cursor: pointer; }
         <div class="b-quote-mark">«</div>
         <p class="b-quote-text">J'ai compris que ma <em>vie de quartier</em> était un film que j'avais le droit de raconter.</p>
         <div class="b-quote-attr"><span class="b-quote-dash"></span><span>Samir B. — atelier 2023</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="b-full-photo">
-    <div class="b-full-photo-bg"></div>
-    <div class="b-full-photo-content">
-      <h2 class="b-full-h2">L'Atelier<br>comme<br>Studio</h2>
-      <div class="b-full-right">
-        <p class="b-full-sub">Caméras pro, kits lumière, son, montage. Ce que les écoles privées facturent 15 000€ par an.</p>
-        <span class="b-full-link">Découvrir les ateliers →</span>
       </div>
     </div>
   </section>
@@ -1369,7 +1485,7 @@ button { cursor: pointer; }
     </div>
   </section>
 
-  <section class="b-method">
+<section class="b-method">
     <div class="b-method-head"><h2 class="b-method-h">La<br>Méthode</h2></div>
     <div class="b-phase-editorial">
       <div class="b-phase-img"></div>
@@ -1390,6 +1506,17 @@ button { cursor: pointer; }
     <div class="b-phase-editorial">
       <div class="b-phase-img p5"></div>
       <div class="b-phase-txt"><div class="b-phase-n">05</div><div class="b-phase-name">Diffusion</div><p class="b-phase-desc">Projection publique, festivals, circuits scolaires. Les films ont une vie réelle — pas juste un fichier sur un disque dur.</p><span class="b-phase-tag">1 projection publique</span></div>
+    </div>
+  </section>
+
+  <section class="b-full-photo">
+    <div class="b-full-photo-bg"></div>
+    <div class="b-full-photo-content">
+      <h2 class="b-full-h2">L'Atelier<br>comme<br>Studio</h2>
+      <div class="b-full-right">
+        <p class="b-full-sub">Caméras pro, kits lumière, son, montage. Ce que les écoles privées facturent 15 000€ par an.</p>
+        <span class="b-full-link">Découvrir les ateliers →</span>
+      </div>
     </div>
   </section>
 
@@ -1420,6 +1547,7 @@ button { cursor: pointer; }
     <div class="b-cta-content">
       <h2 class="b-cta-h">Votre établissement<br>rejoint <em>l'aventure</em> ?</h2>
       <div class="b-cta-btns"><button class="b-btn-gold">Contacter notre équipe</button><button class="b-btn-ghost">Télécharger le dossier</button></div>
+      <p style="font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.28);font-family:monospace;margin-top:16px;">contact@banlieuwood.fr · Réponse en 48h</p>
     </div>
   </section>
 
@@ -1437,7 +1565,7 @@ button { cursor: pointer; }
 <!-- ══════════════ PAGE C — COCKPIT CINÉMA ══════════════ -->
 <div class="page" id="page-c">
 
-  <section class="c-hero">
+  <section class="c-hero" style="position:relative; overflow:hidden;">
     <nav class="c-nav">
       <span class="c-logo">BANLIEUWOOD</span>
       <div class="c-nav-links"><a href="#" class="c-nav-link">Ateliers</a><a href="#" class="c-nav-link">Films</a><a href="#" class="c-nav-link">Cockpit</a></div>
@@ -1457,6 +1585,19 @@ button { cursor: pointer; }
           <button class="c-btn-main">Essayer le cockpit</button>
           <button class="c-btn-sec">Voir les ateliers</button>
         </div>
+        <!-- V2 BRILLIANT EMBED — UI cockpit incrustée dans la section -->
+        <div class="c-hero-cockpit-embed" style="position:relative;margin-top:40px;max-width:480px;">
+          <div class="c-embed-bar"><div class="c-embed-dot"></div><div class="c-embed-dot"></div><div class="c-embed-dot"></div><span class="c-embed-label">COCKPIT · SÉANCE LIVE</span></div>
+          <div class="c-embed-body">
+            <div class="c-embed-session"><span class="c-embed-session-title">Scène 03 — Contre-champ café</span><span class="c-embed-session-live">LIVE</span></div>
+            <div class="c-embed-students">
+              <div class="c-embed-student"><div class="c-embed-student-name">Équipe A</div><div class="c-embed-student-score hot">07</div></div>
+              <div class="c-embed-student"><div class="c-embed-student-name">Équipe B</div><div class="c-embed-student-score">05</div></div>
+              <div class="c-embed-student"><div class="c-embed-student-name">Équipe C</div><div class="c-embed-student-score">09</div></div>
+            </div>
+            <button class="c-embed-action">Lancer l'exercice suivant →</button>
+          </div>
+        </div>
       </div>
       <div class="c-hero-stats">
         <div class="c-hero-stat"><div class="c-hero-stat-val">1200</div><div class="c-hero-stat-lbl">Jeunes formés</div></div>
@@ -1464,37 +1605,27 @@ button { cursor: pointer; }
         <div class="c-hero-stat"><div class="c-hero-stat-val">12</div><div class="c-hero-stat-lbl">Établissements</div></div>
         <div class="c-hero-stat"><div class="c-hero-stat-val">8</div><div class="c-hero-stat-lbl">Ans de présence</div></div>
       </div>
-      <div class="c-hero-mock-wrap">
-        <div class="c-cockpit-mock">
-          <div class="c-mock-top"><div class="c-mock-dots"><div class="c-mock-dot" style="background:#252220"></div><div class="c-mock-dot" style="background:#1e1c18"></div><div class="c-mock-dot" style="background:#181614"></div></div><span class="c-mock-title">COCKPIT · SÉANCE EN COURS</span></div>
-          <div class="c-mock-body">
-            <div class="c-mock-row"><span class="c-mock-lbl">Scène 03 — Contre-champ café</span><span class="c-mock-badge badge-o">EN COURS</span></div>
-            <div class="c-mock-row"><span class="c-mock-lbl">Équipe A — Caméra + Son</span><span class="c-mock-badge badge-t">PLATEAU</span></div>
-            <div class="c-mock-row"><span class="c-mock-lbl">Équipe B — Écriture plan</span><span class="c-mock-badge badge-t">ACTIF</span></div>
-            <div class="c-mock-row"><span class="c-mock-lbl">Scène 04 — Travelling</span><span class="c-mock-badge badge-g">ATTENTE</span></div>
-            <div class="c-mock-row"><span class="c-mock-lbl">IA Gemini — Exercice prêt</span><span class="c-mock-badge badge-o">PRÊT</span></div>
-          </div>
-          <div class="c-mock-bar"><div class="c-mock-live"></div><span class="c-mock-status">23 participants · 01:24:15 · LIVE</span></div>
-        </div>
-      </div>
+
     </div>
   </section>
 
-  <div class="c-filmstrip">
-    <div class="c-film-cell" data-title="ATELIER · SEINE-SAINT-DENIS">
-      <div class="c-film-cell-bg" style="background-image:url('photos/P1011059.jpg');background-position:center top;"></div>
+  <div class="c-filmstrip" style="position:relative;">
+    <div style="position:absolute;bottom:24px;left:40px;z-index:20;font-family:monospace;font-size:10px;letter-spacing:5px;color:rgba(255,255,255,0.35);text-transform:uppercase;pointer-events:none;">DEPUIS 2016 — 1200 ÉLÈVES</div>
+    <!-- V3 : vraies frames making-of dans le filmstrip C -->
+    <div class="c-film-cell" data-title="PASSAGE · MAKING-OF">
+      <div class="c-film-cell-bg mof" style="background-image:url('making-of/frame_007.jpg');background-position:center;"></div>
       <span class="c-film-cell-n">01</span>
     </div>
-    <div class="c-film-cell main" data-title="TOURNAGE · JOUR 3">
-      <div class="c-film-cell-bg" style="background-image:url('photos/_1177495.JPG');background-position:center 35%;"></div>
+    <div class="c-film-cell main" data-title="TOURNAGE · PASSAGE 2024">
+      <div class="c-film-cell-bg mof" style="background-image:url('making-of/frame_015.jpg');background-position:center;"></div>
       <span class="c-film-cell-n">02</span>
     </div>
-    <div class="c-film-cell" data-title="ÉCRITURE · PHASE 02">
-      <div class="c-film-cell-bg" style="background-image:url('photos/_1177442.JPG');background-position:center;"></div>
+    <div class="c-film-cell" data-title="ÉLÈVES · MAKING-OF">
+      <div class="c-film-cell-bg mof" style="background-image:url('making-of/frame_022.jpg');background-position:center;"></div>
       <span class="c-film-cell-n">03</span>
     </div>
     <div class="c-film-cell" data-title="PROJECTION · FINALE">
-      <div class="c-film-cell-bg" style="background-image:url('photos/_1177608.JPG');background-position:center;"></div>
+      <div class="c-film-cell-bg mof" style="background-image:url('making-of/frame_035.jpg');background-position:center;"></div>
       <span class="c-film-cell-n">04</span>
     </div>
   </div>
@@ -1546,6 +1677,17 @@ button { cursor: pointer; }
       <div class="c-num"><span class="c-num-val">47</span><div class="c-num-lbl">films courts produits et diffusés</div></div>
       <div class="c-num"><span class="c-num-val">12</span><div class="c-num-lbl">établissements partenaires actifs</div></div>
     </div>
+  </section>
+
+  <!-- C/V3 — SPLIT-FLAP : rupture émotionnelle entre chiffres et photo -->
+  <section class="c-splitflap" id="c-splitflap-sec">
+    <video class="c-sf-bg" autoplay muted loop playsinline>
+      <source src="making-of/passage.mp4" type="video/mp4">
+    </video>
+    <div class="c-sf-lbl">BANLIEUWOOD · DEPUIS 2016</div>
+    <div id="c-sf-display"></div>
+    <div class="c-sf-word-lbl">CHAQUE QUARTIER A SON HISTOIRE</div>
+    <div class="c-sf-ctr" id="c-sf-ctr">SÉQUENCE 01 / 03</div>
   </section>
 
   <section class="c-photo">
@@ -1610,6 +1752,7 @@ button { cursor: pointer; }
       <div class="c-cta-right">
         <button class="c-btn-o">Contacter notre équipe</button>
         <button class="c-btn-w">Télécharger le dossier</button>
+        <p style="font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.28);font-family:monospace;margin-top:8px;">contact@banlieuwood.fr · Réponse en 48h</p>
       </div>
     </div>
   </section>
@@ -1735,6 +1878,99 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initReveal();
 });
+
+// ═══ V3 EFFECTS ══════════════════════════════════════════
+
+// ── CURSOR TRAIL (A hero uniquement) ─────────────────────
+const V3_FRAMES = ['making-of/frame_001.jpg','making-of/frame_005.jpg','making-of/frame_008.jpg','making-of/frame_012.jpg','making-of/frame_016.jpg','making-of/frame_020.jpg','making-of/frame_024.jpg','making-of/frame_028.jpg','making-of/frame_032.jpg','making-of/frame_036.jpg'];
+let v3TrailLast = 0, v3TrailIdx = 0;
+document.addEventListener('mousemove', e => {
+  if (!document.getElementById('page-a').classList.contains('active')) return;
+  const hero = document.getElementById('a-hero-sec');
+  if (!hero) return;
+  const hr = hero.getBoundingClientRect();
+  if (e.clientY < hr.top || e.clientY > hr.bottom) return;
+  const now = Date.now();
+  if (now - v3TrailLast < 60) return;
+  v3TrailLast = now;
+  const el = document.createElement('div');
+  el.className = 'v3-trail';
+  const rot = (Math.random() * 16 - 8).toFixed(1);
+  el.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;width:120px;height:76px;background-color:rgba(255,107,53,.18);background-image:url(${V3_FRAMES[v3TrailIdx % V3_FRAMES.length]});--rot:${rot}deg;opacity:.8;`;
+  v3TrailIdx++;
+  document.body.appendChild(el);
+  requestAnimationFrame(() => {
+    setTimeout(() => { el.style.opacity = '0'; el.style.transform = `translate(-50%,-50%) rotate(${rot}deg) scale(.88)`; }, 55);
+    setTimeout(() => el.remove(), 640);
+  });
+});
+
+
+// ── B NOISE DISTORTION — collage ─────────────────────────
+document.querySelectorAll('#page-b .b-col-cell').forEach(cell => {
+  const noise = cell.querySelector('.b-col-noise');
+  if (!noise) return;
+  cell.addEventListener('mouseenter', () => noise.style.opacity = '1');
+  cell.addEventListener('mouseleave', () => noise.style.opacity = '0');
+});
+
+/* C — SPLIT-FLAP */
+(function() {
+  const PHRASES = [
+    'FILMER SA VÉRITÉ',
+    '1200 VIES FORMÉES',
+    'LE CINÉMA PARLE'
+  ];
+  const maxLen = Math.max(...PHRASES.map(p => p.length));
+  const padded = PHRASES.map(p => p.padEnd(maxLen));
+
+  const display = document.getElementById('c-sf-display');
+  const ctrEl = document.getElementById('c-sf-ctr');
+  if (!display) return;
+
+  const cells = [];
+  for (let i = 0; i < maxLen; i++) {
+    const wrap = document.createElement('div');
+    wrap.className = 'c-sf-char';
+    const inner = document.createElement('div');
+    inner.className = 'c-sf-char-inner';
+    inner.textContent = '-'; // sera mis à jour au premier flip
+    wrap.appendChild(inner);
+    display.appendChild(wrap);
+    cells.push({ wrap, inner });
+  }
+
+  let phraseIdx = 0;
+
+  function flipToPhrase() {
+    const phrase = padded[phraseIdx];
+    phraseIdx = (phraseIdx + 1) % padded.length;
+    if (ctrEl) ctrEl.textContent = `SÉQUENCE ${String(phraseIdx).padStart(2,'0')} / 0${padded.length}`;
+    cells.forEach(({ wrap, inner }, i) => {
+      setTimeout(() => {
+        wrap.classList.add('flipping');
+        setTimeout(() => {
+          const ch = phrase[i] || ' ';
+          if (ch === ' ') {
+            wrap.classList.add('sp');
+            inner.textContent = '';
+          } else {
+            wrap.classList.remove('sp');
+            inner.textContent = ch;
+          }
+          wrap.classList.remove('flipping');
+        }, 44);
+      }, i * 55);
+    });
+  }
+
+  // Démarrage immédiat — pas d'attente scroll (évite zone de tirets mortes)
+  setTimeout(() => {
+    flipToPhrase();
+    setInterval(flipToPhrase, 3800);
+  }, 800);
+})();
+
 </script>
 </body>
 </html>

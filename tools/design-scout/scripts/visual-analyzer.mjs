@@ -21,12 +21,12 @@
  */
 
 import { chromium } from "playwright";
-import { writeFileSync, mkdirSync, existsSync, readdirSync } from "fs";
+import { writeFileSync, mkdirSync, existsSync, readdirSync, statSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const OUT_DIR = resolve(__dirname, "captures/visual-analysis");
+const OUT_DIR = resolve(__dirname, "../captures/visual-analysis");
 mkdirSync(OUT_DIR, { recursive: true });
 
 // ─── CONFIGURATION ────────────────────────────────────────────────────────────
@@ -42,24 +42,38 @@ function slug(url) {
   return url.replace(/https?:\/\/(www\.)?/, "").replace(/[^a-z0-9]/gi, "-").slice(0, 50).replace(/-+$/, "");
 }
 
-async function newPage(browser, mobile = false) {
+async function newPage(browser, mobile = false, stealth = false) {
   const page = await browser.newPage();
   await page.setViewportSize(mobile ? MOBILE : DESKTOP);
-  await page.setExtraHTTPHeaders({
+  const headers = {
     "User-Agent": mobile ? MOBILE_UA : DESKTOP_UA,
     "Accept-Language": "fr-FR,fr;q=0.9,en-US;q=0.8",
-  });
+  };
+  if (stealth) {
+    Object.assign(headers, {
+      "sec-ch-ua": '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"',
+      "sec-ch-ua-mobile": mobile ? "?1" : "?0",
+      "sec-ch-ua-platform": mobile ? '"iOS"' : '"macOS"',
+      "sec-fetch-dest": "document",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-site": "none",
+      "sec-fetch-user": "?1",
+      "upgrade-insecure-requests": "1",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    });
+  }
+  await page.setExtraHTTPHeaders(headers);
   return page;
 }
 
-async function goto(page, url) {
+async function goto(page, url, slow = false) {
   try {
-    await page.goto(url, { waitUntil: "networkidle", timeout: 35000 });
+    await page.goto(url, { waitUntil: "networkidle", timeout: slow ? 50000 : 35000 });
   } catch {
-    try { await page.goto(url, { waitUntil: "domcontentloaded", timeout: 25000 }); } catch {}
+    try { await page.goto(url, { waitUntil: "domcontentloaded", timeout: slow ? 35000 : 25000 }); } catch {}
   }
   // Attendre que JS + fonts soient chargés
-  await page.waitForTimeout(3500);
+  try { await page.waitForTimeout(slow ? 7000 : 3500); } catch {}
 }
 
 async function scrollFull(page) {
@@ -90,22 +104,37 @@ async function killPopups(page) {
     "Accept selected cookies", "Accepter tout", "Tout accepter",
     "Alle akzeptieren", "Alle Cookies akzeptieren",
     "Allow all", "Allow All", "Allow cookies", "Allow Cookies", "Allow all cookies",
-    "I agree", "Got it", "OK", "Okay", "Sure",
+    "Allow All Cookies", "Allow all cookies",
+    "I agree", "I Accept", "I accept", "Agree", "Accept", "Got it", "OK", "Okay", "Sure",
     "J'accepte", "Accepter", "Accepter les cookies", "Accepter tous les cookies",
-    "Alle akzeptieren", "Zustimmen",
+    "Accepter et continuer", "Accepter et fermer",
+    "Consent and continue", "Accept and continue",
+    "Autoriser tous les cookies", "Autoriser", "Tout autoriser",
+    "OK pour moi", "C'est OK pour moi", "C'est ok", "Tout accepter",
+    "Akkoord", "Accepteer alle cookies",
+    "Alle akzeptieren", "Zustimmen", "Einverstanden",
+    // Cookiebot spécifique (Harry's, fintech...)
+    "Allow all cookies", "Tillad alle cookies",
+    // Shiseido / modales pays
+    "Access the website", "ACCESS THE WEBSITE", "Continue to site",
+    // Country redirect — continuer sans changer
+    "Continue to IT", "Continue to FR", "Continue to DE", "Continue to US",
+    "Continue to GB", "Stay on this site", "Continue anyway",
     // Age gate — après cookie
     "YES", "Yes", "OUI", "Oui",
     "Yes, I am", "Yes, I'm", "I'm 18+", "I am 18",
     "Enter", "Enter Site", "Enter the site",
     "I am of legal age", "Confirm my age",
-    // Fermetures
-    "No thanks", "Non merci", "Close", "Fermer", "Dismiss",
-    "Not now", "Maybe later", "×", "✕", "✖",
+    // Fermetures newsletter / promo
+    "No thanks", "No, thanks", "Non merci", "Close", "Fermer", "Dismiss",
+    "Not now", "Maybe later", "I'll Pass", "I'll pass", "Skip",
+    "×", "✕", "✖", "✗",
+    // Coréen (Innisfree, etc.)
+    "오늘 그만 보기", "닫기",
   ];
 
   for (const txt of clickTexts) {
     try {
-      // getByText est plus précis que text= (correspondance exacte)
       const el = page.getByRole("button", { name: txt, exact: true }).first();
       if (await el.isVisible({ timeout: 400 })) {
         await el.click({ force: true });
@@ -114,7 +143,6 @@ async function killPopups(page) {
       }
     } catch {}
     try {
-      // Fallback : locator text
       const el = page.locator(`text="${txt}"`).first();
       if (await el.isVisible({ timeout: 300 })) {
         await el.click({ force: true });
@@ -123,25 +151,62 @@ async function killPopups(page) {
     } catch {}
   }
 
-  // 2. Sélecteurs CSS connus (onetrust, cc-cookie, Shopify age-gate...)
+  // 2. Sélecteurs CSS connus (onetrust, cc-cookie, Cookiebot, Shopify...)
   const cssSelectors = [
+    // OneTrust
     "#onetrust-accept-btn-handler",
+    // cc-cookie
     ".cc-dismiss", ".cc-allow", ".cc-btn.cc-allow",
+    // Cookiebot (Harry's, etc.)
+    "#CybotCookiebotDialogBodyButtonAccept",
+    "#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll",
+    ".CybotCookiebotDialogBodyButton[id*='Allow']",
+    // Axeptio
+    "#axeptio_btn_acceptAll", ".axeptio_btn_accept",
+    // Didomi
+    "#didomi-notice-agree-button",
+    // TrustArc
+    ".truste_popframe button[id*='accept']",
+    // Usercentrics
+    "[data-testid='uc-accept-all-button']",
+    // Data attr génériques
     "[data-testid='cookie-accept']",
+    "[data-action='accept-all']",
     "button[class*='AcceptAll']", "button[class*='accept-all']",
     "button[class*='acceptAll']", "button[class*='accept_all']",
     "[id*='accept'][id*='cookie']",
-    // Fermetures modales (✕, ×, close button)
+    // Ketch consent (Olaplex, etc.)
+    "[data-tid='banner-accept']", "[data-tid='accept']",
+    "button[class*='ketch']", "[class*='ketch'] button[class*='accept']",
+    // Fermetures génériques (aria-label)
     "button[aria-label='Close']", "button[aria-label='close']",
     "button[aria-label='Dismiss']", "button[aria-label='dismiss']",
     "button[aria-label='×']", "button[aria-label='✕']",
+    "button[aria-label*='close' i]", "button[aria-label*='fermer' i]",
+    "button[aria-label*='dismiss' i]",
+    // Modales / popups
     "[data-dismiss='modal']", ".modal__close", ".popup__close",
     "button[class*='close']", "button[class*='Close']",
     "button[class*='modal-close']", "button[class*='popup-close']",
     "button[class*='newsletter-close']", "button[class*='dialog-close']",
+    // Drawers / side panels (Laneige, etc.)
+    "[class*='drawer'] button[class*='close']",
+    "[class*='panel'] button[class*='close']",
+    "[class*='slideout'] button[class*='close']",
+    "button[class*='drawer-close']", "button[class*='panel-close']",
+    // Newsletter/SMS popup (Klaviyo, Attentive, Postscript)
+    "[data-attentive='close']", ".attentive-creative__close",
+    "#attentive_close", "#attentive_overlay",
+    "[class*='klaviyo'] [class*='close']", ".klaviyo-close-form",
+    "[id*='popup'] button[class*='close']", "[class*='popup'] button[class*='close']",
     // Shopify age verifier
     ".age-verifier__yes", "button[data-age-verify='yes']",
+    // Fenty Beauty "I'll Pass" type
+    "button[class*='decline']", "button[class*='skip']", "button[class*='no-thanks']",
+    // Dialogues natifs HTML
+    "dialog button[class*='close']", "dialog button[aria-label*='close' i]",
   ];
+
   for (const sel of cssSelectors) {
     try {
       const el = await page.$(sel);
@@ -157,11 +222,12 @@ async function killPopups(page) {
     const clicked = await page.evaluate(() => {
       const hits = [];
       const patterns = [
-        /^(accept all|accept cookies|tout accepter|allow all|i agree|got it|okay)$/i,
-        /^(yes|oui|enter|enter site|yes[,\s]+i am|i'?m 18|confirm age)$/i,
-        /^(close|fermer|dismiss|no thanks|non merci)$/i,
+        /^(accept all|accept all cookies|accepter tous|autoriser tous|tout accepter|allow all|allow all cookies|i agree|got it|okay|j'accepte|akkoord)$/i,
+        /^(yes|oui|enter|enter site|yes[,\s]+i am|i'?m 18|confirm age|access the website)$/i,
+        /^(close|fermer|dismiss|no thanks|no, thanks|non merci|i'll pass|skip|닫기|오늘 그만 보기)$/i,
+        /^(×|✕|✖|✗)$/,
       ];
-      const els = document.querySelectorAll('button, a[role="button"], input[type="submit"], [role="button"]');
+      const els = document.querySelectorAll('button, a[role="button"], input[type="submit"], [role="button"], [class*="close-btn"]');
       for (const el of els) {
         const txt = (el.textContent || el.value || el.getAttribute("aria-label") || "").trim();
         if (patterns.some(p => p.test(txt))) {
@@ -177,7 +243,7 @@ async function killPopups(page) {
     if (clicked.length) await page.waitForTimeout(700);
   } catch {}
 
-  // 4. Supprimer les overlays résiduels via JS
+  // 4. Supprimer les overlays résiduels via JS (force brute si tout le reste échoue)
   try {
     await page.evaluate(() => {
       const selectors = [
@@ -186,17 +252,32 @@ async function killPopups(page) {
         "[class*='ageVerif']", "[class*='AgeVerif']",
         "[class*='cookie-banner']", "[id*='cookie-banner']",
         "[class*='CookieBanner']", "[class*='consent-overlay']",
+        "[class*='cookie-consent']", "[id*='cookie-consent']",
+        "[class*='gdpr']", "[id*='gdpr']",
+        "[class*='newsletter-popup']", "[id*='newsletter-popup']",
+        "[class*='email-popup']", "[class*='promo-popup']",
+        // Cookiebot wrapper
+        "#CybotCookiebotDialog", "#cookiebanner",
+        // Country redirect modals
+        "[class*='country-redirect']", "[class*='CountryRedirect']",
+        "[class*='geolocation-modal']", "[class*='region-selector']",
       ];
       selectors.forEach(sel => {
         document.querySelectorAll(sel).forEach(el => {
           const s = window.getComputedStyle(el);
-          if (s.position === "fixed" || s.position === "absolute") el.remove();
+          if (s.position === "fixed" || s.position === "absolute" || s.zIndex > 100) el.remove();
         });
+      });
+      // Supprimer backdrop / overlay générique
+      document.querySelectorAll('[class*="overlay"], [class*="backdrop"], [class*="mask"]').forEach(el => {
+        const s = window.getComputedStyle(el);
+        if (s.position === "fixed" && parseFloat(s.opacity) > 0) el.remove();
       });
       // Dégeler le scroll
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
       document.body.style.position = "";
+      document.documentElement.style.position = "";
     });
     await page.waitForTimeout(300);
   } catch {}
@@ -208,18 +289,20 @@ async function killPopups(page) {
 
 // ─── CAPTURE D'UNE PAGE ───────────────────────────────────────────────────────
 
-async function capturePage(browser, url, prefix, dir) {
+async function capturePage(browser, url, prefix, dir, stealth = false) {
   const captures = {};
 
   // ── Desktop ────────────────────────────────────────────────────────────────
-  const dp = await newPage(browser, false);
+  const dp = await newPage(browser, false, stealth);
   try {
-    await goto(dp, url);
+    await goto(dp, url, stealth);
 
-    // 2 passes de killPopups : avant scroll + après scroll
+    // 3 passes de killPopups : cookie → newsletter → résidus
     await killPopups(dp);
+    await dp.waitForTimeout(800);
+    await killPopups(dp); // 2ème passe — newsletter peut apparaître après cookie accept
     await dp.waitForTimeout(500);
-    await killPopups(dp); // 2ème passe — age gate peut apparaître après cookie accept
+    await killPopups(dp); // 3ème passe — résidus
 
     await scrollFull(dp); // déclenche lazy loads
 
@@ -253,9 +336,9 @@ async function capturePage(browser, url, prefix, dir) {
   } finally { await dp.close(); }
 
   // ── Mobile ─────────────────────────────────────────────────────────────────
-  const mp = await newPage(browser, true);
+  const mp = await newPage(browser, true, stealth);
   try {
-    await goto(mp, url);
+    await goto(mp, url, stealth);
     await killPopups(mp);
     await mp.waitForTimeout(400);
     await killPopups(mp);
@@ -295,14 +378,20 @@ async function getSubPages(browser, url, max = 3) {
 
 // ─── CAPTURE COMPLÈTE D'UN SITE ──────────────────────────────────────────────
 
+function isBlankHero(dir) {
+  const hero = resolve(dir, "00-main-hero.jpg");
+  if (!existsSync(hero)) return true;
+  return statSync(hero).size < 30000; // < 30KB = page blanche
+}
+
 async function captureWebsite(url) {
   const s = slug(url);
   const dir = resolve(OUT_DIR, s);
 
-  // Skip si déjà capturé avec assez d'images (> 5)
+  // Skip si déjà capturé avec assez d'images (> 5) et hero non blanc
   if (existsSync(dir)) {
     const imgs = readdirSync(dir).filter(f => f.endsWith(".jpg")).length;
-    if (imgs > 5) {
+    if (imgs > 5 && !isBlankHero(dir)) {
       console.log(`  ⏭  Déjà capturé (${imgs} imgs) : ${s}`);
       return;
     }
@@ -310,15 +399,15 @@ async function captureWebsite(url) {
   mkdirSync(dir, { recursive: true });
 
   console.log(`\n📸 ${url}`);
+
+  // ── Tentative 1 : headless standard ───────────────────────────────────────
   const browser = await chromium.launch({ headless: true });
   const manifest = { url, slug: s, captured_at: new Date().toISOString(), pages: {} };
 
   try {
-    // Page principale
     console.log("  → main page...");
     manifest.pages.main = await capturePage(browser, url, "00-main", dir);
 
-    // Sous-pages
     const subs = await getSubPages(browser, url);
     console.log(`  → ${subs.length} sous-pages`);
     for (let i = 0; i < subs.length; i++) {
@@ -330,12 +419,38 @@ async function captureWebsite(url) {
         manifest.pages[`sub${i+1}`]._url = su;
       } catch (e) { console.log(`    ✗ ${e.message}`); }
     }
-
-    const imgTotal = readdirSync(dir).filter(f => f.endsWith(".jpg")).length;
-    console.log(`  ✅ ${imgTotal} captures → ${s}`);
-    writeFileSync(resolve(dir, "manifest.json"), JSON.stringify(manifest, null, 2));
-
   } finally { await browser.close(); }
+
+  // ── Tentative 2 : headed + stealth si hero blanc ───────────────────────────
+  if (isBlankHero(dir)) {
+    console.log(`  ⚠️  Hero blanc — fallback headed+stealth...`);
+    const browser2 = await chromium.launch({
+      headless: false,
+      args: [
+        "--disable-blink-features=AutomationControlled",
+        "--no-sandbox",
+        "--disable-web-security",
+      ],
+    });
+    try {
+      manifest.fallback = true;
+      manifest.pages.main = await capturePage(browser2, url, "00-main", dir, true);
+    } catch (e) {
+      console.log(`    ✗ Fallback erreur : ${e.message}`);
+    } finally {
+      try { await browser2.close(); } catch {}
+    }
+    if (!isBlankHero(dir)) {
+      console.log(`  ✅ Fallback OK`);
+    } else {
+      console.log(`  ✗ Toujours blanc (Cloudflare dur — site ignoré)`);
+      manifest.blocked = true;
+    }
+  }
+
+  const imgTotal = readdirSync(dir).filter(f => f.endsWith(".jpg")).length;
+  console.log(`  ✅ ${imgTotal} captures → ${s}`);
+  writeFileSync(resolve(dir, "manifest.json"), JSON.stringify(manifest, null, 2));
 }
 
 // ─── CLI ──────────────────────────────────────────────────────────────────────

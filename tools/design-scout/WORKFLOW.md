@@ -9,7 +9,7 @@
 
 ```bash
 cd ~/starter-kit/tools/design-scout
-node visual-auditor.mjs --report
+node scripts/visual-auditor.mjs --report
 ```
 
 Résultat attendu : combien de sites audités, combien de captures pending, distribution des scores.
@@ -20,10 +20,10 @@ Résultat attendu : combien de sites audités, combien de captures pending, dist
 
 ```bash
 # Un seul site
-node visual-analyzer.mjs https://exemple.com
+node scripts/visual-analyzer.mjs https://exemple.com
 
 # Plusieurs sites d'un coup
-echo '["https://site1.com","https://site2.com"]' | node visual-analyzer.mjs --batch
+echo '["https://site1.com","https://site2.com"]' | node scripts/visual-analyzer.mjs --batch
 ```
 
 Résultat attendu : dossier créé dans `captures/visual-analysis/slug-du-site/` avec ~32 images JPG.
@@ -55,7 +55,7 @@ Claude lance des agents en parallèle qui lisent les images, scorent /10 comme D
 ## ÉTAPE 4 — Élaguer les mauvais scores
 
 ```bash
-node visual-auditor.mjs --prune 6
+node scripts/visual-auditor.mjs --prune 6
 ```
 
 Supprime de la KB tous les sites avec score < 6. Confirme avant de lancer si tu veux vérifier d'abord avec `--report`.
@@ -84,10 +84,10 @@ Dans Claude Code, dire :
 
 | Tâche | Outil |
 |-------|-------|
-| Capturer des sites | `node visual-analyzer.mjs` dans le terminal |
-| Vérifier l'état | `node visual-auditor.mjs --report` dans le terminal |
+| Capturer des sites | `node scripts/visual-analyzer.mjs` dans le terminal |
+| Vérifier l'état | `node scripts/visual-auditor.mjs --report` dans le terminal |
 | Auditer les images | Agent Claude Code (gratuit, inclus abonnement) |
-| Élaguer la KB | `node visual-auditor.mjs --prune 6` dans le terminal |
+| Élaguer la KB | `node scripts/visual-auditor.mjs --prune 6` dans le terminal |
 | Améliorer un design | `@design-director` dans Claude Code |
 
 ---

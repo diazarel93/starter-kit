@@ -1,0 +1,2493 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TERRAIN — Direction B — Plateforme d'ateliers creatifs</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+</style>
+
+<style>
+/* ============================================
+   DIRECTION B — TERRAIN
+   Editorial, ancre dans le reel
+
+   Palette:
+     Papier     #F5F0E8  (fond chaud)
+     Encre      #1A1814  (texte)
+     Terracotta #D4552A  (accent vif)
+     Vert       #2D5A3D  (secondaire)
+     Creme      #EDE8DD  (fond alt)
+
+   Typo: Instrument Serif + DM Sans
+   ============================================ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: #F5F0E8;
+  color: #1A1814;
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   TAB NAVIGATION
+   ============================================ */
+.tab-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  background: rgba(245,240,232,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(26,24,20,0.08);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 20px 24px;
+  background: none;
+  border: none;
+  color: rgba(26,24,20,0.35);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.tab-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 24px;
+  right: 24px;
+  height: 2px;
+  background: #D4552A;
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.tab-btn.active {
+  color: #1A1814;
+}
+
+.tab-btn.active::after {
+  transform: scaleX(1);
+}
+
+.tab-btn:hover {
+  color: rgba(26,24,20,0.6);
+}
+
+/* Views */
+.view {
+  display: none;
+  min-height: 100vh;
+  padding-top: 62px;
+}
+
+.view.active {
+  display: block;
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+.serif { font-family: 'Instrument Serif', serif; }
+.sans { font-family: 'DM Sans', sans-serif; }
+
+/* ============================================
+   1. LANDING PAGE
+   ============================================ */
+
+/* Hero */
+.hero {
+  min-height: calc(100vh - 62px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 80px 6vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, #F5F0E8 0%, rgba(245,240,232,0.2) 35%, rgba(26,24,20,0.88) 100%);
+  z-index: 1;
+}
+
+.hero-texture {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse at 25% 15%, rgba(212,85,42,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 55%, rgba(45,90,61,0.05) 0%, transparent 45%),
+    repeating-conic-gradient(rgba(26,24,20,0.015) 0% 25%, transparent 0% 50%) 0 0 / 80px 80px;
+}
+
+.hero-mosaic {
+  position: absolute;
+  top: 80px; left: 0; right: 0; bottom: 220px;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 0.7fr 1.1fr;
+  grid-template-rows: 1fr 1.3fr;
+  gap: 5px;
+  padding: 0 6vw;
+  opacity: 0.4;
+}
+
+.hero-mosaic-cell {
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-mosaic-cell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, rgba(26,24,20,0.35), rgba(212,85,42,0.08));
+}
+
+.hero-mosaic-cell:nth-child(1) {
+  background: linear-gradient(135deg, #2D5A3D 0%, #1A1814 100%);
+  grid-row: span 2;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+}
+.hero-mosaic-cell:nth-child(1)::before {
+  content: 'CINEMA';
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #D4552A;
+  position: relative;
+  z-index: 2;
+}
+.hero-mosaic-cell:nth-child(2) { background: linear-gradient(135deg, #D4552A 0%, #8B3A1F 100%); }
+.hero-mosaic-cell:nth-child(3) {
+  background: linear-gradient(135deg, #F5F0E8 0%, #C8BFB0 100%);
+  border: 1px solid rgba(26,24,20,0.12);
+  grid-row: span 2;
+}
+.hero-mosaic-cell:nth-child(4) {
+  background: #1A1814;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+}
+.hero-mosaic-cell:nth-child(4)::before {
+  content: 'Seine-Saint-Denis \B7  2016\2192';
+  font-family: 'Instrument Serif', serif;
+  font-size: 11px;
+  font-style: italic;
+  color: #F5F0E8;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  line-height: 1.4;
+}
+.hero-mosaic-cell:nth-child(5) { background: linear-gradient(145deg, #2D5A3D 0%, #1A1814 60%); grid-column: span 2; }
+
+/* Grain texture overlay for mosaic cells */
+.hero-mosaic-cell {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-family: 'Instrument Serif', serif;
+  font-size: 15px;
+  font-style: italic;
+  color: #D4552A;
+  margin-bottom: 28px;
+  padding-left: 24px;
+  border-left: 2px solid #D4552A;
+}
+
+.hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(52px, 9.5vw, 140px);
+  font-weight: 400;
+  line-height: 0.93;
+  color: #F5F0E8;
+  margin-bottom: 36px;
+  letter-spacing: -0.025em;
+}
+
+.hero h1 span { display: block; }
+
+.hero h1 .accent {
+  color: #D4552A;
+  font-style: italic;
+}
+
+.hero-manifeste {
+  font-size: clamp(15px, 1.5vw, 19px);
+  line-height: 1.7;
+  color: rgba(245,240,232,0.55);
+  max-width: 500px;
+  margin-bottom: 48px;
+}
+
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 40px;
+  background: #D4552A;
+  color: #F5F0E8;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.4s ease;
+  letter-spacing: 0.01em;
+}
+
+.cta-primary:hover {
+  background: #e06a3f;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(212,85,42,0.3);
+}
+
+.cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 32px;
+  background: transparent;
+  color: rgba(245,240,232,0.6);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid rgba(245,240,232,0.15);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.4s ease;
+  margin-left: 16px;
+}
+
+.cta-secondary:hover {
+  border-color: rgba(245,240,232,0.35);
+  color: #F5F0E8;
+}
+
+/* Quote band */
+.quote-band {
+  padding: 80px 6vw;
+  background: #1A1814;
+  text-align: center;
+}
+
+.quote-band blockquote {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(22px, 3.2vw, 40px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.4;
+  max-width: 780px;
+  margin: 0 auto 24px;
+  color: rgba(245,240,232,0.8);
+}
+
+.quote-band cite {
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.3);
+}
+
+/* Section — 7 Disciplines (magazine layout) */
+.disciplines {
+  padding: 120px 6vw;
+  position: relative;
+}
+
+.disciplines::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 6vw; right: 6vw;
+  height: 1px;
+  background: rgba(26,24,20,0.1);
+}
+
+.disciplines-header {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  margin-bottom: 80px;
+  align-items: end;
+}
+
+.disciplines-header h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(38px, 5vw, 68px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.disciplines-header h2 em {
+  font-style: italic;
+  color: #D4552A;
+}
+
+.disciplines-intro {
+  font-size: 16px;
+  line-height: 1.75;
+  color: rgba(26,24,20,0.5);
+}
+
+/* Magazine asymmetric layout */
+.disciplines-magazine {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 24px;
+}
+
+.disc-card {
+  padding: 48px 40px;
+  border: 1px solid rgba(26,24,20,0.07);
+  position: relative;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  cursor: default;
+  background: rgba(255,255,255,0.25);
+}
+
+.disc-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: transparent;
+  transition: background 0.4s ease;
+}
+
+.disc-card:hover {
+  border-color: rgba(26,24,20,0.14);
+  box-shadow: 0 16px 56px rgba(26,24,20,0.07);
+  transform: translateY(-3px);
+}
+
+.disc-card:hover::before {
+  background: #D4552A;
+}
+
+.disc-card--featured {
+  grid-row: span 2;
+  padding: 56px 48px;
+  background: linear-gradient(160deg, #1A1814 0%, #2D5A3D 100%);
+  color: #F5F0E8;
+  border: none;
+  border-bottom: 2px solid #D4552A;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  min-height: 520px;
+}
+
+.disc-card--featured::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    linear-gradient(180deg, rgba(26,24,20,0) 20%, rgba(26,24,20,0.6) 100%);
+  z-index: 0;
+}
+
+.disc-card--featured .disc-content { position: relative; z-index: 1; }
+
+.disc-card--featured .disc-flagship {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #D4552A;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.disc-card--featured .disc-num {
+  color: rgba(245,240,232,0.08);
+  font-size: 96px;
+}
+
+.disc-card--featured h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 16px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.disc-card--featured .disc-subject {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: #F5F0E8;
+  margin-bottom: 20px;
+  line-height: 1.4;
+  opacity: 0.85;
+}
+
+.disc-card--featured p {
+  color: rgba(245,240,232,0.5);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.disc-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 52px;
+  font-weight: 400;
+  color: rgba(26,24,20,0.05);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.disc-card h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 26px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.disc-subject {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: #D4552A;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.disc-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(26,24,20,0.45);
+}
+
+.disc-label {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #2D5A3D;
+  padding: 5px 12px;
+  border: 1px solid rgba(45,90,61,0.18);
+}
+
+.disc-card--featured .disc-label {
+  color: rgba(245,240,232,0.4);
+  border-color: rgba(245,240,232,0.1);
+}
+
+/* More disciplines — grid row */
+.disciplines-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.disc-card--small {
+  padding: 32px 24px;
+}
+
+.disc-card--small .disc-num {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.disc-card--small h3 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.disc-card--small .disc-subject {
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.disc-card--small p {
+  font-size: 13px;
+}
+
+/* Section — Pipeline M1-M8 (magazine double-page) */
+.pipeline {
+  padding: 120px 6vw;
+  background: #1A1814;
+  color: #F5F0E8;
+  position: relative;
+}
+
+.pipeline-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 100px;
+  align-items: end;
+}
+
+.pipeline-header h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(36px, 4.5vw, 60px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.pipeline-header h2 em {
+  font-style: italic;
+  color: #D4552A;
+}
+
+.pipeline-intro {
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(245,240,232,0.4);
+}
+
+.pipeline-spread {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  position: relative;
+}
+
+.pipeline-spread::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(245,240,232,0.06);
+}
+
+.pipeline-page {
+  padding: 0 40px;
+}
+
+.pipeline-page:first-child {
+  padding-left: 0;
+}
+
+.pipeline-page:last-child {
+  padding-right: 0;
+}
+
+.moment {
+  padding: 36px 0;
+  border-bottom: 1px solid rgba(245,240,232,0.05);
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 24px;
+  align-items: start;
+  transition: all 0.4s ease;
+}
+
+.moment:hover {
+  border-bottom-color: rgba(212,85,42,0.2);
+}
+
+.moment:last-child {
+  border-bottom: none;
+}
+
+.moment-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 56px;
+  font-weight: 400;
+  line-height: 1;
+  color: rgba(245,240,232,0.06);
+  transition: color 0.4s ease;
+}
+
+.moment:hover .moment-num {
+  color: rgba(212,85,42,0.3);
+}
+
+.moment-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 6px;
+  color: rgba(245,240,232,0.85);
+}
+
+.moment-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(245,240,232,0.3);
+}
+
+.moment-tag {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.2);
+}
+
+
+/* ============================================
+   2. DASHBOARD INSTITUTION
+   ============================================ */
+.dash {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: calc(100vh - 62px);
+}
+
+/* Sidebar */
+.dash-sidebar {
+  background: #1A1814;
+  color: #F5F0E8;
+  padding: 40px 28px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(245,240,232,0.04);
+}
+
+.dash-sidebar-brand {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  margin-bottom: 8px;
+  color: #F5F0E8;
+}
+
+.dash-sidebar-sub {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.2);
+  margin-bottom: 48px;
+}
+
+.dash-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  margin-bottom: 4px;
+  font-family: 'Instrument Serif', serif;
+  font-size: 17px;
+  color: rgba(245,240,232,0.4);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.dash-nav-item:hover {
+  color: rgba(245,240,232,0.7);
+  background: rgba(245,240,232,0.04);
+}
+
+.dash-nav-item.active {
+  color: #D4552A;
+  background: rgba(212,85,42,0.06);
+}
+
+.dash-nav-icon {
+  width: 20px;
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.dash-nav-section {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.15);
+  margin: 32px 0 12px 16px;
+}
+
+.dash-sidebar-footer {
+  margin-top: auto;
+  padding-top: 32px;
+  border-top: 1px solid rgba(245,240,232,0.04);
+}
+
+.dash-sidebar-footer .dash-nav-item {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+}
+
+/* Dashboard main */
+.dash-main {
+  padding: 48px 56px;
+  overflow-y: auto;
+}
+
+.dash-header {
+  margin-bottom: 56px;
+}
+
+.dash-header-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(26,24,20,0.3);
+  margin-bottom: 8px;
+}
+
+.dash-header-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.dash-header-title em {
+  font-style: italic;
+  color: #D4552A;
+}
+
+.dash-header-sub {
+  font-size: 15px;
+  color: rgba(26,24,20,0.4);
+  margin-top: 8px;
+}
+
+/* Stats row */
+.dash-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 56px;
+}
+
+.dash-stat {
+  padding: 32px 28px;
+  border: 1px solid rgba(26,24,20,0.06);
+  background: rgba(255,255,255,0.3);
+  transition: all 0.4s ease;
+}
+
+.dash-stat:hover {
+  box-shadow: 0 8px 32px rgba(26,24,20,0.05);
+  transform: translateY(-2px);
+}
+
+.dash-stat-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1;
+  color: #1A1814;
+  margin-bottom: 8px;
+}
+
+.dash-stat-label {
+  font-size: 13px;
+  color: rgba(26,24,20,0.4);
+  line-height: 1.4;
+}
+
+.dash-stat-change {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #2D5A3D;
+}
+
+/* Section titles */
+.dash-section-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(26,24,20,0.06);
+}
+
+.dash-section-title em {
+  font-style: italic;
+  color: #D4552A;
+}
+
+/* En ce moment — grande carte */
+.dash-now {
+  margin-bottom: 56px;
+}
+
+.dash-now-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+}
+
+.dash-now-card {
+  padding: 48px 44px;
+  background: #1A1814;
+  color: #F5F0E8;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.dash-now-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    linear-gradient(180deg, transparent 40%, rgba(26,24,20,0.85) 100%),
+    linear-gradient(135deg, #3a3530, #5a4e42);
+  z-index: 0;
+}
+
+.dash-now-card > * { position: relative; z-index: 1; }
+
+.dash-now-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #D4552A;
+  margin-bottom: 16px;
+}
+
+.dash-now-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: #D4552A;
+  border-radius: 50%;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.dash-now-card h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.dash-now-card p {
+  font-size: 14px;
+  color: rgba(245,240,232,0.4);
+  line-height: 1.6;
+}
+
+.dash-now-meta {
+  margin-top: 20px;
+  font-size: 12px;
+  color: rgba(245,240,232,0.25);
+  display: flex;
+  gap: 20px;
+}
+
+.dash-now-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dash-now-side-card {
+  padding: 28px 24px;
+  border: 1px solid rgba(26,24,20,0.07);
+  background: rgba(255,255,255,0.25);
+  flex: 1;
+  transition: all 0.4s ease;
+}
+
+.dash-now-side-card:hover {
+  border-color: rgba(26,24,20,0.14);
+  box-shadow: 0 8px 32px rgba(26,24,20,0.06);
+}
+
+.dash-now-side-card h4 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+
+.dash-now-side-card p {
+  font-size: 13px;
+  color: rgba(26,24,20,0.4);
+}
+
+.dash-now-side-card .dash-disc-tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2D5A3D;
+}
+
+/* A venir — liste editoriale */
+.dash-upcoming {
+  margin-bottom: 56px;
+}
+
+.dash-upcoming-list {
+  list-style: none;
+}
+
+.dash-upcoming-item {
+  display: grid;
+  grid-template-columns: 100px 1fr 140px 120px;
+  gap: 24px;
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(26,24,20,0.05);
+  transition: all 0.3s ease;
+}
+
+.dash-upcoming-item:hover {
+  border-bottom-color: rgba(212,85,42,0.15);
+}
+
+.dash-upcoming-date {
+  font-family: 'Instrument Serif', serif;
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(26,24,20,0.35);
+}
+
+.dash-upcoming-info h4 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 2px;
+}
+
+.dash-upcoming-info p {
+  font-size: 13px;
+  color: rgba(26,24,20,0.35);
+}
+
+.dash-upcoming-disc {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2D5A3D;
+}
+
+.dash-upcoming-status {
+  font-size: 12px;
+  color: rgba(26,24,20,0.3);
+  text-align: right;
+}
+
+
+/* ============================================
+   3. COCKPIT INTERVENANT
+   ============================================ */
+.cockpit {
+  min-height: calc(100vh - 62px);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  background: #F5F0E8;
+}
+
+/* Cockpit header */
+.cockpit-header {
+  padding: 28px 6vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(26,24,20,0.07);
+}
+
+.cockpit-header-left {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+}
+
+.cockpit-discipline {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #2D5A3D;
+  padding: 6px 14px;
+  border: 1px solid rgba(45,90,61,0.2);
+}
+
+.cockpit-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.cockpit-title em {
+  font-style: italic;
+  color: rgba(26,24,20,0.4);
+}
+
+.cockpit-timer {
+  font-family: 'Instrument Serif', serif;
+  font-size: 36px;
+  font-weight: 400;
+  color: #D4552A;
+  letter-spacing: 0.02em;
+}
+
+.cockpit-timer-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(26,24,20,0.25);
+  text-align: right;
+  margin-bottom: 4px;
+}
+
+/* Cockpit body */
+.cockpit-body {
+  display: grid;
+  grid-template-columns: 240px 1fr 280px;
+  gap: 0;
+  overflow: hidden;
+}
+
+/* Chapters sidebar */
+.cockpit-chapters {
+  padding: 32px 24px;
+  border-right: 1px solid rgba(26,24,20,0.06);
+  overflow-y: auto;
+}
+
+.cockpit-chapters-title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(26,24,20,0.25);
+  margin-bottom: 24px;
+}
+
+.cockpit-chapter {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 14px 12px;
+  margin-bottom: 2px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.cockpit-chapter:hover {
+  background: rgba(26,24,20,0.03);
+}
+
+.cockpit-chapter.active {
+  background: rgba(212,85,42,0.06);
+}
+
+.cockpit-chapter.completed {
+  opacity: 0.4;
+}
+
+.cockpit-chapter-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 20px;
+  color: rgba(26,24,20,0.12);
+  min-width: 28px;
+}
+
+.cockpit-chapter.active .cockpit-chapter-num {
+  color: #D4552A;
+}
+
+.cockpit-chapter-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 15px;
+  color: rgba(26,24,20,0.5);
+}
+
+.cockpit-chapter.active .cockpit-chapter-name {
+  color: #1A1814;
+}
+
+.cockpit-chapter-tag {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(26,24,20,0.2);
+  display: block;
+  margin-top: 2px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* Central zone */
+.cockpit-center {
+  padding: 60px 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.03'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+.cockpit-center::before {
+  content: '\201C';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  font-family: 'Instrument Serif', serif;
+  font-size: 120px;
+  color: #D4552A;
+  opacity: 0.15;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cockpit-moment-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(26,24,20,0.25);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.cockpit-instruction {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(34px, 4.2vw, 54px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.25;
+  max-width: 620px;
+  color: #1A1814;
+  margin-bottom: 24px;
+  letter-spacing: -0.01em;
+  position: relative;
+  z-index: 1;
+}
+
+.cockpit-instruction-context {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(26,24,20,0.3);
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.cockpit-instruction-context em {
+  font-style: normal;
+  color: #D4552A;
+}
+
+.cockpit-instruction-sub {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(26,24,20,0.4);
+  max-width: 480px;
+  margin-bottom: 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.cockpit-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.cockpit-btn-primary {
+  padding: 16px 36px;
+  background: #D4552A;
+  color: #F5F0E8;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.4s ease;
+}
+
+.cockpit-btn-primary:hover {
+  background: #e06a3f;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(212,85,42,0.25);
+}
+
+.cockpit-btn-secondary {
+  padding: 16px 28px;
+  background: transparent;
+  color: rgba(26,24,20,0.5);
+  border: 1px solid rgba(26,24,20,0.1);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.cockpit-btn-secondary:hover {
+  border-color: rgba(26,24,20,0.25);
+  color: #1A1814;
+}
+
+/* Participation wall */
+.cockpit-sidebar {
+  padding: 32px 24px;
+  border-left: 1px solid rgba(26,24,20,0.06);
+  overflow-y: auto;
+}
+
+.cockpit-sidebar-title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(26,24,20,0.25);
+  margin-bottom: 20px;
+}
+
+.cockpit-presence {
+  margin-bottom: 32px;
+}
+
+.cockpit-presence-count {
+  font-family: 'Instrument Serif', serif;
+  font-size: 42px;
+  font-weight: 400;
+  color: #1A1814;
+  line-height: 1;
+}
+
+.cockpit-presence-label {
+  font-size: 12px;
+  color: rgba(26,24,20,0.35);
+  margin-top: 4px;
+}
+
+/* Signatures wall */
+.cockpit-wall {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.cockpit-sig {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Instrument Serif', serif;
+  font-size: 16px;
+  font-style: italic;
+  transition: all 0.3s ease;
+  cursor: default;
+  position: relative;
+}
+
+.cockpit-sig:hover {
+  transform: scale(1.15);
+  z-index: 1;
+}
+
+.cockpit-sig--active {
+  background: rgba(212,85,42,0.1);
+  color: #D4552A;
+  border: 1px solid rgba(212,85,42,0.2);
+}
+
+.cockpit-sig--idle {
+  background: rgba(26,24,20,0.04);
+  color: rgba(26,24,20,0.3);
+  border: 1px solid rgba(26,24,20,0.06);
+}
+
+.cockpit-sig--done {
+  background: rgba(45,90,61,0.08);
+  color: #2D5A3D;
+  border: 1px solid rgba(45,90,61,0.15);
+}
+
+.cockpit-activity-title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(26,24,20,0.25);
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+
+.cockpit-activity-item {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(26,24,20,0.04);
+  font-size: 13px;
+  color: rgba(26,24,20,0.4);
+}
+
+.cockpit-activity-item strong {
+  color: #1A1814;
+  font-weight: 500;
+}
+
+.cockpit-activity-time {
+  font-size: 11px;
+  color: rgba(26,24,20,0.2);
+  float: right;
+}
+
+/* Cockpit footer controls */
+.cockpit-footer {
+  padding: 16px 6vw;
+  border-top: 2px solid rgba(26,24,20,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #F5F0E8;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+.cockpit-footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cockpit-footer-left strong {
+  color: #1A1814;
+  font-family: 'Instrument Serif', serif;
+  font-size: 15px;
+}
+
+.cockpit-footer-step {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(26,24,20,0.45);
+}
+
+.cockpit-footer-step em {
+  font-style: normal;
+  color: #D4552A;
+}
+
+.cockpit-footer-progress-bar {
+  width: 160px;
+  height: 3px;
+  background: rgba(26,24,20,0.08);
+  border-radius: 2px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.cockpit-footer-progress-bar-fill {
+  width: 50%;
+  height: 100%;
+  background: #D4552A;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+.cockpit-footer-center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cockpit-footer-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.cockpit-nav-prev {
+  height: 56px;
+  min-width: 180px;
+  padding: 0 32px;
+  background: transparent;
+  border: 2px solid #D4552A;
+  color: #D4552A;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.cockpit-nav-prev:hover {
+  background: rgba(212,85,42,0.08);
+  border-color: #D4552A;
+  color: #D4552A;
+}
+
+.cockpit-nav-next {
+  height: 56px;
+  min-width: 180px;
+  padding: 0 32px;
+  background: #D4552A;
+  border: 2px solid #D4552A;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cockpit-nav-next:hover {
+  background: #e06a3f;
+  border-color: #e06a3f;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(212,85,42,0.3);
+}
+
+.cockpit-progress {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cockpit-progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(26,24,20,0.08);
+  transition: all 0.3s ease;
+}
+
+.cockpit-progress-dot.done {
+  background: #2D5A3D;
+}
+
+.cockpit-progress-dot.current {
+  background: #D4552A;
+  box-shadow: 0 0 0 3px rgba(212,85,42,0.15);
+}
+
+
+/* ============================================
+   4. FOOTER EDITORIAL (COLOPHON)
+   ============================================ */
+.colophon {
+  background: #1A1814;
+  color: #F5F0E8;
+}
+
+.colophon-top {
+  padding: 100px 6vw 60px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 56px;
+  border-bottom: 1px solid rgba(245,240,232,0.04);
+}
+
+.colophon-brand {
+  font-family: 'Instrument Serif', serif;
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.colophon-manifeste {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(245,240,232,0.35);
+  max-width: 320px;
+}
+
+.colophon h4 {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.2);
+  margin-bottom: 24px;
+}
+
+.colophon a {
+  display: block;
+  color: rgba(245,240,232,0.45);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 5px 0;
+  transition: color 0.3s ease;
+}
+
+.colophon a:hover {
+  color: #D4552A;
+}
+
+.colophon-bottom {
+  padding: 32px 6vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.colophon-credits {
+  font-size: 12px;
+  color: rgba(245,240,232,0.15);
+}
+
+.colophon-edition {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(245,240,232,0.2);
+}
+
+.colophon-legal {
+  font-size: 11px;
+  color: rgba(245,240,232,0.12);
+  display: flex;
+  gap: 20px;
+}
+
+.colophon-legal a {
+  display: inline;
+  color: rgba(245,240,232,0.12);
+  font-size: 11px;
+  padding: 0;
+}
+
+.colophon-legal a:hover {
+  color: rgba(245,240,232,0.35);
+}
+
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .disciplines-magazine {
+    grid-template-columns: 1fr;
+  }
+  .disc-card--featured {
+    grid-row: span 1;
+    min-height: 380px;
+  }
+  .disciplines-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .pipeline-spread {
+    grid-template-columns: 1fr;
+  }
+  .pipeline-spread::before {
+    display: none;
+  }
+  .dash {
+    grid-template-columns: 220px 1fr;
+  }
+  .dash-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dash-now-grid {
+    grid-template-columns: 1fr;
+  }
+  .dash-upcoming-item {
+    grid-template-columns: 80px 1fr 100px;
+  }
+  .dash-upcoming-status {
+    display: none;
+  }
+  .cockpit-body {
+    grid-template-columns: 200px 1fr 240px;
+  }
+  .colophon-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .disciplines-header {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .disciplines-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .pipeline-header {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .dash {
+    grid-template-columns: 1fr;
+  }
+  .dash-sidebar {
+    display: none;
+  }
+  .dash-main {
+    padding: 32px 24px;
+  }
+  .dash-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .dash-upcoming-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .cockpit-body {
+    grid-template-columns: 1fr;
+  }
+  .cockpit-chapters {
+    display: none;
+  }
+  .cockpit-sidebar {
+    border-left: none;
+    border-top: 1px solid rgba(26,24,20,0.06);
+    padding: 24px;
+  }
+  .cockpit-header {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  .cockpit-header-left {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .colophon-top {
+    grid-template-columns: 1fr;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 12vw, 80px);
+  }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.view.active .hero-content {
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.view.active .dash-header {
+  animation: fadeInUp 0.6s ease 0.1s both;
+}
+
+.view.active .dash-stats {
+  animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+.view.active .cockpit-center {
+  animation: fadeInUp 0.6s ease 0.15s both;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================================
+     TAB NAVIGATION
+     ============================================ -->
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="showView('landing')">Landing</button>
+  <button class="tab-btn" onclick="showView('dashboard')">Dashboard</button>
+  <button class="tab-btn" onclick="showView('cockpit')">Cockpit</button>
+  <button class="tab-btn" onclick="showView('about')">Colophon</button>
+</nav>
+
+
+<!-- ============================================
+     1. LANDING PAGE
+     ============================================ -->
+<section id="landing" class="view active">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-texture"></div>
+    <div class="hero-mosaic">
+      <div class="hero-mosaic-cell"></div>
+      <div class="hero-mosaic-cell"></div>
+      <div class="hero-mosaic-cell"></div>
+      <div class="hero-mosaic-cell"></div>
+      <div class="hero-mosaic-cell"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-tag">Depuis les quartiers, pour le monde</div>
+      <h1>
+        <span>Ici le reel</span>
+        <span class="accent">devient art.</span>
+      </h1>
+      <p class="hero-manifeste">
+        Une plateforme pour les intervenants qui croient que la creation
+        change les trajectoires. 7 disciplines. Des vrais metiers.
+        Des jeunes qui font, pas qui regardent.
+      </p>
+      <div>
+        <button class="cta-primary">Explorer la plateforme &rarr;</button>
+        <button class="cta-secondary">Voir la demo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quote -->
+  <div class="quote-band">
+    <blockquote>&laquo;&thinsp;On ne forme pas des artistes. On revele des gens qui ne savaient pas qu'ils l'etaient.&thinsp;&raquo;</blockquote>
+    <cite>Manifeste de la plateforme</cite>
+  </div>
+
+  <!-- 7 Disciplines — magazine layout -->
+  <div class="disciplines">
+    <div class="disciplines-header">
+      <div>
+        <h2>Sept disciplines,<br>un <em>meme pipeline.</em></h2>
+      </div>
+      <p class="disciplines-intro">
+        Chaque atelier suit le meme parcours en 8 moments &mdash; de l'entree
+        a la sortie. Le contenu change, la structure reste. C'est ce qui permet
+        a un realisateur, un musicien ou un designer de piloter un atelier
+        avec le meme outil.
+      </p>
+    </div>
+
+    <!-- Featured + side cards -->
+    <div class="disciplines-magazine">
+      <div class="disc-card disc-card--featured">
+        <div class="disc-content">
+          <span class="disc-flagship">[MODE FLAGSHIP]</span>
+          <div class="disc-num">01</div>
+          <div class="disc-subject">&laquo;&thinsp;Le cinema comme langue maternelle&thinsp;&raquo;</div>
+          <h3>Cinema</h3>
+          <p>Scenario, cadrage, montage. Les gestes du 7e art transmis par ceux qui les pratiquent. Pas une ecole de cinema. Un atelier ou le reel se tourne, se monte, se montre.</p>
+          <span class="disc-label">Film &amp; Audiovisuel</span>
+        </div>
+      </div>
+      <div class="disc-card">
+        <div class="disc-num">02</div>
+        <div class="disc-subject">&laquo;&thinsp;Coder son univers&thinsp;&raquo;</div>
+        <h3>Jeu video</h3>
+        <p>Narration, game design, level design. Construire un monde jouable a plusieurs.</p>
+        <span class="disc-label">Interactif</span>
+      </div>
+      <div class="disc-card">
+        <div class="disc-num">03</div>
+        <div class="disc-subject">&laquo;&thinsp;Questionner le monde, le raconter&thinsp;&raquo;</div>
+        <h3>Medias</h3>
+        <p>Podcast, presse, documentaire. Ecouter avant de parler. Montrer avant de juger.</p>
+        <span class="disc-label">Journalisme creatif</span>
+      </div>
+    </div>
+
+    <!-- Row of remaining disciplines -->
+    <div class="disciplines-row">
+      <div class="disc-card disc-card--small">
+        <div class="disc-num">04</div>
+        <div class="disc-subject">&laquo;&thinsp;Porter ce qu'on est&thinsp;&raquo;</div>
+        <h3>Mode</h3>
+        <p>Du croquis au defile. Le geste artisanal rencontre la direction artistique.</p>
+        <span class="disc-label">Textile &amp; Style</span>
+      </div>
+      <div class="disc-card disc-card--small">
+        <div class="disc-num">05</div>
+        <div class="disc-subject">&laquo;&thinsp;Resoudre en beaute&thinsp;&raquo;</div>
+        <h3>Design</h3>
+        <p>Graphisme, identite, UX. Donner forme a une idee pour qu'elle existe dans le monde.</p>
+        <span class="disc-label">Visuel &amp; Spatial</span>
+      </div>
+      <div class="disc-card disc-card--small">
+        <div class="disc-num">06</div>
+        <div class="disc-subject">&laquo;&thinsp;Le son comme matiere premiere&thinsp;&raquo;</div>
+        <h3>Musique</h3>
+        <p>Beatmaking, composition, sound design. Produire un son de A a Z.</p>
+        <span class="disc-label">Son &amp; Production</span>
+      </div>
+      <div class="disc-card disc-card--small">
+        <div class="disc-num">07</div>
+        <div class="disc-subject">&laquo;&thinsp;Le corps parle en premier&thinsp;&raquo;</div>
+        <h3>Theatre</h3>
+        <p>Ecriture, improvisation, mise en scene. La presence avant les mots.</p>
+        <span class="disc-label">Arts vivants</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pipeline M1-M8 — double-page magazine -->
+  <div class="pipeline">
+    <div class="pipeline-header">
+      <div>
+        <h2>Huit moments.<br>Un <em>seul parcours.</em></h2>
+      </div>
+      <p class="pipeline-intro">
+        Chaque atelier se deroule en 8 chapitres. Un rythme universel
+        qui s'adapte a toutes les disciplines. Le meme souffle,
+        de l'entree a la sortie.
+      </p>
+    </div>
+
+    <div class="pipeline-spread">
+      <div class="pipeline-page">
+        <div class="moment">
+          <div class="moment-num">M1</div>
+          <div>
+            <div class="moment-name">Accueil</div>
+            <p class="moment-desc">Le seuil. On entre dans un espace ou quelque chose va se passer. Presentation, regles du jeu, premiere respiration commune.</p>
+            <span class="moment-tag">5-10 min</span>
+          </div>
+        </div>
+        <div class="moment">
+          <div class="moment-num">M2</div>
+          <div>
+            <div class="moment-name">Decouverte</div>
+            <p class="moment-desc">L'intervenant devoile le sujet. Un extrait, une image, un son. Le reel entre dans la salle.</p>
+            <span class="moment-tag">10-15 min</span>
+          </div>
+        </div>
+        <div class="moment">
+          <div class="moment-num">M3</div>
+          <div>
+            <div class="moment-name">Exploration</div>
+            <p class="moment-desc">Les jeunes manipulent, experimentent, testent. Premier contact avec les outils du metier.</p>
+            <span class="moment-tag">15-20 min</span>
+          </div>
+        </div>
+        <div class="moment">
+          <div class="moment-num">M4</div>
+          <div>
+            <div class="moment-name">Creation</div>
+            <p class="moment-desc">Le coeur de l'atelier. On produit, on ecrit, on filme, on compose. La main et l'idee ne font qu'un.</p>
+            <span class="moment-tag">25-35 min</span>
+          </div>
+        </div>
+      </div>
+      <div class="pipeline-page">
+        <div class="moment">
+          <div class="moment-num">M5</div>
+          <div>
+            <div class="moment-name">Partage</div>
+            <p class="moment-desc">Chacun montre ce qu'il a fait. Pas de jury, pas de note. Juste le geste de donner a voir.</p>
+            <span class="moment-tag">10-15 min</span>
+          </div>
+        </div>
+        <div class="moment">
+          <div class="moment-num">M6</div>
+          <div>
+            <div class="moment-name">Retours</div>
+            <p class="moment-desc">L'intervenant guide la discussion. Qu'est-ce qui marche? Qu'est-ce qui resonne? Le regard bienveillant du metier.</p>
+            <span class="moment-tag">10-15 min</span>
+          </div>
+        </div>
+        <div class="moment">
+          <div class="moment-num">M7</div>
+          <div>
+            <div class="moment-name">Synthese</div>
+            <p class="moment-desc">On relie ce qu'on a vecu a ce qui existe. References, metiers, parcours. Le pont entre l'atelier et le monde.</p>
+            <span class="moment-tag">5-10 min</span>
+          </div>
+        </div>
+        <div class="moment">
+          <div class="moment-num">M8</div>
+          <div>
+            <div class="moment-name">Cloture</div>
+            <p class="moment-desc">Le mot de la fin. Un rituel de sortie. On repart avec quelque chose de plus qu'en entrant.</p>
+            <span class="moment-tag">5 min</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer (colophon) on landing -->
+  <div class="colophon">
+    <div class="colophon-top">
+      <div>
+        <div class="colophon-brand">the platform</div>
+        <p class="colophon-manifeste">
+          Ici le reel devient art. Plateforme de creation collective
+          pour intervenants creatifs et institutions culturelles.
+        </p>
+      </div>
+      <div>
+        <h4>Plateforme</h4>
+        <a href="#">Cockpit intervenant</a>
+        <a href="#">Dashboard structure</a>
+        <a href="#">Espace eleve</a>
+        <a href="#">Tarifs</a>
+      </div>
+      <div>
+        <h4>Disciplines</h4>
+        <a href="#">Cinema</a>
+        <a href="#">Jeu video</a>
+        <a href="#">Musique</a>
+        <a href="#">Toutes les disciplines</a>
+      </div>
+      <div>
+        <h4>A propos</h4>
+        <a href="#">Manifeste</a>
+        <a href="#">L'equipe</a>
+        <a href="#">Presse</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="colophon-bottom">
+      <span class="colophon-credits">&copy; 2026 The Platform</span>
+      <span class="colophon-edition">Direction TERRAIN &mdash; edition printemps 2026</span>
+      <span class="colophon-legal">
+        <a href="#">Mentions legales</a>
+        <a href="#">Confidentialite</a>
+        <a href="#">CGU</a>
+      </span>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ============================================
+     2. DASHBOARD INSTITUTION
+     ============================================ -->
+<section id="dashboard" class="view">
+  <div class="dash">
+    <!-- Sidebar -->
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-brand">the platform</div>
+      <div class="dash-sidebar-sub">Espace institution</div>
+
+      <div class="dash-nav-section">Navigation</div>
+      <a class="dash-nav-item active">
+        <span class="dash-nav-icon">&#9670;</span>
+        Vue d'ensemble
+      </a>
+      <a class="dash-nav-item">
+        <span class="dash-nav-icon">&#9654;</span>
+        Ateliers
+      </a>
+      <a class="dash-nav-item">
+        <span class="dash-nav-icon">&#9632;</span>
+        Calendrier
+      </a>
+      <a class="dash-nav-item">
+        <span class="dash-nav-icon">&#9650;</span>
+        Intervenants
+      </a>
+
+      <div class="dash-nav-section">Donnees</div>
+      <a class="dash-nav-item">
+        <span class="dash-nav-icon">&#9679;</span>
+        Statistiques
+      </a>
+      <a class="dash-nav-item">
+        <span class="dash-nav-icon">&#9733;</span>
+        Rapports
+      </a>
+
+      <div class="dash-sidebar-footer">
+        <a class="dash-nav-item">
+          <span class="dash-nav-icon">&#9881;</span>
+          Parametres
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="dash-main">
+      <div class="dash-header">
+        <div class="dash-header-label">Saison 2025-2026</div>
+        <h1 class="dash-header-title">College <em>Jean Moulin</em></h1>
+        <p class="dash-header-sub">Montreuil &mdash; 4 classes, 3 intervenants, 2 disciplines actives</p>
+      </div>
+
+      <!-- Stats -->
+      <div class="dash-stats">
+        <div class="dash-stat">
+          <div class="dash-stat-num">127</div>
+          <div class="dash-stat-label">Eleves inscrits</div>
+          <span class="dash-stat-change">+12 ce mois</span>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-num">34</div>
+          <div class="dash-stat-label">Ateliers realises</div>
+          <span class="dash-stat-change">8 cette semaine</span>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-num">89%</div>
+          <div class="dash-stat-label">Taux de presence</div>
+          <span class="dash-stat-change">+3% vs sept.</span>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-num">4</div>
+          <div class="dash-stat-label">Disciplines explorees</div>
+          <span class="dash-stat-change">Cinema, Musique, Medias, Theatre</span>
+        </div>
+      </div>
+
+      <!-- En ce moment -->
+      <div class="dash-now">
+        <h2 class="dash-section-title">En <em>ce moment</em></h2>
+        <div class="dash-now-grid">
+          <div class="dash-now-card">
+            <span class="dash-now-badge">En direct</span>
+            <h3>Atelier Court-metrage &mdash; Chapitre 4</h3>
+            <p>Classe de 3eB avec Karim Boudjema. Les eleves tournent leurs scenes dans la cour et le CDI. Moment M4 : Creation.</p>
+            <div class="dash-now-meta">
+              <span>&#9658; Cinema</span>
+              <span>24 eleves</span>
+              <span>Il reste ~25 min</span>
+            </div>
+          </div>
+          <div class="dash-now-side">
+            <div class="dash-now-side-card">
+              <h4>Podcast documentaire</h4>
+              <p>Classe de 4eA &mdash; demarre a 14h30</p>
+              <span class="dash-disc-tag">Medias</span>
+            </div>
+            <div class="dash-now-side-card">
+              <h4>Sound design &mdash; Session 3</h4>
+              <p>Classe de 3eC &mdash; mercredi 10h</p>
+              <span class="dash-disc-tag">Musique</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- A venir -->
+      <div class="dash-upcoming">
+        <h2 class="dash-section-title">A <em>venir</em></h2>
+        <ul class="dash-upcoming-list">
+          <li class="dash-upcoming-item">
+            <span class="dash-upcoming-date">Lun 7 avr.</span>
+            <div class="dash-upcoming-info">
+              <h4>Initiation mise en scene</h4>
+              <p>Classe de 5eA &mdash; Nadia El Fathi</p>
+            </div>
+            <span class="dash-upcoming-disc">Theatre</span>
+            <span class="dash-upcoming-status">Session 1/6</span>
+          </li>
+          <li class="dash-upcoming-item">
+            <span class="dash-upcoming-date">Mar 8 avr.</span>
+            <div class="dash-upcoming-info">
+              <h4>Ecriture de scenario</h4>
+              <p>Classe de 3eB &mdash; Karim Boudjema</p>
+            </div>
+            <span class="dash-upcoming-disc">Cinema</span>
+            <span class="dash-upcoming-status">Session 5/6</span>
+          </li>
+          <li class="dash-upcoming-item">
+            <span class="dash-upcoming-date">Mer 9 avr.</span>
+            <div class="dash-upcoming-info">
+              <h4>Beatmaking collectif</h4>
+              <p>Classe de 3eC &mdash; Youssef Amrani</p>
+            </div>
+            <span class="dash-upcoming-disc">Musique</span>
+            <span class="dash-upcoming-status">Session 4/6</span>
+          </li>
+          <li class="dash-upcoming-item">
+            <span class="dash-upcoming-date">Jeu 10 avr.</span>
+            <div class="dash-upcoming-info">
+              <h4>Reportage photo et texte</h4>
+              <p>Classe de 4eA &mdash; Lea Martin</p>
+            </div>
+            <span class="dash-upcoming-disc">Medias</span>
+            <span class="dash-upcoming-status">Session 2/6</span>
+          </li>
+        </ul>
+      </div>
+    </main>
+  </div>
+</section>
+
+
+<!-- ============================================
+     3. COCKPIT INTERVENANT
+     ============================================ -->
+<section id="cockpit" class="view">
+  <div class="cockpit">
+
+    <!-- Header -->
+    <div class="cockpit-header">
+      <div class="cockpit-header-left">
+        <span class="cockpit-discipline">Cinema</span>
+        <span class="cockpit-title">Atelier Court-metrage <em>&mdash; 3eB</em></span>
+      </div>
+      <div>
+        <div class="cockpit-timer-label">Temps restant</div>
+        <div class="cockpit-timer">24:37</div>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="cockpit-body">
+
+      <!-- Chapters sidebar -->
+      <div class="cockpit-chapters">
+        <div class="cockpit-chapters-title">Chapitres</div>
+
+        <div class="cockpit-chapter completed">
+          <span class="cockpit-chapter-num">M1</span>
+          <div>
+            <span class="cockpit-chapter-name">Accueil</span>
+            <span class="cockpit-chapter-tag">termine</span>
+          </div>
+        </div>
+        <div class="cockpit-chapter completed">
+          <span class="cockpit-chapter-num">M2</span>
+          <div>
+            <span class="cockpit-chapter-name">Decouverte</span>
+            <span class="cockpit-chapter-tag">termine</span>
+          </div>
+        </div>
+        <div class="cockpit-chapter completed">
+          <span class="cockpit-chapter-num">M3</span>
+          <div>
+            <span class="cockpit-chapter-name">Exploration</span>
+            <span class="cockpit-chapter-tag">termine</span>
+          </div>
+        </div>
+        <div class="cockpit-chapter active">
+          <span class="cockpit-chapter-num">M4</span>
+          <div>
+            <span class="cockpit-chapter-name">Creation</span>
+            <span class="cockpit-chapter-tag">en cours</span>
+          </div>
+        </div>
+        <div class="cockpit-chapter">
+          <span class="cockpit-chapter-num">M5</span>
+          <div>
+            <span class="cockpit-chapter-name">Partage</span>
+          </div>
+        </div>
+        <div class="cockpit-chapter">
+          <span class="cockpit-chapter-num">M6</span>
+          <div>
+            <span class="cockpit-chapter-name">Retours</span>
+          </div>
+        </div>
+        <div class="cockpit-chapter">
+          <span class="cockpit-chapter-num">M7</span>
+          <div>
+            <span class="cockpit-chapter-name">Synthese</span>
+          </div>
+        </div>
+        <div class="cockpit-chapter">
+          <span class="cockpit-chapter-num">M8</span>
+          <div>
+            <span class="cockpit-chapter-name">Cloture</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Central zone -->
+      <div class="cockpit-center">
+        <div class="cockpit-moment-label">Chapitre 4 &mdash; Creation</div>
+        <div class="cockpit-instruction">
+          &laquo;&thinsp;Tournez votre scene. Vous avez la camera, le decor, et 25 minutes.&thinsp;&raquo;
+        </div>
+        <div class="cockpit-instruction-context"><em>CINEMA</em> &middot; M4 CREATION &middot; 25 min</div>
+        <p class="cockpit-instruction-sub">
+          Les eleves sont en equipes de 4. Chaque equipe a un scenario valide
+          au chapitre precedent. L'intervenant circule entre les groupes.
+        </p>
+        <div class="cockpit-actions">
+          <button class="cockpit-btn-primary">Passer au Chapitre 5 &rarr;</button>
+          <button class="cockpit-btn-secondary">Lancer le vote</button>
+          <button class="cockpit-btn-secondary">Envoyer un message</button>
+        </div>
+      </div>
+
+      <!-- Participation sidebar -->
+      <div class="cockpit-sidebar">
+        <div class="cockpit-sidebar-title">Presence</div>
+        <div class="cockpit-presence">
+          <div class="cockpit-presence-count">24</div>
+          <div class="cockpit-presence-label">eleves connectes / 26</div>
+        </div>
+
+        <div class="cockpit-sidebar-title">Mur des participants</div>
+        <div class="cockpit-wall">
+          <div class="cockpit-sig cockpit-sig--active">Ka</div>
+          <div class="cockpit-sig cockpit-sig--active">So</div>
+          <div class="cockpit-sig cockpit-sig--done">Am</div>
+          <div class="cockpit-sig cockpit-sig--active">Ry</div>
+          <div class="cockpit-sig cockpit-sig--idle">Le</div>
+          <div class="cockpit-sig cockpit-sig--active">Fa</div>
+          <div class="cockpit-sig cockpit-sig--done">Ma</div>
+          <div class="cockpit-sig cockpit-sig--active">Ya</div>
+          <div class="cockpit-sig cockpit-sig--active">In</div>
+          <div class="cockpit-sig cockpit-sig--done">No</div>
+          <div class="cockpit-sig cockpit-sig--active">Ab</div>
+          <div class="cockpit-sig cockpit-sig--active">Sa</div>
+          <div class="cockpit-sig cockpit-sig--idle">Di</div>
+          <div class="cockpit-sig cockpit-sig--active">Mo</div>
+          <div class="cockpit-sig cockpit-sig--done">Li</div>
+          <div class="cockpit-sig cockpit-sig--active">Ha</div>
+          <div class="cockpit-sig cockpit-sig--active">Is</div>
+          <div class="cockpit-sig cockpit-sig--active">Ay</div>
+          <div class="cockpit-sig cockpit-sig--done">Ju</div>
+          <div class="cockpit-sig cockpit-sig--active">Ti</div>
+          <div class="cockpit-sig cockpit-sig--active">Ad</div>
+          <div class="cockpit-sig cockpit-sig--active">Ch</div>
+          <div class="cockpit-sig cockpit-sig--active">Na</div>
+          <div class="cockpit-sig cockpit-sig--active">Em</div>
+        </div>
+
+        <div class="cockpit-activity-title">Activite recente</div>
+        <div class="cockpit-activity-item">
+          <strong>Equipe 3</strong> a lance l'enregistrement
+          <span class="cockpit-activity-time">il y a 2 min</span>
+        </div>
+        <div class="cockpit-activity-item">
+          <strong>Karim B.</strong> a envoye un encouragement
+          <span class="cockpit-activity-time">il y a 5 min</span>
+        </div>
+        <div class="cockpit-activity-item">
+          <strong>Equipe 1</strong> a termine le tournage
+          <span class="cockpit-activity-time">il y a 8 min</span>
+        </div>
+        <div class="cockpit-activity-item">
+          <strong>Sofia M.</strong> a rejoint la seance
+          <span class="cockpit-activity-time">il y a 12 min</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="cockpit-footer">
+      <div class="cockpit-footer-left">
+        <strong>Karim Boudjema</strong>
+        <span class="cockpit-footer-step">M4 / 8 &mdash; <em>CREATION</em></span>
+        <div class="cockpit-footer-progress-bar">
+          <div class="cockpit-footer-progress-bar-fill"></div>
+        </div>
+      </div>
+      <div class="cockpit-footer-center">
+        <div class="cockpit-progress">
+          <div class="cockpit-progress-dot done"></div>
+          <div class="cockpit-progress-dot done"></div>
+          <div class="cockpit-progress-dot done"></div>
+          <div class="cockpit-progress-dot current"></div>
+          <div class="cockpit-progress-dot"></div>
+          <div class="cockpit-progress-dot"></div>
+          <div class="cockpit-progress-dot"></div>
+          <div class="cockpit-progress-dot"></div>
+        </div>
+      </div>
+      <div class="cockpit-footer-right">
+        <button class="cockpit-nav-prev">&larr; ETAPE PREC.</button>
+        <button class="cockpit-nav-next">&rarr; ETAPE SUIVANTE</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================
+     4. COLOPHON / A PROPOS
+     ============================================ -->
+<section id="about" class="view">
+  <div style="min-height: calc(100vh - 62px); display: flex; flex-direction: column;">
+
+    <!-- Full-page colophon editorial -->
+    <div style="flex: 1; padding: 120px 6vw 80px; display: flex; flex-direction: column; justify-content: center;">
+      <div style="max-width: 640px;">
+        <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(26,24,20,0.25); margin-bottom: 32px;">A propos de la plateforme</div>
+        <h1 style="font-family: 'Instrument Serif', serif; font-size: clamp(40px, 6vw, 72px); font-weight: 400; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 40px;">
+          Chaque atelier<br>est une <em style="font-style: italic; color: #D4552A;">histoire.</em>
+        </h1>
+        <p style="font-size: 17px; line-height: 1.8; color: rgba(26,24,20,0.5); margin-bottom: 24px;">
+          The Platform est nee d'une conviction simple : la creation change les trajectoires.
+          Pas la creation comme loisir. La creation comme pratique, comme metier, comme langage.
+        </p>
+        <p style="font-size: 17px; line-height: 1.8; color: rgba(26,24,20,0.5); margin-bottom: 24px;">
+          Notre plateforme permet a des intervenants creatifs &mdash; realisateurs, musiciens,
+          designers, dramaturges &mdash; de piloter des ateliers structurees dans des institutions :
+          colleges, lycees, MJC, centres sociaux, fondations.
+        </p>
+        <p style="font-size: 17px; line-height: 1.8; color: rgba(26,24,20,0.5); margin-bottom: 48px;">
+          7 disciplines. 8 moments par atelier. Un meme outil.
+          Et surtout : des jeunes qui font, qui creent, qui se decouvrent.
+        </p>
+        <div style="display: flex; gap: 40px; padding-top: 40px; border-top: 1px solid rgba(26,24,20,0.06);">
+          <div>
+            <div style="font-family: 'Instrument Serif', serif; font-size: 48px; color: #1A1814;">7</div>
+            <div style="font-size: 13px; color: rgba(26,24,20,0.35);">Disciplines</div>
+          </div>
+          <div>
+            <div style="font-family: 'Instrument Serif', serif; font-size: 48px; color: #1A1814;">8</div>
+            <div style="font-size: 13px; color: rgba(26,24,20,0.35);">Moments par atelier</div>
+          </div>
+          <div>
+            <div style="font-family: 'Instrument Serif', serif; font-size: 48px; color: #1A1814;">3</div>
+            <div style="font-size: 13px; color: rgba(26,24,20,0.35);">Types d'utilisateurs</div>
+          </div>
+          <div>
+            <div style="font-family: 'Instrument Serif', serif; font-size: 48px; color: #D4552A;">&infin;</div>
+            <div style="font-size: 13px; color: rgba(26,24,20,0.35);">Histoires possibles</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quote -->
+    <div class="quote-band">
+      <blockquote>&laquo;&thinsp;Le terrain, c'est la ou les choses commencent vraiment.&thinsp;&raquo;</blockquote>
+      <cite>Direction artistique TERRAIN</cite>
+    </div>
+
+    <!-- Colophon footer -->
+    <div class="colophon">
+      <div class="colophon-top">
+        <div>
+          <div class="colophon-brand">the platform</div>
+          <p class="colophon-manifeste">
+            Ici le reel devient art.
+          </p>
+        </div>
+        <div>
+          <h4>Equipe</h4>
+          <a href="#">Direction</a>
+          <a href="#">Design</a>
+          <a href="#">Developpement</a>
+          <a href="#">Pedagogie</a>
+        </div>
+        <div>
+          <h4>Partenaires</h4>
+          <a href="#">Institutions</a>
+          <a href="#">Fondations</a>
+          <a href="#">Collectivites</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <a href="#">hello@theplatform.fr</a>
+          <a href="#">Presse</a>
+          <a href="#">Rejoindre l'equipe</a>
+        </div>
+      </div>
+      <div class="colophon-bottom">
+        <span class="colophon-credits">&copy; 2026 The Platform &mdash; Tous droits reserves</span>
+        <span class="colophon-edition">Colophon &mdash; edition n&deg;1, printemps 2026</span>
+        <span class="colophon-legal">
+          <a href="#">Mentions legales</a>
+          <a href="#">Confidentialite</a>
+        </span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================
+     JAVASCRIPT — TAB NAVIGATION
+     ============================================ -->
+<script>
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
