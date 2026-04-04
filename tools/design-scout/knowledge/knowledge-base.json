@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "last_updated": "2026-04-04",
-  "total_sites": 579,
+  "total_sites": 602,
   "sites": [
     {
       "id": "banlieuwood-pencil-cinema-dark-2026-04-03",
@@ -2601,7 +2601,8 @@
         "La typographie serif centrée du logo sur fond clair est une signature éditoriale classique transposable"
       ],
       "visual_analyzed": true,
-      "visual_analyzed_at": "2026-04-03"
+      "visual_analyzed_at": "2026-04-04",
+      "palette_mood": "neutre"
     },
     {
       "id": "eyemagazine-com-2026-04-03",
@@ -2700,7 +2701,9 @@
         "L'archive = la vraie valeur d'une publication spécialisée"
       ],
       "visual_analyzed": true,
-      "visual_analyzed_at": "2026-04-03"
+      "visual_analyzed_at": "2026-04-04",
+      "slug": "eyemagazine-com",
+      "palette_mood": "coloré"
     },
     {
       "id": "www-sagmeisterwalsh-com-2026-04-03",
@@ -3122,7 +3125,7 @@
       "photography_quality": "Zéro photo — illustrations 3D maison à haute qualité de render",
       "animation_level": "Probablement des animations des personnages en production",
       "mobile_quality": "Excellent — les personnages en coeur centré sur mobile sont encore plus impactants",
-      "overall_craft": "Craft world-class dans son registre. La cohérence entre brand, illustrations et UX est totale.",
+      "overall_craft": "soigné",
       "strengths": [
         "Les illustrations 3D maison sont un asset de marque inattaquable",
         "Vert iconique sur blanc — palette la plus efficace possible pour ce contexte",
@@ -3140,7 +3143,8 @@
         "Quand la marque est forte, le hero peut être émotionnel plutôt que fonctionnel"
       ],
       "visual_analyzed": true,
-      "visual_analyzed_at": "2026-04-03"
+      "visual_analyzed_at": "2026-04-04",
+      "palette_mood": "clair"
     },
     {
       "id": "www-headspace-com-2026-04-03",
@@ -5241,7 +5245,7 @@
       "slug": "tribecafilm-com",
       "visual_score": 7,
       "is_reference_worthy": true,
-      "visual_impression": "Bonne référence pour un site de festival de cinéma. Hero dark panoramique NYC en N&B avec typographie blanche bold — classique mais efficace. Sur mobile, portrait plein écran de speakers en N&B avec texte superposé blanc — très bon traitement. Logo TRIBECA avec 'I' remplacé par un 'bar vertical' = identité typographique mémorable. Energie cinéma sans excès.",
+      "visual_impression": "Dark N&B panoramique NYC + typo bold blanche + CTA jaune — festival design qui assume son identité urbaine, logo TRIBECA avec 'I' stylisé = signature typographique mémorable.",
       "palette_real": {
         "dominant": "#1A1A1A",
         "primary": "#FFFFFF",
@@ -5260,7 +5264,7 @@
       "photography_quality": "N&B panoramique NYC iconic + portraits speakers pros — bon niveau éditorial",
       "animation_level": "Slider hero présumé, transitions fluides attendues pour festival",
       "mobile_quality": "Très bon — plein écran portrait immersif, texte sur overlay bien lisible, CTA 'Tickets & Passes' jaune visible",
-      "overall_craft": "Bon niveau — festival design qui assume son identité NYC dark",
+      "overall_craft": "soigné",
       "strengths": [
         "Logo TRIBECA avec 'I' stylisé — petite touche typographique qui fait la différence",
         "Dark + N&B + or = palette festival premium classique bien exécutée",
@@ -5278,7 +5282,8 @@
         "Plein écran portrait sur mobile = engagement émotionnel immédiat"
       ],
       "visual_analyzed": true,
-      "visual_analyzed_at": "2026-04-03"
+      "visual_analyzed_at": "2026-04-04",
+      "palette_mood": "sombre"
     },
     {
       "id": "sundance-org-2026-04-03",
@@ -5344,104 +5349,6 @@
       "visual_score": 7,
       "visual_notes": "Sundance tient par son héritage et sa typographie Trade Gothic Condensed — police authentique du cinéma indépendant américain. Le jaune #FED105 en accent navigation est le seul geste de couleur dans une palette très sobre mais mémorable. Le design se met au service de l'institution sans chercher à impressionner visuellement.",
       "visual_audited_at": "2026-04-04"
-    },
-    {
-      "id": "festival-cannes-com-2026-04-03",
-      "url": "https://www.festival-cannes.com",
-      "title": "Festival de Cannes — Élégance Institutionnelle Française",
-      "source": "batch-analysis",
-      "studio": "in-house",
-      "country": "FR",
-      "sector": "cinema",
-      "date_observed": "2026-04-03",
-      "level": "good",
-      "style_tags": [
-        "festival-prestige",
-        "french-institutional",
-        "photo-driven",
-        "or-prestige",
-        "editorial"
-      ],
-      "palette": {
-        "bg": "#FFFFFF",
-        "text_primary": "#1a1a1a",
-        "accent_primary": "#C9A227",
-        "mood": "neutre avec accent or",
-        "saturation": "modérée — or comme seul accent visible"
-      },
-      "typography": {
-        "display": "Sans-serif moderne (probablement GT America ou équivalent)",
-        "body": "Sans-serif 14-16px",
-        "size_hero": "Variable selon carousel",
-        "style": "Institutionnel, sobre, international (FR/EN)",
-        "notable": "Le design joue sur la mythologie Cannes (Palme d'Or, 78 ans d'histoire) — l'identité est dans le contenu, pas dans le design"
-      },
-      "layout": {
-        "hero_pattern": "Grand carousel avec films en vedette + 3 sites satellites intégrés",
-        "grid": "Grille 4 colonnes films, sections modulaires",
-        "tension": "Or sur fond blanc = élégance sans effort. La tension est narrative (Palme d'Or) pas visuelle.",
-        "spacing": "Standard — ni minimal ni dense"
-      },
-      "what_makes_it_exceptional": "La palette ivoire-crème comme fond dominant est rare dans le secteur cinéma (tous les autres font du noir). C'est cette inversion qui crée l'élégance et la distinction. La typographie serif large des titres confère une autorité éditoriale sans arrogance.",
-      "reusable_patterns": [
-        "Or (#C9A227 ou similaire) comme seul accent sur fond blanc pour le prestige institutionnel",
-        "3 sous-sites intégrés (Sélection, Marché, Demain) = architecture multi-audience dans un seul design",
-        "Carousel hero avec photos haute définition de films — les films font le design"
-      ],
-      "mistakes_to_avoid": [
-        "Design fonctionnel mais sans vision — Cannes tient grâce à la Palme d'Or, pas à son design",
-        "Ne pas confondre prestige de marque et design world-reference — ce n'est pas la même chose"
-      ],
-      "best_for": [
-        "festival cinéma prestige",
-        "site institutionnel FR",
-        "page programme international",
-        "landing marché du film"
-      ],
-      "visual_score": 7,
-      "is_reference_worthy": true,
-      "visual_impression": "Prestige institutionnel cinéma. Palette ivoire-crème avec accents dorés — élégance francesa assumée. Le split desktop (image film à gauche / texte à droite) fonctionne bien. La grille actualités en s2 avec photos de plateau est propre. Le footer avec les chiffres géants '2025' est une belle signature typographique.",
-      "palette_real": {
-        "dominant": "#F5F0E8",
-        "primary": "#1A1A1A",
-        "secondary": "#C8A96E",
-        "accent": "#C8A96E",
-        "background": "#F5F0E8",
-        "mood": "Prestige cinéma, or et ivoire, élégance classique française"
-      },
-      "typography_real": {
-        "heading": "Serif élégant (probablement Cannes-custom ou Domaine Display), grandes tailles",
-        "body": "Sans-serif discret, lisible",
-        "quality": "Excellente hiérarchie — les titres respirent, les catégories en capslock bien espacées"
-      },
-      "layout_pattern": "Hero split 50/50 image+texte, slider 1-of-6, grille éditoriale 3 colonnes sous le fold",
-      "whitespace": "Très généreux — Cannes assume la lenteur et le prestige",
-      "photography_quality": "Photos de films professionnelles, bonne couleur chaude, cadrage cinématographique",
-      "animation_level": "Slider avec flèches arrow, navigation fluide probable",
-      "mobile_quality": "Mobile excellent — image full-width puis texte en stack, lisibilité parfaite, sponsor bar en haut bien gérée",
-      "overall_craft": "Haut niveau — cohérence brand totale, ivoire signature mémorable, typo impeccable",
-      "strengths": [
-        "Palette ivoire-or unique et reconnaissable",
-        "Typographie éditoriale premium",
-        "Mobile exemplaire — stack vertical naturel",
-        "Grille actualités sobre et élégante",
-        "Branding sponsors intégré discrètement"
-      ],
-      "weaknesses": [
-        "Navigation desktop très chargée (deux barres de nav)",
-        "Le split 50/50 peut sembler conservateur",
-        "Peu d'énergie visuelle — prestige mais statique"
-      ],
-      "remove_reason": null,
-      "design_lessons": [
-        "Choisir un fond de couleur chaude non-blanc crée immédiatement un positionnement premium vs la concurrence",
-        "La discrétion des sponsors en top bar permet la monétisation sans dégrader l'expérience",
-        "Le serif en grand corps pour les titres éditoriaux = signal qualité instantané",
-        "Ivoire + or = code luxury cinéma à retenir pour Banlieuwood"
-      ],
-      "visual_analyzed": true,
-      "visual_analyzed_at": "2026-04-03",
-      "slug": "festival-cannes-com"
     },
     {
       "id": "finalist-digital-agency-2026-04-03",
@@ -8245,7 +8152,7 @@
       "photography_quality": "Très bonne — couvertures de livres photographiées ou renderées avec soin, composition soignée",
       "animation_level": "Ticker en haut pour les annonces — reste sobre",
       "mobile_quality": "Bon — les livres s'empilent verticalement, texte bien lisible, popup newsletter visible",
-      "overall_craft": "Execution honnête d'un site e-commerce éditorial premium — pas révolutionnaire mais solide",
+      "overall_craft": "soigné",
       "strengths": [
         "Le fond bleu-gris poudré est une vraie décision de palette — pas le blanc par défaut",
         "Les couvertures de livres sont le héros — bien mis en valeur",
@@ -8262,7 +8169,8 @@
         "Les produits (livres) peuvent être les éléments visuels principaux si photographiés avec soin"
       ],
       "visual_analyzed": true,
-      "visual_analyzed_at": "2026-04-03"
+      "visual_analyzed_at": "2026-04-04",
+      "palette_mood": "clair"
     },
     {
       "id": "fondation-louis-vuitton-2026-04-03",
@@ -10174,7 +10082,7 @@
       "photography_quality": "Exceptionnelle — portraits studio des instructeurs, éclairage cinématique, très haute qualité",
       "animation_level": "Modéré — questionnaire interactif, scroll probable",
       "mobile_quality": "Bon malgré le pop-up questionnaire Sprig qui masque le hero — problème UX au premier chargement",
-      "overall_craft": "Top 10% mondial. Référence absolue pour l'edtech premium. Le fond noir + portraits lumineux est une formule copiée par toute l'industrie.",
+      "overall_craft": "exceptionnel",
       "strengths": [
         "Fond noir + portraits éclairés = sentiment d'apprentissage avec des stars de cinéma",
         "Headline caps ultra-bold 'LEARN FROM THE BEST' — aspiration pure",
@@ -10194,7 +10102,8 @@
         "Photographier ses instructeurs comme des stars de cinéma élève la perception du produit"
       ],
       "visual_analyzed": true,
-      "visual_analyzed_at": "2026-04-03"
+      "visual_analyzed_at": "2026-04-04",
+      "palette_mood": "sombre"
     },
     {
       "id": "brilliant-2026-04-03",
@@ -10278,7 +10187,7 @@
       "photography_quality": "Zéro photo — illustrations/UI produit uniquement, cohérence totale",
       "animation_level": "Probablement très animé en production (éléments interactifs bougent dans les lettres)",
       "mobile_quality": "Excellent — l'idée tient sur petit écran, titres bien dimensionnés",
-      "overall_craft": "Craft world-class. Chaque élément justifié, rien de gratuit. Le concept 'learn by doing' se lit dans le design lui-même.",
+      "overall_craft": "soigné",
       "strengths": [
         "Concept visuel rare : l'interface pédagogique traverse la typographie",
         "Minimalisme qui n'est pas pauvreté — richesse conceptuelle maximale",
@@ -10296,7 +10205,8 @@
         "Intégrer le produit dans la typographie plutôt que de le montrer à côté"
       ],
       "visual_analyzed": true,
-      "visual_analyzed_at": "2026-04-03"
+      "visual_analyzed_at": "2026-04-04",
+      "palette_mood": "clair"
     },
     {
       "id": "ideo-stories-2026-04-03",
@@ -15874,7 +15784,8 @@
       ],
       "remove_reason": null,
       "visual_analyzed": true,
-      "visual_analyzed_at": "2026-04-03"
+      "visual_analyzed_at": "2026-04-04",
+      "palette_mood": "clair"
     },
     {
       "name": "032c",
@@ -15988,7 +15899,8 @@
       ],
       "remove_reason": null,
       "visual_analyzed": true,
-      "visual_analyzed_at": "2026-04-03"
+      "visual_analyzed_at": "2026-04-04",
+      "palette_mood": "clair"
     },
     {
       "name": "T Magazine (New York Times)",
@@ -16123,7 +16035,7 @@
       "slug": "thegentlewoman-co-uk",
       "visual_score": 9,
       "is_reference_worthy": true,
-      "visual_impression": "Parfait. Couverture de magazine simulée en plein centre de l'écran sur fond blanc pur — la couverture Solange en N&B avec le logo teal du magazine. Navigation ultra-minimaliste horizontale top. Sur mobile, même couverture centrée puis shop en dessous. C'est la transposition exacte de l'identité print en numérique. Zéro compromis, zéro bruit.",
+      "visual_impression": "Couverture 'Solange' en N&B centré sur fond blanc absolu, logo turquoise signature 'the gentlewoman' en lowercase serif — beauté éditoriale de la simplicité maximum, la couverture magazine comme seul objet de désir.",
       "palette_real": {
         "dominant": "#FFFFFF",
         "primary": "#3DBFB8",
@@ -16142,7 +16054,7 @@
       "photography_quality": "N&B éditorial haut de gamme — shooting Solange Knowles niveau Vogue. Irréprochable.",
       "animation_level": "Minimal présumé — site contemplatif",
       "mobile_quality": "Excellent — couverture centrée bien redimensionnée, sections linéaires propres",
-      "overall_craft": "Top 1% mondial de l'éditorial numérique. Chaque pixel est une décision consciente.",
+      "overall_craft": "world-class",
       "strengths": [
         "Présentation de la couverture comme un objet de musée — placement centré sur fond blanc infini",
         "Logotype teal 'the gentlewoman' en bas de casse italique = identité unique au monde",
@@ -16156,7 +16068,8 @@
       ],
       "remove_reason": null,
       "visual_analyzed": true,
-      "visual_analyzed_at": "2026-04-03"
+      "visual_analyzed_at": "2026-04-04",
+      "palette_mood": "clair"
     },
     {
       "name": "Snøhetta",
@@ -18075,7 +17988,7 @@
       "photography_quality": "Photo éditoriale haute qualité — émotionnelle, pas stock",
       "animation_level": "Minimal — institutions ne font pas de bling",
       "mobile_quality": "Très bon — le serif géant blanc sur photo sombre tient parfaitement",
-      "overall_craft": "Craft institutionnel de haut niveau. Simplicité assumée qui communique l'autorité.",
+      "overall_craft": "soigné",
       "strengths": [
         "Photo full-bleed éditoriale de qualité — choisie avec intention",
         "Serif blanc sur dark overlay = recette classique qui fonctionne toujours",
@@ -18087,7 +18000,8 @@
       ],
       "remove_reason": null,
       "visual_analyzed": true,
-      "visual_analyzed_at": "2026-04-03"
+      "visual_analyzed_at": "2026-04-04",
+      "palette_mood": "sombre"
     },
     {
       "name": "Royal College of Art (RCA)",
@@ -18134,7 +18048,7 @@
       "photography_quality": "Exceptionnelle — sculpture en fil doré éclairée par lumière ambre, qualité exposé. La photo EST le site.",
       "animation_level": "Probable slide de photos artistiques — transitions attendues soignées",
       "mobile_quality": "Mobile superbe — l'image prend tout le viewport, la sculpture garde sa magie, texte très discret en bas",
-      "overall_craft": "Niveau musée — chaque pixel est au service de l'oeuvre. Aucun élément superflu.",
+      "overall_craft": "world-class",
       "strengths": [
         "Photographie de niveau galerie d'art — qualité exceptionnelle",
         "Palette ambre-ténèbres unique et immersive",
@@ -18148,7 +18062,8 @@
       ],
       "remove_reason": null,
       "visual_analyzed": true,
-      "visual_analyzed_at": "2026-04-03"
+      "visual_analyzed_at": "2026-04-04",
+      "palette_mood": "sombre"
     },
     {
       "name": "Parsons School of Design (The New School)",
@@ -21059,7 +20974,7 @@
       "photography_quality": "Illustration > photo — style illustratif cohérent et distinctif sur tous les articles",
       "animation_level": "Minimal — probable hover sur les articles",
       "mobile_quality": "Excellent — single column avec illustration pleine largeur, le logo scale bien",
-      "overall_craft": "Très haut niveau — cohérence éditoriale parfaite entre contenu global et identité visuelle internationale",
+      "overall_craft": "soigné",
       "strengths": [
         "Logo 'rëst öf wörld' avec diacritiques : signature immédiatement reconnaissable",
         "Système d'illustration cohérent sur tous les articles — rare et difficile à maintenir",
@@ -21072,7 +20987,8 @@
       ],
       "remove_reason": null,
       "visual_analyzed": true,
-      "visual_analyzed_at": "2026-04-03"
+      "visual_analyzed_at": "2026-04-04",
+      "palette_mood": "coloré"
     },
     {
       "name": "The Intercept",
@@ -21203,7 +21119,8 @@
       ],
       "remove_reason": null,
       "visual_analyzed": true,
-      "visual_analyzed_at": "2026-04-03"
+      "visual_analyzed_at": "2026-04-04",
+      "palette_mood": "sombre"
     },
     {
       "name": "Mack Books",
@@ -25453,7 +25370,11 @@
         "grid-courses",
         "energetic"
       ],
-      "source": "visual-audit-batch4"
+      "source": "visual-audit-batch4",
+      "palette_mood": "coloré",
+      "overall_craft": "soigné",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04"
     },
     {
       "url": "https://www.spiegel.de",
@@ -25489,7 +25410,11 @@
         "institutional",
         "editorial"
       ],
-      "source": "visual-audit-batch4"
+      "source": "visual-audit-batch4",
+      "palette_mood": "clair",
+      "overall_craft": "correct",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04"
     },
     {
       "url": "https://substack.com",
@@ -25541,7 +25466,11 @@
         "product-photography",
         "cultural-premium"
       ],
-      "source": "visual-audit-batch4"
+      "source": "visual-audit-batch4",
+      "palette_mood": "neutre",
+      "overall_craft": "soigné",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04"
     },
     {
       "url": "https://www.typewolf.com",
@@ -25594,7 +25523,13 @@
         "category-nav",
         "premium-media"
       ],
-      "source": "visual-audit-batch4"
+      "source": "visual-audit-batch4",
+      "palette_mood": "clair",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "is_reference_worthy": true,
+      "visual_impression": "Magazine design & architecture premium — hero derrière pop-up RGPD frustrante, mais la structure éditoriale avec WallpaperSTORE+, trending bar et photographie high-end témoigne d'un craft soigné.",
+      "overall_craft": "soigné"
     },
     {
       "url": "https://www.shudder.com",
@@ -25885,7 +25820,11 @@
         "charming"
       ],
       "source": "visual-audit-batch2",
-      "is_reference_worthy": true
+      "is_reference_worthy": true,
+      "palette_mood": "coloré",
+      "overall_craft": "soigné",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04"
     },
     {
       "id": "ghibli-jp-2026-04-04",
@@ -25905,7 +25844,411 @@
         "minimal-japanese"
       ],
       "source": "visual-audit-batch2",
-      "is_reference_worthy": true
+      "is_reference_worthy": true,
+      "palette_mood": "coloré",
+      "overall_craft": "soigné",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04"
+    },
+    {
+      "slug": "bandcamp-com",
+      "url": "https://bandcamp.com",
+      "visual_score": 7,
+      "is_reference_worthy": true,
+      "visual_impression": "Fond cyan menthe pâle, étoiles/astérisques géométriques décoratifs, typo bold noire — minimalisme artisanal authentique qui reflète l'ethos indie de la plateforme.",
+      "palette_mood": "clair",
+      "overall_craft": "soigné",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch3"
+    },
+    {
+      "slug": "bleep-com",
+      "url": "https://bleep.com",
+      "visual_score": 7,
+      "is_reference_worthy": true,
+      "visual_impression": "Grid éditoriale dense de visuels d'albums colorés et variés sur fond sombre — bon niveau magazine musique avec une vraie curation visuelle.",
+      "palette_mood": "sombre",
+      "overall_craft": "soigné",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch3"
+    },
+    {
+      "slug": "boilerroom-tv",
+      "url": "https://boilerroom.tv",
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Noir absolu + typo massive blanche + CTA jaune fluo — brutalisme club culture assumé, identité visuelle instantanément reconnaissable et puissante.",
+      "palette_mood": "sombre",
+      "overall_craft": "world-class",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch3"
+    },
+    {
+      "slug": "warp-net",
+      "url": "https://warp.net",
+      "visual_score": 8,
+      "is_reference_worthy": true,
+      "visual_impression": "Hero plein écran N&B cinématique avec bande violette en accent — sobre, élégant, fort caractère photographique qui donne au label une posture artistique premium.",
+      "palette_mood": "sombre",
+      "overall_craft": "exceptionnel",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch3"
+    },
+    {
+      "slug": "soundcloud-com",
+      "url": "https://soundcloud.com",
+      "visual_score": 7,
+      "is_reference_worthy": true,
+      "visual_impression": "Hero dark avec photo artiste plein écran immersive, typo bold blanche, CTA clairs — design plateforme propre et moderne qui met les artistes en avant.",
+      "palette_mood": "sombre",
+      "overall_craft": "soigné",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch3"
+    },
+    {
+      "slug": "a24films-com",
+      "url": "https://a24films.com",
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Noir absolu total + liste de titres de films en typo serif blanche sur photo floue — minimalisme cinéma premium d'une rare élégance, la référence absolue pour un site culturel ambitieux.",
+      "palette_mood": "sombre",
+      "overall_craft": "world-class",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch3"
+    },
+    {
+      "slug": "criterion-com",
+      "url": "https://criterion.com",
+      "visual_score": 8,
+      "is_reference_worthy": true,
+      "visual_impression": "Hero plein écran photo film vintage Charlize Theron / Keanu Reeves, typographie serif élégante en overlay — référence éditoriale cinéma entre magazine et boutique premium.",
+      "palette_mood": "coloré",
+      "overall_craft": "exceptionnel",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch3"
+    },
+    {
+      "slug": "hellfest-fr",
+      "url": "https://hellfest.fr",
+      "visual_score": 7,
+      "is_reference_worthy": true,
+      "visual_impression": "Photo crowd dark + typo grunge orange flamboyante 'Tales From The Pit' — énergie metal assumée et cohérente, la brutalité visuelle est un choix DA délibéré et réussi.",
+      "palette_mood": "sombre",
+      "overall_craft": "soigné",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch3"
+    },
+    {
+      "slug": "coachella-com",
+      "url": "https://coachella.com",
+      "visual_score": 7,
+      "is_reference_worthy": true,
+      "visual_impression": "Affiche festival typographique dense avec illustration palmiers iconique — design surchargé mais iconique, la lisibilité est sacrifiée au profit de l'image de marque festival californien.",
+      "palette_mood": "coloré",
+      "overall_craft": "soigné",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch3"
+    },
+    {
+      "id": "theintercept-com-2026-04-04",
+      "url": "https://theintercept.com",
+      "name": "The Intercept",
+      "slug": "theintercept-com",
+      "sector": "journalism-investigative",
+      "country": "US",
+      "visual_score": 7,
+      "is_reference_worthy": true,
+      "visual_impression": "Journalisme d'investigation avec un hero photo fullbleed dramatique, typographie bold condensée blanche sur fond dark — identité visuelle qui incarne l'urgence éditoriale sans fioritures.",
+      "palette_mood": "sombre",
+      "overall_craft": "soigné",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "style_tags": [
+        "dark-editorial",
+        "bold-type",
+        "photo-hero",
+        "journalism",
+        "high-contrast"
+      ],
+      "source": "visual-audit-batch3"
+    },
+    {
+      "id": "murmure-me-2026-04-04",
+      "url": "https://murmure.me",
+      "name": "Murmure",
+      "slug": "murmure-me",
+      "sector": "design-studio",
+      "country": "FR",
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Studio de design français world-class — typographie display 'MURMURE' massive en noir total, lettres interrompues par un collage de photos de travaux : tension typographique maximaliste, portfolio vivant qui absorbe le nom de marque.",
+      "palette_mood": "sombre",
+      "overall_craft": "world-class",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "style_tags": [
+        "black-hero",
+        "display-type",
+        "photo-collage",
+        "maximalist-type",
+        "french-studio",
+        "world-class"
+      ],
+      "source": "visual-audit-batch3"
+    },
+    {
+      "slug": "off---white-com",
+      "url": "https://off---white.com",
+      "visual_score": 7,
+      "is_reference_worthy": true,
+      "visual_impression": "Hero gris neutre avec 4 mannequins face caméra pour la collab AC Milan — luxe streetwear clean et assumé, typographie OW serif cursive en rouge signature, split CTA minimaliste sur fond blanc cassé.",
+      "palette_mood": "neutre",
+      "overall_craft": "soigné",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch2",
+      "sector": "fashion-streetwear",
+      "style_tags": [
+        "luxe-streetwear",
+        "minimal-luxury",
+        "serif-italic",
+        "clean-neutral",
+        "collaboration"
+      ]
+    },
+    {
+      "slug": "stussy-com",
+      "url": "https://stussy.com",
+      "visual_score": 8,
+      "is_reference_worthy": true,
+      "visual_impression": "Sobriété radicale — une seule image centrée sur fond blanc immaculé, t-shirt bleu acier sur cintre en rack de boutique, logo Stussy brushstroke minimal en coin : confiance de marque absolue sans chercher à séduire.",
+      "palette_mood": "clair",
+      "overall_craft": "exceptionnel",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch2",
+      "sector": "fashion-streetwear",
+      "style_tags": [
+        "ultra-minimal",
+        "one-image-hero",
+        "whitespace-radical",
+        "brand-confidence",
+        "streetwear-icon"
+      ]
+    },
+    {
+      "slug": "palaceskateboards-com",
+      "url": "https://palaceskateboards.com",
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Anti-design érigé en manifeste artistique — 5 logos Tri-Ferg Palace en variantes couleurs sur fond blanc, rien d'autre au-dessus de la fold : confiance totale dans l'identité visuelle sans avoir besoin de produit ou texte.",
+      "palette_mood": "clair",
+      "overall_craft": "world-class",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch2",
+      "sector": "skate-streetwear",
+      "style_tags": [
+        "anti-design",
+        "logo-only-hero",
+        "color-variants",
+        "brand-manifesto",
+        "skateboarding-culture"
+      ]
+    },
+    {
+      "slug": "wearebraindead-com",
+      "url": "https://wearebraindead.com",
+      "visual_score": 8,
+      "is_reference_worthy": true,
+      "visual_impression": "Hero planétaire sombre rouge-ocre SF avec produits collab en float — atmosphère intergalactique poétique et décalée, art direction avec une cohérence de world-building rare dans le streetwear.",
+      "palette_mood": "sombre",
+      "overall_craft": "exceptionnel",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch2",
+      "sector": "fashion-streetwear",
+      "style_tags": [
+        "dark-sci-fi",
+        "world-building",
+        "editorial-hero",
+        "collaboration",
+        "atmospheric"
+      ]
+    },
+    {
+      "slug": "cactusplantfleamarket-com",
+      "url": "https://cactusplantfleamarket.com",
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Interface OS/terminal vivante avec date/heure/météo/phase lunaire en live, URL dans la barre comme header, grille produits ultra-brute avec 'BUY ME' en gras — CPFM réinvente l'e-commerce comme performance conceptuelle.",
+      "palette_mood": "clair",
+      "overall_craft": "world-class",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch2",
+      "sector": "fashion-streetwear",
+      "style_tags": [
+        "os-interface",
+        "conceptual-ecommerce",
+        "brutalist-ui",
+        "anti-design",
+        "live-data",
+        "system-font"
+      ]
+    },
+    {
+      "slug": "kith-com",
+      "url": "https://kith.com",
+      "visual_score": 8,
+      "is_reference_worthy": true,
+      "visual_impression": "Hero plein-bleed jardin/serre pour Spring 2026 — photographie luxe avec modèle dans un écosystème végétal dense, trois vignettes lifestyle en bas, exécution premium qui rapproche Kith du luxe européen.",
+      "palette_mood": "neutre",
+      "overall_craft": "exceptionnel",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch2",
+      "sector": "fashion-streetwear",
+      "style_tags": [
+        "luxury-photography",
+        "full-bleed-hero",
+        "nature-editorial",
+        "premium-streetwear",
+        "lifestyle"
+      ]
+    },
+    {
+      "slug": "anothermag-com",
+      "url": "https://anothermag.com",
+      "visual_score": 7,
+      "is_reference_worthy": true,
+      "visual_impression": "Fond blanc épuré, serif 'AnOther' en majuscule élégante, bi-colonnes éditorial photo/texte avec image large à gauche et texte aligné à droite — craft typographique fin et maîtrise de la grille éditoriale.",
+      "palette_mood": "clair",
+      "overall_craft": "soigné",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch2",
+      "sector": "media-fashion",
+      "style_tags": [
+        "editorial-serif",
+        "clean-white",
+        "two-column-hero",
+        "fashion-culture",
+        "typographic-identity"
+      ]
+    },
+    {
+      "slug": "kinfolk-com",
+      "url": "https://kinfolk.com",
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Couverture magazine centré sur fond blanc absolu, serif uppercase 'ISSUE 59 / THE CLEAN ISSUE' — pureté éditoriale maximale où le site devient le magazine lui-même, photographie de couverture comme seule preuve de vie.",
+      "palette_mood": "clair",
+      "overall_craft": "world-class",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch2",
+      "sector": "media-lifestyle",
+      "style_tags": [
+        "magazine-as-website",
+        "cover-hero",
+        "white-space-radical",
+        "serif-uppercase",
+        "editorial-purity"
+      ]
+    },
+    {
+      "slug": "fantasticman-com",
+      "url": "https://fantasticman.com",
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Masthead 'FANTASTICMAN' en condensed serif massif pleine largeur comme une une de journal broadsheet — photo B&W centrée sous le titre, craft typographique ultra-précis, date en haut gauche, vignette magazine en coin : world-class editorial web.",
+      "palette_mood": "clair",
+      "overall_craft": "world-class",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch2",
+      "sector": "media-fashion",
+      "style_tags": [
+        "newspaper-typography",
+        "condensed-serif-masthead",
+        "black-white",
+        "editorial-precision",
+        "fashion-magazine"
+      ]
+    },
+    {
+      "slug": "annapurnainteractive-com",
+      "url": "https://annapurnainteractive.com",
+      "visual_score": 8,
+      "is_reference_worthy": true,
+      "visual_impression": "Hero sombre violet-nuit avec feux d'artifice cinématiques pour le jeu Mixtape — atmosphère poétique et émotionnelle, navigation épurée, craft visuel qui transporte immédiatement dans l'univers du studio indépendant.",
+      "palette_mood": "sombre",
+      "overall_craft": "exceptionnel",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch2",
+      "sector": "gaming-indie",
+      "style_tags": [
+        "cinematic-dark",
+        "game-hero",
+        "atmospheric",
+        "indie-studio",
+        "purple-night"
+      ]
+    },
+    {
+      "slug": "are-na",
+      "url": "https://are.na",
+      "visual_score": 7,
+      "is_reference_worthy": true,
+      "visual_impression": "Landing page textuelle sur fond blanc — anti-marketing assumé où la définition du produit en liste numérotée remplace tout hero image, screenshot UI sobre en bas, esthétique tool-first qui parle directement aux créatifs et chercheurs.",
+      "palette_mood": "clair",
+      "overall_craft": "soigné",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch2",
+      "sector": "creative-tools",
+      "style_tags": [
+        "text-only-landing",
+        "anti-marketing",
+        "tool-aesthetic",
+        "white-space",
+        "intellectual"
+      ]
+    },
+    {
+      "slug": "festival-avignon-com",
+      "url": "https://festival-avignon.com",
+      "visual_score": 8,
+      "is_reference_worthy": true,
+      "visual_impression": "Festival d'Avignon : hero photo plongée saisissante de l'amphithéâtre de nuit, foule sous les pierres millénaires, logo encadré sobre flottant dans l'obscurité — l'image fait tout le travail, aucun artifice nécessaire.",
+      "palette_mood": "sombre",
+      "overall_craft": "soigné",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch4"
+    },
+    {
+      "slug": "brestbrestbrest-fr",
+      "url": "https://brestbrestbrest.fr",
+      "visual_score": 9,
+      "is_reference_worthy": true,
+      "visual_impression": "Studio Brest Brest Brest : mosaïque explosive de projets graphiques — affiches jaune acidulé, typographies expressives oversized (EN AMOUR, MURAILLE MUSIC), identités culturelles vibrantes. Pure culture graphique française indépendante, chaque projet déborde d'énergie.",
+      "palette_mood": "coloré",
+      "overall_craft": "exceptionnel",
+      "visual_analyzed": true,
+      "visual_analyzed_at": "2026-04-04",
+      "source": "visual-audit-batch4"
     }
   ],
   "last_pruned": "2026-04-04",

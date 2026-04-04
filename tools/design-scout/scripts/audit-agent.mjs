@@ -24,9 +24,9 @@ import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const KB_PATH       = resolve(__dirname, "knowledge-base.json");
-const CAPTURES_DIR  = resolve(__dirname, "captures/visual-analysis");
-const CHECKPOINT    = resolve(__dirname, ".audit-checkpoint.json");
+const KB_PATH       = resolve(__dirname, "../knowledge/knowledge-base.json");
+const CAPTURES_DIR  = resolve(__dirname, "../captures/visual-analysis");
+const CHECKPOINT    = resolve(__dirname, "../.audit-checkpoint.json");
 
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 
