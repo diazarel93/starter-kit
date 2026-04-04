@@ -9,14 +9,15 @@
 ## Seuil actuel — Design Critic
 
 ```
-Seuil minimum acceptable  : 56/70
-Seuil "excellent"          : 62/70
-Seuil "world-class"        : 67/70
+Seuil minimum acceptable  : 62/70
+Seuil "excellent"          : 65/70
+Seuil "world-class"        : 68/70
 
 Historique :
 - 2026-04-03 : seuil fixé à 56/70 (baseline session intensive)
+- 2026-04-04 : seuil monté à 62/70 — session 3 propositions SaaS, scores 64-67/70 après 3 rounds. Brief précis + checklist 6 règles = nouveau minimum.
 
-Prochain palier : 2026-05-03 → passer à 58/70 si 3 sessions consécutives passent facilement
+Prochain palier : 2026-05-04 → passer à 64/70 si 3 sessions consécutives passent facilement
 Règle : augmenter de 2pts par mois si le niveau le permet. Ne jamais baisser.
 
 KB actuelle : 641 sites (2026-04-03) — objectif 700 en cours
@@ -62,6 +63,91 @@ Couverture secteurs : luxury-fashion, streetwear, automotive, cinema, saas, gami
 **Pattern café specialty** : Le whitespace généreux = signal de luxe dans le café. Tim Wendelboe, Blue Bottle utilisent l'espace vide comme argument de qualité — "on n'a pas besoin de te convaincre". Custom typography (Stumptown, Onyx) crée l'identité là où d'autres utilisent la couleur.
 
 **Règle universelle craft** : Jamais plus de 4 couleurs. Une couleur accent vivante sur palette neutre = différenciation. Plus = dilution.
+
+---
+
+### Le WAAAAA peut venir du produit lui-même, pas du design (2026-04-04)
+
+**Cas Kura** : L'audit design-critic a donné 52/70 en pointant l'absence de "singularité visuelle". C'était faux. Le WAAAAA de la landing Kura c'est la démo live interactive :
+- Searchbar → "Caféine" → verdict card verte AUTHORIZED · Source DETERMINISTIC
+- "Cannabis" → verdict rouge PROHIBITED · Class S8 · Confidence HIGH · KURA_DB
+- "EPO" → état "Analyzing..." avec spinner → verdict
+
+Personne dans le RegTech / compliance ne fait ça sur sa landing. Le vrai moteur tourne en direct.
+
+**Règle critique** : Avant de chercher un effet visuel différenciant, demander : "Est-ce que le produit lui-même peut être montré en action sur la landing ?" Si oui, c'est ça le moment WAAAAA — pas un radar CSS ou une display font custom.
+
+**Ce que ça change dans l'audit D5** :
+- Un produit avec une démo fonctionnelle live = score D5 automatiquement 8+/10, même si le design est générique
+- La démo Kura (searchbar + verdict card qui apparaît) = signature impossible à copier par un concurrent sans le moteur
+- Le design-critic ne doit pas noter D5 sans avoir testé l'interactivité du site
+
+**Pattern à retenir** : Design = cadre. Produit = contenu. Le meilleur cadre du monde ne compense pas un produit qui ne se montre pas. Et un produit exceptionnel qui se montre en live rend le cadre secondaire.
+
+---
+
+### Techniques cinématiques — Gap 30%→85% (2026-04-04)
+
+**Constat brutal** : Les landings produites par l'agent étaient à 30% de l'excellence. L'analyse de la vraie landing Kura (Next.js, Framer Motion, videos) a révélé le gap.
+
+**7 techniques manquantes — OBLIGATOIRES dans toute landing premium :**
+
+1. **Logo reveal** — jamais statique. Lettre par lettre (stagger 80ms), SVG stroke-dashoffset, ou clip-path reveal. Toujours.
+
+2. **Figure contextuelle dans le hero** — une silhouette, une forme, un objet qui dit IMMÉDIATEMENT le secteur. Athlète pour sport/santé. Globe/circuit pour tech/data. Mannequin pour mode. CSS only = radial-gradient + mask-image SVG inline + animation de pulsation.
+
+3. **Brand reveal section** — section plein viewport avec nom de marque en 15vw+, fond sombre/vidéo, moment de pause dramatique. Position : entre Problème et Solution. Non-négociable pour toute landing > 6 sections.
+
+4. **Video background** — si fichier disponible : `<video autoplay muted loop playsinline>`. Si non : simulation CSS avec radial-gradient animé + `@keyframes` de déplacement lent + grain SVG opacity 0.03. La simulation doit BOUGER.
+
+5. **Scroll-driven narrative (statement section)** — IntersectionObserver qui allume des mots au scroll. Mots en opacity 0.2 au repos, couleur accent au passage. Phrase courte (<10 mots), taille 5-7vw.
+
+6. **Radar/scope animation** — pour tout produit data/tech/sécurité. Cercle rotatif avec conic-gradient + animation radarSpin 8s linear infinite. Crée une impression de surveillance active, de traitement en cours.
+
+7. **Loading screen cinématique** — logo + barre de progression CSS. 1.5-2s max. Fade out doux (opacity transition 0.6s). Standard mondial pour les landings premium.
+
+**Vidéos Kura disponibles pour réutilisation :**
+- `hero-athlete.mp4` → silhouette athlète (hero background)
+- `statement-stadium.mp4` → stade (brand reveal / statement)
+- `hero-scan.mp4` → scanning (section data/tech)
+- `demo-capsule.mp4` → capsule (section demo)
+- Chemin absolu : `/Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/`
+
+**Règle de validation** avant chaque rendu : "Est-ce que quelque chose bouge dans chaque section ?" Si une section entière est statique → ajouter animation.
+
+---
+
+### Sur la génération de 3 propositions identitaires (2026-04-04)
+
+**Contexte** : Session intensive — 3 directions (SYSTÈME/TERRAIN/SIGNAL) pour plateforme SaaS multi-disciplines. 3 rounds d'itération avec screenshots + analyse + fixes ciblés.
+
+**Règle #1 — Le brief est plus important que le talent de l'agent**
+La progression de la journée (59→67/70) n'est pas venue de l'agent qui s'est amélioré — c'est le brief qui s'est précisé. Un brief avec : ce qu'il NE faut PAS faire, les références exactes, les critères de score, les 3 directions nommées = output 8 points supérieur au premier essai.
+→ **Avant de générer, investir autant de temps dans le brief que dans la génération.**
+
+**Règle #2 — Le cockpit a ses propres lois de design**
+Un cockpit intervenant (interface live en salle) n'est PAS une app SaaS normale. Lois spécifiques :
+- Chrono : minimum 88px, police monospace ou display, couleur contrastée. Visible à 3m.
+- Contrôles navigation (étape préc/suiv) : sticky bottom, 56px minimum de hauteur, 180px minimum de largeur, bouton principal couleur pleine (pas outline)
+- Instruction centrale : serif display 28px+, max 2 lignes, jamais de blocs de texte
+- Panel participants : représentation visuelle (cercles/barres), pas de liste de noms
+→ **Toujours designer le cockpit comme un tableau de bord physique, pas une page web.**
+
+**Règle #3 — Cards de disciplines : différenciation = identité**
+Quand une plateforme a plusieurs modes/disciplines, les cartes ne peuvent pas toutes être identiques (dark card + icône blanc = échec). Chaque discipline doit avoir sa couleur propre, appliquée en fond de card. Contrastes : pour les couleurs claires (jaune, vert clair), texte sombre.
+→ **Assigner une couleur par discipline dès le départ, l'appliquer partout de manière cohérente.**
+
+**Règle #4 — Dark-on-dark = bug invisible**
+Sidebar dark sur fond dark est le bug le plus fréquent et le moins détecté visuellement dans les maquettes. Toujours vérifier : fond sidebar vs texte nav. Ratio minimum : `#1A1A24` pour fond, crème 70% opacity pour texte = lisible.
+→ **Rule : jamais fond sidebar = fond page. Différence minimum : 10% de luminosité.**
+
+**Règle #5 — Pas de placeholder vide dans une grille**
+Une grille de N items avec un item vide (N+1 cellule) est un bug visuel grave. Soit N items remplissent parfaitement la grille (4+3 avec centrage, ou 3+3+1, etc.), soit on repense la grille.
+→ **Avant de valider une grille, compter les items et vérifier qu'il n'y a pas de cellule fantôme.**
+
+**Règle #6 — Le meilleur résultat en 1 passe, pas en 3**
+Pattern constaté : 3 propositions médiocres → analyse → 3 améliorations → analyse → 3 fixes = 3 rounds coûteux. Alternative : un brief ultra-précis + une seule direction poussée au max = meilleur output en moins de tokens.
+→ **Pour les prochains briefs multi-direction : inclure dans le prompt les 5 règles ci-dessus comme "checklist de validation obligatoire avant de soumettre le code."**
 
 ---
 
@@ -639,4 +725,107 @@ Format d'entrée :
 5. **Brand voice guide** — comment le copy et le design s'alignent (Oatly humor + Patagonia honnêteté)
 6. **Packaging design** — boîtes, étiquettes, sacs, unboxing experience
 7. **Signage/Environmental** — touchpoints physiques de marque
+
+
+---
+
+## Références World-Class — Sites à Décortiquer (2026-04-04)
+
+> Ces sites sont des œuvres — chaque technique est documentée pour être maîtrisée.
+> Source : Adveris "Sites innovants de l'année 2026" + veille directe.
+
+### Terminal Industries — terminal-industries.com (⭐ #1 Adveris 2026)
+
+**Adresse** : https://terminal-industries.com/
+**Catégorie** : Industrie / B2B / branding — Dark + Lime
+
+**Palette DNA** :
+- Background : `#052424` (vert très sombre — pas noir pur)
+- Accent : `#abff02` (lime électrique — PAS jaune, PAS vert — entre les deux)
+- Texte secondaire : `rgba(255,255,255, 0.1-0.4)` (transparences fines)
+- États actifs : lime sur fond dark green
+
+**Typographie** :
+- Primaire : SuisseIntl (sans-serif suisse — proche de Neue Haas Grotesk)
+- Mono : Geist Mono (code, données techniques)
+- Titres : `10.256vw` avec `-0.308vw` letter-spacing — fluidité TOTALE par viewport
+- Corps : `min(1.4375rem, 5.897vw)` — jamais de px fixes pour le corps
+
+**Techniques d'animation — CHAQUE UNE À MAÎTRISER** :
+
+1. **Color transition text animée** (signature Terminal Industries)
+   - Texte qui passe de gris clair → lime → vert foncé
+   - `@keyframes color-transition { 0% {color: #ccc} 30% {color: #abff02} 100% {color: #052424} }`
+   - Timing : `cubic-bezier(.19,1,.22,1)` — overshoot naturel
+
+2. **Reveal vertical pur** (pas fade — slide)
+   - `.reveal-y-enter-active` : `opacity fade + translateY(100%)`
+   - Durée enter : 0.6s / exit : 0.4s
+   - Easing : `cubic-bezier(.39,.575,.565,1)`
+   - À 0.6s avec TranslateY(100%) → TranslateY(0) le mouvement EST l'animation, pas l'opacity
+
+3. **Nav link — centered dot** (micro-interaction signature)
+   - `.nav a:after` = petit point centré sous le texte
+   - `transform: scale(0)` → `scale(1.01)` au hover
+   - C'est UN pixel qui change tout. Minimal mais distinctif.
+
+4. **Underline direction — right to left**
+   - `.link-active:after` : underline avec `transform-origin: right`
+   - Apparaît de droite à gauche (contre-intuitif = mémorable)
+
+5. **Button hover — slide-up fill**
+   - `::before` pseudo-element part de `translateY(100%)` → `translateY(0)` au hover
+   - Effet : couleur qui monte de bas en haut dans le bouton
+   - Durée : 0.2s (feedback rapide)
+
+6. **Mobile menu — backdrop blur** 
+   - Panel : `blur(30px)` + `background: #0000004d`
+   - Chevron rotate 180° sur open
+
+7. **Grid 12 colonnes en vw**
+   - Gutters : `min(3.646vw, 93.3333px)` — jamais de gap fixe
+   - Mobile : 2 colonnes + `5.128vw` padding
+   - Principe : TOUT en relatif/viewport pour scaling parfait
+
+8. **Will-change déclaré sur toutes les animations**
+   - `will-change: transform, opacity, filter` sur chaque élément animé
+   - Hardware-acceleration obligatoire → 60fps garanti
+
+**Référence motion globale** :
+- Feedback UI rapide : 0.15-0.2s (couleur, bg, border, opacity)
+- Reveals de contenu : 0.6-1.2s (transforms)
+- Transitions de page : 0.5s opacity
+
+### Autres références Adveris 2026 — À explorer
+
+| Site | DNA | Technique signature |
+|------|-----|---------------------|
+| landon-norris.com | Sport, bold, héritage F1 | Hero design qui a créé un standard web sport |
+| bruno-simon.com | Portfolio 3D isométrique | Navigation spatiale interactive — pas de scroll |
+| glenncatteeuw.com | Minimal typographique | "Controlled rhythm" — précision micro-interactions |
+| symphony-of-vines.unseen.co | 3D WebGL nature | Textures et lighting temps réel |
+| ribbit.dk | Motion design | Rythme sans ostentation |
+| sunmetalon.com | Wireframe + typo | Structure wireframe + élégance typographique |
+
+### Ce qu'on apprend de Terminal Industries pour nos agents
+
+**Règle 1 — Couleur accent ≠ blanc cassé ni noir pur**
+Le lime `#abff02` est IMPOSSIBLE à ignorer sur `#052424`. La tension entre les deux crée l'énergie.
+→ Nos futurs designs : chercher l'accent qui crée une tension maximale sans agresser.
+
+**Règle 2 — Typo en vw = respiration à toutes les tailles**
+Un H1 à `10.256vw` est gigantesque sur desktop, parfait sur mobile. Plus de casse.
+→ Adopter `clamp()` ou `vw` pour tous nos gros titres.
+
+**Règle 3 — Un seul micro-interaction signature**
+Le dot sous le nav link C'EST Terminal Industries. Une seule chose, parfaitement exécutée.
+→ Chaque brand doit avoir son micro-interaction propre. Un seul. Pas dix.
+
+**Règle 4 — Color transition sur texte = différenciation immédiate**
+Personne ne fait ça. L'animation de couleur sur le texte au scroll est reconnaissable en 1 seconde.
+→ Ajouter à notre arsenal CSS : `@keyframes text-color-reveal`
+
+**Règle 5 — Dark n'est pas `#000000`**
+`#052424` = presque noir mais avec une dominante verte subtile qui prépare le lime.
+`#02030A` pour Kura = noir avec dominante bleue qui prépare le cyan. Même logique.
 

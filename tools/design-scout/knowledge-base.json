@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_updated": "2026-04-03",
-  "total_sites": 552,
+  "last_updated": "2026-04-04",
+  "total_sites": 579,
   "sites": [
     {
       "id": "banlieuwood-pencil-cinema-dark-2026-04-03",
@@ -5340,7 +5340,10 @@
         "institution cinéma américain",
         "page mission culturelle",
         "landing heritage brand"
-      ]
+      ],
+      "visual_score": 7,
+      "visual_notes": "Sundance tient par son héritage et sa typographie Trade Gothic Condensed — police authentique du cinéma indépendant américain. Le jaune #FED105 en accent navigation est le seul geste de couleur dans une palette très sobre mais mémorable. Le design se met au service de l'institution sans chercher à impressionner visuellement.",
+      "visual_audited_at": "2026-04-04"
     },
     {
       "id": "festival-cannes-com-2026-04-03",
@@ -6143,7 +6146,10 @@
         "awards/competitions",
         "architecture publications",
         "visual storytelling"
-      ]
+      ],
+      "visual_score": 8,
+      "visual_notes": "Dezeen présente un design éditorial solide avec une typographie bold et un logo 'dezeen' immédiatement reconnaissable. La une multi-colonnes avec highlights scrollables est bien exécutée mais masquée par une modale RGPD agressive qui nuit à la première impression. Le langage visuel de marque (noir/blanc + accents magenta/jaune) est fort en dehors du site mais peu visible en homepage.",
+      "visual_audited_at": "2026-04-04"
     },
     {
       "id": "cinematheque-francaise-2026-04-03",
@@ -16153,28 +16159,6 @@
       "visual_analyzed_at": "2026-04-03"
     },
     {
-      "name": "Document Journal",
-      "url": "https://www.documentjournal.com",
-      "sector": "editorial-fashion",
-      "sub_aesthetic": "Contemporary art + fashion intersection / Experimental editorial",
-      "style_tags": [
-        "art-centric",
-        "experimental",
-        "contemporary",
-        "digital-innovative",
-        "boundary-pushing"
-      ],
-      "color_philosophy": "Not fully accessible via fetch — appears to use contemporary art magazine aesthetics (likely neutral palette with strategic accent colors)",
-      "typography_dna": "Contemporary typography reflecting art-world roots. Likely experimental font choices reflecting boundary-pushing editorial stance.",
-      "visual_signature": "Document Journal positions fashion within contemporary art discourse, not lifestyle. Visual treatment aligns with art magazine conventions.",
-      "what_makes_it_exceptional": "Art-first positioning distinguishes from traditional fashion editorial. Experimental visual approach. Limited accessibility prevented full analysis.",
-      "design_lessons": [
-        "Positioning fashion within art discourse requires different visual language than lifestyle magazines",
-        "Contemporary art magazine aesthetics signal intellectual rigor",
-        "Experimental visual approach mirrors experimental editorial content"
-      ]
-    },
-    {
       "name": "Snøhetta",
       "url": "https://snohetta.com",
       "sector": "architecture + landscape + interiors",
@@ -17323,7 +17307,10 @@
         "Les partenariats avec Accenture = credibilité auprès enterprises sans perdre créativité",
         "Les galeries multi-formats amplifient impact sans page-flipping",
         "Le positionnement 'problem-solving' attire strategy-first clients, pas decoration-chasers"
-      ]
+      ],
+      "visual_score": 7,
+      "visual_notes": "Work & Co impose un minimalisme stratégique radical — fond blanc, rouge carré logo, typographie sans-serif directe. La grille de cases de contenu (Loewe, AI hub, Health Answers by Pfizer) crée un portefeuille vivant plutôt qu'une simple liste. L'absence d'artifices décoratifs communique une confiance institutionnelle qui correspond exactement au positionnement Accenture Song.",
+      "visual_audited_at": "2026-04-04"
     },
     {
       "name": "AREA 17",
@@ -25414,8 +25401,513 @@
       ],
       "classic_modern_ratio": "75% institutional / 25% contemporary",
       "risk_of_being_boring": "Highest risk in cohort—mitigated by collaborator photography + certification prominence."
+    },
+    {
+      "url": "https://screenlane.com",
+      "name": "Screenlane",
+      "slug": "screenlane-com",
+      "sector": "design-reference",
+      "country": "US",
+      "visual_score": 7,
+      "visual_notes": "Dark mode sophistiqué pour une galerie de UI examples — fond #0D0D0D avec grid de screenshots en cartes arrondies. L'interface propose une navigation par plateforme (iOS, Android, Web, Emails) très bien exécutée. La typographie blanche sur noir crée une ambiance premium pour une ressource de référence. Un des meilleurs design parmi les outils de curation UX.",
+      "visual_audited_at": "2026-04-04",
+      "style_tags": [
+        "dark-mode",
+        "ui-gallery",
+        "rounded-cards",
+        "platform-filter",
+        "clean"
+      ],
+      "source": "visual-audit-batch4"
+    },
+    {
+      "url": "https://www.siteinspire.com",
+      "name": "Siteispire",
+      "slug": "siteinspire-com",
+      "sector": "design-reference",
+      "country": "UK",
+      "visual_score": 8,
+      "visual_notes": "La référence absolue de la curation web design — minimalisme blanc parfait, typographie sans-serif légère, grid de screenshots haute densité sans surcharge. Le hero carousel pleine largeur avec navigation gauche/droite discrets est une leçon d'élégance fonctionnelle. La catégorisation (Agencies, Typographic, Grid Layout, etc.) témoigne d'une intelligence de curation que peu de concurrents atteignent.",
+      "visual_audited_at": "2026-04-04",
+      "style_tags": [
+        "white-minimal",
+        "grid-screenshot",
+        "curation-premium",
+        "typographic-clarity"
+      ],
+      "source": "visual-audit-batch4"
+    },
+    {
+      "url": "https://www.skillshare.com",
+      "name": "Skillshare",
+      "slug": "skillshare-com",
+      "sector": "edtech",
+      "country": "US",
+      "visual_score": 6,
+      "visual_notes": "Interface e-learning colorée et inclusive — vert chartreuse vibrant en couleur signature, illustrations de diversité bien réalisées, cards cours en grid serrée. L'énergie créative est palpable mais la composition devient bruyante à mi-scroll. La section 'Why Creators Love Skillshare' avec photos de community members est le point fort : authentic et engageant.",
+      "visual_audited_at": "2026-04-04",
+      "style_tags": [
+        "edtech",
+        "vibrant-green",
+        "diversity-focused",
+        "grid-courses",
+        "energetic"
+      ],
+      "source": "visual-audit-batch4"
+    },
+    {
+      "url": "https://www.spiegel.de",
+      "name": "Der Spiegel",
+      "slug": "spiegel-de",
+      "sector": "media-news",
+      "country": "DE",
+      "visual_score": 7,
+      "visual_notes": "Editorial allemand sérieux et dense — typographie bold condensée en rouge (#E2001A Spiegel) + noir, système de grille à 3-4 colonnes très construit. La hiérarchie editoriale est impeccable : titres chocs en gros corps, décrochés chronologiques, icônes catégories standardisées. Le design system est probablement l'un des plus cohérents du journalisme allemand, même si la densité informationnelle peut décourager.",
+      "visual_audited_at": "2026-04-04",
+      "style_tags": [
+        "german-editorial",
+        "bold-condensed",
+        "red-black",
+        "dense-grid",
+        "news-system"
+      ],
+      "source": "visual-audit-batch4"
+    },
+    {
+      "url": "https://www.stanford.edu",
+      "name": "Stanford University",
+      "slug": "stanford-edu",
+      "sector": "education-institution",
+      "country": "US",
+      "visual_score": 6,
+      "visual_notes": "Le hero avec la photo aérienne du campus sous le soleil de Californie est une image de marque immédiate et puissante — Stanford rouge cardinal sur vert/ocre naturel. Mais le site déroule ensuite dans un layout institutionnel américain générique : sections news/research/events bien construites mais sans ambition graphique distincte. La marque porte le site, pas le design.",
+      "visual_audited_at": "2026-04-04",
+      "style_tags": [
+        "us-university",
+        "campus-photography",
+        "red-cardinal",
+        "institutional",
+        "editorial"
+      ],
+      "source": "visual-audit-batch4"
+    },
+    {
+      "url": "https://substack.com",
+      "name": "Substack",
+      "slug": "substack-com",
+      "sector": "publishing-platform",
+      "country": "US",
+      "visual_score": 6,
+      "visual_notes": "Interface de feed minimaliste centrée sur le contenu des créateurs — orange (#FF6719) comme seule couleur accent sur fond blanc. Le design sert l'author-first experience sans jamais concurrencer le contenu. La sidebar explore avec miniatures newsletters est élégante dans sa simplicité. Manque d'ambition visuelle propre mais cette neutralité est probablement une décision stratégique assumée.",
+      "visual_audited_at": "2026-04-04",
+      "style_tags": [
+        "publishing-platform",
+        "minimal-white",
+        "orange-accent",
+        "content-first",
+        "feed"
+      ],
+      "source": "visual-audit-batch4"
+    },
+    {
+      "url": "https://www.sundance.org/initiatives/ignite",
+      "name": "Sundance Institute — Ignite",
+      "slug": "sundance-org-initiatives-ignite",
+      "sector": "cinema-festival",
+      "country": "US",
+      "visual_score": 6,
+      "visual_notes": "Sous-page de Sundance Institute avec le même design system — Trade Gothic Condensed, blanc/jaune, institutions robuste. Le layout est encore plus sobre que la homepage : texte long sur fond blanc, photographie de groupe, calendar programme. Fonctionnel et cohérent avec l'identité globale, mais sans le relief du hero principal du site mère.",
+      "visual_audited_at": "2026-04-04",
+      "style_tags": [
+        "festival-sub-page",
+        "white-minimal",
+        "trade-gothic",
+        "program-page"
+      ],
+      "source": "visual-audit-batch4"
+    },
+    {
+      "url": "https://www.taschen.com",
+      "name": "TASCHEN",
+      "slug": "taschen-com",
+      "sector": "publishing-art-books",
+      "country": "DE",
+      "visual_score": 8,
+      "visual_notes": "Éditeur art book premium par excellence — typographie TASCHEN en capitals espacés sur fond blanc immaculé, grid livres avec couvertures qui parlent d'elles-mêmes. La mise en scène des livres (Hilma af Klint, Norman Foster, Stones) est du product photography editorial de niveau galerie. La hiérarchie New & Trending / Cultural Companions / Discount est claire et efficace sans jamais descendre dans le registre e-commerce générique.",
+      "visual_audited_at": "2026-04-04",
+      "style_tags": [
+        "art-book-publisher",
+        "white-editorial",
+        "product-photography",
+        "cultural-premium"
+      ],
+      "source": "visual-audit-batch4"
+    },
+    {
+      "url": "https://www.typewolf.com",
+      "name": "Typewolf",
+      "slug": "typewolf-com",
+      "sector": "design-reference",
+      "country": "US",
+      "visual_score": 8,
+      "visual_notes": "Référence typographie web avec un design propre qui ne concurrence jamais les specimens montrés — fond rosé pâle chaleureux (#F5EFE8), cards screenshots à fond coloré contextuel, système de tags typo exemplaire. La hiérarchie nom police / date / tags est parfaitement lisible. L'utilisation d'un fond warm beige plutôt que blanc pur est une décision DA distinguée qui donne de la chaleur à un site de ressources.",
+      "visual_audited_at": "2026-04-04",
+      "style_tags": [
+        "typography-reference",
+        "warm-beige",
+        "card-grid",
+        "font-specimen",
+        "editorial"
+      ],
+      "source": "visual-audit-batch4"
+    },
+    {
+      "url": "https://upstash.com",
+      "name": "Upstash",
+      "slug": "upstash-com",
+      "sector": "saas-infrastructure",
+      "country": "US",
+      "visual_score": 7,
+      "visual_notes": "Parmi les meilleurs designs SaaS infrastructure — gradient vert émeraude/teal sur fond clair, typographie display large 'Serverless Data Platform' avec degradé de couleur sur le mot-clé. Les tabs produits (Redis, Vector, QStash, Workflow) sont une UI propre et efficace. La section 'Fast Anywhere' avec chiffres de performance en bold display noir est un pattern marketing tech bien exécuté.",
+      "visual_audited_at": "2026-04-04",
+      "style_tags": [
+        "saas-infra",
+        "green-gradient",
+        "display-bold",
+        "dark-sections",
+        "tech-premium"
+      ],
+      "source": "visual-audit-batch4"
+    },
+    {
+      "url": "https://www.wallpaper.com",
+      "name": "Wallpaper*",
+      "slug": "wallpaper-com",
+      "sector": "media-design",
+      "country": "UK",
+      "visual_score": 7,
+      "visual_notes": "Magazine design et architecture premium — navigation catégorielle claire, photographie éditoriale high-end en pleine colonne. La distinction WallpaperSTORE+ dans la nav est bien visible sans aggressivité. La ticker de tendances (TRENDING bar) est un pattern magazine print bien transposé en digital. Ensemble cohérent mais la pop-up RGPD au-dessus du hero est une frustration UX récurrente qui nuit à la première impression.",
+      "visual_audited_at": "2026-04-04",
+      "style_tags": [
+        "design-magazine",
+        "editorial-photography",
+        "category-nav",
+        "premium-media"
+      ],
+      "source": "visual-audit-batch4"
+    },
+    {
+      "url": "https://www.shudder.com",
+      "name": "Shudder",
+      "slug": "watch-shudder-com-home",
+      "sector": "streaming-horror",
+      "country": "US",
+      "visual_score": 7,
+      "visual_notes": "Plateforme streaming horror avec une identité de niche forte — rouge Shudder (#FF0000) sur fond quasi-noir, artwork films d'horreur en cards horizontales scroll. La bannière hero 'Halloween Nights Collection' avec la citrouille art-directée est un beau moment de brand engagement. Le grid de collections thématiques (Slashics, Folk Horror, Zombie Jamboree) crée un sentiment de curation experte pour les amateurs du genre.",
+      "visual_audited_at": "2026-04-04",
+      "style_tags": [
+        "streaming-horror",
+        "dark-red-black",
+        "horror-artwork",
+        "thematic-collections"
+      ],
+      "source": "visual-audit-batch4"
+    },
+    {
+      "url": "https://www.wired.com",
+      "name": "WIRED",
+      "slug": "wired-com",
+      "sector": "media-tech",
+      "country": "US",
+      "visual_score": 7,
+      "visual_notes": "Media tech premium avec un design system éditorial fort — logo WIRED en blocs lettres blancs sur fond noir (parfois inversé), typographie bold serif pour headlines, grid d'articles à densité modulable. La hiérarchie éditoriale est impeccable : TODAY'S PICKS en rouge, sous-catégories en majuscules grises, photojournalisme de qualité. Le design system WIRED est une référence du journalisme tech.",
+      "visual_audited_at": "2026-04-04",
+      "style_tags": [
+        "tech-media",
+        "bold-editorial",
+        "black-white-red",
+        "photojournalism",
+        "dense-grid"
+      ],
+      "source": "visual-audit-batch4"
+    },
+    {
+      "url": "https://www.berlinale.de",
+      "name": "Berlinale",
+      "slug": "www-berlinale-de",
+      "sector": "cinema-festival",
+      "country": "DE",
+      "visual_score": 8,
+      "visual_notes": "Le Berlinale est un des sites de festival de cinéma les mieux designés d'Europe — identité graphique forte basée sur l'Ours d'Or, typographie sans-serif germanique précise, palette rouge/blanc institutionnelle avec accents noirs. Le design system est cohérent sur desktop et mobile, avec une navigation claire malgré la complexité d'un événement multi-programmes. Note basée sur connaissance du site (captures non disponibles).",
+      "visual_audited_at": "2026-04-04",
+      "style_tags": [
+        "german-festival",
+        "red-white-black",
+        "institutional-precision",
+        "cinema-premium"
+      ],
+      "source": "visual-audit-batch4",
+      "note": "Images de capture non disponibles — score basé sur connaissance du site"
+    },
+    {
+      "url": "https://www.eater.com",
+      "name": "Eater",
+      "slug": "www-eater-com",
+      "sector": "media-food",
+      "country": "US",
+      "visual_score": 7,
+      "visual_notes": "Food media avec une identité typographique forte — logo EATER en rouge display bold prend toute la largeur, photographie culinaire chaude et appétissante. Le layout éditorial est bien structuré : Latest, Dining Out, Eater at Home en sections claires. La combinaison d'une bannière display publicitaire en haut avec le logo en rouge vif en dessous est un choix éditorial courageux qui assume l'aspect commercial sans le cacher.",
+      "visual_audited_at": "2026-04-04",
+      "style_tags": [
+        "food-media",
+        "red-bold-logo",
+        "editorial-photography",
+        "culinary",
+        "grid-articles"
+      ],
+      "source": "visual-audit-batch4"
+    },
+    {
+      "id": "letterboxd-com-2026-04-04",
+      "url": "https://letterboxd.com",
+      "title": "Letterboxd — Social Network for Film Lovers",
+      "source": "batch-vision",
+      "sector": "cinema",
+      "style_tags": [
+        "cinema-dark",
+        "social-film",
+        "grid-colorful",
+        "community-driven",
+        "editorial-feed"
+      ],
+      "visual_score": 7,
+      "visual_notes": "Dark mode cinéma avec une grille de posters de films colorée et bien rythmée — l'identité visuelle est forte et reconnaissable, construite entièrement autour de la richesse visuelle des posters. Le layout pleine longueur révèle une hiérarchie éditoriale mature : films populaires, critiques récentes, festival highlights. Un des meilleurs exemples de design social qui laisse le contenu prendre le dessus.",
+      "visual_audited_at": "2026-04-04",
+      "slug": "letterboxd-com",
+      "is_reference_worthy": true
+    },
+    {
+      "id": "netflix-com-2026-04-04",
+      "url": "https://netflix.com",
+      "title": "Netflix — Films et Séries en Illimité",
+      "source": "batch-vision",
+      "sector": "streaming",
+      "style_tags": [
+        "streaming-hero",
+        "collage-cinema",
+        "dark-dominant",
+        "red-accent",
+        "cta-driven"
+      ],
+      "visual_score": 8,
+      "visual_notes": "Hero fullscreen composé d'un collage de posters de films en fond sombre — la richesse du catalogue devient elle-même le design. Le rouge Netflix (#E50914) sur fond quasi-noir est l'un des CTA les plus reconnaissables du web. L'email input + bouton 'Commencer' centré est une mécanique de conversion éprouvée à la fois simple et puissante. Design exécuté avec une maîtrise absolue du rapport impact/simplicité.",
+      "visual_audited_at": "2026-04-04",
+      "slug": "netflix-com",
+      "is_reference_worthy": true
+    },
+    {
+      "id": "104-fr-2026-04-04",
+      "url": "https://www.104.fr",
+      "name": "Le 104 — Centre artistique Paris",
+      "sector": "culture-institution",
+      "country": "FR",
+      "date_observed": "2026-04-04",
+      "style_tags": [
+        "culture-institution",
+        "editorial",
+        "photo-driven",
+        "french-cultural"
+      ],
+      "visual_score": 6,
+      "visual_notes": "Le site du 104 présente un layout éditorial fonctionnel avec une belle photo de groupe en hero. L'identité visuelle #104PARIS en jaune orange sur fond sombre est mémorable, mais la typographie manque de hiérarchie claire et la navigation dense nuit à la lisibilité. L'approche est correcte pour une institution culturelle mais sans audace formelle particulière.",
+      "visual_audited_at": "2026-04-04",
+      "source": "visual-audit-batch1-2026-04-04"
+    },
+    {
+      "id": "42-fr-2026-04-04",
+      "url": "https://42.fr",
+      "name": "42 — École de code",
+      "sector": "education-tech",
+      "country": "FR",
+      "date_observed": "2026-04-04",
+      "style_tags": [
+        "full-screen-hero",
+        "photo-driven",
+        "dark-overlay",
+        "education"
+      ],
+      "visual_score": 6,
+      "visual_notes": "Hero plein écran avec photo authentique et tagline impactant '42 : APPRENDRE LE CODE. / Casser les codes.' — la promesse de marque est forte et bien portée visuellement. Une modale cookies chargée nuit à la première impression. Le site est correct mais sans ambition design au-delà du formulaire landing page classique.",
+      "visual_audited_at": "2026-04-04",
+      "source": "visual-audit-batch1-2026-04-04"
+    },
+    {
+      "id": "amplitude-com-2026-04-04",
+      "url": "https://amplitude.com",
+      "name": "Amplitude — Plateforme analytics IA",
+      "sector": "saas-analytics",
+      "country": "US",
+      "date_observed": "2026-04-04",
+      "style_tags": [
+        "saas-modern",
+        "product-screenshot",
+        "clean-layout",
+        "blue-accent"
+      ],
+      "visual_score": 7,
+      "visual_notes": "Amplitude présente un design SaaS moderne et propre avec une typographie bien hiérarchisée et un UI de produit bien mis en scène dans le hero. Le dégradé violet/bleu dans la section suivante apporte une dimension premium. Solide sans être exceptionnel — le langage visuel est générique SaaS 2024 mais bien exécuté.",
+      "visual_audited_at": "2026-04-04",
+      "source": "visual-audit-batch1-2026-04-04"
+    },
+    {
+      "id": "awwwards-adam-bricker-2026-04-04",
+      "url": "https://www.awwwards.com/sites/adam-bricker",
+      "name": "Awwwards — Adam Bricker SOTD",
+      "sector": "design-awards",
+      "country": "US",
+      "date_observed": "2026-04-04",
+      "style_tags": [
+        "awards-platform",
+        "minimal-neutral",
+        "editorial-typography",
+        "dark-thumbnails"
+      ],
+      "visual_score": 7,
+      "visual_notes": "La page Awwwards présente son design de plateforme épuré : fond gris clair neutre, grande typographie display 'ADAM BRICKER' en condensed bold, prévisualisation du site primé dans un mock-up laptop. C'est la structure éprouvée d'Awwwards — fonctionnelle, propre, mais sans surprise. L'interface d'analyse (Font & Color, Details, Score) est un vrai plus éditorial.",
+      "visual_audited_at": "2026-04-04",
+      "source": "visual-audit-batch1-2026-04-04"
+    },
+    {
+      "id": "berlinale-de-2026-04-04",
+      "url": "https://www.berlinale.de",
+      "name": "Berlinale — Festival International du Film de Berlin",
+      "sector": "cinema-festival",
+      "country": "DE",
+      "date_observed": "2026-04-04",
+      "style_tags": [
+        "festival-cinema",
+        "editorial-institutional",
+        "dark-photo-hero",
+        "red-accent"
+      ],
+      "visual_score": 6,
+      "visual_notes": "La Berlinale affiche un design institutionnel avec son identité rouge et blanc reconnaissable. Le hero photo/vidéo avec des artistes en costumes traditionnels est visuellement fort. La navigation dense et la grille éditoriale classique restent trop conventionnelles pour un festival de cette envergure — la Berlinale mérite un langage visuel aussi audacieux que sa programmation.",
+      "visual_audited_at": "2026-04-04",
+      "source": "visual-audit-batch1-2026-04-04"
+    },
+    {
+      "id": "bfi-org-uk-2026-04-04",
+      "url": "https://www.bfi.org.uk",
+      "name": "BFI — British Film Institute",
+      "sector": "cinema-institution",
+      "country": "UK",
+      "date_observed": "2026-04-04",
+      "style_tags": [
+        "institutional-cinema",
+        "black-white-hero",
+        "editorial-clean",
+        "purple-accent"
+      ],
+      "visual_score": 7,
+      "visual_notes": "Le BFI présente un design institutionnel soigné avec un hero plein écran en noir et blanc (photo cinématographique de boxeurs) extrêmement évocateur. L'identité violet/blanc du BFI est discrète mais cohérente. La typographie blanche sur image N&B crée un impact dramatique immédiat — qualité clairement au-dessus de la moyenne institutionnelle.",
+      "visual_audited_at": "2026-04-04",
+      "source": "visual-audit-batch1-2026-04-04"
+    },
+    {
+      "id": "cal-com-2026-04-04",
+      "url": "https://cal.com",
+      "name": "Cal.com — Scheduling Open Source",
+      "sector": "saas-productivity",
+      "country": "US",
+      "date_observed": "2026-04-04",
+      "style_tags": [
+        "saas-modern",
+        "open-source-brand",
+        "minimal-clean",
+        "product-demo"
+      ],
+      "visual_score": 7,
+      "visual_notes": "Cal.com présente un design SaaS propre et moderne avec une mise en scène produit efficace (interface calendrier directement dans le hero) et une preuve sociale bien structurée. Le layout bi-colonne hero (texte gauche + UI droit) est une formule classique mais bien exécutée. La palette blanche/noire avec UI bleu clair est lisible et professionnelle sans être mémorable.",
+      "visual_audited_at": "2026-04-04",
+      "source": "visual-audit-batch1-2026-04-04"
+    },
+    {
+      "id": "cnc-fr-2026-04-04",
+      "url": "https://www.cnc.fr",
+      "name": "CNC — Centre National du Cinéma",
+      "sector": "cinema-institution",
+      "country": "FR",
+      "date_observed": "2026-04-04",
+      "style_tags": [
+        "institutional-cinema",
+        "editorial-news",
+        "photo-editorial",
+        "french-government"
+      ],
+      "visual_score": 6,
+      "visual_notes": "Le CNC présente un design institutionnel propre avec une belle photo de hero (Yellow Letters, Ours d'or Berlin) et une navigation thématique bien structurée. Le logo CNC carré est distinctif. La mise en page éditoriale avec tuiles d'actualités est fonctionnelle mais manque de personnalité visuelle pour une institution qui finance le cinéma d'auteur français.",
+      "visual_audited_at": "2026-04-04",
+      "source": "visual-audit-batch1-2026-04-04"
+    },
+    {
+      "id": "disneyplus-com-2026-04-04",
+      "url": "https://www.disneyplus.com",
+      "name": "Disney+ — Service de streaming",
+      "sector": "streaming-entertainment",
+      "country": "US",
+      "date_observed": "2026-04-04",
+      "style_tags": [
+        "streaming-dark",
+        "content-grid",
+        "brand-strong",
+        "entertainment"
+      ],
+      "visual_score": 7,
+      "visual_notes": "Disney+ présente le design standard du streaming premium dark : hero saturé de posters sur fond très sombre, CTA email direct, 'Top 10 Today' comme signal social proof. Le langage visuel est cohérent avec la marque mais très similaire à Netflix/Prime. La page pricing est particulièrement propre avec une grille de comparaison turquoise sur fond noir — belle exécution.",
+      "visual_audited_at": "2026-04-04",
+      "source": "visual-audit-batch1-2026-04-04"
+    },
+    {
+      "id": "drawnandquarterly-com-2026-04-04",
+      "url": "https://www.drawnandquarterly.com",
+      "name": "Drawn & Quarterly",
+      "slug": "drawnandquarterly-com",
+      "sector": "publishing-comics",
+      "country": "CA",
+      "visual_score": 7,
+      "visual_notes": "Éditeur BD indépendant avec une identité visuelle délicieusement assumée — hero fullscreen fond rose pastel avec illustration Anouk Ricard centrée (volatile grotesque en trait simple). Typographie cursive du logo 'Drawn & Quarterly' en serif organique est une signature distincte. Le scroll révèle une palette éditoriale riche : grid livres aux couleurs vives, section MOOMIN en jaune, manga en bleu nuit. Design éditorial cohérent et sincère avec l'univers indépendant.",
+      "visual_audited_at": "2026-04-04",
+      "style_tags": [
+        "indie-comics",
+        "pink-hero",
+        "editorial-grid",
+        "cursive-logo",
+        "charming"
+      ],
+      "source": "visual-audit-batch2",
+      "is_reference_worthy": true
+    },
+    {
+      "id": "ghibli-jp-2026-04-04",
+      "url": "https://www.ghibli.jp",
+      "name": "Studio Ghibli",
+      "slug": "ghibli-jp",
+      "sector": "animation-studio",
+      "country": "JP",
+      "visual_score": 7,
+      "visual_notes": "Site officiel du Studio Ghibli avec identité visuelle immédiatement reconnaissable — Totoro en trait fin sur fond cyan vif (#00B4D5) en plein hero, nom 'スタジオジブリ / STUDIO GHIBLI' en typographie système blanche sobre. Design d'une sobriété radicale assumée pour un studio aussi iconique : liste de liens en menu japonais à gauche, informations textuelles à droite, aucune fioriture. Authenticité japonaise institutionnelle qui prime sur le marketing — identité irréductible.",
+      "visual_audited_at": "2026-04-04",
+      "style_tags": [
+        "japanese-institutional",
+        "cyan-totoro",
+        "text-navigation",
+        "cultural-icon",
+        "minimal-japanese"
+      ],
+      "source": "visual-audit-batch2",
+      "is_reference_worthy": true
     }
   ],
-  "last_pruned": "2026-04-03",
-  "prune_threshold": 5
+  "last_pruned": "2026-04-04",
+  "prune_threshold": 6
 }
