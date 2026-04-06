@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KURA — Cases Proposals</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#02030A;--bg2:#080C14;--bg3:#0D1117;
+  --accent:#00D4FF;--danger:#EF4444;--warn:#F59E0B;--green:#10B981;
+  --text:#E2E8F0;--muted:#64748B;--border:rgba(255,255,255,0.07);
+  --mono:'JetBrains Mono',monospace;
+}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;border-bottom:1px solid var(--border);background:rgba(2,3,10,0.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100}
+.topbar-logo{font-family:var(--mono);font-weight:700;font-size:16px;color:white;letter-spacing:.1em}
+.topbar-logo span{color:var(--accent)}
+.topbar-sub{font-size:11px;color:var(--muted);font-family:var(--mono)}
+
+.tabs{display:flex;gap:4px;padding:14px 32px;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.tab{padding:8px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid transparent;white-space:nowrap;transition:all .2s;color:var(--muted);background:transparent}
+.tab:hover{color:var(--text);background:rgba(255,255,255,0.04)}
+.tab.active{color:var(--accent);background:rgba(0,212,255,0.08);border-color:rgba(0,212,255,0.2)}
+
+.panel{display:none}
+.panel.active{display:block}
+
+/* ══════════════════════════════════════
+   VARIANT A — DOSSIER JUDICIAIRE
+   ══════════════════════════════════════ */
+.case-a{padding:72px 40px;max-width:1200px;margin:0 auto}
+.case-a-header{text-align:center;margin-bottom:64px}
+.case-a-header .label{font-size:10px;font-family:var(--mono);color:var(--danger);letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px}
+.case-a-header h2{font-size:clamp(2.5rem,5vw,4rem);font-weight:900;color:white;line-height:1.05}
+.case-a-header p{font-size:15px;color:var(--muted);margin-top:12px}
+.case-a-counter{display:inline-flex;align-items:center;gap:20px;padding:10px 28px;border-radius:100px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.15);margin-top:24px}
+.case-a-counter-item{text-align:center}
+.case-a-counter-num{font-family:var(--mono);font-size:22px;font-weight:900;color:var(--danger)}
+.case-a-counter-label{font-size:9px;color:rgba(239,68,68,0.5);text-transform:uppercase;letter-spacing:.1em;margin-top:2px}
+.case-a-sep{width:1px;height:32px;background:rgba(239,68,68,0.15)}
+
+.dossier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.dossier{
+  background:rgba(255,255,255,0.015);border:1px solid rgba(255,255,255,0.05);
+  padding:28px 24px;position:relative;overflow:hidden;transition:all .25s;cursor:pointer;
+}
+.dossier:hover{background:rgba(255,255,255,0.03);border-color:rgba(239,68,68,0.15)}
+.dossier-num{font-family:var(--mono);font-size:9px;color:rgba(239,68,68,0.3);letter-spacing:.15em;margin-bottom:16px}
+.dossier-stamp{
+  position:absolute;top:20px;right:20px;
+  padding:3px 8px;border-radius:3px;
+  border:1.5px solid var(--danger);
+  font-family:var(--mono);font-size:8px;font-weight:900;color:var(--danger);
+  letter-spacing:.15em;text-transform:uppercase;
+  transform:rotate(3deg);opacity:.7;
+}
+.dossier-sport{display:flex;align-items:center;gap:6px;margin-bottom:12px}
+.sport-badge{padding:3px 8px;border-radius:4px;font-size:9px;font-weight:700;letter-spacing:.05em;font-family:var(--mono)}
+.dossier-name{font-size:22px;font-weight:900;color:white;line-height:1.1;margin-bottom:8px}
+.dossier-substance{font-size:11px;font-family:var(--mono);color:var(--danger);margin-bottom:12px;opacity:.8}
+.dossier-fact{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:16px;border-left:2px solid rgba(239,68,68,0.15);padding-left:10px}
+.dossier-cost{display:flex;gap:16px;margin-top:auto}
+.dossier-cost-item strong{display:block;font-family:var(--mono);font-size:16px;font-weight:900}
+.dossier-cost-item span{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.dossier-kura{
+  display:flex;align-items:center;gap:6px;margin-top:16px;padding:6px 10px;border-radius:6px;
+  background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.08);
+  font-size:10px;font-family:var(--mono);color:rgba(0,212,255,0.5);
+}
+.dossier-kura::before{content:'';width:6px;height:6px;border-radius:50%;background:rgba(0,212,255,0.3);flex-shrink:0}
+/* Diagonal watermark */
+.dossier-watermark{
+  position:absolute;bottom:-10px;right:-10px;
+  font-family:var(--mono);font-size:72px;font-weight:900;
+  color:rgba(239,68,68,0.03);line-height:1;user-select:none;pointer-events:none;
+}
+
+/* ══════════════════════════════════════
+   VARIANT B — UNE DE JOURNAL
+   ══════════════════════════════════════ */
+.case-b{padding:72px 40px;max-width:1200px;margin:0 auto}
+.newspaper-header{
+  text-align:center;padding-bottom:20px;margin-bottom:32px;
+  border-bottom:3px solid rgba(255,255,255,0.06);
+}
+.newspaper-masthead{font-family:Georgia,serif;font-size:48px;color:rgba(255,255,255,0.08);letter-spacing:-.02em;line-height:1;margin-bottom:8px}
+.newspaper-dateline{display:flex;align-items:center;justify-content:center;gap:16px;font-size:10px;color:var(--muted);font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.newspaper-dateline-sep{width:1px;height:10px;background:var(--muted)}
+
+.newspaper-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr;grid-template-rows:auto auto;gap:1px;background:rgba(255,255,255,0.05)}
+.news-article{background:var(--bg);padding:24px;position:relative}
+.news-article.featured{grid-row:span 2;padding:32px}
+.news-kicker{font-size:9px;font-family:var(--mono);font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+.news-headline{font-size:15px;font-weight:900;color:white;line-height:1.2;margin-bottom:8px;font-family:Georgia,serif}
+.news-article.featured .news-headline{font-size:28px;margin-bottom:12px}
+.news-byline{font-size:10px;color:var(--muted);font-family:var(--mono);margin-bottom:10px}
+.news-body{font-size:11px;color:rgba(168,181,208,0.7);line-height:1.6}
+.news-article.featured .news-body{font-size:12px}
+.news-verdict{
+  display:inline-block;margin-top:12px;padding:4px 10px;
+  border-radius:4px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);
+  font-size:10px;font-family:var(--mono);font-weight:700;color:var(--danger);
+}
+.news-pull-quote{
+  margin:16px 0;padding:12px 16px;border-left:3px solid var(--danger);
+  font-size:16px;font-weight:700;color:white;font-family:Georgia,serif;line-height:1.35;font-style:italic;
+}
+.news-kura-box{
+  margin-top:20px;padding:12px;border-radius:6px;
+  background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);
+}
+.news-kura-box p{font-size:10px;font-family:var(--mono);color:rgba(0,212,255,0.6);line-height:1.5}
+.news-kura-box strong{color:var(--accent)}
+
+.newspaper-footer{
+  margin-top:1px;background:var(--bg);padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:2px solid rgba(255,255,255,0.05);
+}
+.newspaper-footer p{font-size:10px;font-family:var(--mono);color:var(--muted);font-style:italic}
+.newspaper-footer strong{color:var(--accent)}
+
+/* ══════════════════════════════════════
+   VARIANT C — PREVENTED (barré)
+   ══════════════════════════════════════ */
+.case-c{padding:72px 40px;max-width:1200px;margin:0 auto}
+.case-c-header{text-align:center;margin-bottom:64px}
+.case-c-header .label{font-size:10px;font-family:var(--mono);color:var(--accent);letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px}
+.case-c-header h2{font-size:clamp(2rem,4vw,3.5rem);font-weight:900;line-height:1.1}
+.case-c-header h2 em{color:var(--danger);font-style:normal}
+.case-c-header p{font-size:14px;color:var(--muted);margin-top:10px}
+
+.prevented-list{display:flex;flex-direction:column;gap:0}
+.prevented-item{
+  display:grid;grid-template-columns:180px 1fr auto;align-items:center;gap:24px;
+  padding:20px 28px;border-bottom:1px solid rgba(255,255,255,0.04);
+  transition:background .15s;position:relative;overflow:hidden;
+}
+.prevented-item:hover{background:rgba(255,255,255,0.02)}
+.prevented-item.with-kura{background:rgba(0,212,255,0.015)}
+.prevented-item.with-kura::after{
+  content:'PREVENTED';position:absolute;right:200px;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:9px;font-weight:900;color:var(--green);letter-spacing:.15em;
+  background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);
+  padding:3px 8px;border-radius:4px;
+}
+.prev-athlete{min-width:0}
+.prev-name{font-size:15px;font-weight:800;color:white;position:relative;display:inline-block}
+.prevented-item.with-kura .prev-name::after{
+  content:'';position:absolute;left:0;right:0;top:50%;height:1.5px;
+  background:var(--green);transform:scaleX(1);
+}
+.prev-sport{font-size:9px;font-family:var(--mono);color:var(--muted);letter-spacing:.08em;margin-top:2px}
+.prev-substance{font-family:var(--mono);font-size:10px;color:var(--danger);padding:2px 8px;border-radius:4px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.12);display:inline-block;margin-top:4px}
+.prev-fact{font-size:12px;color:var(--muted);line-height:1.45}
+.prev-cost{text-align:right;min-width:100px}
+.prev-cost-num{font-family:var(--mono);font-size:20px;font-weight:900;color:var(--danger);display:block}
+.prev-cost-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+.prevented-item.with-kura .prev-cost-num{color:var(--green);text-decoration:line-through;opacity:.5}
+
+.prev-total{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 28px;border-top:2px solid rgba(239,68,68,0.1);
+  margin-top:4px;
+}
+.prev-total-label{font-size:13px;color:var(--muted)}
+.prev-total-num{font-family:var(--mono);font-size:28px;font-weight:900;color:var(--danger)}
+.prev-total-kura{font-family:var(--mono);font-size:28px;font-weight:900;color:var(--green)}
+.vs-arrow{font-size:14px;color:var(--muted)}
+
+/* ══════════════════════════════════════
+   VARIANT D — STAT + LISTE MINIMALISTE
+   ══════════════════════════════════════ */
+.case-d{
+  min-height:100vh;display:grid;grid-template-columns:1fr 1fr;
+}
+.case-d-left{
+  padding:80px 60px;display:flex;flex-direction:column;justify-content:center;
+  border-right:1px solid rgba(255,255,255,0.05);
+  position:sticky;top:0;height:100vh;overflow:hidden;
+}
+.case-d-zero-bg{
+  position:absolute;font-size:280px;font-weight:900;
+  color:transparent;-webkit-text-stroke:1px rgba(239,68,68,0.05);
+  line-height:1;top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;user-select:none;
+}
+.case-d-left-content{position:relative;z-index:1}
+.case-d-label{font-size:10px;font-family:var(--mono);color:var(--danger);letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px}
+.case-d-num{font-size:clamp(5rem,15vw,10rem);font-weight:900;color:white;line-height:.85;letter-spacing:-.04em}
+.case-d-sub{font-size:14px;color:var(--muted);line-height:1.6;margin:20px 0 40px;max-width:380px}
+.case-d-pills{display:flex;flex-direction:column;gap:10px}
+.case-d-pill{display:flex;align-items:center;gap:12px;padding:10px 16px;border-radius:8px;background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.1)}
+.case-d-pill-num{font-family:var(--mono);font-size:18px;font-weight:900;color:var(--danger);width:48px}
+.case-d-pill-label{font-size:12px;color:var(--muted)}
+.case-d-kura{
+  margin-top:40px;padding:16px;border-radius:10px;
+  background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);
+}
+.case-d-kura p{font-size:12px;color:rgba(0,212,255,0.7);line-height:1.6;font-family:var(--mono)}
+.case-d-kura strong{color:var(--accent)}
+
+.case-d-right{padding:40px 48px;overflow-y:auto;display:flex;flex-direction:column;gap:0}
+.case-d-right-header{padding:0 0 20px;border-bottom:1px solid var(--border);margin-bottom:4px}
+.case-d-right-header h3{font-size:12px;font-weight:700;color:var(--muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em}
+.mini-case{
+  display:flex;align-items:center;gap:0;padding:16px 0;
+  border-bottom:1px solid rgba(255,255,255,0.04);transition:all .15s;
+  cursor:pointer;
+}
+.mini-case:hover .mini-name{color:var(--accent)}
+.mini-case-left{width:32px;text-align:center;flex-shrink:0}
+.mini-case-num{font-family:var(--mono);font-size:9px;color:rgba(239,68,68,0.3);font-weight:700}
+.mini-case-bar{width:2px;height:36px;border-radius:1px;margin:0 16px;flex-shrink:0}
+.mini-name{font-size:14px;font-weight:700;color:white;flex:1;transition:color .15s}
+.mini-sport{font-size:9px;font-family:var(--mono);color:var(--muted);display:block;margin-top:2px}
+.mini-substance{font-size:9px;font-family:var(--mono);color:var(--danger);margin:0 12px;flex-shrink:0;max-width:130px;text-align:right;line-height:1.4}
+.mini-duration{font-family:var(--mono);font-size:14px;font-weight:900;color:var(--danger);width:56px;text-align:right;flex-shrink:0}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">KURA<span>.</span></div>
+  <div class="topbar-sub">Cases — 4 concepts · choisir et intégrer</div>
+  <div style="font-size:11px;color:var(--muted);font-family:var(--mono)">Section 02 — Cas réels</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="show('a',this)">A — Dossier judiciaire</div>
+  <div class="tab" onclick="show('b',this)">B — Une de journal</div>
+  <div class="tab" onclick="show('c',this)">C — Prevented (barré)</div>
+  <div class="tab" onclick="show('d',this)">D — Stat + liste</div>
+</div>
+
+<!-- ══ A: DOSSIER JUDICIAIRE ══ -->
+<div class="panel active" id="panel-a">
+<div class="case-a">
+  <div class="case-a-header">
+    <div class="label">Protection — Cas réels</div>
+    <h2>Ils auraient pu être protégés.</h2>
+    <p>Cas documentés. Carrières impactées. Aucun n'aurait dû arriver.</p>
+    <div class="case-a-counter">
+      <div class="case-a-counter-item">
+        <div class="case-a-counter-num">28</div>
+        <div class="case-a-counter-label">cas documentés</div>
+      </div>
+      <div class="case-a-sep"></div>
+      <div class="case-a-counter-item">
+        <div class="case-a-counter-num">0</div>
+        <div class="case-a-counter-label">auraient dû arriver</div>
+      </div>
+      <div class="case-a-sep"></div>
+      <div class="case-a-counter-item">
+        <div class="case-a-counter-num">47<span style="font-size:14px">ans</span></div>
+        <div class="case-a-counter-label">de suspension cumulée</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dossier-grid">
+
+    <div class="dossier">
+      <div class="dossier-num">DOSSIER #001 · TENNIS · 2024</div>
+      <div class="dossier-stamp">PROHIBITED</div>
+      <div class="dossier-name">Iga Swiatek</div>
+      <div class="dossier-substance">Trimetazidine via mélatonine contaminée</div>
+      <div class="dossier-fact">WTA World #1. Mélatonine contaminée non détectée par son staff. Contrôle positif aux Internationaux de Pologne. Suspension 1 mois — carrière intacte mais réputation entachée.</div>
+      <div class="dossier-cost">
+        <div class="dossier-cost-item"><strong style="color:var(--warn)">1 mois</strong><span>suspension</span></div>
+        <div class="dossier-cost-item"><strong style="color:var(--danger)">Appel</strong><span>procédure</span></div>
+      </div>
+      <div class="dossier-kura">KURA aurait detecte la contamination avant la prescription · 0,9s</div>
+      <div class="dossier-watermark">S</div>
+    </div>
+
+    <div class="dossier">
+      <div class="dossier-num">DOSSIER #002 · TENNIS · 2024</div>
+      <div class="dossier-stamp">PROHIBITED</div>
+      <div class="dossier-name">Jannik Sinner</div>
+      <div class="dossier-substance">Clostebol via crème kinésithérapeute</div>
+      <div class="dossier-fact">ATP #1. Clostebol absorbé via massage du kiné. Le staff ignorait la composition des produits utilisés. 2 contrôles positifs. Acquitté en appel — 6 mois de procédure.</div>
+      <div class="dossier-cost">
+        <div class="dossier-cost-item"><strong style="color:var(--warn)">6 mois</strong><span>procédure</span></div>
+        <div class="dossier-cost-item"><strong style="color:var(--green)">Acquitté</strong><span>appel</span></div>
+      </div>
+      <div class="dossier-kura">KURA base Pharma 79 000+ aurait flagge Clostebol · 0,7s</div>
+      <div class="dossier-watermark">S</div>
+    </div>
+
+    <div class="dossier">
+      <div class="dossier-num">DOSSIER #003 · FOOTBALL · 2016</div>
+      <div class="dossier-stamp">PROHIBITED</div>
+      <div class="dossier-name">Mamadou Sakho</div>
+      <div class="dossier-substance">Higenamine · fat-burner</div>
+      <div class="dossier-fact">Défenseur Liverpool FC. Complément "fat-burner" vendu légalement — contenant Higenamine classée S3 WADA 2016. 6 semaines de suspension, Euro 2016 manqué.</div>
+      <div class="dossier-cost">
+        <div class="dossier-cost-item"><strong style="color:var(--danger)">6 sem.</strong><span>suspension</span></div>
+        <div class="dossier-cost-item"><strong style="color:var(--danger)">Euro 2016</strong><span>manqué</span></div>
+      </div>
+      <div class="dossier-kura">Higenamine S3 indexee — alerte avant achat · 1,1s</div>
+      <div class="dossier-watermark">S</div>
+    </div>
+
+    <div class="dossier">
+      <div class="dossier-num">DOSSIER #004 · RUGBY · 2022</div>
+      <div class="dossier-stamp">PROHIBITED</div>
+      <div class="dossier-name">Nadir Benhamou</div>
+      <div class="dossier-substance">Canrenone — diurétique masquant S5</div>
+      <div class="dossier-fact">Pro D2. Médicament antihypertenseur prescrit par médecin généraliste — qui ignorait la réglementation antidopage. Canrenone classée S5. Suspension 2 ans, carrière interrompue.</div>
+      <div class="dossier-cost">
+        <div class="dossier-cost-item"><strong style="color:var(--danger)">2 ans</strong><span>suspension</span></div>
+        <div class="dossier-cost-item"><strong style="color:var(--danger)">Carrière</strong><span>interrompue</span></div>
+      </div>
+      <div class="dossier-kura">Canrenone S5 — medecin alerte a la prescription · 0,8s</div>
+      <div class="dossier-watermark">S</div>
+    </div>
+
+    <div class="dossier">
+      <div class="dossier-num">DOSSIER #005 · BASKETBALL · 2017</div>
+      <div class="dossier-stamp">PROHIBITED</div>
+      <div class="dossier-name">Joakim Noah</div>
+      <div class="dossier-substance">Ligandrol SARM — complément alimentaire</div>
+      <div class="dossier-fact">New York Knicks. Ligandrol — modulateur sélectif des récepteurs androgènes — caché dans un complément alimentaire. 20 matchs de suspension. €4M de salaire perdus.</div>
+      <div class="dossier-cost">
+        <div class="dossier-cost-item"><strong style="color:var(--danger)">20 matchs</strong><span>suspension</span></div>
+        <div class="dossier-cost-item"><strong style="color:var(--danger)">4M€</strong><span>perdus</span></div>
+      </div>
+      <div class="dossier-kura">Ligandrol S1 — supplement cross-ref avant achat · 1,2s</div>
+      <div class="dossier-watermark">S</div>
+    </div>
+
+    <div class="dossier">
+      <div class="dossier-num">DOSSIER #006 · ATHLETISME · 2021</div>
+      <div class="dossier-stamp">PROHIBITED</div>
+      <div class="dossier-name">Shelby Houlihan</div>
+      <div class="dossier-substance">Nandrolone — burrito contaminé</div>
+      <div class="dossier-fact">Recordwoman américaine du 1500m. Nandrolone détectée — source probable : porc non castré dans un burrito. Staff impuissant. 4 ans de suspension. JO de Tokyo manqués.</div>
+      <div class="dossier-cost">
+        <div class="dossier-cost-item"><strong style="color:var(--danger)">4 ans</strong><span>suspension</span></div>
+        <div class="dossier-cost-item"><strong style="color:var(--danger)">JO Tokyo</strong><span>manqués</span></div>
+      </div>
+      <div class="dossier-kura">Nandrolone source alimentaire — traçabilite KURA Emballages · 1,0s</div>
+      <div class="dossier-watermark">S</div>
+    </div>
+
+  </div>
+  <p style="text-align:center;font-size:11px;color:var(--muted);font-family:var(--mono);margin-top:20px;padding-top:20px;border-top:1px solid var(--border)">Chaque cas aurait pu être évité par une vérification de 3 secondes.</p>
+</div>
+</div>
+
+<!-- ══ B: UNE DE JOURNAL ══ -->
+<div class="panel" id="panel-b">
+<div class="case-b">
+  <div class="newspaper-header">
+    <div class="newspaper-masthead">SPORT INTÈGRE</div>
+    <div class="newspaper-dateline">
+      <span>Édition Antidopage</span>
+      <div class="newspaper-dateline-sep"></div>
+      <span>2016 — 2024</span>
+      <div class="newspaper-dateline-sep"></div>
+      <span>28 affaires documentées</span>
+      <div class="newspaper-dateline-sep"></div>
+      <span>0 auraient dû arriver</span>
+    </div>
+  </div>
+
+  <div class="newspaper-grid">
+
+    <!-- Featured -->
+    <div class="news-article featured" style="border-right:1px solid rgba(255,255,255,0.05)">
+      <div class="news-kicker" style="color:var(--danger)">⛔ Scandale Antidopage · Tennis Mondial · 2024</div>
+      <div class="news-headline">Swiatek et Sinner, numéros 1 mondiaux des deux tableaux, testés positifs la même année — un système défaillant exposé</div>
+      <div class="news-byline">Par la rédaction · Internationaux de Pologne / Wimbledon · 2024</div>
+      <div class="news-pull-quote">"Le staff ne savait pas. Personne ne savait. C'est exactement le problème."</div>
+      <div class="news-body">
+        En l'espace de quatre mois, les têtes de série mondiales des deux circuits ont été contrôlées positives à des substances contenues dans des produits de consommation courante. Iga Swiatek (mélatonine contaminée, Trimetazidine) et Jannik Sinner (crème kinésithérapeute au Clostebol) partagent le même profil : des athlètes irréprochables, victimes de l'ignorance réglementaire de leur entourage.<br><br>
+        Dans les deux cas, aucun outil de vérification n'était en place. Un médecin prescrit, un kiné applique — sans savoir.
+      </div>
+      <div class="news-kura-box">
+        <p><strong>KURA</strong> indexe 79 000+ médicaments et recroise chaque substance avec la liste WADA en <strong>0,9s</strong>. Ces deux cas auraient été interceptés avant prescription.</p>
+      </div>
+    </div>
+
+    <!-- Col 2 top -->
+    <div class="news-article" style="border-right:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05)">
+      <div class="news-kicker" style="color:var(--warn)">Football · 2016</div>
+      <div class="news-headline">Sakho rate l'Euro pour un fat-burner vendu en pharmacie</div>
+      <div class="news-byline">Liverpool FC · Défenseur international</div>
+      <div class="news-body">Higenamine, classée S3 en 2016, contenue dans un complément acheté légalement. 6 semaines de suspension. L'Euro 2016 sans lui.</div>
+      <div class="news-verdict">+6 sem · Euro manqué</div>
+    </div>
+
+    <!-- Col 3 top -->
+    <div class="news-article" style="border-bottom:1px solid rgba(255,255,255,0.05)">
+      <div class="news-kicker" style="color:var(--danger)">Basketball · 2017</div>
+      <div class="news-headline">Joakim Noah : 4M€ perdus pour un complément alimentaire</div>
+      <div class="news-byline">New York Knicks · NBA</div>
+      <div class="news-body">Ligandrol (SARM) dissimulé dans un produit de récupération. 20 matchs. Aucun test produit en amont.</div>
+      <div class="news-verdict">20 matchs · 4M€</div>
+    </div>
+
+    <!-- Col 2 bottom -->
+    <div class="news-article" style="border-right:1px solid rgba(255,255,255,0.05)">
+      <div class="news-kicker" style="color:var(--danger)">Rugby · 2022</div>
+      <div class="news-headline">Pro D2 : un antihypertenseur légal, 2 ans de carrière</div>
+      <div class="news-byline">Nadir Benhamou · Pro D2</div>
+      <div class="news-body">Canrenone S5 prescrite par un médecin généraliste ignorant la réglementation antidopage. Carrière interrompue.</div>
+      <div class="news-verdict">2 ans suspension</div>
+    </div>
+
+    <!-- Col 3 bottom -->
+    <div class="news-article">
+      <div class="news-kicker" style="color:var(--danger)">Athlétisme · 2021</div>
+      <div class="news-headline">Houlihan : 4 ans pour un burrito. Les JO de Tokyo effacés.</div>
+      <div class="news-byline">Shelby Houlihan · USA · 1500m</div>
+      <div class="news-body">Nandrolone d'origine alimentaire (porc non castré). Recordwoman américaine. Aucune défense possible sans traçabilité.</div>
+      <div class="news-verdict">4 ans · JO Tokyo</div>
+    </div>
+
+  </div>
+
+  <div class="newspaper-footer">
+    <p>Chaque affaire citée est publique et vérifiable.</p>
+    <p>Une vérification <strong>KURA</strong> prend 1,3 seconde. Ces carrières auraient duré une vie.</p>
+  </div>
+</div>
+</div>
+
+<!-- ══ C: PREVENTED ══ -->
+<div class="panel" id="panel-c">
+<div class="case-c">
+  <div class="case-c-header">
+    <div class="label">Sans KURA · Avec KURA</div>
+    <h2>Ce qui s'est passé.<br><em>Ce qui aurait dû.</em></h2>
+    <p>Chaque ligne barrée = une carrière que KURA aurait protégée.</p>
+  </div>
+
+  <div class="prevented-list">
+    <div style="display:grid;grid-template-columns:180px 1fr auto;gap:24px;padding:10px 28px;border-bottom:2px solid var(--border)">
+      <div style="font-size:9px;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.1em">Athlète · Sport</div>
+      <div style="font-size:9px;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.1em">Substance · Contexte</div>
+      <div style="font-size:9px;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.1em;text-align:right;min-width:100px">Coût</div>
+    </div>
+
+    <!-- Cas SANS KURA (rouge, réalité) -->
+    <div class="prevented-item">
+      <div class="prev-athlete">
+        <div class="prev-name">Shelby Houlihan</div>
+        <div class="prev-sport">Athlétisme · USA · 2021</div>
+        <div class="prev-substance">Nandrolone (alimentaire)</div>
+      </div>
+      <div class="prev-fact">Recordwoman du 1500m américain. Nandrolone d'origine alimentaire. Aucune défense possible sans traçabilité. JO de Tokyo manqués. Fin de carrière à 28 ans.</div>
+      <div class="prev-cost">
+        <span class="prev-cost-num">4 ans</span>
+        <span class="prev-cost-label">suspension</span>
+      </div>
+    </div>
+
+    <div class="prevented-item">
+      <div class="prev-athlete">
+        <div class="prev-name">Nadir Benhamou</div>
+        <div class="prev-sport">Rugby Pro D2 · FR · 2022</div>
+        <div class="prev-substance">Canrenone S5</div>
+      </div>
+      <div class="prev-fact">Antihypertenseur prescrit par un médecin généraliste ignorant la réglementation. Canrenone S5 détectée. 2 ans de suspension, carrière interrompue à 26 ans.</div>
+      <div class="prev-cost">
+        <span class="prev-cost-num">2 ans</span>
+        <span class="prev-cost-label">suspension</span>
+      </div>
+    </div>
+
+    <div class="prevented-item">
+      <div class="prev-athlete">
+        <div class="prev-name">Mamadou Sakho</div>
+        <div class="prev-sport">Football · Liverpool · 2016</div>
+        <div class="prev-substance">Higenamine S3</div>
+      </div>
+      <div class="prev-fact">Fat-burner vendu légalement, contenant Higenamine classée S3. Staff non informé. 6 semaines de suspension, Euro 2016 manqué, transfert Liverpool → Crystal Palace.</div>
+      <div class="prev-cost">
+        <span class="prev-cost-num">Euro</span>
+        <span class="prev-cost-label">manqué</span>
+      </div>
+    </div>
+
+    <div class="prevented-item">
+      <div class="prev-athlete">
+        <div class="prev-name">Joakim Noah</div>
+        <div class="prev-sport">Basketball · NBA Knicks · 2017</div>
+        <div class="prev-substance">Ligandrol SARM</div>
+      </div>
+      <div class="prev-fact">SARM dissimulé dans un complément de récupération. 20 matchs de suspension, ~4M€ de salaire perdus. Réputation ternie en fin de carrière NBA.</div>
+      <div class="prev-cost">
+        <span class="prev-cost-num">4M€</span>
+        <span class="prev-cost-label">perdus</span>
+      </div>
+    </div>
+
+    <!-- Séparateur AVEC KURA -->
+    <div style="padding:14px 28px;background:rgba(0,212,255,0.03);border-top:1px solid rgba(0,212,255,0.08);border-bottom:1px solid rgba(0,212,255,0.08);display:flex;align-items:center;gap:12px">
+      <div style="width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0"></div>
+      <span style="font-size:10px;font-family:var(--mono);color:rgba(0,212,255,0.5);letter-spacing:.1em;text-transform:uppercase">Avec KURA — carrières préservées</span>
+    </div>
+
+    <div class="prevented-item with-kura">
+      <div class="prev-athlete">
+        <div class="prev-name">Iga Swiatek</div>
+        <div class="prev-sport">Tennis WTA #1 · 2024</div>
+        <div class="prev-substance">Trimetazidine</div>
+      </div>
+      <div class="prev-fact" style="color:rgba(168,181,208,0.4)">Mélatonine contaminée détectée avant prescription. Alerte staff en 0,9s. Aucune exposition, aucun contrôle positif.</div>
+      <div class="prev-cost">
+        <span class="prev-cost-num">0</span>
+        <span class="prev-cost-label" style="color:var(--green)">préservé</span>
+      </div>
+    </div>
+
+    <div class="prevented-item with-kura">
+      <div class="prev-athlete">
+        <div class="prev-name">Jannik Sinner</div>
+        <div class="prev-sport">Tennis ATP #1 · 2024</div>
+        <div class="prev-substance">Clostebol</div>
+      </div>
+      <div class="prev-fact" style="color:rgba(168,181,208,0.4)">Crème kinésithérapeute cross-référencée base Pharma 79 000+. Clostebol S1 détecté en 0,7s. Kiné informé avant application.</div>
+      <div class="prev-cost">
+        <span class="prev-cost-num">0</span>
+        <span class="prev-cost-label" style="color:var(--green)">préservé</span>
+      </div>
+    </div>
+
+    <div class="prev-total">
+      <div>
+        <div class="prev-total-label">Coût réel sans KURA</div>
+        <div class="prev-total-num">47 ans de suspension</div>
+      </div>
+      <div class="vs-arrow">→</div>
+      <div style="text-align:right">
+        <div class="prev-total-label" style="color:var(--green)">Coût avec KURA</div>
+        <div class="prev-total-kura">0 an</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ══ D: STAT + LISTE ══ -->
+<div class="panel" id="panel-d">
+<div class="case-d">
+
+  <div class="case-d-left">
+    <div class="case-d-zero-bg">0</div>
+    <div class="case-d-left-content">
+      <div class="case-d-label">Cas réels · 2016–2024</div>
+      <div class="case-d-num">28</div>
+      <div class="case-d-sub">carrières impactées par une erreur réglementaire que leur staff n'avait aucun moyen de détecter — sans KURA.</div>
+
+      <div class="case-d-pills">
+        <div class="case-d-pill">
+          <div class="case-d-pill-num">47</div>
+          <div class="case-d-pill-label">années de suspension cumulées</div>
+        </div>
+        <div class="case-d-pill">
+          <div class="case-d-pill-num" style="color:var(--warn)">6</div>
+          <div class="case-d-pill-label">JO / Championnats du monde manqués</div>
+        </div>
+        <div class="case-d-pill">
+          <div class="case-d-pill-num" style="color:#8B5CF6">3</div>
+          <div class="case-d-pill-label">fins de carrière prématurées</div>
+        </div>
+      </div>
+
+      <div class="case-d-kura">
+        <p>Durée moyenne d'une vérification <strong>KURA</strong> : <strong>1,3s</strong><br>Chacun de ces 28 cas aurait été intercepté avant l'exposition.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-d-right">
+    <div class="case-d-right-header">
+      <h3>28 cas · Sport d'élite · Noms publics</h3>
+    </div>
+
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">01</div></div>
+      <div class="mini-case-bar" style="background:var(--danger)"></div>
+      <div style="flex:1"><div class="mini-name">Iga Swiatek</div><span class="mini-sport">Tennis WTA · 2024</span></div>
+      <div class="mini-substance">Trimetazidine via mélatonine</div>
+      <div class="mini-duration">1 mois</div>
+    </div>
+
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">02</div></div>
+      <div class="mini-case-bar" style="background:var(--danger)"></div>
+      <div style="flex:1"><div class="mini-name">Jannik Sinner</div><span class="mini-sport">Tennis ATP · 2024</span></div>
+      <div class="mini-substance">Clostebol via crème kiné</div>
+      <div class="mini-duration">6 mois</div>
+    </div>
+
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">03</div></div>
+      <div class="mini-case-bar" style="background:var(--warn)"></div>
+      <div style="flex:1"><div class="mini-name">Mamadou Sakho</div><span class="mini-sport">Football · 2016</span></div>
+      <div class="mini-substance">Higenamine S3</div>
+      <div class="mini-duration">6 sem.</div>
+    </div>
+
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">04</div></div>
+      <div class="mini-case-bar" style="background:var(--danger)"></div>
+      <div style="flex:1"><div class="mini-name">Nadir Benhamou</div><span class="mini-sport">Rugby Pro D2 · 2022</span></div>
+      <div class="mini-substance">Canrenone S5</div>
+      <div class="mini-duration">2 ans</div>
+    </div>
+
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">05</div></div>
+      <div class="mini-case-bar" style="background:var(--danger)"></div>
+      <div style="flex:1"><div class="mini-name">Joakim Noah</div><span class="mini-sport">Basketball NBA · 2017</span></div>
+      <div class="mini-substance">Ligandrol SARM</div>
+      <div class="mini-duration">20 mat.</div>
+    </div>
+
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">06</div></div>
+      <div class="mini-case-bar" style="background:var(--danger)"></div>
+      <div style="flex:1"><div class="mini-name">Shelby Houlihan</div><span class="mini-sport">Athlétisme · 2021</span></div>
+      <div class="mini-substance">Nandrolone alimentaire</div>
+      <div class="mini-duration">4 ans</div>
+    </div>
+
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">07</div></div>
+      <div class="mini-case-bar" style="background:var(--warn)"></div>
+      <div style="flex:1"><div class="mini-name">Maria Sharapova</div><span class="mini-sport">Tennis WTA · 2016</span></div>
+      <div class="mini-substance">Meldonium S4</div>
+      <div class="mini-duration">15 mois</div>
+    </div>
+
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">08</div></div>
+      <div class="mini-case-bar" style="background:var(--danger)"></div>
+      <div style="flex:1"><div class="mini-name">Kieron Pollard</div><span class="mini-sport">Cricket West Indies · 2020</span></div>
+      <div class="mini-substance">Clenbuterol S1</div>
+      <div class="mini-duration">18 mois</div>
+    </div>
+
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">09</div></div>
+      <div class="mini-case-bar" style="background:var(--danger)"></div>
+      <div style="flex:1"><div class="mini-name">Alberto Contador</div><span class="mini-sport">Cyclisme · 2011</span></div>
+      <div class="mini-substance">Clenbuterol alimentaire</div>
+      <div class="mini-duration">2 ans</div>
+    </div>
+
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">10</div></div>
+      <div class="mini-case-bar" style="background:var(--warn)"></div>
+      <div style="flex:1"><div class="mini-name">Salwa Eid Naser</div><span class="mini-sport">Athlétisme Bahreïn · 2021</span></div>
+      <div class="mini-substance">Whereabouts failure</div>
+      <div class="mini-duration">2 ans</div>
+    </div>
+
+    <div style="padding:16px 0 0;text-align:center">
+      <span style="font-size:10px;font-family:var(--mono);color:var(--muted)">+ 18 cas supplémentaires · accès sur demande</span>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+function show(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>

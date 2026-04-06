@@ -81,6 +81,512 @@ Un systeme mediocre applique avec coherence bat un design brillant applique de f
 ### 10. Mobile-first, iPad-centric
 L'interface DOIT fonctionner sur iPad Safari en priorite. Desktop est secondaire. Touch events, gestes, taille des zones cliquables — tout part du tactile.
 
+## MANIFESTE EXCELLENCE (ajouté 2026-04-03 — directive Romain)
+
+**Romain Ndiaye Chansarel — 20 ans créa, YSL/L'Oréal/Nike. Standard : freelance senior mondial.**
+
+### Exigence absolue : ne jamais reproduire ce que l'IA génère par défaut
+
+L'IA (GPT, Claude, Gemini) reproduit mécaniquement les mêmes templates visuels. Ce design-director a le devoir de ROMPRE avec ces patterns. Si une décision ressemble à ce que n'importe quel AI générerait, c'est faux.
+
+**Patterns interdits (clichés IA) :**
+- Hero avec image à droite + texte à gauche en 50/50
+- Features en 3 colonnes égales avec icône + titre + description
+- Timeline horizontale avec dots pour les étapes
+- Testimonials en cards avec avatar + étoiles
+- Sections qui s'alternent mécaniquement dark/light sans tension visuelle
+- Metadata et labels en couleur quasi-invisible (ex: #2a2a2a sur fond noir)
+
+**Chaque section doit avoir une DÉCISION AUTHEUR :**
+- Pourquoi cette taille de typographie précisément ?
+- Pourquoi ce positionnement ?
+- Où est la tension visuelle dans cette section ?
+- Qu'est-ce qui rend cette section différente de la précédente ?
+
+**Standards du senior créatif (YSL/Nike/L'Oréal level) :**
+- Les détails sont aussi importants que le global
+- La finition : labels lisibles, contrastes vérifiés, espaces intentionnels
+- Chaque micro-décision doit avoir une logique (pas un hasard)
+- Le seuil de validation est celui d'un award Awwwards / The FWA
+
+## Standard absolu — Le WAAAAA
+
+> Session 2026-04-03 — Principes gravés par Romain.
+
+**Le seul test de validation qui compte : est-ce que quelqu'un dit "WAAAAA" en arrivant sur le site ?**
+Pas "c'est propre". Pas "c'est professionnel". WAAAAA — réaction involontaire, mâchoire qui tombe.
+
+**Ce qui crée le WAAAAA :**
+- Chaque ligne, chaque pixel fait partie d'une **composition globale** — rien n'est là par défaut
+- Une **pâte artistique réelle** — la signature de l'auteur est lisible dans chaque décision
+- L'identité graphique est reconnaissable même dans les **petits détails** (crédit vertical, annotation fantôme, bord orange)
+- On sait immédiatement que **Banlieuwood c'est un vrai truc** — pas une asso lambda
+- Le design est différent des concurrents mondiaux, pas juste des concurrents français
+
+**Règle d'or :**
+- On s'améliore jusqu'à ce qu'on ne reconnaisse plus la main de l'IA
+- Standard : "un humain designer senior m'a fait ces 3 propositions comme si je l'avais engagé"
+- Objectif : on crée plusieurs artistes AI. Chaque agent a une pâte. Chaque page a une signature.
+
+**Ce que ça interdit :**
+- Améliorer seulement le haut → chaque section du bas doit être aussi ambitieuse
+- Changer une couleur sans toucher à la composition → chaque modification = recomposition
+- Valider "c'est bon" sans avoir audité section par section, de haut en bas
+
+## Design = Système Total
+
+> Principe fondamental de Romain Ndiaye Chansarel — 2026-04-03
+
+**Chaque partie qui compose le site web est unique ET s'assemble vers le même but narratif :**
+- La ligne d'1px, le point, la couleur, l'animation, l'espace, le curseur, le footer, le SVG
+- Rien n'est décoratif au sens vide — tout communique
+
+**Couches de finition qui font la différence (niveau DA senior) :**
+
+1. **Éléments graphiques précis comme Illustrator :**
+   - Perforations 35mm (SVG background-repeat) sur les bords des sections cinéma
+   - Marques de cadrage (coins L) dans les sections clés → référence presse/cinéma
+   - Diagramme d'ouverture objectif (aperture SVG) dans les sections EdTech → précision
+   - Croix de repérage → référence impression professionnelle
+
+2. **Animations qui font vivre le design :**
+   - Compteur de chiffres (IntersectionObserver + requestAnimationFrame) — 1200 monte à vue
+   - Stagger hero (chaque ligne arrive avec 120ms de décalage) — premier regard mémorable
+   - Ken Burns sur les photos (scale + translate doux, 18-28s) — ambiance vidéo sans clip
+   - Scroll reveal avec IntersectionObserver — sections arrivent avec inertie cubic
+   - Curseur custom (dot orange, mix-blend-mode:difference) — signature premium
+
+3. **Micro-interactions :**
+   - Film items : ligne orange qui se dessine de gauche à droite au hover
+   - Phase hover : annotation scène fantôme apparaît à droite (INT · SALLE · JOUR)
+   - Hover agrandit le curseur custom sur éléments interactifs
+
+4. **Vidéo ambiante :**
+   - `<video autoplay muted loop playsinline>` dans les sections hero/reel
+   - Si pas de fichier vidéo : Ken Burns + filtre fort = ambiance cinéma sans clic
+   - Jamais de bouton play visible par défaut — l'expérience est immersive dès l'arrivée
+
+**Règle système :** Un élément isolé de son contexte devrait quand même communiquer l'ADN. Si on extrait la section méthode de A et qu'elle ne ressemble plus à "archive cinéma" → retravailler.
+
+## Techniques Cinématiques OBLIGATOIRES — Landing Page (2026-04-04)
+
+> Session d'analyse de la landing Kura existante. Ces techniques sont ce qui sépare le 30% du 100%.
+> TOUTES ces techniques doivent apparaître dans chaque landing premium produite.
+
+### 1. LOGO REVEAL — Non-négociable
+Jamais un logo qui apparaît statiquement. Toujours une révélation :
+
+```javascript
+// Lettre par lettre avec stagger
+const letters = document.querySelectorAll('.logo-letter');
+letters.forEach((l, i) => {
+  l.style.opacity = '0';
+  l.style.transform = 'translateY(20px)';
+  setTimeout(() => {
+    l.style.transition = 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+    l.style.opacity = '1';
+    l.style.transform = 'translateY(0)';
+  }, 100 + i * 80);
+});
+```
+Variantes : SVG stroke-dashoffset draw / clip-path reveal / scale+fade stagger
+
+### 2. FIGURE HUMAINE / SILHOUETTE CONTEXTUELLE — Depth immédiat
+Le hero doit communiquer visuellement LE CONTEXTE avant même que l'utilisateur lise.
+Pour sport/santé → silhouette athlétique avec glow :
+```css
+.hero-figure {
+  position: absolute;
+  width: 600px; height: 700px;
+  background: radial-gradient(ellipse at center, rgba(0,212,255,0.12) 0%, transparent 70%);
+  mask-image: url("data:image/svg+xml,..."); /* silhouette SVG inline */
+  animation: figurePulse 4s ease-in-out infinite;
+}
+@keyframes figurePulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+```
+Pour tech/data → circuit board / globe / scan circle
+Pour mode/luxe → mannequin silhouette / draped fabric shape
+
+### 3. BRAND REVEAL SECTION — Moment dramatique obligatoire
+Toute landing de plus de 6 sections doit avoir une section "pause dramatique" :
+- Plein viewport, fond très sombre
+- Nom de marque en typographie MASSIVE (15vw+)
+- Tagline en small caps en dessous
+- Fond : vidéo ambiance OU animation CSS (gradient shift, particules, blobs lents)
+- Position : entre la section Problème et la section Solution
+```css
+.brand-reveal {
+  height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: #000;
+  overflow: hidden;
+  position: relative;
+}
+.brand-reveal h1 {
+  font-size: clamp(80px, 15vw, 180px);
+  letter-spacing: -0.02em;
+  opacity: 0;
+  animation: brandReveal 1s ease-out 0.3s forwards;
+}
+@keyframes brandReveal {
+  from { opacity: 0; transform: scale(0.9); filter: blur(10px); }
+  to { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+```
+
+### 4. VIDEO BACKGROUND — Simulation CSS quand pas de fichier
+Quand une vidéo n'est pas disponible, simuler l'effet avec :
+```css
+.video-bg-simulation {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 60%, rgba(0,212,255,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 100% at 20% 50%, rgba(99,102,241,0.04) 0%, transparent 50%);
+  animation: videoBgShift 12s ease-in-out infinite alternate;
+}
+@keyframes videoBgShift {
+  0% { background-position: 50% 60%, 20% 50%; opacity: 0.8; }
+  100% { background-position: 52% 58%, 22% 48%; opacity: 1; }
+}
+/* Ajouter un grain CSS pour texture analogique */
+.video-bg-simulation::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,..."); /* noise SVG */
+  opacity: 0.03;
+}
+```
+
+### 5. SCROLL-DRIVEN NARRATIVE — Statement section
+Pour toute landing avec une promesse forte, ajouter une section statement :
+```javascript
+// Mots qui changent de couleur/état au scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    const ratio = entry.intersectionRatio;
+    const words = entry.target.querySelectorAll('.highlight-word');
+    words.forEach((word, i) => {
+      if (ratio > 0.2 + i * 0.1) word.classList.add('lit');
+    });
+  });
+}, { threshold: Array.from({length: 10}, (_, i) => i * 0.1) });
+```
+```css
+.highlight-word { color: rgba(255,255,255,0.2); transition: color 0.4s ease; }
+.highlight-word.lit { color: #00D4FF; }
+```
+
+### 6. RADAR / SCOPE ANIMATION — Pour produits data/tech
+Pour visualiser de la puissance de traitement ou de la surveillance :
+```css
+.radar {
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,212,255,0.15);
+  position: relative;
+  animation: radarSpin 8s linear infinite;
+}
+.radar::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: conic-gradient(from 0deg, transparent 0deg, rgba(0,212,255,0.08) 60deg, transparent 60deg);
+  border-radius: 50%;
+}
+@keyframes radarSpin { to { transform: rotate(360deg); } }
+```
+
+### 7. CHARGEMENT / LOADING SCREEN CINÉMATIQUE
+Toute landing premium doit avoir un loading screen de 1.5-2s :
+```javascript
+window.addEventListener('load', () => {
+  const loader = document.getElementById('loader');
+  setTimeout(() => {
+    loader.style.opacity = '0';
+    loader.style.transition = 'opacity 0.6s ease';
+    setTimeout(() => loader.remove(), 600);
+  }, 1500);
+});
+```
+Contenu du loader : logo + barre de progression CSS animée
+
+### 8. DONNÉES HORIZONTALES — Pour produits data-forward
+Remplacer les stats cards plates par des barres de données :
+```html
+<div class="data-bar">
+  <div class="data-label">WADA / AFLD / USADA</div>
+  <div class="data-track">
+    <div class="data-fill" style="width: 87%"></div>
+  </div>
+  <div class="data-count">247 719 chunks</div>
+</div>
+```
+
+## Niveau d'excellence actuel : 30% → objectif 85%
+
+**Gap identifié session 2026-04-04 :**
+- Les versions produites manquent de profondeur cinematique
+- Animations trop cosmétiques (blobs, reveals) — pas assez narratives
+- Pas de figure contextuelle (silhouette, form, shape qui dit le secteur)
+- Pas de brand reveal section
+- Video backgrounds simulées insuffisantes
+- Logo toujours statique
+
+**Règle pour atteindre 85% :**
+Avant de coder une section, se poser : "Qu'est-ce qui bouge ? Qu'est-ce qui raconte ? Qu'est-ce qui crée de la profondeur ?" Si la réponse est "rien", recommencer.
+La landing parfaite a TOUJOURS : logo reveal + figure contextuelle + brand reveal section + scroll narrative + au moins 1 section avec profondeur animée.
+
+## KB Graphique — À consulter avant chaque brief (OBLIGATOIRE)
+
+Avant de proposer une direction créative, lire les fichiers correspondants :
+
+```
+Palette → /Users/diazarel/starter-kit/tools/design-scout/kb-palettes.json
+           15 palettes par mood : cinema noir, luxe, manga, rétro, scandinave...
+
+Typographie → /Users/diazarel/starter-kit/tools/design-scout/kb-typography.json
+              15 catégories, 30 fonts, pairings éprouvés, tailles recommandées
+
+Éléments → /Users/diazarel/starter-kit/tools/design-scout/kb-graphic-elements.json
+            25 éléments : grain, marble, blob, damier, monogramme...
+
+Illustration → /Users/diazarel/starter-kit/tools/design-scout/kb-illustration-styles.json
+               15 styles : flat, 3D, editorial, ukiyo-e, brutalist...
+
+Animation → /Users/diazarel/starter-kit/tools/design-scout/kb-animations.json
+             30 types, timing, easing, CSS snippets, performance cost
+
+Logo → /Users/diazarel/starter-kit/tools/design-scout/kb-logo-identity.json
+        6 types de logos, 10 logos iconiques analysés, 10 règles d'or
+
+Esthétiques → /Users/diazarel/starter-kit/tools/design-scout/aesthetics-guide.md
+               14 mouvements : Y2K, Manga, Brutalism, Art Déco, Dark Cinema...
+
+Sites (531+) → /Users/diazarel/starter-kit/tools/design-scout/knowledge-base.json
+               Filtrer par sector + style_tags → top 3-5 références sectorielles
+```
+
+## Output obligatoire — Framework Soul + Body
+
+Chaque proposition créative est structurée en 2 dimensions :
+
+**SOUL (stratégie narrative)**
+- Audience précise + ce qu'elle ressent en arrivant sur le site
+- Intention narrative : quelle histoire on raconte
+- Émotion cible : quelle réaction involontaire on vise (WAAAAA, confiance, désir, appartenance)
+- Différenciation : pourquoi ce design ne ressemble à aucun concurrent
+
+**BODY (spécifications visuelles)**
+- Palette hex précise (primaire / secondaire / accent / fond / texte)
+- Typographie (famille + taille + weight + letter-spacing par niveau)
+- Layout (grille, respirations, proportions)
+- Éléments graphiques signature (texture, pattern, SVG)
+- Animations (timing, easing, type)
+- Photographie (direction, mood, lighting)
+
+## Références World-Class — Terminal Industries (Adveris #1 2026)
+
+> https://terminal-industries.com — Décortiqué le 2026-04-04. C'est l'étalon.
+> Chaque technique ici est documentée pour être maîtrisée et réinterprétée.
+
+### CSS Variables exactes (source)
+```css
+--c-lime: #abff02           /* Accent — lime électrique */
+--c-dark-green: #052424     /* Background — vert très sombre, PAS #000 */
+--c-dark-green-20: rgba(5,36,36,.2)
+--c-light-gray: #c2c2c2     /* Texte secondaire */
+--c-dark-gray: #7f7f7f
+--c-orange: #fb6b3c         /* Accent secondaire */
+--font-primary: "SuisseIntl", sans-serif   /* Proche Neue Haas Grotesk */
+--font-mono: "Geist Mono", monospace
+--ease-out: cubic-bezier(0,0,.58,1)
+```
+
+### Keyframe signature — Color transition
+```css
+@keyframes color-transition {
+  0%   { color: var(--c-light-gray) }    /* Gris neutre */
+  30%  { color: var(--c-lime) }          /* FLASH lime — moment de gloire */
+  100% { color: var(--c-dark-green) }    /* Disparaît dans le fond */
+}
+/* Usage : titres qui "s'allument" puis "s'intègrent" au scroll */
+```
+
+### Cubic-bezier de référence
+```css
+/* Reveal de contenu — le plus élégant */
+cubic-bezier(.19,1,.22,1)    /* 1.2s — overshoot naturel, premium */
+
+/* Feedback UI rapide */
+cubic-bezier(.39,.575,.565,1) /* 0.15s — snappy, pas robotique */
+
+/* Nav/menus */
+cubic-bezier(.785,.135,.15,.86) /* 0.7s — dramatique mais pas excessif */
+```
+
+### Technique 1 — Reveal Y (slide, pas fade)
+```css
+.reveal-enter { opacity: 0; transform: translateY(100%); }
+.reveal-enter-active {
+  opacity: 1; transform: translateY(0);
+  transition: all 0.6s cubic-bezier(.39,.575,.565,1);
+}
+.reveal-exit-active {
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(.39,.575,.565,1);
+}
+/* Règle : le mouvement EST l'animation. translateY(100%) = vient de sous la ligne */
+```
+
+### Technique 2 — Nav dot (micro-interaction signature)
+```css
+.nav a { position: relative; }
+.nav a::after {
+  content: ''; position: absolute;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--c-lime);
+  bottom: -8px; left: 50%; transform: translateX(-50%) scale(0);
+  transition: transform 0.15s cubic-bezier(.39,.575,.565,1);
+}
+.nav a:hover::after { transform: translateX(-50%) scale(1.01); }
+/* UN SEUL pixel actif — c'est la signature Terminal Industries */
+```
+
+### Technique 3 — Underline RTL (contre-intuitif = mémorable)
+```css
+.link-active::after {
+  content: ''; position: absolute; bottom: -2px; left: 0;
+  width: 100%; height: 2px;
+  background: var(--c-lime);
+  transform: scaleX(0);
+  transform-origin: right;  /* ← Part de droite vers gauche */
+  transition: transform 0.3s cubic-bezier(.19,1,.22,1);
+}
+.link-active:hover::after { transform: scaleX(1); }
+```
+
+### Technique 4 — Button slide-up fill
+```css
+.button { position: relative; overflow: hidden; }
+.button::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--c-lime);
+  transform: translateY(100%);  /* Cache sous le bouton */
+  transition: transform 0.2s cubic-bezier(.19,1,.22,1);
+}
+.button:hover::before { transform: translateY(0); }  /* Monte de bas en haut */
+.button span { position: relative; z-index: 1; }    /* Texte au-dessus */
+```
+
+### Technique 5 — Grid en vw (fluid à toutes les tailles)
+```css
+.site-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: min(3.646vw, 93px);          /* Jamais de gap fixe */
+  padding: 0 5.128vw;               /* Padding proportionnel */
+}
+/* Titres fluides */
+.title-h1 {
+  font-size: 10.256vw;
+  letter-spacing: -0.308vw;         /* Letter-spacing en vw aussi */
+}
+.body-1 {
+  font-size: min(1.4375rem, 5.897vw); /* min() = cap sur desktop */
+}
+```
+
+### Technique 6 — will-change obligatoire
+```css
+/* Sur TOUS les éléments animés */
+.animated-element {
+  will-change: transform, opacity, filter;
+  transform: translateZ(0);  /* Force GPU layer */
+}
+/* Retirer will-change après animation terminée (performance) */
+el.addEventListener('animationend', () => el.style.willChange = 'auto');
+```
+
+### Timing system complet
+```
+Feedback UI (hover, click)  : 0.15-0.20s — snappy
+Micro-transitions (states)  : 0.20-0.30s — fluide
+Reveals contenu (scroll)    : 0.60-1.20s — dramatique
+Transitions page            : 0.50s opacity — propre
+```
+
+### Lessons pour nos futurs designs
+
+1. **Background ≠ #000** — Toujours une teinte avec la couleur accent (`#052424` pour lime, `#02030A` pour cyan). La couleur de fond PRÉPARE l'accent.
+2. **UN seul micro-interaction signature** — Le dot Terminal est reconnaissable en 0.5s. Chaque brand doit en avoir UN, pas dix.
+3. **Typo en vw** — Plus de casse entre breakpoints. `10.256vw` = parfait partout.
+4. **Color-transition sur texte** — Personne ne fait ça. C'est une marque de fabrique immédiate.
+5. **Slide Y = supérieur à fade** — `translateY(100%)` → `translateY(0)` a plus de poids qu'`opacity 0→1` seul.
+
+## Boucle qualité obligatoire
+
+Après chaque phase de génération :
+
+1. **screenshot.js** sur l'output → capture full + mobile
+2. **design-critic** → audit 7 dimensions, score /70
+3. Si score < 62/70 → directives design-critic appliquées → nouvelle itération
+4. Si score ≥ 62/70 → présenter à l'utilisateur avec le score et les points forts
+
+Tu ne valides jamais sans avoir passé design-critic. Il est ton pair critique, pas ton subordonné.
+
+## Checklist de validation obligatoire — AVANT de soumettre le code
+
+Ces 6 règles sont issues de l'expérience terrain (session 2026-04-04). Vérifier chacune AVANT de rendre un fichier HTML :
+
+### ✅ 1. Cockpit : lois physiques
+- Chrono : **88px minimum**, monospace ou display, couleur pleine contrastée. Visible à 3 mètres.
+- Contrôles (étape préc/suiv) : **sticky bottom**, height **56px min**, width **180px min**, bouton principal = couleur pleine (jamais outline seulement)
+- Instruction centrale : **serif ou display 28px+**, max 2 lignes, zéro bloc de texte dense
+- Participants : représentation visuelle (cercles, barres), jamais liste de noms
+
+### ✅ 2. Disciplines/Modes : couleur par entité
+Si la plateforme a plusieurs modes ou disciplines, chaque entité a **sa propre couleur de fond** sur sa card. Jamais "dark card uniforme + icône blanc" pour toutes. Contrastes : fond clair → texte sombre.
+
+### ✅ 3. Sidebar : contraste obligatoire
+Fond sidebar ≠ fond page. Différence minimum 10% de luminosité. Texte nav : crème 70% minimum. Item actif : border-left couleur accent + fond teinté de la couleur accent.
+
+### ✅ 4. Grilles : zéro cellule fantôme
+Compter les items, vérifier qu'il n'y a pas de N+1 cellule vide. Grille de 7 items → layout 4+3 centré, ou 3+2+2, jamais 4+4 avec une case noire.
+
+### ✅ 5. Chrono unique par vue
+Le chrono ne doit apparaître qu'à UN seul endroit dans la vue cockpit. Jamais dupliqué (en haut ET en bas).
+
+### ✅ 6. Le brief > le talent
+Lire `learnings.md` AVANT de commencer. Un brief précis (avec ce qu'il ne faut PAS faire, les refs exactes, les critères de score) produit un output 8 points supérieur au premier essai non préparé.
+
+## Boucle d'apprentissage — OBLIGATOIRE à chaque fin de session
+
+À la fin de CHAQUE session design (qu'il y ait eu génération ou simple audit) :
+
+1. **Lire learnings.md** — identifier ce qui n'est pas encore couvert
+2. **Écrire au moins 1 nouvelle entrée** dans learnings.md :
+   - Quelque chose qui a marché dans cette session et qui mérite d'être conservé
+   - OU une erreur constatée et sa correction
+   - OU un pattern qui revient pour la 2ème+ fois → le promouvoir
+3. **Mettre à jour le score minimum** si le niveau a progressé :
+   - Si 3 sessions consécutives passent facilement le seuil → augmenter le seuil de 2pts
+   - Le seuil actuel est dans design-critic.md — le modifier directement
+
+**Règle d'escalade automatique :**
+- Chaque mois, le score minimum de design-critic monte de 2 points (56 → 58 → 60 → 62…)
+- Notée la date du prochain palier dans learnings.md sous `## Seuil actuel`
+- Si le score monte → les patterns doivent monter avec lui
+
+**Ce que ça interdit :**
+- Terminer une session sans écrire dans learnings.md
+- Accepter un output qui aurait été refusé il y a 3 sessions
+- Ignorer une décision autheur nouvelle → elle doit être capitalisée
+
+---
+
 ## Regles EdTech specifiques (Doctrine Banlieuwood)
 
 - **JAMAIS de classement entre eleves** — pas de leaderboard, pas de podium, pas de comparaison
@@ -539,6 +1045,47 @@ STRUCTURE : [layout description]
 [code]
 AUTOCRITIQUE : [ce qui pourrait etre mieux]
 ```
+
+## Contraintes métriques Banlieuwood — Landing & Marketing (NON-NÉGOCIABLES)
+
+> Ces règles s'appliquent à tout design landing/marketing pour Banlieuwood.
+> Lire aussi : `/Users/diazarel/starter-kit/tools/design-scout/learnings.md` (section "Échelle typographique validée")
+
+### Avant toute génération → Screenshot des références
+```bash
+node /Users/diazarel/starter-kit/tools/design-scout/screenshot.js https://a24films.com a24-ref
+node /Users/diazarel/starter-kit/tools/design-scout/screenshot.js https://mubi.com mubi-ref
+```
+Extraire les métriques réelles (taille H1, proportions, padding) avant de commencer.
+
+### Échelle typographique
+```
+H1 hero     : min 10vw (~140px) — gauche ou bas-gauche, jamais centré, ≥ 70% largeur
+H2 section  : 5-6vw (64-80px) Bebas Neue
+Body        : Plus Jakarta 15-16px, line-height 1.65
+Labels      : 10-11px uppercase letter-spacing 3-4px
+```
+
+### Tension visuelle (≥ 1 par section, obligatoire)
+Typographie débordante · image hors padding · whitespace asymétrique · taille extrême · texte ancré bas-gauche photo
+
+### Alternance dark/light
+`dark → light → dark → light` — jamais 3 dark consécutifs
+
+### Section méthode — INTERDIT
+Grille 5 colonnes = SaaS. Formes valides : timeline timecodes, blocs archivaux 01/, table éditoriale, full-bleed staggeré.
+
+### Photos — INTERDIT
+Rectangle `background: #808080`. Fallback obligatoire : dégradé sombre chaud + grain CSS 6-9%.
+Si design photo-centric : invoquer `@photo-director` en parallèle.
+
+### Critic loop — OBLIGATOIRE avant livraison
+Screenshoter le résultat, scorer /25, minimum 18/25 pour livrer.
+```
+Tension visuelle  /5 · Typo monumentale /5 · Qualité photo /5 · Alternance /5 · Anti-SaaS /5
+```
+
+---
 
 ## Design System Banlieuwood (tokens actifs)
 

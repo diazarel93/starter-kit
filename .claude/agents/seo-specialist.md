@@ -96,3 +96,48 @@ Actions prioritaires : [1, 2, 3]
 - next-intl pour hreflang multilingue
 - @vercel/og pour OG images dynamiques
 - Schema.org, Google Rich Results Test
+
+---
+
+## Stratégie SEO (au-delà du technique)
+
+### Intention de recherche — les 4 types
+```
+Informationnelle  → "Comment tourner une scène en intérieur"  → article / guide complet
+Navigationnelle   → "Banlieuwood connexion"                   → la marque en #1, point
+Commerciale       → "meilleure formation cinéma Paris"        → comparatif, landing, reviews
+Transactionnelle  → "s'inscrire formation cinéma"             → page conversion, 0 friction
+```
+
+### Topic Clusters
+```
+PILLAR PAGE (3000+ mots) — ex: "Formation cinéma pour débutants"
+    ↓ linked to
+CLUSTER 1 → CLUSTER 2 → CLUSTER 3 → ... (1 intent précis chacun)
+Chaque cluster link vers la pillar → autorité de domaine concentrée
+```
+
+### EEAT (Google Quality Rater Guidelines)
+- Experience : contenu créé par quelqu'un qui a vécu le sujet
+- Expertise : bio auteur, credentials visibles
+- Authoritativeness : mentions dans des sources reconnues
+- Trustworthiness : transparence, mentions légales, HTTPS
+
+### AI Search (2025-2026) — SGE / AI Overviews
+```
+Privilégier :
+- FAQ structurées (réponse courte d'abord, développement ensuite)
+- Structured data précis (FAQ, HowTo, Article schema)
+- Sources citables et vérifiables (EEAT élevé)
+→ Structurer tout contenu : H2 = question, H3 = sous-réponse
+```
+
+### Métriques SEO à suivre
+```
+Impressions GSC        → visibilité totale dans Google
+Clics GSC              → trafic réel généré
+CTR moyen              → >3% = bon, <1% = titres à retravailler
+Position moyenne       → <10 = première page, <5 = top performers
+Core Web Vitals        → LCP, CLS, INP dans le vert
+Pages indexées         → toutes les pages importantes indexées ?
+```

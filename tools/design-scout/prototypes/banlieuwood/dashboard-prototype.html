@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banlieuwood — Dashboard Intervenant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:   #FF6B35;
+      --ink:      #0D0B09;
+      --cream:    #F2EBD9;
+      --warm:     #EDE4CF;
+      --surface:  #1A1714;
+      --surface2: #252118;
+      --border:   rgba(255,255,255,0.07);
+      --tp:       rgba(255,255,255,0.92);
+      --ts:       rgba(255,255,255,0.45);
+      --bg:       #0F0D0B;
+      --sidebar-w: 240px;
+      --header-h:  56px;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--tp);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      overflow: hidden;
+    }
+
+    /* ─── GRAIN OVERLAY ────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.018;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ─── LAYOUT SHELL ─────────────────────────────────────── */
+    .shell {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ─── SIDEBAR ──────────────────────────────────────────── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .sidebar-logo {
+      padding: 24px 20px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-logo .wordmark {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.04em;
+      color: var(--tp);
+      line-height: 1;
+    }
+
+    .sidebar-logo .role-badge {
+      margin-top: 6px;
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      color: var(--orange);
+      border: 1px solid rgba(255,107,53,0.35);
+      padding: 2px 7px;
+      text-transform: uppercase;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: 12px 0;
+      overflow-y: auto;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      color: var(--ts);
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.15s;
+      border-left: 2px solid transparent;
+      user-select: none;
+    }
+
+    .nav-item:hover {
+      color: var(--tp);
+      background: var(--surface2);
+    }
+
+    .nav-item.active {
+      color: var(--orange);
+      background: var(--surface2);
+      border-left-color: var(--orange);
+    }
+
+    .nav-item .nav-icon {
+      font-size: 15px;
+      width: 18px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .sidebar-user {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      background: var(--orange);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .user-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .user-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--tp);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .user-logout {
+      font-size: 10px;
+      color: var(--ts);
+      cursor: pointer;
+      font-family: 'Space Mono', monospace;
+      margin-top: 1px;
+    }
+
+    .user-logout:hover { color: var(--orange); }
+
+    /* ─── MAIN AREA ────────────────────────────────────────── */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    /* ─── TOPBAR ───────────────────────────────────────────── */
+    .topbar {
+      height: var(--header-h);
+      flex-shrink: 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+    }
+
+    .topbar-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--tp);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-primary {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); opacity: 1; }
+
+    .btn-ghost {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      color: var(--ts);
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .btn-ghost:hover { color: var(--tp); border-color: rgba(255,255,255,0.15); }
+
+    .notif-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      color: var(--ts);
+      font-size: 16px;
+      position: relative;
+      transition: color 0.15s;
+    }
+
+    .notif-btn:hover { color: var(--tp); }
+
+    .notif-dot {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      width: 6px;
+      height: 6px;
+      background: var(--orange);
+      border-radius: 50%;
+    }
+
+    /* ─── CONTENT SCROLL ───────────────────────────────────── */
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .content::-webkit-scrollbar { width: 4px; }
+    .content::-webkit-scrollbar-track { background: transparent; }
+    .content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+    /* ─── SECTION LABEL ────────────────────────────────────── */
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      color: var(--ts);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    /* ─── CARD BASE ────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 20px;
+    }
+
+    /* ─── SEANCE ACTIVE CARD ───────────────────────────────── */
+    .seance-card {
+      background: linear-gradient(135deg, #1f1a14 0%, #241c14 100%);
+      border: 1px solid rgba(255,107,53,0.2);
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .seance-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--orange);
+    }
+
+    .seance-card::after {
+      content: '';
+      position: absolute;
+      right: -60px; top: -60px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(255,107,53,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .seance-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      color: var(--orange);
+      margin-bottom: 6px;
+    }
+
+    .seance-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.03em;
+      color: var(--tp);
+      line-height: 1.1;
+    }
+
+    .seance-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      padding: 4px 9px;
+      text-transform: uppercase;
+    }
+
+    .badge-scheduled {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--ts);
+    }
+
+    .badge-live {
+      background: rgba(255,107,53,0.12);
+      border: 1px solid rgba(255,107,53,0.35);
+      color: var(--orange);
+    }
+
+    .badge-live .pulse {
+      width: 6px;
+      height: 6px;
+      background: var(--orange);
+      border-radius: 50%;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    /* ─── KPI GRID ─────────────────────────────────────────── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .kpi-icon {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .kpi-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px;
+      color: var(--tp);
+      line-height: 1;
+    }
+
+    .kpi-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: var(--ts);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* ─── SEANCES LISTE ────────────────────────────────────── */
+    .seances-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .seance-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+      position: relative;
+    }
+
+    .seance-row:hover {
+      background: var(--surface2);
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    .seance-row:hover .btn-results {
+      opacity: 1;
+    }
+
+    .module-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 8px;
+      flex-shrink: 0;
+      min-width: 34px;
+      text-align: center;
+    }
+
+    .mod-m1 { background: rgba(99,179,237,0.15);  color: #63B3ED; border: 1px solid rgba(99,179,237,0.25); }
+    .mod-m3 { background: rgba(154,230,180,0.15); color: #9AE6B4; border: 1px solid rgba(154,230,180,0.25); }
+    .mod-m4 { background: rgba(255,107,53,0.15);  color: #FF6B35; border: 1px solid rgba(255,107,53,0.25); }
+    .mod-m6 { background: rgba(214,188,250,0.15); color: #D6BCFA; border: 1px solid rgba(214,188,250,0.25); }
+    .mod-m7 { background: rgba(252,211,77,0.15);  color: #FCD34D; border: 1px solid rgba(252,211,77,0.25); }
+
+    .seance-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .seance-row-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--tp);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .seance-row-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: var(--ts);
+      margin-top: 2px;
+      letter-spacing: 0.06em;
+    }
+
+    .seance-duration {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--ts);
+      flex-shrink: 0;
+    }
+
+    .btn-results {
+      opacity: 0;
+      transition: opacity 0.15s;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: var(--orange);
+      background: rgba(255,107,53,0.1);
+      border: 1px solid rgba(255,107,53,0.25);
+      padding: 5px 10px;
+      cursor: pointer;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .btn-results:hover { background: rgba(255,107,53,0.2); }
+
+    /* ─── CHART ────────────────────────────────────────────── */
+    .chart-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 20px 24px;
+    }
+
+    .chart-area {
+      margin-top: 20px;
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+      height: 120px;
+    }
+
+    .bar-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    .bar-pct {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--tp);
+    }
+
+    .bar-track {
+      width: 100%;
+      background: var(--surface2);
+      height: 80px;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .bar-fill {
+      width: 100%;
+      background: var(--orange);
+      height: 0;
+      transition: height 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .bar-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: var(--ts);
+      letter-spacing: 0.06em;
+      text-align: center;
+    }
+
+    /* ─── RESULTS DRAWER ───────────────────────────────────── */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s;
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: 480px;
+      max-width: 90vw;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      z-index: 101;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+
+    .drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 24px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .drawer-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.04em;
+      color: var(--tp);
+      line-height: 1.1;
+    }
+
+    .drawer-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .drawer-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .drawer-scroll::-webkit-scrollbar { width: 3px; }
+    .drawer-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); }
+
+    .stat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .stat-row-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      color: var(--ts);
+      text-transform: uppercase;
+    }
+
+    .stat-value {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--tp);
+    }
+
+    .stat-bar-track {
+      height: 3px;
+      background: var(--surface2);
+      border-radius: 2px;
+    }
+
+    .stat-bar-fill {
+      height: 3px;
+      background: var(--orange);
+      border-radius: 2px;
+    }
+
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat-item:last-child { border-bottom: none; }
+
+    .highlight-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 14px 16px;
+    }
+
+    .highlight-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: var(--ts);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .highlight-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--tp);
+    }
+
+    .highlight-votes {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--orange);
+      margin-top: 3px;
+    }
+
+    /* ─── WORD CLOUD ───────────────────────────────────────── */
+    .word-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      align-items: baseline;
+      padding: 4px 0;
+    }
+
+    .word {
+      color: var(--ts);
+      line-height: 1;
+      transition: color 0.15s;
+    }
+    .word:hover { color: var(--orange); }
+
+    .word-xl { font-size: 22px; font-weight: 700; color: var(--tp); }
+    .word-lg { font-size: 17px; font-weight: 600; color: rgba(255,255,255,0.7); }
+    .word-md { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.5); }
+    .word-sm { font-size: 11px; color: rgba(255,255,255,0.35); }
+    .word-xs { font-size: 9px; color: rgba(255,255,255,0.25); }
+
+    .drawer-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .btn-secondary {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface2);
+      color: var(--ts);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .btn-secondary:hover { color: var(--tp); border-color: rgba(255,255,255,0.15); }
+
+    /* ─── MODAL NOUVELLE SEANCE ────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      width: 520px;
+      max-width: 92vw;
+      transform: translateY(12px) scale(0.98);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+
+    .modal-overlay.open .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-header {
+      padding: 22px 24px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.04em;
+      color: var(--tp);
+    }
+
+    .modal-close {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ts);
+      cursor: pointer;
+      font-size: 18px;
+      transition: color 0.15s;
+    }
+
+    .modal-close:hover { color: var(--tp); }
+
+    .modal-body {
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      color: var(--ts);
+      text-transform: uppercase;
+    }
+
+    .form-input {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--tp);
+      padding: 10px 14px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.15s;
+      width: 100%;
+    }
+
+    .form-input:focus {
+      border-color: rgba(255,107,53,0.5);
+    }
+
+    .form-input::placeholder { color: rgba(255,255,255,0.2); }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .module-option {
+      padding: 10px 6px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .module-option:hover {
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .module-option.selected {
+      border-color: var(--orange);
+      background: rgba(255,107,53,0.08);
+    }
+
+    .module-option .mod-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      color: var(--tp);
+      line-height: 1;
+    }
+
+    .module-option .mod-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      color: var(--ts);
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* ─── NEXT MODULE TAG ──────────────────────────────────── */
+    .next-module-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,107,53,0.08);
+      border: 1px solid rgba(255,107,53,0.2);
+      padding: 6px 10px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--orange);
+    }
+
+    .next-arrow { opacity: 0.6; }
+
+    /* ─── DIVIDER ──────────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ───── SIDEBAR ───── -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="wordmark">BANLIEUWOOD</div>
+      <span class="role-badge">Intervenant</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-item active" data-nav="accueil">
+        <span class="nav-icon">🏠</span>
+        Accueil
+      </div>
+      <div class="nav-item" data-nav="seances">
+        <span class="nav-icon">📅</span>
+        Mes séances
+      </div>
+      <div class="nav-item" data-nav="biblio">
+        <span class="nav-icon">📚</span>
+        Bibliothèque modules
+      </div>
+      <div class="nav-item" data-nav="stats">
+        <span class="nav-icon">📊</span>
+        Statistiques
+      </div>
+      <div class="nav-item" data-nav="reglages">
+        <span class="nav-icon">⚙️</span>
+        Réglages
+      </div>
+    </nav>
+
+    <div class="sidebar-user">
+      <div class="avatar">KB</div>
+      <div class="user-info">
+        <div class="user-name">Karim Benziani</div>
+        <div class="user-logout">Déconnexion</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ───── MAIN ───── -->
+  <div class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <span class="topbar-title">Tableau de bord</span>
+      <div class="topbar-actions">
+        <button class="btn-primary" id="btn-new-seance">
+          ＋ Nouvelle séance
+        </button>
+        <div class="notif-btn" title="Notifications">
+          🔔
+          <span class="notif-dot"></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- SCROLLABLE CONTENT -->
+    <div class="content">
+
+      <!-- BLOC 1 — Séance programmée -->
+      <div>
+        <div class="section-label">Prochaine séance</div>
+        <div class="seance-card">
+          <div>
+            <div class="seance-meta">AUJOURD'HUI · 14:00</div>
+            <div class="seance-title">M4 — Le Pitch · Collège Jean Moulin · 5<sup style="font-size:14px">e</sup> B</div>
+          </div>
+          <div class="seance-right">
+            <span class="badge badge-scheduled">PROGRAMMÉE</span>
+            <button class="btn-primary" style="white-space:nowrap;">
+              Lancer le cockpit →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOC 2 — KPIs -->
+      <div>
+        <div class="section-label">Cette année</div>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon">🎬</div>
+            <div class="kpi-value">47</div>
+            <div class="kpi-label">séances réalisées</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">👥</div>
+            <div class="kpi-value">312</div>
+            <div class="kpi-label">élèves · 18 classes</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">⏱</div>
+            <div class="kpi-value">23<span style="font-size:20px;font-family:'Space Mono',monospace;opacity:0.6"> min</span></div>
+            <div class="kpi-label">durée moyenne</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">✅</div>
+            <div class="kpi-value">87<span style="font-size:20px;font-family:'Space Mono',monospace;opacity:0.6">%</span></div>
+            <div class="kpi-label">participation moy.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOC 3 — Séances récentes -->
+      <div>
+        <div class="section-label">Séances récentes</div>
+        <div class="seances-list">
+
+          <div class="seance-row" data-session="m4">
+            <span class="module-badge mod-m4">M4</span>
+            <div class="seance-info">
+              <div class="seance-row-title">Le Pitch</div>
+              <div class="seance-row-sub">5e B · Collège Jean Moulin · 28 mars</div>
+            </div>
+            <span class="seance-duration">34 min</span>
+            <button class="btn-results" onclick="openDrawer()">Résultats →</button>
+          </div>
+
+          <div class="seance-row">
+            <span class="module-badge mod-m7">M7</span>
+            <div class="seance-info">
+              <div class="seance-row-title">Storyboard</div>
+              <div class="seance-row-sub">4e A · Lycée Jacques Feyder · 25 mars</div>
+            </div>
+            <span class="seance-duration">28 min</span>
+            <button class="btn-results" onclick="openDrawer()">Résultats →</button>
+          </div>
+
+          <div class="seance-row">
+            <span class="module-badge mod-m3">M3</span>
+            <div class="seance-info">
+              <div class="seance-row-title">Et si…</div>
+              <div class="seance-row-sub">CM2 · École Vaillant · 20 mars</div>
+            </div>
+            <span class="seance-duration">19 min</span>
+            <button class="btn-results" onclick="openDrawer()">Résultats →</button>
+          </div>
+
+          <div class="seance-row">
+            <span class="module-badge mod-m1">M1</span>
+            <div class="seance-info">
+              <div class="seance-row-title">Le Regard</div>
+              <div class="seance-row-sub">6e C · Collège Jean Moulin · 18 mars</div>
+            </div>
+            <span class="seance-duration">22 min</span>
+            <button class="btn-results" onclick="openDrawer()">Résultats →</button>
+          </div>
+
+          <div class="seance-row">
+            <span class="module-badge mod-m6">M6</span>
+            <div class="seance-info">
+              <div class="seance-row-title">Le Scénario</div>
+              <div class="seance-row-sub">5e B · Collège Jean Moulin · 15 mars</div>
+            </div>
+            <span class="seance-duration">41 min</span>
+            <button class="btn-results" onclick="openDrawer()">Résultats →</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- BLOC 4 — Graphique participation -->
+      <div>
+        <div class="chart-card">
+          <div class="section-label" style="margin-bottom:0;">Participation — 4 dernières semaines</div>
+          <div class="chart-area" id="chart-area">
+            <div class="bar-group">
+              <span class="bar-pct" id="pct-0">78%</span>
+              <div class="bar-track">
+                <div class="bar-fill" id="bar-0" data-pct="78"></div>
+              </div>
+              <span class="bar-label">10–16 mar</span>
+            </div>
+            <div class="bar-group">
+              <span class="bar-pct" id="pct-1">85%</span>
+              <div class="bar-track">
+                <div class="bar-fill" id="bar-1" data-pct="85"></div>
+              </div>
+              <span class="bar-label">17–23 mar</span>
+            </div>
+            <div class="bar-group">
+              <span class="bar-pct" id="pct-2">91%</span>
+              <div class="bar-track">
+                <div class="bar-fill" id="bar-2" data-pct="91"></div>
+              </div>
+              <span class="bar-label">24–30 mar</span>
+            </div>
+            <div class="bar-group">
+              <span class="bar-pct" id="pct-3">87%</span>
+              <div class="bar-track">
+                <div class="bar-fill" id="bar-3" data-pct="87"></div>
+              </div>
+              <span class="bar-label">31 mar–4 avr</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /shell -->
+
+
+<!-- ───── DRAWER RÉSULTATS ───── -->
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()">
+  <div class="drawer" id="drawer" onclick="event.stopPropagation()">
+    <div class="drawer-header">
+      <div>
+        <div class="section-label" style="margin-bottom:6px;">Résultats de séance</div>
+        <div class="drawer-title">M4 · LE PITCH — 5<sup style="font-size:14px">e</sup> B · 28 mars 2026</div>
+        <div class="drawer-meta">
+          <span class="badge badge-scheduled">34 min</span>
+          <span class="badge badge-scheduled">23 élèves</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer-scroll">
+
+      <!-- Participation -->
+      <div>
+        <div class="section-label">Participation collective</div>
+        <div class="stat-row">
+          <div class="stat-row-header">
+            <span class="stat-label">Élèves ayant participé</span>
+            <span class="stat-value">21 / 23 — 91%</span>
+          </div>
+          <div class="stat-bar-track">
+            <div class="stat-bar-fill" style="width:91%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Stats agrégées -->
+      <div>
+        <div class="section-label">Données de séance</div>
+        <div>
+          <div class="stat-item">
+            <span class="stat-label">Pitchs soumis</span>
+            <span class="stat-value">21</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Durée moy. par pitch</span>
+            <span class="stat-value">1m 42s</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Votes exprimés</span>
+            <span class="stat-value">19 élèves</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pitch retenu -->
+      <div>
+        <div class="section-label">Pitch retenu par la classe</div>
+        <div class="highlight-card">
+          <div class="highlight-label">Titre choisi</div>
+          <div class="highlight-value">"L'histoire du gardien de nuit"</div>
+          <div class="highlight-votes">▲ 14 votes · majorité absolue</div>
+        </div>
+      </div>
+
+      <!-- Nuage de mots -->
+      <div>
+        <div class="section-label">Thèmes des pitchs (contributions anonymisées)</div>
+        <div class="word-cloud">
+          <span class="word word-xl">Nuit</span>
+          <span class="word word-lg">Mystère</span>
+          <span class="word word-xl">Famille</span>
+          <span class="word word-md">Banlieue</span>
+          <span class="word word-lg">Identité</span>
+          <span class="word word-sm">Solitude</span>
+          <span class="word word-xl">Justice</span>
+          <span class="word word-md">Rêve</span>
+          <span class="word word-sm">Cinéma</span>
+          <span class="word word-lg">Amitié</span>
+          <span class="word word-xs">Quartier</span>
+          <span class="word word-md">Espoir</span>
+          <span class="word word-xs">Mémoire</span>
+          <span class="word word-sm">Lumière</span>
+          <span class="word word-xl">Avenir</span>
+          <span class="word word-xs">Trahison</span>
+          <span class="word word-md">Voyage</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Module suivant -->
+      <div>
+        <div class="section-label">Module suivant suggéré</div>
+        <div class="next-module-tag">
+          M5 · Le Vote
+          <span class="next-arrow">→</span>
+          Logique de suite narrative
+        </div>
+      </div>
+
+    </div><!-- /drawer-scroll -->
+
+    <div class="drawer-footer">
+      <button class="btn-secondary">⬇ Télécharger rapport</button>
+      <button class="btn-secondary">↗ Partager avec l'enseignant</button>
+      <button class="btn-primary" onclick="closeDrawer()">Fermer</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ───── MODAL NOUVELLE SÉANCE ───── -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <span class="modal-title">Nouvelle séance</span>
+      <span class="modal-close" onclick="closeModal()">✕</span>
+    </div>
+    <div class="modal-body">
+
+      <div class="form-group">
+        <label class="form-label">Titre ou classe</label>
+        <input class="form-input" type="text" placeholder="Ex : 5e B · Collège Jean Moulin" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Module</label>
+        <div class="modules-grid" id="modules-grid">
+          <div class="module-option" data-mod="1">
+            <span class="mod-num">M1</span>
+            <span class="mod-name">Le Regard</span>
+          </div>
+          <div class="module-option" data-mod="2">
+            <span class="mod-num">M2</span>
+            <span class="mod-name">Le Son</span>
+          </div>
+          <div class="module-option" data-mod="3">
+            <span class="mod-num">M3</span>
+            <span class="mod-name">Et si…</span>
+          </div>
+          <div class="module-option selected" data-mod="4">
+            <span class="mod-num">M4</span>
+            <span class="mod-name">Le Pitch</span>
+          </div>
+          <div class="module-option" data-mod="5">
+            <span class="mod-num">M5</span>
+            <span class="mod-name">Le Vote</span>
+          </div>
+          <div class="module-option" data-mod="6">
+            <span class="mod-num">M6</span>
+            <span class="mod-name">Scénario</span>
+          </div>
+          <div class="module-option" data-mod="7">
+            <span class="mod-num">M7</span>
+            <span class="mod-name">Storyboard</span>
+          </div>
+          <div class="module-option" data-mod="8">
+            <span class="mod-num">M8</span>
+            <span class="mod-name">Le Tournage</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" onclick="closeModal()">Annuler</button>
+      <button class="btn-primary" onclick="closeModal()">Créer la séance →</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  /* ─── NAV ─────────────────────────────────────────────── */
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
+
+  /* ─── CHART ANIMATION ─────────────────────────────────── */
+  function animateBars() {
+    const bars = document.querySelectorAll('.bar-fill');
+    const trackH = 80; // px height of track
+    bars.forEach(bar => {
+      const pct = parseInt(bar.dataset.pct, 10);
+      const h = Math.round((pct / 100) * trackH);
+      // Small delay to trigger transition after paint
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          bar.style.height = h + 'px';
+        }, 120);
+      });
+    });
+  }
+
+  /* ─── DRAWER ──────────────────────────────────────────── */
+  function openDrawer() {
+    document.getElementById('drawer-overlay').classList.add('open');
+    document.getElementById('drawer').classList.add('open');
+  }
+
+  function closeDrawer() {
+    document.getElementById('drawer-overlay').classList.remove('open');
+    document.getElementById('drawer').classList.remove('open');
+  }
+
+  /* ─── MODAL ───────────────────────────────────────────── */
+  document.getElementById('btn-new-seance').addEventListener('click', () => {
+    document.getElementById('modal-overlay').classList.add('open');
+  });
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+  }
+
+  // Module selection
+  document.getElementById('modules-grid').addEventListener('click', e => {
+    const opt = e.target.closest('.module-option');
+    if (!opt) return;
+    document.querySelectorAll('.module-option').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+  });
+
+  // Keyboard close
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeDrawer();
+      closeModal();
+    }
+  });
+
+  /* ─── INIT ────────────────────────────────────────────── */
+  window.addEventListener('load', animateBars);
+</script>
+</body>
+</html>

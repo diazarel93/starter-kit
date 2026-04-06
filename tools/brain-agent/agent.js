@@ -10,6 +10,7 @@ import { getApiCosts, checkGithubBuilds, trackApiCall } from "./tools/apis.js";
 import { webSearch, checkWadaUpdates } from "./tools/search.js";
 import { createTask, saveAlert, getRecentAlerts } from "./tools/tasks.js";
 import { loadPatterns, loadEvents } from "./tools/patterns.js";
+import { runDesignScout } from "./tools/design-scout.js";
 
 // Lazy init — ANTHROPIC_API_KEY doit être set avant runAgentCycle()
 let client = null;
@@ -104,6 +105,11 @@ const TOOLS = [
     input_schema: { type: "object", properties: {}, required: [] },
   },
   {
+    name: "run_design_scout",
+    description: "Lancer le sous-agent design-scout pour faire la veille créative quotidienne. À appeler UNE FOIS par jour (entre 8h et 10h). L'agent va scruter Awwwards et Lapa Ninja, analyser des sites, et alimenter la knowledge-base design.",
+    input_schema: { type: "object", properties: {}, required: [] },
+  },
+  {
     name: "do_nothing",
     description: "Ne rien faire ce cycle. Utiliser quand tout est nominal.",
     input_schema: { type: "object", properties: { reason: { type: "string" } }, required: ["reason"] },
@@ -123,6 +129,11 @@ async function executeTool(name, input) {
     case "save_to_memory":      return appendToMemory(input.key, input.value);
     case "get_patterns":
       return { patterns: loadPatterns().filter((p) => !p.resolved).slice(-10) };
+    case "run_design_scout": {
+      console.log("[agent] → Lancement design-scout...");
+      const result = await runDesignScout(process.env.ANTHROPIC_API_KEY);
+      return result;
+    }
     case "do_nothing":
       console.log(`[agent] Rien à faire : ${input.reason}`);
       return { ok: true };
@@ -169,6 +180,11 @@ PRIORITÉS DE SURVEILLANCE :
 🟠 P1 : commits non pushés depuis 24h+, Haiku 3 dépréciation (19/04/2026), WADA update
 🟡 P2 : TODO critiques, dette technique, opportunités veille
 ⚪ P3 : infos utiles à mémoriser, stats
+
+TÂCHE QUOTIDIENNE AUTOMATIQUE :
+🎨 Design Scout : Entre 8h et 10h (heure = ${new Date().getHours()}h), lancer run_design_scout UNE FOIS par jour.
+   → Vérifie d'abord la mémoire pour savoir si design_scout_last_run = aujourd'hui. Si oui, ne pas relancer.
+   → Après le run, mémoriser : design_scout_last_run = date du jour.
 
 PROCESSUS :
 1. get_projects_status → état git

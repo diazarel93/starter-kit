@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banlieuwood — Cinéma pour les quartiers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════════════ */
+:root {
+  --c-orange: #FF6B35;
+  --c-cream:  #F2EBD9;
+  --c-warm:   #EDE4CF;
+  --c-ink:    #0D0B09;
+  --font-c: 'Bebas Neue', sans-serif;
+  --font-b: 'Plus Jakarta Sans', sans-serif;
+  --font-m: 'Space Mono', monospace;
+}
+
+/* ═══════════════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; cursor: none; }
+body {
+  font-family: var(--font-b);
+  background: var(--c-cream);
+  color: var(--c-ink);
+  overflow-x: hidden;
+}
+button { font-family: inherit; cursor: none; }
+a { cursor: none; text-decoration: none; }
+
+/* ═══════════════════════════════════════════════════
+   GRAIN GLOBAL FIXE
+═══════════════════════════════════════════════════ */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.04'/%3E%3C/svg%3E");
+  animation: grain-shift 1.4s steps(2) infinite;
+}
+@keyframes grain-shift {
+  0%   { transform: translate(0,0); }
+  25%  { transform: translate(-2px, 1px); }
+  50%  { transform: translate(2px, -1px); }
+  75%  { transform: translate(-1px, 2px); }
+  100% { transform: translate(1px, -2px); }
+}
+
+/* ═══════════════════════════════════════════════════
+   CURSEUR CUSTOM
+═══════════════════════════════════════════════════ */
+#cursor {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--c-orange);
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%,-50%);
+  transition: width 0.22s, height 0.22s, background 0.22s, opacity 0.22s;
+  mix-blend-mode: difference;
+}
+#cursor.big {
+  width: 36px; height: 36px;
+  background: rgba(255,107,53,0.18);
+  border: 1.5px solid rgba(255,107,53,0.5);
+}
+#cursor.hidden { opacity: 0; }
+
+/* ═══════════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.delay-1 { transition-delay: 0.1s; }
+.reveal.delay-2 { transition-delay: 0.2s; }
+.reveal.delay-3 { transition-delay: 0.32s; }
+.reveal.delay-4 { transition-delay: 0.46s; }
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════
+   KEN BURNS
+═══════════════════════════════════════════════════ */
+@keyframes kenBurns {
+  0%   { transform: scale(1) translate(0,0); }
+  100% { transform: scale(1.08) translate(-1.5%, 1%); }
+}
+
+/* ═══════════════════════════════════════════════════
+   TICKER
+═══════════════════════════════════════════════════ */
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ═══════════════════════════════════════════════════
+   COMPTEURS
+═══════════════════════════════════════════════════ */
+@keyframes count-reveal {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════════ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 20px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(13,11,9,0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(242,235,217,0.06);
+  transition: padding 0.3s;
+}
+.nav.scrolled { padding: 14px 64px; }
+.nav-logo {
+  font-family: var(--font-c);
+  font-size: 18px;
+  letter-spacing: 6px;
+  color: var(--c-cream);
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+}
+.nav-link {
+  color: rgba(242,235,217,0.4);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: rgba(242,235,217,0.85); }
+.nav-cta {
+  background: var(--c-orange);
+  color: white;
+  border: none;
+  padding: 9px 22px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-b);
+  letter-spacing: 0.5px;
+  transition: opacity 0.2s, transform 0.18s;
+}
+.nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* ═══════════════════════════════════════════════════
+   S1 — HERO
+═══════════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  background: var(--c-ink);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 80px;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) brightness(0.28);
+  animation: kenBurns 18s ease-in-out alternate infinite;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(13,11,9,0.2) 0%,
+    rgba(13,11,9,0.0) 30%,
+    rgba(13,11,9,0.6) 75%,
+    rgba(13,11,9,0.95) 100%
+  );
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  padding: 0 64px;
+}
+
+.hero-h1 {
+  font-family: var(--font-c);
+  font-size: clamp(96px, 14vw, 200px);
+  line-height: 0.87;
+  color: var(--c-cream);
+  margin-bottom: 36px;
+}
+.hero-h1 em {
+  color: var(--c-orange);
+  font-style: normal;
+  display: block;
+}
+
+.hero-sub {
+  font-size: clamp(14px, 1.4vw, 17px);
+  font-weight: 300;
+  color: rgba(242,235,217,0.65);
+  max-width: 520px;
+  line-height: 1.65;
+  margin-bottom: 40px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--c-orange);
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  font-family: var(--font-b);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: opacity 0.2s, transform 0.18s;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+.btn-outline {
+  background: transparent;
+  color: rgba(242,235,217,0.8);
+  border: 1.5px solid rgba(242,235,217,0.3);
+  padding: 13px 30px;
+  font-family: var(--font-b);
+  font-size: 13px;
+  font-weight: 400;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-outline:hover {
+  border-color: rgba(242,235,217,0.7);
+  color: white;
+}
+
+.hero-badge {
+  position: absolute;
+  bottom: 80px;
+  right: 64px;
+  font-family: var(--font-m);
+  font-size: 10px;
+  color: rgba(242,235,217,0.28);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+/* ═══════════════════════════════════════════════════
+   S2 — TICKER
+═══════════════════════════════════════════════════ */
+.ticker-section {
+  background: var(--c-orange);
+  height: 20vh;
+  min-height: 100px;
+  max-height: 140px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.ticker-track {
+  display: flex;
+  white-space: nowrap;
+  animation: ticker 22s linear infinite;
+}
+.ticker-item {
+  font-family: var(--font-c);
+  font-size: clamp(28px, 4vw, 52px);
+  color: white;
+  letter-spacing: 3px;
+  padding-right: 60px;
+}
+.ticker-sep {
+  color: rgba(255,255,255,0.35);
+  padding-right: 60px;
+}
+
+/* ═══════════════════════════════════════════════════
+   S3 — MANIFESTE
+═══════════════════════════════════════════════════ */
+.manifeste {
+  background: var(--c-cream);
+  padding: 120px 64px;
+}
+.manifeste-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  margin-bottom: 100px;
+}
+.manifeste-citation {
+  font-family: var(--font-c);
+  font-size: clamp(52px, 6.5vw, 88px);
+  line-height: 0.92;
+  color: var(--c-ink);
+}
+.manifeste-text {
+  font-family: var(--font-m);
+  font-size: 12px;
+  color: rgba(13,11,9,0.5);
+  line-height: 2.1;
+  padding-top: 8px;
+}
+
+.stats-row {
+  display: flex;
+  gap: 0;
+  border-top: 1.5px solid rgba(13,11,9,0.1);
+  padding-top: 48px;
+}
+.stat-item {
+  flex: 1;
+  padding-right: 48px;
+  border-right: 1px solid rgba(13,11,9,0.08);
+}
+.stat-item:last-child { border-right: none; padding-right: 0; padding-left: 48px; }
+.stat-item:nth-child(2) { padding: 0 48px; }
+.stat-num {
+  font-family: var(--font-c);
+  font-size: clamp(56px, 7vw, 96px);
+  color: var(--c-ink);
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.stat-num.counted { opacity: 1; animation: count-reveal 0.5s ease forwards; }
+.stat-label {
+  font-family: var(--font-m);
+  font-size: 11px;
+  color: rgba(13,11,9,0.4);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+/* ═══════════════════════════════════════════════════
+   S4 — FILMS
+═══════════════════════════════════════════════════ */
+.films {
+  background: var(--c-ink);
+  padding: 120px 64px;
+}
+.films-label {
+  font-family: var(--font-m);
+  font-size: 11px;
+  color: rgba(242,235,217,0.28);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 64px;
+}
+.film-list { list-style: none; }
+.film-item {
+  position: relative;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(242,235,217,0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  overflow: hidden;
+}
+.film-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 2px;
+  width: 0;
+  background: var(--c-orange);
+  transition: width 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+.film-item:hover::after { width: 100%; }
+.film-title {
+  font-family: var(--font-c);
+  font-size: clamp(56px, 7.5vw, 96px);
+  color: var(--c-cream);
+  line-height: 1;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+.film-item:hover .film-title { color: var(--c-orange); }
+.film-meta {
+  font-family: var(--font-m);
+  font-size: 11px;
+  color: rgba(242,235,217,0.28);
+  letter-spacing: 1px;
+  text-align: right;
+  flex-shrink: 0;
+  margin-left: 32px;
+}
+.films-footer {
+  margin-top: 64px;
+  font-family: var(--font-m);
+  font-size: 12px;
+  color: rgba(242,235,217,0.3);
+  letter-spacing: 1px;
+}
+.films-footer a { color: rgba(242,235,217,0.45); border-bottom: 1px solid rgba(242,235,217,0.15); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+.films-footer a:hover { color: var(--c-orange); border-color: var(--c-orange); }
+
+/* ═══════════════════════════════════════════════════
+   S5 — ATELIERS
+═══════════════════════════════════════════════════ */
+.ateliers {
+  background: var(--c-warm);
+  padding: 120px 64px;
+  position: relative;
+}
+.ateliers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 80px;
+}
+.ateliers-title {
+  font-family: var(--font-c);
+  font-size: clamp(52px, 6.5vw, 88px);
+  line-height: 0.92;
+  color: var(--c-ink);
+}
+.ateliers-side-label {
+  font-family: var(--font-m);
+  font-size: 11px;
+  color: rgba(13,11,9,0.28);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  padding-top: 8px;
+}
+.module-list { list-style: none; }
+.module-item {
+  display: flex;
+  align-items: baseline;
+  gap: 32px;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(13,11,9,0.08);
+  position: relative;
+}
+.module-num {
+  font-family: var(--font-c);
+  font-size: 88px;
+  color: rgba(13,11,9,0.06);
+  line-height: 1;
+  min-width: 96px;
+  user-select: none;
+  transition: color 0.3s;
+}
+.module-item:last-child .module-num { color: rgba(255,107,53,0.18); }
+.module-content { flex: 1; }
+.module-name {
+  font-family: var(--font-c);
+  font-size: clamp(22px, 2.8vw, 34px);
+  color: var(--c-ink);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.module-item:last-child .module-name { color: var(--c-orange); }
+.module-desc {
+  font-size: 13px;
+  color: rgba(13,11,9,0.45);
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.ateliers-footer {
+  margin-top: 72px;
+  padding-top: 36px;
+  border-top: 1px solid rgba(13,11,9,0.1);
+  font-family: var(--font-m);
+  font-size: 12px;
+  color: rgba(13,11,9,0.45);
+  line-height: 1.8;
+}
+.ateliers-footer strong {
+  color: var(--c-ink);
+  font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════════
+   S6 — PHOTO BREAK
+═══════════════════════════════════════════════════ */
+.photo-break {
+  height: 70vh;
+  min-height: 500px;
+  position: relative;
+  overflow: hidden;
+}
+.photo-break-img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) brightness(0.45);
+  animation: kenBurns 20s ease-in-out alternate infinite;
+}
+.photo-break-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13,11,9,0.85) 0%, rgba(13,11,9,0.1) 60%);
+}
+.photo-break-caption {
+  position: absolute;
+  bottom: 48px;
+  left: 64px;
+  font-family: var(--font-m);
+  font-size: 11px;
+  color: rgba(242,235,217,0.4);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  z-index: 2;
+}
+.photo-break-watermark {
+  position: absolute;
+  bottom: -40px; right: 48px;
+  font-family: var(--font-c);
+  font-size: clamp(120px, 20vw, 280px);
+  color: rgba(242,235,217,0.03);
+  line-height: 1;
+  z-index: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════
+   S7 — COCKPIT
+═══════════════════════════════════════════════════ */
+.cockpit {
+  background: var(--c-ink);
+  padding: 100px 64px;
+}
+.cockpit-badge {
+  display: inline-block;
+  background: var(--c-orange);
+  color: white;
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  margin-bottom: 28px;
+}
+.cockpit-title {
+  font-family: var(--font-c);
+  font-size: clamp(46px, 5.5vw, 76px);
+  color: var(--c-cream);
+  line-height: 0.92;
+  margin-bottom: 20px;
+}
+.cockpit-sub {
+  font-size: 14px;
+  color: rgba(242,235,217,0.45);
+  font-weight: 300;
+  max-width: 480px;
+  line-height: 1.7;
+  margin-bottom: 56px;
+}
+.cockpit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.cockpit-features { list-style: none; }
+.cockpit-feature {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(242,235,217,0.06);
+}
+.cockpit-feature:first-child { padding-top: 0; }
+.feature-num {
+  font-family: var(--font-m);
+  font-size: 10px;
+  color: var(--c-orange);
+  letter-spacing: 1px;
+  min-width: 28px;
+  margin-top: 2px;
+}
+.feature-name {
+  font-family: var(--font-c);
+  font-size: 22px;
+  color: var(--c-cream);
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.feature-desc {
+  font-size: 12px;
+  color: rgba(242,235,217,0.35);
+  line-height: 1.6;
+}
+
+/* iPad Mockup */
+.ipad-mockup {
+  background: #1a1815;
+  border-radius: 20px;
+  border: 1.5px solid rgba(242,235,217,0.1);
+  padding: 20px;
+  font-family: var(--font-m);
+  position: relative;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+}
+.ipad-dots {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(242,235,217,0.06);
+}
+.ipad-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(242,235,217,0.15);
+}
+.ipad-dot.orange { background: var(--c-orange); animation: pulse-dot 2.2s ease-in-out infinite; }
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+.ipad-label {
+  font-size: 9px;
+  color: rgba(242,235,217,0.2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.ipad-session {
+  font-size: 20px;
+  color: var(--c-cream);
+  margin-bottom: 4px;
+  font-family: var(--font-c);
+  letter-spacing: 1px;
+}
+.ipad-session-sub {
+  font-size: 10px;
+  color: rgba(242,235,217,0.25);
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+.ipad-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(242,235,217,0.05);
+  font-size: 11px;
+}
+.ipad-row-name { color: rgba(242,235,217,0.5); }
+.ipad-row-val { color: var(--c-orange); font-size: 10px; }
+.ipad-row-status {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+}
+
+.cockpit-cta {
+  margin-top: 48px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-m);
+  font-size: 12px;
+  color: rgba(242,235,217,0.4);
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(242,235,217,0.1);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.cockpit-cta:hover { color: var(--c-orange); border-color: var(--c-orange); }
+
+/* ═══════════════════════════════════════════════════
+   S8 — TÉMOIGNAGES
+═══════════════════════════════════════════════════ */
+.temoignages {
+  background: var(--c-cream);
+  padding: 120px 64px;
+}
+.temoignages-label {
+  font-family: var(--font-m);
+  font-size: 11px;
+  color: rgba(13,11,9,0.28);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 72px;
+}
+.temoignages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+.temoignage {
+  padding-top: 28px;
+  border-top: 2px solid var(--c-orange);
+}
+.temoignage-quote {
+  font-family: var(--font-c);
+  font-size: clamp(22px, 2.2vw, 30px);
+  color: var(--c-ink);
+  line-height: 1.05;
+  margin-bottom: 28px;
+}
+.temoignage-attribution {
+  font-family: var(--font-m);
+  font-size: 10px;
+  color: rgba(13,11,9,0.38);
+  letter-spacing: 1.5px;
+  line-height: 1.9;
+}
+.temoignage-attribution strong {
+  display: block;
+  color: rgba(13,11,9,0.65);
+  font-size: 11px;
+}
+
+/* ═══════════════════════════════════════════════════
+   S9 — PARTENAIRES
+═══════════════════════════════════════════════════ */
+.partenaires {
+  background: var(--c-ink);
+  padding: 80px 64px;
+}
+.partenaires-label {
+  font-family: var(--font-m);
+  font-size: 11px;
+  color: rgba(242,235,217,0.2);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 48px;
+}
+.partenaires-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+.partenaire-item {
+  font-family: var(--font-m);
+  font-size: 11px;
+  color: rgba(242,235,217,0.22);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 16px 32px 16px 0;
+  margin-right: 32px;
+  border-right: 1px solid rgba(242,235,217,0.07);
+  transition: color 0.2s;
+  line-height: 1.4;
+}
+.partenaire-item:last-child { border-right: none; }
+.partenaire-item:hover { color: rgba(242,235,217,0.55); }
+
+/* ═══════════════════════════════════════════════════
+   S10 — CONTACT
+═══════════════════════════════════════════════════ */
+.contact {
+  background: var(--c-orange);
+  padding: 120px 64px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.contact::before {
+  content: 'BANLIEUWOOD';
+  position: absolute;
+  font-family: var(--font-c);
+  font-size: clamp(80px, 14vw, 220px);
+  color: rgba(255,255,255,0.05);
+  white-space: nowrap;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  user-select: none;
+}
+.contact-title {
+  font-family: var(--font-c);
+  font-size: clamp(52px, 7vw, 100px);
+  color: white;
+  line-height: 0.9;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+.contact-sub {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 48px;
+  position: relative;
+  z-index: 1;
+}
+.contact-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+  position: relative;
+  z-index: 1;
+}
+.btn-white {
+  background: white;
+  color: var(--c-orange);
+  border: none;
+  padding: 14px 32px;
+  font-family: var(--font-b);
+  font-size: 13px;
+  font-weight: 600;
+  transition: opacity 0.2s, transform 0.18s;
+}
+.btn-white:hover { opacity: 0.9; transform: translateY(-2px); }
+.btn-outline-white {
+  background: transparent;
+  color: white;
+  border: 1.5px solid rgba(255,255,255,0.5);
+  padding: 13px 30px;
+  font-family: var(--font-b);
+  font-size: 13px;
+  font-weight: 400;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-outline-white:hover { border-color: white; background: rgba(255,255,255,0.08); }
+.contact-email {
+  font-family: var(--font-m);
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 1.5px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════ */
+.footer {
+  background: var(--c-ink);
+  padding: 64px 64px 40px;
+  border-top: 2px solid var(--c-orange);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 64px;
+  margin-bottom: 48px;
+}
+.footer-logo {
+  font-family: var(--font-c);
+  font-size: 22px;
+  letter-spacing: 5px;
+  color: var(--c-cream);
+  margin-bottom: 12px;
+}
+.footer-mission {
+  font-size: 12px;
+  color: rgba(242,235,217,0.3);
+  line-height: 1.7;
+  max-width: 240px;
+}
+.footer-nav-title {
+  font-family: var(--font-m);
+  font-size: 10px;
+  color: rgba(242,235,217,0.2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.footer-nav-links { list-style: none; }
+.footer-nav-link {
+  margin-bottom: 10px;
+}
+.footer-nav-link a {
+  font-size: 13px;
+  color: rgba(242,235,217,0.38);
+  transition: color 0.2s;
+}
+.footer-nav-link a:hover { color: var(--c-cream); }
+.footer-contact-title {
+  font-family: var(--font-m);
+  font-size: 10px;
+  color: rgba(242,235,217,0.2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.footer-contact-email {
+  font-family: var(--font-m);
+  font-size: 12px;
+  color: rgba(242,235,217,0.4);
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+.footer-contact-loc {
+  font-size: 12px;
+  color: rgba(242,235,217,0.25);
+  line-height: 1.6;
+}
+.footer-bottom {
+  padding-top: 32px;
+  border-top: 1px solid rgba(242,235,217,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-copy {
+  font-family: var(--font-m);
+  font-size: 10px;
+  color: rgba(242,235,217,0.18);
+  letter-spacing: 1px;
+}
+.footer-assoc {
+  font-family: var(--font-m);
+  font-size: 10px;
+  color: rgba(255,107,53,0.4);
+  letter-spacing: 1px;
+}
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE 768px
+═══════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .nav { padding: 16px 24px; }
+  .nav.scrolled { padding: 12px 24px; }
+  .nav-links { display: none; }
+
+  .hero-body { padding: 0 24px; }
+  .hero-badge { right: 24px; bottom: 48px; }
+
+  .manifeste { padding: 80px 24px; }
+  .manifeste-grid { grid-template-columns: 1fr; gap: 40px; }
+  .stats-row { flex-direction: column; gap: 32px; }
+  .stat-item { border-right: none; border-bottom: 1px solid rgba(13,11,9,0.08); padding: 0 0 32px 0 !important; }
+  .stat-item:last-child { border-bottom: none; padding-bottom: 0 !important; }
+
+  .films { padding: 80px 24px; }
+  .film-item { flex-direction: column; gap: 8px; }
+  .film-meta { text-align: left; margin-left: 0; }
+
+  .ateliers { padding: 80px 24px; }
+  .ateliers-header { flex-direction: column; gap: 20px; }
+  .ateliers-side-label { writing-mode: horizontal-tb; transform: none; }
+
+  .cockpit { padding: 80px 24px; }
+  .cockpit-grid { grid-template-columns: 1fr; gap: 48px; }
+
+  .temoignages { padding: 80px 24px; }
+  .temoignages-grid { grid-template-columns: 1fr; gap: 40px; }
+
+  .partenaires { padding: 60px 24px; }
+  .partenaire-item { font-size: 9px; padding: 12px 16px 12px 0; margin-right: 16px; }
+
+  .contact { padding: 80px 24px; }
+  .contact-actions { flex-direction: column; align-items: center; }
+
+  .footer { padding: 48px 24px 32px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- CURSEUR -->
+<div id="cursor"></div>
+
+<!-- ═══════════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════════ -->
+<nav class="nav" id="mainNav">
+  <div class="nav-logo">BANLIEUWOOD</div>
+  <div class="nav-links">
+    <a href="#ateliers" class="nav-link">Ateliers</a>
+    <a href="#films" class="nav-link">Films</a>
+    <a href="#equipe" class="nav-link">Équipe</a>
+    <a href="#cockpit" class="nav-link">Cockpit</a>
+    <a href="#contact" class="nav-link">Contact</a>
+    <button class="nav-cta" onclick="document.getElementById('cockpit').scrollIntoView({behavior:'smooth'})">Accéder au Cockpit</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════
+     S1 — HERO
+═══════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="../../photos/_1177608.JPG" alt="Tournage Banlieuwood" loading="eager">
+  </div>
+
+  <div class="hero-body">
+    <h1 class="hero-h1 reveal">
+      LE CINÉMA<br>
+      COMME<br>
+      <em>TERRITOIRE</em>
+    </h1>
+    <p class="hero-sub reveal delay-2">
+      Ateliers cinéma pour les jeunes des quartiers populaires.<br>
+      47 films. 1200 vies. Depuis 2016.
+    </p>
+    <div class="hero-actions reveal delay-3">
+      <button class="btn-primary" onclick="document.getElementById('films').scrollIntoView({behavior:'smooth'})">Voir nos films</button>
+      <button class="btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Nous rejoindre</button>
+    </div>
+  </div>
+
+  <div class="hero-badge">Association loi 1901 — Seine-Saint-Denis</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     S2 — TICKER
+═══════════════════════════════════════════════ -->
+<section class="ticker-section" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">47 FILMS</span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">1200 JEUNES FORMÉS</span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">8 ANS</span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">12 ÉTABLISSEMENTS</span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">SEINE-SAINT-DENIS</span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">DEPUIS 2016</span>
+    <span class="ticker-item ticker-sep">·</span>
+    <!-- dupliqué pour loop infini -->
+    <span class="ticker-item">47 FILMS</span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">1200 JEUNES FORMÉS</span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">8 ANS</span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">12 ÉTABLISSEMENTS</span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">SEINE-SAINT-DENIS</span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">DEPUIS 2016</span>
+    <span class="ticker-item ticker-sep">·</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     S3 — MANIFESTE
+═══════════════════════════════════════════════ -->
+<section class="manifeste" id="ateliers">
+  <div class="manifeste-grid">
+    <div class="manifeste-citation reveal">
+      Ce que l'école ne fait pas, le cinéma le fait.
+    </div>
+    <div class="manifeste-text reveal delay-2">
+      Un jeune qui découvre qu'il a un œil pour le cadrage et que ça peut devenir un métier — ce n'est pas un atelier. C'est un point de bascule.<br><br>
+      L'école est le lieu. L'école n'est pas l'identité.
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-item reveal">
+      <div class="stat-num" data-target="1200" data-suffix="+">0</div>
+      <div class="stat-label">Jeunes formés</div>
+    </div>
+    <div class="stat-item reveal delay-1">
+      <div class="stat-num" data-target="47">0</div>
+      <div class="stat-label">Films produits</div>
+    </div>
+    <div class="stat-item reveal delay-2">
+      <div class="stat-num" data-target="8">0</div>
+      <div class="stat-label">Ans d'existence</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     S4 — FILMS
+═══════════════════════════════════════════════ -->
+<section class="films" id="films">
+  <p class="films-label reveal">FILMOGRAPHIE</p>
+  <ul class="film-list">
+    <li class="film-item reveal">
+      <span class="film-title">LES MAINS DANS LE BÉTON</span>
+      <span class="film-meta">2024 · Drame · 12 min</span>
+    </li>
+    <li class="film-item reveal delay-1">
+      <span class="film-title">NUIT D'HIVER</span>
+      <span class="film-meta">2024 · Court-métrage · 8 min</span>
+    </li>
+    <li class="film-item reveal delay-2">
+      <span class="film-title">TERRITOIRE</span>
+      <span class="film-meta">2023 · Documentaire · 6 min</span>
+    </li>
+    <li class="film-item reveal delay-3">
+      <span class="film-title">LA CAGE ET L'OISEAU</span>
+      <span class="film-meta">2023 · Fiction · 14 min</span>
+    </li>
+    <li class="film-item reveal delay-4">
+      <span class="film-title">SALAM</span>
+      <span class="film-meta">2022 · Court-métrage · 9 min</span>
+    </li>
+  </ul>
+  <p class="films-footer reveal">
+    <a href="#">47 films produits depuis 2016 →</a>
+  </p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     S5 — ATELIERS / MÉTHODE
+═══════════════════════════════════════════════ -->
+<section class="ateliers">
+  <div class="ateliers-header">
+    <h2 class="ateliers-title reveal">Comment on travaille.</h2>
+    <span class="ateliers-side-label reveal">MÉTHODE</span>
+  </div>
+
+  <ul class="module-list">
+    <li class="module-item reveal">
+      <span class="module-num">M1</span>
+      <div class="module-content">
+        <div class="module-name">LE REGARD</div>
+        <div class="module-desc">Apprendre à voir avant d'apprendre à filmer. Lecture d'image, composition, point de vue.</div>
+      </div>
+    </li>
+    <li class="module-item reveal delay-1">
+      <span class="module-num">M2</span>
+      <div class="module-content">
+        <div class="module-name">L'HISTOIRE</div>
+        <div class="module-desc">Du récit oral au scénario. Structure, personnages, dialogue. La narration comme langage universel.</div>
+      </div>
+    </li>
+    <li class="module-item reveal delay-2">
+      <span class="module-num">M3</span>
+      <div class="module-content">
+        <div class="module-name">LA LUMIÈRE</div>
+        <div class="module-desc">Comprendre la lumière naturelle, artificielle. Comment l'ombre raconte autant que la lumière.</div>
+      </div>
+    </li>
+    <li class="module-item reveal delay-3">
+      <span class="module-num">M4</span>
+      <div class="module-content">
+        <div class="module-name">LE SON</div>
+        <div class="module-desc">Prise de son, ambiance, dialogue. Le son qu'on entend pas souvent plus fort que l'image.</div>
+      </div>
+    </li>
+    <li class="module-item reveal">
+      <span class="module-num">M5</span>
+      <div class="module-content">
+        <div class="module-name">LA DIRECTION</div>
+        <div class="module-desc">Diriger des acteurs amateurs. La confiance, l'écoute, la précision — sur et derrière la caméra.</div>
+      </div>
+    </li>
+    <li class="module-item reveal delay-1">
+      <span class="module-num">M6</span>
+      <div class="module-content">
+        <div class="module-name">LE MONTAGE</div>
+        <div class="module-desc">Assembler le film. Le rythme, les coupes, la musique. Voir son travail prendre vie.</div>
+      </div>
+    </li>
+    <li class="module-item reveal delay-2">
+      <span class="module-num">M7</span>
+      <div class="module-content">
+        <div class="module-name">LA DIFFUSION</div>
+        <div class="module-desc">Présenter son film. Festivals scolaires, séances de projection, retours d'audience.</div>
+      </div>
+    </li>
+    <li class="module-item reveal delay-3">
+      <span class="module-num">M8</span>
+      <div class="module-content">
+        <div class="module-name">L'ÉQUIPE</div>
+        <div class="module-desc">Les métiers du cinéma. Réalisation, production, son, montage — un film, c'est un collectif.</div>
+      </div>
+    </li>
+  </ul>
+
+  <div class="ateliers-footer reveal">
+    Chaque atelier = <strong>PEAC</strong> + <strong>Parcours Avenir</strong> + <strong>Parcours Citoyen</strong>.<br>
+    3 parcours obligatoires couverts en 1 seule intervention.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     S6 — PHOTO BREAK
+═══════════════════════════════════════════════ -->
+<div class="photo-break">
+  <img class="photo-break-img" src="../../photos/_1177442.JPG" alt="Sur le plateau">
+  <div class="photo-break-overlay"></div>
+  <div class="photo-break-caption">Sur le plateau — Seine-Saint-Denis, 2024</div>
+  <div class="photo-break-watermark">TOURNAGE</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     S7 — COCKPIT
+═══════════════════════════════════════════════ -->
+<section class="cockpit" id="cockpit">
+  <div class="cockpit-badge reveal">Outil numérique</div>
+  <h2 class="cockpit-title reveal">Le Cockpit<br>Intervenant</h2>
+  <p class="cockpit-sub reveal delay-1">
+    Tableau de bord iPad-first pour gérer les séances. 25 jeunes. IA Gemini. Temps réel.
+  </p>
+
+  <div class="cockpit-grid">
+    <div>
+      <ul class="cockpit-features">
+        <li class="cockpit-feature reveal">
+          <span class="feature-num">01</span>
+          <div>
+            <div class="feature-name">TEMPS RÉEL</div>
+            <div class="feature-desc">Suivi live de chaque jeune pendant la séance. Participation, attention, progression — une vue d'ensemble instantanée.</div>
+          </div>
+        </li>
+        <li class="cockpit-feature reveal delay-1">
+          <span class="feature-num">02</span>
+          <div>
+            <div class="feature-name">IA GEMINI</div>
+            <div class="feature-desc">Suggestions pédagogiques contextuelles. L'IA lit la salle, propose, adapte — l'intervenant décide.</div>
+          </div>
+        </li>
+        <li class="cockpit-feature reveal delay-2">
+          <span class="feature-num">03</span>
+          <div>
+            <div class="feature-name">RAPPORT PÉDAGOGIQUE</div>
+            <div class="feature-desc">Génération automatique du compte-rendu de séance. PEAC, Parcours Avenir, Citoyen — balisé, exportable, prêt à signer.</div>
+          </div>
+        </li>
+      </ul>
+      <a class="cockpit-cta reveal delay-3" href="#">Accéder au cockpit →</a>
+    </div>
+
+    <div class="ipad-mockup reveal delay-2">
+      <div class="ipad-dots">
+        <div class="ipad-dot orange"></div>
+        <div class="ipad-dot"></div>
+        <div class="ipad-dot"></div>
+      </div>
+      <div class="ipad-label">Session en cours</div>
+      <div class="ipad-session">ATELIER M3 — LA LUMIÈRE</div>
+      <div class="ipad-session-sub">Collège Jean Moulin, Bondy · 14h30</div>
+      <div class="ipad-row">
+        <span class="ipad-row-name">Présents</span>
+        <span>23 / 25</span>
+        <span class="ipad-row-status"></span>
+      </div>
+      <div class="ipad-row">
+        <span class="ipad-row-name">Participation</span>
+        <span class="ipad-row-val">ÉLEVÉE</span>
+        <span class="ipad-row-status"></span>
+      </div>
+      <div class="ipad-row">
+        <span class="ipad-row-name">Suggestion IA</span>
+        <span class="ipad-row-val">Exercice contre-jour</span>
+        <span class="ipad-row-status"></span>
+      </div>
+      <div class="ipad-row">
+        <span class="ipad-row-name">Durée restante</span>
+        <span>42 min</span>
+        <span class="ipad-row-status"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     S8 — TÉMOIGNAGES
+═══════════════════════════════════════════════ -->
+<section class="temoignages" id="equipe">
+  <p class="temoignages-label reveal">CE QU'ILS EN DISENT</p>
+  <div class="temoignages-grid">
+    <div class="temoignage reveal">
+      <p class="temoignage-quote">
+        "Les élèves qui ne participent jamais se sont révélés. Le cadrage les a rendus légitimes."
+      </p>
+      <div class="temoignage-attribution">
+        <strong>Sophie Martin</strong>
+        Professeure de français<br>
+        Collège Jean Moulin, Bondy
+      </div>
+    </div>
+    <div class="temoignage reveal delay-1">
+      <p class="temoignage-quote">
+        "Je pilote tout depuis le cockpit, les gamins sont à fond — et mon rapport est prêt le soir."
+      </p>
+      <div class="temoignage-attribution">
+        <strong>Karim Benziani</strong>
+        Intervenant cinéma<br>
+        Banlieuwood depuis 2019
+      </div>
+    </div>
+    <div class="temoignage reveal delay-2">
+      <p class="temoignage-quote">
+        "Enfin un outil pédagogique qui respecte les élèves et qui simplifie le travail des profs."
+      </p>
+      <div class="temoignage-attribution">
+        <strong>Claire Dubois</strong>
+        Coordinatrice PEAC<br>
+        Académie de Créteil
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     S9 — PARTENAIRES
+═══════════════════════════════════════════════ -->
+<section class="partenaires">
+  <p class="partenaires-label reveal">ILS NOUS FONT CONFIANCE</p>
+  <div class="partenaires-grid reveal delay-1">
+    <span class="partenaire-item">Académie de Créteil</span>
+    <span class="partenaire-item">Académie de Versailles</span>
+    <span class="partenaire-item">Académie de Paris</span>
+    <span class="partenaire-item">CNC</span>
+    <span class="partenaire-item">DRAC Île-de-France</span>
+    <span class="partenaire-item">Mairie de Bondy</span>
+    <span class="partenaire-item">Mairie de Saint-Denis</span>
+    <span class="partenaire-item">PEAC</span>
+    <span class="partenaire-item">CNAF</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     S10 — CONTACT
+═══════════════════════════════════════════════ -->
+<section class="contact" id="contact">
+  <h2 class="contact-title reveal">
+    Votre établissement<br>rejoint l'aventure ?
+  </h2>
+  <p class="contact-sub reveal delay-1">On répond en 48h.</p>
+  <div class="contact-actions reveal delay-2">
+    <button class="btn-white">Contacter l'équipe</button>
+    <button class="btn-outline-white">Télécharger le dossier pédagogique</button>
+  </div>
+  <p class="contact-email reveal delay-3">contact@banlieuwood.fr</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">BANLIEUWOOD</div>
+      <p class="footer-mission">
+        Association loi 1901 dédiée à la formation cinématographique des jeunes des quartiers populaires d'Île-de-France depuis 2016.
+      </p>
+    </div>
+    <div>
+      <p class="footer-nav-title">Navigation</p>
+      <ul class="footer-nav-links">
+        <li class="footer-nav-link"><a href="#ateliers">Ateliers</a></li>
+        <li class="footer-nav-link"><a href="#films">Films</a></li>
+        <li class="footer-nav-link"><a href="#equipe">Équipe</a></li>
+        <li class="footer-nav-link"><a href="#cockpit">Cockpit</a></li>
+        <li class="footer-nav-link"><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-contact-title">Contact</p>
+      <p class="footer-contact-email">contact@banlieuwood.fr</p>
+      <p class="footer-contact-loc">
+        Seine-Saint-Denis<br>
+        Île-de-France<br>
+        www.banlieuwood.fr
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Banlieuwood — Association loi 1901</span>
+    <span class="footer-assoc">ASSOCIATION LOI 1901</span>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════════ -->
+<script>
+// ── Curseur custom ──────────────────────────────
+const cursor = document.getElementById('cursor');
+let mouseX = -100, mouseY = -100;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursor.style.left = mouseX + 'px';
+  cursor.style.top  = mouseY + 'px';
+});
+document.addEventListener('mouseleave', () => cursor.classList.add('hidden'));
+document.addEventListener('mouseenter', () => cursor.classList.remove('hidden'));
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+});
+
+// ── Nav scroll ──────────────────────────────────
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ── Scroll Reveal ────────────────────────────────
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(el => revealObserver.observe(el));
+
+// Révèle le hero immédiatement
+setTimeout(() => {
+  document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
+}, 100);
+
+// ── Compteurs animés ─────────────────────────────
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1800;
+  const start = performance.now();
+
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+    const current = Math.floor(eased * target);
+    el.textContent = current.toLocaleString('fr-FR') + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = target.toLocaleString('fr-FR') + suffix;
+  }
+  requestAnimationFrame(update);
+  el.classList.add('counted');
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+</script>
+
+</body>
+</html>

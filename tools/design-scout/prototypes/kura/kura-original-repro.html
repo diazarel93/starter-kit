@@ -1,0 +1,2412 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KURA — Infallible Compliance. Pure Performance.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+/* ══════════════════════════════════════════════════════════════
+   KURA DESIGN SYSTEM — Standalone Reproduction
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+  --kura-accent: #00D4FF;
+  --kura-success: #00E676;
+  --kura-warning: #FFB020;
+  --kura-danger: #FF4B4B;
+  --kura-info: #3B82F6;
+  --obsidian-900: #02030A;
+  --obsidian-850: #040710;
+  --obsidian-800: #050816;
+  --obsidian-700: #0A0F1F;
+  --obsidian-600: #141B2C;
+  --obsidian-500: #1C2538;
+  --obsidian-400: #273044;
+  --obsidian-300: #343D53;
+  --obsidian-200: #4A5672;
+  --obsidian-100: #A8B5D0;
+  --obsidian-50: #CFD5EA;
+  --foreground: #F5F7FA;
+  --border: rgba(168, 181, 208, 0.20);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--obsidian-800);
+  color: var(--foreground);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(0, 212, 255, 0.2);
+  color: var(--foreground);
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(168, 181, 208, 0.20); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(168, 181, 208, 0.40); }
+
+a { text-decoration: none; color: inherit; }
+
+.font-display { font-family: 'Inter', sans-serif; }
+.font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+/* ── Glass cards ── */
+.glass-card {
+  background: rgba(10, 15, 31, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(168, 181, 208, 0.12);
+}
+.glass-card-premium {
+  background: rgba(10, 15, 31, 0.5);
+  backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid rgba(168, 181, 208, 0.10);
+  box-shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 8px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+/* ── Hover effects ── */
+.hover-lift { transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s; }
+.hover-lift:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.15); }
+.hover-glow { transition: box-shadow .25s ease, border-color .25s ease; }
+.hover-glow:hover { box-shadow: 0 0 20px rgba(0,212,255,.12), 0 0 60px rgba(0,212,255,.04); border-color: rgba(0,212,255,.25); }
+.btn-press:active { transform: scale(0.97); transition: transform 0.1s ease; }
+
+/* ── Scroll reveal ── */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Stagger children ── */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeInUp 0.4s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 50ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 100ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 150ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 200ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 250ms; }
+
+/* ── Animations ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes breathe {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+@keyframes scrollDot {
+  0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  50% { transform: translateX(-50%) translateY(12px); opacity: 0.3; }
+  100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+@keyframes heroZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.12); }
+}
+@keyframes stadiumZoom {
+  0% { transform: scale(1) translateY(0); }
+  100% { transform: scale(1.2) translateY(-3%); }
+}
+@keyframes eyeZoom {
+  0% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.12) translateY(-1%); }
+  100% { transform: scale(1.05) translateX(2%); }
+}
+@keyframes shieldZoom {
+  0% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marqueeReverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pingDot {
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+@keyframes pulseProhibited {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+  50% { box-shadow: 0 0 12px 4px rgba(239, 68, 68, 0.25); }
+}
+@keyframes scanLine {
+  0% { top: -60px; }
+  100% { top: calc(100% + 60px); }
+}
+
+/* ── Search glow ── */
+.search-glow:focus-within {
+  box-shadow: 0 0 0 1px rgba(0,212,255,0.5), 0 0 20px rgba(0,212,255,0.1);
+  border-color: rgba(0,212,255,0.5);
+}
+
+/* ── Scrollbar hide ── */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ══════════════════════════════════════════════════════════════
+   LOADING SCREEN
+   ══════════════════════════════════════════════════════════════ */
+#loading-screen {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--obsidian-900);
+  transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+#loading-screen.exit { opacity: 0; pointer-events: none; }
+#loading-screen .dot-grid {
+  position: absolute; inset: 0; opacity: 0.03;
+  background-image: radial-gradient(circle, rgba(0,212,255,0.8) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+#loading-screen .shield-path {
+  stroke-dasharray: 60; stroke-dashoffset: 60;
+  transition: stroke-dashoffset 0.75s cubic-bezier(0.16,1,0.3,1);
+}
+#loading-screen .check-path {
+  stroke-dasharray: 12; stroke-dashoffset: 12;
+  transition: stroke-dashoffset 0.3s cubic-bezier(0.16,1,0.3,1) 0.3s;
+}
+#loading-screen.drawing .shield-path { stroke-dashoffset: 60; }
+#loading-screen.drawing .check-path { stroke-dashoffset: 12; }
+#loading-screen.revealed .shield-path { stroke-dashoffset: 0; }
+#loading-screen.revealed .check-path { stroke-dashoffset: 0; }
+#loading-screen .brand-text {
+  opacity: 0; transform: translateY(8px);
+  transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+#loading-screen.revealed .brand-text { opacity: 1; transform: translateY(0); }
+.loading-letter {
+  display: inline-block;
+  opacity: 0; transform: translateY(12px);
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+#loading-screen.revealed .loading-letter { opacity: 1; transform: translateY(0); }
+#loading-screen.revealed .loading-letter:nth-child(1) { transition-delay: 100ms; }
+#loading-screen.revealed .loading-letter:nth-child(2) { transition-delay: 180ms; }
+#loading-screen.revealed .loading-letter:nth-child(3) { transition-delay: 260ms; }
+#loading-screen.revealed .loading-letter:nth-child(4) { transition-delay: 340ms; }
+.loading-bar-inner {
+  width: 0%; transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+}
+#loading-screen.revealed .loading-bar-inner { width: 70%; }
+#loading-screen.exit .loading-bar-inner { width: 100%; }
+
+/* ══════════════════════════════════════════════════════════════
+   NAVBAR
+   ══════════════════════════════════════════════════════════════ */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  transition: all 0.5s;
+  opacity: 0; transform: translateY(-100%);
+}
+#navbar.visible { opacity: 1; transform: translateY(0); }
+#navbar.scrolled {
+  background: rgba(5, 8, 22, 0.92);
+  backdrop-filter: blur(20px) saturate(1.2);
+  border-bottom: 1px solid rgba(168, 181, 208, 0.08);
+}
+.nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.nav-logo { display: flex; align-items: center; gap: 10px; }
+.nav-logo-text { font-size: 18px; font-weight: 800; color: white; letter-spacing: -0.01em; }
+.nav-beta { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; background: rgba(0,212,255,0.15); color: var(--kura-accent); border: 1px solid rgba(0,212,255,0.2); }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-link {
+  position: relative; color: var(--obsidian-100); font-size: 14px; font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: white; }
+.nav-link::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+  background: var(--kura-accent); border-radius: 2px;
+  transition: width 0.3s ease-out;
+}
+.nav-link:hover::after { width: 100%; }
+.nav-cta {
+  background: var(--kura-accent); color: var(--obsidian-900);
+  padding: 8px 20px; border-radius: 8px; font-size: 14px; font-weight: 700;
+  transition: all 0.3s; border: none; cursor: pointer;
+}
+.nav-cta:hover { box-shadow: 0 0 20px rgba(0,212,255,0.3); transform: scale(1.02); }
+
+/* Mobile hamburger */
+.nav-hamburger { display: none; background: none; border: none; color: var(--obsidian-100); padding: 12px; cursor: pointer; min-width: 44px; min-height: 44px; }
+.mobile-menu { display: none; padding: 24px; border-top: 1px solid rgba(28,37,56,0.2); }
+.mobile-menu a { display: block; color: var(--obsidian-100); font-size: 16px; font-weight: 500; padding: 8px 0; }
+.mobile-menu a:hover { color: white; }
+.mobile-cta { display: block; width: 100%; background: var(--kura-accent); color: var(--obsidian-900); font-weight: 700; height: 48px; border-radius: 12px; text-align: center; line-height: 48px; margin-top: 16px; border: none; cursor: pointer; font-size: 14px; }
+
+@media (max-width: 767px) {
+  .nav-links { display: none !important; }
+  .nav-hamburger { display: flex !important; align-items: center; justify-content: center; }
+  .mobile-menu.open { display: block; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HERO SECTION
+   ══════════════════════════════════════════════════════════════ */
+#hero { position: relative; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.hero-video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0.30; animation: heroZoom 12s ease-in-out infinite alternate;
+}
+.hero-overlay { position: absolute; inset: 0; background: rgba(5,8,22,0.6); }
+.hero-canvas { position: absolute; inset: 0; }
+.hero-radial { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,212,255,0.04) 0%, transparent 70%); }
+.hero-vignette-bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 160px; background: linear-gradient(to top, var(--obsidian-800), transparent); }
+.hero-vignette-top { position: absolute; top: 0; left: 0; right: 0; height: 128px; background: linear-gradient(to bottom, rgba(5,8,22,0.5), transparent); }
+
+.hero-content {
+  position: relative; z-index: 10;
+  min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 64px 16px 80px;
+}
+
+/* Hero elements — initial hidden state, JS reveals them */
+.hero-el { opacity: 0; transform: translateY(20px); transition: all 0.7s cubic-bezier(0.16,1,0.3,1); }
+.hero-el.show { opacity: 1; transform: translateY(0); }
+
+.shield-box {
+  position: relative; margin: 0 auto 32px; width: 80px; height: 80px;
+  display: flex; align-items: center; justify-content: center;
+}
+.shield-bg {
+  position: absolute; inset: 0; border-radius: 16px;
+  background: rgba(0,212,255,0.06); border: 1px solid rgba(0,212,255,0.15);
+}
+.shield-glow {
+  position: absolute; inset: 0; border-radius: 16px;
+  box-shadow: 0 0 40px rgba(0,212,255,0.15);
+  animation: breathe 3s ease-in-out infinite;
+  opacity: 0; transition: opacity 0.5s;
+}
+.shield-glow.show { opacity: 1; }
+.hero-shield-path {
+  stroke-dasharray: 60; stroke-dashoffset: 60;
+  transition: stroke-dashoffset 1s cubic-bezier(0.16,1,0.3,1);
+}
+.hero-shield-path.draw { stroke-dashoffset: 0; }
+.hero-check-path {
+  stroke-dasharray: 12; stroke-dashoffset: 12;
+  transition: stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1) 0.6s;
+}
+.hero-check-path.draw { stroke-dashoffset: 0; }
+
+/* KURA letter-by-letter */
+.kura-title { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 8px; overflow: hidden; }
+.kura-letter {
+  display: inline-block; font-size: clamp(3rem, 8vw, 4.5rem); font-weight: 900; color: white;
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.kura-letter.show { opacity: 1; transform: translateY(0); }
+
+.hero-headline {
+  text-align: center; max-width: 768px; margin-bottom: 16px;
+  font-size: clamp(1.5rem, 4vw, 3rem); font-weight: 900; color: white; line-height: 1.1;
+}
+.hero-headline .accent { color: var(--kura-accent); position: relative; display: inline-block; }
+.hero-headline .accent-line {
+  position: absolute; bottom: -4px; left: 0; right: 0; height: 2px;
+  background: rgba(0,212,255,0.5); border-radius: 2px;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.16,1,0.3,1) 1.4s;
+}
+.hero-headline .accent-line.show { transform: scaleX(1); }
+
+.hero-subtitle {
+  text-align: center; font-size: clamp(0.875rem, 2vw, 1.125rem);
+  color: var(--obsidian-100); max-width: 512px; margin: 0 auto 48px; line-height: 1.6;
+}
+
+/* Search bar */
+.search-container {
+  width: 100%; max-width: 576px; margin: 0 auto;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; padding: 6px; transition: all 0.2s;
+}
+.search-inner { display: flex; align-items: center; gap: 8px; }
+.search-input {
+  height: 56px; flex: 1; background: transparent; border: none; outline: none;
+  color: white; font-size: 18px; padding: 0 16px;
+  font-family: 'Inter', sans-serif;
+}
+.search-input::placeholder { color: rgba(168,181,208,0.5); }
+.search-btn {
+  height: 44px; padding: 0 24px;
+  background: var(--kura-accent); color: var(--obsidian-900); font-weight: 700;
+  border-radius: 12px; border: none; cursor: pointer;
+  box-shadow: 0 0 20px rgba(0,212,255,0.25);
+  transition: opacity 0.2s; white-space: nowrap; font-family: 'Inter', sans-serif; font-size: 14px;
+}
+.search-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Substance pills */
+.pills { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; margin-top: 16px; }
+.pill {
+  padding: 6px 12px; min-height: 40px; font-size: 14px;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px; color: var(--obsidian-100); cursor: pointer;
+  transition: all 0.2s; font-family: 'Inter', sans-serif;
+  display: inline-flex; align-items: center;
+}
+.pill:hover { background: rgba(255,255,255,0.08); color: white; }
+
+/* CTA + trust badges */
+.hero-cta-row { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 24px; }
+.hero-cta-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--kura-accent); color: var(--obsidian-900);
+  padding: 12px 28px; border-radius: 12px; font-size: 14px; font-weight: 700;
+  transition: all 0.3s; border: none; cursor: pointer;
+}
+.hero-cta-btn:hover { box-shadow: 0 0 30px rgba(0,212,255,0.35); transform: scale(1.02); }
+.trust-badges {
+  display: flex; align-items: center; gap: 16px;
+  font-size: 10px; color: var(--obsidian-200); font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.trust-badges .sep { color: rgba(255,255,255,0.1); }
+.trust-badges span { display: flex; align-items: center; gap: 4px; }
+
+.hero-footer-note { text-align: center; font-size: 12px; color: rgba(74,86,114,0.6); margin-top: 40px; }
+
+/* Scroll prompt */
+.scroll-prompt {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center;
+}
+.scroll-prompt svg { animation: scrollDot 2s ease-in-out infinite; color: rgba(74,86,114,0.4); }
+
+/* ══════════════════════════════════════════════════════════════
+   STATS BAR
+   ══════════════════════════════════════════════════════════════ */
+.stats-bar {
+  position: relative; background: var(--obsidian-700);
+  border-top: 1px solid rgba(28,37,56,0.4); border-bottom: 1px solid rgba(28,37,56,0.4);
+  padding: 64px 0; overflow: hidden;
+}
+.stats-grid-bg {
+  pointer-events: none; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(0,212,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.stats-grid {
+  position: relative; z-index: 10;
+  max-width: 1024px; margin: 0 auto; padding: 0 24px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+}
+.stat-item { display: flex; flex-direction: column; align-items: center; position: relative; }
+.stat-divider { display: none; position: absolute; left: 0; top: 50%; transform: translateY(-50%); height: 40px; width: 1px; background: rgba(39,48,68,0.2); }
+.stat-accent { margin-bottom: 16px; height: 2px; border-radius: 2px; background: rgba(0,212,255,0.7); width: 0; transition: width 0.8s cubic-bezier(0.16,1,0.3,1); }
+.stat-item.visible .stat-accent { width: 40%; }
+.stat-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(1.5rem, 4vw, 2.75rem); font-weight: 700; letter-spacing: -0.02em;
+  color: white; text-shadow: 0 0 20px rgba(0,212,255,0.35), 0 0 40px rgba(0,212,255,0.12);
+}
+.stat-label { margin-top: 8px; font-size: clamp(10px, 1.5vw, 14px); text-transform: uppercase; letter-spacing: 0.15em; color: rgba(168,181,208,0.7); }
+
+@media (max-width: 767px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (min-width: 768px) {
+  .stat-item:not(:first-child) .stat-divider { display: block; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   INSTITUTIONAL BAR
+   ══════════════════════════════════════════════════════════════ */
+.institutional-bar { padding: 32px 16px; border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04); }
+.institutional-inner { max-width: 1024px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.institutional-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--obsidian-200); }
+.institutional-logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; }
+.institutional-logo {
+  font-size: 11px; font-weight: 700; font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase; letter-spacing: 0.1em; color: rgba(74,86,114,0.6);
+  padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02); transition: all 0.2s;
+}
+.institutional-logo:hover { color: var(--obsidian-200); border-color: rgba(255,255,255,0.15); }
+
+/* ══════════════════════════════════════════════════════════════
+   STATEMENT SECTION
+   ══════════════════════════════════════════════════════════════ */
+.statement-section {
+  position: relative; padding: 128px 24px; background: var(--obsidian-900); overflow: hidden;
+}
+.statement-video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.30;
+  animation: stadiumZoom 16s ease-in-out infinite alternate;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+}
+.statement-overlay { position: absolute; inset: 0; background: rgba(2,3,10,0.5); }
+.statement-text {
+  position: relative; z-index: 10; max-width: 896px; margin: 0 auto; text-align: center;
+  font-size: clamp(1.5rem, 4vw, 3.5rem); font-weight: 900; line-height: 1.15;
+}
+.statement-text .highlight { color: var(--kura-accent); }
+.statement-char {
+  display: inline-block; opacity: 0; will-change: opacity;
+}
+.statement-word { display: inline-block; margin-right: 0.3em; }
+
+@media (min-width: 768px) {
+  .statement-section { padding: 192px 24px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   WAVE SEPARATOR
+   ══════════════════════════════════════════════════════════════ */
+.wave-separator { position: relative; padding: 40px 0; }
+.wave-line { height: 1px; width: 100%; background: linear-gradient(90deg, transparent, rgba(0,212,255,0.15), transparent); }
+.wave-node {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: flex; align-items: center; justify-content: center;
+}
+.wave-node-glow { position: absolute; width: 40px; height: 40px; border-radius: 50%; background: rgba(0,212,255,0.05); filter: blur(10px); }
+
+/* ══════════════════════════════════════════════════════════════
+   PROBLEM SECTION
+   ══════════════════════════════════════════════════════════════ */
+.problem-section { padding: 64px 24px; }
+.problem-inner { max-width: 1024px; margin: 0 auto; }
+.section-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--kura-accent); margin-bottom: 12px; text-align: center; }
+.section-title { font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 900; color: white; text-align: center; margin-bottom: 32px; }
+.problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+.problem-card {
+  border-radius: 12px; padding: 24px; position: relative; overflow: hidden;
+  border-left: 3px solid #EF4444;
+}
+.problem-card .danger-icon { position: absolute; top: 12px; right: 12px; width: 20px; height: 20px; color: rgba(239,68,68,0.2); }
+.problem-value { font-size: clamp(1.5rem, 4vw, 3rem); font-weight: 900; color: #EF4444; line-height: 1; margin-bottom: 4px; }
+.problem-label { font-size: 14px; font-weight: 600; color: white; margin-bottom: 6px; }
+.problem-desc { font-size: 14px; color: var(--obsidian-100); margin-bottom: 8px; line-height: 1.4; }
+.problem-source { font-size: 12px; color: var(--obsidian-200); font-style: italic; }
+
+.quote-block {
+  position: relative; border-left: 3px solid var(--kura-accent);
+  border-radius: 0 12px 12px 0; padding: 20px 28px;
+  background: linear-gradient(90deg, rgba(0,212,255,0.06), transparent);
+}
+.quote-text { font-style: italic; color: var(--obsidian-50); font-size: clamp(14px, 2vw, 18px); line-height: 1.6; }
+.quote-author { font-size: 14px; color: var(--obsidian-100); margin-top: 12px; }
+
+@media (max-width: 767px) {
+  .problem-grid { grid-template-columns: 1fr; }
+  .problem-section { padding: 48px 16px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CLIENTS SECTION
+   ══════════════════════════════════════════════════════════════ */
+.clients-section { padding: 80px 0; overflow: hidden; }
+.clients-header { padding: 0 24px; max-width: 1024px; margin: 0 auto 48px; }
+.marquee-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--obsidian-200); margin-bottom: 16px; padding-left: 24px; }
+.marquee-wrap { overflow: hidden; position: relative; padding: 0 8px; }
+.marquee-fade-left { position: absolute; left: 0; top: 0; bottom: 0; width: 64px; z-index: 10; background: linear-gradient(to right, var(--obsidian-800), transparent); pointer-events: none; }
+.marquee-fade-right { position: absolute; right: 0; top: 0; bottom: 0; width: 64px; z-index: 10; background: linear-gradient(to left, var(--obsidian-800), transparent); pointer-events: none; }
+.marquee-track { display: flex; gap: 16px; width: max-content; padding: 4px 0; }
+.marquee-track.forward { animation: marquee 35s linear infinite; }
+.marquee-track.reverse { animation: marqueeReverse 35s linear infinite; }
+.client-card {
+  border-radius: 16px; padding: 20px 24px; min-width: 280px; max-width: 320px; flex-shrink: 0;
+}
+.client-card-title { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.client-card-title svg { color: var(--kura-accent); flex-shrink: 0; }
+.client-card-title span { font-weight: 600; color: white; font-size: 14px; }
+.client-card p { font-size: 14px; color: var(--obsidian-100); line-height: 1.5; }
+
+@media (max-width: 639px) {
+  .client-card { min-width: 220px; padding: 16px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CASES SECTION
+   ══════════════════════════════════════════════════════════════ */
+.cases-section { padding: 48px 16px; }
+.cases-inner { max-width: 1024px; margin: 0 auto; }
+.cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.case-card {
+  border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;
+  border-top-width: 2px; border-top-style: solid;
+}
+.case-header { display: flex; align-items: center; gap: 8px; padding: 16px 16px 12px; }
+.case-prohibited-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 2px 8px; border-radius: 999px;
+  background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25);
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #FCA5A5;
+}
+.case-sport-pill {
+  margin-left: auto; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+  padding: 2px 8px; border-radius: 999px; border-width: 1px; border-style: solid;
+}
+.case-year { font-size: 12px; color: var(--obsidian-200); font-family: 'JetBrains Mono', monospace; }
+.case-body { padding: 0 16px 12px; flex: 1; }
+.case-body h3 { font-size: 16px; font-weight: 700; color: white; margin-bottom: 4px; }
+.case-body .drama { font-size: 12px; color: rgba(168,181,208,0.7); line-height: 1.5; margin-bottom: 8px; }
+.case-substance { font-size: 10px; font-family: 'JetBrains Mono', monospace; color: var(--obsidian-200); background: rgba(255,255,255,0.03); display: inline-block; padding: 2px 8px; border-radius: 4px; }
+.case-footer {
+  border-top: 1px solid rgba(255,255,255,0.06); padding: 12px 16px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.case-kura-badge { display: flex; align-items: center; gap: 6px; }
+.case-kura-badge span { font-size: 10px; font-weight: 700; color: var(--kura-accent); }
+.case-kura-text { font-size: 10px; color: rgba(0,212,255,0.8); text-align: right; flex: 1; }
+.case-sanction { font-size: 10px; font-weight: 700; color: #FCA5A5; flex-shrink: 0; }
+
+/* Mobile: horizontal scroll */
+.cases-scroll { display: none; position: relative; }
+.cases-scroll-inner { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 16px; scroll-snap-type: x mandatory; }
+.cases-scroll-inner > div { scroll-snap-align: start; flex-shrink: 0; width: 85vw; max-width: 280px; }
+.cases-scroll .fade-edge { position: absolute; right: 0; top: 0; bottom: 0; width: 32px; z-index: 10; background: linear-gradient(to left, var(--obsidian-800), transparent); pointer-events: none; }
+
+@media (max-width: 767px) {
+  .cases-grid { display: none; }
+  .cases-scroll { display: block; }
+  .cases-section { padding: 32px 16px; }
+}
+
+.cases-conclusion { text-align: center; color: rgba(168,181,208,0.6); font-size: 14px; font-style: italic; margin-top: 40px; }
+.cases-subtitle { text-align: center; color: var(--obsidian-100); font-size: 14px; margin-bottom: 32px; }
+
+/* ══════════════════════════════════════════════════════════════
+   BRAND REVEAL
+   ══════════════════════════════════════════════════════════════ */
+.brand-reveal { position: relative; height: 200vh; }
+.brand-reveal-sticky {
+  position: sticky; top: 0; height: 100vh;
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.brand-video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0.25;
+  animation: eyeZoom 18s ease-in-out infinite alternate;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 100%);
+}
+.brand-bg-overlay {
+  position: absolute; inset: 0; background: rgba(2,3,10,0.4);
+  transition: background 0.3s;
+}
+.brand-content { position: relative; z-index: 2; text-align: center; width: 100%; max-width: 896px; padding: 0 24px; }
+
+/* Text lines that dissolve */
+.brand-text-line { display: block; }
+.brand-text-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--kura-accent); margin-bottom: 20px; }
+.brand-text-big {
+  font-size: clamp(1.5rem, 5vw, 3.75rem); font-weight: 900;
+}
+.brand-text-big.cyan { color: var(--kura-accent); }
+.brand-char { display: inline-block; transition: opacity 0.3s, transform 0.3s; }
+
+/* KURA letters */
+.brand-kura-container { display: flex; align-items: center; justify-content: center; gap: 8px; position: relative; z-index: 10; }
+.brand-kura-letter {
+  font-size: clamp(3rem, 10vw, 12rem); font-weight: 900; color: white;
+  opacity: 0; clip-path: inset(100% 0 0 0);
+}
+.brand-rule {
+  margin: 24px auto 0; height: 1px; width: 128px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.6), transparent);
+  transform: scaleX(0); opacity: 0;
+}
+.brand-tagline {
+  margin-top: 24px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.3em;
+  color: var(--kura-accent); font-weight: 700; opacity: 0;
+}
+
+/* Scan columns */
+.scan-container {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  pointer-events: none; opacity: 0;
+}
+.scan-columns {
+  display: flex; gap: clamp(24px, 4vw, 80px); overflow: hidden; width: 100%; justify-content: center;
+  height: 60vh;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+.scan-col { display: flex; flex-direction: column; gap: 16px; flex-shrink: 0; }
+.scan-term { white-space: nowrap; font-family: 'JetBrains Mono', monospace; font-size: clamp(12px, 1.5vw, 14px); letter-spacing: 0.05em; }
+.scan-term.code { color: rgba(0,212,255,0.5); }
+.scan-term.substance { color: rgba(168,181,208,0.35); }
+
+@media (max-width: 639px) {
+  .brand-reveal { height: 160vh; }
+  .scan-columns { gap: 24px; }
+  .scan-col:nth-child(n+3) { display: none; }
+  .brand-kura-container { gap: 4px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DATA COVERAGE SECTION
+   ══════════════════════════════════════════════════════════════ */
+.data-coverage { position: relative; padding: 64px 16px; }
+.data-coverage-inner { position: relative; z-index: 10; max-width: 1152px; margin: 0 auto; }
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 56px; }
+.kpi-card { border-radius: 16px; padding: 24px; text-align: center; }
+.kpi-value { display: block; font-size: clamp(1.125rem, 3vw, 1.875rem); font-weight: 700; color: var(--kura-accent); margin-bottom: 4px; }
+.kpi-label { font-size: clamp(10px, 1.2vw, 12px); color: var(--obsidian-100); text-transform: uppercase; letter-spacing: 0.1em; }
+.live-badge {
+  display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px;
+  border-radius: 999px; background: rgba(0,212,255,0.07); border: 1px solid rgba(0,212,255,0.2);
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(0,212,255,0.7);
+  margin-bottom: 56px; margin-top: -32px;
+}
+.live-dot { position: relative; width: 6px; height: 6px; }
+.live-dot::before { content: ''; position: absolute; inset: 0; border-radius: 50%; background: var(--kura-accent); }
+.live-dot::after {
+  content: ''; position: absolute; inset: 0; border-radius: 50%; background: var(--kura-accent);
+  animation: pingDot 1.5s cubic-bezier(0,0,0.2,1) infinite; opacity: 0.6;
+}
+
+/* Domain bars */
+.space-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+.space-header .line { height: 1px; flex: 1; }
+.space-header .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; white-space: nowrap; }
+.domain-bar-card { border-radius: 16px; padding: 24px; margin-bottom: 48px; }
+.domain-row { display: flex; flex-direction: column; gap: 16px; border-left: 3px solid; padding-left: 16px; }
+.domain-row + .domain-row { margin-top: 16px; }
+.domain-row-label { font-weight: 700; color: white; font-size: 14px; }
+.domain-sources { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.domain-source-tag {
+  font-size: 10px; font-family: 'JetBrains Mono', monospace;
+  padding: 2px 6px; border-radius: 4px;
+  background: rgba(20,27,44,0.5); color: var(--obsidian-100);
+  border: 1px solid rgba(28,37,56,0.3);
+}
+.bar-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+.bar-track { flex: 1; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.05); overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 3px; transition: width 1s ease-out; }
+.bar-count { font-size: 12px; font-family: 'JetBrains Mono', monospace; font-weight: 700; flex-shrink: 0; }
+.domain-detail { font-size: 11px; color: var(--obsidian-300); }
+
+/* Support cards */
+.support-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 56px; }
+.support-card { border-radius: 12px; padding: 20px; border-left: 3px solid; }
+.support-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
+.support-header .label { font-weight: 700; color: white; font-size: 14px; }
+.support-header .count { font-size: 18px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+.support-unit { font-size: 10px; color: var(--obsidian-300); }
+
+/* Sports & Federations grid */
+.sports-feds { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.sports-feds-card { border-radius: 16px; padding: 24px; }
+.sports-feds-title { font-size: 14px; font-weight: 700; color: white; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.tag-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+.sport-tag { font-size: 12px; padding: 4px 10px; border-radius: 8px; background: rgba(20,27,44,0.4); color: var(--obsidian-100); border: 1px solid rgba(28,37,56,0.2); }
+.fed-tag {
+  font-size: 12px; font-family: 'JetBrains Mono', monospace;
+  padding: 4px 10px; border-radius: 8px;
+  background: rgba(0,212,255,0.06); color: rgba(0,212,255,0.8);
+  border: 1px solid rgba(0,212,255,0.15);
+}
+
+@media (max-width: 767px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .support-grid { grid-template-columns: 1fr; }
+  .sports-feds { grid-template-columns: 1fr; }
+  .domain-row { flex-direction: column; }
+}
+@media (min-width: 768px) {
+  .domain-row { flex-direction: row; align-items: center; }
+  .domain-row-info { width: 160px; flex-shrink: 0; }
+  .domain-row-bar { flex: 1; min-width: 0; }
+  .data-coverage { padding: 112px 24px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SOLUTION SECTION (Pipeline)
+   ══════════════════════════════════════════════════════════════ */
+.solution-section { background: var(--obsidian-900); padding: 64px 24px; position: relative; overflow: hidden; }
+.solution-canvas { position: absolute; inset: 0; pointer-events: none; }
+.solution-inner { position: relative; z-index: 10; max-width: 1152px; margin: 0 auto; }
+.solution-subtitle { color: var(--obsidian-100); text-align: center; max-width: 576px; margin: 0 auto 56px; font-size: 15px; }
+
+.pipeline-layout { display: flex; gap: 32px; align-items: flex-start; }
+.pipeline-nav { display: flex; flex-direction: column; gap: 4px; width: 220px; flex-shrink: 0; }
+.pipeline-nav-btn {
+  display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+  border-radius: 12px; text-align: left; border: none; cursor: pointer;
+  background: transparent; font-family: 'Inter', sans-serif;
+  border-left: 2px solid transparent; transition: all 0.5s;
+}
+.pipeline-nav-btn.active { background: rgba(0,212,255,0.08); border-left-color: rgba(0,212,255,0.7); }
+.pipeline-nav-num {
+  width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; flex-shrink: 0; transition: all 0.5s;
+}
+.pipeline-nav-btn.active .pipeline-nav-num { background: rgba(0,212,255,0.2); color: var(--kura-accent); }
+.pipeline-nav-btn:not(.active) .pipeline-nav-num { background: rgba(168,181,208,0.08); color: rgba(168,181,208,0.5); }
+.pipeline-nav-label { font-size: 14px; font-weight: 500; transition: color 0.3s; }
+.pipeline-nav-btn.active .pipeline-nav-label { color: white; }
+.pipeline-nav-btn:not(.active) .pipeline-nav-label { color: rgba(168,181,208,0.5); }
+
+.pipeline-content { flex: 1; position: relative; min-height: 280px; }
+.pipeline-card {
+  position: absolute; inset: 0; border-radius: 16px; padding: 40px;
+  opacity: 0; transform: translateY(20px) scale(0.95);
+  pointer-events: none; visibility: hidden;
+  transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1), visibility 0s linear 0.5s;
+}
+.pipeline-card.active {
+  opacity: 1; transform: translateY(0) scale(1);
+  pointer-events: auto; visibility: visible;
+  transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1) 0.15s, transform 0.5s cubic-bezier(0.16,1,0.3,1) 0.15s, visibility 0s;
+}
+.pipeline-card-icon {
+  width: 56px; height: 56px; border-radius: 16px;
+  background: rgba(0,212,255,0.1); display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px; border: 1px solid rgba(0,212,255,0.2);
+}
+.pipeline-card-step { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--kura-accent); margin-bottom: 12px; }
+.pipeline-card-title { font-size: 24px; font-weight: 700; color: white; margin-bottom: 12px; }
+.pipeline-card-detail { font-size: 16px; color: var(--obsidian-100); line-height: 1.5; max-width: 448px; }
+.pipeline-progress { display: flex; align-items: center; gap: 8px; margin-top: 32px; }
+.pipeline-progress-bar { height: 4px; border-radius: 2px; flex: 1; transition: background 0.5s; }
+
+/* Guarantee block */
+.guarantee-block {
+  border-radius: 16px; padding: 40px; margin-top: 64px;
+  border-left: 4px solid var(--kura-accent);
+  box-shadow: 0 0 40px rgba(0,212,255,0.08);
+}
+.guarantee-inner { display: flex; align-items: flex-start; gap: 20px; }
+.guarantee-icon {
+  width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
+  background: rgba(0,212,255,0.1); display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(0,212,255,0.2);
+}
+.guarantee-title { font-size: 18px; font-weight: 700; color: var(--kura-accent); margin-bottom: 8px; }
+.guarantee-text { font-size: 14px; color: var(--obsidian-100); line-height: 1.5; max-width: 640px; }
+
+@media (max-width: 767px) {
+  .pipeline-layout { flex-direction: column; }
+  .pipeline-nav { width: 100%; max-width: 400px; margin: 0 auto; }
+  .pipeline-content { min-height: auto; position: relative; }
+  .pipeline-card { position: relative; display: none; padding: 24px; }
+  .pipeline-card.active { display: block; opacity: 1; transform: none; visibility: visible; }
+  .guarantee-block { padding: 16px; }
+  .guarantee-inner { gap: 12px; }
+  .solution-section { padding: 48px 16px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DEMO SECTION
+   ══════════════════════════════════════════════════════════════ */
+.demo-section { padding: 80px 24px; }
+.demo-inner { position: relative; z-index: 10; max-width: 640px; margin: 0 auto; text-align: center; }
+.demo-subtitle { color: var(--obsidian-100); font-size: 18px; margin-bottom: 40px; max-width: 512px; margin-left: auto; margin-right: auto; }
+.domain-tabs {
+  display: inline-flex; align-items: center;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; padding: 4px; margin-bottom: 40px;
+}
+.domain-tab {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 16px; border-radius: 12px;
+  font-size: 14px; font-weight: 500; border: none; cursor: pointer;
+  background: transparent; transition: all 0.2s;
+  color: var(--obsidian-100); font-family: 'Inter', sans-serif;
+}
+.domain-tab.active { background: rgba(0,212,255,0.15); color: white; box-shadow: 0 0 12px rgba(0,212,255,0.1); }
+.domain-tab:hover:not(.active) { color: white; }
+.domain-tab .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; transition: transform 0.2s; }
+.domain-tab.active .dot { transform: scale(1.3); }
+.demo-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px; margin-top: 40px;
+  background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3);
+  color: var(--kura-accent); font-weight: 600; border-radius: 12px;
+  transition: background 0.2s; cursor: pointer; font-size: 14px;
+}
+.demo-cta:hover { background: rgba(0,212,255,0.2); }
+
+/* ══════════════════════════════════════════════════════════════
+   PLATFORM SECTION
+   ══════════════════════════════════════════════════════════════ */
+.platform-section { padding: 96px 24px; background: var(--obsidian-900); position: relative; overflow: hidden; }
+.platform-grid-bg {
+  position: absolute; inset: 0; opacity: 0.03; pointer-events: none;
+  background-image: linear-gradient(rgba(0,212,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.5) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.platform-inner { max-width: 1152px; margin: 0 auto; }
+.platform-subline { font-size: clamp(15px, 2vw, 18px); color: var(--obsidian-100); max-width: 576px; margin: 0 auto 40px; text-align: center; }
+.platform-tabs { display: flex; justify-content: center; margin-bottom: 40px; }
+.platform-tabs-inner { display: flex; gap: 4px; padding: 4px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); }
+.platform-tab {
+  display: flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px;
+  font-size: 14px; font-weight: 700; border: none; cursor: pointer;
+  transition: all 0.3s; font-family: 'Inter', sans-serif;
+}
+.platform-tab.active { background: var(--kura-accent); color: var(--obsidian-900); box-shadow: 0 0 20px rgba(0,212,255,0.2); }
+.platform-tab:not(.active) { background: transparent; color: rgba(255,255,255,0.4); }
+.platform-tab:not(.active):hover { color: rgba(255,255,255,0.7); }
+.platform-content { display: grid; grid-template-columns: 3fr 2fr; gap: 48px; align-items: flex-start; }
+.platform-features h3 { font-size: 20px; font-weight: 900; color: white; margin-bottom: 16px; }
+.platform-features ul { list-style: none; }
+.platform-features li {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; color: var(--obsidian-100); padding: 4px 0;
+}
+.platform-features li svg { flex-shrink: 0; }
+
+/* Browser mockup */
+.browser-mockup { border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 0 60px rgba(0,212,255,0.08); }
+.browser-chrome { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: #0a0d1a; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.browser-dot { width: 12px; height: 12px; border-radius: 50%; }
+.browser-url { flex: 1; margin: 0 16px; height: 24px; border-radius: 6px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; padding: 0 12px; gap: 8px; }
+.browser-url span { font-size: 10px; color: rgba(255,255,255,0.25); font-family: 'JetBrains Mono', monospace; }
+.browser-content { display: flex; background: var(--obsidian-800); height: 320px; }
+.browser-sidebar { width: 56px; background: var(--obsidian-900); border-right: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; align-items: center; padding: 16px 0; gap: 16px; }
+.browser-main { flex: 1; overflow: hidden; padding: 20px; }
+.browser-main-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.athlete-row {
+  display: flex; align-items: center; gap: 12px; padding: 10px 12px;
+  border-radius: 8px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 8px;
+}
+.athlete-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.6); }
+.athlete-info { flex: 1; min-width: 0; }
+.athlete-info .name { font-size: 12px; font-weight: 600; color: white; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.athlete-info .sport { font-size: 10px; color: rgba(255,255,255,0.3); }
+.athlete-bar { width: 64px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.1); overflow: hidden; }
+.athlete-bar-fill { height: 100%; border-radius: 3px; }
+.athlete-score { font-size: 10px; font-weight: 700; width: 24px; text-align: right; }
+.athlete-status { font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+.browser-stat-row { display: flex; gap: 12px; margin-top: 16px; }
+.browser-stat { flex: 1; padding: 8px 10px; border-radius: 8px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.04); }
+.browser-stat .label { font-size: 9px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px; }
+.browser-stat .value { font-size: 14px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+
+/* Phone mockup */
+.phone-mockup { position: relative; margin: 0 auto; width: 220px; }
+.phone-frame { border-radius: 36px; background: #0a0d1a; border: 2px solid rgba(255,255,255,0.15); overflow: hidden; box-shadow: 0 0 60px rgba(0,212,255,0.12); padding: 2px; }
+.phone-island { display: flex; justify-content: center; padding: 12px 0 4px; }
+.phone-island-bar { width: 80px; height: 20px; border-radius: 999px; background: black; }
+.phone-screen { background: var(--obsidian-800); margin: 0 4px; border-radius: 28px; overflow: hidden; padding-bottom: 16px; }
+.phone-statusbar { display: flex; align-items: center; justify-content: space-between; padding: 8px 20px; }
+.phone-statusbar .time { font-size: 9px; color: rgba(255,255,255,0.4); font-family: 'JetBrains Mono', monospace; }
+.phone-header { padding: 0 16px 12px; }
+.phone-header .greeting { font-size: 10px; color: rgba(255,255,255,0.3); }
+.phone-header .name { font-size: 14px; font-weight: 700; color: white; }
+.phone-score-card { margin: 0 16px 12px; border-radius: 16px; background: linear-gradient(135deg, rgba(0,212,255,0.1), var(--obsidian-800)); border: 1px solid rgba(0,212,255,0.2); padding: 16px; position: relative; overflow: hidden; }
+.phone-score-inner { position: relative; }
+.phone-modules { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 16px 12px; }
+.phone-module { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.025); }
+.phone-module.accent { background: rgba(0,212,255,0.1); border-color: rgba(0,212,255,0.25); }
+.phone-module span { font-size: 9px; font-weight: 600; }
+.phone-tabbar { display: flex; justify-content: space-around; align-items: center; padding: 8px 16px 0; border-top: 1px solid rgba(255,255,255,0.05); }
+.phone-home-bar { display: flex; justify-content: center; padding: 8px 0; }
+.phone-home-bar-inner { width: 96px; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.2); }
+.phone-glow { position: absolute; inset: -16px; border-radius: 48px; pointer-events: none; background: radial-gradient(ellipse at 50% 50%, rgba(0,212,255,0.06) 0%, transparent 70%); }
+
+.platform-cta-row { display: flex; justify-content: center; margin-top: 56px; }
+.platform-cta {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--kura-accent); color: var(--obsidian-900);
+  padding: 14px 32px; border-radius: 12px; font-size: 14px; font-weight: 700;
+  transition: all 0.3s; border: none; cursor: pointer;
+}
+.platform-cta:hover { box-shadow: 0 0 30px rgba(0,212,255,0.35); transform: scale(1.02); }
+
+@media (max-width: 767px) {
+  .platform-content { grid-template-columns: 1fr; }
+  .phone-mockup { width: 200px; }
+  .browser-mockup { display: none; }
+  .platform-section { padding: 64px 16px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DOMAINS SECTION
+   ══════════════════════════════════════════════════════════════ */
+.domains-section { position: relative; padding: 80px 24px; }
+.domains-inner { position: relative; z-index: 10; max-width: 1024px; margin: 0 auto; }
+.domains-bento { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.domain-card { border-radius: 16px; padding: 24px; border-left: 3px solid; transition: all 0.3s; }
+.domain-card.hero-card { grid-column: span 2; grid-row: span 2; padding: 28px; }
+.domain-card-icon { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+.domain-card .name { font-weight: 600; color: white; font-size: 14px; }
+.domain-card.hero-card .name { font-size: 18px; }
+.domain-card .desc { font-size: 14px; color: var(--obsidian-100); margin-top: 8px; margin-bottom: 4px; }
+.domain-card .source { font-size: 12px; font-family: 'JetBrains Mono', monospace; color: var(--obsidian-200); margin-bottom: 16px; }
+.domain-card .count { font-weight: 700; }
+.domain-card.hero-card .count { font-size: clamp(1.5rem, 4vw, 3rem); }
+.domain-card:not(.hero-card) .count { font-size: 1.875rem; }
+.domain-card .unit { font-size: 12px; color: var(--obsidian-200); margin-left: 8px; }
+.domain-card.hero-card .unit { font-size: 14px; }
+
+@media (max-width: 767px) {
+  .domains-bento { grid-template-columns: 1fr; }
+  .domain-card.hero-card { grid-column: span 1; grid-row: span 1; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CONTACT SECTION
+   ══════════════════════════════════════════════════════════════ */
+.contact-section { position: relative; background: rgba(10,15,31,0.5); padding: 80px 24px; overflow: hidden; }
+.contact-dot-bg {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.025;
+  background-image: radial-gradient(circle, rgba(0,212,255,0.8) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+.contact-inner { position: relative; z-index: 10; max-width: 1024px; margin: 0 auto; }
+.contact-limited { color: var(--kura-warning); font-size: 14px; font-weight: 500; text-align: center; margin-bottom: 48px; }
+.contact-layout { display: flex; gap: 48px; align-items: center; }
+.contact-video-wrap { width: 50%; position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 16/10; }
+.contact-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: shieldZoom 12s ease-in-out infinite alternate; }
+.contact-video-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(2,3,10,0.6), transparent, rgba(2,3,10,0.3)); }
+.contact-video-text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; }
+.contact-video-text p { text-shadow: 0 2px 20px rgba(0,0,0,0.8); }
+.contact-video-ring { position: absolute; inset: 0; border-radius: 16px; border: 1px solid rgba(0,212,255,0.2); }
+.contact-form-wrap { width: 50%; }
+.contact-form { display: flex; flex-direction: column; gap: 20px; }
+.contact-form label { display: block; font-size: 14px; font-weight: 500; color: var(--obsidian-50); margin-bottom: 6px; }
+.contact-form input, .contact-form select {
+  width: 100%; background: var(--obsidian-800); border: 1px solid var(--border);
+  border-radius: 12px; height: 48px; padding: 0 16px;
+  color: white; outline: none; font-size: 14px; font-family: 'Inter', sans-serif;
+  transition: all 0.2s;
+}
+.contact-form input::placeholder { color: var(--obsidian-300); }
+.contact-form input:focus, .contact-form select:focus { border-color: rgba(0,212,255,0.5); box-shadow: 0 0 0 1px rgba(0,212,255,0.3); }
+.contact-form select { appearance: none; cursor: pointer; padding-right: 40px; }
+.select-wrap { position: relative; }
+.select-wrap svg { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--obsidian-300); }
+.contact-submit {
+  width: 100%; background: var(--kura-accent); color: var(--obsidian-900); font-weight: 700;
+  height: 48px; border-radius: 12px; border: none; cursor: pointer; font-size: 14px;
+  box-shadow: 0 0 30px rgba(0,212,255,0.2);
+  transition: all 0.3s; font-family: 'Inter', sans-serif;
+}
+.contact-submit:hover { box-shadow: 0 0 50px rgba(0,212,255,0.35); }
+.contact-footer-text { font-size: 12px; color: var(--obsidian-200); text-align: center; margin-top: 12px; }
+.contact-email { font-size: 14px; color: var(--obsidian-100); text-align: center; margin-top: 32px; }
+.contact-email a { color: var(--kura-accent); font-weight: 600; }
+.contact-email a:hover { text-decoration: underline; }
+
+@media (max-width: 767px) {
+  .contact-layout { flex-direction: column; }
+  .contact-video-wrap, .contact-form-wrap { width: 100%; }
+  .contact-section { padding: 64px 16px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FOOTER
+   ══════════════════════════════════════════════════════════════ */
+.site-footer { background: var(--obsidian-900); }
+.footer-sep { height: 1px; background: linear-gradient(90deg, transparent, rgba(0,212,255,0.15), transparent); }
+.footer-inner { max-width: 1024px; margin: 0 auto; padding: 48px 24px; }
+.footer-row { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.footer-logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.footer-logo .text { color: white; font-weight: 700; font-size: 14px; letter-spacing: 0.03em; }
+.footer-logo .tagline { font-size: 12px; color: var(--obsidian-200); }
+.footer-links { display: flex; align-items: center; gap: 24px; font-size: 12px; color: var(--obsidian-200); }
+.footer-links a:hover { color: white; }
+.footer-links .sep { color: var(--obsidian-400); }
+.footer-badges { font-size: 12px; color: var(--obsidian-300); flex-shrink: 0; }
+.footer-copyright { font-size: 12px; color: var(--obsidian-400); text-align: center; margin-top: 32px; }
+
+@media (min-width: 768px) {
+  .footer-row { flex-direction: row; justify-content: space-between; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   STICKY CTA (mobile)
+   ══════════════════════════════════════════════════════════════ */
+.sticky-cta {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 40;
+  background: rgba(5,8,22,0.9); backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border); padding: 16px;
+  transform: translateY(100%); transition: transform 0.3s;
+}
+.sticky-cta.show { transform: translateY(0); }
+.sticky-cta a {
+  display: block; width: 100%; background: var(--kura-accent); color: var(--obsidian-900);
+  font-weight: 700; height: 48px; border-radius: 12px; text-align: center; line-height: 48px;
+  box-shadow: 0 0 30px rgba(0,212,255,0.2); font-size: 14px;
+}
+@media (max-width: 767px) { .sticky-cta { display: block; } }
+
+/* ── BG Video overlay for data+domains ── */
+.bg-video-wrap { position: relative; overflow: hidden; }
+.bg-video-el {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none;
+  opacity: 0.20;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE FINE-TUNE
+   ══════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     LOADING SCREEN
+     ═══════════════════════════════════════════════════════════════ -->
+<div id="loading-screen" class="drawing">
+  <div class="dot-grid"></div>
+  <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:24px">
+    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" style="color:var(--kura-accent)">
+      <path class="shield-path" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path class="check-path" d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="brand-text" style="display:flex;align-items:center;gap:4px">
+      <span class="loading-letter" style="font-size:24px;font-weight:700;letter-spacing:0.3em;color:white">K</span>
+      <span class="loading-letter" style="font-size:24px;font-weight:700;letter-spacing:0.3em;color:white">U</span>
+      <span class="loading-letter" style="font-size:24px;font-weight:700;letter-spacing:0.3em;color:white">R</span>
+      <span class="loading-letter" style="font-size:24px;font-weight:700;letter-spacing:0.3em;color:white">A</span>
+    </div>
+    <div style="width:128px;height:2px;background:var(--obsidian-600);border-radius:2px;overflow:hidden">
+      <div class="loading-bar-inner" style="height:100%;background:var(--kura-accent);border-radius:2px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAVBAR
+     ═══════════════════════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--kura-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>
+      </svg>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span class="nav-logo-text">KURA</span>
+        <span class="nav-beta">beta</span>
+      </div>
+    </a>
+    <button class="nav-hamburger" onclick="document.querySelector('.mobile-menu').classList.toggle('open')" aria-label="Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <div class="nav-links">
+      <a href="#probleme" class="nav-link">Probleme</a>
+      <a href="#solution" class="nav-link">Solution</a>
+      <a href="#demo" class="nav-link">Demo</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#contact" class="nav-cta">Demander un acces</a>
+    </div>
+  </div>
+  <div class="mobile-menu">
+    <a href="#probleme" onclick="this.parentElement.classList.remove('open')">Probleme</a>
+    <a href="#solution" onclick="this.parentElement.classList.remove('open')">Solution</a>
+    <a href="#demo" onclick="this.parentElement.classList.remove('open')">Demo</a>
+    <a href="#contact" onclick="this.parentElement.classList.remove('open')">Contact</a>
+    <a href="#contact" class="mobile-cta" onclick="this.parentElement.classList.remove('open')">Demander un acces</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO SECTION
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg">
+    <video class="hero-video" src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/hero-athlete.mp4" autoplay muted loop playsinline preload="auto"></video>
+    <div class="hero-overlay"></div>
+    <canvas id="hero-canvas" class="hero-canvas" style="pointer-events:auto"></canvas>
+    <div class="hero-radial"></div>
+    <div class="hero-vignette-bottom"></div>
+    <div class="hero-vignette-top"></div>
+  </div>
+
+  <div class="hero-content">
+    <!-- Shield icon -->
+    <div class="hero-el" data-delay="0" style="transition-delay:0s">
+      <div class="shield-box">
+        <div class="shield-bg"></div>
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" style="color:var(--kura-accent);position:relative;z-index:10">
+          <path class="hero-shield-path" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="hero-check-path" d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="shield-glow"></div>
+      </div>
+    </div>
+
+    <!-- KURA letters -->
+    <div class="kura-title">
+      <span class="kura-letter" style="transition-delay:200ms">K</span>
+      <span class="kura-letter" style="transition-delay:280ms">U</span>
+      <span class="kura-letter" style="transition-delay:360ms">R</span>
+      <span class="kura-letter" style="transition-delay:440ms">A</span>
+    </div>
+
+    <!-- Headline -->
+    <div class="hero-el" data-delay="700" style="transition-delay:0.7s">
+      <h2 class="hero-headline">
+        Certitude Instantanee.<br>
+        En <span class="accent">1,3 Seconde.<span class="accent-line"></span></span>
+      </h2>
+    </div>
+
+    <!-- Subtitle -->
+    <p class="hero-el hero-subtitle" data-delay="1600" style="transition-delay:1.6s">
+      Kura delivre des verdicts antidopage instantanes et certifies pour medicaments et complements, tout en centralisant les donnees sante et nutrition pour propulser la performance d'elite.
+    </p>
+
+    <!-- Search bar -->
+    <div class="hero-el" data-delay="2000" style="transition-delay:2s;width:100%;max-width:576px;filter:blur(4px)">
+      <div class="search-container search-glow">
+        <div class="search-inner">
+          <input type="text" class="search-input" placeholder="Entrez une substance..." id="hero-search-input">
+          <button class="search-btn" id="hero-search-btn">Verifier</button>
+        </div>
+      </div>
+      <div class="pills">
+        <button class="pill" onclick="this.closest('section').querySelector('.search-input').value=this.textContent">Testosterone</button>
+        <button class="pill" onclick="this.closest('section').querySelector('.search-input').value=this.textContent">Cafeine</button>
+        <button class="pill" onclick="this.closest('section').querySelector('.search-input').value=this.textContent">Trimetazidine</button>
+        <button class="pill" onclick="this.closest('section').querySelector('.search-input').value=this.textContent">Salbutamol</button>
+        <button class="pill" onclick="this.closest('section').querySelector('.search-input').value=this.textContent">EPO</button>
+        <button class="pill" onclick="this.closest('section').querySelector('.search-input').value=this.textContent">Cannabis</button>
+      </div>
+    </div>
+
+    <!-- CTA + trust -->
+    <div class="hero-el hero-cta-row" data-delay="2200" style="transition-delay:2.2s">
+      <a href="#contact" class="hero-cta-btn">
+        Demander l'acces beta
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <div class="trust-badges">
+        <span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Secure</span>
+        <span class="sep">&middot;</span>
+        <span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg> WADA-aligned</span>
+        <span class="sep">&middot;</span>
+        <span>GDPR</span>
+      </div>
+    </div>
+
+    <!-- Footer note -->
+    <p class="hero-el hero-footer-note" data-delay="2400" style="transition-delay:2.4s">
+      Concu pour les staffs medicaux et nutritionnistes du sport de haut niveau
+    </p>
+  </div>
+
+  <!-- Scroll prompt -->
+  <div class="scroll-prompt" style="position:absolute;bottom:32px;left:50%">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:rgba(74,86,114,0.4);animation:scrollDot 2s ease-in-out infinite">
+      <path d="M6 9l6 6 6-6"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     STATS BAR
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="stats-bar scroll-reveal" data-threshold="0.15">
+  <div class="stats-grid-bg"></div>
+  <div class="stats-grid">
+    <div class="stat-item" data-count="338337" data-suffix="">
+      <div class="stat-divider"></div>
+      <div class="stat-accent"></div>
+      <span class="stat-number">0</span>
+      <span class="stat-label">chunks indexes</span>
+    </div>
+    <div class="stat-item" data-count="1029" data-suffix="">
+      <div class="stat-divider"></div>
+      <div class="stat-accent"></div>
+      <span class="stat-number">0</span>
+      <span class="stat-label">substances WADA couvertes</span>
+    </div>
+    <div class="stat-item" data-count="3" data-suffix="s" data-prefix="<">
+      <div class="stat-divider"></div>
+      <div class="stat-accent"></div>
+      <span class="stat-number">&lt;0s</span>
+      <span class="stat-label">verdict complet</span>
+    </div>
+    <div class="stat-item" data-count="5" data-suffix="">
+      <div class="stat-divider"></div>
+      <div class="stat-accent"></div>
+      <span class="stat-number">0</span>
+      <span class="stat-label">domaines</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     INSTITUTIONAL BAR
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="institutional-bar">
+  <div class="institutional-inner">
+    <p class="institutional-label">Concu pour les standards de</p>
+    <div class="institutional-logos">
+      <span class="institutional-logo">FIFA</span>
+      <span class="institutional-logo">WADA</span>
+      <span class="institutional-logo">IOC</span>
+      <span class="institutional-logo">CAS</span>
+      <span class="institutional-logo">UEFA</span>
+      <span class="institutional-logo">UCI</span>
+      <span class="institutional-logo">World Athletics</span>
+      <span class="institutional-logo">ITF</span>
+      <span class="institutional-logo">World Rugby</span>
+      <span class="institutional-logo">FFR</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     STATEMENT SECTION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="statement-section" id="statement-section">
+  <video class="statement-video" src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/statement-stadium.mp4" autoplay muted loop playsinline preload="auto"></video>
+  <div class="statement-overlay"></div>
+  <div class="statement-text" id="statement-text">
+    <!-- Characters injected by JS -->
+  </div>
+</section>
+
+<!-- Wave separator -->
+<div class="wave-separator">
+  <div class="wave-line"></div>
+  <div class="wave-node">
+    <div class="wave-node-glow"></div>
+    <svg width="14" height="16" viewBox="0 0 14 16" fill="none">
+      <path d="M7 1L13 4.5V11.5L7 15L1 11.5V4.5L7 1Z" stroke="var(--kura-accent)" stroke-width="0.8" stroke-opacity="0.25" fill="none"/>
+      <circle cx="7" cy="8" r="1.5" fill="var(--kura-accent)" fill-opacity="0.15"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PROBLEM SECTION
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="probleme" class="problem-section scroll-reveal" data-threshold="0.15">
+  <div class="problem-inner">
+    <p class="section-label">Le probleme</p>
+    <h2 class="section-title">Un controle positif detruit une carriere</h2>
+    <div class="problem-grid">
+      <div class="glass-card hover-lift problem-card" style="transition-delay:0ms">
+        <svg class="danger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <div class="problem-value">15%</div>
+        <div class="problem-label">contamines</div>
+        <p class="problem-desc">des complements alimentaires contiennent des substances interdites</p>
+        <span class="problem-source">Source : Cologne Lab</span>
+      </div>
+      <div class="glass-card hover-lift problem-card" style="transition-delay:100ms">
+        <svg class="danger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <div class="problem-value">1 sur 5</div>
+        <div class="problem-label">des complements en ligne causeraient un positif</div>
+        <p class="problem-desc">Supplements achetes sur Internet sans certification</p>
+        <span class="problem-source">Source : Informed Sport</span>
+      </div>
+      <div class="glass-card hover-lift problem-card" style="transition-delay:200ms">
+        <svg class="danger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <div class="problem-value">100%</div>
+        <div class="problem-label">responsable</div>
+        <p class="problem-desc">L'athlete assume seul la responsabilite d'un controle positif</p>
+        <span class="problem-source">Source : WADA strict liability</span>
+      </div>
+    </div>
+    <blockquote class="quote-block">
+      <p class="quote-text">&laquo;&nbsp;Je ne sais pas ce qui est le pire : ca, ou le fait qu'ils prescrivent des complements alimentaires en se basant sur des resultats gratuits de ChatGPT.&nbsp;&raquo;</p>
+      <footer class="quote-author">&mdash; Itziar Gonzalez, ex-nutritionniste du Real Madrid, Instagram, 24 mars 2026</footer>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CLIENTS SECTION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="clients-section scroll-reveal" data-threshold="0.15">
+  <div class="clients-header">
+    <p class="section-label">CLIENTS CIBLES</p>
+    <h2 class="section-title">Built for the Elite Ecosystem</h2>
+  </div>
+  <div style="margin-bottom:12px;padding:0 8px">
+    <p class="marquee-label">Terrain</p>
+    <div class="marquee-wrap">
+      <div class="marquee-fade-left"></div>
+      <div class="marquee-fade-right"></div>
+      <div class="marquee-track forward" id="marquee-terrain"></div>
+    </div>
+  </div>
+  <div style="padding:0 8px">
+    <p class="marquee-label">Ecosysteme</p>
+    <div class="marquee-wrap">
+      <div class="marquee-fade-left"></div>
+      <div class="marquee-fade-right"></div>
+      <div class="marquee-track reverse" id="marquee-ecosystem"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CASES SECTION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="cases-section scroll-reveal" data-threshold="0.15">
+  <div class="cases-inner">
+    <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.25em;color:var(--kura-accent);text-align:center;margin-bottom:12px">PROTECTION — CAS REELS</p>
+    <h2 class="section-title">Ils auraient pu etre proteges</h2>
+    <p class="cases-subtitle">28 cas documentes. Voici les plus emblematiques.</p>
+    <div class="cases-grid stagger-children" id="cases-grid"></div>
+    <div class="cases-scroll">
+      <div class="fade-edge"></div>
+      <div class="cases-scroll-inner scrollbar-hide" id="cases-scroll"></div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:40px">
+      <div style="height:1px;width:60px;background:linear-gradient(to right, transparent, rgba(0,212,255,0.2))"></div>
+      <p style="color:var(--obsidian-100);font-size:14px;font-weight:500;text-align:center">Chaque cas aurait pu etre evite par une verification de 3&nbsp;secondes.</p>
+      <div style="height:1px;width:60px;background:linear-gradient(to left, transparent, rgba(0,212,255,0.2))"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BRAND REVEAL
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="brand-reveal" id="brand-reveal">
+  <div style="position:absolute;inset:0;pointer-events:none">
+    <div class="brand-reveal-sticky" style="position:sticky;top:0;height:100vh;overflow:hidden">
+      <video class="brand-video" src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/spare-eye.mp4" autoplay muted loop playsinline preload="auto"></video>
+    </div>
+  </div>
+  <div style="position:absolute;inset:0;pointer-events:none">
+    <div id="brand-bg-overlay" class="brand-bg-overlay" style="position:sticky;top:0;height:100vh"></div>
+  </div>
+  <div class="brand-reveal-sticky">
+    <div class="brand-content">
+      <!-- Dissolving text -->
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+        <div style="text-align:center" id="brand-text-container">
+          <p class="brand-text-label" id="brand-line-0"></p>
+          <span class="brand-text-big" id="brand-line-1"></span><br>
+          <span class="brand-text-big" id="brand-line-2"></span><br>
+          <span class="brand-text-big cyan" id="brand-line-3"></span>
+        </div>
+      </div>
+      <!-- Scan columns -->
+      <div class="scan-container" id="scan-container">
+        <div class="scan-columns" id="scan-columns"></div>
+      </div>
+      <!-- KURA letters -->
+      <div class="brand-kura-container" id="brand-kura" style="position:relative;z-index:10">
+        <span class="brand-kura-letter" id="bk-0">K</span>
+        <span class="brand-kura-letter" id="bk-1">U</span>
+        <span class="brand-kura-letter" id="bk-2">R</span>
+        <span class="brand-kura-letter" id="bk-3">A</span>
+      </div>
+      <div class="brand-rule" id="brand-rule"></div>
+      <p class="brand-tagline" id="brand-tagline">Infallible Compliance. Pure Performance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     DATA COVERAGE (with bg video)
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="bg-video-wrap">
+  <video class="bg-video-el" src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/demo-capsule.mp4" autoplay muted loop playsinline preload="auto"></video>
+  <section class="data-coverage scroll-reveal" data-threshold="0.1">
+    <div class="data-coverage-inner">
+      <p class="section-label">NOTRE DATA</p>
+      <h2 class="section-title">La base reglementaire la plus complete au monde</h2>
+      <p style="color:var(--obsidian-100);text-align:center;max-width:640px;margin:0 auto 56px">
+        KURA ne devine pas. KURA sait. Chaque regle, chaque substance, chaque exception — indexee, verifiee, mise a jour en continu.
+      </p>
+
+      <!-- KPIs -->
+      <div class="kpi-grid stagger-children">
+        <div class="glass-card kpi-card"><span class="kpi-value">338 337</span><span class="kpi-label">references RAG</span></div>
+        <div class="glass-card kpi-card"><span class="kpi-value">79 000+</span><span class="kpi-label">medicaments references</span></div>
+        <div class="glass-card kpi-card"><span class="kpi-value">62</span><span class="kpi-label">sources connectees</span></div>
+        <div class="glass-card kpi-card"><span class="kpi-value">20</span><span class="kpi-label">sports couverts</span></div>
+      </div>
+
+      <!-- Live badge -->
+      <div style="display:flex;justify-content:center;margin-bottom:56px;margin-top:0">
+        <span class="live-badge">
+          <span class="live-dot"></span>
+          Donnees synchronisees quotidiennement
+        </span>
+      </div>
+
+      <!-- Space 1: Intelligence antidopage -->
+      <div style="margin-bottom:48px">
+        <div class="space-header">
+          <div class="line" style="background:rgba(239,68,68,0.2)"></div>
+          <p class="label" style="color:#FCA5A5">INTELLIGENCE ANTIDOPAGE</p>
+          <div class="line" style="background:rgba(239,68,68,0.2)"></div>
+        </div>
+        <p style="font-size:14px;color:var(--obsidian-200);margin-bottom:24px;text-align:center">Ce que KURA sait sur chaque substance</p>
+        <div class="glass-card domain-bar-card">
+          <div class="domain-row" style="border-left-color:#EF4444">
+            <div class="domain-row-info">
+              <span class="domain-row-label">WADA / AFLD / USADA</span>
+              <div class="domain-sources"><span class="domain-source-tag">WADA</span><span class="domain-source-tag">AFLD</span><span class="domain-source-tag">IOC</span><span class="domain-source-tag">ITA</span><span class="domain-source-tag">USADA</span></div>
+            </div>
+            <div class="domain-row-bar">
+              <div class="bar-wrap">
+                <div class="bar-track"><div class="bar-fill data-bar" style="background:#EF4444;width:0" data-target="100"></div></div>
+                <span class="bar-count" style="color:#EF4444">247 319 chunks</span>
+              </div>
+              <p class="domain-detail">Liste des Interdictions WADA 2026, Standards Internationaux, AUT, Code Mondial Antidopage</p>
+            </div>
+          </div>
+          <div class="domain-row" style="border-left-color:#F97316;margin-top:16px">
+            <div class="domain-row-info">
+              <span class="domain-row-label">Reglements federations</span>
+              <div class="domain-sources"><span class="domain-source-tag">FIFA</span><span class="domain-source-tag">UCI</span><span class="domain-source-tag">World Athletics</span><span class="domain-source-tag">NFL</span><span class="domain-source-tag">NBA</span><span class="domain-source-tag">UEFA</span><span class="domain-source-tag">UFC</span></div>
+            </div>
+            <div class="domain-row-bar">
+              <div class="bar-wrap">
+                <div class="bar-track"><div class="bar-fill data-bar" style="background:#F97316;width:0" data-target="9"></div></div>
+                <span class="bar-count" style="color:#F97316">22 681 chunks</span>
+              </div>
+              <p class="domain-detail">Reglements sportifs complets : clauses antidopage, procedures de controle, sanctions specifiques par sport</p>
+            </div>
+          </div>
+          <div class="domain-row" style="border-left-color:#F59E0B;margin-top:16px">
+            <div class="domain-row-info">
+              <span class="domain-row-label">Nutrition</span>
+              <div class="domain-sources"><span class="domain-source-tag">EFSA</span><span class="domain-source-tag">NIH</span><span class="domain-source-tag">DGCCRF</span></div>
+            </div>
+            <div class="domain-row-bar">
+              <div class="bar-wrap">
+                <div class="bar-track"><div class="bar-fill data-bar" style="background:#F59E0B;width:0" data-target="4"></div></div>
+                <span class="bar-count" style="color:#F59E0B">9 328 chunks</span>
+              </div>
+              <p class="domain-detail">Upper Levels, allegations sante, Novel Foods, contaminants</p>
+            </div>
+          </div>
+          <p style="font-size:10px;color:rgba(74,86,114,0.4);text-transform:uppercase;letter-spacing:0.1em;padding-top:8px;text-align:center;border-top:1px solid rgba(255,255,255,0.04);margin-top:16px">Aucune approximation. Chaque reponse est sourcee.</p>
+        </div>
+      </div>
+
+      <!-- Space 2: Donnees de support -->
+      <div style="margin-bottom:56px">
+        <div class="space-header">
+          <div class="line" style="background:rgba(28,37,56,0.3)"></div>
+          <p class="label" style="color:var(--obsidian-300)">DONNEES DE SUPPORT</p>
+          <div class="line" style="background:rgba(28,37,56,0.3)"></div>
+        </div>
+        <p style="font-size:12px;color:var(--obsidian-300);text-align:center;max-width:576px;margin:0 auto 24px">
+          Ces donnees permettent d'identifier si un medicament courant, un ingredient cosmetique ou un materiau d'emballage contient une substance prohibee.
+        </p>
+        <div class="support-grid">
+          <div class="glass-card support-card" style="border-left-color:#8B5CF6">
+            <div class="support-header"><span class="label">Pharma</span><span class="count" style="color:#8B5CF6">79 000+</span></div>
+            <div class="domain-sources" style="margin-bottom:8px"><span class="domain-source-tag">AFLD</span><span class="domain-source-tag">FDA</span><span class="domain-source-tag">EMA</span><span class="domain-source-tag">Health Canada</span></div>
+            <p class="support-unit">medicaments references</p>
+            <p class="domain-detail" style="margin-top:8px">79 000+ medicaments France&middot;USA&middot;Canada&middot;UE &mdash; RCP, AMM, interactions DDInter, pharmacovigilance</p>
+          </div>
+          <div class="glass-card support-card" style="border-left-color:#EC4899">
+            <div class="support-header"><span class="label">Cosmetiques</span><span class="count" style="color:#EC4899">20 024</span></div>
+            <div class="domain-sources" style="margin-bottom:8px"><span class="domain-source-tag">CosIng</span><span class="domain-source-tag">RAPEX</span><span class="domain-source-tag">DGCCRF</span></div>
+            <p class="support-unit">chunks</p>
+            <p class="domain-detail" style="margin-top:8px">Annexes II-VI, restrictions, colorants, conservateurs, UV</p>
+          </div>
+          <div class="glass-card support-card" style="border-left-color:#06B6D4">
+            <div class="support-header"><span class="label">Emballages</span><span class="count" style="color:#06B6D4">18 499</span></div>
+            <div class="domain-sources" style="margin-bottom:8px"><span class="domain-source-tag">FCCDB</span><span class="domain-source-tag">FCCMIGEX</span><span class="domain-source-tag">FCCPRIO</span></div>
+            <p class="support-unit">chunks</p>
+            <p class="domain-detail" style="margin-top:8px">Limites migration, monomeres, additifs, recyclage</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sports & Federations -->
+      <div class="sports-feds">
+        <div class="glass-card sports-feds-card">
+          <h3 class="sports-feds-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--kura-accent)"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+            20 sports couverts
+          </h3>
+          <div class="tag-wrap" id="sports-tags"></div>
+        </div>
+        <div class="glass-card sports-feds-card">
+          <h3 class="sports-feds-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--kura-accent)" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            20 federations &amp; agences
+          </h3>
+          <div class="tag-wrap" id="feds-tags"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SOLUTION / PIPELINE (bg obsidian-900)
+     ═══════════════════════════════════════════════════════════════ -->
+<div style="background:var(--obsidian-900)">
+
+<section id="solution" class="solution-section scroll-reveal" data-threshold="0.1">
+  <div class="solution-inner">
+    <p class="section-label">PIPELINE</p>
+    <h2 class="section-title">Comment ca marche</h2>
+    <p class="solution-subtitle">Kura dicte ; il ne delibere pas. Chaque verdict est code en dur dans notre coeur deterministe et verrouille par 10+ guardrails stricts.</p>
+
+    <div class="pipeline-layout">
+      <div class="pipeline-nav" id="pipeline-nav"></div>
+      <div class="pipeline-content" id="pipeline-content"></div>
+    </div>
+
+    <div class="glass-card-premium guarantee-block">
+      <div class="guarantee-inner">
+        <div class="guarantee-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="color:var(--kura-accent)">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="guarantee-title">Garantie anti-erreur</h3>
+          <p class="guarantee-text">Si une substance est interdite par l'AMA, KURA ne dira <strong style="color:white">JAMAIS</strong> qu'elle est autorisee. C'est une garantie technologique, pas une promesse.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     DEMO SECTION
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="demo" class="demo-section scroll-reveal" data-threshold="0.15">
+  <div class="demo-inner">
+    <p class="section-label">DEMO LIVE</p>
+    <h2 class="section-title">Testez maintenant</h2>
+    <p class="demo-subtitle">Le vrai moteur KURA. Entrez une substance, obtenez un verdict reglementaire.</p>
+
+    <div class="domain-tabs" id="domain-tabs"></div>
+
+    <div class="search-container search-glow" style="max-width:576px;margin:0 auto">
+      <div class="search-inner">
+        <input type="text" class="search-input" placeholder="Entrez une substance..." id="demo-search-input">
+        <button class="search-btn" id="demo-search-btn">Verifier</button>
+      </div>
+    </div>
+    <div class="pills" style="margin-top:16px">
+      <button class="pill" onclick="document.getElementById('demo-search-input').value=this.textContent">Testosterone</button>
+      <button class="pill" onclick="document.getElementById('demo-search-input').value=this.textContent">Cafeine</button>
+      <button class="pill" onclick="document.getElementById('demo-search-input').value=this.textContent">Trimetazidine</button>
+      <button class="pill" onclick="document.getElementById('demo-search-input').value=this.textContent">Salbutamol</button>
+      <button class="pill" onclick="document.getElementById('demo-search-input').value=this.textContent">EPO</button>
+      <button class="pill" onclick="document.getElementById('demo-search-input').value=this.textContent">Cannabis</button>
+    </div>
+
+    <div style="margin-top:40px">
+      <a href="#contact" class="demo-cta">
+        Acces au dashboard complet
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PLATFORM SECTION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="platform-section scroll-reveal" data-threshold="0.1">
+  <div class="platform-grid-bg"></div>
+  <div class="platform-inner">
+    <p class="section-label">PLATEFORME</p>
+    <h2 class="section-title" style="font-size:clamp(1.5rem,5vw,3rem)">Deux Produits. Un Ecosysteme.</h2>
+    <p class="platform-subline">Un centre de commandement pour le staff. Une application gardienne pour les athletes. Concus ensemble, fonctionnant comme un seul.</p>
+
+    <div class="platform-tabs">
+      <div class="platform-tabs-inner">
+        <button class="platform-tab active" onclick="switchPlatformTab('dashboard',this)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          Dashboard Staff
+        </button>
+        <button class="platform-tab" onclick="switchPlatformTab('app',this)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+          Application Athlete
+        </button>
+      </div>
+    </div>
+
+    <div class="platform-content">
+      <div class="platform-features" id="platform-features"></div>
+      <div id="platform-mockup"></div>
+    </div>
+
+    <div class="platform-cta-row">
+      <a href="#contact" class="platform-cta">
+        Demander l'acces beta
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+</div><!-- /obsidian-900 bg -->
+
+<!-- Wave separator -->
+<div class="wave-separator">
+  <div class="wave-line"></div>
+  <div class="wave-node"><div class="wave-node-glow"></div>
+    <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M7 1L13 4.5V11.5L7 15L1 11.5V4.5L7 1Z" stroke="var(--kura-accent)" stroke-width="0.8" stroke-opacity="0.25" fill="none"/><circle cx="7" cy="8" r="1.5" fill="var(--kura-accent)" fill-opacity="0.15"/></svg>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     DOMAINS SECTION (with bg video)
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="bg-video-wrap">
+  <video class="bg-video-el" src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/demo-capsule.mp4" autoplay muted loop playsinline preload="auto"></video>
+  <section class="domains-section scroll-reveal" data-threshold="0.15">
+    <div class="domains-inner">
+      <p class="section-label">COUVERTURE</p>
+      <h2 class="section-title">5 domaines, 1 seul moteur</h2>
+      <div class="domains-bento" id="domains-bento"></div>
+      <!-- CTA transition vers Contact -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:48px;padding-top:48px;border-top:1px solid rgba(168,181,208,0.08)">
+        <p style="color:var(--obsidian-100);font-size:15px;text-align:center;max-width:480px">
+          La base la plus complete du sport mondial — disponible pour votre organisation.
+        </p>
+        <a href="#contact" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:10px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);color:var(--kura-accent);font-size:14px;font-weight:600;transition:all 0.2s;text-decoration:none" onmouseover="this.style.background='rgba(0,212,255,0.15)'" onmouseout="this.style.background='rgba(0,212,255,0.08)'">
+          Demander un acces
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Wave separator -->
+<div class="wave-separator">
+  <div class="wave-line"></div>
+  <div class="wave-node"><div class="wave-node-glow"></div>
+    <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M7 1L13 4.5V11.5L7 15L1 11.5V4.5L7 1Z" stroke="var(--kura-accent)" stroke-width="0.8" stroke-opacity="0.25" fill="none"/><circle cx="7" cy="8" r="1.5" fill="var(--kura-accent)" fill-opacity="0.15"/></svg>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONTACT SECTION
+     ═══════════════════════════════════════════════════════════════ -->
+<div style="background:var(--obsidian-900)">
+<section id="contact" class="contact-section scroll-reveal" data-threshold="0.15">
+  <div class="contact-dot-bg"></div>
+  <div class="contact-inner">
+    <p class="section-label">ACCES</p>
+    <h2 class="section-title">Demander un acces beta</h2>
+    <p class="contact-limited">Places limitees. Acces prioritaire pour les clubs et federations.</p>
+
+    <div class="contact-layout">
+      <div class="contact-video-wrap">
+        <video class="contact-video" src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/contact-shield.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <div class="contact-video-overlay"></div>
+        <div class="contact-video-text">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" style="color:var(--kura-accent);margin-bottom:16px;filter:drop-shadow(0 0 20px rgba(0,212,255,0.5))">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p style="color:white;font-weight:700;font-size:18px;text-align:center">Protegez vos athletes</p>
+          <p style="color:rgba(168,181,208,0.8);font-size:14px;text-align:center;margin-top:4px">320K references verifiees &middot; 0 erreur &middot; 1.3 secondes</p>
+        </div>
+        <div class="contact-video-ring"></div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <form class="contact-form" onsubmit="event.preventDefault();alert('Demande envoyee ! Nous reviendrons vers vous sous 24h.')">
+          <div>
+            <label for="fullName">Nom complet</label>
+            <input id="fullName" name="fullName" type="text" required placeholder="Jean Dupont">
+          </div>
+          <div>
+            <label for="email">Email professionnel</label>
+            <input id="email" name="email" type="email" required placeholder="jean@club.com">
+          </div>
+          <div>
+            <label for="organisation">Organisation</label>
+            <input id="organisation" name="organisation" type="text" required placeholder="FC Geneve">
+          </div>
+          <div>
+            <label for="role">Role</label>
+            <div class="select-wrap">
+              <select id="role" name="role" required>
+                <option value="" disabled selected>Selectionnez votre role</option>
+                <option>Medecin</option>
+                <option>Nutritionniste</option>
+                <option>Federation</option>
+                <option>Club</option>
+                <option>Athlete</option>
+                <option>Laboratoire</option>
+                <option>Institution</option>
+                <option>Universite</option>
+              </select>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+          <button type="submit" class="contact-submit btn-press">Securiser mes verifications</button>
+          <p class="contact-footer-text">Reponse sous 24h &middot; Demo personnalisee &middot; Sans engagement</p>
+        </form>
+        <p class="contact-email">
+          <a href="mailto:contact@kurasport.ch">contact@kurasport.ch</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="site-footer">
+  <div class="footer-sep"></div>
+  <div class="footer-inner">
+    <div class="footer-row">
+      <div class="footer-logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--kura-accent)">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+        <span class="text">KURA</span>
+        <span class="tagline">Intelligence reglementaire augmentee</span>
+      </div>
+      <div class="footer-links">
+        <a href="/legal">Mentions legales</a><span class="sep">&middot;</span>
+        <a href="/privacy">Confidentialite</a><span class="sep">&middot;</span>
+        <a href="/terms">CGU</a>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:6px;border:1px solid rgba(0,212,255,0.2);background:rgba(0,212,255,0.04);font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,212,255,0.6)"><span style="width:5px;height:5px;border-radius:50%;background:rgba(0,212,255,0.5);display:inline-block"></span>WADA</span>
+        <span style="display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:6px;border:1px solid rgba(0,212,255,0.2);background:rgba(0,212,255,0.04);font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,212,255,0.6)"><span style="width:5px;height:5px;border-radius:50%;background:rgba(0,212,255,0.5);display:inline-block"></span>IOC</span>
+        <span style="display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:6px;border:1px solid rgba(0,212,255,0.2);background:rgba(0,212,255,0.04);font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,212,255,0.6)"><span style="width:5px;height:5px;border-radius:50%;background:rgba(0,212,255,0.5);display:inline-block"></span>RGPD</span>
+      </div>
+    </div>
+    <p class="footer-copyright">&copy; 2026 KURA Intelligence SA</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     STICKY CTA (mobile)
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="sticky-cta" id="sticky-cta">
+  <a href="#contact">Securiser mes verifications</a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  // ── Loading screen ──
+  const loader = document.getElementById('loading-screen');
+  setTimeout(() => loader.classList.replace('drawing', 'revealed'), 100);
+  setTimeout(() => loader.classList.add('exit'), 1200);
+  setTimeout(() => loader.remove(), 1800);
+
+  // ── Hero reveal ──
+  setTimeout(() => {
+    document.querySelectorAll('.hero-el').forEach(el => {
+      el.classList.add('show');
+      el.style.filter = '';
+    });
+    document.querySelectorAll('.kura-letter').forEach(el => el.classList.add('show'));
+    document.querySelectorAll('.hero-shield-path, .hero-check-path').forEach(el => el.classList.add('draw'));
+    document.querySelector('.shield-glow').classList.add('show');
+    document.querySelector('.accent-line').classList.add('show');
+  }, 1700);
+
+  // ── Navbar scroll behavior ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    const threshold = window.innerHeight * 0.2;
+    navbar.classList.toggle('visible', y >= threshold);
+    navbar.classList.toggle('scrolled', y > 50);
+  }, { passive: true });
+
+  // ── Sticky CTA (mobile) ──
+  const stickyCta = document.getElementById('sticky-cta');
+  const heroEl = document.getElementById('hero');
+  if (stickyCta && heroEl) {
+    const obs = new IntersectionObserver(([e]) => {
+      stickyCta.classList.toggle('show', !e.isIntersecting);
+    }, { threshold: 0.1 });
+    obs.observe(heroEl);
+  }
+
+  // ── Hero interactive dot grid ──
+  const heroCanvas = document.getElementById('hero-canvas');
+  if (heroCanvas) {
+    const ctx = heroCanvas.getContext('2d');
+    const mouse = { x: -1000, y: -1000 };
+    const SPACING = 40, DOT_R = 1.2, CONN = 120, MOUSE_R = 200;
+    let dots = [];
+
+    function resizeCanvas() {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      heroCanvas.width = innerWidth * dpr;
+      heroCanvas.height = innerHeight * dpr;
+      heroCanvas.style.width = innerWidth + 'px';
+      heroCanvas.style.height = innerHeight + 'px';
+      ctx.scale(dpr, dpr);
+      dots = [];
+      for (let r = 0; r < Math.ceil(innerHeight / SPACING) + 2; r++)
+        for (let c = 0; c < Math.ceil(innerWidth / SPACING) + 2; c++)
+          dots.push({ x: c * SPACING, y: r * SPACING, a: 0.08 + Math.random() * 0.07 });
+    }
+
+    function drawGrid() {
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      for (let i = 0; i < dots.length; i++) {
+        const d = dots[i];
+        const dm = Math.hypot(d.x - mouse.x, d.y - mouse.y);
+        let a = d.a, r = DOT_R;
+        if (dm < MOUSE_R) { const inf = 1 - dm / MOUSE_R; a += inf * 0.6; r += inf * 1.5; }
+        if (dm < MOUSE_R) {
+          for (let j = i + 1; j < dots.length; j++) {
+            const d2 = dots[j], dist = Math.hypot(d.x - d2.x, d.y - d2.y);
+            if (dist < CONN && Math.hypot(d2.x - mouse.x, d2.y - mouse.y) < MOUSE_R) {
+              ctx.beginPath(); ctx.moveTo(d.x, d.y); ctx.lineTo(d2.x, d2.y);
+              ctx.strokeStyle = `rgba(0,212,255,${(1 - dm / MOUSE_R) * (1 - dist / CONN) * 0.3})`;
+              ctx.lineWidth = 0.5; ctx.stroke();
+            }
+          }
+        }
+        ctx.beginPath(); ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0,212,255,${a})`; ctx.fill();
+      }
+      requestAnimationFrame(drawGrid);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+    resizeCanvas();
+    requestAnimationFrame(drawGrid);
+  }
+
+  // ── Scroll reveal (IntersectionObserver) ──
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.scroll-reveal').forEach(el => revealObs.observe(el));
+
+  // ── Stats count-up ──
+  const statsObs = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    statsObs.disconnect();
+    document.querySelectorAll('.stat-item').forEach((item, idx) => {
+      setTimeout(() => {
+        item.classList.add('visible');
+        const end = parseInt(item.dataset.count);
+        const suffix = item.dataset.suffix || '';
+        const prefix = item.dataset.prefix || '';
+        const numEl = item.querySelector('.stat-number');
+        const start = performance.now();
+        const dur = 2000 + idx * 200;
+        function tick(now) {
+          const p = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const val = Math.round(eased * end);
+          numEl.textContent = prefix + val.toLocaleString('fr-FR') + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }, idx * 150);
+    });
+  }, { threshold: 0.15 });
+  // Delay observation until loading screen gone
+  setTimeout(() => {
+    const sb = document.querySelector('.stats-bar');
+    if (sb) statsObs.observe(sb);
+  }, 2600);
+
+  // ── Statement section (scroll-driven char reveal) ──
+  const STATEMENT = "Imaginez un monde ou chaque prise est verifiee, tracee et securisee dans un centre de commandement infaillible — eliminant le dopage accidentel tout en propulsant la performance d'elite.";
+  const HIGHLIGHTS = ['verifiee', 'infaillible', 'elite'];
+  const stmtContainer = document.getElementById('statement-text');
+  if (stmtContainer) {
+    const charEls = [];
+    const words = STATEMENT.split(' ');
+    words.forEach((word, wi) => {
+      const isHL = HIGHLIGHTS.some(h => word.toLowerCase().includes(h.toLowerCase()));
+      const span = document.createElement('span');
+      span.className = 'statement-word';
+      word.split('').forEach(ch => {
+        const s = document.createElement('span');
+        s.className = 'statement-char';
+        s.style.color = isHL ? 'var(--kura-accent)' : 'var(--foreground)';
+        s.textContent = ch;
+        charEls.push(s);
+        span.appendChild(s);
+      });
+      stmtContainer.appendChild(span);
+      // space between words counts as a char for delay
+      if (wi < words.length - 1) charEls.push(null);
+    });
+
+    function updateStatement() {
+      const rect = stmtContainer.getBoundingClientRect();
+      const vh = innerHeight;
+      const start = vh * 0.85, end = vh * 0.2;
+      const progress = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
+      const total = charEls.length;
+      for (let i = 0; i < total; i++) {
+        if (!charEls[i]) continue;
+        const charPos = i / total;
+        charEls[i].style.opacity = Math.max(0, Math.min(1, (progress - charPos * 0.7) / 0.3));
+      }
+    }
+    window.addEventListener('scroll', updateStatement, { passive: true });
+    updateStatement();
+  }
+
+  // ── Brand reveal (scroll-driven) ──
+  const brandSection = document.getElementById('brand-reveal');
+  const brandBg = document.getElementById('brand-bg-overlay');
+
+  // Build dissolving text
+  const TEXT_LINES = [
+    { text: "C'est", isLabel: true, isCyan: true },
+    { text: "L'Intelligence", isLabel: false, isCyan: false },
+    { text: 'Reglementaire', isLabel: false, isCyan: false },
+    { text: 'pour le Sport.', isLabel: false, isCyan: true },
+  ];
+  const brandChars = [];
+  TEXT_LINES.forEach((line, li) => {
+    const container = document.getElementById('brand-line-' + li);
+    if (!container) return;
+    line.text.split('').forEach(ch => {
+      const s = document.createElement('span');
+      s.className = 'brand-char';
+      s.textContent = ch === ' ' ? '\u00A0' : ch;
+      s.style.opacity = '1';
+      container.appendChild(s);
+      brandChars.push({ el: s, lineIdx: li });
+    });
+  });
+
+  // Build scan columns
+  const SCAN_COLS = [
+    ['TESTOSTERONE', 'S1.1A', 'NANDROLONE', 'ART. 4.2.2', 'STANOZOLOL', 'CLENBUTEROL', 'S1.2', 'METHYLTREN.', 'BOLDENONE', 'ART. 2.1', 'DHEA', 'ANDROSTEN.'],
+    ['EPO', 'S2.1', 'DARBEPOETIN', 'HGH', 'ART. 10.2', 'PEGINESATIDE', 'COBALT', 'S2.2', 'XENON', 'AICAR', 'GW1516', 'FG-4592'],
+    ['CANNABIS', 'S8', 'GLUCOCORT.', 'S9', 'FUROSEMIDE', 'S5', 'ART. 4.3.1', 'PROBENECIDE', 'TAMOXIFENE', 'S4.1', 'INSULINE', 'S2.3'],
+    ['MELDONIUM', 'S4.5', 'TRIMETAZIDINE', 'ART. 7.1', 'HIGENAMINE', 'OCTODRINE', 'DMAA', 'SARMs', 'ART. 10.12.1', 'OSTARINE', 'LIGANDROL', 'RAD-140'],
+  ];
+  const scanCols = document.getElementById('scan-columns');
+  const scanColEls = [];
+  const colCount = innerWidth < 640 ? 2 : 4;
+  SCAN_COLS.slice(0, colCount).forEach(terms => {
+    const col = document.createElement('div');
+    col.className = 'scan-col';
+    [...terms, ...terms, ...terms].forEach(t => {
+      const s = document.createElement('span');
+      s.className = 'scan-term ' + (t.startsWith('ART.') || t.startsWith('S') ? 'code' : 'substance');
+      s.textContent = t;
+      col.appendChild(s);
+    });
+    scanCols.appendChild(col);
+    scanColEls.push(col);
+  });
+
+  function easeOut(t) { return 1 - (1 - t) * (1 - t) * (1 - t); }
+  function phase(p, s, e) { return Math.max(0, Math.min(1, (p - s) / (e - s))); }
+
+  if (brandSection) {
+    function updateBrand() {
+      const rect = brandSection.getBoundingClientRect();
+      const p = Math.max(0, Math.min(1, -rect.top / (rect.height - innerHeight)));
+
+      // Dissolve chars
+      let gi = 0;
+      TEXT_LINES.forEach((line, li) => {
+        const chars = line.text.split('');
+        const rli = TEXT_LINES.length - 1 - li;
+        chars.forEach((ch, ci) => {
+          const cd = brandChars[gi];
+          if (!cd) { gi++; return; }
+          const lineStart = 0.08 + rli * 0.03;
+          const cDelay = (ci / chars.length) * 0.25;
+          const charStart = lineStart + cDelay * 0.04;
+          const charEnd = charStart + 0.10;
+          const cp = phase(p, charStart, charEnd);
+          const eased = easeOut(cp);
+          cd.el.style.opacity = String(1 - eased);
+          if (cp > 0 && cp < 1) {
+            const angle = -Math.PI / 2 + ((gi * 17 + 5) * 31 % 314 - 157) / 100;
+            const edgeness = Math.abs(ci - chars.length / 2) / (chars.length / 2);
+            const dist = 25 + edgeness * 55 + ((gi * 17 + 5) * 13 % 35);
+            const tx = Math.cos(angle) * dist * eased;
+            const ty = Math.sin(angle) * dist * eased;
+            cd.el.style.transform = `translate3d(${tx}px,${ty}px,0) rotate(${eased * 18}deg) scale(${1 - eased * 0.2})`;
+          } else {
+            cd.el.style.transform = '';
+          }
+          gi++;
+        });
+      });
+
+      // Scan cascade
+      const scanVisible = phase(p, 0.18, 0.25);
+      const scanFade = phase(p, 0.50, 0.60);
+      const scanAlpha = Math.min(easeOut(scanVisible), 1 - easeOut(scanFade));
+      document.getElementById('scan-container').style.opacity = scanAlpha;
+      scanColEls.forEach((col, i) => {
+        const sp = phase(p, 0.18, 0.58);
+        col.style.transform = `translate3d(0,${sp * (1 + i * 0.3) * -500}px,0)`;
+      });
+
+      // KURA letters
+      for (let i = 0; i < 4; i++) {
+        const l = document.getElementById('bk-' + i);
+        const ls = 0.45 + i * 0.04;
+        const lp = phase(p, ls, ls + 0.12);
+        if (lp <= 0) { l.style.opacity = '0'; continue; }
+        const e = easeOut(lp);
+        l.style.clipPath = `inset(${(1 - e) * 100}% 0 0 0)`;
+        l.style.opacity = e;
+        l.style.transform = `translate3d(0,${(1 - e) * 20}px,0)`;
+      }
+
+      // KURA scale + glow
+      const kura = document.getElementById('brand-kura');
+      const sp2 = easeOut(phase(p, 0.55, 0.85));
+      kura.style.transform = `scale(${1 + sp2 * 0.3})`;
+      const g = easeOut(phase(p, 0.50, 0.80));
+      kura.style.textShadow = `0 0 ${30 + g * 60}px rgba(0,212,255,${g * 0.35}),0 0 ${60 + g * 100}px rgba(0,212,255,${g * 0.15})`;
+
+      // Rule
+      const rule = document.getElementById('brand-rule');
+      const re = easeOut(phase(p, 0.62, 0.78));
+      rule.style.transform = `scaleX(${re})`;
+      rule.style.opacity = re * 0.5;
+
+      // Tagline
+      const tag = document.getElementById('brand-tagline');
+      const te = easeOut(phase(p, 0.70, 0.88));
+      tag.style.opacity = te;
+      tag.style.transform = `translate3d(0,${(1 - te) * 20}px,0)`;
+
+      // Background
+      if (brandBg) brandBg.style.backgroundColor = `rgba(2,3,10,${0.4 + p * 0.55})`;
+    }
+    window.addEventListener('scroll', updateBrand, { passive: true });
+    updateBrand();
+  }
+
+  // ── Data coverage bars animation ──
+  const dataBars = document.querySelectorAll('.data-bar');
+  const dataObs = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    dataObs.disconnect();
+    dataBars.forEach(bar => {
+      setTimeout(() => { bar.style.width = bar.dataset.target + '%'; }, 200);
+    });
+  }, { threshold: 0.1 });
+  const dcSection = document.querySelector('.data-coverage');
+  if (dcSection) dataObs.observe(dcSection);
+
+  // ── Cases section ──
+  const CASES = [
+    { name: 'Iga Swiatek', year: 2024, sport: 'Tennis', substance: 'Trimetazidine via melatonine', sanction: '1 mois', drama: 'Contaminated melatonin. WTA world #1. 1-month ban.', kura: 'Would have been flagged in 1.3s.' },
+    { name: 'Jannik Sinner', year: 2024, sport: 'Tennis', substance: 'Clostebol via creme kine', sanction: 'En appel', drama: "Physiotherapist's cream. Wimbledon champion. ATP appeal.", kura: 'Would have been flagged in 1.3s.' },
+    { name: 'Mamadou Sakho', year: 2016, sport: 'Football', substance: 'Higenamine fat-burner', sanction: 'Rate Euro 2016', drama: 'Fat-burner supplement. Liverpool star. Missed Euro 2016.', kura: 'Would have been flagged in 1.3s.' },
+    { name: 'Nadir Benhamou', year: 2022, sport: 'Rugby', substance: 'Canrenone (diuretique masquant)', sanction: '2 ans', drama: 'Masking diuretic detected in Pro D2. 2-year ban. Career interrupted.', kura: 'Would have been flagged in 1.3s.' },
+    { name: 'Joakim Noah', year: 2017, sport: 'Basketball', substance: 'Ligandrol SARM', sanction: '20 matchs', drama: 'SARM hidden in a supplement. 20-game suspension.', kura: 'Would have been flagged in 1.3s.' },
+    { name: 'Shelby Houlihan', year: 2021, sport: 'Athletisme', substance: 'Nandrolone', sanction: '4 ans', drama: 'Contaminated pork burrito. Olympic dreams. 4-year ban.', kura: 'Would have been flagged in 1.3s.' },
+  ];
+  const SPORT_COLORS = {
+    Tennis: { pill: 'background:rgba(34,197,94,.15);color:#4ade80;border-color:rgba(34,197,94,.25)', border: 'border-top-color:rgba(34,197,94,.6)' },
+    Football: { pill: 'background:rgba(59,130,246,.15);color:#60a5fa;border-color:rgba(59,130,246,.25)', border: 'border-top-color:rgba(59,130,246,.6)' },
+    Basketball: { pill: 'background:rgba(249,115,22,.15);color:#fb923c;border-color:rgba(249,115,22,.25)', border: 'border-top-color:rgba(249,115,22,.6)' },
+    Athletisme: { pill: 'background:rgba(168,85,247,.15);color:#c084fc;border-color:rgba(168,85,247,.25)', border: 'border-top-color:rgba(168,85,247,.6)' },
+  };
+  const DEF_COLORS = { pill: 'background:rgba(107,114,128,.15);color:#9ca3af;border-color:rgba(107,114,128,.25)', border: 'border-top-color:rgba(107,114,128,.6)' };
+
+  function makeCaseCard(c) {
+    const colors = SPORT_COLORS[c.sport] || DEF_COLORS;
+    return `<div class="glass-card hover-lift case-card" style="${colors.border}">
+      <div class="case-header">
+        <span class="case-prohibited-badge"><svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>PROHIBITED</span>
+        <span class="case-sport-pill" style="${colors.pill}">${c.sport}</span>
+        <span class="case-year">${c.year}</span>
+      </div>
+      <div class="case-body">
+        <h3>${c.name}</h3>
+        <p class="drama">${c.drama}</p>
+        <span class="case-substance">${c.substance}</span>
+      </div>
+      <div class="case-footer">
+        <div class="case-kura-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          <span>KURA</span>
+        </div>
+        <span class="case-kura-text">${c.kura}</span>
+        <span class="case-sanction">${c.sanction}</span>
+      </div>
+    </div>`;
+  }
+
+  const casesGrid = document.getElementById('cases-grid');
+  const casesScroll = document.getElementById('cases-scroll');
+  CASES.forEach(c => {
+    casesGrid.innerHTML += makeCaseCard(c);
+    casesScroll.innerHTML += `<div>${makeCaseCard(c)}</div>`;
+  });
+
+  // ── Clients marquee ──
+  const CLIENTS = [
+    { title: 'Clubs professionnels', desc: 'Staff medical, nutritionnistes, direction sportive' },
+    { title: 'Federations sportives', desc: 'FFR, FFF, Swiss Olympic, federations nationales' },
+    { title: 'Medecins du sport', desc: 'Consultation, prescription, suivi athletes' },
+    { title: 'Nutritionnistes', desc: 'Complements alimentaires, plans nutritionnels' },
+    { title: 'Laboratoires', desc: 'Analyse de produits, certification, R&D' },
+    { title: 'Marques de complements', desc: 'Verification formulation, conformite etiquetage' },
+    { title: 'Agences antidopage', desc: 'AFLD, UKAD, NADA — aide a la decision' },
+    { title: 'Universites & Recherche', desc: 'Publications, validation clinique, etudes' },
+  ];
+  const ICONS = [
+    'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2',
+    'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
+    'M22 12h-4l-3 9L9 3l-3 9H2',
+    'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4z',
+    'M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h6',
+    'M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z',
+    'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944',
+    'M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z',
+  ];
+
+  function makeClientCard(c, idx) {
+    return `<div class="glass-card hover-glow client-card">
+      <div class="client-card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${ICONS[idx % ICONS.length]}"/></svg>
+        <span>${c.title}</span>
+      </div>
+      <p>${c.desc}</p>
+    </div>`;
+  }
+
+  const terrain = CLIENTS.slice(0, 4);
+  const ecosystem = CLIENTS.slice(4, 8);
+  const marqueeT = document.getElementById('marquee-terrain');
+  const marqueeE = document.getElementById('marquee-ecosystem');
+  [...terrain, ...terrain].forEach((c, i) => { marqueeT.innerHTML += makeClientCard(c, i % 4); });
+  [...ecosystem, ...ecosystem].forEach((c, i) => { marqueeE.innerHTML += makeClientCard(c, 4 + i % 4); });
+
+  // ── Pipeline / Solution ──
+  const STEPS = [
+    { tag: '1', label: 'Votre question', detail: "Le medecin tape le nom d'une substance", icon: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z' },
+    { tag: '2', label: 'Verification instantanee', detail: "Croisement automatique avec la Liste des interdictions WADA et l'ensemble du corpus reglementaire sportif", icon: 'M12 8V4l8 8-8 8v-4H4V8z' },
+    { tag: '3', label: 'Analyse contextuelle', detail: "Sport, periode de competition, voie d'administration", icon: 'M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z' },
+    { tag: '4', label: 'Verdict securise', detail: 'Resultat garanti — impossible de valider une substance interdite', icon: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z' },
+    { tag: '5', label: 'Certificat tracable', detail: "Chaque verification genere un certificat horodate et opposable — preuve de diligence du staff, defense recevable au TAS", icon: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M9 15l2 2 4-4' },
+  ];
+  let activeStep = 0;
+
+  function renderPipeline() {
+    const nav = document.getElementById('pipeline-nav');
+    const content = document.getElementById('pipeline-content');
+    nav.innerHTML = '';
+    content.innerHTML = '';
+    STEPS.forEach((s, i) => {
+      nav.innerHTML += `<button class="pipeline-nav-btn ${i === activeStep ? 'active' : ''}" onclick="setStep(${i})">
+        <div class="pipeline-nav-num">${s.tag}</div>
+        <span class="pipeline-nav-label">${s.label}</span>
+      </button>`;
+      const progress = STEPS.map((_, j) => `<div class="pipeline-progress-bar" style="background:${j <= i ? 'rgba(0,212,255,0.6)' : 'rgba(168,181,208,0.1)'}"></div>`).join('');
+      content.innerHTML += `<div class="glass-card-premium pipeline-card ${i === activeStep ? 'active' : ''}">
+        <div class="pipeline-card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--kura-accent)"><path d="${s.icon}"/></svg></div>
+        <div class="pipeline-card-step">Etape ${s.tag}</div>
+        <h3 class="pipeline-card-title">${s.label}</h3>
+        <p class="pipeline-card-detail">${s.detail}</p>
+        <div class="pipeline-progress">${progress}</div>
+      </div>`;
+    });
+  }
+  renderPipeline();
+  window.setStep = function(i) { activeStep = i; renderPipeline(); };
+
+  // ── Domains bento ──
+  const DOMAINS = [
+    { label: 'Antidopage', desc: "Liste des interdictions, AUT, seuils, reglements federations & standards sportifs", source: 'WADA / AMA', count: '1 029', color: '#EF4444' },
+    { label: 'Nutrition', desc: 'Limites de securite, allegations', source: 'EFSA / ANSES', count: '4 500+', color: '#F59E0B' },
+    { label: 'Pharma', desc: 'Medicaments references France, USA, Canada, UE + interactions', source: 'AFLD / FDA / EMA', count: '79 000+', color: '#8B5CF6' },
+    { label: 'Cosmetiques', desc: 'Substances restreintes, annexes UE', source: 'CosIng / UE', count: '20 000+', color: '#EC4899' },
+    { label: 'Emballages', desc: 'Materiaux au contact, migration', source: 'FCM / ECHA', count: '18 100+', color: '#06B6D4' },
+  ];
+  const domainsBento = document.getElementById('domains-bento');
+  DOMAINS.forEach((d, i) => {
+    const isHero = i === 0;
+    domainsBento.innerHTML += `<div class="glass-card hover-lift domain-card ${isHero ? 'hero-card' : ''}" style="border-left-color:${d.color}">
+      ${isHero ? '<div class="domain-card-icon" style="background:rgba(239,68,68,0.1)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="color:#FCA5A5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' : ''}
+      <span class="name">${d.label}</span>
+      <p class="desc">${d.desc}</p>
+      <p class="source">${d.source}</p>
+      <div><span class="count" style="color:${d.color}">${d.count}</span><span class="unit">substances</span></div>
+    </div>`;
+  });
+
+  // ── Domain tabs (demo) ──
+  const domainTabs = document.getElementById('domain-tabs');
+  DOMAINS.forEach((d, i) => {
+    domainTabs.innerHTML += `<button class="domain-tab ${i === 0 ? 'active' : ''}" onclick="document.querySelectorAll('.domain-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active')">
+      <span class="dot" style="background:${d.color}"></span>
+      <span>${d.label}</span>
+    </button>`;
+  });
+
+  // ── Sports & Feds tags ──
+  const SPORTS = ['Football', 'Tennis', 'Athletisme', 'Basketball', 'Rugby', 'Cyclisme', 'Natation', 'MMA / UFC', 'Boxe', 'Handball', 'Volleyball', 'Hockey', 'Ski', 'Triathlon', 'Halterophilie', 'Gymnastique', 'Judo', 'Escrime', 'Aviron', 'Cricket'];
+  const FEDS = ['WADA', 'IOC', 'FIFA', 'UEFA', 'UCI', 'USADA', 'ITA', 'UKAD', 'NADA', 'AFLD', 'World Athletics', 'NFL', 'NBA', 'NHL', 'UFC', 'NCAA', 'CHINADA', 'CCES', 'Sport Ireland', 'Antidoping CH'];
+  document.getElementById('sports-tags').innerHTML = SPORTS.map(s => `<span class="sport-tag">${s}</span>`).join('');
+  document.getElementById('feds-tags').innerHTML = FEDS.map(f => `<span class="fed-tag">${f}</span>`).join('');
+
+  // ── Platform section ──
+  const PLATFORM = {
+    dashboard: {
+      target: 'Pour les equipes medicales & nutritionnistes',
+      features: [
+        'Verdict antidopage instantane sur toute substance',
+        'Suivi de conformite de toute l\'equipe en temps reel',
+        'Evaluation des risques pre-competition par athlete',
+        'Certificats tracables pour chaque verification',
+        'Alertes proactives sur les substances prohibees',
+      ],
+    },
+    app: {
+      target: 'Pour les athletes',
+      features: [
+        'Scannez tout complement — verdict en 1,3 seconde',
+        'Suivi du stack personnel avec alertes d\'expiration',
+        'KURA Score en direct : votre indice de conformite',
+        'Synchronisation avec votre staff medical en temps reel',
+        'Rappels quotidiens de localisation & calendrier de controles',
+      ],
+    },
+  };
+
+  window.switchPlatformTab = function(tab, btn) {
+    document.querySelectorAll('.platform-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    renderPlatform(tab);
+  };
+
+  function renderPlatform(tab) {
+    const data = PLATFORM[tab];
+    const features = document.getElementById('platform-features');
+    const mockup = document.getElementById('platform-mockup');
+
+    features.innerHTML = `<h3>${data.target}</h3><ul>${data.features.map(f =>
+      `<li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>${f}</li>`
+    ).join('')}</ul>`;
+
+    if (tab === 'dashboard') {
+      mockup.innerHTML = `<div class="browser-mockup">
+        <div class="browser-chrome">
+          <span class="browser-dot" style="background:#FF5F57"></span>
+          <span class="browser-dot" style="background:#FEBC2E"></span>
+          <span class="browser-dot" style="background:#28C840"></span>
+          <div class="browser-url"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:rgba(255,255,255,.3)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>kura.kurasport.ch/app/athletes</span></div>
+        </div>
+        <div class="browser-content">
+          <div class="browser-sidebar">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="browser-main">
+            <div class="browser-main-header">
+              <div><p style="font-size:10px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.1em;font-family:JetBrains Mono,monospace;margin-bottom:2px">Athletes</p><p style="font-size:14px;font-weight:700;color:white">Team Compliance</p></div>
+              <div style="padding:4px 10px;border-radius:6px;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2);font-size:10px;color:#00D4FF;font-weight:700">+ Add athlete</div>
+            </div>
+            <div class="athlete-row"><div class="athlete-avatar">M</div><div class="athlete-info"><div class="name">M. Dupont</div><div class="sport">Cycling</div></div><div class="athlete-bar"><div class="athlete-bar-fill" style="width:98%;background:#00D4FF"></div></div><span class="athlete-score" style="color:#00D4FF">98</span><span class="athlete-status" style="color:#00D4FF;background:rgba(0,212,255,.15)">CLEAR</span></div>
+            <div class="athlete-row"><div class="athlete-avatar">S</div><div class="athlete-info"><div class="name">S. Martin</div><div class="sport">Athletics</div></div><div class="athlete-bar"><div class="athlete-bar-fill" style="width:74%;background:#F59E0B"></div></div><span class="athlete-score" style="color:#F59E0B">74</span><span class="athlete-status" style="color:#F59E0B;background:rgba(245,158,11,.15)">WARNING</span></div>
+            <div class="athlete-row"><div class="athlete-avatar">L</div><div class="athlete-info"><div class="name">L. Bernard</div><div class="sport">Swimming</div></div><div class="athlete-bar"><div class="athlete-bar-fill" style="width:99%;background:#00D4FF"></div></div><span class="athlete-score" style="color:#00D4FF">99</span><span class="athlete-status" style="color:#00D4FF;background:rgba(0,212,255,.15)">CLEAR</span></div>
+            <div class="athlete-row"><div class="athlete-avatar">A</div><div class="athlete-info"><div class="name">A. Moreau</div><div class="sport">Tennis</div></div><div class="athlete-bar"><div class="athlete-bar-fill" style="width:45%;background:#EF4444"></div></div><span class="athlete-score" style="color:#EF4444">45</span><span class="athlete-status" style="color:#EF4444;background:rgba(239,68,68,.15)">ALERT</span></div>
+            <div class="browser-stat-row">
+              <div class="browser-stat"><div class="label">Compliant</div><div class="value" style="color:#00D4FF">3/4</div></div>
+              <div class="browser-stat"><div class="label">Scans today</div><div class="value" style="color:rgba(255,255,255,.4)">12</div></div>
+              <div class="browser-stat"><div class="label">Alerts</div><div class="value" style="color:#EF4444">1</div></div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    } else {
+      mockup.innerHTML = `<div class="phone-mockup">
+        <div class="phone-frame">
+          <div class="phone-island"><div class="phone-island-bar"></div></div>
+          <div class="phone-screen">
+            <div class="phone-statusbar"><span class="time">9:41</span></div>
+            <div class="phone-header"><p class="greeting">Good morning,</p><p class="name">Marcus D.</p></div>
+            <div class="phone-score-card">
+              <div class="phone-score-inner" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                <div><p style="font-size:9px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.1em;font-family:JetBrains Mono,monospace">KURA Score</p><div style="display:flex;align-items:flex-end;gap:4px"><span style="font-size:30px;font-weight:900;color:white">94</span><span style="font-size:10px;color:rgba(255,255,255,.3);margin-bottom:4px">/100</span></div></div>
+                <div style="text-align:center"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><p style="font-size:8px;color:#00D4FF;font-weight:700;text-transform:uppercase;letter-spacing:.05em">CLEAN</p></div>
+              </div>
+              <div style="display:flex;gap:6px"><div style="padding:4px 8px;border-radius:6px;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2)"><p style="font-size:8px;font-weight:700;color:#00D4FF">47 days clean</p></div><div style="padding:4px 8px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)"><p style="font-size:8px;color:rgba(255,255,255,.4)">8 products verified</p></div></div>
+            </div>
+            <div class="phone-modules">
+              <div class="phone-module accent"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z"/></svg><span style="color:#00D4FF">Scanner</span></div>
+              <div class="phone-module"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span style="color:rgba(255,255,255,.5)">My Stack</span></div>
+              <div class="phone-module"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span style="color:rgba(255,255,255,.5)">Training</span></div>
+              <div class="phone-module"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span style="color:rgba(255,255,255,.5)">Health</span></div>
+            </div>
+            <div class="phone-tabbar">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
+            </div>
+          </div>
+          <div class="phone-home-bar"><div class="phone-home-bar-inner"></div></div>
+        </div>
+        <div class="phone-glow"></div>
+      </div>`;
+    }
+  }
+  renderPlatform('dashboard');
+
+})();
+</script>
+</body>
+</html>

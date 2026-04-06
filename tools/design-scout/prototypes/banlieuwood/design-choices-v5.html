@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banlieuwood — 3 Directions V5 (Audit DA)</title>
+<!--
+  ═══════════════════════════════════════════════════════════════
+  V4 — AUDIT & UPGRADE — Directeur Artistique Senior
+  ───────────────────────────────────────────────────────────────
+  CORRECTIONS PRINCIPALES vs V3 :
+
+  A — BÉTON BRUT
+  · Orange → Rouge cinéma #E8001C (A24, affiche politique, urgence)
+  · Nav "Menu" invisible → blanc 40% lisible
+  · Eyebrow générique → ligne précise avec croix de repérage
+  · Manifeste : under-line em → supprimé (trop décoratif)
+  · Stat chiffres : padding/rythme resserré, hiérarchie renforcée
+  · Films : hover indent supprimé (gêne la lecture), remplacé par
+    couleur seule — plus A24
+  · CTA final : inline styles → classes propres
+
+  B — PELLICULE VIVANTE
+  · Gold #D4A843 → Ivoire filmique #F0E6C8 (Dazed, 8½, less luxe)
+  · Teal badges supprimés → blanc/gris cinéma uniquement
+  · b-pour-etab : reformaté en grille éditoriale sans gras corporate
+  · b-numbers border-top gold → fine ligne blanche (moins magazine
+    de luxe, plus documentaire)
+  · Collage : captions retirées (trop UI) — titre apparaît au hover seul
+
+  C — COCKPIT CINÉMA
+  · Fond cream maintenu MAIS palette resserrée : orange seul, plus teal
+  · Hero : embed cockpit déplacé hors du hero — section dédiée propre
+  · Hero : titre plus grand, whitespace + radical au-dessus du fold
+  · c-splitflap : fond aligné avec les sections sombres (transitions)
+  · c-why : grille label/body resserrée, taille typo augmentée
+  · Teal complètement retiré de C → cohérence orange/noir/cream
+  ═══════════════════════════════════════════════════════════════
+-->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  /* A — palette cinéma radical */
+  --a-red:    #E8001C;   /* ← V4 : rouge A24/affiche vs orange startup */
+  --a-ink:    #060504;
+  --a-white:  #F4F0E8;   /* blanc chaud pellicule */
+
+  /* B — palette documentaire filmique */
+  --b-ivory:  #F0E6C8;   /* ← V4 : ivoire vs gold luxe */
+  --b-ink:    #0A0806;
+
+  /* C — palette EdTech cinéma resserrée */
+  --c-orange: #FF6B35;
+  --c-cream:  #F2EBD9;
+  --c-warm:   #EDE4CF;
+  --c-ink:    #0D0B09;
+
+  --font-c: 'Bebas Neue', sans-serif;
+  --font-b: 'Plus Jakarta Sans', sans-serif;
+  --font-m: 'Space Mono', monospace;
+}
+body { background: #060504; font-family: var(--font-b); color: white; overflow-x: hidden; }
+
+/* ── GRAIN CINÉMA GLOBAL — animé pour vivacité ── */
+#v4-grain {
+  position: fixed; inset: 0; z-index: 9998; pointer-events: none; opacity: .04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  animation: grain-shift .09s steps(1) infinite;
+}
+@keyframes grain-shift {
+  0%   { transform: translate(0,0); }
+  20%  { transform: translate(-2%,-3%); }
+  40%  { transform: translate(3%,1%); }
+  60%  { transform: translate(-1%,3%); }
+  80%  { transform: translate(2%,-2%); }
+}
+
+/* ── NAV CHOOSER ── */
+.chooser {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9000;
+  background: rgba(4,3,2,0.97); backdrop-filter: blur(20px);
+  border-bottom: 1px solid #181818; padding: 10px 40px;
+  display: flex; align-items: center; gap: 8px;
+}
+.chooser-label { color: #333; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-right: 8px; font-family: var(--font-m); }
+.c-btn {
+  padding: 7px 20px; border: 1px solid #1e1e1e; background: transparent;
+  color: #444; font-family: var(--font-b); font-size: 11px; letter-spacing: 1px;
+  cursor: pointer; transition: all 0.2s; text-transform: uppercase;
+}
+.c-btn:hover { border-color: #444; color: #888; }
+.c-btn.active { background: var(--a-red); border-color: var(--a-red); color: white; }
+.c-meta { margin-left: auto; font-size: 10px; color: #2a2a2a; letter-spacing: 1px; font-family: var(--font-m); }
+.c-meta span { color: #666; }
+.page { display: none; padding-top: 44px; }
+.page.active { display: block; }
+
+/* ── CURSEUR CUSTOM ── */
+.cursor {
+  position: fixed; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--a-red); z-index: 99999; pointer-events: none;
+  mix-blend-mode: difference; transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, opacity 0.2s; will-change: left, top;
+}
+.cursor.big { width: 28px; height: 28px; }
+.cursor.hidden { opacity: 0; }
+
+/* ── MARQUES DE CADRAGE ── */
+.frame-marks { position: absolute; inset: 24px; pointer-events: none; z-index: 10; }
+.frame-mark { position: absolute; width: 18px; height: 18px; }
+.frame-mark.tl { top:0; left:0; border-top: 1px solid rgba(255,255,255,0.12); border-left: 1px solid rgba(255,255,255,0.12); }
+.frame-mark.tr { top:0; right:0; border-top: 1px solid rgba(255,255,255,0.12); border-right: 1px solid rgba(255,255,255,0.12); }
+.frame-mark.bl { bottom:0; left:0; border-bottom: 1px solid rgba(255,255,255,0.12); border-left: 1px solid rgba(255,255,255,0.12); }
+.frame-mark.br { bottom:0; right:0; border-bottom: 1px solid rgba(255,255,255,0.12); border-right: 1px solid rgba(255,255,255,0.12); }
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-fast {
+  opacity: 0; transform: translateY(14px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-fast.visible { opacity: 1; transform: translateY(0); }
+
+/* ── PERFORATION PELLICULE 35mm ── */
+.film-strip-l {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 22px;
+  pointer-events: none; z-index: 6;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='32'%3E%3Crect x='6' y='8' width='10' height='16' rx='2' fill='none' stroke='%23ffffff' stroke-opacity='0.09' stroke-width='0.8'/%3E%3C/svg%3E");
+  background-size: 22px 32px; background-repeat: repeat-y;
+}
+
+/* ── CROIX DE REPÉRAGE ── */
+.reg-mark { display: inline-block; width: 16px; height: 16px; position: relative; flex-shrink: 0; }
+.reg-mark::before, .reg-mark::after { content: ''; position: absolute; background: rgba(255,255,255,0.25); }
+.reg-mark::before { left: 50%; top: 0; bottom: 0; width: 1px; transform: translateX(-50%); }
+.reg-mark::after { top: 50%; left: 0; right: 0; height: 1px; transform: translateY(-50%); }
+.reg-circle { position: absolute; inset: 3px; border: 0.8px solid rgba(255,255,255,0.18); border-radius: 50%; }
+
+/* ── LIVE PULSE ── */
+@keyframes livePulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(232,0,28,0.5); } 50% { box-shadow: 0 0 0 5px rgba(232,0,28,0); } }
+.live-dot { animation: livePulse 2s ease-in-out infinite; }
+@keyframes pulse-dot { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+
+/* ── BUTTON FINITION ── */
+button { cursor: pointer; }
+.btn-primary, .btn-secondary {
+  transition: transform 0.18s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.18s;
+}
+.btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.btn-secondary:hover { transform: translateY(-1px); }
+
+/* ── KEN BURNS ── */
+@keyframes kenBurns1 { 0%{transform:scale(1) translate(0,0)} 50%{transform:scale(1.07) translate(-1.5%,0.8%)} 100%{transform:scale(1) translate(0,0)} }
+@keyframes kenBurns2 { 0%{transform:scale(1.04) translate(1%,0)} 100%{transform:scale(1) translate(-1%,0.5%)} }
+@keyframes kenBurns3 { 0%{transform:scale(1) translate(0,0)} 100%{transform:scale(1.06) translate(1%,-0.8%)} }
+
+/* ── HERO LINE ANIMATION ── */
+@keyframes heroLineUp {
+  from { opacity: 0; transform: translateY(56px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   VARIANTE A — BÉTON BRUT  ★ V4
+   ADN : TYPOGRAPHIE = IMAGE. Zéro décor. Noir absolu.
+   Rouge cinéma à la place de l'orange startup.
+   Refs world-class : A24 catalogue, Godard affiches, Palace
+═══════════════════════════════════════════════════════════ */
+
+/* A01 HERO */
+.a-hero {
+  min-height: 100vh; background: #060504;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.a-hero-cinematic {
+  position: absolute; inset: 0; z-index: 1;
+  background-image: url('../../photos/_1177608.JPG');
+  background-size: cover; background-position: center 25%;
+  filter: saturate(0) brightness(0.22) contrast(1.3);
+  animation: kenBurns1 30s ease-in-out infinite;
+}
+.a-hero-cinematic::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(6,5,4,0.75) 0%, rgba(6,5,4,0.05) 55%, rgba(6,5,4,0.85) 100%);
+}
+/* Mot fantôme — plus grand, moins opacity = plus architectural */
+.a-hero-bg-word {
+  position: absolute; top: 50%; left: -3vw; transform: translateY(-52%);
+  font-family: var(--font-c); font-size: 34vw; color: rgba(255,255,255,0.018);
+  line-height: 1; white-space: nowrap; pointer-events: none; user-select: none;
+  letter-spacing: -4px;
+}
+.a-nav {
+  position: relative; z-index: 20; padding: 32px 64px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.a-logo { font-family: var(--font-c); font-size: 15px; letter-spacing: 6px; color: white; }
+/* V4 : nav droite visible (était #2a2a2a sur noir — illisible) */
+.a-nav-r {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-m); font-size: 10px; color: rgba(255,255,255,0.35);
+  letter-spacing: 3px; text-transform: uppercase;
+}
+.a-nav-line { width: 24px; height: 1px; background: rgba(255,255,255,0.25); }
+
+.a-hero-content {
+  position: absolute; bottom: 0; left: 0; z-index: 20;
+  padding: 0 64px 64px;
+}
+/* V4 : eyebrow avec croix de repérage — marque autheur */
+.a-eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-m); font-size: 9px; letter-spacing: 5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.28);
+  margin-bottom: 16px;
+}
+
+.a-h1 {
+  font-family: var(--font-c);
+  font-size: clamp(96px, 15.5vw, 230px);
+  line-height: 0.87; color: white;
+  white-space: nowrap;
+}
+/* V4 : rouge cinéma — pas orange startup */
+.a-h1-accent {
+  font-family: var(--font-c);
+  font-size: clamp(96px, 15.5vw, 230px);
+  line-height: 0.87;
+  color: var(--a-red);
+  white-space: nowrap;
+  margin-bottom: 44px;
+}
+.a-hero-bottom {
+  display: flex; align-items: flex-end; gap: 64px; margin-top: 44px;
+}
+.a-sub { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.8; max-width: 300px; font-weight: 300; }
+/* V4 : CTA rouge — cohérence palette */
+.a-cta-link {
+  font-family: var(--font-c); font-size: 14px; letter-spacing: 3px;
+  color: white; cursor: pointer; white-space: nowrap;
+  background: var(--a-red); border: none;
+  padding: 16px 44px; display: inline-block;
+  transition: filter 0.2s, transform 0.18s;
+}
+.a-cta-link:hover { filter: brightness(1.1); transform: translateX(3px); }
+
+/* Crédit vertical */
+.a-hero-credit {
+  position: absolute; right: 56px; top: 50%; z-index: 20;
+  transform: translateY(-50%) rotate(90deg);
+  font-family: var(--font-m); font-size: 8px; color: rgba(255,255,255,0.06);
+  letter-spacing: 5px; text-transform: uppercase; white-space: nowrap; pointer-events: none;
+}
+
+/* A02 TICKER — films défilants */
+.a-ticker {
+  background: #060504; border-top: 1px solid #0d0d0d; border-bottom: 1px solid #0d0d0d;
+  padding: 16px 0; overflow: hidden; white-space: nowrap;
+}
+.a-ticker-inner { display: inline-flex; gap: 0; animation: ticker 22s linear infinite; }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.a-ticker-item {
+  font-family: var(--font-c); font-size: 20px; letter-spacing: 4px;
+  color: rgba(255,255,255,0.1); padding: 0 44px;
+  transition: color 0.25s; cursor: default;
+}
+.a-ticker-item:hover { color: rgba(255,255,255,0.22); }
+.a-ticker-sep { color: rgba(255,255,255,0.06); font-size: 7px; align-self: center; }
+
+/* A03 MANIFESTE — plus d'em underline, la typo suffit */
+.a-manifeste {
+  background: #060504; padding: 72px 64px 56px; border-top: 1px solid #0d0d0d;
+  position: relative;
+}
+.a-manifeste-label {
+  font-family: var(--font-m); font-size: 9px; letter-spacing: 5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.18); margin-bottom: 52px; display: block;
+}
+.a-manifeste-text {
+  font-family: var(--font-c);
+  font-size: clamp(68px, 8vw, 124px);
+  line-height: 0.93; color: white; max-width: 960px;
+}
+/* V4 : em en rouge cinéma au lieu de blanc 70% — contraste dramatique */
+.a-manifeste-text em { color: var(--a-red); font-style: normal; }
+.a-manifeste-annotation {
+  position: absolute; right: 64px; bottom: 72px;
+  font-family: var(--font-c); font-size: 11px; color: rgba(255,255,255,0.12);
+  letter-spacing: 3px; text-transform: uppercase; text-align: right; line-height: 2;
+  pointer-events: none;
+}
+
+/* A03b RUPTURE — mot architectural entre manifeste et stats */
+.a-rupture {
+  background: #F4F0E8;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.a-rupture-word {
+  font-family: var(--font-c);
+  font-size: 28vw;
+  line-height: 1;
+  color: rgba(6,5,4,0.06);
+  letter-spacing: -4px;
+  user-select: none;
+  pointer-events: none;
+}
+.a-rupture-cite {
+  font-family: var(--font-m);
+  font-size: 11px;
+  color: rgba(6,5,4,0.4);
+  letter-spacing: 2px;
+  text-align: center;
+  margin-top: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+/* A04 STATS — hiérarchie radicale 1 chiffre domine */
+.a-stats { background: #060504; border-top: 1px solid #0d0d0d; }
+.a-stat-hero { padding: 72px 64px 0; }
+.a-stat-hero-val {
+  font-family: var(--font-c); color: white; display: block;
+  font-size: clamp(160px, 22vw, 320px); line-height: 0.82;
+  letter-spacing: -6px;
+}
+.a-stat-hero-meta { display: flex; align-items: baseline; gap: 24px; margin-top: 20px; }
+.a-stat-hero-lbl { font-family: var(--font-m); font-size: 12px; color: rgba(255,255,255,0.3); letter-spacing: 2px; text-transform: uppercase; }
+.a-stat-hero-since { font-family: var(--font-m); font-size: 10px; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
+.a-stat-sec-row { display: flex; border-top: 1px solid #0d0d0d; margin-top: 56px; }
+.a-stat-sec { padding: 40px 64px; border-right: 1px solid #0d0d0d; flex: 1; }
+.a-stat-sec:last-child { border-right: none; }
+.a-stat-sec-val { font-family: var(--font-c); font-size: 104px; color: white; line-height: 0.9; display: block; }
+.a-stat-sec-lbl { font-family: var(--font-m); font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 1px; text-transform: uppercase; margin-top: 10px; }
+
+/* A05 FILMS — A24 pure, titres empilés */
+.a-films { background: #060504; padding: 88px 64px; border-top: 1px solid #0d0d0d; }
+.a-films-label {
+  font-family: var(--font-m); font-size: 9px; letter-spacing: 5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.18); margin-bottom: 64px; display: block;
+}
+.a-film-list { display: flex; flex-direction: column; }
+.a-film-item {
+  display: flex; align-items: baseline; justify-content: space-between;
+  border-top: 1px solid #0d0d0d; padding: 22px 0; cursor: pointer;
+  /* V4 : pas de padding-left shift (gêne lecture) — couleur seule */
+  transition: none;
+  position: relative; overflow: hidden;
+}
+.a-film-item:last-child { border-bottom: 1px solid #0d0d0d; }
+/* V4 : ligne rouge qui se dessine — plus précis que indent */
+.a-film-item::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1px; background: var(--a-red);
+  transition: width 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.a-film-item:hover::after { width: 100%; }
+.a-film-item:hover .a-film-name { color: rgba(255,255,255,0.55); }
+.a-film-name-wrap { display: flex; align-items: baseline; gap: 20px; }
+.a-film-n { font-family: var(--font-m); font-size: 10px; color: rgba(255,255,255,0.18); letter-spacing: 3px; min-width: 32px; flex-shrink: 0; transition: color 0.3s; }
+.a-film-item:hover .a-film-n { color: rgba(255,255,255,0.4); }
+.a-film-name { font-family: var(--font-c); font-size: clamp(56px, 6.5vw, 96px); color: white; line-height: 1; transition: color 0.25s; }
+.a-film-meta { font-family: var(--font-m); font-size: 10px; color: rgba(255,255,255,0.22); letter-spacing: 1px; text-align: right; }
+
+/* A05b PHOTO BREAK — seule image, décision autheur */
+.a-photo-break { height: 68vh; position: relative; overflow: hidden; background: #020101; }
+.a-photo-break-bg {
+  position: absolute; inset: 0;
+  background-image: url('../../photos/_1177608.JPG');
+  background-size: cover; background-position: center 30%;
+  filter: saturate(0) brightness(0.32) contrast(1.2);
+  animation: kenBurns1 32s ease-in-out infinite;
+}
+.a-photo-break-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(2,1,1,0.08) 0%, rgba(2,1,1,0.72) 100%);
+}
+.a-photo-break-credit {
+  position: absolute; bottom: 44px; right: 64px; z-index: 5;
+  font-family: var(--font-m); font-size: 8px; letter-spacing: 5px;
+  color: rgba(255,255,255,0.12); text-transform: uppercase;
+}
+.a-photo-break-watermark {
+  position: absolute; bottom: 0; left: 64px; z-index: 5;
+  font-family: var(--font-c); font-size: clamp(72px, 9vw, 130px);
+  color: rgba(255,255,255,0.03); line-height: 1; letter-spacing: -2px; user-select: none;
+}
+
+/* A06 MÉTHODE */
+.a-method { background: #060504; padding: 88px 0; border-top: 1px solid #0d0d0d; position: relative; }
+.a-method::before {
+  content: ''; position: absolute; left: 28px; top: 0; bottom: 0;
+  width: 1px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.08) 15%, rgba(255,255,255,0.08) 85%, transparent);
+}
+.a-method-h { font-family: var(--font-c); font-size: clamp(60px, 7.5vw, 112px); color: white; line-height: 0.9; margin-bottom: 0; padding: 0 64px 56px; }
+.a-phases { display: flex; flex-direction: column; }
+.a-phase { display: grid; grid-template-columns: 200px 1fr; border-top: 1px solid #0d0d0d; align-items: stretch; overflow: hidden; position: relative; }
+.a-phase:last-child { border-bottom: 1px solid #0d0d0d; }
+.a-phase-n {
+  font-family: var(--font-c); font-size: clamp(110px, 13vw, 190px);
+  color: rgba(255,255,255,0.05); line-height: 1;
+  padding: 20px 0 20px 64px; display: flex; align-items: center;
+  border-right: 1px solid #111;
+}
+.a-phase-body { padding: 44px 64px; }
+.a-phase-name { font-family: var(--font-c); font-size: clamp(26px, 3vw, 44px); color: white; margin-bottom: 12px; }
+.a-phase-desc { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.85; max-width: 460px; font-weight: 300; }
+/* V4 : annotation de scène plus visible */
+.a-phase-anno {
+  position: absolute; right: 64px; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-m); font-size: 8px; letter-spacing: 4px;
+  color: rgba(255,255,255,0); text-transform: uppercase;
+  transition: color 0.4s; white-space: nowrap; pointer-events: none;
+}
+.a-phase:hover .a-phase-anno { color: rgba(255,255,255,0.25); }
+
+/* A06b TÉMOIGNAGE */
+.a-testimony { background: #030201; padding: 88px 64px; border-top: 1px solid #0a0a0a; }
+.a-test-mark { font-family: var(--font-c); font-size: 100px; color: rgba(232,0,28,0.12); line-height: 0.7; display: block; margin-bottom: 20px; }
+.a-test-quote { font-family: var(--font-c); font-size: clamp(34px, 4vw, 56px); color: white; line-height: 1.08; max-width: 740px; margin-bottom: 32px; }
+.a-test-quote em { color: var(--a-red); font-style: normal; }
+.a-test-attr { font-family: var(--font-m); font-size: 11px; color: rgba(255,255,255,0.3); display: flex; align-items: center; gap: 14px; }
+.a-test-dash { width: 28px; height: 1px; background: rgba(255,255,255,0.2); display: block; }
+
+/* A07 PROJECTIONS — remplace cockpit */
+.a-projections { background: #030201; padding: 88px 64px; border-top: 1px solid #0d0d0d; }
+.a-proj-label { font-family: var(--font-m); font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.2); margin-bottom: 52px; display: block; }
+.a-proj-h { font-family: var(--font-c); font-size: clamp(52px, 5.5vw, 84px); color: white; line-height: 0.9; margin-bottom: 52px; }
+.a-proj-list { display: flex; flex-direction: column; }
+.a-proj-item {
+  display: flex; align-items: baseline; justify-content: space-between;
+  border-top: 1px solid #0d0d0d; padding: 22px 0; cursor: default;
+  position: relative; overflow: hidden;
+}
+.a-proj-item:last-child { border-bottom: 1px solid #0d0d0d; }
+.a-proj-item::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1px; background: var(--a-red);
+  transition: width 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.a-proj-item:hover::after { width: 100%; }
+.a-proj-name { font-family: var(--font-c); font-size: clamp(26px, 3vw, 44px); color: white; line-height: 1; transition: color 0.25s; }
+.a-proj-item:hover .a-proj-name { color: rgba(255,255,255,0.55); }
+.a-proj-meta { font-family: var(--font-m); font-size: 10px; color: rgba(255,255,255,0.22); letter-spacing: 1px; text-align: right; line-height: 1.8; }
+
+/* A07b COCKPIT — CSS conservé au cas où */
+.a-cockpit { background: #030201; padding: 88px 64px; border-top: 1px solid #0d0d0d; }
+.a-cockpit-inner { display: grid; grid-template-columns: 1fr 1.6fr; gap: 88px; align-items: start; }
+.a-cockpit-label { font-family: var(--font-m); font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.2); margin-bottom: 20px; display: block; }
+.a-cockpit-h { font-family: var(--font-c); font-size: clamp(52px, 5.5vw, 84px); color: white; line-height: 0.9; margin-bottom: 24px; }
+.a-cockpit-sub { font-size: 13px; color: rgba(255,255,255,0.32); line-height: 1.85; margin-bottom: 36px; font-weight: 300; }
+.a-cockpit-cta {
+  background: transparent; color: white;
+  border: 1px solid rgba(255,255,255,0.22); padding: 14px 40px;
+  font-family: var(--font-b); font-size: 12px; font-weight: 600; cursor: pointer; letter-spacing: 0.5px;
+  transition: border-color 0.2s, background 0.2s, transform 0.18s;
+}
+.a-cockpit-cta:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.06); transform: translateY(-1px); }
+.a-cockpit-specs { display: flex; flex-direction: column; gap: 0; }
+.a-cockpit-spec { display: flex; align-items: flex-start; gap: 28px; border-top: 1px solid #111; padding: 32px 0; }
+.a-cockpit-spec:last-child { border-bottom: 1px solid #111; }
+.a-cockpit-spec-n { font-family: var(--font-c); font-size: 68px; color: rgba(255,255,255,0.05); line-height: 1; min-width: 88px; flex-shrink: 0; }
+.a-cockpit-spec-val { font-family: var(--font-c); font-size: 34px; color: white; line-height: 1; margin-bottom: 8px; }
+.a-cockpit-spec-desc { font-size: 12px; color: rgba(255,255,255,0.3); line-height: 1.7; max-width: 300px; font-weight: 300; }
+
+/* A08 REEL — vidéo ambiante */
+.a-reel { position: relative; height: 46vh; background: #000; overflow: hidden; display: flex; align-items: flex-end; }
+.a-reel-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.2) brightness(0.5); }
+.a-reel-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.08) 60%); }
+.a-reel-content { position: relative; z-index: 5; padding: 0 64px 44px; display: flex; align-items: flex-end; justify-content: space-between; width: 100%; }
+.a-reel-label { font-family: var(--font-m); font-size: 8px; letter-spacing: 5px; color: rgba(255,255,255,0.28); text-transform: uppercase; margin-bottom: 10px; display: block; }
+.a-reel-title { font-family: var(--font-c); font-size: clamp(30px, 3.8vw, 52px); color: white; line-height: 1; }
+.a-reel-meta { font-family: var(--font-m); font-size: 9px; color: rgba(255,255,255,0.2); letter-spacing: 2px; text-align: right; line-height: 2.2; }
+
+/* A09 STRIP INSTITUTIONNEL */
+.a-inst-strip {
+  background: #060504; border-top: 1px solid #0a0a0a; border-bottom: 1px solid #0a0a0a;
+  padding: 22px 64px; display: flex; align-items: center; gap: 0;
+}
+.a-inst-label { font-family: var(--font-m); font-size: 8px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.12); margin-right: 52px; white-space: nowrap; }
+.a-inst-items { display: flex; gap: 52px; flex-wrap: wrap; }
+.a-inst-item { font-family: var(--font-c); font-size: 13px; color: rgba(255,255,255,0.38); letter-spacing: 2px; transition: color 0.2s; }
+.a-inst-item:hover { color: rgba(255,255,255,0.72); }
+
+/* A10 CTA FINAL */
+.a-cta { background: #060504; padding: 88px 64px; border-top: 1px solid #0d0d0d; position: relative; }
+.a-cta-h { font-family: var(--font-c); font-size: clamp(60px, 7.5vw, 112px); color: white; line-height: 0.9; margin-bottom: 52px; }
+.a-cta-h em { color: var(--a-red); font-style: normal; }
+.a-cta-bottom { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+/* V4 : bouton primaire rouge, secondaire ghost — cohérence palette */
+.a-btn-primary { background: var(--a-red); color: white; border: none; padding: 16px 48px; font-family: var(--font-b); font-size: 13px; font-weight: 600; transition: filter 0.2s, transform 0.18s; }
+.a-btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.a-btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.18); color: white; padding: 15px 44px; font-family: var(--font-b); font-size: 13px; transition: border-color 0.2s, background 0.2s, transform 0.18s; }
+.a-btn-ghost:hover { border-color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.04); transform: translateY(-1px); }
+.a-cta-contact { font-family: var(--font-m); font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.22); margin-left: 8px; }
+
+/* A FOOTER */
+.a-footer { background: #030201; padding: 64px; border-top: 2px solid var(--a-red); display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 64px; position: relative; overflow: hidden; }
+.a-footer::before { content: '2016'; position: absolute; right: 48px; top: 32px; font-family: var(--font-c); font-size: 130px; color: rgba(255,255,255,0.025); line-height: 1; pointer-events: none; user-select: none; }
+.a-footer-logo { font-family: var(--font-c); font-size: 20px; letter-spacing: 5px; margin-bottom: 16px; }
+.a-footer-tag { font-size: 12px; color: rgba(255,255,255,0.28); line-height: 1.85; max-width: 280px; font-weight: 300; }
+.a-footer-col-h { font-family: var(--font-m); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 20px; }
+.a-footer-links { display: flex; flex-direction: column; gap: 10px; }
+.a-footer-link { font-size: 12px; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+.a-footer-link:hover { color: rgba(255,255,255,0.7); }
+.a-footer-bottom { padding: 20px 64px; border-top: 1px solid #0d0d0d; display: flex; justify-content: space-between; font-family: var(--font-m); font-size: 9px; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
+
+
+/* ═══════════════════════════════════════════════════════════
+   VARIANTE B — PELLICULE VIVANTE  ★ V4
+   ADN : PHOTO DOMINE. Éditorial documentaire. Vérité.
+   V4 : Ivoire filmique remplace gold luxe. Teal supprimé.
+   Collage épuré : captions hover seulement. B2B reformaté.
+   Refs : Dazed & Confused, BFI, Criterion Collection
+═══════════════════════════════════════════════════════════ */
+
+.b-hero { min-height: 100vh; background: var(--b-ink); position: relative; overflow: hidden; }
+.b-hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('../../photos/_1177594.JPG');
+  background-size: cover; background-position: center 40%;
+  filter: saturate(0.55) brightness(0.62) contrast(1.12);
+  animation: kenBurns1 24s ease-in-out infinite; will-change: transform;
+}
+.b-hero-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(to right, rgba(10,8,6,0.7) 0%, rgba(10,8,6,0.1) 55%, rgba(10,8,6,0) 100%),
+    linear-gradient(to top, rgba(10,8,6,0.88) 0%, transparent 38%);
+}
+.b-hero-grain {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.045'/%3E%3C/svg%3E");
+}
+/* Mot fantôme — ivoire au lieu de gold (moins bling) */
+.b-hero-grid-word {
+  position: absolute; right: -2vw; top: 8%; z-index: 3;
+  font-family: var(--font-c); font-size: 19vw;
+  color: rgba(240,230,200,0.04); line-height: 1;
+  pointer-events: none; user-select: none; letter-spacing: -3px;
+}
+/* Personne détourée */
+.b-person {
+  position: absolute; right: 0; bottom: 0; z-index: 3;
+  width: 42%; height: 92vh;
+  background-image: url('../../photos/P1011059.jpg');
+  background-size: cover; background-position: center top;
+  /* Masque simplifié — fonctionnel sur Chrome */
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.85) 20%, transparent 80%),
+                      linear-gradient(to top, black 70%, transparent 100%);
+  -webkit-mask-composite: destination-in;
+  mask-image: linear-gradient(to left, rgba(0,0,0,0.85) 20%, transparent 80%),
+              linear-gradient(to top, black 70%, transparent 100%);
+  mask-composite: intersect;
+  filter: saturate(0.35) brightness(0.65) contrast(1.15);
+}
+.b-nav {
+  position: relative; z-index: 10; padding: 32px 64px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.b-logo { font-family: var(--font-c); font-size: 15px; letter-spacing: 6px; }
+.b-nav-right { display: flex; gap: 36px; align-items: center; }
+.b-nav-link { color: rgba(255,255,255,0.28); font-size: 12px; text-decoration: none; font-weight: 300; transition: color 0.2s; }
+.b-nav-link:hover { color: rgba(255,255,255,0.6); }
+.b-nav-btn { border: 1px solid rgba(255,255,255,0.18); background: transparent; color: white; padding: 9px 24px; font-family: var(--font-b); font-size: 11px; font-weight: 600; cursor: pointer; letter-spacing: 1px; transition: border-color 0.2s, background 0.2s; }
+.b-nav-btn:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.06); }
+
+.b-hero-content { position: absolute; bottom: 0; left: 0; z-index: 10; padding: 0 64px 56px; max-width: 72%; }
+/* V4 : eyebrow ivoire au lieu de gold bling */
+.b-eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-m); font-size: 9px; letter-spacing: 5px;
+  text-transform: uppercase; color: rgba(240,230,200,0.45); margin-bottom: 20px;
+}
+.b-h1 { font-family: var(--font-c); font-size: clamp(110px, 15.5vw, 230px); line-height: 0.84; margin-bottom: 40px; }
+/* V4 : ivoire filmique — pas gold de bijouterie */
+.b-h1 em { color: var(--b-ivory); font-style: normal; display: block; }
+.b-hero-bottom { display: flex; gap: 36px; align-items: center; }
+.b-sub { font-size: 14px; color: rgba(255,255,255,0.3); line-height: 1.7; max-width: 300px; font-weight: 300; }
+.b-hero-btn {
+  background: var(--b-ivory); color: #0a0806; border: none;
+  padding: 14px 36px; font-family: var(--font-b); font-size: 12px; font-weight: 700;
+  cursor: pointer; flex-shrink: 0; transition: filter 0.2s, transform 0.18s;
+}
+.b-hero-btn:hover { filter: brightness(0.92); transform: translateY(-1px); }
+.b-folio { position: absolute; bottom: 20px; right: 64px; font-family: var(--font-m); font-size: 7px; color: rgba(255,255,255,0.06); letter-spacing: 5px; text-transform: uppercase; pointer-events: none; z-index: 5; }
+
+/* B02 COLLAGE — plus épuré, captions hover only */
+.b-collage {
+  background: #080604; display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-rows: 300px 300px; gap: 0; position: relative;
+}
+.b-col-cell { position: relative; overflow: hidden; background: #120e0a; cursor: pointer; }
+.b-col-cell.span2 { grid-row: span 2; }
+.b-col-cell-bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: saturate(0.55) brightness(0.72); transition: filter 0.5s, transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
+.b-col-cell:hover .b-col-cell-bg { filter: saturate(0.85) brightness(0.85); transform: scale(1.03); }
+.b-col-cell::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,6,4,0.82) 0%, transparent 52%); }
+/* V4 : titre et sous-titre apparaissent au hover seulement */
+.b-col-meta {
+  position: absolute; bottom: 18px; left: 22px; z-index: 2;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity 0.4s, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.b-col-cell:hover .b-col-meta { opacity: 1; transform: translateY(0); }
+.b-col-title { font-family: var(--font-c); font-size: 22px; line-height: 1; color: white; }
+.b-col-sub { font-family: var(--font-m); font-size: 9px; color: var(--b-ivory); opacity: 0.6; letter-spacing: 2px; margin-top: 4px; }
+/* Noise overlay hover */
+.b-col-noise { position: absolute; inset: 0; z-index: 1; opacity: 0; transition: opacity 0.35s; pointer-events: none; background: linear-gradient(135deg, rgba(240,230,200,0.08) 0%, rgba(240,230,200,0.04) 100%); mix-blend-mode: overlay; }
+.b-col-cell:hover .b-col-noise { opacity: 1; }
+
+/* B03 CHIFFRES + citation */
+.b-numbers {
+  background: #0a0806; padding: 100px 64px;
+  /* V4 : border-top blanc fin au lieu de gold — documentaire pas luxe */
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.b-numbers-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 88px; align-items: center; }
+.b-numbers-left { display: flex; flex-direction: column; gap: 0; }
+.b-num-row { display: flex; align-items: baseline; gap: 24px; border-bottom: 1px solid #111; padding: 28px 0; }
+.b-num-row:first-child { border-top: 1px solid #111; }
+.b-num-val { font-family: var(--font-c); font-size: clamp(68px, 7.5vw, 104px); color: white; line-height: 0.9; min-width: 136px; }
+.b-num-row:first-child .b-num-val { font-size: clamp(120px, 17vw, 210px); min-width: 230px; }
+.b-num-lbl { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.55; font-weight: 300; }
+/* Citation — ivoire au lieu de gold */
+.b-quote-mark { font-family: var(--font-c); font-size: 150px; color: rgba(240,230,200,0.1); line-height: 0.7; margin-bottom: 24px; }
+.b-quote-text { font-family: var(--font-c); font-size: clamp(30px, 3.2vw, 48px); color: white; line-height: 1.1; margin-bottom: 32px; }
+.b-quote-text em { color: var(--b-ivory); font-style: normal; }
+.b-quote-attr { font-family: var(--font-m); font-size: 11px; color: rgba(255,255,255,0.3); display: flex; align-items: center; gap: 14px; }
+.b-quote-dash { width: 28px; height: 1px; background: rgba(240,230,200,0.3); display: block; }
+
+/* B04 POUR L'ÉTABLISSEMENT — V4 : reformaté, moins brochure corpo */
+.b-pour-etab { background: #0d0a06; padding: 88px 64px; border-top: 1px solid rgba(255,255,255,0.05); }
+.b-pour-etab-inner { display: grid; grid-template-columns: 1fr 1.5fr; gap: 88px; align-items: start; }
+.b-pour-etab-label { font-family: var(--font-m); font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: rgba(240,230,200,0.35); display: block; margin-bottom: 28px; }
+.b-pour-etab-h { font-family: var(--font-c); font-size: clamp(44px, 5.5vw, 76px); color: white; line-height: 0.93; }
+.b-pour-etab-h em { color: var(--b-ivory); font-style: normal; }
+.b-pour-etab-items { display: flex; flex-direction: column; gap: 0; padding-top: 0; }
+/* V4 : items en grille 2 colonnes — moins liste de features, plus éditorial */
+.b-pour-etab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.b-pour-etab-item { padding: 28px 0; border-top: 1px solid #141414; }
+.b-pour-etab-item:nth-child(odd) { padding-right: 40px; border-right: 1px solid #141414; }
+.b-pour-etab-item:nth-child(even) { padding-left: 40px; }
+/* V4 : nom de feature en mono discret, pas en gras corpo */
+.b-pour-etab-item-label { font-family: var(--font-m); font-size: 9px; color: rgba(255,255,255,0.28); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; display: block; }
+.b-pour-etab-item-text { font-size: 13px; color: rgba(255,255,255,0.42); line-height: 1.75; font-weight: 300; }
+
+/* B05 MÉTHODE éditoriale */
+.b-method { background: #0a0806; padding: 100px 0; border-top: 1px solid #111; }
+.b-method-head { padding: 0 64px; margin-bottom: 64px; }
+.b-method-h { font-family: var(--font-c); font-size: clamp(60px, 7.5vw, 108px); color: white; line-height: 0.9; }
+.b-phase-editorial { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid #111; min-height: 240px; }
+.b-phase-editorial:nth-child(even) { direction: rtl; }
+.b-phase-editorial:nth-child(even) > * { direction: ltr; }
+.b-phase-img { background-image: url('../../photos/_1177608.JPG'); background-size: cover; background-position: center; filter: saturate(0.45) brightness(0.58); position: relative; transition: filter 0.5s; }
+.b-phase-editorial:hover .b-phase-img { filter: saturate(0.7) brightness(0.72); }
+.b-phase-img.p2 { background-image: url('../../photos/_1177442.JPG'); background-position: center 30%; }
+.b-phase-img.p3 { background-image: url('../../photos/_1177491.JPG'); }
+.b-phase-img.p4 { background-image: url('../../photos/_1177257.JPG'); }
+.b-phase-img.p5 { background-image: url('../../photos/_1177599.JPG'); }
+.b-phase-img::after { content: ''; position: absolute; inset: 0; background: rgba(8,6,4,0.28); }
+.b-phase-txt { padding: 52px 64px; display: flex; flex-direction: column; justify-content: center; background: #0a0806; }
+.b-phase-n { font-family: var(--font-c); font-size: 90px; color: rgba(240,230,200,0.1); line-height: 1; margin-bottom: 8px; }
+.b-phase-name { font-family: var(--font-c); font-size: 38px; color: white; margin-bottom: 12px; }
+.b-phase-desc { font-size: 13px; color: rgba(255,255,255,0.32); line-height: 1.8; max-width: 360px; font-weight: 300; }
+.b-phase-tag { margin-top: 18px; font-family: var(--font-m); font-size: 9px; color: rgba(255,255,255,0.18); letter-spacing: 3px; text-transform: uppercase; }
+
+/* B06 PHOTO PLEINE LARGEUR */
+.b-full-photo { min-height: 78vh; position: relative; overflow: hidden; background: #080604; display: flex; align-items: flex-end; }
+.b-full-photo-bg { position: absolute; inset: 0; background-image: url('../../photos/_1177495.JPG'); background-size: cover; background-position: center 40%; filter: saturate(0.7) brightness(0.68); animation: kenBurns2 28s ease-in-out infinite alternate; }
+.b-full-photo-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,6,4,0.84) 0%, rgba(8,6,4,0.0) 58%), linear-gradient(to right, rgba(8,6,4,0.3) 0%, transparent 55%); }
+.b-full-photo-content { position: relative; z-index: 5; padding: 64px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; align-items: end; }
+.b-full-h2 { font-family: var(--font-c); font-size: clamp(68px, 9.5vw, 140px); line-height: 0.88; color: white; }
+.b-full-right { text-align: right; }
+.b-full-sub { font-size: 13px; color: rgba(255,255,255,0.32); line-height: 1.75; max-width: 300px; margin-left: auto; margin-bottom: 24px; font-weight: 300; }
+.b-full-link { font-family: var(--font-m); font-size: 10px; color: var(--b-ivory); opacity: 0.6; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; }
+.b-full-link:hover { opacity: 1; }
+
+/* B07 COCKPIT */
+.b-cockpit { background: #050302; padding: 100px 64px; border-top: 1px solid #0a0a0a; }
+.b-cockpit-inner { display: grid; grid-template-columns: 1fr 1.2fr; gap: 88px; align-items: center; }
+.b-cockpit-label { font-family: var(--font-m); font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: rgba(240,230,200,0.35); margin-bottom: 20px; display: block; }
+.b-cockpit-h { font-family: var(--font-c); font-size: clamp(46px, 5vw, 76px); line-height: 0.95; margin-bottom: 24px; }
+.b-cockpit-sub { font-size: 14px; color: rgba(255,255,255,0.3); line-height: 1.75; margin-bottom: 36px; font-weight: 300; }
+.b-cockpit-cta { background: var(--b-ivory); color: #0a0806; border: none; padding: 14px 40px; font-family: var(--font-b); font-size: 12px; font-weight: 700; cursor: pointer; transition: filter 0.2s, transform 0.18s; }
+.b-cockpit-cta:hover { filter: brightness(0.9); transform: translateY(-1px); }
+/* Mockup — sans teal, badge blanc/gris filmique */
+.b-screen { background: #080604; border: 1px solid #141210; overflow: hidden; }
+.b-screen-top { background: #0e0b08; border-bottom: 1px solid #141210; padding: 12px 20px; display: flex; align-items: center; gap: 8px; }
+.b-screen-dots { display: flex; gap: 5px; }
+.b-screen-dot { width: 9px; height: 9px; border-radius: 50%; }
+.b-screen-title { font-family: var(--font-c); font-size: 11px; letter-spacing: 3px; color: #2e2a24; margin-left: 10px; }
+.b-screen-body { padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+.b-screen-row { background: #0d0b08; border: 1px solid #141210; padding: 11px 14px; display: flex; align-items: center; gap: 10px; }
+.b-screen-lbl { font-size: 10px; color: rgba(255,255,255,0.3); flex: 1; letter-spacing: 0.5px; }
+/* V4 : badges ivoire/gris — plus teal */
+.b-screen-badge { font-family: var(--font-m); font-size: 8px; padding: 2px 8px; letter-spacing: 1px; }
+.b-badge-active { background: rgba(240,230,200,0.1); color: rgba(240,230,200,0.6); }
+.b-badge-en-cours { background: rgba(240,230,200,0.15); color: rgba(240,230,200,0.8); }
+.b-badge-attente { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.22); }
+.b-screen-bar { background: #0e0b08; border-top: 1px solid #141210; padding: 10px 16px; display: flex; gap: 8px; align-items: center; }
+/* V4 : dot rouge au lieu de teal */
+.b-screen-live { width: 6px; height: 6px; border-radius: 50%; background: var(--b-ivory); opacity: 0.6; animation: livePulse 2s ease-in-out infinite; }
+.b-screen-status { font-family: var(--font-m); font-size: 9px; color: rgba(255,255,255,0.22); letter-spacing: 1px; }
+
+/* B08 FILMSTRIP MAKING-OF */
+.b-filmstrip-v4 { background: #000; overflow: hidden; position: relative; border-top: 1px solid #0a0806; }
+.b-filmstrip-v4::before, .b-filmstrip-v4::after { content: ''; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 10; pointer-events: none; }
+.b-filmstrip-v4::before { left: 0; background: linear-gradient(to right, #000, transparent); }
+.b-filmstrip-v4::after { right: 0; background: linear-gradient(to left, #000, transparent); }
+.b-strip-row { display: flex; gap: 3px; padding: 3px 0; }
+.b-strip-row.fwd { animation: bstrip-fwd 32s linear infinite; }
+.b-strip-row.rev { animation: bstrip-fwd 24s linear infinite reverse; }
+@keyframes bstrip-fwd { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.b-strip-cell { width: 200px; height: 130px; flex-shrink: 0; overflow: hidden; }
+.b-strip-cell img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.35) brightness(0.6) contrast(1.1); transition: filter 0.4s; }
+.b-strip-cell:hover img { filter: saturate(0.75) brightness(0.82); }
+
+/* B09 CTA */
+.b-cta { min-height: 56vh; position: relative; overflow: hidden; display: flex; align-items: center; }
+.b-cta-bg { position: absolute; inset: 0; background-image: url('../../photos/_1177599.JPG'); background-size: cover; background-position: center; filter: saturate(0.25) brightness(0.28); }
+.b-cta-overlay { position: absolute; inset: 0; background: rgba(10,8,6,0.72); }
+.b-cta-content { position: relative; z-index: 5; padding: 88px 64px; }
+.b-cta-h { font-family: var(--font-c); font-size: clamp(52px, 6.5vw, 100px); line-height: 0.9; max-width: 780px; margin-bottom: 44px; }
+.b-cta-h em { color: var(--b-ivory); font-style: normal; position: relative; }
+.b-cta-h em::after { content: ''; position: absolute; bottom: 4px; left: 0; right: 0; height: 1px; background: rgba(240,230,200,0.3); }
+.b-cta-btns { display: flex; gap: 16px; }
+.b-btn-ivory { background: var(--b-ivory); color: #0a0806; border: none; padding: 16px 48px; font-family: var(--font-b); font-size: 13px; font-weight: 700; cursor: pointer; transition: filter 0.2s, transform 0.18s; }
+.b-btn-ivory:hover { filter: brightness(0.9); transform: translateY(-1px); }
+.b-btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.18); color: white; padding: 15px 44px; font-family: var(--font-b); font-size: 13px; cursor: pointer; transition: border-color 0.2s, background 0.2s, transform 0.18s; }
+.b-btn-ghost:hover { border-color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.04); transform: translateY(-1px); }
+
+/* B FOOTER */
+.b-footer { background: #030201; padding: 64px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 64px; border-top: 2px solid var(--b-ivory); }
+.b-footer-logo { font-family: var(--font-c); font-size: 24px; letter-spacing: 5px; margin-bottom: 10px; color: var(--b-ivory); }
+.b-footer-tag { font-size: 12px; color: rgba(255,255,255,0.28); line-height: 1.85; font-weight: 300; }
+.b-footer-col-h { font-family: var(--font-m); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(240,230,200,0.3); margin-bottom: 20px; }
+.b-footer-links { display: flex; flex-direction: column; gap: 10px; }
+.b-footer-link { font-size: 12px; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+.b-footer-link:hover { color: var(--b-ivory); }
+.b-footer-bottom { padding: 20px 64px; border-top: 1px solid #0d0d0d; display: flex; justify-content: space-between; font-family: var(--font-m); font-size: 9px; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
+
+
+/* ═══════════════════════════════════════════════════════════
+   VARIANTE C — COCKPIT CINÉMA  ★ V4
+   ADN : CLARTÉ. EdTech assume. Fond cream + noir + orange.
+   V4 : Teal supprimé. Embed cockpit sorti du hero.
+   Hero : typo pure, plus grand, whitespace radical.
+   Refs : Brilliant.org meets école de cinéma
+═══════════════════════════════════════════════════════════ */
+
+.c-hero {
+  min-height: 100vh; background: var(--c-cream);
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+/* Grain subtil cream */
+.c-hero::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.018'/%3E%3C/svg%3E");
+}
+/* V4 : grille très subtile — moins que v3 */
+.c-hero::after {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background-image: linear-gradient(rgba(13,11,9,0.022) 1px, transparent 1px), linear-gradient(90deg, rgba(13,11,9,0.022) 1px, transparent 1px);
+  background-size: 96px 96px;
+}
+.c-nav {
+  position: relative; z-index: 10; padding: 28px 64px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.c-logo { font-family: var(--font-c); font-size: 15px; letter-spacing: 6px; color: var(--c-ink); }
+.c-nav-links { display: flex; gap: 40px; }
+.c-nav-link { color: rgba(0,0,0,0.28); font-size: 12px; text-decoration: none; font-weight: 300; transition: color 0.2s; }
+.c-nav-link:hover { color: rgba(0,0,0,0.65); }
+.c-nav-cta { background: var(--c-ink); color: white; border: none; padding: 10px 26px; font-family: var(--font-b); font-size: 12px; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.18s; }
+.c-nav-cta:hover { background: #2a2a2a; transform: translateY(-1px); }
+
+.c-hero-body { flex: 1; display: flex; flex-direction: column; padding: 64px 64px 0; position: relative; z-index: 2; }
+.c-hero-tag {
+  display: inline-block; background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.4);
+  font-family: var(--font-m); font-size: 9px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; padding: 6px 14px; margin-bottom: 28px;
+}
+/* V4 : titre plus grand — whitespace radical sous la nav */
+.c-h1 {
+  font-family: var(--font-c);
+  font-size: clamp(96px, 13.5vw, 196px);
+  line-height: 0.86; color: var(--c-ink); margin-bottom: 0; white-space: nowrap;
+}
+.c-h1 em { color: var(--c-orange); font-style: normal; }
+/* V4 : divider orange maintenu — barre d'identité */
+.c-hero-divider { width: 72px; height: 3px; background: var(--c-orange); margin: 36px 0; }
+
+.c-hero-right { display: flex; align-items: flex-start; gap: 64px; padding-top: 0; max-width: 100%; margin-bottom: 64px; }
+.c-sub { font-size: 15px; color: rgba(0,0,0,0.48); line-height: 1.65; max-width: 440px; flex: 1; font-weight: 300; }
+.c-hero-btns { display: flex; gap: 14px; flex-shrink: 0; padding-top: 4px; }
+.c-btn-main { background: var(--c-orange); color: white; border: none; padding: 14px 40px; font-family: var(--font-b); font-size: 13px; font-weight: 700; cursor: pointer; transition: filter 0.2s, transform 0.18s; }
+.c-btn-main:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.c-btn-sec { background: transparent; border: 2px solid rgba(0,0,0,0.1); color: var(--c-ink); padding: 12px 36px; font-family: var(--font-b); font-size: 13px; cursor: pointer; transition: border-color 0.2s, background 0.2s, transform 0.18s; }
+.c-btn-sec:hover { border-color: rgba(0,0,0,0.28); background: rgba(0,0,0,0.03); transform: translateY(-1px); }
+
+/* V4 : stats sous la fold — épurées */
+.c-hero-stats { display: flex; gap: 0; border-top: 1px solid rgba(0,0,0,0.07); padding-top: 44px; margin-bottom: 64px; }
+.c-hero-stat { padding-right: 52px; border-right: 1px solid rgba(0,0,0,0.07); margin-right: 52px; }
+.c-hero-stat:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+.c-hero-stat-val { font-family: var(--font-c); font-size: 54px; color: var(--c-ink); line-height: 1; }
+.c-hero-stat-lbl { font-family: var(--font-m); font-size: 9px; color: rgba(0,0,0,0.35); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
+
+/* C — FILMSTRIP */
+.c-filmstrip { display: grid; grid-template-columns: 15fr 50fr 22fr 13fr; height: 52vh; overflow: hidden; }
+.c-film-cell { position: relative; overflow: hidden; background: #08080a; }
+.c-film-cell-bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: saturate(0) brightness(0.60) contrast(1.2); transition: transform 7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.c-film-cell:hover .c-film-cell-bg { transform: scale(1.05); }
+.c-film-cell.main .c-film-cell-bg { filter: saturate(0.06) brightness(0.60) contrast(1.2); }
+.c-film-cell-n { position: absolute; bottom: 16px; left: 14px; z-index: 5; font-family: var(--font-m); font-size: 8px; color: rgba(255,255,255,0.18); letter-spacing: 3px; transition: color 0.3s; }
+.c-film-cell:hover .c-film-cell-n { color: rgba(255,255,255,0.5); }
+/* Titre au hover — apparaît du bas */
+.c-film-cell::after {
+  content: attr(data-title); position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
+  padding: 36px 16px 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+  font-family: var(--font-c); font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+  color: rgba(255,255,255,0); transition: color 0.45s; pointer-events: none;
+}
+.c-film-cell:hover::after { color: rgba(255,255,255,0.7); }
+.c-filmstrip-credit {
+  background: var(--c-ink); padding: 10px 24px;
+  display: flex; align-items: center; gap: 16px; border-top: 1px solid rgba(255,255,255,0.05);
+}
+.c-filmstrip-credit-n { font-family: var(--font-c); font-size: 11px; letter-spacing: 3px; color: white; opacity: 0.35; }
+.c-filmstrip-credit-sep { font-size: 7px; color: rgba(255,255,255,0.08); }
+.c-filmstrip-credit-loc, .c-filmstrip-credit-years { font-family: var(--font-m); font-size: 9px; letter-spacing: 3px; color: rgba(255,255,255,0.2); text-transform: uppercase; }
+
+/* C02 STRIP PARTENAIRES */
+.c-strip { background: var(--c-ink); padding: 22px 64px; display: flex; align-items: center; gap: 0; overflow: hidden; border-bottom: 1px solid #111; }
+.c-strip-label { font-family: var(--font-m); font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.2); margin-right: 52px; white-space: nowrap; }
+.c-strip-items { display: flex; gap: 60px; align-items: center; }
+.c-strip-item { font-family: var(--font-c); font-size: 16px; color: rgba(255,255,255,0.48); letter-spacing: 2px; transition: color 0.25s; cursor: default; }
+.c-strip-item:hover { color: white; }
+
+/* C03 POURQUOI */
+.c-why { background: var(--c-cream); padding: 104px 64px; }
+.c-why-inner { display: grid; grid-template-columns: 200px 1fr; gap: 88px; align-items: start; }
+.c-why-label { font-family: var(--font-m); font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: rgba(0,0,0,0.28); padding-top: 8px; writing-mode: vertical-rl; transform: rotate(180deg); }
+.c-why-right {}
+/* V4 : titre plus grand */
+.c-why-h { font-family: var(--font-c); font-size: clamp(52px, 6vw, 92px); color: var(--c-ink); line-height: 0.94; margin-bottom: 48px; }
+.c-why-h em { color: var(--c-orange); font-style: normal; }
+.c-why-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
+.c-why-col-h { font-size: 13px; font-weight: 700; color: var(--c-ink); margin-bottom: 12px; letter-spacing: 0.2px; }
+.c-why-col-p { font-size: 13px; color: rgba(0,0,0,0.5); line-height: 1.75; font-weight: 300; }
+
+/* C04 CHIFFRES — fond sombre avec photo fantôme */
+.c-numbers { background: var(--c-ink); padding: 88px 64px; position: relative; overflow: hidden; }
+.c-numbers::before { content: ''; position: absolute; inset: 0; background-image: url('../../photos/_1177495.JPG'); background-size: cover; background-position: center; filter: saturate(0) brightness(0.05) contrast(1.2); pointer-events: none; }
+.c-numbers-row { display: grid; grid-template-columns: 2fr 1fr 1fr; border-top: 1px solid #111; position: relative; z-index: 1; }
+.c-num { padding: 64px 64px 64px 0; border-right: 1px solid #111; }
+.c-num:last-child { border-right: none; }
+.c-num:nth-child(2), .c-num:nth-child(3) { padding-left: 64px; }
+.c-num-val { font-family: var(--font-c); font-size: 92px; color: white; line-height: 1; display: block; }
+.c-num:first-child .c-num-val { font-size: clamp(112px, 13.5vw, 172px); line-height: 0.9; }
+.c-num-lbl { font-size: 12px; color: rgba(255,255,255,0.32); margin-top: 10px; line-height: 1.55; font-weight: 300; }
+.c-num-since { font-family: var(--font-m); font-size: 9px; color: rgba(255,255,255,0.2); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; display: block; }
+
+/* C04b SPLIT-FLAP — rupture émotionnelle */
+.c-splitflap {
+  min-height: 88vh; background: var(--c-ink);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; padding: 88px 44px;
+}
+.c-sf-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(0) brightness(0.10) contrast(1.25); }
+.c-sf-lbl { font-family: var(--font-m); font-size: 8px; letter-spacing: 6px; color: rgba(255,107,53,0.5); text-transform: uppercase; margin-bottom: 44px; position: relative; z-index: 10; }
+#c-sf-display { display: flex; gap: 4px; position: relative; z-index: 10; flex-wrap: nowrap; justify-content: center; }
+.c-sf-char { width: clamp(26px,3.8vw,68px); height: clamp(36px,5.2vw,92px); background: #111; border: 1px solid #1a1a1a; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; flex-shrink: 0; }
+.c-sf-char-inner { font-family: var(--font-c); font-size: clamp(20px,3vw,52px); color: white; line-height: 1; position: relative; z-index: 2; }
+.c-sf-char::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(0,0,0,0.85); z-index: 3; pointer-events: none; }
+.c-sf-char.flipping .c-sf-char-inner { animation: csf-flip .08s ease-in-out; }
+@keyframes csf-flip { 0%{transform:scaleY(1)} 40%{transform:scaleY(0);opacity:.5} 60%{transform:scaleY(0);opacity:.5} 100%{transform:scaleY(1)} }
+.c-sf-char.sp { background: transparent; border-color: transparent; width: clamp(10px,1.8vw,28px); }
+.c-sf-word-lbl { font-family: var(--font-m); font-size: 8px; letter-spacing: 5px; color: rgba(255,255,255,0.12); margin-top: 32px; position: relative; z-index: 10; text-transform: uppercase; }
+.c-sf-ctr { font-family: var(--font-m); font-size: 8px; color: var(--c-orange); opacity: 0.6; letter-spacing: 2px; margin-top: 10px; position: relative; z-index: 10; }
+
+/* C05 PHOTO */
+.c-photo { min-height: 62vh; position: relative; overflow: hidden; background: #080604; display: flex; align-items: flex-end; }
+.c-photo-bg { position: absolute; inset: 0; background-image: url('../../photos/_1177608.JPG'); background-size: cover; background-position: center 40%; filter: saturate(0.6) brightness(0.65); animation: kenBurns2 26s ease-in-out infinite alternate; }
+.c-photo-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,6,4,0.8) 0%, rgba(8,6,4,0.0) 58%), linear-gradient(to right, rgba(8,6,4,0.18) 0%, transparent 55%); }
+.c-photo-content { position: relative; z-index: 5; padding: 64px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; align-items: end; }
+.c-photo-h { font-family: var(--font-c); font-size: clamp(46px, 5.5vw, 84px); line-height: 0.9; color: white; }
+.c-photo-right { text-align: right; }
+.c-photo-sub { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 290px; margin-left: auto; font-weight: 300; }
+
+/* C06 MÉTHODE — fond warm, timeline propre */
+.c-method { background: var(--c-warm); padding: 104px 64px; overflow: hidden; }
+.c-method-head { margin-bottom: 72px; display: flex; justify-content: space-between; align-items: flex-end; }
+.c-method-h { font-family: var(--font-c); font-size: clamp(46px, 5.5vw, 84px); color: var(--c-ink); line-height: 0.9; }
+.c-method-sub { font-family: var(--font-m); font-size: 11px; color: rgba(0,0,0,0.32); max-width: 240px; text-align: right; line-height: 1.65; letter-spacing: 0.5px; }
+.c-scenes { display: flex; flex-direction: column; }
+.c-scene {
+  display: grid; grid-template-columns: 80px 1fr auto;
+  align-items: baseline; border-top: 1px solid rgba(0,0,0,0.07);
+  padding: 32px 0; gap: 24px; transition: background 0.2s; position: relative;
+}
+.c-scene:last-child { border-bottom: 1px solid rgba(0,0,0,0.07); }
+.c-scene:hover { background: rgba(0,0,0,0.025); margin: 0 -64px; padding-left: 64px; padding-right: 64px; }
+.c-scene-n { font-family: var(--font-m); font-size: 44px; color: rgba(0,0,0,0.06); line-height: 1; }
+.c-scene-name { font-family: var(--font-c); font-size: clamp(26px, 2.8vw, 40px); color: var(--c-ink); line-height: 1; margin-bottom: 6px; }
+.c-scene-desc { font-size: 13px; color: rgba(0,0,0,0.38); line-height: 1.65; font-weight: 300; }
+.c-scene-meta { font-family: var(--font-m); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(0,0,0,0.28); white-space: nowrap; }
+
+/* C07 COCKPIT — V4 : embed sorti du hero, section dédiée propre */
+.c-cockpit-section { background: var(--c-ink); padding: 104px 64px; }
+.c-cockpit-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 88px; align-items: start; }
+.c-cockpit-label { font-family: var(--font-m); font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,107,53,0.6); margin-bottom: 20px; display: block; }
+.c-cockpit-h { font-family: var(--font-c); font-size: clamp(46px, 5vw, 76px); color: white; line-height: 0.95; margin-bottom: 24px; }
+.c-cockpit-sub { font-size: 14px; color: rgba(255,255,255,0.35); line-height: 1.75; margin-bottom: 40px; font-weight: 300; }
+.c-cockpit-feats { display: flex; flex-direction: column; gap: 0; }
+.c-feat { display: grid; grid-template-columns: 56px 1fr; gap: 24px; align-items: flex-start; padding: 28px 0; border-top: 1px solid #111; }
+.c-feat:last-child { border-bottom: 1px solid #111; }
+/* V4 : numéro orange subtil — cohérence palette */
+.c-feat-num { font-family: var(--font-m); font-size: 48px; color: rgba(255,107,53,0.18); line-height: 1; }
+.c-feat-title { font-family: var(--font-c); font-size: 28px; color: white; line-height: 1; margin-bottom: 6px; }
+.c-feat-desc { font-size: 12px; color: rgba(255,255,255,0.35); line-height: 1.7; font-weight: 300; }
+
+/* V4 : mockup cockpit — embed pleine section, pas coincé dans le hero */
+.c-cockpit-embed {
+  background: rgba(8,8,10,0.96);
+  border: 1px solid rgba(255,255,255,0.07);
+  overflow: hidden;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.8);
+}
+.c-embed-bar { height: 38px; background: rgba(255,255,255,0.035); border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; padding: 0 14px; gap: 8px; }
+.c-embed-dot { width: 9px; height: 9px; border-radius: 50%; }
+.c-embed-dot:nth-child(1) { background: rgba(255,95,87,0.65); }
+.c-embed-dot:nth-child(2) { background: rgba(255,189,68,0.45); }
+.c-embed-dot:nth-child(3) { background: rgba(39,201,63,0.45); }
+.c-embed-label { margin-left: 8px; font-family: var(--font-m); font-size: 10px; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
+.c-embed-body { padding: 24px; }
+.c-embed-session {
+  background: rgba(255,107,53,0.07); border: 1px solid rgba(255,107,53,0.12);
+  padding: 14px 16px; margin-bottom: 16px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.c-embed-session-title { font-size: 11px; color: rgba(255,255,255,0.55); font-family: var(--font-b); }
+.c-embed-session-live { font-family: var(--font-m); font-size: 9px; color: var(--c-orange); letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 5px; }
+.c-embed-session-live::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--c-orange); animation: pulse-dot 1.5s ease-in-out infinite; }
+.c-embed-students { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+.c-embed-student { background: rgba(255,255,255,0.035); padding: 12px 8px; text-align: center; }
+.c-embed-student-name { font-family: var(--font-m); font-size: 9px; color: rgba(255,255,255,0.4); letter-spacing: 1px; }
+.c-embed-student-score { font-family: var(--font-c); font-size: 24px; color: white; line-height: 1; margin-top: 6px; }
+.c-embed-student-score.hot { color: var(--c-orange); }
+.c-embed-rows { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.c-embed-row { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 10px 14px; display: flex; align-items: center; gap: 10px; }
+.c-embed-row-lbl { font-size: 10px; color: rgba(255,255,255,0.28); flex: 1; letter-spacing: 0.3px; }
+.c-embed-row-badge { font-family: var(--font-m); font-size: 8px; padding: 2px 8px; letter-spacing: 1px; }
+.c-embed-badge-active { background: rgba(255,107,53,0.12); color: rgba(255,107,53,0.8); }
+.c-embed-badge-wait { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.2); }
+.c-embed-action { background: var(--c-orange); color: white; border: none; width: 100%; padding: 11px; font-family: var(--font-b); font-size: 11px; font-weight: 700; cursor: pointer; letter-spacing: 0.5px; transition: filter 0.2s; }
+.c-embed-action:hover { filter: brightness(1.1); }
+.c-embed-bar-bottom { background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.05); padding: 10px 16px; display: flex; gap: 8px; align-items: center; }
+/* V4 : dot rouge — plus teal */
+.c-embed-live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c-orange); animation: livePulse 2s ease-in-out infinite; }
+.c-embed-status { font-family: var(--font-m); font-size: 9px; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
+
+/* C08 TÉMOIGNAGE — fond cream, épuré */
+.c-testimony { background: var(--c-cream); padding: 104px 64px; }
+.c-test-line { width: 56px; height: 2px; background: var(--c-orange); display: block; margin-bottom: 44px; }
+.c-test-quote { font-family: var(--font-c); font-size: clamp(34px, 4.2vw, 60px); color: var(--c-ink); line-height: 1.06; max-width: 780px; margin-bottom: 36px; }
+.c-test-quote em { color: var(--c-orange); font-style: normal; }
+.c-test-attr { display: flex; align-items: center; gap: 14px; color: rgba(0,0,0,0.3); font-size: 13px; font-weight: 300; }
+.c-test-dash { width: 28px; height: 1px; background: var(--c-orange); display: block; }
+
+/* C09 CTA — fond sombre, barre orange top */
+.c-cta { background: var(--c-ink); padding: 104px 64px; position: relative; overflow: hidden; }
+.c-cta::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--c-orange); }
+.c-cta-inner { display: flex; justify-content: space-between; align-items: center; }
+.c-cta-h { font-family: var(--font-c); font-size: clamp(50px, 5.5vw, 84px); color: white; line-height: 0.9; max-width: 660px; }
+.c-cta-h em { color: var(--c-orange); font-style: normal; }
+.c-cta-right { display: flex; flex-direction: column; gap: 14px; flex-shrink: 0; }
+.c-btn-o { background: var(--c-orange); color: white; border: none; padding: 16px 48px; font-family: var(--font-b); font-size: 13px; font-weight: 700; cursor: pointer; transition: filter 0.2s, transform 0.18s; }
+.c-btn-o:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.c-btn-w { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: white; padding: 14px 44px; font-family: var(--font-b); font-size: 13px; cursor: pointer; transition: border-color 0.2s, background 0.2s, transform 0.18s; }
+.c-btn-w:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.04); transform: translateY(-1px); }
+.c-cta-contact { font-family: var(--font-m); font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.2); }
+
+/* C FOOTER */
+.c-footer { background: var(--c-warm); padding: 64px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 64px; border-top: 2px solid var(--c-orange); }
+.c-footer-logo { font-family: var(--font-c); font-size: 20px; letter-spacing: 5px; color: var(--c-ink); margin-bottom: 16px; }
+.c-footer-tag { font-size: 12px; color: rgba(0,0,0,0.4); line-height: 1.85; font-weight: 300; }
+.c-footer-col-h { font-family: var(--font-m); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(0,0,0,0.28); margin-bottom: 20px; }
+.c-footer-links { display: flex; flex-direction: column; gap: 10px; }
+.c-footer-link { font-size: 12px; color: rgba(0,0,0,0.42); text-decoration: none; transition: color 0.2s; }
+.c-footer-link:hover { color: var(--c-orange); }
+.c-footer-bottom { padding: 20px 64px; background: var(--c-cream); border-top: 1px solid rgba(0,0,0,0.07); display: flex; justify-content: space-between; font-family: var(--font-m); font-size: 9px; color: rgba(0,0,0,0.28); letter-spacing: 1px; }
+
+/* ── FILMSTRIP KEN BURNS ── */
+.c-film-cell:nth-child(1) .c-film-cell-bg { animation: kenBurns2 18s ease-in-out infinite alternate; }
+.c-film-cell:nth-child(2) .c-film-cell-bg { animation: kenBurns3 24s ease-in-out infinite alternate-reverse; }
+.c-film-cell:nth-child(3) .c-film-cell-bg { animation: kenBurns1 20s ease-in-out 2s infinite alternate; }
+.c-film-cell:nth-child(4) .c-film-cell-bg { animation: kenBurns2 16s ease-in-out 1s infinite alternate-reverse; }
+
+/* ── HERO ANIMATIONS A ── */
+#page-a.active .a-h1, #page-a.active .a-h1-accent {
+  animation: heroLineUp 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+#page-a.active .a-h1:nth-child(2) { animation-delay: 0.16s; }
+#page-a.active .a-h1:nth-child(3) { animation-delay: 0.28s; }
+#page-a.active .a-h1-accent { animation-delay: 0.38s; }
+#page-a.active .a-eyebrow { animation: heroLineUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* ── HERO ANIMATIONS B ── */
+@keyframes heroB { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+#page-b.active .b-eyebrow { animation: heroB 0.7s cubic-bezier(0.16,1,0.3,1) both; }
+#page-b.active .b-h1 { animation: heroB 1s cubic-bezier(0.16,1,0.3,1) 0.1s both; }
+#page-b.active .b-hero-bottom { animation: heroB 0.8s cubic-bezier(0.16,1,0.3,1) 0.28s both; }
+
+/* ── HERO ANIMATIONS C ── */
+@keyframes heroC { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:translateY(0); } }
+#page-c.active .c-hero-tag { animation: heroC 0.6s cubic-bezier(0.16,1,0.3,1) both; }
+#page-c.active .c-h1 { animation: heroC 1s cubic-bezier(0.16,1,0.3,1) 0.08s both; }
+#page-c.active .c-hero-divider { animation: heroC 0.6s cubic-bezier(0.16,1,0.3,1) 0.22s both; }
+#page-c.active .c-hero-right { animation: heroC 0.8s cubic-bezier(0.16,1,0.3,1) 0.30s both; }
+#page-c.active .c-hero-stats { animation: heroC 0.7s cubic-bezier(0.16,1,0.3,1) 0.42s both; }
+
+/* ── CURSOR TRAIL A ── */
+.v4-trail {
+  position: fixed; pointer-events: none; z-index: 9990;
+  background-size: cover; background-position: center;
+  filter: saturate(0) brightness(0.6);
+  border: 1px solid rgba(255,255,255,0.06);
+  transform: translate(-50%,-50%) rotate(var(--rot));
+  transition: opacity .55s, transform .55s;
+}
+
+/* ── RESPONSIVE MOBILE ── */
+@media (max-width: 768px) {
+  /* A */
+  .a-hero-content { padding: 0 24px 40px; }
+  .a-h1, .a-h1-accent { font-size: clamp(68px, 19vw, 110px); }
+  .a-hero-bottom { flex-direction: column; gap: 20px; }
+  .a-nav { padding: 20px 24px; }
+  .a-manifeste { padding: 64px 24px; }
+  .a-manifeste-text { font-size: clamp(34px, 9vw, 52px); }
+  .a-stat-hero { padding: 48px 24px 0; }
+  .a-stat-hero-val { font-size: clamp(110px, 30vw, 180px); }
+  .a-stat-sec-row { flex-direction: column; }
+  .a-stat-sec { padding: 24px; border-right: none; border-bottom: 1px solid #111; }
+  .a-films { padding: 64px 24px; }
+  .a-film-name { font-size: clamp(38px, 10vw, 60px); }
+  .a-method-h { padding: 0 24px 48px; }
+  .a-phase { grid-template-columns: 70px 1fr; }
+  .a-phase-n { font-size: 68px; padding-left: 24px; }
+  .a-phase-body { padding: 28px 24px; }
+  .a-cockpit { padding: 64px 24px; }
+  .a-cockpit-inner { grid-template-columns: 1fr; gap: 40px; }
+  .a-cta { padding: 64px 24px; }
+  .a-footer { grid-template-columns: 1fr; gap: 40px; padding: 48px 24px; }
+  .a-footer-bottom { padding: 20px 24px; }
+  /* B */
+  .b-nav { padding: 20px 24px; }
+  .b-hero-content { padding: 0 24px 48px; max-width: 100%; }
+  .b-h1 { font-size: clamp(68px, 19vw, 110px); }
+  .b-collage { grid-template-columns: 1fr; grid-template-rows: repeat(5, 220px); }
+  .b-col-cell.span2 { grid-row: span 1; }
+  .b-numbers { padding: 64px 24px; }
+  .b-numbers-inner { grid-template-columns: 1fr; gap: 48px; }
+  .b-pour-etab { padding: 64px 24px; }
+  .b-pour-etab-inner { grid-template-columns: 1fr; gap: 40px; }
+  .b-pour-etab-grid { grid-template-columns: 1fr; }
+  .b-pour-etab-item:nth-child(odd) { padding-right: 0; border-right: none; }
+  .b-pour-etab-item:nth-child(even) { padding-left: 0; }
+  .b-cockpit { padding: 64px 24px; }
+  .b-cockpit-inner { grid-template-columns: 1fr; gap: 40px; }
+  .b-footer { grid-template-columns: 1fr; gap: 32px; padding: 48px 24px; }
+  .b-footer-bottom { padding: 20px 24px; }
+  /* C */
+  .c-nav { padding: 20px 24px; }
+  .c-hero-body { padding: 40px 24px 0; }
+  .c-h1 { font-size: clamp(60px, 17vw, 110px); white-space: normal; }
+  .c-hero-right { flex-direction: column; gap: 24px; }
+  .c-sub { max-width: 100%; }
+  .c-hero-stats { flex-wrap: wrap; gap: 24px; }
+  .c-hero-stat { border-right: none; margin-right: 0; padding-right: 0; min-width: 40%; }
+  .c-why { padding: 64px 24px; }
+  .c-why-inner { grid-template-columns: 1fr; gap: 32px; }
+  .c-why-label { writing-mode: horizontal-tb; transform: none; }
+  .c-why-cols { grid-template-columns: 1fr; gap: 32px; }
+  .c-method { padding: 64px 24px; }
+  .c-scene { grid-template-columns: 56px 1fr; gap: 16px; }
+  .c-scene:hover { margin: 0; padding-left: 24px; padding-right: 24px; }
+  .c-scene-meta { display: none; }
+  .c-cockpit-section { padding: 64px 24px; }
+  .c-cockpit-inner { grid-template-columns: 1fr; gap: 48px; }
+  .c-testimony { padding: 64px 24px; }
+  .c-cta { padding: 80px 24px; }
+  .c-cta-inner { flex-direction: column; gap: 40px; align-items: flex-start; }
+  .c-footer { grid-template-columns: 1fr; gap: 32px; padding: 48px 24px; }
+  .c-footer-bottom { padding: 20px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Grain cinéma global V4 -->
+<div id="v4-grain"></div>
+
+<div class="cursor" id="cursor"></div>
+
+<!-- NAV CHOOSER -->
+<nav class="chooser">
+  <span class="chooser-label">Direction</span>
+  <button class="c-btn active" onclick="show('a',this)">A — Béton Brut</button>
+  <button class="c-btn" onclick="show('b',this)">B — Pellicule Vivante</button>
+  <button class="c-btn" onclick="show('c',this)">C — Cockpit Cinéma</button>
+  <span class="c-meta">V5 — <span>Audit DA</span></span>
+</nav>
+
+
+<!-- ══════════════ PAGE A — BÉTON BRUT ══════════════ -->
+<div class="page active" id="page-a">
+
+  <section class="a-hero" id="a-hero-sec">
+    <div class="a-hero-cinematic"></div>
+    <div class="a-hero-bg-word">BWD</div>
+    <span class="a-hero-credit">Association Banlieuwood — Cinéma — Seine-Saint-Denis — Depuis 2016</span>
+    <div class="frame-marks">
+      <div class="frame-mark tl"></div><div class="frame-mark tr"></div>
+      <div class="frame-mark bl"></div><div class="frame-mark br"></div>
+    </div>
+    <nav class="a-nav">
+      <span class="a-logo">BANLIEUWOOD</span>
+      <!-- V4 : nav droite visible avec ligne + texte -->
+      <div class="a-nav-r">
+        <span class="a-nav-line"></span>
+        <span>Menu</span>
+      </div>
+    </nav>
+    <div class="a-hero-content">
+      <!-- V4 : eyebrow avec croix de repérage cinéma -->
+      <div class="a-eyebrow">
+        <div class="reg-mark"><div class="reg-circle"></div></div>
+        <span>Cinéma — Quartiers — Depuis 2016</span>
+      </div>
+      <div class="a-h1">FILMER</div>
+      <div class="a-h1">SON</div>
+      <!-- V5 : "TERRITOIRE" en rouge cinéma — manifeste politique -->
+      <div class="a-h1-accent">TERRITOIRE</div>
+      <div class="a-hero-bottom">
+        <p class="a-sub">Le cinéma comme acte politique. Depuis les quartiers de Seine-Saint-Denis, depuis 2016.</p>
+        <button class="a-cta-link">Rejoindre un atelier</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="a-ticker">
+    <div class="a-ticker-inner">
+      <span class="a-ticker-item">LES MAINS DANS LE BÉTON</span><span class="a-ticker-sep">·</span>
+      <span class="a-ticker-item">NUIT D'HIVER</span><span class="a-ticker-sep">·</span>
+      <span class="a-ticker-item">TERRITOIRE</span><span class="a-ticker-sep">·</span>
+      <span class="a-ticker-item">LA CAGE ET L'OISEAU</span><span class="a-ticker-sep">·</span>
+      <span class="a-ticker-item">SALAM</span><span class="a-ticker-sep">·</span>
+      <span class="a-ticker-item">VOIR LA MER</span><span class="a-ticker-sep">·</span>
+      <span class="a-ticker-item">LES MAINS DANS LE BÉTON</span><span class="a-ticker-sep">·</span>
+      <span class="a-ticker-item">NUIT D'HIVER</span><span class="a-ticker-sep">·</span>
+      <span class="a-ticker-item">TERRITOIRE</span><span class="a-ticker-sep">·</span>
+      <span class="a-ticker-item">LA CAGE ET L'OISEAU</span><span class="a-ticker-sep">·</span>
+      <span class="a-ticker-item">SALAM</span><span class="a-ticker-sep">·</span>
+      <span class="a-ticker-item">VOIR LA MER</span><span class="a-ticker-sep">·</span>
+    </div>
+  </div>
+
+  <section class="a-manifeste reveal">
+    <span class="a-manifeste-label">Notre conviction</span>
+    <!-- V4 : em en rouge cinéma — plus dramatique que blanc 70% -->
+    <p class="a-manifeste-text">Chaque quartier est un film<br>qui attend d'être <em>tourné.</em></p>
+    <div class="a-manifeste-annotation">47 films<br>tournés</div>
+  </section>
+
+  <!-- V5 : rupture typographique — mot architectural -->
+  <section class="a-rupture">
+    <div class="a-rupture-word">BANLIEUE</div>
+    <p class="a-rupture-cite">"47 films. 1200 jeunes. 8 ans."</p>
+  </section>
+
+  <section class="a-stats">
+    <div class="a-stat-hero">
+      <span class="a-stat-hero-val">1200</span>
+      <div class="a-stat-hero-meta">
+        <span class="a-stat-hero-lbl">Jeunes formés</span>
+        <span class="a-stat-hero-since">depuis 2016</span>
+      </div>
+    </div>
+    <div class="a-stat-sec-row">
+      <div class="a-stat-sec reveal-fast"><span class="a-stat-sec-val">8</span><span class="a-stat-sec-lbl">ans de présence</span></div>
+      <div class="a-stat-sec reveal-fast"><span class="a-stat-sec-val">47</span><span class="a-stat-sec-lbl">films produits</span></div>
+      <div class="a-stat-sec reveal-fast"><span class="a-stat-sec-val">12</span><span class="a-stat-sec-lbl">établissements</span></div>
+    </div>
+  </section>
+
+  <section class="a-films">
+    <span class="a-films-label">Films produits</span>
+    <div class="a-film-list">
+      <div class="a-film-item reveal-fast">
+        <div class="a-film-name-wrap"><span class="a-film-n">01</span><span class="a-film-name">Les Mains dans le Béton</span></div>
+        <span class="a-film-meta">2024 · Drame · 12 min</span>
+      </div>
+      <div class="a-film-item reveal-fast">
+        <div class="a-film-name-wrap"><span class="a-film-n">02</span><span class="a-film-name">Nuit d'Hiver</span></div>
+        <span class="a-film-meta">2024 · Court · 8 min</span>
+      </div>
+      <div class="a-film-item reveal-fast">
+        <div class="a-film-name-wrap"><span class="a-film-n">03</span><span class="a-film-name">Territoire</span></div>
+        <span class="a-film-meta">2023 · Documentaire · 6 min</span>
+      </div>
+      <div class="a-film-item reveal-fast">
+        <div class="a-film-name-wrap"><span class="a-film-n">04</span><span class="a-film-name">La Cage et l'Oiseau</span></div>
+        <span class="a-film-meta">2023 · Fiction · 14 min</span>
+      </div>
+      <div class="a-film-item reveal-fast">
+        <div class="a-film-name-wrap"><span class="a-film-n">05</span><span class="a-film-name">Salam</span></div>
+        <span class="a-film-meta">2023 · Court · 9 min</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="a-photo-break">
+    <div class="a-photo-break-bg"></div>
+    <span class="a-photo-break-credit">Tournage — Seine-Saint-Denis</span>
+    <span class="a-photo-break-watermark">FILM</span>
+  </section>
+
+  <div class="a-inst-strip">
+    <span class="a-inst-label">Partenaires</span>
+    <div class="a-inst-items">
+      <span class="a-inst-item">CNAF</span>
+      <span class="a-inst-item">Région IDF</span>
+      <span class="a-inst-item">CNC</span>
+      <span class="a-inst-item">Ville de Paris</span>
+      <span class="a-inst-item">SACEM</span>
+      <span class="a-inst-item">Éducation Nationale</span>
+    </div>
+  </div>
+
+  <section class="a-reel reveal">
+    <video class="a-reel-video" autoplay muted loop playsinline>
+      <source src="../../making-of/passage.mp4" type="video/mp4">
+    </video>
+    <div class="a-reel-overlay"></div>
+    <div class="a-reel-content">
+      <div>
+        <span class="a-reel-label">Extrait · 2024</span>
+        <div class="a-reel-title">Les Mains<br>dans le Béton</div>
+      </div>
+      <div class="a-reel-meta">Drame<br>12 min<br>Atelier 2024</div>
+    </div>
+  </section>
+
+  <section class="a-method" style="position:relative;">
+    <div class="film-strip-l"></div>
+    <h2 class="a-method-h">Notre<br>Méthode</h2>
+    <div class="a-phases">
+      <div class="a-phase reveal"><div class="a-phase-n">01</div><div class="a-phase-body"><div class="a-phase-name">Découverte</div><p class="a-phase-desc">Lire un film avant de le faire. Décryptage du langage cinématographique. Les participants deviennent critiques avant de devenir réalisateurs.</p></div><span class="a-phase-anno">INT · SALLE · JOUR</span></div>
+      <div class="a-phase reveal"><div class="a-phase-n">02</div><div class="a-phase-body"><div class="a-phase-name">Écriture</div><p class="a-phase-desc">Du pitch à la continuité. Histoires issues du vécu, du territoire, du regard propre. On ne raconte pas à leur place.</p></div><span class="a-phase-anno">INT · ATELIER · MATIN</span></div>
+      <!-- V5 : phase 03 en rouge — climax de la méthode -->
+      <div class="a-phase reveal"><div class="a-phase-n" style="color:var(--a-red);">03</div><div class="a-phase-body"><div class="a-phase-name">Tournage</div><p class="a-phase-desc">Caméra, son, lumière. Le cockpit numérique orchestre les équipes en temps réel depuis l'iPad de l'intervenant.</p></div><span class="a-phase-anno">EXT · TERRAIN · JOUR</span></div>
+      <div class="a-phase reveal"><div class="a-phase-n">04</div><div class="a-phase-body"><div class="a-phase-name">Montage</div><p class="a-phase-desc">Post-production complète — image, son, étalonnage. Le film se fait autant à la table de montage que sur le plateau.</p></div><span class="a-phase-anno">INT · STUDIO · NUIT</span></div>
+      <div class="a-phase reveal"><div class="a-phase-n">05</div><div class="a-phase-body"><div class="a-phase-name">Diffusion</div><p class="a-phase-desc">Projection publique, festivals, circuits scolaires. Les films ont une vie réelle.</p></div><span class="a-phase-anno">FESTIVAL · SOIR</span></div>
+    </div>
+  </section>
+
+  <section class="a-testimony reveal">
+    <span class="a-test-mark">«</span>
+    <p class="a-test-quote">Le jour où on m'a mis une caméra dans les mains,<br>j'ai compris que mon quartier était un <em>décor.</em></p>
+    <div class="a-test-attr"><span class="a-test-dash"></span><span>Yassin K. — atelier 2023</span></div>
+  </section>
+
+  <!-- V5 : section Projections/Festivals — remplace le cockpit dans la direction A -->
+  <section class="a-projections reveal">
+    <span class="a-proj-label">Prochaines projections</span>
+    <h2 class="a-proj-h">Festivals<br>& Diffusions</h2>
+    <div class="a-proj-list">
+      <div class="a-proj-item">
+        <span class="a-proj-name">Festival Jean Rouch</span>
+        <span class="a-proj-meta">Paris · Musée de l'Homme<br>Mars 2025</span>
+      </div>
+      <div class="a-proj-item">
+        <span class="a-proj-name">Cinéma du Réel</span>
+        <span class="a-proj-meta">Paris · Centre Pompidou<br>Avril 2025</span>
+      </div>
+      <div class="a-proj-item">
+        <span class="a-proj-name">Regards du Sport</span>
+        <span class="a-proj-meta">Evry-Courcouronnes · MJC<br>Mai 2025</span>
+      </div>
+      <div class="a-proj-item">
+        <span class="a-proj-name">Visions du Réel</span>
+        <span class="a-proj-meta">Nyon · Suisse<br>Juin 2025</span>
+      </div>
+      <div class="a-proj-item">
+        <span class="a-proj-name">Festival Premiers Plans</span>
+        <span class="a-proj-meta">Angers · Projection lycéens<br>Janvier 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="a-cta" style="position:relative;">
+    <div class="frame-marks" style="inset:20px;">
+      <div class="frame-mark tl"></div><div class="frame-mark tr"></div>
+      <div class="frame-mark bl"></div><div class="frame-mark br"></div>
+    </div>
+    <h2 class="a-cta-h"><em>1200</em> vies<br>transformées.<br>La prochaine ?</h2>
+    <div class="a-cta-bottom">
+      <button class="a-btn-primary">Contacter notre équipe</button>
+      <button class="a-btn-ghost">Voir nos films</button>
+      <span class="a-cta-contact">contact@banlieuwood.fr · Réponse en 48h</span>
+    </div>
+  </section>
+
+  <footer>
+    <div class="a-footer">
+      <div>
+        <div class="a-footer-logo">BANLIEUWOOD</div>
+        <p class="a-footer-tag">Association loi 1901 — Cinéma, transmission et création pour les jeunes des quartiers populaires.</p>
+      </div>
+      <div>
+        <div class="a-footer-col-h">Navigation</div>
+        <div class="a-footer-links">
+          <a href="#" class="a-footer-link">Ateliers</a>
+          <a href="#" class="a-footer-link">Films</a>
+          <a href="#" class="a-footer-link">Cockpit</a>
+          <a href="#" class="a-footer-link">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="a-footer-col-h">Légal</div>
+        <div class="a-footer-links">
+          <a href="#" class="a-footer-link">Mentions légales</a>
+          <a href="#" class="a-footer-link">RGPD</a>
+        </div>
+      </div>
+    </div>
+    <div class="a-footer-bottom">
+      <span>© 2026 Banlieuwood</span>
+      <span>contact@banlieuwood.fr</span>
+    </div>
+  </footer>
+
+</div><!-- /page-a -->
+
+
+<!-- ══════════════ PAGE B — PELLICULE VIVANTE ══════════════ -->
+<div class="page" id="page-b">
+
+  <section class="b-hero">
+    <div class="b-hero-bg"></div>
+    <div class="b-hero-grain"></div>
+    <div class="b-hero-grid-word">VÉRITÉ</div>
+    <div class="b-person"></div>
+    <nav class="b-nav">
+      <span class="b-logo">BANLIEUWOOD</span>
+      <div class="b-nav-right">
+        <a href="#" class="b-nav-link">Ateliers</a>
+        <a href="#" class="b-nav-link">Films</a>
+        <a href="#" class="b-nav-link">Cockpit</a>
+        <button class="b-nav-btn">Accéder</button>
+      </div>
+    </nav>
+    <div class="b-hero-content">
+      <!-- V4 : eyebrow ivoire + croix de repérage -->
+      <div class="b-eyebrow">
+        <div class="reg-mark"><div class="reg-circle"></div></div>
+        <span>Programmes · Établissements · Seine-Saint-Denis</span>
+      </div>
+      <h1 class="b-h1">Filmer<br><em>Sa Vérité</em></h1>
+      <div class="b-hero-bottom">
+        <p class="b-sub">Ateliers cinéma clé en main pour jeunes des quartiers populaires. Du scénario au festival.</p>
+        <button class="b-hero-btn">Demander un programme</button>
+      </div>
+    </div>
+    <span class="b-folio">BANLIEUWOOD · 01</span>
+  </section>
+
+  <!-- V4 : collage avec background-image inline → classe + data -->
+  <div class="b-collage" style="position:relative;">
+    <div class="b-col-cell span2">
+      <div class="b-col-cell-bg" style="background-image:url('../../photos/_1177495.JPG');background-position:center;"></div>
+      <div class="b-col-noise"></div>
+      <div class="b-col-meta"><div class="b-col-title">Sur le plateau</div><div class="b-col-sub">Tournage 2024</div></div>
+    </div>
+    <div class="b-col-cell">
+      <div class="b-col-cell-bg" style="background-image:url('../../photos/_1177442.JPG');background-position:center 30%;filter:saturate(0.55) brightness(0.7);"></div>
+      <div class="b-col-noise"></div>
+      <div class="b-col-meta"><div class="b-col-title">Prise de son</div><div class="b-col-sub">Atelier 2023</div></div>
+    </div>
+    <div class="b-col-cell">
+      <div class="b-col-cell-bg" style="background-image:url('../../photos/_1177257.JPG');background-position:center;filter:saturate(0.55) brightness(0.7);"></div>
+      <div class="b-col-noise"></div>
+      <div class="b-col-meta"><div class="b-col-title">Maquillage</div><div class="b-col-sub">Making-of</div></div>
+    </div>
+    <div class="b-col-cell">
+      <div class="b-col-cell-bg" style="background-image:url('../../photos/P1011059.jpg');background-position:center top;filter:saturate(0.45) brightness(0.7);"></div>
+      <div class="b-col-noise"></div>
+      <div class="b-col-meta"><div class="b-col-title">Casting</div><div class="b-col-sub">Studio 2022</div></div>
+    </div>
+    <div class="b-col-cell">
+      <div class="b-col-cell-bg" style="background-image:url('../../photos/_1177608.JPG');background-position:center;filter:saturate(0.55) brightness(0.62);"></div>
+      <div class="b-col-noise"></div>
+      <div class="b-col-meta"><div class="b-col-title">Voir la Mer</div><div class="b-col-sub">Court 2023</div></div>
+    </div>
+  </div>
+
+  <section class="b-numbers reveal">
+    <div class="b-numbers-inner">
+      <div class="b-numbers-left">
+        <div class="b-num-row"><div class="b-num-val">1200</div><div class="b-num-lbl">jeunes formés<br>depuis 2016</div></div>
+        <div class="b-num-row"><div class="b-num-val">47</div><div class="b-num-lbl">films courts<br>produits et diffusés</div></div>
+        <div class="b-num-row"><div class="b-num-val">8</div><div class="b-num-lbl">ans de présence<br>dans les quartiers</div></div>
+      </div>
+      <div class="b-numbers-right">
+        <div class="b-quote-mark">«</div>
+        <p class="b-quote-text">J'ai compris que ma <em>vie de quartier</em> était un film que j'avais le droit de raconter.</p>
+        <div class="b-quote-attr"><span class="b-quote-dash"></span><span>Samir B. — atelier 2023</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- V4 : b-pour-etab reformaté grille éditoriale -->
+  <section class="b-pour-etab reveal">
+    <div class="b-pour-etab-inner">
+      <div>
+        <span class="b-pour-etab-label">Pour votre établissement</span>
+        <h2 class="b-pour-etab-h">Un programme<br><em>clé en main.</em></h2>
+      </div>
+      <div class="b-pour-etab-grid">
+        <div class="b-pour-etab-item">
+          <span class="b-pour-etab-item-label">Intervenant</span>
+          <div class="b-pour-etab-item-text">Aucune expertise cinéma requise. Nous arrivons, on tourne, on livre.</div>
+        </div>
+        <div class="b-pour-etab-item">
+          <span class="b-pour-etab-item-label">Matériel</span>
+          <div class="b-pour-etab-item-text">Caméras Sony, kits lumière, perches son. Le même équipement qu'un tournage professionnel.</div>
+        </div>
+        <div class="b-pour-etab-item">
+          <span class="b-pour-etab-item-label">Délai</span>
+          <div class="b-pour-etab-item-text">Film livré en 5 semaines. Découverte → Écriture → Tournage → Montage → Projection.</div>
+        </div>
+        <div class="b-pour-etab-item">
+          <span class="b-pour-etab-item-label">Financements</span>
+          <div class="b-pour-etab-item-text">Éligible CNAF, CNC, Région IDF, ÉducNat. Accompagnement sur les dossiers inclus.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="b-method">
+    <div class="b-method-head"><h2 class="b-method-h">La<br>Méthode</h2></div>
+    <div class="b-phase-editorial reveal">
+      <div class="b-phase-img"></div>
+      <div class="b-phase-txt"><div class="b-phase-n">01</div><div class="b-phase-name">Découverte</div><p class="b-phase-desc">Lire un film avant de le faire. Décryptage du langage cinématographique.</p><span class="b-phase-tag">2 séances</span></div>
+    </div>
+    <div class="b-phase-editorial reveal">
+      <div class="b-phase-img p2"></div>
+      <div class="b-phase-txt"><div class="b-phase-n">02</div><div class="b-phase-name">Écriture</div><p class="b-phase-desc">Du pitch à la continuité dialoguée. Histoires issues du vécu des participants.</p><span class="b-phase-tag">3 séances</span></div>
+    </div>
+    <div class="b-phase-editorial reveal">
+      <div class="b-phase-img p3"></div>
+      <div class="b-phase-txt"><div class="b-phase-n">03</div><div class="b-phase-name">Tournage</div><p class="b-phase-desc">Caméra, son, lumière. Cockpit numérique en temps réel.</p><span class="b-phase-tag">4 séances terrain</span></div>
+    </div>
+    <div class="b-phase-editorial reveal">
+      <div class="b-phase-img p4"></div>
+      <div class="b-phase-txt"><div class="b-phase-n">04</div><div class="b-phase-name">Montage</div><p class="b-phase-desc">Post-production complète. Image, son, étalonnage. Le film se fait autant à la table de montage que sur le plateau.</p><span class="b-phase-tag">3 séances</span></div>
+    </div>
+    <div class="b-phase-editorial reveal">
+      <div class="b-phase-img p5"></div>
+      <div class="b-phase-txt"><div class="b-phase-n">05</div><div class="b-phase-name">Diffusion</div><p class="b-phase-desc">Projection publique, festivals, circuits scolaires. Les films ont une vie réelle — pas juste un fichier sur un disque dur.</p><span class="b-phase-tag">1 projection publique</span></div>
+    </div>
+  </section>
+
+  <section class="b-full-photo">
+    <div class="b-full-photo-bg"></div>
+    <div class="b-full-photo-content">
+      <h2 class="b-full-h2">L'Atelier<br>comme<br>Studio</h2>
+      <div class="b-full-right">
+        <p class="b-full-sub">Caméras pro, kits lumière, son, montage. Ce que les écoles privées facturent 15 000€ par an.</p>
+        <span class="b-full-link">Découvrir les ateliers →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- B FILMSTRIP MAKING-OF -->
+  <div class="b-filmstrip-v4">
+    <div class="b-strip-row fwd">
+      <div class="b-strip-cell"><img src="../../making-of/frame_001.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_005.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_008.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_012.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_016.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_020.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../photos/_1177608.JPG" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../photos/_1177442.JPG" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../photos/_1177495.JPG" alt="" loading="lazy"></div>
+      <!-- duplicate pour loop -->
+      <div class="b-strip-cell"><img src="../../making-of/frame_001.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_005.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_008.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_012.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_016.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_020.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../photos/_1177608.JPG" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../photos/_1177442.JPG" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../photos/_1177495.JPG" alt="" loading="lazy"></div>
+    </div>
+    <div class="b-strip-row rev" style="margin-top:3px;">
+      <div class="b-strip-cell"><img src="../../photos/_1177257.JPG" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_024.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_028.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../photos/P1011059.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_032.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_036.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../photos/_1177599.JPG" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_022.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../photos/_1177491.JPG" alt="" loading="lazy"></div>
+      <!-- duplicate -->
+      <div class="b-strip-cell"><img src="../../photos/_1177257.JPG" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_024.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_028.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../photos/P1011059.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_032.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_036.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../photos/_1177599.JPG" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../making-of/frame_022.jpg" alt="" loading="lazy"></div>
+      <div class="b-strip-cell"><img src="../../photos/_1177491.JPG" alt="" loading="lazy"></div>
+    </div>
+  </div>
+
+  <section class="b-cockpit reveal">
+    <div class="b-cockpit-inner">
+      <div>
+        <span class="b-cockpit-label">Outil numérique</span>
+        <h2 class="b-cockpit-h">Le Cockpit<br>Intervenant</h2>
+        <p class="b-cockpit-sub">Tableau de bord iPad-first. Séances temps réel, IA Gemini intégrée, suivi pédagogique sans notation.</p>
+        <button class="b-cockpit-cta">Accéder au cockpit</button>
+      </div>
+      <!-- V4 : mockup sans teal — badges ivoire/gris filmique -->
+      <div class="b-screen">
+        <div class="b-screen-top">
+          <div class="b-screen-dots">
+            <div class="b-screen-dot" style="background:#2a2420"></div>
+            <div class="b-screen-dot" style="background:#1e1c18"></div>
+            <div class="b-screen-dot" style="background:#181614"></div>
+          </div>
+          <span class="b-screen-title">COCKPIT · SÉANCE</span>
+        </div>
+        <div class="b-screen-body">
+          <div class="b-screen-row"><span class="b-screen-lbl">Scène 03 — Contre-champ</span><span class="b-screen-badge b-badge-en-cours">EN COURS</span></div>
+          <div class="b-screen-row"><span class="b-screen-lbl">Équipe A — Plateau</span><span class="b-screen-badge b-badge-active">ACTIF</span></div>
+          <div class="b-screen-row"><span class="b-screen-lbl">Équipe B — Écriture</span><span class="b-screen-badge b-badge-active">ACTIF</span></div>
+          <div class="b-screen-row"><span class="b-screen-lbl">Scène 04</span><span class="b-screen-badge b-badge-attente">ATTENTE</span></div>
+        </div>
+        <div class="b-screen-bar">
+          <div class="b-screen-live"></div>
+          <span class="b-screen-status">23 participants · 01:24:15 · LIVE</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="b-cta">
+    <div class="b-cta-bg"></div>
+    <div class="b-cta-overlay"></div>
+    <div class="b-cta-content reveal">
+      <h2 class="b-cta-h">Votre établissement<br>rejoint <em>l'aventure</em> ?</h2>
+      <div class="b-cta-btns">
+        <button class="b-btn-ivory">Contacter notre équipe</button>
+        <button class="b-btn-ghost">Télécharger le dossier</button>
+      </div>
+      <p style="font-family:var(--font-m);font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.22);margin-top:18px;">contact@banlieuwood.fr · Réponse en 48h</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="b-footer">
+      <div>
+        <div class="b-footer-logo">BANLIEUWOOD</div>
+        <p class="b-footer-tag">Association loi 1901 — Cinéma, transmission et création pour les jeunes des quartiers populaires.</p>
+      </div>
+      <div>
+        <div class="b-footer-col-h">Navigation</div>
+        <div class="b-footer-links">
+          <a href="#" class="b-footer-link">Ateliers</a>
+          <a href="#" class="b-footer-link">Films</a>
+          <a href="#" class="b-footer-link">Cockpit</a>
+        </div>
+      </div>
+      <div>
+        <div class="b-footer-col-h">Contact</div>
+        <div class="b-footer-links">
+          <a href="#" class="b-footer-link">contact@banlieuwood.fr</a>
+          <a href="#" class="b-footer-link">Mentions légales</a>
+        </div>
+      </div>
+    </div>
+    <div class="b-footer-bottom"><span>© 2026 Banlieuwood</span></div>
+  </footer>
+
+</div><!-- /page-b -->
+
+
+<!-- ══════════════ PAGE C — COCKPIT CINÉMA ══════════════ -->
+<div class="page" id="page-c">
+
+  <!-- V4 : hero épuré — embed cockpit sorti, typo plus grande -->
+  <section class="c-hero" style="position:relative; overflow:hidden;">
+    <nav class="c-nav">
+      <span class="c-logo">BANLIEUWOOD</span>
+      <div class="c-nav-links">
+        <a href="#" class="c-nav-link">Ateliers</a>
+        <a href="#" class="c-nav-link">Films</a>
+        <a href="#" class="c-nav-link">Cockpit</a>
+      </div>
+      <button class="c-nav-cta">Accéder</button>
+    </nav>
+    <div class="c-hero-body">
+      <div class="c-hero-tag">L'outil des intervenants</div>
+      <h1 class="c-h1">La Banlieue <em>Tourne</em></h1>
+      <div class="c-hero-divider"></div>
+      <div class="c-hero-right">
+        <p class="c-sub">L'outil numérique qui transforme chaque atelier cinéma en expérience professionnelle. Pour les intervenants, les élèves, les établissements.</p>
+        <div class="c-hero-btns">
+          <button class="c-btn-main">Essayer le cockpit</button>
+          <button class="c-btn-sec">Voir les ateliers</button>
+        </div>
+      </div>
+      <div class="c-hero-stats">
+        <div class="c-hero-stat"><div class="c-hero-stat-val">1200</div><div class="c-hero-stat-lbl">Jeunes formés</div></div>
+        <div class="c-hero-stat"><div class="c-hero-stat-val">47</div><div class="c-hero-stat-lbl">Films produits</div></div>
+        <div class="c-hero-stat"><div class="c-hero-stat-val">12</div><div class="c-hero-stat-lbl">Établissements</div></div>
+        <div class="c-hero-stat"><div class="c-hero-stat-val">8</div><div class="c-hero-stat-lbl">Ans de présence</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- V4 : filmstrip avec vraies frames making-of -->
+  <div class="c-filmstrip" style="position:relative;">
+    <div style="position:absolute;bottom:24px;left:40px;z-index:20;font-family:var(--font-m);font-size:9px;letter-spacing:5px;color:rgba(255,255,255,0.3);text-transform:uppercase;pointer-events:none;">DEPUIS 2016 — 1200 ÉLÈVES</div>
+    <div class="c-film-cell" data-title="PASSAGE · MAKING-OF">
+      <div class="c-film-cell-bg" style="background-image:url('../../making-of/frame_007.jpg');background-position:center;"></div>
+      <span class="c-film-cell-n">01</span>
+    </div>
+    <div class="c-film-cell main" data-title="TOURNAGE · PASSAGE 2024">
+      <div class="c-film-cell-bg" style="background-image:url('../../making-of/frame_015.jpg');background-position:center;"></div>
+      <span class="c-film-cell-n">02</span>
+    </div>
+    <div class="c-film-cell" data-title="ÉLÈVES · MAKING-OF">
+      <div class="c-film-cell-bg" style="background-image:url('../../making-of/frame_022.jpg');background-position:center;"></div>
+      <span class="c-film-cell-n">03</span>
+    </div>
+    <div class="c-film-cell" data-title="PROJECTION · FINALE">
+      <div class="c-film-cell-bg" style="background-image:url('../../making-of/frame_035.jpg');background-position:center;"></div>
+      <span class="c-film-cell-n">04</span>
+    </div>
+  </div>
+  <div class="c-filmstrip-credit">
+    <span class="c-filmstrip-credit-n">47 FILMS PRODUITS</span>
+    <span class="c-filmstrip-credit-sep">·</span>
+    <span class="c-filmstrip-credit-loc">SEINE-SAINT-DENIS</span>
+    <span class="c-filmstrip-credit-sep">·</span>
+    <span class="c-filmstrip-credit-years">2016 — 2024</span>
+  </div>
+
+  <div class="c-strip">
+    <span class="c-strip-label">Partenaires</span>
+    <div class="c-strip-items">
+      <span class="c-strip-item">CNAF</span>
+      <span class="c-strip-item">Région IDF</span>
+      <span class="c-strip-item">CNC</span>
+      <span class="c-strip-item">Ville de Paris</span>
+      <span class="c-strip-item">SACEM</span>
+    </div>
+  </div>
+
+  <section class="c-why reveal">
+    <div class="c-why-inner">
+      <!-- V4 : label en écriture verticale — détail éditorial -->
+      <div><span class="c-why-label">Pourquoi</span></div>
+      <div class="c-why-right">
+        <h2 class="c-why-h">Le cinéma<br>comme <em>droit</em>,<br>pas privilège.</h2>
+        <div class="c-why-cols">
+          <div>
+            <div class="c-why-col-h">Pour les jeunes</div>
+            <p class="c-why-col-p">Accès au matériel pro et aux techniques que les écoles privées facturent 15 000€. Gratuit pour les participants.</p>
+          </div>
+          <div>
+            <div class="c-why-col-h">Pour les établissements</div>
+            <p class="c-why-col-p">Un outil clés en main pour les intervenants. Séances structurées, suivi pédagogique, rapport automatique.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-method">
+    <div class="c-method-head">
+      <h2 class="c-method-h">La Méthode</h2>
+      <p class="c-method-sub">5 phases. De l'idée au festival. Rien n'est simulé.</p>
+    </div>
+    <div class="c-scenes">
+      <div class="c-scene reveal-fast"><span class="c-scene-n">01</span><div class="c-scene-body"><div class="c-scene-name">Découverte</div><p class="c-scene-desc">Lire un film avant de le faire. Les jeunes deviennent critiques avant d'être réalisateurs.</p></div><span class="c-scene-meta">INT · SALLE · JOUR</span></div>
+      <div class="c-scene reveal-fast"><span class="c-scene-n">02</span><div class="c-scene-body"><div class="c-scene-name">Écriture</div><p class="c-scene-desc">Du pitch à la continuité. Histoires du territoire, du vécu, du regard propre.</p></div><span class="c-scene-meta">INT · ATELIER · MATIN</span></div>
+      <div class="c-scene reveal-fast"><span class="c-scene-n">03</span><div class="c-scene-body"><div class="c-scene-name">Tournage</div><p class="c-scene-desc">Caméra, son, lumière pro. Le cockpit orchestre les équipes en temps réel.</p></div><span class="c-scene-meta">EXT · QUARTIER · JOUR</span></div>
+      <div class="c-scene reveal-fast"><span class="c-scene-n">04</span><div class="c-scene-body"><div class="c-scene-name">Montage</div><p class="c-scene-desc">Post-production complète. Image, son, titres. Un vrai film au format court.</p></div><span class="c-scene-meta">INT · STUDIO · NUIT</span></div>
+      <div class="c-scene reveal-fast"><span class="c-scene-n">05</span><div class="c-scene-body"><div class="c-scene-name">Diffusion</div><p class="c-scene-desc">Festivals, projections publiques, circuits scolaires. Le film existe dans le monde.</p></div><span class="c-scene-meta">FESTIVAL · SOIR</span></div>
+    </div>
+  </section>
+
+  <section class="c-numbers">
+    <div class="c-numbers-row">
+      <div class="c-num"><span class="c-num-val">1200</span><div class="c-num-lbl">jeunes formés</div><span class="c-num-since">depuis 2016</span></div>
+      <div class="c-num"><span class="c-num-val">47</span><div class="c-num-lbl">films courts produits et diffusés</div></div>
+      <div class="c-num"><span class="c-num-val">12</span><div class="c-num-lbl">établissements partenaires actifs</div></div>
+    </div>
+  </section>
+
+  <!-- V4 : split-flap — rupture émotionnelle -->
+  <section class="c-splitflap" id="c-splitflap-sec">
+    <video class="c-sf-bg" autoplay muted loop playsinline>
+      <source src="../../making-of/passage.mp4" type="video/mp4">
+    </video>
+    <div class="c-sf-lbl">BANLIEUWOOD · DEPUIS 2016</div>
+    <div id="c-sf-display"></div>
+    <div class="c-sf-word-lbl">CHAQUE QUARTIER A SON HISTOIRE</div>
+    <div class="c-sf-ctr" id="c-sf-ctr">SÉQUENCE 01 / 03</div>
+  </section>
+
+  <section class="c-photo">
+    <div class="c-photo-bg"></div>
+    <div class="c-photo-content">
+      <h2 class="c-photo-h">L'Atelier<br>comme<br>Studio</h2>
+      <div class="c-photo-right"><p class="c-photo-sub">Caméras, lumière, son, montage. Le matériel professionnel, accessible gratuitement.</p></div>
+    </div>
+  </section>
+
+  <!-- V4 : cockpit section dédiée — embed propre, pas dans le hero -->
+  <section class="c-cockpit-section reveal">
+    <div class="c-cockpit-inner">
+      <div>
+        <span class="c-cockpit-label">Le produit</span>
+        <h2 class="c-cockpit-h">Cockpit<br>Intervenant</h2>
+        <p class="c-cockpit-sub">Tableau de bord iPad-first. Tout ce dont l'animateur a besoin pour mener une séance cinéma professionnelle avec 25 jeunes.</p>
+        <div class="c-cockpit-feats">
+          <div class="c-feat reveal-fast"><span class="c-feat-num">01</span><div><div class="c-feat-title">Séances temps réel</div><div class="c-feat-desc">Démarrer, pauser, gérer les équipes depuis l'iPad en live.</div></div></div>
+          <div class="c-feat reveal-fast"><span class="c-feat-num">02</span><div><div class="c-feat-title">IA Gemini intégrée</div><div class="c-feat-desc">Exercices générés et adaptés au niveau du groupe en séance.</div></div></div>
+          <div class="c-feat reveal-fast"><span class="c-feat-num">03</span><div><div class="c-feat-title">Suivi pédagogique</div><div class="c-feat-desc">Rapport post-séance automatique pour le professeur. Sans notation.</div></div></div>
+        </div>
+      </div>
+      <!-- V4 : embed cockpit pleine section — lisible, pas coincé dans hero -->
+      <div class="c-cockpit-embed">
+        <div class="c-embed-bar">
+          <div class="c-embed-dot"></div><div class="c-embed-dot"></div><div class="c-embed-dot"></div>
+          <span class="c-embed-label">COCKPIT · SÉANCE LIVE</span>
+        </div>
+        <div class="c-embed-body">
+          <div class="c-embed-session">
+            <span class="c-embed-session-title">Scène 03 — Contre-champ café</span>
+            <span class="c-embed-session-live">LIVE</span>
+          </div>
+          <div class="c-embed-students">
+            <div class="c-embed-student"><div class="c-embed-student-name">Équipe A</div><div class="c-embed-student-score hot">07</div></div>
+            <div class="c-embed-student"><div class="c-embed-student-name">Équipe B</div><div class="c-embed-student-score">05</div></div>
+            <div class="c-embed-student"><div class="c-embed-student-name">Équipe C</div><div class="c-embed-student-score">09</div></div>
+          </div>
+          <div class="c-embed-rows">
+            <div class="c-embed-row"><span class="c-embed-row-lbl">Scène 03 — Contre-champ</span><span class="c-embed-row-badge c-embed-badge-active">EN COURS</span></div>
+            <div class="c-embed-row"><span class="c-embed-row-lbl">Équipe A — Plateau</span><span class="c-embed-row-badge c-embed-badge-active">ACTIF</span></div>
+            <div class="c-embed-row"><span class="c-embed-row-lbl">Scène 04 — Travelling</span><span class="c-embed-row-badge c-embed-badge-wait">ATTENTE</span></div>
+            <div class="c-embed-row"><span class="c-embed-row-lbl">IA — Exercice prêt</span><span class="c-embed-row-badge c-embed-badge-active">PRÊT</span></div>
+          </div>
+          <button class="c-embed-action">Lancer l'exercice suivant →</button>
+        </div>
+        <div class="c-embed-bar-bottom">
+          <div class="c-embed-live-dot"></div>
+          <span class="c-embed-status">23 participants · 01:24:15 · LIVE</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-testimony reveal">
+    <span class="c-test-line"></span>
+    <p class="c-test-quote">Ce n'est pas que j'avais du talent caché. C'est que personne ne m'avait jamais donné une <em>caméra.</em></p>
+    <div class="c-test-attr"><span class="c-test-dash"></span><span>Inès M. — atelier 2024</span></div>
+  </section>
+
+  <section class="c-cta reveal">
+    <div class="c-cta-inner">
+      <h2 class="c-cta-h">Votre établissement<br>rejoint <em>l'aventure</em> ?</h2>
+      <div class="c-cta-right">
+        <button class="c-btn-o">Contacter notre équipe</button>
+        <button class="c-btn-w">Télécharger le dossier</button>
+        <span class="c-cta-contact">contact@banlieuwood.fr · 48h</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="c-footer">
+      <div>
+        <div class="c-footer-logo">BANLIEUWOOD</div>
+        <p class="c-footer-tag">Association loi 1901 — Cinéma, transmission et création pour les jeunes des quartiers populaires.</p>
+      </div>
+      <div>
+        <div class="c-footer-col-h">Navigation</div>
+        <div class="c-footer-links">
+          <a href="#" class="c-footer-link">Ateliers</a>
+          <a href="#" class="c-footer-link">Films</a>
+          <a href="#" class="c-footer-link">Cockpit</a>
+        </div>
+      </div>
+      <div>
+        <div class="c-footer-col-h">Contact</div>
+        <div class="c-footer-links">
+          <a href="#" class="c-footer-link">contact@banlieuwood.fr</a>
+          <a href="#" class="c-footer-link">Mentions légales</a>
+        </div>
+      </div>
+    </div>
+    <div class="c-footer-bottom"><span>© 2026 Banlieuwood</span></div>
+  </footer>
+
+</div><!-- /page-c -->
+
+
+<script>
+/* ── NAV SWITCH ── */
+function show(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.c-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,0);
+  initReveal();
+}
+
+/* ── CURSEUR FLUIDE ── */
+const cursor = document.getElementById('cursor');
+let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
+document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+document.addEventListener('mouseleave', () => cursor.classList.add('hidden'));
+document.addEventListener('mouseenter', () => cursor.classList.remove('hidden'));
+document.addEventListener('mouseover', e => {
+  if (e.target.matches('button, a, .a-film-item, .c-scene, .b-col-cell, .b-phase-editorial')) {
+    cursor.classList.add('big');
+  } else {
+    cursor.classList.remove('big');
+  }
+});
+(function animateCursor() {
+  curX += (mouseX - curX) * 0.12;
+  curY += (mouseY - curY) * 0.12;
+  cursor.style.left = curX + 'px';
+  cursor.style.top = curY + 'px';
+  requestAnimationFrame(animateCursor);
+})();
+
+/* ── CURSOR TRAIL (A hero) ── */
+const V4_FRAMES = [
+  'making-of/frame_001.jpg','making-of/frame_005.jpg','making-of/frame_008.jpg',
+  'making-of/frame_012.jpg','making-of/frame_016.jpg','making-of/frame_020.jpg',
+  'making-of/frame_024.jpg','making-of/frame_028.jpg','making-of/frame_032.jpg','making-of/frame_036.jpg'
+];
+let v4TrailLast = 0, v4TrailIdx = 0;
+document.addEventListener('mousemove', e => {
+  if (!document.getElementById('page-a').classList.contains('active')) return;
+  const hero = document.getElementById('a-hero-sec');
+  if (!hero) return;
+  const hr = hero.getBoundingClientRect();
+  if (e.clientY < hr.top || e.clientY > hr.bottom) return;
+  const now = Date.now();
+  if (now - v4TrailLast < 65) return;
+  v4TrailLast = now;
+  const el = document.createElement('div');
+  el.className = 'v4-trail';
+  const rot = (Math.random() * 16 - 8).toFixed(1);
+  el.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;width:120px;height:76px;background-image:url(${V4_FRAMES[v4TrailIdx % V4_FRAMES.length]});--rot:${rot}deg;opacity:.75;`;
+  v4TrailIdx++;
+  document.body.appendChild(el);
+  requestAnimationFrame(() => {
+    setTimeout(() => { el.style.opacity = '0'; el.style.transform = `translate(-50%,-50%) rotate(${rot}deg) scale(.88)`; }, 55);
+    setTimeout(() => el.remove(), 640);
+  });
+});
+
+/* ── COMPTEUR ANIMÉ ── */
+function animateCounter(el, target, duration = 1400) {
+  const startTime = performance.now();
+  function step(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(ease * target);
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = target;
+  }
+  requestAnimationFrame(step);
+}
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const target = parseInt(el.textContent);
+      if (!isNaN(target) && target > 0) {
+        animateCounter(el, target, target > 100 ? 1600 : 1000);
+        counterObserver.unobserve(el);
+      }
+    }
+  });
+}, { threshold: 0.3 });
+
+/* ── PARALLAXE B hero ── */
+window.addEventListener('scroll', () => {
+  const heroBg = document.querySelector('#page-b .b-hero-bg');
+  if (!heroBg) return;
+  if (document.getElementById('page-b').classList.contains('active')) {
+    heroBg.style.transform = `translateY(${window.scrollY * 0.16}px) scale(1.07)`;
+  }
+}, { passive: true });
+
+/* ── SCROLL REVEAL ── */
+let _revealObserver = null;
+function initReveal() {
+  if (_revealObserver) _revealObserver.disconnect();
+  _revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 55);
+      }
+    });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal, .reveal-fast').forEach(el => {
+    el.classList.remove('visible');
+    _revealObserver.observe(el);
+  });
+  // Ré-observer les compteurs à chaque switch de page
+  document.querySelectorAll('.a-stat-hero-val, .a-stat-sec-val, .b-num-val, .c-num-val, .c-hero-stat-val').forEach(el => {
+    counterObserver.unobserve(el);
+    counterObserver.observe(el);
+  });
+}
+
+/* ── SPLIT-FLAP C ── */
+(function() {
+  const PHRASES = ['FILMER SA VÉRITÉ', '1200 VIES FORMÉES', 'LE CINÉMA PARLE'];
+  const maxLen = Math.max(...PHRASES.map(p => p.length));
+  const padded = PHRASES.map(p => p.padEnd(maxLen));
+  const display = document.getElementById('c-sf-display');
+  const ctrEl = document.getElementById('c-sf-ctr');
+  if (!display) return;
+  const cells = [];
+  for (let i = 0; i < maxLen; i++) {
+    const wrap = document.createElement('div');
+    wrap.className = 'c-sf-char';
+    const inner = document.createElement('div');
+    inner.className = 'c-sf-char-inner';
+    inner.textContent = '-';
+    wrap.appendChild(inner);
+    display.appendChild(wrap);
+    cells.push({ wrap, inner });
+  }
+  let phraseIdx = 0;
+  function flipToPhrase() {
+    const phrase = padded[phraseIdx];
+    phraseIdx = (phraseIdx + 1) % padded.length;
+    if (ctrEl) ctrEl.textContent = `SÉQUENCE ${String(phraseIdx).padStart(2,'0')} / 0${padded.length}`;
+    cells.forEach(({ wrap, inner }, i) => {
+      setTimeout(() => {
+        wrap.classList.add('flipping');
+        setTimeout(() => {
+          const ch = phrase[i] || ' ';
+          if (ch === ' ') { wrap.classList.add('sp'); inner.textContent = ''; }
+          else { wrap.classList.remove('sp'); inner.textContent = ch; }
+          wrap.classList.remove('flipping');
+        }, 44);
+      }, i * 52);
+    });
+  }
+  setTimeout(() => { flipToPhrase(); setInterval(flipToPhrase, 3800); }, 700);
+})();
+
+/* ── INIT ── */
+document.addEventListener('DOMContentLoaded', () => {
+  initReveal(); // observe reveal + compteurs via initReveal()
+});
+</script>
+</body>
+</html>

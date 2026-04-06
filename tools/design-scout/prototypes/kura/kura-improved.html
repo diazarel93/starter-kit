@@ -1,0 +1,3178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KURA — Infallible Compliance. Pure Performance.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+/* ══════════════════════════════════════════════════════════════
+   KURA DESIGN SYSTEM — Standalone Reproduction
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+  --kura-accent: #00D4FF;
+  --kura-success: #00E676;
+  --kura-warning: #FFB020;
+  --kura-danger: #FF4B4B;
+  --kura-info: #3B82F6;
+  --obsidian-900: #02030A;
+  --obsidian-850: #040710;
+  --obsidian-800: #050816;
+  --obsidian-700: #0A0F1F;
+  --obsidian-600: #141B2C;
+  --obsidian-500: #1C2538;
+  --obsidian-400: #273044;
+  --obsidian-300: #343D53;
+  --obsidian-200: #4A5672;
+  --obsidian-100: #A8B5D0;
+  --obsidian-50: #CFD5EA;
+  --foreground: #F5F7FA;
+  --border: rgba(168, 181, 208, 0.20);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--obsidian-800);
+  background-image: radial-gradient(rgba(0,212,255,0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: var(--foreground);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  line-height: 1.65;
+  font-size: 15px;
+}
+
+::selection {
+  background: rgba(0, 212, 255, 0.2);
+  color: var(--foreground);
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(168, 181, 208, 0.20); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(168, 181, 208, 0.40); }
+
+a { text-decoration: none; color: inherit; }
+
+.font-display { font-family: 'Inter', sans-serif; }
+.font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+/* ── Glass cards ── */
+.glass-card {
+  background: rgba(10, 15, 31, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(168, 181, 208, 0.12);
+}
+.glass-card-premium {
+  background: rgba(10, 15, 31, 0.5);
+  backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid rgba(168, 181, 208, 0.10);
+  box-shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 8px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+/* ── Hover effects ── */
+.hover-lift { transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s; }
+.hover-lift:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.15); }
+.hover-glow { transition: box-shadow .25s ease, border-color .25s ease; }
+.hover-glow:hover { box-shadow: 0 0 20px rgba(0,212,255,.12), 0 0 60px rgba(0,212,255,.04); border-color: rgba(0,212,255,.25); }
+.btn-press:active { transform: scale(0.97); transition: transform 0.1s ease; }
+
+/* ── Scroll reveal ── */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Stagger children ── */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeInUp 0.4s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 50ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 100ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 150ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 200ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 250ms; }
+
+/* ── Animations ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes breathe {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+@keyframes scrollDot {
+  0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  50% { transform: translateX(-50%) translateY(12px); opacity: 0.3; }
+  100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+@keyframes heroZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.12); }
+}
+@keyframes stadiumZoom {
+  0% { transform: scale(1) translateY(0); }
+  100% { transform: scale(1.2) translateY(-3%); }
+}
+@keyframes eyeZoom {
+  0% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.12) translateY(-1%); }
+  100% { transform: scale(1.05) translateX(2%); }
+}
+@keyframes shieldZoom {
+  0% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marqueeReverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pingDot {
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+@keyframes pulseProhibited {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+  50% { box-shadow: 0 0 12px 4px rgba(239, 68, 68, 0.25); }
+}
+@keyframes scanLine {
+  0% { top: -60px; }
+  100% { top: calc(100% + 60px); }
+}
+
+/* ── Search glow ── */
+.search-glow:focus-within {
+  box-shadow: 0 0 0 1px rgba(0,212,255,0.5), 0 0 20px rgba(0,212,255,0.1);
+  border-color: rgba(0,212,255,0.5);
+}
+
+/* ── Scrollbar hide ── */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ══════════════════════════════════════════════════════════════
+   LOADING SCREEN
+   ══════════════════════════════════════════════════════════════ */
+#loading-screen {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--obsidian-900);
+  transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+#loading-screen.exit { opacity: 0; pointer-events: none; }
+#loading-screen .dot-grid {
+  position: absolute; inset: 0; opacity: 0.03;
+  background-image: radial-gradient(circle, rgba(0,212,255,0.8) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+#loading-screen .shield-path {
+  stroke-dasharray: 60; stroke-dashoffset: 60;
+  transition: stroke-dashoffset 0.75s cubic-bezier(0.16,1,0.3,1);
+}
+#loading-screen .check-path {
+  stroke-dasharray: 12; stroke-dashoffset: 12;
+  transition: stroke-dashoffset 0.3s cubic-bezier(0.16,1,0.3,1) 0.3s;
+}
+#loading-screen.drawing .shield-path { stroke-dashoffset: 60; }
+#loading-screen.drawing .check-path { stroke-dashoffset: 12; }
+#loading-screen.revealed .shield-path { stroke-dashoffset: 0; }
+#loading-screen.revealed .check-path { stroke-dashoffset: 0; }
+#loading-screen .brand-text {
+  opacity: 0; transform: translateY(8px);
+  transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+#loading-screen.revealed .brand-text { opacity: 1; transform: translateY(0); }
+.loading-letter {
+  display: inline-block;
+  opacity: 0; transform: translateY(12px);
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+#loading-screen.revealed .loading-letter { opacity: 1; transform: translateY(0); }
+#loading-screen.revealed .loading-letter:nth-child(1) { transition-delay: 100ms; }
+#loading-screen.revealed .loading-letter:nth-child(2) { transition-delay: 180ms; }
+#loading-screen.revealed .loading-letter:nth-child(3) { transition-delay: 260ms; }
+#loading-screen.revealed .loading-letter:nth-child(4) { transition-delay: 340ms; }
+.loading-bar-inner {
+  width: 0%; transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+}
+#loading-screen.revealed .loading-bar-inner { width: 70%; }
+#loading-screen.exit .loading-bar-inner { width: 100%; }
+
+/* ══════════════════════════════════════════════════════════════
+   NAVBAR
+   ══════════════════════════════════════════════════════════════ */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  transition: all 0.5s;
+  opacity: 0; transform: translateY(-100%);
+}
+#navbar.visible { opacity: 1; transform: translateY(0); }
+#navbar.scrolled {
+  background: rgba(5, 8, 22, 0.92);
+  backdrop-filter: blur(20px) saturate(1.2);
+  border-bottom: 1px solid rgba(168, 181, 208, 0.08);
+}
+.nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.nav-logo { display: flex; align-items: center; gap: 10px; }
+.nav-logo-text { font-size: 18px; font-weight: 800; color: white; letter-spacing: -0.01em; }
+.nav-beta { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; background: rgba(0,212,255,0.15); color: var(--kura-accent); border: 1px solid rgba(0,212,255,0.2); }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-link {
+  position: relative; color: var(--obsidian-100); font-size: 14px; font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: white; }
+.nav-link::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+  background: var(--kura-accent); border-radius: 2px;
+  transition: width 0.3s ease-out;
+}
+.nav-link:hover::after { width: 100%; }
+.nav-cta {
+  background: var(--kura-accent); color: var(--obsidian-900);
+  padding: 8px 20px; border-radius: 8px; font-size: 14px; font-weight: 700;
+  transition: all 0.3s; border: none; cursor: pointer;
+}
+.nav-cta:hover { box-shadow: 0 0 20px rgba(0,212,255,0.3); transform: scale(1.02); }
+
+/* Mobile hamburger */
+.nav-hamburger { display: none; background: none; border: none; color: var(--obsidian-100); padding: 12px; cursor: pointer; min-width: 44px; min-height: 44px; }
+.mobile-menu { display: none; padding: 24px; border-top: 1px solid rgba(28,37,56,0.2); }
+.mobile-menu a { display: block; color: var(--obsidian-100); font-size: 16px; font-weight: 500; padding: 8px 0; }
+.mobile-menu a:hover { color: white; }
+.mobile-cta { display: block; width: 100%; background: var(--kura-accent); color: var(--obsidian-900); font-weight: 700; height: 48px; border-radius: 12px; text-align: center; line-height: 48px; margin-top: 16px; border: none; cursor: pointer; font-size: 14px; }
+
+@media (max-width: 767px) {
+  .nav-links { display: none !important; }
+  .nav-hamburger { display: flex !important; align-items: center; justify-content: center; }
+  .mobile-menu.open { display: block; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HERO SECTION
+   ══════════════════════════════════════════════════════════════ */
+#hero { position: relative; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.hero-video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0.30; animation: heroZoom 12s ease-in-out infinite alternate;
+}
+.hero-overlay { position: absolute; inset: 0; background: rgba(5,8,22,0.6); }
+.hero-canvas { position: absolute; inset: 0; }
+.hero-radial { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,212,255,0.04) 0%, transparent 70%); }
+.hero-vignette-bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 160px; background: linear-gradient(to top, var(--obsidian-800), transparent); }
+.hero-vignette-top { position: absolute; top: 0; left: 0; right: 0; height: 128px; background: linear-gradient(to bottom, rgba(5,8,22,0.5), transparent); }
+
+.hero-content {
+  position: relative; z-index: 10;
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 80px var(--sec-px) 64px;
+}
+/* Vertical badge top-right — indicateur live */
+.hero-live-badge {
+  position: absolute; top: 88px; right: var(--sec-px);
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 14px; border-radius: 999px;
+  border: 1px solid rgba(0,212,255,0.15);
+  background: rgba(0,212,255,0.04);
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+  color: rgba(0,212,255,0.6); letter-spacing: .15em; text-transform: uppercase;
+}
+.hero-live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--kura-accent); animation: pingDot 1.5s cubic-bezier(0,0,.2,1) infinite; }
+
+/* Hero elements — initial hidden state, JS reveals them */
+.hero-el { opacity: 0; transform: translateY(20px); transition: all 0.7s cubic-bezier(0.16,1,0.3,1); }
+.hero-el.show { opacity: 1; transform: translateY(0); }
+
+.shield-box {
+  position: relative; margin: 0 auto 32px; width: 80px; height: 80px;
+  display: flex; align-items: center; justify-content: center;
+}
+.shield-bg {
+  position: absolute; inset: 0; border-radius: 16px;
+  background: rgba(0,212,255,0.06); border: 1px solid rgba(0,212,255,0.15);
+}
+.shield-glow {
+  position: absolute; inset: 0; border-radius: 16px;
+  box-shadow: 0 0 40px rgba(0,212,255,0.15);
+  animation: breathe 3s ease-in-out infinite;
+  opacity: 0; transition: opacity 0.5s;
+}
+.shield-glow.show { opacity: 1; }
+.hero-shield-path {
+  stroke-dasharray: 60; stroke-dashoffset: 60;
+  transition: stroke-dashoffset 1s cubic-bezier(0.16,1,0.3,1);
+}
+.hero-shield-path.draw { stroke-dashoffset: 0; }
+.hero-check-path {
+  stroke-dasharray: 12; stroke-dashoffset: 12;
+  transition: stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1) 0.6s;
+}
+.hero-check-path.draw { stroke-dashoffset: 0; }
+
+/* KURA letter-by-letter — gauche, géant */
+.kura-title {
+  display: flex; align-items: baseline; justify-content: flex-start;
+  gap: 0; margin-bottom: 20px; overflow: visible;
+  letter-spacing: -0.06em; line-height: 0.85;
+}
+.kura-letter {
+  display: inline-block; font-size: clamp(4rem, 12vw, 9rem); font-weight: 900; color: white;
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.kura-letter.show { opacity: 1; transform: translateY(0); }
+
+/* Tagline sous KURA — mono, subtitre, pas un second h1 */
+.hero-headline {
+  text-align: left; margin-bottom: 32px;
+  font-size: clamp(0.9rem, 1.8vw, 1.25rem); font-weight: 400;
+  color: var(--obsidian-100); line-height: 1.65; max-width: 520px;
+}
+.hero-headline .accent { color: var(--kura-accent); }
+.hero-headline .accent-line { display: none; }
+
+/* Suppression de l'ancienne subtitle (remplacée par hero-headline simplifié) */
+.hero-subtitle { display: none; }
+
+/* Search bar — gauche, plus large */
+.search-container {
+  width: 100%; max-width: 640px; margin: 0;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; padding: 6px; transition: all 0.2s;
+}
+.search-inner { display: flex; align-items: center; gap: 8px; }
+.search-input {
+  height: 56px; flex: 1; background: transparent; border: none; outline: none;
+  color: white; font-size: 18px; padding: 0 16px;
+  font-family: 'Inter', sans-serif;
+}
+.search-input::placeholder { color: rgba(168,181,208,0.5); }
+.search-btn {
+  height: 44px; padding: 0 24px;
+  background: var(--kura-accent); color: var(--obsidian-900); font-weight: 700;
+  border-radius: 12px; border: none; cursor: pointer;
+  box-shadow: 0 0 20px rgba(0,212,255,0.25);
+  transition: opacity 0.2s; white-space: nowrap; font-family: 'Inter', sans-serif; font-size: 14px;
+}
+.search-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Substance pills — gauche */
+.pills { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 8px; margin-top: 16px; }
+.pill {
+  padding: 6px 12px; min-height: 40px; font-size: 14px;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px; color: var(--obsidian-100); cursor: pointer;
+  transition: all 0.2s; font-family: 'Inter', sans-serif;
+  display: inline-flex; align-items: center;
+}
+.pill:hover { background: rgba(255,255,255,0.08); color: white; }
+
+/* CTA — gauche */
+.hero-cta-row { display: flex; flex-direction: row; align-items: center; gap: 20px; margin-top: 24px; flex-wrap: wrap; }
+.hero-cta-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--kura-accent); color: var(--obsidian-900);
+  padding: 12px 28px; border-radius: 12px; font-size: 14px; font-weight: 700;
+  transition: all 0.3s; border: none; cursor: pointer;
+}
+.hero-cta-btn:hover { box-shadow: 0 0 30px rgba(0,212,255,0.35); transform: scale(1.02); }
+.trust-badges {
+  display: flex; align-items: center; gap: 16px;
+  font-size: 10px; color: var(--obsidian-200); font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.trust-badges .sep { color: rgba(255,255,255,0.1); }
+.trust-badges span { display: flex; align-items: center; gap: 4px; }
+
+.hero-footer-note { text-align: center; font-size: 12px; color: rgba(74,86,114,0.6); margin-top: 40px; }
+
+/* Scroll prompt */
+.scroll-prompt {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center;
+}
+.scroll-prompt svg { animation: scrollDot 2s ease-in-out infinite; color: rgba(74,86,114,0.4); }
+
+/* ══════════════════════════════════════════════════════════════
+   STATS BAR
+   ══════════════════════════════════════════════════════════════ */
+.stats-bar {
+  position: relative; background: transparent;
+  border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 56px 0; overflow: hidden;
+}
+.stats-grid-bg {
+  pointer-events: none; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(0,212,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.stats-grid {
+  position: relative; z-index: 10;
+  max-width: 1024px; margin: 0 auto; padding: 0 24px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+}
+.stat-item { display: flex; flex-direction: column; align-items: center; position: relative; }
+.stat-divider { display: none; position: absolute; left: 0; top: 50%; transform: translateY(-50%); height: 40px; width: 1px; background: rgba(39,48,68,0.2); }
+.stat-accent { margin-bottom: 16px; height: 2px; border-radius: 2px; background: rgba(0,212,255,0.7); width: 0; transition: width 0.8s cubic-bezier(0.16,1,0.3,1); }
+.stat-item.visible .stat-accent { width: 40%; }
+.stat-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(1.5rem, 4vw, 2.75rem); font-weight: 700; letter-spacing: -0.02em;
+  color: white; text-shadow: 0 0 20px rgba(0,212,255,0.35), 0 0 40px rgba(0,212,255,0.12);
+}
+.stat-label { margin-top: 8px; font-size: clamp(10px, 1.5vw, 14px); text-transform: uppercase; letter-spacing: 0.15em; color: rgba(168,181,208,0.7); }
+
+@media (max-width: 767px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (min-width: 768px) {
+  .stat-item:not(:first-child) .stat-divider { display: block; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   INSTITUTIONAL BAR
+   ══════════════════════════════════════════════════════════════ */
+.institutional-bar { padding: 32px 16px; border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04); }
+.institutional-inner { max-width: 1024px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.institutional-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--obsidian-200); }
+.institutional-logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; }
+.institutional-logo {
+  font-size: 11px; font-weight: 700; font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase; letter-spacing: 0.1em; color: rgba(74,86,114,0.6);
+  padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02); transition: all 0.2s;
+}
+.institutional-logo:hover { color: var(--obsidian-200); border-color: rgba(255,255,255,0.15); }
+
+/* ══════════════════════════════════════════════════════════════
+   STATEMENT SECTION
+   ══════════════════════════════════════════════════════════════ */
+.statement-section {
+  position: relative; padding: 96px 24px; background: var(--obsidian-900); overflow: hidden;
+}
+.statement-video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.30;
+  animation: stadiumZoom 16s ease-in-out infinite alternate;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+}
+.statement-overlay { position: absolute; inset: 0; background: rgba(2,3,10,0.5); }
+.statement-text {
+  position: relative; z-index: 10; max-width: 760px; margin: 0 auto; text-align: center;
+  font-size: clamp(1.1rem, 2vw, 1.65rem); font-weight: 700; line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+.statement-text .highlight { color: var(--kura-accent); }
+.statement-char {
+  display: inline-block; opacity: 0; will-change: opacity;
+}
+.statement-word { display: inline-block; margin-right: 0.3em; }
+
+@media (min-width: 768px) {
+  .statement-section { padding: 120px 24px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   WAVE SEPARATOR
+   ══════════════════════════════════════════════════════════════ */
+.wave-separator { display: none; }
+.wave-line { display: none; }
+.wave-node {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: flex; align-items: center; justify-content: center;
+}
+.wave-node-glow { position: absolute; width: 40px; height: 40px; border-radius: 50%; background: rgba(0,212,255,0.05); filter: blur(10px); }
+
+/* ══════════════════════════════════════════════════════════════
+   PROBLEM SECTION
+   ══════════════════════════════════════════════════════════════ */
+.problem-section { padding: 64px 24px; }
+.problem-inner { max-width: 1024px; margin: 0 auto; }
+.section-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--kura-accent); margin-bottom: 12px; text-align: center; }
+.section-title { font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 900; color: white; text-align: center; margin-bottom: 32px; }
+
+/* Problem section — split layout : focal point gauche + stats droite */
+.problem-split {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  align-items: center; margin-bottom: 56px;
+}
+.problem-focal-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(3.5rem, 9vw, 7rem); font-weight: 900; color: #EF4444;
+  line-height: 0.85; letter-spacing: -0.04em; margin-bottom: 20px;
+}
+.problem-focal-num sup { font-size: 0.35em; vertical-align: super; opacity: 0.7; }
+.problem-focal-desc { font-size: 16px; color: var(--obsidian-100); line-height: 1.65; max-width: 360px; }
+.problem-focal-source { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--obsidian-200); margin-top: 12px; letter-spacing: .05em; }
+.problem-stack { display: flex; flex-direction: column; gap: 0; }
+.problem-stack-row {
+  padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex; gap: 24px; align-items: flex-start;
+}
+.problem-stack-row:first-child { border-top: 1px solid rgba(255,255,255,0.05); }
+.problem-stack-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 1.75rem; font-weight: 900;
+  color: white; flex-shrink: 0; min-width: 72px; line-height: 1;
+}
+.problem-stack-text { font-size: 14px; color: var(--obsidian-100); line-height: 1.65; }
+.problem-stack-source { font-size: 11px; color: var(--obsidian-200); font-style: italic; margin-top: 4px; }
+
+.quote-block {
+  position: relative; border-left: 2px solid rgba(0,212,255,0.3);
+  padding: 24px 32px;
+  background: linear-gradient(90deg, rgba(0,212,255,0.04), transparent);
+}
+.quote-text { font-style: italic; color: var(--obsidian-50); font-size: clamp(14px, 2vw, 17px); line-height: 1.7; }
+.quote-author { font-size: 13px; color: var(--obsidian-100); margin-top: 12px; font-family: 'JetBrains Mono', monospace; font-style: normal; }
+
+@media (max-width: 767px) {
+  .problem-split { grid-template-columns: 1fr; gap: 40px; }
+  .problem-section { padding: 48px 16px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CLIENTS SECTION
+   ══════════════════════════════════════════════════════════════ */
+.clients-section { padding: var(--sec-py) 0; overflow: hidden; }
+.clients-header { padding: 0 var(--sec-px); max-width: var(--sec-max); margin: 0 auto 48px; }
+.marquee-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--obsidian-200); margin-bottom: 16px; padding-left: 24px; }
+.marquee-wrap { overflow: hidden; position: relative; padding: 0 8px; }
+.marquee-fade-left { position: absolute; left: 0; top: 0; bottom: 0; width: 64px; z-index: 10; background: linear-gradient(to right, var(--obsidian-800), transparent); pointer-events: none; }
+.marquee-fade-right { position: absolute; right: 0; top: 0; bottom: 0; width: 64px; z-index: 10; background: linear-gradient(to left, var(--obsidian-800), transparent); pointer-events: none; }
+.marquee-track { display: flex; gap: 16px; width: max-content; padding: 4px 0; }
+.marquee-track.forward { animation: marquee 35s linear infinite; }
+.marquee-track.reverse { animation: marqueeReverse 35s linear infinite; }
+.client-card {
+  border-radius: 16px; padding: 20px 24px; min-width: 280px; max-width: 320px; flex-shrink: 0;
+}
+.client-card-title { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.client-card-title svg { color: var(--kura-accent); flex-shrink: 0; }
+.client-card-title span { font-weight: 600; color: white; font-size: 14px; }
+.client-card p { font-size: 14px; color: var(--obsidian-100); line-height: 1.5; }
+
+@media (max-width: 639px) {
+  .client-card { min-width: 220px; padding: 16px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CASES SECTION — Variant D · Stat + liste minimaliste
+   ══════════════════════════════════════════════════════════════ */
+.case-d { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
+.case-d-left {
+  padding: 80px 60px; display: flex; flex-direction: column; justify-content: center;
+  border-right: 1px solid rgba(255,255,255,0.05);
+  position: sticky; top: 0; height: 100vh; overflow: hidden;
+}
+.case-d-zero-bg {
+  position: absolute; font-size: 280px; font-weight: 900;
+  color: transparent; -webkit-text-stroke: 1px rgba(239,68,68,0.05);
+  line-height: 1; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  pointer-events: none; user-select: none;
+}
+.case-d-stamp {
+  position: absolute; top: 40px; right: 40px;
+  padding: 5px 12px; border-radius: 3px;
+  border: 2px solid rgba(239,68,68,0.4);
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 900;
+  color: rgba(239,68,68,0.4); letter-spacing: .2em; text-transform: uppercase;
+  transform: rotate(6deg);
+}
+.case-d-left-content { position: relative; z-index: 1; }
+.case-d-label { font-size: 10px; font-family: 'JetBrains Mono', monospace; color: #EF4444; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 16px; }
+.case-d-num { font-size: clamp(3rem,7vw,5.5rem); font-weight: 900; color: white; line-height: .85; letter-spacing: -.04em; }
+.case-d-sub { font-size: 14px; color: var(--obsidian-100); line-height: 1.6; margin: 20px 0 40px; max-width: 380px; }
+.case-d-pills { display: flex; flex-direction: column; gap: 10px; }
+.case-d-pill { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-radius: 8px; background: rgba(239,68,68,0.04); border: 1px solid rgba(239,68,68,0.1); }
+.case-d-pill-num { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 900; color: #EF4444; width: 48px; }
+.case-d-pill-label { font-size: 12px; color: var(--obsidian-100); }
+.case-d-kura {
+  margin-top: 40px; padding: 16px; border-radius: 10px;
+  background: rgba(0,212,255,0.04); border: 1px solid rgba(0,212,255,0.1);
+}
+.case-d-kura p { font-size: 12px; color: rgba(0,212,255,0.7); line-height: 1.6; font-family: 'JetBrains Mono', monospace; }
+.case-d-kura strong { color: var(--kura-accent); }
+.case-d-right { padding: 40px 48px; overflow-y: auto; display: flex; flex-direction: column; gap: 0; }
+.case-d-right-header { padding: 0 0 20px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 4px; }
+.case-d-right-header h3 { font-size: 12px; font-weight: 700; color: var(--obsidian-100); font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .1em; }
+.mini-case { display: flex; align-items: center; gap: 0; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.04); transition: all .15s; cursor: pointer; }
+.mini-case:hover .mini-name { color: var(--kura-accent); }
+.mini-case-left { width: 32px; text-align: center; flex-shrink: 0; }
+.mini-case-num { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(239,68,68,0.3); font-weight: 700; }
+.mini-case-bar { width: 2px; height: 36px; border-radius: 1px; margin: 0 16px; flex-shrink: 0; }
+.mini-name { font-size: 14px; font-weight: 700; color: white; flex: 1; transition: color .15s; }
+.mini-sport { font-size: 9px; font-family: 'JetBrains Mono', monospace; color: var(--obsidian-100); display: block; margin-top: 2px; }
+.mini-substance { font-size: 9px; font-family: 'JetBrains Mono', monospace; color: #EF4444; margin: 0 12px; flex-shrink: 0; max-width: 130px; text-align: right; line-height: 1.4; }
+.mini-duration { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 900; color: #EF4444; width: 56px; text-align: right; flex-shrink: 0; }
+@media (max-width: 767px) {
+  .case-d { grid-template-columns: 1fr; }
+  .case-d-left { position: relative; height: auto; padding: 48px 24px; }
+  .case-d-right { padding: 32px 24px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BRAND REVEAL
+   ══════════════════════════════════════════════════════════════ */
+.brand-reveal { position: relative; height: 200vh; }
+.brand-reveal-sticky {
+  position: sticky; top: 0; height: 100vh;
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.brand-video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0.25;
+  animation: eyeZoom 18s ease-in-out infinite alternate;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 100%);
+}
+.brand-bg-overlay {
+  position: absolute; inset: 0; background: rgba(2,3,10,0.4);
+  transition: background 0.3s;
+}
+.brand-content { position: relative; z-index: 2; text-align: center; width: 100%; max-width: 896px; padding: 0 24px; }
+
+/* Text lines that dissolve */
+.brand-text-line { display: block; }
+.brand-text-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--kura-accent); margin-bottom: 20px; }
+.brand-text-big {
+  font-size: clamp(1.5rem, 5vw, 3.75rem); font-weight: 900;
+}
+.brand-text-big.cyan { color: var(--kura-accent); }
+.brand-char { display: inline-block; transition: opacity 0.3s, transform 0.3s; }
+
+/* KURA letters */
+.brand-kura-container { display: flex; align-items: center; justify-content: center; gap: 8px; position: relative; z-index: 10; }
+.brand-kura-letter {
+  font-size: clamp(3rem, 10vw, 12rem); font-weight: 900; color: white;
+  opacity: 0; clip-path: inset(100% 0 0 0);
+}
+.brand-rule {
+  margin: 24px auto 0; height: 1px; width: 128px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.6), transparent);
+  transform: scaleX(0); opacity: 0;
+}
+.brand-tagline {
+  margin-top: 24px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.3em;
+  color: var(--kura-accent); font-weight: 700; opacity: 0;
+}
+
+/* Scan columns */
+.scan-container {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  pointer-events: none; opacity: 0;
+}
+.scan-columns {
+  display: flex; gap: clamp(24px, 4vw, 80px); overflow: hidden; width: 100%; justify-content: center;
+  height: 60vh;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+.scan-col { display: flex; flex-direction: column; gap: 16px; flex-shrink: 0; }
+.scan-term { white-space: nowrap; font-family: 'JetBrains Mono', monospace; font-size: clamp(12px, 1.5vw, 14px); letter-spacing: 0.05em; }
+.scan-term.code { color: rgba(0,212,255,0.5); }
+.scan-term.substance { color: rgba(168,181,208,0.35); }
+
+@media (max-width: 639px) {
+  .brand-reveal { height: 160vh; }
+  .scan-columns { gap: 24px; }
+  .scan-col:nth-child(n+3) { display: none; }
+  .brand-kura-container { gap: 4px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DATA COVERAGE SECTION
+   ══════════════════════════════════════════════════════════════ */
+.data-coverage { position: relative; padding: 64px 16px; }
+.data-coverage-inner { position: relative; z-index: 10; max-width: 1152px; margin: 0 auto; }
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 56px; }
+.kpi-card { border-radius: 16px; padding: 24px; text-align: center; }
+.kpi-value { display: block; font-size: clamp(1.125rem, 3vw, 1.875rem); font-weight: 700; color: var(--kura-accent); margin-bottom: 4px; }
+.kpi-label { font-size: clamp(10px, 1.2vw, 12px); color: var(--obsidian-100); text-transform: uppercase; letter-spacing: 0.1em; }
+.live-badge {
+  display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px;
+  border-radius: 999px; background: rgba(0,212,255,0.07); border: 1px solid rgba(0,212,255,0.2);
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(0,212,255,0.7);
+  margin-bottom: 56px; margin-top: -32px;
+}
+.live-dot { position: relative; width: 6px; height: 6px; }
+.live-dot::before { content: ''; position: absolute; inset: 0; border-radius: 50%; background: var(--kura-accent); }
+.live-dot::after {
+  content: ''; position: absolute; inset: 0; border-radius: 50%; background: var(--kura-accent);
+  animation: pingDot 1.5s cubic-bezier(0,0,0.2,1) infinite; opacity: 0.6;
+}
+
+/* Domain bars */
+.space-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+.space-header .line { height: 1px; flex: 1; }
+.space-header .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; white-space: nowrap; }
+.domain-bar-card { border-radius: 16px; padding: 24px; margin-bottom: 48px; }
+.domain-row { display: flex; flex-direction: column; gap: 16px; border-left: 3px solid; padding-left: 16px; }
+.domain-row + .domain-row { margin-top: 16px; }
+.domain-row-label { font-weight: 700; color: white; font-size: 14px; }
+.domain-sources { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.domain-source-tag {
+  font-size: 10px; font-family: 'JetBrains Mono', monospace;
+  padding: 2px 6px; border-radius: 4px;
+  background: rgba(20,27,44,0.5); color: var(--obsidian-100);
+  border: 1px solid rgba(28,37,56,0.3);
+}
+.bar-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+.bar-track { flex: 1; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.05); overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 3px; transition: width 1s ease-out; }
+.bar-count { font-size: 12px; font-family: 'JetBrains Mono', monospace; font-weight: 700; flex-shrink: 0; }
+.domain-detail { font-size: 11px; color: var(--obsidian-300); }
+
+/* Support cards */
+.support-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 56px; }
+.support-card { border-radius: 12px; padding: 20px; border-left: 3px solid; }
+.support-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
+.support-header .label { font-weight: 700; color: white; font-size: 14px; }
+.support-header .count { font-size: 18px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+.support-unit { font-size: 10px; color: var(--obsidian-300); }
+
+/* Sports & Federations grid */
+.sports-feds { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.sports-feds-card { border-radius: 16px; padding: 24px; }
+.sports-feds-title { font-size: 14px; font-weight: 700; color: white; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.tag-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+.sport-tag { font-size: 12px; padding: 4px 10px; border-radius: 8px; background: rgba(20,27,44,0.4); color: var(--obsidian-100); border: 1px solid rgba(28,37,56,0.2); }
+.fed-tag {
+  font-size: 12px; font-family: 'JetBrains Mono', monospace;
+  padding: 4px 10px; border-radius: 8px;
+  background: rgba(0,212,255,0.06); color: rgba(0,212,255,0.8);
+  border: 1px solid rgba(0,212,255,0.15);
+}
+
+@media (max-width: 767px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .support-grid { grid-template-columns: 1fr; }
+  .sports-feds { grid-template-columns: 1fr; }
+  .domain-row { flex-direction: column; }
+}
+@media (min-width: 768px) {
+  .domain-row { flex-direction: row; align-items: center; }
+  .domain-row-info { width: 160px; flex-shrink: 0; }
+  .domain-row-bar { flex: 1; min-width: 0; }
+  .data-coverage { padding: 112px 24px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SOLUTION SECTION (Pipeline)
+   ══════════════════════════════════════════════════════════════ */
+/* ── Pipeline / Solution — Flow diagram ── */
+.solution-section { background: var(--obsidian-900); padding: 80px 24px; position: relative; overflow: hidden; }
+.solution-inner { position: relative; z-index: 10; max-width: 1100px; margin: 0 auto; }
+.solution-subtitle { color: var(--obsidian-100); text-align: center; max-width: 580px; margin: 0 auto 56px; font-size: 15px; line-height: 1.65; }
+
+/* Speed hero */
+.pipeline-speed-hero { text-align: center; margin-bottom: 64px; }
+.speed-num { font-size: clamp(2rem,5vw,4rem); font-weight: 900; color: white; line-height: 1; letter-spacing: -0.03em; }
+.speed-accent { color: var(--kura-accent); }
+.speed-sub { font-size: 13px; font-family: 'JetBrains Mono', monospace; color: var(--obsidian-200); letter-spacing: .08em; text-transform: uppercase; margin-top: 12px; }
+
+/* Flow nodes */
+.flow-row { display: flex; align-items: center; gap: 0; width: 100%; margin-bottom: 56px; }
+.flow-node { display: flex; flex-direction: column; align-items: center; gap: 16px; flex: 1; position: relative; }
+.flow-node-circle {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: rgba(255,255,255,0.02); border: 1.5px solid rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 1; transition: all 0.4s;
+  cursor: pointer;
+}
+.flow-node-circle:hover { border-color: rgba(0,212,255,0.4); background: rgba(0,212,255,0.05); box-shadow: 0 0 24px rgba(0,212,255,0.1); }
+.flow-node-circle.start { border-color: rgba(0,212,255,0.4); background: rgba(0,212,255,0.06); box-shadow: 0 0 20px rgba(0,212,255,0.08); }
+.flow-node-circle.end { border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.06); box-shadow: 0 0 20px rgba(16,185,129,0.08); }
+.flow-node-num {
+  position: absolute; top: -6px; right: -6px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--obsidian-900); border: 1px solid rgba(0,212,255,0.3);
+  font-size: 9px; font-family: 'JetBrains Mono', monospace; font-weight: 700;
+  color: var(--kura-accent); display: flex; align-items: center; justify-content: center;
+}
+.flow-node-label { text-align: center; }
+.flow-node-label strong { display: block; font-size: 12px; font-weight: 700; color: white; margin-bottom: 4px; }
+.flow-node-label span { font-size: 10px; color: var(--obsidian-200); font-family: 'JetBrains Mono', monospace; line-height: 1.4; }
+.flow-node-label em { display: block; font-size: 10px; color: var(--obsidian-300); font-style: normal; max-width: 100px; }
+
+/* Animated connector */
+.flow-connector { flex: 1; position: relative; height: 2px; max-width: 80px; }
+.flow-connector-line {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, rgba(0,212,255,0.15), rgba(0,212,255,0.05));
+}
+.flow-connector-pulse {
+  position: absolute; top: -3px; left: -8px;
+  width: 8px; height: 8px; border-radius: 50%; background: var(--kura-accent);
+  box-shadow: 0 0 8px var(--kura-accent);
+  animation: flow-travel 2s ease-in-out infinite;
+}
+.flow-connector:nth-child(4) .flow-connector-pulse { animation-delay: .4s; }
+.flow-connector:nth-child(6) .flow-connector-pulse { animation-delay: .8s; }
+.flow-connector:nth-child(8) .flow-connector-pulse { animation-delay: 1.2s; }
+@keyframes flow-travel {
+  0% { left: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: calc(100% - 8px); opacity: 0; }
+}
+.flow-connector-arrow {
+  position: absolute; right: -6px; top: -5px;
+  font-size: 10px; color: rgba(0,212,255,0.25);
+}
+
+/* Guarantee block */
+.guarantee-block { border-radius: 16px; padding: 40px; border-left: 4px solid var(--kura-accent); box-shadow: 0 0 40px rgba(0,212,255,0.08); }
+.guarantee-inner { display: flex; align-items: flex-start; gap: 20px; }
+.guarantee-icon { width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0; background: rgba(0,212,255,0.1); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(0,212,255,0.2); }
+.guarantee-title { font-size: 18px; font-weight: 700; color: var(--kura-accent); margin-bottom: 8px; }
+.guarantee-text { font-size: 14px; color: var(--obsidian-100); line-height: 1.5; max-width: 640px; }
+
+@media (max-width: 767px) {
+  .flow-row { flex-wrap: wrap; gap: 24px; justify-content: center; }
+  .flow-connector { display: none; }
+  .solution-section { padding: 48px 16px; }
+  .guarantee-block { padding: 20px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DEMO SECTION
+   ══════════════════════════════════════════════════════════════ */
+.demo-section { padding: 80px 24px; }
+.demo-inner { position: relative; z-index: 10; max-width: 640px; margin: 0 auto; text-align: center; }
+.demo-subtitle { color: var(--obsidian-100); font-size: 18px; margin-bottom: 40px; max-width: 512px; margin-left: auto; margin-right: auto; }
+.domain-tabs {
+  display: inline-flex; align-items: center;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; padding: 4px; margin-bottom: 40px;
+}
+.domain-tab {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 16px; border-radius: 12px;
+  font-size: 14px; font-weight: 500; border: none; cursor: pointer;
+  background: transparent; transition: all 0.2s;
+  color: var(--obsidian-100); font-family: 'Inter', sans-serif;
+}
+.domain-tab.active { background: rgba(0,212,255,0.15); color: white; box-shadow: 0 0 12px rgba(0,212,255,0.1); }
+.domain-tab:hover:not(.active) { color: white; }
+.domain-tab .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; transition: transform 0.2s; }
+.domain-tab.active .dot { transform: scale(1.3); }
+.demo-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px; margin-top: 40px;
+  background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3);
+  color: var(--kura-accent); font-weight: 600; border-radius: 12px;
+  transition: background 0.2s; cursor: pointer; font-size: 14px;
+}
+.demo-cta:hover { background: rgba(0,212,255,0.2); }
+
+/* ══════════════════════════════════════════════════════════════
+   PLATFORM SECTION
+   ══════════════════════════════════════════════════════════════ */
+.platform-section { padding: 96px 24px; background: var(--obsidian-900); position: relative; overflow: hidden; }
+.platform-grid-bg {
+  position: absolute; inset: 0; opacity: 0.03; pointer-events: none;
+  background-image: linear-gradient(rgba(0,212,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.5) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.platform-inner { max-width: 1152px; margin: 0 auto; }
+.platform-subline { font-size: clamp(15px, 2vw, 18px); color: var(--obsidian-100); max-width: 576px; margin: 0 auto 40px; text-align: center; }
+.platform-tabs { display: flex; justify-content: center; margin-bottom: 40px; }
+.platform-tabs-inner { display: flex; gap: 4px; padding: 4px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); }
+.platform-tab {
+  display: flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px;
+  font-size: 14px; font-weight: 700; border: none; cursor: pointer;
+  transition: all 0.3s; font-family: 'Inter', sans-serif;
+}
+.platform-tab.active { background: var(--kura-accent); color: var(--obsidian-900); box-shadow: 0 0 20px rgba(0,212,255,0.2); }
+.platform-tab:not(.active) { background: transparent; color: rgba(255,255,255,0.4); }
+.platform-tab:not(.active):hover { color: rgba(255,255,255,0.7); }
+.platform-content { display: grid; grid-template-columns: 3fr 2fr; gap: 48px; align-items: flex-start; }
+.platform-features h3 { font-size: 20px; font-weight: 900; color: white; margin-bottom: 16px; }
+.platform-features ul { list-style: none; }
+.platform-features li {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; color: var(--obsidian-100); padding: 4px 0;
+}
+.platform-features li svg { flex-shrink: 0; }
+
+/* Browser mockup */
+.browser-mockup { border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 0 60px rgba(0,212,255,0.08); }
+.browser-chrome { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: #0a0d1a; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.browser-dot { width: 12px; height: 12px; border-radius: 50%; }
+.browser-url { flex: 1; margin: 0 16px; height: 24px; border-radius: 6px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; padding: 0 12px; gap: 8px; }
+.browser-url span { font-size: 10px; color: rgba(255,255,255,0.25); font-family: 'JetBrains Mono', monospace; }
+.browser-content { display: flex; background: var(--obsidian-800); height: 320px; }
+.browser-sidebar { width: 56px; background: var(--obsidian-900); border-right: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; align-items: center; padding: 16px 0; gap: 16px; }
+.browser-main { flex: 1; overflow: hidden; padding: 20px; }
+.browser-main-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.athlete-row {
+  display: flex; align-items: center; gap: 12px; padding: 10px 12px;
+  border-radius: 8px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 8px;
+}
+.athlete-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.6); }
+.athlete-info { flex: 1; min-width: 0; }
+.athlete-info .name { font-size: 12px; font-weight: 600; color: white; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.athlete-info .sport { font-size: 10px; color: rgba(255,255,255,0.3); }
+.athlete-bar { width: 64px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.1); overflow: hidden; }
+.athlete-bar-fill { height: 100%; border-radius: 3px; }
+.athlete-score { font-size: 10px; font-weight: 700; width: 24px; text-align: right; }
+.athlete-status { font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+.browser-stat-row { display: flex; gap: 12px; margin-top: 16px; }
+.browser-stat { flex: 1; padding: 8px 10px; border-radius: 8px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.04); }
+.browser-stat .label { font-size: 9px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px; }
+.browser-stat .value { font-size: 14px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+
+/* Phone mockup */
+.phone-mockup { position: relative; margin: 0 auto; width: 220px; }
+.phone-frame { border-radius: 36px; background: #0a0d1a; border: 2px solid rgba(255,255,255,0.15); overflow: hidden; box-shadow: 0 0 60px rgba(0,212,255,0.12); padding: 2px; }
+.phone-island { display: flex; justify-content: center; padding: 12px 0 4px; }
+.phone-island-bar { width: 80px; height: 20px; border-radius: 999px; background: black; }
+.phone-screen { background: var(--obsidian-800); margin: 0 4px; border-radius: 28px; overflow: hidden; padding-bottom: 16px; }
+.phone-statusbar { display: flex; align-items: center; justify-content: space-between; padding: 8px 20px; }
+.phone-statusbar .time { font-size: 9px; color: rgba(255,255,255,0.4); font-family: 'JetBrains Mono', monospace; }
+.phone-header { padding: 0 16px 12px; }
+.phone-header .greeting { font-size: 10px; color: rgba(255,255,255,0.3); }
+.phone-header .name { font-size: 14px; font-weight: 700; color: white; }
+.phone-score-card { margin: 0 16px 12px; border-radius: 16px; background: linear-gradient(135deg, rgba(0,212,255,0.1), var(--obsidian-800)); border: 1px solid rgba(0,212,255,0.2); padding: 16px; position: relative; overflow: hidden; }
+.phone-score-inner { position: relative; }
+.phone-modules { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 16px 12px; }
+.phone-module { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.025); }
+.phone-module.accent { background: rgba(0,212,255,0.1); border-color: rgba(0,212,255,0.25); }
+.phone-module span { font-size: 9px; font-weight: 600; }
+.phone-tabbar { display: flex; justify-content: space-around; align-items: center; padding: 8px 16px 0; border-top: 1px solid rgba(255,255,255,0.05); }
+.phone-home-bar { display: flex; justify-content: center; padding: 8px 0; }
+.phone-home-bar-inner { width: 96px; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.2); }
+.phone-glow { position: absolute; inset: -16px; border-radius: 48px; pointer-events: none; background: radial-gradient(ellipse at 50% 50%, rgba(0,212,255,0.06) 0%, transparent 70%); }
+
+.platform-cta-row { display: flex; justify-content: center; margin-top: 56px; }
+.platform-cta {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--kura-accent); color: var(--obsidian-900);
+  padding: 14px 32px; border-radius: 12px; font-size: 14px; font-weight: 700;
+  transition: all 0.3s; border: none; cursor: pointer;
+}
+.platform-cta:hover { box-shadow: 0 0 30px rgba(0,212,255,0.35); transform: scale(1.02); }
+
+@media (max-width: 767px) {
+  .platform-content { grid-template-columns: 1fr; }
+  .phone-mockup { width: 200px; }
+  .browser-mockup { display: none; }
+  .platform-section { padding: 64px 16px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DOMAINS SECTION — Globe réglementaire
+   ══════════════════════════════════════════════════════════════ */
+.domains-section { position: relative; padding: 80px 24px; }
+.globe-layout {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+  align-items: center; max-width: 1100px; margin: 0 auto;
+}
+.globe-subtitle { font-size: 15px; color: var(--obsidian-100); line-height: 1.65; margin: 12px 0 32px; max-width: 400px; }
+.globe-domain-list { display: flex; flex-direction: column; gap: 0; margin-bottom: 36px; }
+.globe-domain-row {
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  cursor: pointer; transition: all 0.2s;
+}
+.globe-domain-row:hover .globe-domain-name { color: white; }
+.globe-domain-row.active .globe-domain-name { color: white; }
+.globe-domain-row.active { border-color: rgba(0,212,255,0.15); }
+.globe-domain-bullet { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.globe-domain-name { font-size: 15px; font-weight: 600; color: var(--obsidian-100); flex: 1; transition: color 0.2s; }
+.globe-domain-count { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 900; letter-spacing: -0.02em; }
+.globe-domain-source { font-size: 9px; color: var(--obsidian-300); font-family: 'JetBrains Mono', monospace; margin-left: 4px; opacity: 0.6; }
+.globe-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 28px; border-radius: 10px;
+  background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25);
+  color: var(--kura-accent); font-size: 14px; font-weight: 600;
+  text-decoration: none; transition: all 0.2s;
+}
+.globe-cta:hover { background: rgba(0,212,255,0.15); }
+
+/* Globe visualization */
+.globe-viz-wrap { display: flex; align-items: center; justify-content: center; position: relative; }
+.globe-sphere {
+  width: 380px; height: 380px; border-radius: 50%; position: relative;
+  background: radial-gradient(circle at 35% 32%, rgba(0,212,255,0.04) 0%, rgba(2,3,10,0.8) 65%, rgba(0,212,255,0.02) 100%);
+  border: 1px solid rgba(0,212,255,0.08);
+  box-shadow: 0 0 80px rgba(0,212,255,0.05), inset 0 0 60px rgba(0,212,255,0.02);
+  overflow: hidden;
+}
+.globe-grid-lat {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 37px,
+    rgba(0,212,255,0.04) 38px
+  );
+}
+.globe-grid-lon {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: repeating-linear-gradient(
+    90deg, transparent, transparent 37px,
+    rgba(0,212,255,0.04) 38px
+  );
+}
+.globe-ring {
+  position: absolute; border-radius: 50%; border: 1px dashed rgba(0,212,255,0.07);
+  pointer-events: none;
+}
+.globe-glow {
+  position: absolute; inset: -20px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,212,255,0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+/* Points */
+.globe-pt {
+  position: absolute; transform: translate(-50%,-50%);
+  display: flex; flex-direction: column; align-items: center;
+}
+.globe-pt-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  position: relative; cursor: pointer;
+  box-shadow: 0 0 10px currentColor;
+  animation: globe-pulse 2.5s ease-in-out infinite;
+}
+.globe-pt-dot::before {
+  content: ''; position: absolute; inset: -4px; border-radius: 50%;
+  border: 1px solid currentColor; opacity: 0.3;
+  animation: globe-ring-expand 2.5s ease-out infinite;
+}
+@keyframes globe-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.7;transform:scale(.85)} }
+@keyframes globe-ring-expand { 0%{transform:scale(1);opacity:.3} 100%{transform:scale(2.2);opacity:0} }
+.globe-pt-label {
+  position: absolute; white-space: nowrap; pointer-events: none;
+  font-size: 9px; font-family: 'JetBrains Mono', monospace; font-weight: 700;
+  letter-spacing: .06em; padding: 2px 6px; border-radius: 4px;
+  background: rgba(2,3,10,0.85); border: 1px solid;
+  opacity: 0; transition: opacity .2s;
+}
+.globe-pt:hover .globe-pt-label { opacity: 1; }
+/* Connector line from dot to edge */
+.globe-pt-line {
+  position: absolute; height: 1px; transform-origin: left center;
+  background: linear-gradient(90deg, currentColor, transparent);
+  opacity: 0.2; pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .globe-layout { grid-template-columns: 1fr; gap: 48px; }
+  .globe-sphere { width: 280px; height: 280px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CONTACT SECTION
+   ══════════════════════════════════════════════════════════════ */
+.contact-section { position: relative; background: rgba(10,15,31,0.5); padding: 80px 24px; overflow: hidden; }
+.contact-dot-bg {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.025;
+  background-image: radial-gradient(circle, rgba(0,212,255,0.8) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+.contact-inner { position: relative; z-index: 10; max-width: 1024px; margin: 0 auto; }
+.contact-limited { color: var(--kura-warning); font-size: 14px; font-weight: 500; text-align: center; margin-bottom: 48px; }
+.contact-layout { display: flex; gap: 48px; align-items: center; }
+.contact-video-wrap { width: 50%; position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 16/10; }
+.contact-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: shieldZoom 12s ease-in-out infinite alternate; }
+.contact-video-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(2,3,10,0.6), transparent, rgba(2,3,10,0.3)); }
+.contact-video-text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; }
+.contact-video-text p { text-shadow: 0 2px 20px rgba(0,0,0,0.8); }
+.contact-video-ring { position: absolute; inset: 0; border-radius: 16px; border: 1px solid rgba(0,212,255,0.2); }
+.contact-form-wrap { width: 50%; }
+.contact-form { display: flex; flex-direction: column; gap: 20px; }
+.contact-form label { display: block; font-size: 14px; font-weight: 500; color: var(--obsidian-50); margin-bottom: 6px; }
+.contact-form input, .contact-form select {
+  width: 100%; background: var(--obsidian-800); border: 1px solid var(--border);
+  border-radius: 12px; height: 48px; padding: 0 16px;
+  color: white; outline: none; font-size: 14px; font-family: 'Inter', sans-serif;
+  transition: all 0.2s;
+}
+.contact-form input::placeholder { color: var(--obsidian-300); }
+.contact-form input:focus, .contact-form select:focus { border-color: rgba(0,212,255,0.5); box-shadow: 0 0 0 1px rgba(0,212,255,0.3); }
+.contact-form select { appearance: none; cursor: pointer; padding-right: 40px; }
+.select-wrap { position: relative; }
+.select-wrap svg { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--obsidian-300); }
+.contact-submit {
+  width: 100%; background: var(--kura-accent); color: var(--obsidian-900); font-weight: 700;
+  height: 48px; border-radius: 12px; border: none; cursor: pointer; font-size: 14px;
+  box-shadow: 0 0 30px rgba(0,212,255,0.2);
+  transition: all 0.3s; font-family: 'Inter', sans-serif;
+}
+.contact-submit:hover { box-shadow: 0 0 50px rgba(0,212,255,0.35); }
+.contact-footer-text { font-size: 12px; color: var(--obsidian-200); text-align: center; margin-top: 12px; }
+.contact-email { font-size: 14px; color: var(--obsidian-100); text-align: center; margin-top: 32px; }
+.contact-email a { color: var(--kura-accent); font-weight: 600; }
+.contact-email a:hover { text-decoration: underline; }
+
+@media (max-width: 767px) {
+  .contact-layout { flex-direction: column; }
+  .contact-video-wrap, .contact-form-wrap { width: 100%; }
+  .contact-section { padding: 64px 16px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FOOTER
+   ══════════════════════════════════════════════════════════════ */
+.site-footer { background: var(--obsidian-900); }
+.footer-sep { height: 1px; background: linear-gradient(90deg, transparent, rgba(0,212,255,0.15), transparent); }
+.footer-inner { max-width: 1024px; margin: 0 auto; padding: 48px 24px; }
+.footer-row { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.footer-logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.footer-logo .text { color: white; font-weight: 700; font-size: 14px; letter-spacing: 0.03em; }
+.footer-logo .tagline { font-size: 12px; color: var(--obsidian-200); }
+.footer-links { display: flex; align-items: center; gap: 24px; font-size: 12px; color: var(--obsidian-200); }
+.footer-links a:hover { color: white; }
+.footer-links .sep { color: var(--obsidian-400); }
+.footer-badges { font-size: 12px; color: var(--obsidian-300); flex-shrink: 0; }
+.footer-copyright { font-size: 12px; color: var(--obsidian-400); text-align: center; margin-top: 32px; }
+
+@media (min-width: 768px) {
+  .footer-row { flex-direction: row; justify-content: space-between; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   STICKY CTA (mobile)
+   ══════════════════════════════════════════════════════════════ */
+.sticky-cta {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 40;
+  background: rgba(5,8,22,0.9); backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border); padding: 16px;
+  transform: translateY(100%); transition: transform 0.3s;
+}
+.sticky-cta.show { transform: translateY(0); }
+.sticky-cta a {
+  display: block; width: 100%; background: var(--kura-accent); color: var(--obsidian-900);
+  font-weight: 700; height: 48px; border-radius: 12px; text-align: center; line-height: 48px;
+  box-shadow: 0 0 30px rgba(0,212,255,0.2); font-size: 14px;
+}
+@media (max-width: 767px) { .sticky-cta { display: block; } }
+
+/* ── BG Video overlay for data+domains ── */
+.bg-video-wrap { position: relative; overflow: hidden; }
+.bg-video-el {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none;
+  opacity: 0.20;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   AMÉLIORATIONS v2 — DATA COVERAGE
+   ══════════════════════════════════════════════════════════════ */
+
+/* Big hero number */
+.data-hero-number {
+  text-align: center; margin-bottom: 48px; position: relative;
+}
+.data-hero-number .big-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 900; letter-spacing: -0.04em;
+  color: white;
+  text-shadow: 0 0 60px rgba(0,212,255,0.3), 0 0 120px rgba(0,212,255,0.1);
+  line-height: 1;
+  display: block;
+}
+.data-hero-number .big-num-label {
+  font-size: 13px; text-transform: uppercase; letter-spacing: 0.3em;
+  color: rgba(0,212,255,0.6); font-weight: 700; margin-top: 12px;
+  display: block;
+}
+
+/* Bar percent label */
+.bar-percent {
+  font-size: 11px; font-family: 'JetBrains Mono', monospace;
+  font-weight: 700; color: var(--obsidian-200); flex-shrink: 0; width: 36px; text-align: right;
+}
+
+/* Live badge amélioré */
+.live-badge-v2 {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(0,212,255,0.07); border: 1px solid rgba(0,212,255,0.2);
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(0,212,255,0.8);
+  font-weight: 700;
+}
+.live-dot-v2 { position: relative; width: 8px; height: 8px; flex-shrink: 0; }
+.live-dot-v2::before { content: ''; position: absolute; inset: 0; border-radius: 50%; background: var(--kura-accent); }
+.live-dot-v2::after {
+  content: ''; position: absolute; inset: -3px; border-radius: 50%;
+  background: transparent; border: 1.5px solid var(--kura-accent);
+  animation: pingRing 1.8s cubic-bezier(0,0,0.2,1) infinite; opacity: 0;
+}
+@keyframes pingRing {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Separateur sections data */
+.data-section-sep {
+  display: flex; align-items: center; gap: 16px; margin: 64px 0 40px;
+}
+.data-section-sep .sep-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,212,255,0.15), transparent); }
+.data-section-sep .sep-label {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px;
+  color: rgba(0,212,255,0.5); white-space: nowrap; padding: 4px 12px;
+  border: 1px solid rgba(0,212,255,0.15); border-radius: 999px;
+  background: rgba(0,212,255,0.04);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   AMÉLIORATIONS v2 — CASES
+   ══════════════════════════════════════════════════════════════ */
+
+/* Badge dramatique cas */
+.cases-drama-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 20px; border-radius: 999px;
+  background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25);
+  margin-bottom: 24px;
+  animation: pulseProhibited 2.5s ease-in-out infinite;
+}
+.cases-drama-badge .badge-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: #EF4444;
+  position: relative; flex-shrink: 0;
+}
+.cases-drama-badge .badge-dot::after {
+  content: ''; position: absolute; inset: -3px; border-radius: 50%;
+  border: 1.5px solid #EF4444;
+  animation: pingRing 1.5s cubic-bezier(0,0,0.2,1) infinite;
+  opacity: 0;
+}
+.cases-drama-badge .badge-text {
+  font-size: 12px; font-weight: 700; color: #FCA5A5;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.cases-drama-badge .badge-sep { color: rgba(239,68,68,0.3); font-size: 16px; }
+.cases-drama-badge .badge-zero { color: #EF4444; font-weight: 900; }
+
+/* Case card améliorée — atoms overrides */
+.case-card .case-body h3 { font-size: 18px; font-weight: 800; }
+.case-card .case-body .drama { font-size: 13px; }
+.case-card .case-header { padding: 16px 20px 12px; }
+.case-card .case-body { padding: 0 20px 14px; }
+.case-card .case-footer { padding: 14px 20px; }
+
+/* ══════════════════════════════════════════════════════════════
+   AMÉLIORATIONS v2 — PIPELINE/SOLUTION
+   ══════════════════════════════════════════════════════════════ */
+
+/* Speed headline pipeline */
+.pipeline-speed-hero {
+  text-align: center; margin-bottom: 48px;
+}
+.pipeline-speed-hero .speed-num {
+  font-size: clamp(3rem, 8vw, 6rem); font-weight: 900;
+  color: white; line-height: 1; font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -0.03em;
+}
+.pipeline-speed-hero .speed-num .speed-accent { color: var(--kura-accent); }
+.pipeline-speed-hero .speed-sub {
+  font-size: 13px; color: var(--obsidian-200); text-transform: uppercase;
+  letter-spacing: 0.25em; margin-top: 10px; font-weight: 600;
+}
+
+/* Scan line animée dans pipeline card active */
+.pipeline-card.active .pipeline-scan-line {
+  position: absolute; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.8), transparent);
+  animation: scanLine 2.2s linear infinite;
+  box-shadow: 0 0 8px rgba(0,212,255,0.5);
+  pointer-events: none;
+}
+
+/* Guarantee dramatique */
+.guarantee-block-v2 {
+  border-radius: 16px; padding: 48px; margin-top: 64px;
+  border: 1px solid rgba(0,212,255,0.15);
+  background: linear-gradient(135deg, rgba(0,212,255,0.04), rgba(0,212,255,0.02));
+  box-shadow: 0 0 60px rgba(0,212,255,0.06), inset 0 1px 0 rgba(255,255,255,0.04);
+  border-left: 4px solid var(--kura-accent);
+}
+.guarantee-zero-row {
+  display: flex; align-items: center; gap: 24px; margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.guarantee-zero-num {
+  font-size: clamp(3.5rem, 7vw, 5rem); font-weight: 900; color: var(--kura-accent);
+  font-family: 'JetBrains Mono', monospace; line-height: 1;
+  text-shadow: 0 0 30px rgba(0,212,255,0.4), 0 0 60px rgba(0,212,255,0.15);
+}
+.guarantee-zero-label {
+  font-size: 16px; font-weight: 700; color: white; line-height: 1.4;
+}
+.guarantee-zero-label small { display: block; font-size: 13px; color: var(--obsidian-200); font-weight: 400; margin-top: 6px; }
+
+/* ══════════════════════════════════════════════════════════════
+   AMÉLIORATIONS v2 — DEMO SECTION
+   ══════════════════════════════════════════════════════════════ */
+
+.demo-title-dramatic {
+  font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 800;
+  text-align: center; line-height: 1.15; color: white; margin-bottom: 8px;
+}
+.demo-title-dramatic .demo-accent { color: var(--kura-accent); }
+
+.demo-speed-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 16px; border-radius: 999px;
+  background: rgba(0,212,255,0.06); border: 1px solid rgba(0,212,255,0.15);
+  font-size: 11px; font-weight: 700; color: rgba(0,212,255,0.8);
+  text-transform: uppercase; letter-spacing: 0.12em;
+  margin-bottom: 32px;
+}
+
+/* Search container v2 avec glow ring */
+.search-container-v2 {
+  width: 100%; max-width: 576px; margin: 0 auto;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(0,212,255,0.2);
+  border-radius: 16px; padding: 6px;
+  box-shadow: 0 0 0 4px rgba(0,212,255,0.03), 0 0 40px rgba(0,212,255,0.08);
+  transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.search-container-v2:focus-within {
+  border-color: rgba(0,212,255,0.5);
+  box-shadow: 0 0 0 4px rgba(0,212,255,0.08), 0 0 50px rgba(0,212,255,0.15), 0 0 100px rgba(0,212,255,0.06);
+}
+
+/* Verdict résultat animé */
+.demo-verdict {
+  max-width: 576px; margin: 12px auto 0;
+  border-radius: 12px; overflow: hidden;
+  opacity: 0; transform: translateY(10px);
+  transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+  pointer-events: none;
+}
+.demo-verdict.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.demo-verdict-inner {
+  padding: 16px 20px; display: flex; align-items: flex-start; gap: 14px;
+}
+.demo-verdict-icon {
+  width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.demo-verdict-body { flex: 1; min-width: 0; }
+.demo-verdict-status { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 2px; }
+.demo-verdict-name { font-size: 16px; font-weight: 800; color: white; margin-bottom: 4px; }
+.demo-verdict-detail { font-size: 12px; color: var(--obsidian-100); line-height: 1.5; }
+.demo-verdict-meta { display: flex; align-items: center; gap: 12px; margin-top: 8px; flex-wrap: wrap; }
+.demo-verdict-time { font-size: 10px; font-family: 'JetBrains Mono', monospace; color: var(--obsidian-300); }
+.demo-verdict-source { font-size: 10px; font-family: 'JetBrains Mono', monospace; color: rgba(0,212,255,0.5); }
+
+/* Pills colorées par verdict */
+.pill-red { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.25); color: #FCA5A5; }
+.pill-red:hover { background: rgba(239,68,68,0.15); color: #EF4444; border-color: rgba(239,68,68,0.4); }
+.pill-green { background: rgba(0,230,118,0.08); border-color: rgba(0,230,118,0.2); color: #6ee7b7; }
+.pill-green:hover { background: rgba(0,230,118,0.15); color: #00E676; border-color: rgba(0,230,118,0.4); }
+.pill-orange { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.2); color: #fcd34d; }
+.pill-orange:hover { background: rgba(245,158,11,0.15); color: #F59E0B; border-color: rgba(245,158,11,0.4); }
+
+/* ══════════════════════════════════════════════════════════════
+   AMÉLIORATIONS v2 — DOMAINS SECTION
+   ══════════════════════════════════════════════════════════════ */
+
+/* Hero card : shine animation sur chiffre */
+@keyframes shine {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.domain-shine {
+  background: linear-gradient(135deg, #FF4B4B 0%, #FF8C8C 40%, #FF4B4B 60%, #FF8C8C 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shine 2.5s linear infinite;
+}
+
+/* Micro-stat sous chaque card */
+.domain-micro-stat {
+  font-size: 10px; font-family: 'JetBrains Mono', monospace;
+  color: rgba(0,212,255,0.4); text-transform: uppercase; letter-spacing: 0.08em;
+  margin-top: 10px; display: flex; align-items: center; gap: 4px;
+}
+.domain-micro-stat::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(0,212,255,0.4); display: inline-block; flex-shrink: 0;
+}
+
+/* Domain card hover gradient */
+.domain-card:not(.hero-card):hover {
+  background: linear-gradient(135deg, rgba(10,15,31,0.8), rgba(10,15,31,0.6)) !important;
+  transform: translateY(-3px);
+}
+.domain-card.hero-card:hover {
+  transform: translateY(-2px);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   AMÉLIORATIONS v2 — PLATFORM SECTION
+   ══════════════════════════════════════════════════════════════ */
+
+/* Glow sur browser mockup renforcé */
+.browser-mockup-glow {
+  box-shadow: 0 0 80px rgba(0,212,255,0.12), 0 24px 80px rgba(0,0,0,0.5) !important;
+}
+
+/* Badge clubs beta */
+.platform-beta-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 999px; margin-top: 16px;
+  background: rgba(0,212,255,0.06); border: 1px solid rgba(0,212,255,0.15);
+  font-size: 11px; color: rgba(0,212,255,0.7); font-weight: 600; letter-spacing: 0.04em;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE FINE-TUNE
+   ══════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SYSTÈME DE COHÉRENCE GLOBALE
+   Un fond. Une grille. Une typographie.
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+  --sec-py: 96px;
+  --sec-px: 40px;
+  --sec-max: 1100px;
+}
+@media (max-width: 1023px) { :root { --sec-px: 28px; } }
+@media (max-width: 767px)  { :root { --sec-py: 64px; --sec-px: 20px; } }
+
+/* ── Fond unique — supprimer les ruptures visuelles ── */
+.solution-section  { background: transparent !important; }
+.platform-section  { background: transparent !important; }
+.contact-section   { background: transparent !important; }
+
+/* ── Grille : même padding partout ── */
+.problem-section,
+.solution-section,
+.demo-section,
+.platform-section,
+.domains-section,
+.contact-section {
+  padding: var(--sec-py) var(--sec-px) !important;
+}
+.data-coverage { padding: var(--sec-py) var(--sec-px) !important; }
+
+/* ── Largeur interne identique partout ── */
+.problem-inner,
+.clients-header,
+.data-coverage-inner,
+.solution-inner,
+.platform-inner,
+.contact-inner {
+  max-width: var(--sec-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* ── Étiquette de section — monospace système ── */
+.section-label {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: .2em !important;
+  color: var(--kura-accent) !important;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  margin-bottom: 16px !important;
+}
+
+/* ── Titre de section — échelle unifiée ── */
+.section-title {
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -.02em !important;
+  line-height: 1.1 !important;
+  text-align: center;
+  margin-bottom: 0 !important;
+}
+
+/* ── Accent line sous chaque titre ── */
+.section-accent-line {
+  display: block;
+  width: 28px; height: 2px;
+  background: var(--kura-accent);
+  border-radius: 1px;
+  margin: 20px auto 48px;
+  opacity: 0.5;
+}
+
+/* ── Séparateurs entre sections ── */
+.section-sep {
+  display: block;
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(0,212,255,0.07) 20%, rgba(0,212,255,0.07) 80%, transparent 100%);
+}
+
+/* ── Numéros de section ── */
+.section-num {
+  position: absolute;
+  top: 40px; right: var(--sec-px);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700;
+  color: rgba(168,181,208,0.1);
+  letter-spacing: .15em;
+  user-select: none; pointer-events: none;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     LOADING SCREEN
+     ═══════════════════════════════════════════════════════════════ -->
+<div id="loading-screen" class="drawing">
+  <div class="dot-grid"></div>
+  <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:24px">
+    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" style="color:var(--kura-accent)">
+      <path class="shield-path" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path class="check-path" d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="brand-text" style="display:flex;align-items:center;gap:4px">
+      <span class="loading-letter" style="font-size:24px;font-weight:700;letter-spacing:0.3em;color:white">K</span>
+      <span class="loading-letter" style="font-size:24px;font-weight:700;letter-spacing:0.3em;color:white">U</span>
+      <span class="loading-letter" style="font-size:24px;font-weight:700;letter-spacing:0.3em;color:white">R</span>
+      <span class="loading-letter" style="font-size:24px;font-weight:700;letter-spacing:0.3em;color:white">A</span>
+    </div>
+    <div style="width:128px;height:2px;background:var(--obsidian-600);border-radius:2px;overflow:hidden">
+      <div class="loading-bar-inner" style="height:100%;background:var(--kura-accent);border-radius:2px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAVBAR
+     ═══════════════════════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--kura-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>
+      </svg>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span class="nav-logo-text">KURA</span>
+        <span class="nav-beta">beta</span>
+      </div>
+    </a>
+    <button class="nav-hamburger" onclick="document.querySelector('.mobile-menu').classList.toggle('open')" aria-label="Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <div class="nav-links">
+      <a href="#probleme" class="nav-link">Probleme</a>
+      <a href="#solution" class="nav-link">Solution</a>
+      <a href="#demo" class="nav-link">Demo</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#contact" class="nav-cta">Demander un acces</a>
+    </div>
+  </div>
+  <div class="mobile-menu">
+    <a href="#probleme" onclick="this.parentElement.classList.remove('open')">Probleme</a>
+    <a href="#solution" onclick="this.parentElement.classList.remove('open')">Solution</a>
+    <a href="#demo" onclick="this.parentElement.classList.remove('open')">Demo</a>
+    <a href="#contact" onclick="this.parentElement.classList.remove('open')">Contact</a>
+    <a href="#contact" class="mobile-cta" onclick="this.parentElement.classList.remove('open')">Demander un acces</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO SECTION
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg">
+    <video class="hero-video" src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/hero-athlete.mp4" autoplay muted loop playsinline preload="auto"></video>
+    <div class="hero-overlay"></div>
+    <canvas id="hero-canvas" class="hero-canvas" style="pointer-events:auto"></canvas>
+    <div class="hero-radial"></div>
+    <div class="hero-vignette-bottom"></div>
+    <div class="hero-vignette-top"></div>
+  </div>
+
+  <div class="hero-content">
+    <!-- Badge live top-right -->
+    <div class="hero-live-badge hero-el" data-delay="200" style="transition-delay:0.2s">
+      <span class="hero-live-dot"></span>
+      Verdict certifié · <span style="color:var(--kura-accent)">1,3s</span>
+    </div>
+
+    <!-- KURA letters — géant, gauche-bas -->
+    <div class="kura-title">
+      <span class="kura-letter" style="transition-delay:200ms">K</span>
+      <span class="kura-letter" style="transition-delay:280ms">U</span>
+      <span class="kura-letter" style="transition-delay:360ms">R</span>
+      <span class="kura-letter" style="transition-delay:440ms">A</span>
+    </div>
+
+    <!-- Tagline — mono, gauche, un seul niveau sous KURA -->
+    <div class="hero-el" data-delay="700" style="transition-delay:0.7s">
+      <p class="hero-headline">
+        Verdicts antidopage instantanés et certifiés.<br>
+        Médicaments, compléments, nutrition — en <span class="accent">1,3 seconde.</span>
+      </p>
+    </div>
+
+    <!-- Search bar -->
+    <div class="hero-el" data-delay="2000" style="transition-delay:2s;width:100%;max-width:576px;filter:blur(4px)">
+      <div class="search-container search-glow">
+        <div class="search-inner">
+          <input type="text" class="search-input" placeholder="Entrez une substance..." id="hero-search-input">
+          <button class="search-btn" id="hero-search-btn">Verifier</button>
+        </div>
+      </div>
+      <div class="pills">
+        <button class="pill" onclick="this.closest('section').querySelector('.search-input').value=this.textContent">Testosterone</button>
+        <button class="pill" onclick="this.closest('section').querySelector('.search-input').value=this.textContent">Cafeine</button>
+        <button class="pill" onclick="this.closest('section').querySelector('.search-input').value=this.textContent">Trimetazidine</button>
+        <button class="pill" onclick="this.closest('section').querySelector('.search-input').value=this.textContent">Salbutamol</button>
+        <button class="pill" onclick="this.closest('section').querySelector('.search-input').value=this.textContent">EPO</button>
+        <button class="pill" onclick="this.closest('section').querySelector('.search-input').value=this.textContent">Cannabis</button>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="hero-el hero-cta-row" data-delay="2200" style="transition-delay:2.2s">
+      <a href="#contact" class="hero-cta-btn">
+        Demander l'acces beta
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(168,181,208,0.4);letter-spacing:.1em;text-transform:uppercase">Staff médical · Nutritionnistes · Fédérations</span>
+    </div>
+  </div>
+
+  <!-- Scroll prompt -->
+  <div class="scroll-prompt" style="position:absolute;bottom:32px;left:50%">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:rgba(74,86,114,0.4);animation:scrollDot 2s ease-in-out infinite">
+      <path d="M6 9l6 6 6-6"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     STATS BAR
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="stats-bar scroll-reveal" data-threshold="0.15">
+  <div class="stats-grid-bg"></div>
+  <div class="stats-grid">
+    <div class="stat-item" data-count="338337" data-suffix="">
+      <div class="stat-divider"></div>
+      <div class="stat-accent"></div>
+      <span class="stat-number">0</span>
+      <span class="stat-label">chunks indexes</span>
+    </div>
+    <div class="stat-item" data-count="1029" data-suffix="">
+      <div class="stat-divider"></div>
+      <div class="stat-accent"></div>
+      <span class="stat-number">0</span>
+      <span class="stat-label">substances WADA couvertes</span>
+    </div>
+    <div class="stat-item" data-count="3" data-suffix="s" data-prefix="<">
+      <div class="stat-divider"></div>
+      <div class="stat-accent"></div>
+      <span class="stat-number">&lt;0s</span>
+      <span class="stat-label">verdict complet</span>
+    </div>
+    <div class="stat-item" data-count="5" data-suffix="">
+      <div class="stat-divider"></div>
+      <div class="stat-accent"></div>
+      <span class="stat-number">0</span>
+      <span class="stat-label">domaines</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     INSTITUTIONAL BAR
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="institutional-bar">
+  <div class="institutional-inner">
+    <p class="institutional-label">Concu pour les standards de</p>
+    <div class="institutional-logos">
+      <span class="institutional-logo">FIFA</span>
+      <span class="institutional-logo">WADA</span>
+      <span class="institutional-logo">IOC</span>
+      <span class="institutional-logo">CAS</span>
+      <span class="institutional-logo">UEFA</span>
+      <span class="institutional-logo">UCI</span>
+      <span class="institutional-logo">World Athletics</span>
+      <span class="institutional-logo">ITF</span>
+      <span class="institutional-logo">World Rugby</span>
+      <span class="institutional-logo">FFR</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     STATEMENT SECTION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="statement-section" id="statement-section">
+  <video class="statement-video" src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/statement-stadium.mp4" autoplay muted loop playsinline preload="auto"></video>
+  <div class="statement-overlay"></div>
+  <div class="statement-text" id="statement-text">
+    <!-- Characters injected by JS -->
+  </div>
+</section>
+
+<!-- Wave separator -->
+<div class="wave-separator">
+  <div class="wave-line"></div>
+  <div class="wave-node">
+    <div class="wave-node-glow"></div>
+    <svg width="14" height="16" viewBox="0 0 14 16" fill="none">
+      <path d="M7 1L13 4.5V11.5L7 15L1 11.5V4.5L7 1Z" stroke="var(--kura-accent)" stroke-width="0.8" stroke-opacity="0.25" fill="none"/>
+      <circle cx="7" cy="8" r="1.5" fill="var(--kura-accent)" fill-opacity="0.15"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PROBLEM SECTION
+     ═══════════════════════════════════════════════════════════════ -->
+<span class="section-sep"></span>
+<section id="probleme" class="problem-section scroll-reveal" data-threshold="0.15">
+  <div class="problem-inner">
+    <p class="section-label">Le probleme</p>
+    <h2 class="section-title">Un controle positif detruit une carriere</h2>
+    <span class="section-accent-line"></span>
+    <div class="problem-split">
+      <!-- Focal point gauche : le chiffre qui tue -->
+      <div>
+        <div class="problem-focal-num">15<sup>%</sup></div>
+        <p class="problem-focal-desc">des compléments alimentaires contiennent une substance interdite par la WADA — sans que l'étiquette le mentionne.</p>
+        <p class="problem-focal-source">Source : Institut de biochimie, Cologne Lab</p>
+      </div>
+      <!-- Stats secondaires droite -->
+      <div class="problem-stack">
+        <div class="problem-stack-row">
+          <div class="problem-stack-num">1/5</div>
+          <div>
+            <div class="problem-stack-text">compléments achetés en ligne causeraient un contrôle positif</div>
+            <div class="problem-stack-source">Source : Informed Sport</div>
+          </div>
+        </div>
+        <div class="problem-stack-row">
+          <div class="problem-stack-num">100%</div>
+          <div>
+            <div class="problem-stack-text">de responsabilité pour l'athlète — même si le staff ignorait la contamination</div>
+            <div class="problem-stack-source">Source : WADA Strict Liability</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <blockquote class="quote-block">
+      <p class="quote-text">&laquo;&nbsp;Je ne sais pas ce qui est le pire : ca, ou le fait qu'ils prescrivent des complements alimentaires en se basant sur des resultats gratuits de ChatGPT.&nbsp;&raquo;</p>
+      <footer class="quote-author">&mdash; Itziar Gonzalez, ex-nutritionniste du Real Madrid, Instagram, 24 mars 2026</footer>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CLIENTS SECTION
+     ═══════════════════════════════════════════════════════════════ -->
+<span class="section-sep"></span>
+<section class="clients-section scroll-reveal" data-threshold="0.15">
+  <div class="clients-header">
+    <p class="section-label">CLIENTS CIBLES</p>
+    <h2 class="section-title">Concu pour le sport d'elite</h2>
+  </div>
+  <div style="margin-bottom:12px;padding:0 8px">
+    <p class="marquee-label">Terrain</p>
+    <div class="marquee-wrap">
+      <div class="marquee-fade-left"></div>
+      <div class="marquee-fade-right"></div>
+      <div class="marquee-track forward" id="marquee-terrain"></div>
+    </div>
+  </div>
+  <div style="padding:0 8px">
+    <p class="marquee-label">Ecosysteme</p>
+    <div class="marquee-wrap">
+      <div class="marquee-fade-left"></div>
+      <div class="marquee-fade-right"></div>
+      <div class="marquee-track reverse" id="marquee-ecosystem"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CASES SECTION — Variant D · Stat + liste minimaliste
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="scroll-reveal" data-threshold="0.1">
+<div class="case-d">
+  <div class="case-d-left">
+    <div class="case-d-zero-bg">0</div>
+    <div class="case-d-stamp">PROHIBITED</div>
+    <div class="case-d-left-content">
+      <div class="case-d-label">Cas réels · 2016–2024</div>
+      <div class="case-d-num">28</div>
+      <div class="case-d-sub">carrières impactées par une erreur réglementaire que leur staff n'avait aucun moyen de détecter — sans KURA.</div>
+      <div class="case-d-pills">
+        <div class="case-d-pill">
+          <div class="case-d-pill-num">47</div>
+          <div class="case-d-pill-label">années de suspension cumulées</div>
+        </div>
+        <div class="case-d-pill">
+          <div class="case-d-pill-num" style="color:#F59E0B">6</div>
+          <div class="case-d-pill-label">JO / Championnats du monde manqués</div>
+        </div>
+        <div class="case-d-pill">
+          <div class="case-d-pill-num" style="color:#EF4444">3</div>
+          <div class="case-d-pill-label">fins de carrière prématurées</div>
+        </div>
+      </div>
+      <div class="case-d-kura">
+        <p>Durée moyenne d'une vérification <strong>KURA</strong> : <strong>1,3s</strong><br>Chacun de ces 28 cas aurait été intercepté avant l'exposition.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-d-right">
+    <div class="case-d-right-header">
+      <h3>28 cas · Sport d'élite · Noms publics</h3>
+    </div>
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">01</div></div>
+      <div class="mini-case-bar" style="background:#EF4444"></div>
+      <div style="flex:1"><div class="mini-name">Iga Swiatek</div><span class="mini-sport">Tennis WTA · 2024</span></div>
+      <div class="mini-substance">Trimetazidine via mélatonine</div>
+      <div class="mini-duration">1 mois</div>
+    </div>
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">02</div></div>
+      <div class="mini-case-bar" style="background:#EF4444"></div>
+      <div style="flex:1"><div class="mini-name">Jannik Sinner</div><span class="mini-sport">Tennis ATP · 2024</span></div>
+      <div class="mini-substance">Clostebol via crème kiné</div>
+      <div class="mini-duration">6 mois</div>
+    </div>
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">03</div></div>
+      <div class="mini-case-bar" style="background:#F59E0B"></div>
+      <div style="flex:1"><div class="mini-name">Mamadou Sakho</div><span class="mini-sport">Football · 2016</span></div>
+      <div class="mini-substance">Higenamine S3</div>
+      <div class="mini-duration">6 sem.</div>
+    </div>
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">04</div></div>
+      <div class="mini-case-bar" style="background:#EF4444"></div>
+      <div style="flex:1"><div class="mini-name">Nadir Benhamou</div><span class="mini-sport">Rugby Pro D2 · 2022</span></div>
+      <div class="mini-substance">Canrenone S5</div>
+      <div class="mini-duration">2 ans</div>
+    </div>
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">05</div></div>
+      <div class="mini-case-bar" style="background:#EF4444"></div>
+      <div style="flex:1"><div class="mini-name">Joakim Noah</div><span class="mini-sport">Basketball NBA · 2017</span></div>
+      <div class="mini-substance">Ligandrol SARM</div>
+      <div class="mini-duration">20 mat.</div>
+    </div>
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">06</div></div>
+      <div class="mini-case-bar" style="background:#EF4444"></div>
+      <div style="flex:1"><div class="mini-name">Shelby Houlihan</div><span class="mini-sport">Athlétisme · 2021</span></div>
+      <div class="mini-substance">Nandrolone alimentaire</div>
+      <div class="mini-duration">4 ans</div>
+    </div>
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">07</div></div>
+      <div class="mini-case-bar" style="background:#F59E0B"></div>
+      <div style="flex:1"><div class="mini-name">Maria Sharapova</div><span class="mini-sport">Tennis WTA · 2016</span></div>
+      <div class="mini-substance">Meldonium S4</div>
+      <div class="mini-duration">15 mois</div>
+    </div>
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">08</div></div>
+      <div class="mini-case-bar" style="background:#EF4444"></div>
+      <div style="flex:1"><div class="mini-name">Alberto Contador</div><span class="mini-sport">Cyclisme · 2011</span></div>
+      <div class="mini-substance">Clenbuterol alimentaire</div>
+      <div class="mini-duration">2 ans</div>
+    </div>
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">09</div></div>
+      <div class="mini-case-bar" style="background:#EF4444"></div>
+      <div style="flex:1"><div class="mini-name">Salwa Eid Naser</div><span class="mini-sport">Athlétisme Bahreïn · 2021</span></div>
+      <div class="mini-substance">Whereabouts failure</div>
+      <div class="mini-duration">2 ans</div>
+    </div>
+    <div class="mini-case">
+      <div class="mini-case-left"><div class="mini-case-num">10</div></div>
+      <div class="mini-case-bar" style="background:#EF4444"></div>
+      <div style="flex:1"><div class="mini-name">Kieron Pollard</div><span class="mini-sport">Cricket West Indies · 2020</span></div>
+      <div class="mini-substance">Clenbuterol S1</div>
+      <div class="mini-duration">18 mois</div>
+    </div>
+    <div style="padding:20px 0 0;text-align:center">
+      <span style="font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--obsidian-100)">+ 18 cas supplémentaires · accès sur demande</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Connecteur narratif -->
+<div style="text-align:center;padding:40px var(--sec-px)">
+  <p style="font-size:13px;font-family:'JetBrains Mono',monospace;color:rgba(168,181,208,0.3);letter-spacing:.15em;text-transform:uppercase">Chaque verification prend 1,3 seconde. Chacun de ces cas a pris des annees.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BRAND REVEAL
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="brand-reveal" id="brand-reveal">
+  <div style="position:absolute;inset:0;pointer-events:none">
+    <div class="brand-reveal-sticky" style="position:sticky;top:0;height:100vh;overflow:hidden">
+      <video class="brand-video" src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/spare-eye.mp4" autoplay muted loop playsinline preload="auto"></video>
+    </div>
+  </div>
+  <div style="position:absolute;inset:0;pointer-events:none">
+    <div id="brand-bg-overlay" class="brand-bg-overlay" style="position:sticky;top:0;height:100vh"></div>
+  </div>
+  <div class="brand-reveal-sticky">
+    <div class="brand-content">
+      <!-- Dissolving text -->
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+        <div style="text-align:center" id="brand-text-container">
+          <p class="brand-text-label" id="brand-line-0"></p>
+          <span class="brand-text-big" id="brand-line-1"></span><br>
+          <span class="brand-text-big" id="brand-line-2"></span><br>
+          <span class="brand-text-big cyan" id="brand-line-3"></span>
+        </div>
+      </div>
+      <!-- Scan columns -->
+      <div class="scan-container" id="scan-container">
+        <div class="scan-columns" id="scan-columns"></div>
+      </div>
+      <!-- KURA letters -->
+      <div class="brand-kura-container" id="brand-kura" style="position:relative;z-index:10">
+        <span class="brand-kura-letter" id="bk-0">K</span>
+        <span class="brand-kura-letter" id="bk-1">U</span>
+        <span class="brand-kura-letter" id="bk-2">R</span>
+        <span class="brand-kura-letter" id="bk-3">A</span>
+      </div>
+      <div class="brand-rule" id="brand-rule"></div>
+      <p class="brand-tagline" id="brand-tagline">Infallible Compliance. Pure Performance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     DATA COVERAGE (with bg video)
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="bg-video-wrap">
+  <video class="bg-video-el" src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/demo-capsule.mp4" autoplay muted loop playsinline preload="auto"></video>
+  <section class="data-coverage scroll-reveal" data-threshold="0.1">
+    <div class="data-coverage-inner">
+      <p class="section-label">NOTRE DATA</p>
+      <h2 class="section-title">La base reglementaire la plus complete au monde</h2>
+      <p style="color:var(--obsidian-100);text-align:center;max-width:640px;margin:0 auto 48px">
+        KURA ne devine pas. KURA sait. Chaque regle, chaque substance, chaque exception — indexee, verifiee, mise a jour en continu.
+      </p>
+
+      <!-- Live badge amélioré -->
+      <div style="display:flex;justify-content:center;margin-bottom:56px;margin-top:8px">
+        <span class="live-badge-v2">
+          <span class="live-dot-v2"></span>
+          Mis a jour aujourd&apos;hui &mdash; synchronisation quotidienne WADA/AFLD
+        </span>
+      </div>
+
+      <!-- Space 1: Intelligence antidopage -->
+      <div style="margin-bottom:48px">
+        <div class="space-header">
+          <div class="line" style="background:rgba(239,68,68,0.2)"></div>
+          <p class="label" style="color:#FCA5A5">INTELLIGENCE ANTIDOPAGE</p>
+          <div class="line" style="background:rgba(239,68,68,0.2)"></div>
+        </div>
+        <p style="font-size:14px;color:var(--obsidian-200);margin-bottom:24px;text-align:center">Ce que KURA sait sur chaque substance</p>
+        <div class="glass-card domain-bar-card">
+          <div class="domain-row" style="border-left-color:#EF4444">
+            <div class="domain-row-info">
+              <span class="domain-row-label">WADA / AFLD / USADA</span>
+              <div class="domain-sources"><span class="domain-source-tag">WADA</span><span class="domain-source-tag">AFLD</span><span class="domain-source-tag">IOC</span><span class="domain-source-tag">ITA</span><span class="domain-source-tag">USADA</span></div>
+            </div>
+            <div class="domain-row-bar">
+              <div class="bar-wrap">
+                <div class="bar-track"><div class="bar-fill data-bar" style="background:#EF4444;width:0" data-target="100"></div></div>
+                <span class="bar-count" style="color:#EF4444">247 319 chunks</span>
+                <span class="bar-percent" style="color:#EF4444">73%</span>
+              </div>
+              <p class="domain-detail">Liste des Interdictions WADA 2026, Standards Internationaux, AUT, Code Mondial Antidopage</p>
+            </div>
+          </div>
+          <div class="domain-row" style="border-left-color:#F97316;margin-top:16px">
+            <div class="domain-row-info">
+              <span class="domain-row-label">Reglements federations</span>
+              <div class="domain-sources"><span class="domain-source-tag">FIFA</span><span class="domain-source-tag">UCI</span><span class="domain-source-tag">World Athletics</span><span class="domain-source-tag">NFL</span><span class="domain-source-tag">NBA</span><span class="domain-source-tag">UEFA</span><span class="domain-source-tag">UFC</span></div>
+            </div>
+            <div class="domain-row-bar">
+              <div class="bar-wrap">
+                <div class="bar-track"><div class="bar-fill data-bar" style="background:#F97316;width:0" data-target="9"></div></div>
+                <span class="bar-count" style="color:#F97316">22 681 chunks</span>
+                <span class="bar-percent" style="color:#F97316">7%</span>
+              </div>
+              <p class="domain-detail">Reglements sportifs complets : clauses antidopage, procedures de controle, sanctions specifiques par sport</p>
+            </div>
+          </div>
+          <div class="domain-row" style="border-left-color:#F59E0B;margin-top:16px">
+            <div class="domain-row-info">
+              <span class="domain-row-label">Nutrition</span>
+              <div class="domain-sources"><span class="domain-source-tag">EFSA</span><span class="domain-source-tag">NIH</span><span class="domain-source-tag">DGCCRF</span></div>
+            </div>
+            <div class="domain-row-bar">
+              <div class="bar-wrap">
+                <div class="bar-track"><div class="bar-fill data-bar" style="background:#F59E0B;width:0" data-target="4"></div></div>
+                <span class="bar-count" style="color:#F59E0B">9 328 chunks</span>
+                <span class="bar-percent" style="color:#F59E0B">3%</span>
+              </div>
+              <p class="domain-detail">Upper Levels, allegations sante, Novel Foods, contaminants</p>
+            </div>
+          </div>
+          <p style="font-size:10px;color:rgba(74,86,114,0.4);text-transform:uppercase;letter-spacing:0.1em;padding-top:8px;text-align:center;border-top:1px solid rgba(255,255,255,0.04);margin-top:16px">Aucune approximation. Chaque reponse est sourcee.</p>
+        </div>
+      </div>
+
+      <!-- Sports & Federations -->
+      <div class="sports-feds">
+        <div class="glass-card sports-feds-card">
+          <h3 class="sports-feds-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--kura-accent)"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+            20 sports couverts
+          </h3>
+          <div class="tag-wrap" id="sports-tags"></div>
+        </div>
+        <div class="glass-card sports-feds-card">
+          <h3 class="sports-feds-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--kura-accent)" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            20 federations &amp; agences
+          </h3>
+          <div class="tag-wrap" id="feds-tags"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SOLUTION / PIPELINE
+     ═══════════════════════════════════════════════════════════════ -->
+<span class="section-sep"></span>
+
+<section id="solution" class="solution-section scroll-reveal" data-threshold="0.1">
+  <div class="solution-inner">
+    <p class="section-label">PIPELINE</p>
+    <h2 class="section-title">Comment ca marche</h2>
+    <p class="solution-subtitle">Kura dicte ; il ne delibere pas. Chaque verdict est code en dur dans notre coeur deterministe et verrouille par 10+ guardrails stricts.</p>
+
+    <!-- Speed hero -->
+    <div class="pipeline-speed-hero">
+      <div class="speed-num">5 <span style="font-size:0.55em;color:var(--obsidian-200);font-weight:400">etapes.</span> &lt;<span class="speed-accent">1,3s</span>.</div>
+      <p class="speed-sub">Du nom de la substance au verdict certifie — garanti sans erreur</p>
+    </div>
+
+    <!-- Flow diagram -->
+    <div class="flow-row">
+
+      <!-- Node 1 -->
+      <div class="flow-node">
+        <div class="flow-node-circle start">
+          <div class="flow-node-num">1</div>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--kura-accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <div class="flow-node-label">
+          <strong>Votre question</strong>
+          <span>Nom, marque ou<br>molecule libre</span>
+          <em>~80ms</em>
+        </div>
+      </div>
+
+      <div class="flow-connector">
+        <div class="flow-connector-line"></div>
+        <div class="flow-connector-pulse"></div>
+        <div class="flow-connector-arrow">›</div>
+      </div>
+
+      <!-- Node 2 -->
+      <div class="flow-node">
+        <div class="flow-node-circle">
+          <div class="flow-node-num">2</div>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(168,181,208,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+        </div>
+        <div class="flow-node-label">
+          <strong>Detection</strong>
+          <span>Entites, variantes,<br>synonymes</span>
+          <em>~120ms</em>
+        </div>
+      </div>
+
+      <div class="flow-connector">
+        <div class="flow-connector-line"></div>
+        <div class="flow-connector-pulse"></div>
+        <div class="flow-connector-arrow">›</div>
+      </div>
+
+      <!-- Node 3 -->
+      <div class="flow-node">
+        <div class="flow-node-circle">
+          <div class="flow-node-num">3</div>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(168,181,208,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          </svg>
+        </div>
+        <div class="flow-node-label">
+          <strong>RAG multi-pass</strong>
+          <span>338 337 chunks<br>interroges</span>
+          <em>~600ms</em>
+        </div>
+      </div>
+
+      <div class="flow-connector">
+        <div class="flow-connector-line"></div>
+        <div class="flow-connector-pulse"></div>
+        <div class="flow-connector-arrow">›</div>
+      </div>
+
+      <!-- Node 4 -->
+      <div class="flow-node">
+        <div class="flow-node-circle">
+          <div class="flow-node-num">4</div>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(168,181,208,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="flow-node-label">
+          <strong>10 Guardrails</strong>
+          <span>Architecture<br>deterministe</span>
+          <em>~380ms</em>
+        </div>
+      </div>
+
+      <div class="flow-connector">
+        <div class="flow-connector-line"></div>
+        <div class="flow-connector-pulse"></div>
+        <div class="flow-connector-arrow">›</div>
+      </div>
+
+      <!-- Node 5 -->
+      <div class="flow-node">
+        <div class="flow-node-circle end">
+          <div class="flow-node-num" style="border-color:rgba(16,185,129,0.4);color:#10B981">5</div>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+        </div>
+        <div class="flow-node-label">
+          <strong>Verdict certifie</strong>
+          <span>Source citee,<br>tracable CAS</span>
+          <em style="color:#10B981">~120ms</em>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tags garantie -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:56px">
+      <div style="display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.15)">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        <span style="font-size:11px;color:rgba(0,212,255,0.8);font-weight:700;font-family:'JetBrains Mono',monospace">Truth-first architecture</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.15)">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        <span style="font-size:11px;color:rgba(0,212,255,0.8);font-weight:700;font-family:'JetBrains Mono',monospace">Zero hallucination garantie</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.15)">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        <span style="font-size:11px;color:rgba(0,212,255,0.8);font-weight:700;font-family:'JetBrains Mono',monospace">Sources citees systematiquement</span>
+      </div>
+    </div>
+
+    <!-- Guarantee bloc -->
+    <div class="guarantee-block-v2">
+      <div class="guarantee-zero-row">
+        <div class="guarantee-zero-num">0</div>
+        <div>
+          <div class="guarantee-zero-label">
+            Erreur autorisee
+            <small>Si une substance est interdite par l&apos;AMA, KURA ne dira <strong style="color:white">JAMAIS</strong> qu&apos;elle est autorisee. C&apos;est une garantie technologique, pas une promesse.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Connecteur narratif -->
+<div style="text-align:center;padding:40px var(--sec-px) 0">
+  <p style="font-size:13px;font-family:'JetBrains Mono',monospace;color:rgba(168,181,208,0.3);letter-spacing:.15em;text-transform:uppercase">Voyez-le en action.</p>
+</div>
+<span class="section-sep"></span>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     DEMO SECTION
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="demo" class="demo-section scroll-reveal" data-threshold="0.15">
+  <div class="demo-inner">
+    <p class="section-label">DEMO LIVE</p>
+    <h1 class="demo-title-dramatic">Testez maintenant.<br><span class="demo-accent">En direct.</span></h1>
+    <div style="display:flex;justify-content:center;margin-bottom:16px">
+      <span class="demo-speed-badge">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Reponse en &lt;&nbsp;1,3 seconde
+      </span>
+    </div>
+    <p class="demo-subtitle">Le vrai moteur KURA. Entrez une substance, obtenez un verdict reglementaire certifie.</p>
+
+    <div class="domain-tabs" id="domain-tabs"></div>
+
+    <div class="search-container-v2">
+      <div class="search-inner">
+        <input type="text" class="search-input" placeholder="Entrez une substance..." id="demo-search-input">
+        <button class="search-btn" id="demo-search-btn" onclick="runDemoVerdict()">Verifier</button>
+      </div>
+    </div>
+
+    <!-- Verdict animé -->
+    <div class="demo-verdict" id="demo-verdict"></div>
+
+    <div class="pills" style="margin-top:16px">
+      <button class="pill pill-red" onclick="setDemoSubstance('Testosterone')">Testosterone</button>
+      <button class="pill pill-green" onclick="setDemoSubstance('Cafeine')">Cafeine</button>
+      <button class="pill pill-red" onclick="setDemoSubstance('Trimetazidine')">Trimetazidine</button>
+      <button class="pill pill-orange" onclick="setDemoSubstance('Salbutamol')">Salbutamol</button>
+      <button class="pill pill-red" onclick="setDemoSubstance('EPO')">EPO</button>
+      <button class="pill pill-orange" onclick="setDemoSubstance('Cannabis')">Cannabis</button>
+    </div>
+
+    <div style="margin-top:40px">
+      <a href="#contact" class="demo-cta">
+        Acces au dashboard complet
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PLATFORM SECTION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="platform-section scroll-reveal" data-threshold="0.1">
+  <div class="platform-grid-bg"></div>
+  <div class="platform-inner">
+    <p class="section-label">PLATEFORME</p>
+    <h2 class="section-title">Deux Produits. Un Ecosysteme.</h2>
+    <span class="section-accent-line"></span>
+    <p class="platform-subline">Un centre de commandement pour le staff. Une application gardienne pour les athletes. Concus ensemble, fonctionnant comme un seul.</p>
+
+    <div class="platform-tabs">
+      <div class="platform-tabs-inner">
+        <button class="platform-tab active" onclick="switchPlatformTab('dashboard',this)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          Dashboard Staff
+        </button>
+        <button class="platform-tab" onclick="switchPlatformTab('app',this)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+          Application Athlete
+        </button>
+      </div>
+    </div>
+
+    <div class="platform-content">
+      <div class="platform-features" id="platform-features"></div>
+      <div id="platform-mockup"></div>
+    </div>
+
+    <div class="platform-cta-row" style="flex-direction:column;gap:12px">
+      <a href="#contact" class="platform-cta">
+        Demander l'acces beta
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <span class="platform-beta-badge">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+        Certifie par 12 clubs professionnels en beta
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- Wave separator -->
+<div class="wave-separator">
+  <div class="wave-line"></div>
+  <div class="wave-node"><div class="wave-node-glow"></div>
+    <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M7 1L13 4.5V11.5L7 15L1 11.5V4.5L7 1Z" stroke="var(--kura-accent)" stroke-width="0.8" stroke-opacity="0.25" fill="none"/><circle cx="7" cy="8" r="1.5" fill="var(--kura-accent)" fill-opacity="0.15"/></svg>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     DOMAINS SECTION (with bg video)
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="bg-video-wrap">
+  <video class="bg-video-el" src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/demo-capsule.mp4" autoplay muted loop playsinline preload="auto"></video>
+  <section class="domains-section scroll-reveal" data-threshold="0.1">
+    <div class="globe-layout">
+
+      <!-- LEFT: Content -->
+      <div class="globe-content">
+        <p class="section-label">COUVERTURE MONDIALE</p>
+        <h2 class="section-title" style="text-align:left">5 domaines,<br>1 seul moteur</h2>
+        <p class="globe-subtitle">KURA agr&egrave;ge les r&eacute;glementations de 4 continents &mdash; une seule requ&ecirc;te, un seul verdict.</p>
+        <div class="globe-domain-list" id="globe-domain-list"></div>
+        <a href="#contact" class="globe-cta">
+          Demander un acc&egrave;s
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- RIGHT: Globe -->
+      <div class="globe-viz-wrap">
+        <div class="globe-glow"></div>
+        <div class="globe-sphere" id="globe-sphere">
+          <div class="globe-grid-lat"></div>
+          <div class="globe-grid-lon"></div>
+          <!-- Rings -->
+          <div class="globe-ring" style="top:15%;left:5%;right:5%;bottom:15%"></div>
+          <div class="globe-ring" style="top:5%;left:18%;right:18%;bottom:5%;transform:rotate(45deg)"></div>
+          <!-- Points rendered by JS -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- Wave separator -->
+<div class="wave-separator">
+  <div class="wave-line"></div>
+  <div class="wave-node"><div class="wave-node-glow"></div>
+    <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M7 1L13 4.5V11.5L7 15L1 11.5V4.5L7 1Z" stroke="var(--kura-accent)" stroke-width="0.8" stroke-opacity="0.25" fill="none"/><circle cx="7" cy="8" r="1.5" fill="var(--kura-accent)" fill-opacity="0.15"/></svg>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONTACT SECTION
+     ═══════════════════════════════════════════════════════════════ -->
+<span class="section-sep"></span>
+<section id="contact" class="contact-section scroll-reveal" data-threshold="0.15">
+  <div class="contact-dot-bg"></div>
+  <div class="contact-inner">
+    <p class="section-label">ACCES BETA</p>
+    <h2 class="section-title" style="text-align:left;margin-bottom:8px">12 clubs en beta prive.</h2>
+    <p style="font-size:15px;color:var(--obsidian-100);line-height:1.65;margin-bottom:32px;max-width:480px">Chaque semaine, un nouveau staff accede au moteur. La liste d'attente grandit. Rejoignez-la maintenant.</p>
+
+    <div class="contact-layout">
+      <div class="contact-video-wrap">
+        <video class="contact-video" src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/contact-shield.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <div class="contact-video-overlay"></div>
+        <div class="contact-video-text">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" style="color:var(--kura-accent);margin-bottom:16px;filter:drop-shadow(0 0 20px rgba(0,212,255,0.5))">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p style="color:white;font-weight:700;font-size:18px;text-align:center">Protegez vos athletes</p>
+          <p style="color:rgba(168,181,208,0.8);font-size:14px;text-align:center;margin-top:4px">320K references verifiees &middot; 0 erreur &middot; 1.3 secondes</p>
+        </div>
+        <div class="contact-video-ring"></div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <form class="contact-form" onsubmit="event.preventDefault();alert('Demande envoyee ! Nous reviendrons vers vous sous 24h.')">
+          <div>
+            <label for="fullName">Nom complet</label>
+            <input id="fullName" name="fullName" type="text" required placeholder="Jean Dupont">
+          </div>
+          <div>
+            <label for="email">Email professionnel</label>
+            <input id="email" name="email" type="email" required placeholder="jean@club.com">
+          </div>
+          <div>
+            <label for="organisation">Organisation</label>
+            <input id="organisation" name="organisation" type="text" required placeholder="FC Geneve">
+          </div>
+          <div>
+            <label for="role">Role</label>
+            <div class="select-wrap">
+              <select id="role" name="role" required>
+                <option value="" disabled selected>Selectionnez votre role</option>
+                <option>Medecin</option>
+                <option>Nutritionniste</option>
+                <option>Federation</option>
+                <option>Club</option>
+                <option>Athlete</option>
+                <option>Laboratoire</option>
+                <option>Institution</option>
+                <option>Universite</option>
+              </select>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+          <button type="submit" class="contact-submit btn-press">Securiser mes verifications</button>
+          <p class="contact-footer-text">Reponse sous 24h &middot; Demo personnalisee &middot; Sans engagement</p>
+        </form>
+        <p class="contact-email">
+          <a href="mailto:contact@kurasport.ch">contact@kurasport.ch</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="site-footer">
+  <div class="footer-sep"></div>
+  <div class="footer-inner">
+    <div class="footer-row">
+      <div class="footer-logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--kura-accent)">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+        <span class="text">KURA</span>
+        <span class="tagline">Intelligence reglementaire augmentee</span>
+      </div>
+      <div class="footer-links">
+        <a href="/legal">Mentions legales</a><span class="sep">&middot;</span>
+        <a href="/privacy">Confidentialite</a><span class="sep">&middot;</span>
+        <a href="/terms">CGU</a>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:6px;border:1px solid rgba(0,212,255,0.2);background:rgba(0,212,255,0.04);font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,212,255,0.6)"><span style="width:5px;height:5px;border-radius:50%;background:rgba(0,212,255,0.5);display:inline-block"></span>WADA</span>
+        <span style="display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:6px;border:1px solid rgba(0,212,255,0.2);background:rgba(0,212,255,0.04);font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,212,255,0.6)"><span style="width:5px;height:5px;border-radius:50%;background:rgba(0,212,255,0.5);display:inline-block"></span>IOC</span>
+        <span style="display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:6px;border:1px solid rgba(0,212,255,0.2);background:rgba(0,212,255,0.04);font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,212,255,0.6)"><span style="width:5px;height:5px;border-radius:50%;background:rgba(0,212,255,0.5);display:inline-block"></span>RGPD</span>
+      </div>
+    </div>
+    <p class="footer-copyright">&copy; 2026 KURA Intelligence SA</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     STICKY CTA (mobile)
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="sticky-cta" id="sticky-cta">
+  <a href="#contact">Securiser mes verifications</a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  // ── Loading screen ──
+  const loader = document.getElementById('loading-screen');
+  setTimeout(() => loader.classList.replace('drawing', 'revealed'), 100);
+  setTimeout(() => loader.classList.add('exit'), 1200);
+  setTimeout(() => loader.remove(), 1800);
+
+  // ── Hero reveal ──
+  setTimeout(() => {
+    document.querySelectorAll('.hero-el').forEach(el => {
+      el.classList.add('show');
+      el.style.filter = '';
+    });
+    document.querySelectorAll('.kura-letter').forEach(el => el.classList.add('show'));
+    document.querySelectorAll('.hero-shield-path, .hero-check-path').forEach(el => el.classList.add('draw'));
+    const shieldGlow = document.querySelector('.shield-glow');
+    if (shieldGlow) shieldGlow.classList.add('show');
+    const accentLine = document.querySelector('.hero-headline .accent-line');
+    if (accentLine) accentLine.classList.add('show');
+  }, 1700);
+
+  // ── Navbar scroll behavior ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    const threshold = window.innerHeight * 0.2;
+    navbar.classList.toggle('visible', y >= threshold);
+    navbar.classList.toggle('scrolled', y > 50);
+  }, { passive: true });
+
+  // ── Sticky CTA (mobile) ──
+  const stickyCta = document.getElementById('sticky-cta');
+  const heroEl = document.getElementById('hero');
+  if (stickyCta && heroEl) {
+    const obs = new IntersectionObserver(([e]) => {
+      stickyCta.classList.toggle('show', !e.isIntersecting);
+    }, { threshold: 0.1 });
+    obs.observe(heroEl);
+  }
+
+  // ── Hero interactive dot grid ──
+  const heroCanvas = document.getElementById('hero-canvas');
+  if (heroCanvas) {
+    const ctx = heroCanvas.getContext('2d');
+    const mouse = { x: -1000, y: -1000 };
+    const SPACING = 40, DOT_R = 1.2, CONN = 120, MOUSE_R = 200;
+    let dots = [];
+
+    function resizeCanvas() {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      heroCanvas.width = innerWidth * dpr;
+      heroCanvas.height = innerHeight * dpr;
+      heroCanvas.style.width = innerWidth + 'px';
+      heroCanvas.style.height = innerHeight + 'px';
+      ctx.scale(dpr, dpr);
+      dots = [];
+      for (let r = 0; r < Math.ceil(innerHeight / SPACING) + 2; r++)
+        for (let c = 0; c < Math.ceil(innerWidth / SPACING) + 2; c++)
+          dots.push({ x: c * SPACING, y: r * SPACING, a: 0.08 + Math.random() * 0.07 });
+    }
+
+    function drawGrid() {
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      for (let i = 0; i < dots.length; i++) {
+        const d = dots[i];
+        const dm = Math.hypot(d.x - mouse.x, d.y - mouse.y);
+        let a = d.a, r = DOT_R;
+        if (dm < MOUSE_R) { const inf = 1 - dm / MOUSE_R; a += inf * 0.6; r += inf * 1.5; }
+        if (dm < MOUSE_R) {
+          for (let j = i + 1; j < dots.length; j++) {
+            const d2 = dots[j], dist = Math.hypot(d.x - d2.x, d.y - d2.y);
+            if (dist < CONN && Math.hypot(d2.x - mouse.x, d2.y - mouse.y) < MOUSE_R) {
+              ctx.beginPath(); ctx.moveTo(d.x, d.y); ctx.lineTo(d2.x, d2.y);
+              ctx.strokeStyle = `rgba(0,212,255,${(1 - dm / MOUSE_R) * (1 - dist / CONN) * 0.3})`;
+              ctx.lineWidth = 0.5; ctx.stroke();
+            }
+          }
+        }
+        ctx.beginPath(); ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0,212,255,${a})`; ctx.fill();
+      }
+      requestAnimationFrame(drawGrid);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+    resizeCanvas();
+    requestAnimationFrame(drawGrid);
+  }
+
+  // ── Scroll reveal (IntersectionObserver) ──
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.scroll-reveal').forEach(el => revealObs.observe(el));
+
+  // ── Stats count-up ──
+  const statsObs = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    statsObs.disconnect();
+    document.querySelectorAll('.stat-item').forEach((item, idx) => {
+      setTimeout(() => {
+        item.classList.add('visible');
+        const end = parseInt(item.dataset.count);
+        const suffix = item.dataset.suffix || '';
+        const prefix = item.dataset.prefix || '';
+        const numEl = item.querySelector('.stat-number');
+        const start = performance.now();
+        const dur = 2000 + idx * 200;
+        function tick(now) {
+          const p = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const val = Math.round(eased * end);
+          numEl.textContent = prefix + val.toLocaleString('fr-FR') + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }, idx * 150);
+    });
+  }, { threshold: 0.15 });
+  // Delay observation until loading screen gone
+  setTimeout(() => {
+    const sb = document.querySelector('.stats-bar');
+    if (sb) statsObs.observe(sb);
+  }, 2600);
+
+  // ── Statement section (scroll-driven char reveal) ──
+  const STATEMENT = "Imaginez un monde ou chaque prise est verifiee, tracee et securisee dans un centre de commandement infaillible — eliminant le dopage accidentel tout en propulsant la performance d'elite.";
+  const HIGHLIGHTS = ['verifiee', 'infaillible', 'elite'];
+  const stmtContainer = document.getElementById('statement-text');
+  if (stmtContainer) {
+    const charEls = [];
+    const words = STATEMENT.split(' ');
+    words.forEach((word, wi) => {
+      const isHL = HIGHLIGHTS.some(h => word.toLowerCase().includes(h.toLowerCase()));
+      const span = document.createElement('span');
+      span.className = 'statement-word';
+      word.split('').forEach(ch => {
+        const s = document.createElement('span');
+        s.className = 'statement-char';
+        s.style.color = isHL ? 'var(--kura-accent)' : 'var(--foreground)';
+        s.textContent = ch;
+        charEls.push(s);
+        span.appendChild(s);
+      });
+      stmtContainer.appendChild(span);
+      // space between words counts as a char for delay
+      if (wi < words.length - 1) charEls.push(null);
+    });
+
+    function updateStatement() {
+      const rect = stmtContainer.getBoundingClientRect();
+      const vh = innerHeight;
+      const start = vh * 0.85, end = vh * 0.2;
+      const progress = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
+      const total = charEls.length;
+      for (let i = 0; i < total; i++) {
+        if (!charEls[i]) continue;
+        const charPos = i / total;
+        charEls[i].style.opacity = Math.max(0, Math.min(1, (progress - charPos * 0.7) / 0.3));
+      }
+    }
+    window.addEventListener('scroll', updateStatement, { passive: true });
+    updateStatement();
+  }
+
+  // ── Brand reveal (scroll-driven) ──
+  const brandSection = document.getElementById('brand-reveal');
+  const brandBg = document.getElementById('brand-bg-overlay');
+
+  // Build dissolving text
+  const TEXT_LINES = [
+    { text: "C'est", isLabel: true, isCyan: true },
+    { text: "L'Intelligence", isLabel: false, isCyan: false },
+    { text: 'Reglementaire', isLabel: false, isCyan: false },
+    { text: 'pour le Sport.', isLabel: false, isCyan: true },
+  ];
+  const brandChars = [];
+  TEXT_LINES.forEach((line, li) => {
+    const container = document.getElementById('brand-line-' + li);
+    if (!container) return;
+    line.text.split('').forEach(ch => {
+      const s = document.createElement('span');
+      s.className = 'brand-char';
+      s.textContent = ch === ' ' ? '\u00A0' : ch;
+      s.style.opacity = '1';
+      container.appendChild(s);
+      brandChars.push({ el: s, lineIdx: li });
+    });
+  });
+
+  // Build scan columns
+  const SCAN_COLS = [
+    ['TESTOSTERONE', 'S1.1A', 'NANDROLONE', 'ART. 4.2.2', 'STANOZOLOL', 'CLENBUTEROL', 'S1.2', 'METHYLTREN.', 'BOLDENONE', 'ART. 2.1', 'DHEA', 'ANDROSTEN.'],
+    ['EPO', 'S2.1', 'DARBEPOETIN', 'HGH', 'ART. 10.2', 'PEGINESATIDE', 'COBALT', 'S2.2', 'XENON', 'AICAR', 'GW1516', 'FG-4592'],
+    ['CANNABIS', 'S8', 'GLUCOCORT.', 'S9', 'FUROSEMIDE', 'S5', 'ART. 4.3.1', 'PROBENECIDE', 'TAMOXIFENE', 'S4.1', 'INSULINE', 'S2.3'],
+    ['MELDONIUM', 'S4.5', 'TRIMETAZIDINE', 'ART. 7.1', 'HIGENAMINE', 'OCTODRINE', 'DMAA', 'SARMs', 'ART. 10.12.1', 'OSTARINE', 'LIGANDROL', 'RAD-140'],
+  ];
+  const scanCols = document.getElementById('scan-columns');
+  const scanColEls = [];
+  const colCount = innerWidth < 640 ? 2 : 4;
+  SCAN_COLS.slice(0, colCount).forEach(terms => {
+    const col = document.createElement('div');
+    col.className = 'scan-col';
+    [...terms, ...terms, ...terms].forEach(t => {
+      const s = document.createElement('span');
+      s.className = 'scan-term ' + (t.startsWith('ART.') || t.startsWith('S') ? 'code' : 'substance');
+      s.textContent = t;
+      col.appendChild(s);
+    });
+    scanCols.appendChild(col);
+    scanColEls.push(col);
+  });
+
+  function easeOut(t) { return 1 - (1 - t) * (1 - t) * (1 - t); }
+  function phase(p, s, e) { return Math.max(0, Math.min(1, (p - s) / (e - s))); }
+
+  if (brandSection) {
+    function updateBrand() {
+      const rect = brandSection.getBoundingClientRect();
+      const p = Math.max(0, Math.min(1, -rect.top / (rect.height - innerHeight)));
+
+      // Dissolve chars
+      let gi = 0;
+      TEXT_LINES.forEach((line, li) => {
+        const chars = line.text.split('');
+        const rli = TEXT_LINES.length - 1 - li;
+        chars.forEach((ch, ci) => {
+          const cd = brandChars[gi];
+          if (!cd) { gi++; return; }
+          const lineStart = 0.08 + rli * 0.03;
+          const cDelay = (ci / chars.length) * 0.25;
+          const charStart = lineStart + cDelay * 0.04;
+          const charEnd = charStart + 0.10;
+          const cp = phase(p, charStart, charEnd);
+          const eased = easeOut(cp);
+          cd.el.style.opacity = String(1 - eased);
+          if (cp > 0 && cp < 1) {
+            const angle = -Math.PI / 2 + ((gi * 17 + 5) * 31 % 314 - 157) / 100;
+            const edgeness = Math.abs(ci - chars.length / 2) / (chars.length / 2);
+            const dist = 25 + edgeness * 55 + ((gi * 17 + 5) * 13 % 35);
+            const tx = Math.cos(angle) * dist * eased;
+            const ty = Math.sin(angle) * dist * eased;
+            cd.el.style.transform = `translate3d(${tx}px,${ty}px,0) rotate(${eased * 18}deg) scale(${1 - eased * 0.2})`;
+          } else {
+            cd.el.style.transform = '';
+          }
+          gi++;
+        });
+      });
+
+      // Scan cascade
+      const scanVisible = phase(p, 0.18, 0.25);
+      const scanFade = phase(p, 0.50, 0.60);
+      const scanAlpha = Math.min(easeOut(scanVisible), 1 - easeOut(scanFade));
+      document.getElementById('scan-container').style.opacity = scanAlpha;
+      scanColEls.forEach((col, i) => {
+        const sp = phase(p, 0.18, 0.58);
+        col.style.transform = `translate3d(0,${sp * (1 + i * 0.3) * -500}px,0)`;
+      });
+
+      // KURA letters
+      for (let i = 0; i < 4; i++) {
+        const l = document.getElementById('bk-' + i);
+        const ls = 0.45 + i * 0.04;
+        const lp = phase(p, ls, ls + 0.12);
+        if (lp <= 0) { l.style.opacity = '0'; continue; }
+        const e = easeOut(lp);
+        l.style.clipPath = `inset(${(1 - e) * 100}% 0 0 0)`;
+        l.style.opacity = e;
+        l.style.transform = `translate3d(0,${(1 - e) * 20}px,0)`;
+      }
+
+      // KURA scale + glow
+      const kura = document.getElementById('brand-kura');
+      const sp2 = easeOut(phase(p, 0.55, 0.85));
+      kura.style.transform = `scale(${1 + sp2 * 0.3})`;
+      const g = easeOut(phase(p, 0.50, 0.80));
+      kura.style.textShadow = `0 0 ${30 + g * 60}px rgba(0,212,255,${g * 0.35}),0 0 ${60 + g * 100}px rgba(0,212,255,${g * 0.15})`;
+
+      // Rule
+      const rule = document.getElementById('brand-rule');
+      const re = easeOut(phase(p, 0.62, 0.78));
+      rule.style.transform = `scaleX(${re})`;
+      rule.style.opacity = re * 0.5;
+
+      // Tagline
+      const tag = document.getElementById('brand-tagline');
+      const te = easeOut(phase(p, 0.70, 0.88));
+      tag.style.opacity = te;
+      tag.style.transform = `translate3d(0,${(1 - te) * 20}px,0)`;
+
+      // Background
+      if (brandBg) brandBg.style.backgroundColor = `rgba(2,3,10,${0.4 + p * 0.55})`;
+    }
+    window.addEventListener('scroll', updateBrand, { passive: true });
+    updateBrand();
+  }
+
+  // ── Data coverage bars animation ──
+  const dataBars = document.querySelectorAll('.data-bar');
+  const dataObs = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    dataObs.disconnect();
+    dataBars.forEach(bar => {
+      setTimeout(() => { bar.style.width = bar.dataset.target + '%'; }, 200);
+    });
+
+    // Count-up dramatique sur le big number
+    const bigNumEl = document.getElementById('data-big-num');
+    if (bigNumEl) {
+      const target = 338337;
+      const dur = 2800;
+      const start = performance.now();
+      function tickBig(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 4); // cubic ease mais plus fort
+        const val = Math.round(eased * target);
+        bigNumEl.textContent = val.toLocaleString('fr-FR');
+        if (p < 1) requestAnimationFrame(tickBig);
+      }
+      requestAnimationFrame(tickBig);
+    }
+  }, { threshold: 0.1 });
+  const dcSection = document.querySelector('.data-coverage');
+  if (dcSection) dataObs.observe(dcSection);
+
+  // Cases section — static HTML (variant D)
+
+  // ── Clients marquee ──
+  const CLIENTS = [
+    { title: 'Clubs professionnels', desc: 'Staff medical, nutritionnistes, direction sportive' },
+    { title: 'Federations sportives', desc: 'FFR, FFF, Swiss Olympic, federations nationales' },
+    { title: 'Medecins du sport', desc: 'Consultation, prescription, suivi athletes' },
+    { title: 'Nutritionnistes', desc: 'Complements alimentaires, plans nutritionnels' },
+    { title: 'Laboratoires', desc: 'Analyse de produits, certification, R&D' },
+    { title: 'Marques de complements', desc: 'Verification formulation, conformite etiquetage' },
+    { title: 'Agences antidopage', desc: 'AFLD, UKAD, NADA — aide a la decision' },
+    { title: 'Universites & Recherche', desc: 'Publications, validation clinique, etudes' },
+  ];
+  const ICONS = [
+    'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2',
+    'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
+    'M22 12h-4l-3 9L9 3l-3 9H2',
+    'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4z',
+    'M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h6',
+    'M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z',
+    'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944',
+    'M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z',
+  ];
+
+  function makeClientCard(c, idx) {
+    return `<div class="glass-card hover-glow client-card">
+      <div class="client-card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${ICONS[idx % ICONS.length]}"/></svg>
+        <span>${c.title}</span>
+      </div>
+      <p>${c.desc}</p>
+    </div>`;
+  }
+
+  const terrain = CLIENTS.slice(0, 4);
+  const ecosystem = CLIENTS.slice(4, 8);
+  const marqueeT = document.getElementById('marquee-terrain');
+  const marqueeE = document.getElementById('marquee-ecosystem');
+  [...terrain, ...terrain].forEach((c, i) => { marqueeT.innerHTML += makeClientCard(c, i % 4); });
+  [...ecosystem, ...ecosystem].forEach((c, i) => { marqueeE.innerHTML += makeClientCard(c, 4 + i % 4); });
+
+  // ── Domains bento ──
+  const DOMAINS = [
+    { label: 'Antidopage', desc: "Liste des interdictions, AUT, seuils, reglements federations & standards sportifs", source: 'WADA / AMA', count: '1 029', color: '#EF4444' },
+    { label: 'Nutrition', desc: 'Limites de securite, allegations', source: 'EFSA / ANSES', count: '4 500+', color: '#F59E0B' },
+    { label: 'Pharma', desc: 'Medicaments references France, USA, Canada, UE + interactions', source: 'AFLD / FDA / EMA', count: '79 000+', color: '#8B5CF6' },
+    { label: 'Cosmetiques', desc: 'Substances restreintes, annexes UE', source: 'CosIng / UE', count: '20 000+', color: '#EC4899' },
+    { label: 'Emballages', desc: 'Materiaux au contact, migration', source: 'FCM / ECHA', count: '18 100+', color: '#06B6D4' },
+  ];
+
+  // ── Globe domain list (left column) ──
+  const domainList = document.getElementById('globe-domain-list');
+  if (domainList) {
+    DOMAINS.forEach(d => {
+      domainList.innerHTML += `<div class="globe-domain-row" onclick="highlightGlobePoint('${d.label}')">
+        <div class="globe-domain-bullet" style="background:${d.color}"></div>
+        <div class="globe-domain-name">${d.label}</div>
+        <div class="globe-domain-count" style="color:${d.color}">${d.count}</div>
+        <div class="globe-domain-source">${d.source}</div>
+      </div>`;
+    });
+  }
+
+  // ── Globe points (regulatory bodies) ──
+  const GLOBE_POINTS = [
+    { id:'WADA',   label:'WADA · Lausanne',    top:28, left:52, color:'#00D4FF', domain:'Antidopage' },
+    { id:'AFLD',   label:'AFLD · Paris',        top:24, left:46, color:'#EF4444', domain:'Antidopage' },
+    { id:'FDA',    label:'FDA · Washington',    top:33, left:18, color:'#8B5CF6', domain:'Pharma' },
+    { id:'EMA',    label:'EMA · Amsterdam',     top:20, left:50, color:'#8B5CF6', domain:'Pharma' },
+    { id:'EFSA',   label:'EFSA · Parme',        top:34, left:52, color:'#F59E0B', domain:'Nutrition' },
+    { id:'ECHA',   label:'ECHA · Helsinki',     top:14, left:55, color:'#06B6D4', domain:'Emballages' },
+    { id:'IOC',    label:'IOC · Lausanne',      top:31, left:51, color:'#00D4FF', domain:'Antidopage' },
+    { id:'ANSES',  label:'ANSES · Paris',       top:26, left:45, color:'#F59E0B', domain:'Nutrition' },
+    { id:'HC',     label:'Health Canada',       top:30, left:16, color:'#8B5CF6', domain:'Pharma' },
+    { id:'CosIng', label:'CosIng · UE',         top:38, left:49, color:'#EC4899', domain:'Cosmetiques' },
+    { id:'USADA',  label:'USADA · Colorado',    top:36, left:14, color:'#EF4444', domain:'Antidopage' },
+    { id:'FIFA',   label:'FIFA · Zurich',       top:29, left:53, color:'#00D4FF', domain:'Antidopage' },
+  ];
+  const globeSphere = document.getElementById('globe-sphere');
+  if (globeSphere) {
+    GLOBE_POINTS.forEach(pt => {
+      const el = document.createElement('div');
+      el.className = 'globe-pt';
+      el.id = 'gpt-' + pt.id;
+      el.style.cssText = `top:${pt.top}%;left:${pt.left}%`;
+      const labelSide = pt.left > 55 ? 'right:14px' : 'left:14px';
+      el.innerHTML = `
+        <div class="globe-pt-dot" style="background:${pt.color};color:${pt.color}"></div>
+        <div class="globe-pt-label" style="color:${pt.color};border-color:${pt.color}22;${labelSide};top:-4px">${pt.label}</div>`;
+      globeSphere.appendChild(el);
+    });
+  }
+
+  window.highlightGlobePoint = function(domainLabel) {
+    document.querySelectorAll('.globe-domain-row').forEach(r => r.classList.remove('active'));
+    event.currentTarget && event.currentTarget.classList.add('active');
+    GLOBE_POINTS.forEach(pt => {
+      const el = document.getElementById('gpt-' + pt.id);
+      if (!el) return;
+      const dot = el.querySelector('.globe-pt-dot');
+      dot.style.transform = pt.domain === domainLabel ? 'scale(1.6)' : 'scale(1)';
+      dot.style.boxShadow = pt.domain === domainLabel ? `0 0 20px ${pt.color}` : `0 0 10px ${pt.color}`;
+      el.querySelector('.globe-pt-label').style.opacity = pt.domain === domainLabel ? '1' : '';
+    });
+  };
+
+  // ── Demo verdict interactif ──
+  const VERDICTS = {
+    'Testosterone':    { status: 'PROHIBITED', color: '#EF4444', bg: 'rgba(239,68,68,0.08)', border: 'rgba(239,68,68,0.25)', icon: '&#9940;', detail: 'Substance anabolisante S1.1A — Interdite en competition et hors competition (WADA 2026). Sanction : 4 ans.', source: 'WADA Liste Interdictions 2026 — S1.1' },
+    'EPO':             { status: 'PROHIBITED', color: '#EF4444', bg: 'rgba(239,68,68,0.08)', border: 'rgba(239,68,68,0.25)', icon: '&#9940;', detail: 'Peptide hormone S2.1 — Erythropoietine interdite. Detectee par passeport biologique.', source: 'WADA S2.1 — Peptide Hormones' },
+    'Trimetazidine':   { status: 'PROHIBITED', color: '#EF4444', bg: 'rgba(239,68,68,0.08)', border: 'rgba(239,68,68,0.25)', icon: '&#9940;', detail: 'Modulateur metabolique S4.5 — Interdit en competition et hors competition. Cas Swiatek 2024.', source: 'WADA S4.5 — Modulateurs metaboliques' },
+    'Salbutamol':      { status: 'CONDITIONAL', color: '#F59E0B', bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.25)', icon: '&#9888;', detail: 'Beta-2 agoniste S3 — Autorise par inhalation (<= 1600 mcg/24h). Seuil urinaire : 1000 ng/mL. AUT non requise.', source: 'WADA S3 — Agonistes beta-2' },
+    'Cannabis':        { status: 'CONDITIONAL', color: '#F59E0B', bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.25)', icon: '&#9888;', detail: 'Cannaibinoides S8 — Interdit en competition uniquement. Seuil urinaire THC : 150 ng/mL. Sport-dependant.', source: 'WADA S8 — Cannabinoides' },
+    'Cafeine':         { status: 'AUTHORIZED', color: '#00E676', bg: 'rgba(0,230,118,0.08)', border: 'rgba(0,230,118,0.25)', icon: '&#10003;', detail: 'Stimulant — Retiree de la liste des interdictions. Aucune restriction competitive. Sous surveillance WADA.', source: 'WADA Programme de surveillance 2026' },
+  };
+
+  window.setDemoSubstance = function(name) {
+    document.getElementById('demo-search-input').value = name;
+    runDemoVerdict(name);
+  };
+
+  window.runDemoVerdict = function(substanceName) {
+    const input = document.getElementById('demo-search-input');
+    const name = (substanceName || input.value || '').trim();
+    const verdictEl = document.getElementById('demo-verdict');
+    if (!name) return;
+
+    // Simule le delai de 1.3s
+    verdictEl.classList.remove('show');
+    verdictEl.innerHTML = `<div class="demo-verdict-inner" style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1)">
+      <div style="display:flex;align-items:center;gap:8px;color:rgba(0,212,255,0.6);font-size:12px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 0.8s linear infinite"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0"/></svg>
+        Interrogation corpus — 338 337 references RAG...
+      </div>
+    </div>`;
+    verdictEl.classList.add('show');
+
+    setTimeout(() => {
+      const normalizedKey = Object.keys(VERDICTS).find(k => k.toLowerCase() === name.toLowerCase()) || null;
+      const v = VERDICTS[normalizedKey] || { status: 'A VERIFIER', color: '#A8B5D0', bg: 'rgba(168,181,208,0.06)', border: 'rgba(168,181,208,0.2)', icon: '?', detail: 'Substance non trouvee dans la base. Verification manuelle recommandee.', source: 'Non indexe' };
+
+      const iconSvg = v.status === 'PROHIBITED'
+        ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="${v.color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>`
+        : v.status === 'AUTHORIZED'
+        ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="${v.color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>`
+        : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="${v.color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>`;
+
+      verdictEl.innerHTML = `<div class="demo-verdict-inner" style="background:${v.bg};border:1px solid ${v.border}">
+        <div class="demo-verdict-icon" style="background:${v.bg};border:1px solid ${v.border}">${iconSvg}</div>
+        <div class="demo-verdict-body">
+          <div class="demo-verdict-status" style="color:${v.color}">${v.status}</div>
+          <div class="demo-verdict-name">${name}</div>
+          <div class="demo-verdict-detail">${v.detail}</div>
+          <div class="demo-verdict-meta">
+            <span class="demo-verdict-time">Reponse en 1,3 secondes</span>
+            <span class="demo-verdict-source">${v.source}</span>
+          </div>
+        </div>
+      </div>`;
+      verdictEl.classList.remove('show');
+      requestAnimationFrame(() => { setTimeout(() => verdictEl.classList.add('show'), 10); });
+    }, 1300);
+  };
+
+  // Keyframe spin injectee
+  if (!document.getElementById('spin-kf')) {
+    const s = document.createElement('style');
+    s.id = 'spin-kf';
+    s.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+    document.head.appendChild(s);
+  }
+
+  // Trigger verdict sur Enter
+  document.getElementById('demo-search-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') runDemoVerdict();
+  });
+
+  // Pré-charger un verdict au load — demo non vide
+  setTimeout(() => {
+    setDemoSubstance('Trimetazidine');
+  }, 400);
+
+  // ── Domain tabs (demo) ──
+  const domainTabs = document.getElementById('domain-tabs');
+  DOMAINS.forEach((d, i) => {
+    domainTabs.innerHTML += `<button class="domain-tab ${i === 0 ? 'active' : ''}" onclick="document.querySelectorAll('.domain-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active')">
+      <span class="dot" style="background:${d.color}"></span>
+      <span>${d.label}</span>
+    </button>`;
+  });
+
+  // ── Sports & Feds tags ──
+  const SPORTS = ['Football', 'Tennis', 'Athletisme', 'Basketball', 'Rugby', 'Cyclisme', 'Natation', 'MMA / UFC', 'Boxe', 'Handball', 'Volleyball', 'Hockey', 'Ski', 'Triathlon', 'Halterophilie', 'Gymnastique', 'Judo', 'Escrime', 'Aviron', 'Cricket'];
+  const FEDS = ['WADA', 'IOC', 'FIFA', 'UEFA', 'UCI', 'USADA', 'ITA', 'UKAD', 'NADA', 'AFLD', 'World Athletics', 'NFL', 'NBA', 'NHL', 'UFC', 'NCAA', 'CHINADA', 'CCES', 'Sport Ireland', 'Antidoping CH'];
+  document.getElementById('sports-tags').innerHTML = SPORTS.map(s => `<span class="sport-tag">${s}</span>`).join('');
+  document.getElementById('feds-tags').innerHTML = FEDS.map(f => `<span class="fed-tag">${f}</span>`).join('');
+
+  // ── Platform section ──
+  const PLATFORM = {
+    dashboard: {
+      target: 'Pour les equipes medicales & nutritionnistes',
+      features: [
+        'Verdict antidopage instantane sur toute substance',
+        'Suivi de conformite de toute l\'equipe en temps reel',
+        'Evaluation des risques pre-competition par athlete',
+        'Certificats tracables pour chaque verification',
+        'Alertes proactives sur les substances prohibees',
+      ],
+    },
+    app: {
+      target: 'Pour les athletes',
+      features: [
+        'Scannez tout complement — verdict en 1,3 seconde',
+        'Suivi du stack personnel avec alertes d\'expiration',
+        'KURA Score en direct : votre indice de conformite',
+        'Synchronisation avec votre staff medical en temps reel',
+        'Rappels quotidiens de localisation & calendrier de controles',
+      ],
+    },
+  };
+
+  window.switchPlatformTab = function(tab, btn) {
+    document.querySelectorAll('.platform-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    renderPlatform(tab);
+  };
+
+  function renderPlatform(tab) {
+    const data = PLATFORM[tab];
+    const features = document.getElementById('platform-features');
+    const mockup = document.getElementById('platform-mockup');
+
+    features.innerHTML = `<h3>${data.target}</h3><ul>${data.features.map(f =>
+      `<li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>${f}</li>`
+    ).join('')}</ul>`;
+
+    if (tab === 'dashboard') {
+      mockup.innerHTML = `<div class="browser-mockup browser-mockup-glow">
+        <div class="browser-chrome">
+          <span class="browser-dot" style="background:#FF5F57"></span>
+          <span class="browser-dot" style="background:#FEBC2E"></span>
+          <span class="browser-dot" style="background:#28C840"></span>
+          <div class="browser-url"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:rgba(255,255,255,.3)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>kura.kurasport.ch/app/athletes</span></div>
+        </div>
+        <div class="browser-content">
+          <div class="browser-sidebar">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="browser-main">
+            <div class="browser-main-header">
+              <div><p style="font-size:10px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.1em;font-family:JetBrains Mono,monospace;margin-bottom:2px">Athletes</p><p style="font-size:14px;font-weight:700;color:white">Team Compliance</p></div>
+              <div style="padding:4px 10px;border-radius:6px;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2);font-size:10px;color:#00D4FF;font-weight:700">+ Add athlete</div>
+            </div>
+            <div class="athlete-row"><div class="athlete-avatar">M</div><div class="athlete-info"><div class="name">M. Dupont</div><div class="sport">Cycling</div></div><div class="athlete-bar"><div class="athlete-bar-fill" style="width:98%;background:#00D4FF"></div></div><span class="athlete-score" style="color:#00D4FF">98</span><span class="athlete-status" style="color:#00D4FF;background:rgba(0,212,255,.15)">CLEAR</span></div>
+            <div class="athlete-row"><div class="athlete-avatar">S</div><div class="athlete-info"><div class="name">S. Martin</div><div class="sport">Athletics</div></div><div class="athlete-bar"><div class="athlete-bar-fill" style="width:74%;background:#F59E0B"></div></div><span class="athlete-score" style="color:#F59E0B">74</span><span class="athlete-status" style="color:#F59E0B;background:rgba(245,158,11,.15)">WARNING</span></div>
+            <div class="athlete-row"><div class="athlete-avatar">L</div><div class="athlete-info"><div class="name">L. Bernard</div><div class="sport">Swimming</div></div><div class="athlete-bar"><div class="athlete-bar-fill" style="width:99%;background:#00D4FF"></div></div><span class="athlete-score" style="color:#00D4FF">99</span><span class="athlete-status" style="color:#00D4FF;background:rgba(0,212,255,.15)">CLEAR</span></div>
+            <div class="athlete-row"><div class="athlete-avatar">A</div><div class="athlete-info"><div class="name">A. Moreau</div><div class="sport">Tennis</div></div><div class="athlete-bar"><div class="athlete-bar-fill" style="width:45%;background:#EF4444"></div></div><span class="athlete-score" style="color:#EF4444">45</span><span class="athlete-status" style="color:#EF4444;background:rgba(239,68,68,.15)">ALERT</span></div>
+            <div class="browser-stat-row">
+              <div class="browser-stat"><div class="label">Compliant</div><div class="value" style="color:#00D4FF">3/4</div></div>
+              <div class="browser-stat"><div class="label">Scans today</div><div class="value" style="color:rgba(255,255,255,.4)">12</div></div>
+              <div class="browser-stat"><div class="label">Alerts</div><div class="value" style="color:#EF4444">1</div></div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    } else {
+      mockup.innerHTML = `<div class="phone-mockup">
+        <div class="phone-frame">
+          <div class="phone-island"><div class="phone-island-bar"></div></div>
+          <div class="phone-screen">
+            <div class="phone-statusbar"><span class="time">9:41</span></div>
+            <div class="phone-header"><p class="greeting">Good morning,</p><p class="name">Marcus D.</p></div>
+            <div class="phone-score-card">
+              <div class="phone-score-inner" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                <div><p style="font-size:9px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.1em;font-family:JetBrains Mono,monospace">KURA Score</p><div style="display:flex;align-items:flex-end;gap:4px"><span style="font-size:30px;font-weight:900;color:white">94</span><span style="font-size:10px;color:rgba(255,255,255,.3);margin-bottom:4px">/100</span></div></div>
+                <div style="text-align:center"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><p style="font-size:8px;color:#00D4FF;font-weight:700;text-transform:uppercase;letter-spacing:.05em">CLEAN</p></div>
+              </div>
+              <div style="display:flex;gap:6px"><div style="padding:4px 8px;border-radius:6px;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2)"><p style="font-size:8px;font-weight:700;color:#00D4FF">47 days clean</p></div><div style="padding:4px 8px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)"><p style="font-size:8px;color:rgba(255,255,255,.4)">8 products verified</p></div></div>
+            </div>
+            <div class="phone-modules">
+              <div class="phone-module accent"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z"/></svg><span style="color:#00D4FF">Scanner</span></div>
+              <div class="phone-module"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span style="color:rgba(255,255,255,.5)">My Stack</span></div>
+              <div class="phone-module"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span style="color:rgba(255,255,255,.5)">Training</span></div>
+              <div class="phone-module"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span style="color:rgba(255,255,255,.5)">Health</span></div>
+            </div>
+            <div class="phone-tabbar">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
+            </div>
+          </div>
+          <div class="phone-home-bar"><div class="phone-home-bar-inner"></div></div>
+        </div>
+        <div class="phone-glow"></div>
+      </div>`;
+    }
+  }
+  renderPlatform('dashboard');
+
+  // ── Cohérence globale : accent lines + numéros de section + séparateurs ──
+  (function applyDesignSystem() {
+    // 1. Accent line sous chaque section-title (qui n'en a pas déjà)
+    document.querySelectorAll('.section-title').forEach(el => {
+      if (!el.nextElementSibling || !el.nextElementSibling.classList.contains('section-accent-line')) {
+        const line = document.createElement('span');
+        line.className = 'section-accent-line';
+        el.insertAdjacentElement('afterend', line);
+      }
+    });
+
+    // 2. Numéros de section sur toutes les sections principales
+    const numbered = [
+      { sel: '#probleme',          num: '01' },
+      { sel: '.clients-section',   num: '02' },
+      { sel: '.case-d',            num: '03' },
+      { sel: '.data-coverage',     num: '04' },
+      { sel: '#solution',          num: '05' },
+      { sel: '#demo',              num: '06' },
+      { sel: '.platform-section',  num: '07' },
+      { sel: '.domains-section',   num: '08' },
+      { sel: '#contact',           num: '09' },
+    ];
+    numbered.forEach(({ sel, num }) => {
+      const el = document.querySelector(sel);
+      if (!el) return;
+      if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+      const span = document.createElement('span');
+      span.className = 'section-num';
+      span.textContent = num;
+      el.appendChild(span);
+    });
+
+    // 3. Séparateurs fins entre sections principales (avant problem, avant data, avant demo, avant contact)
+    ['.problem-section', '.data-coverage', '#demo', '#contact'].forEach(sel => {
+      const el = document.querySelector(sel);
+      if (el && el.parentNode) {
+        const sep = document.createElement('span');
+        sep.className = 'section-sep';
+        el.parentNode.insertBefore(sep, el);
+      }
+    });
+  })();
+
+})();
+</script>
+</body>
+</html>

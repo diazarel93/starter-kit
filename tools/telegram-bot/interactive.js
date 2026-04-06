@@ -12,13 +12,15 @@
  */
 import TelegramBot from "node-telegram-bot-api";
 import Anthropic from "@anthropic-ai/sdk";
-import { readFileSync, writeFileSync, existsSync } from "fs";
+import { readFileSync, writeFileSync, existsSync, appendFileSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 import { execSync } from "child_process";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const STATE_FILE = resolve(__dirname, ".bot-state.json");
+const FEEDBACK_FILE = resolve(__dirname, "../../tools/design-scout/learnings-feedback.md");
+const PENDING_FEEDBACK = {}; // messageId → { label, context }
 
 // ─── ENV ────────────────────────────────────────────────────────────────────
 
@@ -504,6 +506,39 @@ bot.onText(/\/patterns/, async (msg) => {
   }
 });
 
+// ─── FEEDBACK DESIGN (👍/👎 → learnings-feedback.md) ─────────────────────
+
+/**
+ * Envoyer un message avec boutons feedback design
+ * @param {string} label - ex: "Landing Banlieuwood v2"
+ * @param {string} context - description du design pour le log
+ */
+export async function sendWithFeedback(label, context) {
+  const buttons = {
+    inline_keyboard: [[
+      { text: "👍 Validé", callback_data: `fb_ok__${label.slice(0, 40)}` },
+      { text: "👎 Rejeté", callback_data: `fb_ko__${label.slice(0, 40)}` },
+    ]],
+  };
+  const sentMsg = await bot.sendMessage(
+    chatId,
+    `_Feedback design attendu pour :_ *${label}*`,
+    { parse_mode: "Markdown", reply_markup: buttons }
+  );
+  PENDING_FEEDBACK[sentMsg.message_id] = { label, context };
+}
+
+function saveFeedback(status, label, context) {
+  const date = new Date().toISOString().split("T")[0];
+  const icon = status === "ok" ? "✅ VALIDÉ" : "❌ REJETÉ";
+  const entry = `\n### ${date} ${icon}: ${label}\n${context}\n`;
+  try {
+    appendFileSync(FEEDBACK_FILE, entry);
+  } catch {
+    writeFileSync(FEEDBACK_FILE, `# Feedback design — Boucle Telegram\n\n> Chaque 👍/👎 envoyé depuis Telegram s'ajoute ici.\n> Les agents lisent ce fichier pour adapter leurs futures propositions.\n${entry}`);
+  }
+}
+
 // ─── BOUTONS (callback_query) ───────────────────────────────────────────────
 
 bot.on("callback_query", async (query) => {
@@ -513,6 +548,19 @@ bot.on("callback_query", async (query) => {
 
   // Accusé de réception immédiat (sinon le bouton reste en "loading")
   await bot.answerCallbackQuery(query.id);
+
+  // Feedback design 👍/👎
+  if (data.startsWith("fb_ok__") || data.startsWith("fb_ko__")) {
+    const status = data.startsWith("fb_ok__") ? "ok" : "ko";
+    const label = data.replace(/^fb_(ok|ko)__/, "");
+    const pending = Object.values(PENDING_FEEDBACK).find(p => p.label.slice(0, 40) === label);
+    const context = pending?.context ?? "(contexte non enregistré)";
+    saveFeedback(status, label, context);
+    const emoji = status === "ok" ? "👍" : "👎";
+    const word = status === "ok" ? "Validé" : "Rejeté";
+    await bot.sendMessage(chatId, `${emoji} *${word}* — _${label}_\n_Mémorisé dans learnings-feedback.md_`, { parse_mode: "Markdown" });
+    return;
+  }
 
   if (data === "help") {
     await handleHelp(bot, chatId);

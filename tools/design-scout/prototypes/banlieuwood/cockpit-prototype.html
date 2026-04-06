@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banlieuwood — Cockpit Intervenant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ═══════════════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════════════ */
+:root {
+  --orange:         #FF6B35;
+  --ink:            #0D0B09;
+  --cream:          #F2EBD9;
+  --warm:           #EDE4CF;
+  --green:          #4CAF50;
+  --red:            #E8001C;
+  --amber:          #F5A623;
+
+  --font-c: 'Bebas Neue', sans-serif;
+  --font-b: 'Plus Jakarta Sans', sans-serif;
+  --font-m: 'Space Mono', monospace;
+
+  --r-sm:  6px;
+  --r-md:  10px;
+  --r-lg:  14px;
+}
+
+/* ═══════════════════════════════════════════════════
+   THEMES
+═══════════════════════════════════════════════════ */
+[data-theme="light"] {
+  --bg:             #F2EBD9;
+  --surface:        #EDE4CF;
+  --surface2:       #E4D9C3;
+  --surface3:       #DACED8;
+  --border:         rgba(13,11,9,0.10);
+  --border-strong:  rgba(13,11,9,0.18);
+  --text-primary:   rgba(13,11,9,0.90);
+  --text-secondary: rgba(13,11,9,0.45);
+  --text-muted:     rgba(13,11,9,0.28);
+  --header-bg:      #EDE4CF;
+  --footer-bg:      #EDE4CF;
+  --sidebar-bg:     #E8DECA;
+  --center-bg:      #F2EBD9;
+  --card-bg:        #EAE0CB;
+  --card-border:    rgba(13,11,9,0.08);
+}
+
+[data-theme="dark"] {
+  --bg:             #0F0D0B;
+  --surface:        #1A1714;
+  --surface2:       #252118;
+  --surface3:       #2E2920;
+  --border:         rgba(255,255,255,0.07);
+  --border-strong:  rgba(255,255,255,0.12);
+  --text-primary:   rgba(255,255,255,0.92);
+  --text-secondary: rgba(255,255,255,0.45);
+  --text-muted:     rgba(255,255,255,0.22);
+  --header-bg:      #1A1714;
+  --footer-bg:      #1A1714;
+  --sidebar-bg:     #1A1714;
+  --center-bg:      #0F0D0B;
+  --card-bg:        #1E1B17;
+  --card-border:    rgba(255,255,255,0.07);
+}
+
+/* ═══════════════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-b);
+  background: var(--bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s, color 0.3s;
+}
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+textarea, input { font-family: inherit; }
+
+/* ═══════════════════════════════════════════════════
+   GRAIN OVERLAY
+═══════════════════════════════════════════════════ */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.02'/%3E%3C/svg%3E");
+  animation: grain-shift 1.8s steps(2) infinite;
+}
+@keyframes grain-shift {
+  0%   { transform: translate(0,0); }
+  50%  { transform: translate(-2px, 1px); }
+  100% { transform: translate(1px, -2px); }
+}
+
+/* ═══════════════════════════════════════════════════
+   LAYOUT ROOT
+═══════════════════════════════════════════════════ */
+.cockpit {
+  display: grid;
+  grid-template-rows: 48px 56px 1fr 64px;
+  grid-template-columns: 240px 1fr 240px;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ═══════════════════════════════════════════════════
+   HEADER (48px)
+═══════════════════════════════════════════════════ */
+.header {
+  grid-column: 1 / -1;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+.btn-prev-module {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-secondary);
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  padding: 4px 8px;
+  border-radius: var(--r-sm);
+  transition: color 0.15s, background 0.15s;
+}
+.btn-prev-module:hover {
+  color: var(--text-primary);
+  background: var(--border);
+}
+.btn-prev-module svg { flex-shrink: 0; }
+
+.badge-module {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--orange);
+  color: #fff;
+  font-family: var(--font-m);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: var(--r-sm);
+  text-transform: uppercase;
+}
+.badge-module-num {
+  opacity: 0.7;
+}
+
+.header-center {
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+}
+.header-title {
+  font-family: var(--font-b);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 8px;
+}
+.header-subtitle {
+  font-family: var(--font-m);
+  font-size: 9px;
+  color: var(--text-secondary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+.timer-display {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: var(--r-sm);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  transition: border-color 0.3s, background 0.3s;
+}
+.timer-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  transition: background 0.3s;
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.timer-value {
+  font-family: var(--font-m);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 0.04em;
+  transition: color 0.3s;
+  min-width: 38px;
+  text-align: center;
+}
+
+.badge-students {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  transition: border-color 0.15s, background 0.3s;
+  border-radius: var(--r-sm);
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.badge-students:hover { border-color: var(--border-strong); }
+.badge-students-icon {
+  font-size: 11px;
+  opacity: 0.6;
+}
+.badge-students-count {
+  font-family: var(--font-m);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+}
+
+/* ═══════════════════════════════════════════════════
+   MODULE RAIL (56px)
+═══════════════════════════════════════════════════ */
+.module-rail {
+  grid-column: 1 / -1;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 6px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  flex-shrink: 0;
+}
+.module-rail::-webkit-scrollbar { display: none; }
+
+.module-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 14px;
+  min-height: 44px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.module-pill-num {
+  font-family: var(--font-m);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.module-pill-label {
+  font-family: var(--font-b);
+  font-size: 11px;
+  font-weight: 500;
+}
+.module-pill-check {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+/* États */
+.module-pill.done {
+  background: var(--surface2);
+  border-color: transparent;
+  color: var(--text-secondary);
+}
+.module-pill.done:hover {
+  background: var(--surface3);
+  color: var(--text-primary);
+  opacity: 0.7;
+}
+.module-pill.active {
+  background: var(--orange);
+  color: #fff;
+  box-shadow: 0 0 16px rgba(255,107,53,0.35);
+}
+.module-pill.future {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+.module-pill.future:hover {
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+  opacity: 0.7;
+}
+
+/* Séparateur entre groupes */
+.module-rail-sep {
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+  flex-shrink: 0;
+  margin: 0 4px;
+}
+
+/* ═══════════════════════════════════════════════════
+   BODY (milieu)
+═══════════════════════════════════════════════════ */
+.body {
+  display: contents;
+}
+
+/* ═══════════════════════════════════════════════════
+   SIDEBAR GAUCHE — PLAN DE CLASSE
+═══════════════════════════════════════════════════ */
+.sidebar-left {
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header plan de classe */
+.classroom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px 8px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.classroom-title {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.classroom-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.classroom-class-name {
+  font-family: var(--font-m);
+  font-size: 9px;
+  color: var(--orange);
+  letter-spacing: 1px;
+}
+#editModeBtn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-left: 6px;
+  transition: border-color 0.15s, background 0.15s;
+}
+#editModeBtn.active {
+  border-color: var(--orange);
+  background: rgba(255,107,53,0.12);
+}
+
+/* Tableau + bureau prof */
+.classroom-tableau {
+  margin: 8px 12px 4px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  text-align: center;
+  padding: 5px;
+  font-family: var(--font-m);
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--text-secondary);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.classroom-teacher-desk {
+  margin: 2px 32px 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  text-align: center;
+  padding: 3px;
+  font-family: var(--font-m);
+  font-size: 7px;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Grille */
+.classroom-grid {
+  flex: 1;
+  padding: 4px 8px;
+  display: grid;
+  gap: 4px;
+  overflow: hidden;
+  align-content: start;
+}
+
+.seat {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-m);
+  font-size: 9px;
+  font-weight: 700;
+  cursor: default;
+  transition: transform 0.15s, box-shadow 0.15s;
+  position: relative;
+  user-select: none;
+}
+.seat.occupied { cursor: pointer; }
+.seat.occupied:hover { transform: scale(1.12); }
+
+/* États élèves */
+.seat.active {
+  background: #4CAF50;
+  color: white;
+  box-shadow: 0 0 8px rgba(76,175,80,0.4);
+}
+.seat.idle {
+  background: var(--orange);
+  color: white;
+}
+.seat.pending {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+.seat.disconnected {
+  background: rgba(232,0,28,0.13);
+  border: 1px solid rgba(232,0,28,0.27);
+  color: var(--red);
+}
+.seat.empty {
+  background: transparent;
+  border: 1px dashed var(--border);
+}
+
+/* Mode édition */
+.classroom-grid.edit-mode .seat.occupied {
+  cursor: grab;
+  animation: seat-wiggle 0.5s ease-in-out infinite alternate;
+}
+@keyframes seat-wiggle {
+  from { transform: rotate(-2deg) scale(1.0); }
+  to   { transform: rotate(2deg) scale(1.05); }
+}
+.classroom-grid.edit-mode .seat.occupied:active { cursor: grabbing; }
+.classroom-grid.edit-mode .seat.empty {
+  border: 1px dashed var(--orange);
+  opacity: 0.6;
+}
+.seat.drag-over {
+  border: 2px solid var(--orange) !important;
+  background: rgba(255,107,53,0.15) !important;
+  transform: scale(1.1);
+}
+
+/* Config mode édition */
+.classroom-config {
+  padding: 8px 12px;
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+.classroom-config label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-m);
+  font-size: 9px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+}
+.classroom-config input[type="number"] {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 3px 6px;
+  width: 44px;
+  font-family: var(--font-m);
+  font-size: 11px;
+  border-radius: 2px;
+  outline: none;
+}
+#applyConfigBtn {
+  background: var(--orange);
+  color: white;
+  border: none;
+  padding: 5px;
+  font-family: var(--font-m);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+/* Footer compteur */
+.classroom-footer {
+  padding: 8px 12px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.response-counter {
+  font-family: var(--font-m);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+.response-counter span {
+  color: var(--orange);
+}
+.progress-bar-wrap {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: var(--orange);
+  border-radius: 2px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ═══════════════════════════════════════════════════
+   ZONE CENTRALE
+═══════════════════════════════════════════════════ */
+.center {
+  background: var(--center-bg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Toggle bar */
+.center-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.state-toggle {
+  display: flex;
+  background: var(--surface2);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+  transition: background 0.3s;
+}
+.state-toggle-btn {
+  padding: 5px 14px;
+  border-radius: 6px;
+  font-family: var(--font-m);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+.state-toggle-btn.active {
+  background: var(--surface);
+  color: var(--text-primary);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.center-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-m);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: 0.06em;
+}
+.center-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+
+/* ── État vide : en attente ── */
+.state-waiting {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 32px;
+}
+
+.waiting-pulse-wrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.waiting-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255,107,53,0.4);
+  animation: pulse-ring 2s ease-out infinite;
+}
+.waiting-pulse:nth-child(2) { animation-delay: 0.6s; }
+.waiting-pulse:nth-child(3) { animation-delay: 1.2s; }
+.waiting-core {
+  position: absolute;
+  inset: 24px;
+  border-radius: 50%;
+  background: var(--orange);
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.waiting-count {
+  font-family: var(--font-c);
+  font-size: 48px;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  line-height: 1;
+}
+.waiting-count span { color: var(--orange); }
+
+.waiting-label {
+  font-family: var(--font-m);
+  font-size: 11px;
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.waiting-progress-wrap {
+  width: 100%;
+  max-width: 400px;
+}
+.waiting-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-m);
+  font-size: 9px;
+  color: var(--text-secondary);
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.waiting-progress-bar {
+  height: 6px;
+  background: var(--surface2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.waiting-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--orange), #FF8C5A);
+  border-radius: 3px;
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.waiting-missing {
+  font-family: var(--font-b);
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+.waiting-missing strong {
+  color: var(--text-primary);
+}
+
+.btn-project {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--r-md);
+  background: var(--surface2);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  transition: all 0.2s;
+  font-family: var(--font-m);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-project:hover {
+  background: var(--surface3);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+.btn-project svg { color: var(--orange); }
+
+/* ── État réponses reçues ── */
+.state-responses {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.response-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-left: 3px solid var(--orange);
+  border-radius: var(--r-md);
+  padding: 12px 14px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  transition: all 0.2s;
+  animation: card-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+.response-card:hover {
+  background: var(--surface2);
+  border-color: var(--border-strong);
+}
+.response-card.validated {
+  border-left-color: var(--green);
+  background: rgba(76,175,80,0.06);
+}
+.response-card.flagged {
+  border-left-color: var(--red);
+  background: rgba(232,0,28,0.05);
+}
+
+.response-text {
+  font-family: var(--font-b);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  flex: 1;
+}
+.response-anon {
+  font-family: var(--font-m);
+  font-size: 9px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+.response-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.response-action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.response-action-btn svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.response-action-btn:hover {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+.response-action-btn.validate:hover { color: var(--green); border-color: rgba(76,175,80,0.4); }
+.response-action-btn.flag:hover     { color: var(--red); border-color: rgba(232,0,28,0.3); }
+.response-action-btn.project:hover  { color: var(--orange); border-color: rgba(255,107,53,0.4); }
+
+/* ═══════════════════════════════════════════════════
+   SIDEBAR DROITE — ASSISTANT
+═══════════════════════════════════════════════════ */
+.sidebar-right {
+  background: var(--sidebar-bg);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.assist-section {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.assist-section:last-child { border-bottom: none; flex: 1; display: flex; flex-direction: column; }
+
+.assist-section-title {
+  font-family: var(--font-m);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.assist-section-title-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+
+/* Priorité IA */
+.assist-priority-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(255,107,53,0.25);
+  border-radius: var(--r-md);
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
+.assist-priority-text {
+  font-family: var(--font-b);
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.assist-priority-text strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.btn-assist {
+  width: 100%;
+  padding: 7px 12px;
+  border-radius: var(--r-sm);
+  background: rgba(255,107,53,0.15);
+  border: 1px solid rgba(255,107,53,0.3);
+  color: var(--orange);
+  font-family: var(--font-m);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-assist:hover {
+  background: rgba(255,107,53,0.25);
+  border-color: rgba(255,107,53,0.5);
+}
+
+/* Timeline */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 6px 0;
+  position: relative;
+}
+.timeline-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 20px;
+  bottom: -6px;
+  width: 1px;
+  background: var(--border);
+}
+.timeline-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 2px;
+  border: 1.5px solid;
+}
+.timeline-dot.done     { background: rgba(76,175,80,0.3); border-color: var(--green); }
+.timeline-dot.active   { background: var(--orange); border-color: var(--orange); box-shadow: 0 0 6px rgba(255,107,53,0.5); animation: tlpulse 1.5s ease-in-out infinite; }
+.timeline-dot.upcoming { background: transparent; border-color: var(--border-strong); }
+@keyframes tlpulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(255,107,53,0.4); }
+  50%       { box-shadow: 0 0 10px rgba(255,107,53,0.7); }
+}
+
+.timeline-content {}
+.timeline-label {
+  font-family: var(--font-m);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.03em;
+}
+.timeline-label.done    { color: var(--text-secondary); }
+.timeline-label.active  { color: var(--text-primary); }
+.timeline-label.upcoming{ color: var(--text-muted); }
+.timeline-meta {
+  font-family: var(--font-m);
+  font-size: 9px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  margin-top: 1px;
+}
+.timeline-meta .tl-check { color: var(--green); }
+
+/* Notes */
+.notes-textarea {
+  flex: 1;
+  width: 100%;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 10px 12px;
+  font-family: var(--font-b);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  resize: none;
+  outline: none;
+  min-height: 60px;
+  transition: border-color 0.15s;
+}
+.notes-textarea::placeholder { color: var(--text-muted); }
+.notes-textarea:focus { border-color: var(--border-strong); }
+
+/* ═══════════════════════════════════════════════════
+   FOOTER (64px)
+═══════════════════════════════════════════════════ */
+.footer {
+  grid-column: 1 / -1;
+  background: var(--footer-bg);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.footer-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-footer {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 18px;
+  border-radius: var(--r-md);
+  font-family: var(--font-m);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-footer.outline {
+  background: transparent;
+  border: 1.5px solid var(--border-strong);
+  color: var(--text-secondary);
+}
+.btn-footer.outline:hover {
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+  background: var(--surface2);
+  transform: translateY(-1px);
+}
+
+.btn-footer.primary {
+  background: var(--orange);
+  border: 1.5px solid var(--orange);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(255,107,53,0.3);
+}
+.btn-footer.primary:hover {
+  background: #FF7B4A;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255,107,53,0.4);
+}
+.btn-footer.primary:active, .btn-footer.primary.flashing {
+  transform: scale(0.97);
+  background: #FF8C5A;
+}
+
+.btn-badge {
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+  padding: 1px 6px;
+  font-size: 9px;
+}
+
+/* Footer divider */
+.footer-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+}
+
+/* ═══════════════════════════════════════════════════
+   MODAL CONFIRMATION
+═══════════════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.modal-overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+.modal-box {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  transition: background 0.3s;
+  border-radius: 16px;
+  padding: 28px;
+  width: 360px;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+  transform: scale(0.95) translateY(8px);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.modal-overlay.visible .modal-box {
+  transform: scale(1) translateY(0);
+}
+.modal-title {
+  font-family: var(--font-c);
+  font-size: 24px;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.modal-body {
+  font-family: var(--font-b);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  transition: color 0.3s;
+}
+.modal-body strong { color: var(--text-primary); }
+.modal-actions {
+  display: flex;
+  gap: 10px;
+}
+.modal-btn {
+  flex: 1;
+  padding: 11px;
+  border-radius: var(--r-md);
+  font-family: var(--font-m);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.modal-btn.cancel {
+  background: var(--surface2);
+  border: 1px solid var(--border-strong);
+  color: var(--text-secondary);
+  transition: background 0.3s, color 0.15s;
+}
+.modal-btn.cancel:hover { color: var(--text-primary); }
+.modal-btn.confirm {
+  background: var(--orange);
+  border: 1px solid var(--orange);
+  color: #fff;
+}
+.modal-btn.confirm:hover { background: #FF7B4A; }
+
+/* ═══════════════════════════════════════════════════
+   TOAST NOTIFICATION
+═══════════════════════════════════════════════════ */
+.toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 24px;
+  padding: 10px 20px;
+  font-family: var(--font-m);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2000;
+  white-space: nowrap;
+}
+.toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════ COCKPIT ═ -->
+<div class="cockpit" id="cockpit">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <button class="btn-prev-module" onclick="showModal('M3', 'Le Regardeur')">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M7.5 9L4.5 6L7.5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        M3
+      </button>
+      <div class="badge-module">
+        <span class="badge-module-num">M4</span>
+        <span>LE PITCH</span>
+      </div>
+    </div>
+
+    <div class="header-center">
+      <div class="header-title">Carnet d'idées — Que vois-tu dans ce plan ?</div>
+      <div class="header-subtitle">Phase 2 · Observation</div>
+    </div>
+
+    <div class="header-right">
+      <div class="timer-display" id="timerDisplay">
+        <div class="timer-dot" id="timerDot"></div>
+        <div class="timer-value" id="timerValue">3:00</div>
+      </div>
+      <button class="badge-students" onclick="showToast('23 élèves connectés — 2 en attente de connexion')">
+        <span class="badge-students-icon">👥</span>
+        <span class="badge-students-count">23 élèves</span>
+      </button>
+      <button id="theme-toggle" title="Changer le thème" style="background:transparent;border:1px solid var(--border);padding:8px;border-radius:4px;cursor:pointer;color:var(--text-secondary);transition:border-color 0.15s,color 0.15s;display:flex;align-items:center;justify-content:center;min-width:36px;min-height:36px;">
+        <svg id="ck-icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="display:none"><circle cx="8" cy="8" r="3"/><line x1="8" y1="1" x2="8" y2="3"/><line x1="8" y1="13" x2="8" y2="15"/><line x1="1" y1="8" x2="3" y2="8"/><line x1="13" y1="8" x2="15" y2="8"/><line x1="2.93" y1="2.93" x2="4.34" y2="4.34"/><line x1="11.66" y1="11.66" x2="13.07" y2="13.07"/><line x1="2.93" y1="13.07" x2="4.34" y2="11.66"/><line x1="11.66" y1="4.34" x2="13.07" y2="2.93"/></svg>
+        <svg id="ck-icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13.5 10.5A6 6 0 0 1 5.5 2.5a6 6 0 1 0 8 8z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- MODULE RAIL -->
+  <nav class="module-rail">
+    <button class="module-pill done" onclick="showModal('M1', 'Entrée en matière')">
+      <span class="module-pill-num">M1</span>
+      <span class="module-pill-label">Entrée</span>
+      <span class="module-pill-check">✓</span>
+    </button>
+    <button class="module-pill done" onclick="showModal('M2', 'La Bande-Annonce')">
+      <span class="module-pill-num">M2</span>
+      <span class="module-pill-label">Bande-Annonce</span>
+      <span class="module-pill-check">✓</span>
+    </button>
+    <button class="module-pill done" onclick="showModal('M3', 'Le Regardeur')">
+      <span class="module-pill-num">M3</span>
+      <span class="module-pill-label">Regardeur</span>
+      <span class="module-pill-check">✓</span>
+    </button>
+    <div class="module-rail-sep"></div>
+    <button class="module-pill active">
+      <span class="module-pill-num">M4</span>
+      <span class="module-pill-label">Le Pitch</span>
+    </button>
+    <div class="module-rail-sep"></div>
+    <button class="module-pill future" onclick="showModal('M5', 'La Technique')">
+      <span class="module-pill-num">M5</span>
+      <span class="module-pill-label">Technique</span>
+    </button>
+    <button class="module-pill future" onclick="showModal('M6', 'La Scène')">
+      <span class="module-pill-num">M6</span>
+      <span class="module-pill-label">Scène</span>
+    </button>
+    <button class="module-pill future" onclick="showModal('M7', 'L\'Équipe')">
+      <span class="module-pill-num">M7</span>
+      <span class="module-pill-label">Équipe</span>
+    </button>
+    <button class="module-pill future" onclick="showModal('M8', 'Bilan & Signature')">
+      <span class="module-pill-num">M8</span>
+      <span class="module-pill-label">Bilan</span>
+    </button>
+  </nav>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- SIDEBAR GAUCHE — PLAN DE CLASSE -->
+    <aside class="sidebar-left">
+
+      <!-- Header -->
+      <div class="classroom-header">
+        <span class="classroom-title">Plan de classe</span>
+        <div class="classroom-controls">
+          <span class="classroom-class-name">5e B</span>
+          <button id="editModeBtn" title="Modifier le plan">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9.5 2.5l2 2L4 12H2v-2L9.5 2.5z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tableau -->
+      <div class="classroom-tableau">TABLEAU</div>
+
+      <!-- Bureau prof -->
+      <div class="classroom-teacher-desk">Bureau</div>
+
+      <!-- Grille élèves -->
+      <div class="classroom-grid" id="classroomGrid">
+        <!-- Générée par JS -->
+      </div>
+
+      <!-- Config (mode édition) -->
+      <div class="classroom-config" id="classroomConfig">
+        <label>Rangées <input type="number" id="configRows" min="3" max="8" value="5"></label>
+        <label>Colonnes <input type="number" id="configCols" min="3" max="6" value="5"></label>
+        <button id="applyConfigBtn">Appliquer</button>
+      </div>
+
+      <!-- Footer compteur -->
+      <div class="classroom-footer">
+        <div class="response-counter">
+          <span id="responseCountVal">8</span> / 25 ont répondu
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="progressBarFill" style="width: 32%"></div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ZONE CENTRALE -->
+    <main class="center">
+      <div class="center-topbar">
+        <div class="state-toggle" id="stateToggle">
+          <button class="state-toggle-btn active" onclick="switchState('waiting')" id="toggleWaiting">En attente</button>
+          <button class="state-toggle-btn" onclick="switchState('responses')" id="toggleResponses">Réponses</button>
+        </div>
+        <div class="center-badge">
+          <div class="center-badge-dot"></div>
+          <span id="centerBadgeText">8 réponses reçues</span>
+        </div>
+      </div>
+
+      <!-- État : En attente -->
+      <div class="state-waiting" id="stateWaiting">
+        <div class="waiting-pulse-wrap">
+          <div class="waiting-pulse"></div>
+          <div class="waiting-pulse"></div>
+          <div class="waiting-pulse"></div>
+          <div class="waiting-core">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3l3 3L6 17H3v-3L14 3z"/></svg>
+          </div>
+        </div>
+
+        <div class="waiting-count">
+          <span id="waitingCountVal">8</span><span style="color:var(--text-secondary);font-size:28px"> / 23</span>
+        </div>
+
+        <div class="waiting-label">élèves ont répondu</div>
+
+        <div class="waiting-progress-wrap">
+          <div class="waiting-progress-labels">
+            <span>PROGRESSION</span>
+            <span id="waitingPct">34%</span>
+          </div>
+          <div class="waiting-progress-bar">
+            <div class="waiting-progress-fill" id="waitingProgressFill" style="width: 34.8%"></div>
+          </div>
+        </div>
+
+        <div class="waiting-missing" id="waitingMissing">
+          <strong>15 élèves</strong> n'ont pas encore répondu
+        </div>
+
+        <button class="btn-project" onclick="showToast('Question projetée sur l\'écran principal')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <rect x="1" y="3" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M5 11v2M9 11v2M3.5 13h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Projeter la question →
+        </button>
+      </div>
+
+      <!-- État : Réponses reçues -->
+      <div class="state-responses" id="stateResponses" style="display:none;">
+        <!-- Généré par JS -->
+      </div>
+    </main>
+
+    <!-- SIDEBAR DROITE -->
+    <aside class="sidebar-right">
+
+      <!-- Priorité IA -->
+      <div class="assist-section">
+        <div class="assist-section-title">
+          <div class="assist-section-title-dot"></div>
+          Priorité
+        </div>
+        <div class="assist-priority-card">
+          <div class="assist-priority-text">
+            <strong>3 élèves</strong> semblent bloqués — aucune interaction depuis 45 secondes.
+          </div>
+          <button class="btn-assist" onclick="showToast('Message de relance envoyé à la classe')">
+            ↻ Relancer
+          </button>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="assist-section">
+        <div class="assist-section-title">
+          <div class="assist-section-title-dot"></div>
+          Séance
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot done"></div>
+            <div class="timeline-content">
+              <div class="timeline-label done">M1 · Entrée</div>
+              <div class="timeline-meta"><span class="tl-check">✓</span> 14 min · 22/23 réponses</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot done"></div>
+            <div class="timeline-content">
+              <div class="timeline-label done">M2 · Bande-Annonce</div>
+              <div class="timeline-meta"><span class="tl-check">✓</span> 8 min · 20/23 réponses</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot done"></div>
+            <div class="timeline-content">
+              <div class="timeline-label done">M3 · Regardeur</div>
+              <div class="timeline-meta"><span class="tl-check">✓</span> 11 min · 21/23 réponses</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot active"></div>
+            <div class="timeline-content">
+              <div class="timeline-label active">M4 · Le Pitch</div>
+              <div class="timeline-meta">En cours · 3 min restantes</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot upcoming"></div>
+            <div class="timeline-content">
+              <div class="timeline-label upcoming">M5 · Technique</div>
+              <div class="timeline-meta">À venir</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div class="assist-section">
+        <div class="assist-section-title">
+          <div class="assist-section-title-dot"></div>
+          Notes
+        </div>
+        <textarea class="notes-textarea" placeholder="Notes de séance...&#10;(anonymes, non liées aux élèves)" id="sessionNotes"></textarea>
+      </div>
+
+    </aside>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-group">
+      <button class="btn-footer outline" onclick="showToast('Relance envoyée aux 15 élèves en attente')">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5A5 5 0 1 0 12 7"/><polyline points="12,2 12,5 9,5"/></svg>
+        Relancer
+        <span class="btn-badge">15</span>
+      </button>
+      <button class="btn-footer outline" onclick="showToast('Message envoyé à toute la classe')">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="2" width="11" height="9" rx="1"/><polyline points="1,2 6.5,7 12,2"/></svg>
+        Message classe
+      </button>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-group">
+      <button class="btn-footer outline" onclick="showToast('Vue projetée sur l\'écran de la classe')">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="1" width="11" height="8" rx="1"/><line x1="4" y1="12" x2="9" y2="12"/><line x1="6.5" y1="9" x2="6.5" y2="12"/></svg>
+        Projeter
+      </button>
+      <button class="btn-footer primary" id="btnNext" onclick="nextModule()">
+        Pitch suivant →
+      </button>
+    </div>
+  </footer>
+
+</div>
+
+<!-- MODAL CONFIRMATION -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <div class="modal-title" id="modalTitle">CHANGER DE MODULE</div>
+    <div class="modal-body" id="modalBody">
+      Veux-tu naviguer vers <strong id="modalTarget">M3 · Le Regardeur</strong> ?<br>
+      Les réponses en cours seront sauvegardées.
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn cancel" onclick="closeModal()">Annuler</button>
+      <button class="modal-btn confirm" onclick="confirmModal()">Confirmer</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+
+/* ═══════════════════════════════════════════════════
+   PLAN DE CLASSE — DONNÉES & DRAG-DROP
+═══════════════════════════════════════════════════ */
+const NAMES = ["Amir","Binta","Carlos","Dalila","Élias","Fatou","Gaël","Hana",
+               "Ibrahim","Jade","Karim","Leila","Malik","Nina","Omar","Priya",
+               "Quentin","Rania","Samir","Talia","Ugo","Vanessa","Wassim","Yaël","Zara"];
+const TOTAL = NAMES.length; // 25
+
+let ROWS = 5, COLS = 5;
+let seats = []; // { studentIdx: null|0-24, state: 'empty'|'active'|'idle'|'pending'|'disconnected' }
+let editMode = false;
+let dragSrc = null;
+let responseCount = 8;
+
+function initSeats() {
+  seats = [];
+  const total = ROWS * COLS;
+  for (let i = 0; i < total; i++) {
+    if (i < NAMES.length) {
+      // 8 actifs, 2 idle, 1 déconnecté, reste pending
+      let state = 'pending';
+      if (i < 8)       state = 'active';
+      else if (i < 10) state = 'idle';
+      else if (i === 10) state = 'disconnected';
+      seats.push({ studentIdx: i, state });
+    } else {
+      seats.push({ studentIdx: null, state: 'empty' });
+    }
+  }
+}
+
+function renderClassroom() {
+  const grid = document.getElementById('classroomGrid');
+  grid.style.gridTemplateColumns = `repeat(${COLS}, 1fr)`;
+  grid.innerHTML = '';
+  grid.className = 'classroom-grid' + (editMode ? ' edit-mode' : '');
+
+  seats.forEach((seat, idx) => {
+    const el = document.createElement('div');
+    el.dataset.idx = idx;
+
+    if (seat.state === 'empty') {
+      el.className = 'seat empty';
+    } else {
+      el.className = `seat occupied ${seat.state}`;
+      const name = NAMES[seat.studentIdx];
+      el.textContent = name.slice(0, 2).toUpperCase();
+      el.title = name;
+    }
+
+    if (editMode) {
+      if (seat.state !== 'empty') {
+        el.draggable = true;
+        el.addEventListener('dragstart', e => {
+          dragSrc = idx;
+          e.dataTransfer.effectAllowed = 'move';
+          setTimeout(() => { el.style.opacity = '0.4'; }, 0);
+        });
+        el.addEventListener('dragend', () => { el.style.opacity = '1'; });
+      }
+      el.addEventListener('dragover', e => { e.preventDefault(); el.classList.add('drag-over'); });
+      el.addEventListener('dragleave', () => el.classList.remove('drag-over'));
+      el.addEventListener('drop', e => {
+        e.preventDefault();
+        el.classList.remove('drag-over');
+        if (dragSrc !== null && dragSrc !== idx) {
+          const tmp = { ...seats[dragSrc] };
+          seats[dragSrc] = { ...seats[idx] };
+          seats[idx] = tmp;
+          renderClassroom();
+        }
+        dragSrc = null;
+      });
+    }
+
+    grid.appendChild(el);
+  });
+}
+
+function updateCounter() {
+  document.getElementById('responseCountVal').textContent = responseCount;
+  document.getElementById('waitingCountVal') && (document.getElementById('waitingCountVal').textContent = responseCount);
+  const pctFrac = (responseCount / TOTAL) * 100;
+  const pct = Math.round(pctFrac);
+  document.getElementById('progressBarFill').style.width = pctFrac + '%';
+  document.getElementById('waitingProgressFill') && (document.getElementById('waitingProgressFill').style.width = pctFrac + '%');
+  document.getElementById('waitingPct') && (document.getElementById('waitingPct').textContent = pct + '%');
+  const missing = TOTAL - responseCount;
+  document.getElementById('waitingMissing') && (document.getElementById('waitingMissing').innerHTML = `<strong>${missing} élève${missing > 1 ? 's' : ''}</strong> n'${missing > 1 ? 'ont' : 'a'} pas encore répondu`);
+  document.getElementById('centerBadgeText') && (document.getElementById('centerBadgeText').textContent = `${responseCount} réponse${responseCount > 1 ? 's' : ''} reçue${responseCount > 1 ? 's' : ''}`);
+}
+
+// Toggle mode édition
+document.getElementById('editModeBtn').addEventListener('click', () => {
+  editMode = !editMode;
+  document.getElementById('editModeBtn').classList.toggle('active', editMode);
+  document.getElementById('classroomConfig').style.display = editMode ? 'flex' : 'none';
+  renderClassroom();
+});
+
+// Appliquer la config
+document.getElementById('applyConfigBtn').addEventListener('click', () => {
+  ROWS = parseInt(document.getElementById('configRows').value) || 5;
+  COLS = parseInt(document.getElementById('configCols').value) || 5;
+  initSeats();
+  renderClassroom();
+});
+
+/* ═══════════════════════════════════════════════════
+   SIMULATION : RÉPONSES QUI ARRIVENT
+═══════════════════════════════════════════════════ */
+function simulateResponse() {
+  const pendingSeats = seats.map((s, i) => i).filter(i => seats[i].state === 'pending');
+  if (pendingSeats.length === 0) return;
+  const pick = pendingSeats[Math.floor(Math.random() * pendingSeats.length)];
+  seats[pick].state = 'active';
+  responseCount++;
+  updateCounter();
+  addResponseCard();
+  if (!editMode) renderClassroom();
+  // Prochain après 2–3.5s
+  const remaining = seats.filter(s => s.state === 'pending').length;
+  if (remaining > 0) {
+    setTimeout(simulateResponse, 2000 + Math.random() * 1500);
+  }
+}
+
+const SAMPLE_RESPONSES = [
+  "Je vois un plan en contre-plongée, la caméra est très basse par rapport au personnage. Ça le rend imposant.",
+  "Il y a beaucoup de lumière sur le côté droit, l'ombre crée une ambiance mystérieuse.",
+  "Le cadrage coupe les pieds du personnage, on ne voit que le buste et le visage.",
+  "La profondeur de champ est floue derrière, on se concentre sur le premier plan.",
+  "Je remarque une texture sur le mur, c'est du béton brut — ça fait quartier.",
+  "Le personnage regarde hors-champ à droite. Il attend quelque chose ou quelqu'un.",
+  "Il y a un détail orange dans le coin bas gauche, peut-être un vêtement ou un objet.",
+  "Le cadre est très serré sur le visage. Ça donne une impression de tension.",
+  "Les couleurs sont désaturées sauf la lumière jaune derrière. Contraste fort.",
+  "On dirait un plan qui vient d'un film de genre. Le ciel est bas, lourd.",
+  "Je vois une ligne de fuite qui part vers le fond, ça attire l'œil vers l'arrière-plan.",
+];
+let responseIndex = 0;
+
+function addResponseCard() {
+  const container = document.getElementById('stateResponses');
+  const text = SAMPLE_RESPONSES[responseIndex % SAMPLE_RESPONSES.length];
+  responseIndex++;
+  const card = document.createElement('div');
+  card.className = 'response-card';
+  card.innerHTML = `
+    <div>
+      <div class="response-text">${text}</div>
+      <div class="response-anon">Réponse anonyme</div>
+    </div>
+    <div class="response-actions">
+      <button class="response-action-btn validate" title="Valider" onclick="validateCard(this)"><svg viewBox="0 0 14 14"><polyline points="2,7 5.5,11 12,3"/></svg></button>
+      <button class="response-action-btn flag"     title="Signaler" onclick="flagCard(this)"><svg viewBox="0 0 14 14"><path d="M3 1v12M3 1h8l-2 3.5 2 3.5H3"/></svg></button>
+      <button class="response-action-btn project"  title="Projeter" onclick="showToast('Réponse projetée')"><svg viewBox="0 0 14 14"><rect x="1" y="1" width="12" height="9" rx="1"/><line x1="4" y1="13" x2="10" y2="13"/><line x1="7" y1="10" x2="7" y2="13"/></svg></button>
+    </div>
+  `;
+  container.prepend(card);
+}
+
+function validateCard(btn) {
+  const card = btn.closest('.response-card');
+  card.classList.toggle('validated');
+  card.classList.remove('flagged');
+}
+function flagCard(btn) {
+  const card = btn.closest('.response-card');
+  card.classList.toggle('flagged');
+  card.classList.remove('validated');
+}
+
+/* ═══════════════════════════════════════════════════
+   TOGGLE ÉTAT CENTRAL
+═══════════════════════════════════════════════════ */
+function switchState(state) {
+  const waiting = document.getElementById('stateWaiting');
+  const responses = document.getElementById('stateResponses');
+  const btnW = document.getElementById('toggleWaiting');
+  const btnR = document.getElementById('toggleResponses');
+
+  if (state === 'waiting') {
+    waiting.style.display = 'flex';
+    responses.style.display = 'none';
+    btnW.classList.add('active');
+    btnR.classList.remove('active');
+  } else {
+    waiting.style.display = 'none';
+    responses.style.display = 'flex';
+    btnW.classList.remove('active');
+    btnR.classList.add('active');
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   TIMER
+═══════════════════════════════════════════════════ */
+let timerSeconds = 180; // 3:00
+let timerInterval = null;
+
+function formatTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return `${m}:${sec.toString().padStart(2, '0')}`;
+}
+
+function updateTimerColor() {
+  const val = document.getElementById('timerValue');
+  const dot = document.getElementById('timerDot');
+  const display = document.getElementById('timerDisplay');
+  let color;
+  if (timerSeconds > 90) {
+    color = 'var(--green)';
+  } else if (timerSeconds > 30) {
+    color = 'var(--amber)';
+  } else {
+    color = 'var(--red)';
+  }
+  val.style.color = color;
+  dot.style.background = color;
+  display.style.borderColor = timerSeconds <= 30 ? 'rgba(232,0,28,0.3)' : 'var(--border)';
+}
+
+function startTimer() {
+  timerInterval = setInterval(() => {
+    if (timerSeconds <= 0) {
+      clearInterval(timerInterval);
+      document.getElementById('timerValue').textContent = '0:00';
+      showToast('⏱ Temps écoulé — passer au module suivant ?');
+      return;
+    }
+    timerSeconds--;
+    document.getElementById('timerValue').textContent = formatTime(timerSeconds);
+    updateTimerColor();
+  }, 1000);
+}
+
+/* ═══════════════════════════════════════════════════
+   MODAL
+═══════════════════════════════════════════════════ */
+let pendingModalAction = null;
+
+function showModal(moduleId, moduleName) {
+  pendingModalAction = () => {
+    closeModal();
+    showToast(`Navigation vers ${moduleId} · ${moduleName}`);
+  };
+  document.getElementById('modalTarget').textContent = `${moduleId} · ${moduleName}`;
+  document.getElementById('modalOverlay').classList.add('visible');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('visible');
+  pendingModalAction = null;
+}
+
+function confirmModal() {
+  if (pendingModalAction) pendingModalAction();
+}
+
+// Fermer en cliquant l'overlay
+document.getElementById('modalOverlay').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeModal();
+});
+
+/* ═══════════════════════════════════════════════════
+   NEXT MODULE
+═══════════════════════════════════════════════════ */
+function nextModule() {
+  const btn = document.getElementById('btnNext');
+  btn.classList.add('flashing');
+  btn.textContent = 'Passage à M5...';
+  setTimeout(() => {
+    btn.classList.remove('flashing');
+    btn.innerHTML = 'Pitch suivant →';
+    showToast('Module M5 · Technique activé');
+  }, 1000);
+}
+
+/* ═══════════════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════════════ */
+let toastTimeout = null;
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('visible');
+  if (toastTimeout) clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => t.classList.remove('visible'), 2800);
+}
+
+/* ═══════════════════════════════════════════════════
+   THEME TOGGLE
+═══════════════════════════════════════════════════ */
+const themeBtn = document.getElementById('theme-toggle');
+let theme = 'light'; // défaut = clair pour l'école
+document.documentElement.setAttribute('data-theme', theme);
+
+function updateThemeIcons(t) {
+  document.getElementById('ck-icon-sun').style.display  = t === 'dark'  ? 'block' : 'none';
+  document.getElementById('ck-icon-moon').style.display = t === 'light' ? 'block' : 'none';
+}
+
+themeBtn.addEventListener('click', () => {
+  theme = theme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', theme);
+  updateThemeIcons(theme);
+});
+
+updateThemeIcons(theme);
+
+/* ═══════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════ */
+initSeats();
+renderClassroom();
+updateCounter();
+startTimer();
+// Pré-remplir quelques réponses dans le flux
+for (let i = 0; i < 8; i++) addResponseCard();
+// Démarrer la simulation après 2s
+setTimeout(simulateResponse, 2000);
+
+</script>
+</body>
+</html>

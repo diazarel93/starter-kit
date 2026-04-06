@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banlieuwood — Écran Élèves</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════════ */
+:root {
+  --orange: #FF6B35;
+  --ink:    #0D0B09;
+  --cream:  #F2EBD9;
+  --warm:   #EDE4CF;
+  --green:  #2D6A4F;
+  --red:    #E8001C;
+
+  --font-d: 'Bebas Neue', sans-serif;
+  --font-b: 'Plus Jakarta Sans', sans-serif;
+  --font-m: 'Space Mono', monospace;
+}
+
+/* THEMES */
+[data-theme="light"] {
+  --bg:             #F2EBD9;
+  --surface:        #EDE4CF;
+  --text-primary:   rgba(13,11,9,0.90);
+  --text-secondary: rgba(13,11,9,0.45);
+  --text-muted:     rgba(13,11,9,0.25);
+  --border:         rgba(13,11,9,0.08);
+}
+
+[data-theme="dark"] {
+  --bg:             #0F0D0B;
+  --surface:        #1A1714;
+  --text-primary:   rgba(255,255,255,0.92);
+  --text-secondary: rgba(255,255,255,0.45);
+  --text-muted:     rgba(255,255,255,0.22);
+  --border:         rgba(255,255,255,0.07);
+}
+
+/* ═══════════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-b);
+  transition: background 0.3s, color 0.3s;
+}
+
+/* GRAIN */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.02'/%3E%3C/svg%3E");
+}
+
+/* ═══════════════════════════════════════════════
+   SHELL — MODES
+═══════════════════════════════════════════════ */
+.shell {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  flex-direction: column;
+}
+
+.shell.active { display: flex; }
+
+/* ═══════════════════════════════════════════════
+   TOPBAR
+═══════════════════════════════════════════════ */
+.topbar {
+  height: 52px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.topbar-logo {
+  font-family: var(--font-d);
+  font-size: 18px;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+}
+
+.topbar-sep {
+  width: 1px;
+  height: 16px;
+  background: var(--border);
+}
+
+.topbar-module {
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.timer-display {
+  font-family: var(--font-m);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  min-width: 48px;
+  text-align: right;
+}
+
+.timer-display.warning { color: #F5A623; }
+.timer-display.urgent  { color: var(--red); }
+
+.step-badge {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1px solid rgba(255,107,53,0.3);
+  background: rgba(255,107,53,0.08);
+  color: var(--orange);
+}
+
+/* ═══════════════════════════════════════════════
+   MODE: CONSIGNE (grande question affichée)
+═══════════════════════════════════════════════ */
+#mode-consigne {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 80px;
+  text-align: center;
+  position: relative;
+}
+
+.consigne-kicker {
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 32px;
+}
+
+.consigne-question {
+  font-family: var(--font-d);
+  font-size: clamp(40px, 7vw, 100px);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+  font-feature-settings: "liga" 0, "kern" 1;
+  max-width: 900px;
+  margin-bottom: 48px;
+}
+
+.consigne-question em {
+  font-style: normal;
+  color: var(--orange);
+}
+
+.consigne-sub {
+  font-size: clamp(14px, 2vw, 18px);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 560px;
+  margin-bottom: 64px;
+}
+
+/* Big timer ring */
+.timer-ring-wrap {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.timer-ring-svg {
+  width: 120px;
+  height: 120px;
+  transform: rotate(-90deg);
+}
+
+.timer-ring-bg {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 4;
+}
+
+.timer-ring-fill {
+  fill: none;
+  stroke: var(--orange);
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear, stroke 0.3s;
+}
+
+.timer-ring-fill.warning { stroke: #F5A623; }
+.timer-ring-fill.urgent  { stroke: var(--red); }
+
+.timer-ring-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-ring-num {
+  font-family: var(--font-d);
+  font-size: 32px;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.timer-ring-label {
+  font-family: var(--font-m);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* Watermark number */
+#mode-consigne::before {
+  content: attr(data-step);
+  position: absolute;
+  bottom: -0.1em;
+  right: 40px;
+  font-family: var(--font-d);
+  font-size: clamp(160px, 22vw, 280px);
+  color: var(--border);
+  line-height: 1;
+  pointer-events: none;
+  letter-spacing: -0.04em;
+}
+
+/* ═══════════════════════════════════════════════
+   MODE: VOTE — choix collectif
+═══════════════════════════════════════════════ */
+#mode-vote {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 80px 40px;
+}
+
+.vote-question {
+  font-family: var(--font-d);
+  font-size: clamp(28px, 4vw, 52px);
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin-bottom: 48px;
+  max-width: 700px;
+  line-height: 1.05;
+}
+
+.vote-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  flex: 1;
+  align-content: start;
+}
+
+.vote-option {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  padding: 32px 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: border-color 0.2s, transform 0.15s, background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.vote-option:hover {
+  border-color: var(--orange);
+  background: rgba(255,107,53,0.04);
+  transform: translateY(-2px);
+}
+
+.vote-option.voted {
+  border-color: var(--orange);
+  background: rgba(255,107,53,0.08);
+  pointer-events: none;
+}
+
+.vote-option.voted .vote-bar-fill { background: var(--orange); }
+
+.vote-letter {
+  font-family: var(--font-d);
+  font-size: 56px;
+  color: var(--orange);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 60px;
+  opacity: 0.4;
+  transition: opacity 0.2s;
+}
+
+.vote-option:hover .vote-letter,
+.vote-option.voted .vote-letter { opacity: 1; }
+
+.vote-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.vote-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--border);
+}
+
+.vote-bar-fill {
+  height: 3px;
+  background: var(--text-muted);
+  width: 0;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vote-pct {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.vote-option.revealed .vote-pct { opacity: 1; }
+
+/* ═══════════════════════════════════════════════
+   MODE: PAUSE — entre deux activités
+═══════════════════════════════════════════════ */
+#mode-pause {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  position: relative;
+}
+
+.pause-word {
+  font-family: var(--font-d);
+  font-size: clamp(80px, 18vw, 220px);
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  font-feature-settings: "liga" 0, "kern" 1;
+  opacity: 0.12;
+}
+
+.pause-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.pause-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.pause-play-icon {
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 12px 0 12px 22px;
+  border-color: transparent transparent transparent #fff;
+  margin-left: 4px;
+}
+
+.pause-title {
+  font-family: var(--font-d);
+  font-size: 36px;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.pause-sub {
+  font-family: var(--font-m);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* ═══════════════════════════════════════════════
+   MODE: FIN — récap de séance
+═══════════════════════════════════════════════ */
+#mode-fin {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.fin-left {
+  padding: 60px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--border);
+}
+
+.fin-badge {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 24px;
+}
+
+.fin-title {
+  font-family: var(--font-d);
+  font-size: clamp(48px, 7vw, 88px);
+  line-height: 0.88;
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+  margin-bottom: 32px;
+  font-feature-settings: "liga" 0, "kern" 1;
+}
+
+.fin-title span { color: var(--orange); }
+
+.fin-desc {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  max-width: 400px;
+}
+
+.fin-right {
+  padding: 60px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+}
+
+.fin-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.fin-stat:last-child { border-bottom: none; }
+
+.fin-stat-num {
+  font-family: var(--font-d);
+  font-size: 56px;
+  color: var(--orange);
+  line-height: 1;
+}
+
+.fin-stat-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.fin-stat-text strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+/* ═══════════════════════════════════════════════
+   CONTROLS OVERLAY (bottom, accessible via keyboard)
+═══════════════════════════════════════════════ */
+.controls {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 1000;
+}
+
+.controls:hover,
+.controls:focus-within { opacity: 1; }
+
+body:hover .controls { opacity: 1; }
+
+.ctrl-btn {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.ctrl-btn:hover { color: var(--text-primary); border-color: var(--orange); }
+.ctrl-btn.active-mode { color: var(--orange); border-color: var(--orange); }
+
+.ctrl-sep {
+  width: 1px;
+  background: var(--border);
+  align-self: stretch;
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — projector landscape
+═══════════════════════════════════════════════ */
+@media (max-width: 700px) {
+  #mode-consigne { padding: 32px 24px; }
+  .consigne-question { font-size: 40px; }
+  #mode-vote { padding: 32px 24px; }
+  .vote-options { grid-template-columns: 1fr; }
+  #mode-fin { grid-template-columns: 1fr; }
+  .fin-left, .fin-right { padding: 32px 24px; }
+  .topbar { padding: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ MODE: CONSIGNE ═══════ -->
+<div class="shell active" id="shell-consigne" data-mode="consigne">
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-logo">BANLIEUWOOD</span>
+      <span class="topbar-sep"></span>
+      <span class="topbar-module" id="module-name-c">M3 — La Lumière</span>
+    </div>
+    <div class="topbar-right">
+      <span class="step-badge" id="step-badge-c">Étape 2 / 4</span>
+      <span class="timer-display" id="timer-c">08:00</span>
+    </div>
+  </header>
+
+  <div id="mode-consigne" data-step="02">
+    <div class="consigne-kicker">Exercice individuel</div>
+    <h1 class="consigne-question">
+      PRENEZ<br>
+      <em>3 PHOTOS</em><br>
+      DE LA MÊME CHOSE
+    </h1>
+    <p class="consigne-sub">
+      Même sujet — trois lumières différentes.<br>
+      Utilisez la fenêtre, votre lampe, vos mains comme réflecteur.
+    </p>
+    <div class="timer-ring-wrap">
+      <svg class="timer-ring-svg" viewBox="0 0 120 120">
+        <circle class="timer-ring-bg" cx="60" cy="60" r="52"/>
+        <circle class="timer-ring-fill" id="ring-fill" cx="60" cy="60" r="52"
+          stroke-dasharray="326.7"
+          stroke-dashoffset="0"/>
+      </svg>
+      <div class="timer-ring-text">
+        <span class="timer-ring-num" id="ring-num">8</span>
+        <span class="timer-ring-label">min</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ MODE: VOTE ═══════ -->
+<div class="shell" id="shell-vote" data-mode="vote">
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-logo">BANLIEUWOOD</span>
+      <span class="topbar-sep"></span>
+      <span class="topbar-module">M3 — La Lumière</span>
+    </div>
+    <div class="topbar-right">
+      <span class="step-badge">Étape 3 / 4</span>
+      <span class="timer-display">05:00</span>
+    </div>
+  </header>
+
+  <div id="mode-vote">
+    <h2 class="vote-question">QUELLE LUMIÈRE RACONTE<br>UNE SCÈNE TRISTE ?</h2>
+    <div class="vote-options">
+      <div class="vote-option" data-pct="62" onclick="vote(this)">
+        <span class="vote-letter">A</span>
+        <span class="vote-text">Lumière dure, frontale, sans ombres</span>
+        <div class="vote-bar"><div class="vote-bar-fill"></div></div>
+        <span class="vote-pct">62%</span>
+      </div>
+      <div class="vote-option" data-pct="8" onclick="vote(this)">
+        <span class="vote-letter">B</span>
+        <span class="vote-text">Lumière vive venant d'en haut</span>
+        <div class="vote-bar"><div class="vote-bar-fill"></div></div>
+        <span class="vote-pct">8%</span>
+      </div>
+      <div class="vote-option" data-pct="24" onclick="vote(this)">
+        <span class="vote-letter">C</span>
+        <span class="vote-text">Contre-jour, visage dans l'ombre</span>
+        <div class="vote-bar"><div class="vote-bar-fill"></div></div>
+        <span class="vote-pct">24%</span>
+      </div>
+      <div class="vote-option" data-pct="6" onclick="vote(this)">
+        <span class="vote-letter">D</span>
+        <span class="vote-text">Lumière diffuse, nuageuse, douce</span>
+        <div class="vote-bar"><div class="vote-bar-fill"></div></div>
+        <span class="vote-pct">6%</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ MODE: PAUSE ═══════ -->
+<div class="shell" id="shell-pause" data-mode="pause">
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-logo">BANLIEUWOOD</span>
+      <span class="topbar-sep"></span>
+      <span class="topbar-module">M3 — La Lumière</span>
+    </div>
+    <div class="topbar-right">
+      <span class="step-badge" style="background:rgba(13,11,9,0.06);border-color:var(--border);color:var(--text-secondary);">Pause</span>
+    </div>
+  </header>
+
+  <div id="mode-pause">
+    <div class="pause-word">PAUSE</div>
+    <div class="pause-center">
+      <div class="pause-icon">
+        <div class="pause-play-icon"></div>
+      </div>
+      <div class="pause-title">On reprend dans un instant</div>
+      <div class="pause-sub">Rangez vos téléphones · Restez attentifs</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ MODE: FIN ═══════ -->
+<div class="shell" id="shell-fin" data-mode="fin">
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-logo">BANLIEUWOOD</span>
+      <span class="topbar-sep"></span>
+      <span class="topbar-module">M3 — La Lumière · Fin de séance</span>
+    </div>
+    <div class="topbar-right">
+      <span class="step-badge" style="background:rgba(45,106,79,0.1);border-color:rgba(45,106,79,0.3);color:#2D6A4F;">Séance terminée</span>
+    </div>
+  </header>
+
+  <div id="mode-fin">
+    <div class="fin-left">
+      <div class="fin-badge">Séance M3 · La Lumière</div>
+      <h2 class="fin-title">
+        BIEN<br>
+        <span>JOUÉ.</span>
+      </h2>
+      <p class="fin-desc">
+        Vous avez exploré la lumière comme outil de mise en scène. Votre regard a changé — vous ne regarderez plus jamais une image de la même façon.
+      </p>
+    </div>
+    <div class="fin-right">
+      <div class="fin-stat">
+        <span class="fin-stat-num">23</span>
+        <div class="fin-stat-text">
+          <strong>Élèves actifs</strong>
+          sur 25 présents
+        </div>
+      </div>
+      <div class="fin-stat">
+        <span class="fin-stat-num">54</span>
+        <div class="fin-stat-text">
+          <strong>Photos prises</strong>
+          en 8 minutes d'exercice
+        </div>
+      </div>
+      <div class="fin-stat">
+        <span class="fin-stat-num">M4</span>
+        <div class="fin-stat-text">
+          <strong>Prochaine séance</strong>
+          Le Son — Mardi 15 avril
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTROLS OVERLAY -->
+<div class="controls" id="controls">
+  <button class="ctrl-btn active-mode" id="btn-consigne" onclick="switchMode('consigne')">Consigne</button>
+  <button class="ctrl-btn" id="btn-vote" onclick="switchMode('vote')">Vote</button>
+  <button class="ctrl-btn" id="btn-pause" onclick="switchMode('pause')">Pause</button>
+  <button class="ctrl-btn" id="btn-fin" onclick="switchMode('fin')">Fin</button>
+  <div class="ctrl-sep"></div>
+  <button class="ctrl-btn" id="btn-theme" onclick="toggleTheme()">Sombre</button>
+  <div class="ctrl-sep"></div>
+  <button class="ctrl-btn" onclick="startTimer()">▶ Timer</button>
+  <button class="ctrl-btn" onclick="resetTimer()">↺ Reset</button>
+</div>
+
+<script>
+/* ── MODE SWITCH ──────────────────────────────── */
+const MODES = ['consigne', 'vote', 'pause', 'fin'];
+
+function switchMode(mode) {
+  MODES.forEach(m => {
+    const shell = document.getElementById(`shell-${m}`);
+    const btn   = document.getElementById(`btn-${m}`);
+    shell.classList.toggle('active', m === mode);
+    btn?.classList.toggle('active-mode', m === mode);
+  });
+  if (mode === 'vote') setTimeout(initVote, 80);
+}
+
+/* ── VOTE ─────────────────────────────────────── */
+let voted = false;
+
+function vote(el) {
+  if (voted) return;
+  voted = true;
+  el.classList.add('voted');
+  // Reveal percentages after 600ms
+  setTimeout(() => {
+    document.querySelectorAll('.vote-option').forEach(opt => {
+      const pct = parseInt(opt.dataset.pct);
+      opt.classList.add('revealed');
+      opt.querySelector('.vote-bar-fill').style.width = pct + '%';
+    });
+  }, 600);
+}
+
+function initVote() {
+  voted = false;
+  document.querySelectorAll('.vote-option').forEach(opt => {
+    opt.classList.remove('voted', 'revealed');
+    opt.querySelector('.vote-bar-fill').style.width = '0%';
+  });
+}
+
+/* ── TIMER ─────────────────────────────────────── */
+const TOTAL_SECONDS = 8 * 60; // 8 minutes
+const RING_CIRC     = 2 * Math.PI * 52; // ≈ 326.7
+
+let secondsLeft = TOTAL_SECONDS;
+let timerInterval = null;
+let running = false;
+
+function updateTimerDisplay() {
+  const m = Math.floor(secondsLeft / 60);
+  const s = secondsLeft % 60;
+  const str = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+
+  // Topbar
+  const tc = document.getElementById('timer-c');
+  tc.textContent = str;
+  tc.classList.toggle('warning', secondsLeft <= 180 && secondsLeft > 60);
+  tc.classList.toggle('urgent',  secondsLeft <= 60);
+
+  // Ring
+  const fraction = secondsLeft / TOTAL_SECONDS;
+  const offset   = RING_CIRC * (1 - fraction);
+  const ring = document.getElementById('ring-fill');
+  ring.style.strokeDashoffset = offset;
+  ring.classList.toggle('warning', secondsLeft <= 180 && secondsLeft > 60);
+  ring.classList.toggle('urgent',  secondsLeft <= 60);
+
+  // Ring num
+  document.getElementById('ring-num').textContent = m;
+}
+
+function startTimer() {
+  if (running) { clearInterval(timerInterval); running = false; return; }
+  running = true;
+  timerInterval = setInterval(() => {
+    if (secondsLeft <= 0) { clearInterval(timerInterval); running = false; return; }
+    secondsLeft--;
+    updateTimerDisplay();
+  }, 1000);
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  running = false;
+  secondsLeft = TOTAL_SECONDS;
+  updateTimerDisplay();
+}
+
+/* ── THEME ─────────────────────────────────────── */
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn  = document.getElementById('btn-theme');
+  const isDark = html.dataset.theme === 'dark';
+  html.dataset.theme = isDark ? 'light' : 'dark';
+  btn.textContent = isDark ? 'Sombre' : 'Clair';
+}
+
+/* ── KEYBOARD ──────────────────────────────────── */
+document.addEventListener('keydown', e => {
+  if (e.key === 'c' || e.key === 'C') switchMode('consigne');
+  if (e.key === 'v' || e.key === 'V') switchMode('vote');
+  if (e.key === 'p' || e.key === 'P') switchMode('pause');
+  if (e.key === 'f' || e.key === 'F') switchMode('fin');
+  if (e.key === ' ')  { e.preventDefault(); startTimer(); }
+  if (e.key === 'r' || e.key === 'R')  resetTimer();
+  if (e.key === 't' || e.key === 'T')  toggleTheme();
+});
+
+/* ── INIT ──────────────────────────────────────── */
+updateTimerDisplay();
+</script>
+</body>
+</html>

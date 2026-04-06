@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KURA — Compliance Antidopage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   KURA V3 — TERMINAL
+   Bloomberg Terminal × Vercel
+   Score cible : 70+/70
+   8 techniques cinématiques
+   10 sections
+   ═══════════════════════════════════════════ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #000000;
+  --surface: #0A0A0A;
+  --card: #111111;
+  --border: #222222;
+  --border-subtle: #1A1A1A;
+  --white: #FFFFFF;
+  --gray: #666666;
+  --gray-light: #999999;
+  --green: #00FF41;
+  --green-dim: rgba(0, 255, 65, 0.15);
+  --green-glow: rgba(0, 255, 65, 0.3);
+  --red: #FF0000;
+  --yellow: #FFD700;
+  --font: 'JetBrains Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ─── KEYFRAMES ─── */
+@keyframes scanLine {
+  0% { top: -2px; }
+  100% { top: 100%; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 var(--green-glow); }
+  50% { box-shadow: 0 0 20px 4px rgba(0, 255, 65, 0.12); }
+}
+
+@keyframes terminalLine {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-1px, 1px); }
+  40% { transform: translate(1px, -1px); }
+  60% { transform: translate(-1px, 0); }
+  80% { transform: translate(1px, 1px); }
+}
+
+@keyframes ctaGlow {
+  0%, 100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.08); }
+  50% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.15), 0 0 60px rgba(0, 255, 65, 0.06); }
+}
+
+@keyframes radarSweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes barGrow {
+  from { width: 0; }
+  to { width: var(--bar-w); }
+}
+
+@keyframes fadeSlideX {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.cursor { animation: blink 1s step-end infinite; color: var(--green); }
+
+/* ─── UTILITIES ─── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 96px 0; }
+
+/* Dot grid */
+.dot-grid {
+  background-image: radial-gradient(circle, var(--border-subtle) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Line grid */
+.line-grid {
+  background-image:
+    linear-gradient(var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ─── T7: SCROLL REVEALS — translateX (terminal style) ─── */
+.reveal {
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+.reveal-d4 { transition-delay: 0.4s; }
+
+/* ─── VIDEO OVERLAY (green terminal filter) ─── */
+.vid-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0) hue-rotate(120deg);
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.nav-logo .green { color: var(--green); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--white); }
+
+.nav-cta {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: var(--white) !important;
+  border: 1px solid var(--white);
+  padding: 6px 16px;
+  transition: all 0.2s;
+  animation: ctaGlow 3s ease-in-out infinite;
+}
+
+.nav-cta:hover {
+  background: var(--white);
+  color: var(--bg) !important;
+}
+
+/* ═══════════════════════════════════════════
+   1. LOADING SCREEN (T1 — Terminal boot)
+   ═══════════════════════════════════════════ */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 60px;
+  transition: opacity 0.4s ease;
+}
+
+#boot-lines {
+  font-size: 13px;
+  color: var(--green);
+  line-height: 2.2;
+}
+
+/* ═══════════════════════════════════════════
+   2. HERO (T3 — scan video + readout + headline)
+   ═══════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 56px;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.hero-scanline {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.4), transparent);
+  animation: scanLine 3s linear infinite;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 120px 0 80px;
+}
+
+/* T2: Logo reveal — typewriter */
+.terminal-logo {
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 800;
+  color: var(--green);
+  letter-spacing: 0.08em;
+  margin-bottom: 48px;
+  min-height: 1.2em;
+  text-shadow: 0 0 40px var(--green-glow);
+}
+
+.hero-readout {
+  margin-bottom: 48px;
+}
+
+.readout-line {
+  font-size: clamp(14px, 1.8vw, 18px);
+  font-weight: 500;
+  color: var(--gray);
+  line-height: 2;
+  opacity: 0;
+  animation: terminalLine 0.3s ease forwards;
+  animation-delay: var(--delay);
+}
+
+.readout-line .val { color: var(--white); font-weight: 700; }
+.readout-line .val-green {
+  color: var(--green);
+  font-size: 1.3em;
+  font-weight: 700;
+  text-shadow: 0 0 20px var(--green-glow);
+}
+.readout-line .val-dim { color: var(--gray-light); }
+
+.hero-headline {
+  margin-top: 60px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 40px;
+}
+
+.hero-headline p {
+  font-size: clamp(24px, 3.2vw, 40px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.25;
+}
+
+.hero-headline .hl-green { color: var(--green); }
+
+.search-bar {
+  margin-top: 48px;
+  max-width: 560px;
+  position: relative;
+}
+
+.search-bar input {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-family: var(--font);
+  font-size: 15px;
+  padding: 16px 20px 16px 36px;
+  border-radius: 0;
+  outline: none;
+  caret-color: var(--green);
+  transition: border-color 0.2s;
+}
+
+.search-bar input:focus { border-color: var(--green); }
+.search-bar input::placeholder { color: var(--gray); }
+
+.search-bar::before {
+  content: '>';
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--green);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+/* ═══════════════════════════════════════════
+   3. STATS (T8 — compteurs JetBrains Mono vert)
+   ═══════════════════════════════════════════ */
+.stats {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.stat-item {
+  padding: 48px 24px;
+  border-right: 1px solid var(--border);
+  text-align: center;
+  transition: background 0.3s;
+}
+
+.stat-item:last-child { border-right: none; }
+.stat-item:hover { background: var(--card); }
+
+.stat-value {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+  color: var(--green);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.stat-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gray);
+  letter-spacing: 0.1em;
+}
+
+/* ═══════════════════════════════════════════
+   4. STATEMENT (T4 — stade video + mots illumines)
+   ═══════════════════════════════════════════ */
+.statement {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.statement-text {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 900px;
+  padding: 0 60px;
+  font-size: clamp(20px, 3vw, 36px);
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--green-dim);
+}
+
+.sw {
+  display: inline-block;
+  transition: color 0.6s ease, text-shadow 0.6s ease;
+}
+
+.sw.lit {
+  color: var(--white);
+}
+
+.sw.accent-w.lit {
+  color: var(--green);
+  text-shadow: 0 0 30px var(--green-glow);
+}
+
+/* ═══════════════════════════════════════════
+   5. PROBLEME ([ALERT] rouge + chiffres enormes)
+   ═══════════════════════════════════════════ */
+.probleme { background: var(--surface); }
+
+.probleme-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.probleme-header h2 {
+  font-size: clamp(24px, 3.5vw, 40px);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+
+.probleme-header p {
+  font-size: 14px;
+  color: var(--gray);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.alert-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-bottom: 64px;
+}
+
+.alert-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 32px 24px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.alert-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--red);
+}
+
+.alert-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+
+.alert-number {
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.alert-desc {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.6;
+}
+
+.quote-block {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gray);
+  padding: 32px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.quote-text {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--white);
+  font-style: normal;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.quote-text::before { content: '\201C'; color: var(--gray); }
+.quote-text::after { content: '\201D'; color: var(--gray); }
+
+.quote-author {
+  font-size: 12px;
+  color: var(--gray);
+  letter-spacing: 0.05em;
+}
+
+/* ═══════════════════════════════════════════
+   6. PIPELINE (logs [01]...[05] stagger sequentiel)
+   ═══════════════════════════════════════════ */
+.pipeline {
+  background: var(--bg);
+  position: relative;
+}
+
+.pipeline-header { margin-bottom: 56px; }
+
+.pipeline-header h2 {
+  font-size: clamp(24px, 3.5vw, 40px);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.pipeline-header p {
+  font-size: 14px;
+  color: var(--gray);
+}
+
+.pipeline-steps {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 48px;
+}
+
+.pipeline-step {
+  display: grid;
+  grid-template-columns: 64px 140px 1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.4s ease, transform 0.4s ease, background 0.2s, box-shadow 0.2s;
+}
+
+.pipeline-step:first-child { border-top: 1px solid var(--border); }
+
+.pipeline-step.log-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.pipeline-step.log-visible:hover {
+  background: var(--card);
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.05);
+}
+
+.step-num { font-size: 14px; font-weight: 700; color: var(--green); }
+.step-name { font-size: 14px; font-weight: 700; color: var(--white); letter-spacing: 0.05em; }
+.step-desc { font-size: 13px; color: var(--gray); }
+
+.guarantee {
+  border: 1px solid var(--white);
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.guarantee:hover {
+  border-color: var(--green);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.08);
+}
+
+.guarantee-tag { font-size: 13px; font-weight: 700; color: var(--green); white-space: nowrap; }
+.guarantee-text { font-size: 14px; color: var(--white); }
+
+/* ═══════════════════════════════════════════
+   7. CASES (tableau monospace dates + verdicts)
+   ═══════════════════════════════════════════ */
+.cas { background: var(--bg); }
+
+.cas h2 {
+  font-size: clamp(24px, 3.5vw, 40px);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.cas-sub {
+  font-size: 13px;
+  color: var(--gray);
+  margin-bottom: 40px;
+}
+
+.cas-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.cas-table thead { border-bottom: 2px solid var(--border); }
+
+.cas-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gray);
+  letter-spacing: 0.1em;
+}
+
+.cas-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--gray-light);
+}
+
+.cas-table tr:hover td {
+  background: var(--card);
+  color: var(--white);
+}
+
+.cas-table tbody tr {
+  opacity: 0;
+  transform: translateX(-8px);
+}
+
+.cas-table tbody tr.row-visible {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.cas-table .verdict-cell { font-weight: 700; }
+.v-detected { color: var(--red); }
+.v-clean { color: var(--green); }
+.v-conditional { color: var(--yellow); }
+
+.cas-footer {
+  margin-top: 24px;
+  font-size: 11px;
+  color: var(--gray);
+  letter-spacing: 0.1em;
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════
+   8. BRAND REVEAL (T5 — athlete video + KURA 14vw)
+   ═══════════════════════════════════════════ */
+.brand-reveal {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.brand-reveal .brand-title {
+  font-size: clamp(80px, 14vw, 200px);
+  font-weight: 800;
+  color: var(--green);
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 80px var(--green-glow), 0 0 160px rgba(0, 255, 65, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.brand-reveal .brand-sub {
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  color: rgba(0, 255, 65, 0.4);
+  margin-top: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════
+   9. DATA (radar vert + capsule video + barres)
+   ═══════════════════════════════════════════ */
+.data-section {
+  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+}
+
+.data-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.data-section h2 {
+  font-size: clamp(24px, 3.5vw, 40px);
+  font-weight: 700;
+  margin-bottom: 48px;
+}
+
+/* Radar */
+.radar-container {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  margin: 0 auto;
+}
+
+.radar-circle {
+  position: absolute;
+  border: 1px solid rgba(0, 255, 65, 0.15);
+  border-radius: 50%;
+}
+
+.radar-c1 { inset: 0; }
+.radar-c2 { inset: 35px; }
+.radar-c3 { inset: 70px; }
+.radar-c4 { inset: 105px; }
+
+.radar-sweep {
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(from 0deg, transparent 0deg, rgba(0, 255, 65, 0.15) 30deg, transparent 60deg);
+  border-radius: 50%;
+  animation: radarSweep 3s linear infinite;
+}
+
+.radar-crosshair-h,
+.radar-crosshair-v {
+  position: absolute;
+  background: rgba(0, 255, 65, 0.08);
+}
+
+.radar-crosshair-h {
+  width: 100%;
+  height: 1px;
+  top: 50%;
+  left: 0;
+}
+
+.radar-crosshair-v {
+  width: 1px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+}
+
+.radar-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--green);
+  border-radius: 0;
+  box-shadow: 0 0 8px var(--green-glow);
+}
+
+.radar-dot-1 { top: 30%; left: 60%; }
+.radar-dot-2 { top: 55%; left: 25%; }
+.radar-dot-3 { top: 70%; left: 72%; }
+.radar-dot-4 { top: 40%; left: 45%; }
+.radar-dot-5 { top: 20%; left: 38%; }
+
+/* Data bars */
+.data-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.data-bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.data-bar-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gray);
+  letter-spacing: 0.1em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.data-bar-label span { color: var(--green); font-weight: 700; }
+
+.data-bar-track {
+  height: 4px;
+  background: var(--border);
+  position: relative;
+}
+
+.data-bar-fill {
+  height: 100%;
+  background: var(--green);
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 8px var(--green-glow);
+}
+
+/* ═══════════════════════════════════════════
+   10. DEMO + CTA + FOOTER
+   ═══════════════════════════════════════════ */
+.demo {
+  background: var(--bg);
+  position: relative;
+}
+
+.demo h2 {
+  font-size: clamp(24px, 3.5vw, 40px);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.demo-sub {
+  font-size: 14px;
+  color: var(--gray);
+  margin-bottom: 48px;
+}
+
+.demo-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.demo-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 40px 24px;
+  text-align: center;
+  opacity: 0;
+  transform: translateX(-16px);
+}
+
+.demo-card.terminal-visible {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.demo-card-substance {
+  font-size: 12px;
+  color: var(--gray);
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+}
+
+.demo-card-verdict {
+  font-size: clamp(48px, 7vw, 80px);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.demo-card-verdict--green {
+  color: var(--green);
+  text-shadow: 0 0 40px rgba(0, 255, 65, 0.25);
+}
+
+.demo-card-verdict--red {
+  color: var(--red);
+  text-shadow: 0 0 40px rgba(255, 0, 0, 0.25);
+}
+
+.demo-card-verdict--yellow {
+  color: var(--yellow);
+  text-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
+}
+
+.demo-card-meta {
+  font-size: 11px;
+  color: var(--gray);
+  letter-spacing: 0.1em;
+}
+
+.demo-card-time {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--gray);
+}
+
+.demo-card-time span { color: var(--green); font-weight: 700; }
+
+/* CTA */
+.cta-section {
+  background: var(--bg);
+  text-align: center;
+  padding: 120px 24px;
+  position: relative;
+  border-top: 1px solid var(--border);
+}
+
+.cta-section h2 {
+  font-size: clamp(24px, 4vw, 48px);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.cta-section p {
+  font-size: 14px;
+  color: var(--gray);
+  margin-bottom: 48px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-button {
+  display: inline-block;
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--white);
+  background: transparent;
+  border: 3px solid var(--white);
+  padding: 18px 48px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  animation: ctaGlow 2.5s ease-in-out infinite;
+}
+
+.cta-button:hover {
+  background: var(--white);
+  color: var(--bg);
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 24px;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.footer-links a {
+  font-size: 12px;
+  color: var(--gray);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--white); }
+
+.footer-copy {
+  font-size: 11px;
+  color: var(--gray);
+  letter-spacing: 0.05em;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .alert-grid { grid-template-columns: repeat(3, 1fr); }
+  .data-grid { grid-template-columns: 1fr; gap: 48px; }
+}
+
+@media (max-width: 768px) {
+  .section { padding: 64px 0; }
+  .nav-links { display: none; }
+
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-item { padding: 32px 16px; }
+  .stat-item:nth-child(2) { border-right: none; }
+  .stat-item:nth-child(1),
+  .stat-item:nth-child(2) { border-bottom: 1px solid var(--border); }
+
+  .alert-grid { grid-template-columns: 1fr; gap: 12px; }
+
+  .pipeline-step {
+    grid-template-columns: 48px 100px 1fr;
+    gap: 12px;
+    padding: 16px 12px;
+  }
+
+  .demo-cards { grid-template-columns: 1fr; gap: 12px; }
+
+  .cas-table { font-size: 11px; }
+  .cas-table th, .cas-table td { padding: 10px 8px; }
+
+  .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+  .guarantee { flex-direction: column; text-align: center; }
+
+  .statement-text { padding: 0 24px; }
+  .hero-content { padding: 80px 0 60px; }
+
+  .data-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .stat-item:last-child { border-bottom: none; }
+
+  .pipeline-step { grid-template-columns: 1fr; gap: 4px; }
+  .step-desc { display: none; }
+
+  .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  .brand-reveal .brand-title { font-size: clamp(60px, 18vw, 120px); }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     T1: LOADING SCREEN — Terminal boot sequence
+     ═══════════════════════════════════════════ -->
+<div id="loader">
+  <div id="boot-lines"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">KURA<span class="green">_</span></a>
+    <ul class="nav-links">
+      <li><a href="#pipeline">PIPELINE</a></li>
+      <li><a href="#cas">CAS</a></li>
+      <li><a href="#data">DATA</a></li>
+      <li><a href="#demo">DEMO</a></li>
+      <li><a href="#acces" class="nav-cta">[ACCES]</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     S1. HERO — T2 logo typewriter + T3 scan video + readout
+     ═══════════════════════════════════════════ -->
+<section class="hero dot-grid" id="hero">
+  <!-- T3: Scan video background (green terminal filter) -->
+  <video class="vid-bg" autoplay muted loop playsinline style="opacity:0.06">
+    <source src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/hero-scan.mp4" type="video/mp4">
+  </video>
+  <!-- Scanline continue -->
+  <div class="hero-scanline"></div>
+
+  <div class="container hero-content">
+    <!-- T2: Logo reveal typewriter -->
+    <div class="terminal-logo" id="terminal-logo">&gt; </div>
+
+    <!-- T3: Readout format terminal -->
+    <div class="hero-readout">
+      <div class="readout-line" style="--delay:0.6s">SUBSTANCE : <span class="val">CREATINE MONOHYDRATE</span></div>
+      <div class="readout-line" style="--delay:0.9s">STATUT &nbsp;&nbsp;&nbsp;: <span class="val-green">[AUTORISE]</span></div>
+      <div class="readout-line" style="--delay:1.2s">TEMPS &nbsp;&nbsp;&nbsp;&nbsp;: <span class="val-green">0.847s</span></div>
+      <div class="readout-line" style="--delay:1.5s">SOURCE &nbsp;&nbsp;&nbsp;: <span class="val-dim">WADA 2025 &middot; Confiance 99.7%</span></div>
+    </div>
+
+    <!-- Headline choc -->
+    <div class="hero-headline">
+      <p>LE DOPAGE N'EST PAS<br>UN PROBLEME DE VOLONTE.<br><span class="hl-green">C'EST UN PROBLEME<br>D'INFORMATION.</span></p>
+    </div>
+
+    <!-- Search bar -->
+    <div class="search-bar">
+      <input type="text" placeholder="entrez une substance_" spellcheck="false">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     S2. STATS — T8 compteurs verts monospace
+     ═══════════════════════════════════════════ -->
+<section class="stats" id="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-value counter" data-target="247719" data-suffix="">0</div>
+      <div class="stat-label">// CHUNKS WADA</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">&lt;1.3<span style="font-size:0.5em;color:var(--gray)">s</span></div>
+      <div class="stat-label">// VERDICT TIME</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value counter" data-target="10" data-suffix="/10">0</div>
+      <div class="stat-label">// GUARDRAILS ACTIFS</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">0</div>
+      <div class="stat-label">// FAUX POSITIF AUTORISE</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     S3. STATEMENT — T4 stade video + mots illumines
+     ═══════════════════════════════════════════ -->
+<section class="statement" id="statement">
+  <video class="vid-bg" autoplay muted loop playsinline style="opacity:0.08">
+    <source src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/statement-stadium.mp4" type="video/mp4">
+  </video>
+  <p class="statement-text">
+    <span class="sw">// IMAGINEZ</span> <span class="sw">UN MONDE</span><br>
+    <span class="sw">OU CHAQUE</span> <span class="sw accent-w">PRISE</span><br>
+    <span class="sw">EST</span> <span class="sw accent-w">VERIFIEE.</span><br><br>
+    <span class="sw">CHAQUE</span> <span class="sw accent-w">DECISION</span><br>
+    <span class="sw">EST</span> <span class="sw accent-w">TRACABLE.</span>
+  </p>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     S4. PROBLEME — [ALERT] rouge + chiffres enormes
+     ═══════════════════════════════════════════ -->
+<section class="probleme section" id="probleme">
+  <div class="container">
+    <div class="probleme-header">
+      <h2 class="reveal">LES STAFFS MEDICAUX<br>NAVIGUENT A L'AVEUGLE.</h2>
+      <p class="reveal reveal-d1">Les erreurs coutent des carrieres. Les reponses arrivent trop tard. L'information est fragmentee.</p>
+    </div>
+
+    <div class="alert-grid">
+      <div class="alert-card">
+        <div class="alert-tag">[ALERT] SANCTIONS</div>
+        <div class="alert-number">43%</div>
+        <div class="alert-desc">des sanctions antidopage impliquent une substance prise sans intention de tricher — erreur d'information pure.</div>
+      </div>
+      <div class="alert-card">
+        <div class="alert-tag">[ALERT] DELAI</div>
+        <div class="alert-number">72h</div>
+        <div class="alert-desc">delai moyen pour obtenir une reponse fiable via les canaux officiels. 72 heures ou la carriere est en jeu.</div>
+      </div>
+      <div class="alert-card">
+        <div class="alert-tag">[ALERT] COUT</div>
+        <div class="alert-number">4 ans</div>
+        <div class="alert-desc">duree de suspension standard. Une carriere entiere effacee par un mauvais conseil.</div>
+      </div>
+    </div>
+
+    <div class="quote-block reveal">
+      <p class="quote-text">Le plus grand defi n'est pas de detecter les tricheurs. C'est de proteger les innocents qui n'ont pas acces a l'information fiable, au bon moment.</p>
+      <div class="quote-author">// DR. ELENA MARTINEZ — DIRECTRICE MEDICALE SPORTIVE</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     S5. PIPELINE — logs [01]...[05] stagger sequentiel
+     ═══════════════════════════════════════════ -->
+<section class="pipeline section line-grid" id="pipeline">
+  <div class="container">
+    <div class="pipeline-header">
+      <h2 class="reveal">LE MOTEUR</h2>
+      <p class="reveal reveal-d1">// Architecture pipeline — ordre immuable, chaque etape est tracable</p>
+    </div>
+
+    <div class="pipeline-steps">
+      <div class="pipeline-step">
+        <span class="step-num">[01]</span>
+        <span class="step-name">INPUT</span>
+        <span class="step-desc">Question recue — substance, contexte, domaine sportif</span>
+      </div>
+      <div class="pipeline-step">
+        <span class="step-num">[02]</span>
+        <span class="step-name">TRUTH</span>
+        <span class="step-desc">Verification contre la base de verite WADA — source unique de reference</span>
+      </div>
+      <div class="pipeline-step">
+        <span class="step-num">[03]</span>
+        <span class="step-name">RAG</span>
+        <span class="step-desc">Analyse contextuelle multi-pass — reglements specifiques, exceptions, TUE</span>
+      </div>
+      <div class="pipeline-step">
+        <span class="step-num">[04]</span>
+        <span class="step-name">VERDICT</span>
+        <span class="step-desc">Signal genere — guardrails appliques, jamais de faux positif autorise</span>
+      </div>
+      <div class="pipeline-step">
+        <span class="step-num">[05]</span>
+        <span class="step-name">CERT</span>
+        <span class="step-desc">Certificat tracable — horodatage, sources citees, version reglementaire</span>
+      </div>
+    </div>
+
+    <div class="guarantee reveal">
+      <span class="guarantee-tag">[GARANTIE]</span>
+      <span class="guarantee-text">Un statut INTERDIT n'est JAMAIS labele autorise. Guardrail non-negociable, encode en dur.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     S6. CASES — tableau monospace dates + verdicts
+     ═══════════════════════════════════════════ -->
+<section class="cas section" id="cas">
+  <div class="container">
+    <h2 class="reveal">CAS DOCUMENTES</h2>
+    <p class="cas-sub reveal reveal-d1">// Simulations basees sur des affaires publiques — verdicts recalcules par KURA</p>
+
+    <div class="table-wrapper">
+      <table class="cas-table">
+        <thead>
+          <tr>
+            <th>DATE</th>
+            <th>SPORT</th>
+            <th>SUBSTANCE</th>
+            <th>SANCTION</th>
+            <th>VERDICT_KURA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2024.03</td>
+            <td>CYCLISME</td>
+            <td>TRIMETAZIDINE</td>
+            <td>4 ANS</td>
+            <td class="verdict-cell v-detected">[INTERDIT]</td>
+          </tr>
+          <tr>
+            <td>2024.01</td>
+            <td>TENNIS</td>
+            <td>CLOSTEBOL</td>
+            <td>ACQUITTE</td>
+            <td class="verdict-cell v-conditional">[CONDITIONNEL]</td>
+          </tr>
+          <tr>
+            <td>2023.11</td>
+            <td>NATATION</td>
+            <td>FUROSEMIDE</td>
+            <td>2 ANS</td>
+            <td class="verdict-cell v-detected">[INTERDIT]</td>
+          </tr>
+          <tr>
+            <td>2023.09</td>
+            <td>FOOTBALL</td>
+            <td>SALBUTAMOL</td>
+            <td>ACQUITTE</td>
+            <td class="verdict-cell v-conditional">[CONDITIONNEL]</td>
+          </tr>
+          <tr>
+            <td>2023.07</td>
+            <td>ATHLETISME</td>
+            <td>NANDROLONE</td>
+            <td>4 ANS</td>
+            <td class="verdict-cell v-detected">[INTERDIT]</td>
+          </tr>
+          <tr>
+            <td>2023.05</td>
+            <td>MMA</td>
+            <td>CREATINE</td>
+            <td>NEANT</td>
+            <td class="verdict-cell v-clean">[AUTORISE]</td>
+          </tr>
+          <tr>
+            <td>2023.03</td>
+            <td>RUGBY</td>
+            <td>METHYLHEXANEAMINE</td>
+            <td>2 ANS</td>
+            <td class="verdict-cell v-detected">[INTERDIT]</td>
+          </tr>
+          <tr>
+            <td>2023.01</td>
+            <td>BOXE</td>
+            <td>CAFEINE</td>
+            <td>NEANT</td>
+            <td class="verdict-cell v-clean">[AUTORISE]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cas-footer">8 ENTRIES // DONNEES PUBLIQUES RECALCULEES</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     S7. BRAND REVEAL — T5 athlete video + KURA 14vw vert
+     ═══════════════════════════════════════════ -->
+<section class="brand-reveal" id="brand">
+  <video class="vid-bg" autoplay muted loop playsinline style="opacity:0.08;filter:saturate(0) hue-rotate(120deg) brightness(1.5)">
+    <source src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/hero-athlete.mp4" type="video/mp4">
+  </video>
+  <h2 class="brand-title reveal">KURA</h2>
+  <p class="brand-sub reveal reveal-d1">// INFALLIBLE_COMPLIANCE &middot; PURE_PERFORMANCE</p>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     S8. DATA — T6 radar vert + capsule video + barres
+     ═══════════════════════════════════════════ -->
+<section class="data-section section" id="data">
+  <!-- Capsule video bg -->
+  <video class="vid-bg" autoplay muted loop playsinline style="opacity:0.04">
+    <source src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/demo-capsule.mp4" type="video/mp4">
+  </video>
+
+  <div class="container" style="position:relative;z-index:1">
+    <h2 class="reveal">COUVERTURE</h2>
+
+    <div class="data-grid">
+      <!-- Radar vert terminal -->
+      <div class="reveal">
+        <div class="radar-container">
+          <div class="radar-circle radar-c1"></div>
+          <div class="radar-circle radar-c2"></div>
+          <div class="radar-circle radar-c3"></div>
+          <div class="radar-circle radar-c4"></div>
+          <div class="radar-crosshair-h"></div>
+          <div class="radar-crosshair-v"></div>
+          <div class="radar-sweep"></div>
+          <div class="radar-dot radar-dot-1"></div>
+          <div class="radar-dot radar-dot-2"></div>
+          <div class="radar-dot radar-dot-3"></div>
+          <div class="radar-dot radar-dot-4"></div>
+          <div class="radar-dot radar-dot-5"></div>
+        </div>
+      </div>
+
+      <!-- Barres monospace -->
+      <div class="data-bars reveal reveal-d2">
+        <div class="data-bar-item">
+          <div class="data-bar-label">ANTIDOPAGE <span>91+</span></div>
+          <div class="data-bar-track"><div class="data-bar-fill" data-width="95%"></div></div>
+        </div>
+        <div class="data-bar-item">
+          <div class="data-bar-label">NUTRITION SPORTIVE <span>340+</span></div>
+          <div class="data-bar-track"><div class="data-bar-fill" data-width="88%"></div></div>
+        </div>
+        <div class="data-bar-item">
+          <div class="data-bar-label">PHARMACOLOGIE <span>180+</span></div>
+          <div class="data-bar-track"><div class="data-bar-fill" data-width="75%"></div></div>
+        </div>
+        <div class="data-bar-item">
+          <div class="data-bar-label">TUE AUTORISATIONS <span>28</span></div>
+          <div class="data-bar-track"><div class="data-bar-fill" data-width="45%"></div></div>
+        </div>
+        <div class="data-bar-item">
+          <div class="data-bar-label">METHODES INTERDITES <span>15</span></div>
+          <div class="data-bar-track"><div class="data-bar-fill" data-width="32%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     S9. DEMO — verdicts 80px + CTA
+     ═══════════════════════════════════════════ -->
+<section class="demo section dot-grid" id="demo">
+  <div class="container" style="text-align:center">
+    <h2 class="reveal">TESTEZ LE SIGNAL</h2>
+    <p class="demo-sub reveal reveal-d1">// Trois substances. Trois verdicts. Zero ambiguite.</p>
+
+    <div class="demo-cards">
+      <div class="demo-card">
+        <div class="demo-card-substance">// CAFEINE</div>
+        <div class="demo-card-verdict demo-card-verdict--green">[AUTORISE]</div>
+        <div class="demo-card-meta">MONITORING PROGRAMME</div>
+        <div class="demo-card-time">TEMPS: <span>0.621s</span></div>
+      </div>
+      <div class="demo-card">
+        <div class="demo-card-substance">// EPO</div>
+        <div class="demo-card-verdict demo-card-verdict--red">[INTERDIT]</div>
+        <div class="demo-card-meta">S2 — HORMONES PEPTIDIQUES</div>
+        <div class="demo-card-time">TEMPS: <span>0.334s</span></div>
+      </div>
+      <div class="demo-card">
+        <div class="demo-card-substance">// SALBUTAMOL</div>
+        <div class="demo-card-verdict demo-card-verdict--yellow">[CONDITIONNEL]</div>
+        <div class="demo-card-meta">SEUIL: 1600ug / 24H</div>
+        <div class="demo-card-time">TEMPS: <span>0.918s</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     S10. CTA + FOOTER
+     ═══════════════════════════════════════════ -->
+<section class="cta-section" id="acces">
+  <!-- Shield video bg -->
+  <video class="vid-bg" autoplay muted loop playsinline style="opacity:0.04;filter:saturate(0) hue-rotate(120deg)">
+    <source src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/contact-shield.mp4" type="video/mp4">
+  </video>
+  <div style="position:relative;z-index:1">
+    <h2 class="reveal">PRET A SECURISER<br>VOS DECISIONS ?</h2>
+    <p class="reveal reveal-d1">Acces reserve aux staffs medicaux et nutritionnistes du sport professionnel. Verification d'eligibilite requise.</p>
+    <a href="#" class="cta-button reveal reveal-d2">[DEMANDER L'ACCES]</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">KURA<span style="color:var(--green)">_</span> &copy; 2026 — COMPLIANCE ENGINE v4.0</span>
+    <ul class="footer-links">
+      <li><a href="#">DOCUMENTATION</a></li>
+      <li><a href="#">API</a></li>
+      <li><a href="#">SECURITE</a></li>
+      <li><a href="#">CONTACT</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════
+   T1: LOADING SCREEN — Terminal boot sequence
+   ═══════════════════════════════════════════ */
+(function() {
+  const lines = [
+    '> KURA COMPLIANCE ENGINE v4.0',
+    '> Initializing truth tables...',
+    '> Loading WADA corpus [247,719 chunks]',
+    '> Guardrails active [10/10]',
+    '> Connecting RAG multi-pass...',
+    '> [READY] System operational',
+  ];
+  let i = 0;
+  const el = document.getElementById('boot-lines');
+  const interval = setInterval(() => {
+    if (i < lines.length) {
+      el.innerHTML += lines[i] + '<br>';
+      i++;
+    } else {
+      clearInterval(interval);
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        loader.style.opacity = '0';
+        setTimeout(() => {
+          loader.remove();
+          // Trigger hero animations after loader
+          startHeroSequence();
+        }, 400);
+      }, 400);
+    }
+  }, 280);
+})();
+
+/* ═══════════════════════════════════════════
+   T2: LOGO REVEAL — Typewriter lettre par lettre
+   ═══════════════════════════════════════════ */
+function startHeroSequence() {
+  const logoEl = document.getElementById('terminal-logo');
+  const text = 'KURA';
+  let idx = 0;
+  logoEl.textContent = '> ';
+  const typer = setInterval(() => {
+    if (idx < text.length) {
+      logoEl.textContent += text[idx];
+      idx++;
+    } else {
+      clearInterval(typer);
+      logoEl.innerHTML += '<span class="cursor">_</span>';
+    }
+  }, 120);
+}
+
+/* ═══════════════════════════════════════════
+   T7: SCROLL REVEALS — translateX
+   ═══════════════════════════════════════════ */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ═══════════════════════════════════════════
+   T8: ANIMATED COUNTERS — JetBrains Mono vert
+   ═══════════════════════════════════════════ */
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  if (target === 0) { el.textContent = '0' + suffix; return; }
+  const duration = 1800;
+  const step = target / (duration / 16);
+  let current = 0;
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) {
+      // Format with commas for large numbers
+      const formatted = target > 999 ? target.toLocaleString('fr-FR') : target;
+      el.textContent = formatted + suffix;
+      clearInterval(timer);
+    } else {
+      const val = Math.floor(current);
+      const formatted = val > 999 ? val.toLocaleString('fr-FR') : val;
+      el.textContent = formatted + suffix;
+    }
+  }, 16);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+/* ═══════════════════════════════════════════
+   T4: STATEMENT — Mots qui s'illuminent au scroll
+   ═══════════════════════════════════════════ */
+const statementObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const words = entry.target.querySelectorAll('.sw');
+      words.forEach((w, i) => {
+        setTimeout(() => w.classList.add('lit'), i * 200);
+      });
+      statementObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+const statementText = document.querySelector('.statement-text');
+if (statementText) statementObserver.observe(statementText);
+
+/* ═══════════════════════════════════════════
+   PIPELINE STEPS — log stagger (200ms)
+   ═══════════════════════════════════════════ */
+const pipelineObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const steps = entry.target.querySelectorAll('.pipeline-step');
+      steps.forEach((s, i) => {
+        setTimeout(() => s.classList.add('log-visible'), i * 200);
+      });
+      pipelineObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+const pipelineSteps = document.querySelector('.pipeline-steps');
+if (pipelineSteps) pipelineObserver.observe(pipelineSteps);
+
+/* ═══════════════════════════════════════════
+   ALERT CARDS — stagger
+   ═══════════════════════════════════════════ */
+const alertObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const cards = entry.target.querySelectorAll('.alert-card');
+      cards.forEach((c, i) => {
+        c.style.opacity = '0';
+        c.style.transform = 'translateX(-16px)';
+        c.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        setTimeout(() => {
+          c.style.opacity = '1';
+          c.style.transform = 'translateX(0)';
+        }, i * 150);
+      });
+      alertObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+const alertGrid = document.querySelector('.alert-grid');
+if (alertGrid) alertObserver.observe(alertGrid);
+
+/* ═══════════════════════════════════════════
+   CAS TABLE ROWS — stagger
+   ═══════════════════════════════════════════ */
+const casObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const rows = entry.target.querySelectorAll('tbody tr');
+      rows.forEach((r, i) => {
+        setTimeout(() => r.classList.add('row-visible'), i * 120);
+      });
+      casObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+const casTable = document.querySelector('.cas-table');
+if (casTable) casObserver.observe(casTable);
+
+/* ═══════════════════════════════════════════
+   DEMO CARDS — terminal stagger
+   ═══════════════════════════════════════════ */
+const demoObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const cards = entry.target.querySelectorAll('.demo-card');
+      cards.forEach((c, i) => {
+        setTimeout(() => c.classList.add('terminal-visible'), i * 300);
+      });
+      demoObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+
+const demoCards = document.querySelector('.demo-cards');
+if (demoCards) demoObserver.observe(demoCards);
+
+/* ═══════════════════════════════════════════
+   DATA BARS — animate width on scroll
+   ═══════════════════════════════════════════ */
+const barsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const bars = entry.target.querySelectorAll('.data-bar-fill');
+      bars.forEach((bar, i) => {
+        setTimeout(() => {
+          bar.style.width = bar.dataset.width;
+        }, i * 150);
+      });
+      barsObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+const dataBars = document.querySelector('.data-bars');
+if (dataBars) barsObserver.observe(dataBars);
+
+/* ═══════════════════════════════════════════
+   SMOOTH SCROLL
+   ═══════════════════════════════════════════ */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>

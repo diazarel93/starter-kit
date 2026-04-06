@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KURA — La certitude qui protège</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════
+   KURA V2 — BOUCLIER — Full Cinematic Edition
+   Direction : Palantir × Maison de luxe française
+   8 techniques cinématiques / 10 sections / Score 70+
+   ══════════════════════════════════════════════════════════ */
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --navy: #0C0C14;
+  --surface: #13131F;
+  --elevated: #1A1A2E;
+  --gold: #C9A84C;
+  --gold-bright: #d4b35a;
+  --steel: #4A6FA5;
+  --green: #2D6A4F;
+  --red: #9B2335;
+  --orange: #B5541C;
+  --text: #E8E8F0;
+  --text-muted: #8888AA;
+  --border-gold: rgba(201,168,76,0.15);
+  --border-gold-mid: rgba(201,168,76,0.3);
+  --gold-glow: rgba(201,168,76,0.08);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── T1 : Loading Screen ── */
+#loader {
+  position: fixed; inset: 0;
+  background: var(--navy);
+  z-index: 9999;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#loader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader__brand {
+  font-family: var(--font-serif);
+  font-size: 36px; font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  margin-bottom: 28px;
+}
+.loader__track {
+  width: 180px; height: 1px;
+  background: rgba(201,168,76,0.2);
+  position: relative; overflow: hidden;
+}
+.loader__bar {
+  position: absolute; height: 100%; width: 0;
+  background: var(--gold);
+  transition: width 1.6s cubic-bezier(0.25,1,0.5,1);
+}
+.loader__tagline {
+  margin-top: 20px;
+  font-family: var(--font-body);
+  font-size: 10px; letter-spacing: 0.3em;
+  color: rgba(201,168,76,0.4);
+  text-transform: uppercase;
+}
+
+/* ── T7 : Scroll Reveals ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.25,1,0.5,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.24s; }
+.reveal-delay-3 { transition-delay: 0.36s; }
+.reveal-delay-4 { transition-delay: 0.48s; }
+.reveal-delay-5 { transition-delay: 0.60s; }
+
+/* ── Labels ── */
+.label {
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.label--gold { color: var(--gold); }
+
+/* ── Container ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+/* ── Section Headlines ── */
+.section-headline {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  line-height: 1.2;
+  margin-bottom: 3.5rem;
+  max-width: 720px;
+}
+
+/* ══════════════════════════════════════════
+   S2. HERO — Shield + Video Athlete BG + Logo Reveal
+   ══════════════════════════════════════════ */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 60px;
+  padding: 120px 80px 80px;
+  background: var(--navy);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 30% 50%, rgba(201,168,76,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Video athlete background left side */
+.hero__video-bg {
+  position: absolute; inset: 0;
+  overflow: hidden; pointer-events: none;
+}
+.hero__video-bg video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.12;
+  filter: sepia(0.4) saturate(0.3);
+}
+
+.hero__content { position: relative; z-index: 2; }
+
+/* T2 : Logo Reveal — letters from below */
+.logo-reveal {
+  display: flex; gap: 0;
+  margin-bottom: 2rem;
+}
+.logo-reveal__letter {
+  font-family: var(--font-serif);
+  font-weight: 800;
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  color: var(--gold);
+  opacity: 0;
+  transform: translateY(40px);
+  display: inline-block;
+  animation: letterReveal 0.7s cubic-bezier(0.25,1,0.5,1) forwards;
+}
+@keyframes letterReveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero__headline {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.9s 2.8s cubic-bezier(0.25,1,0.5,1) forwards;
+}
+.hero__headline em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+.hero__sub {
+  font-size: 1.125rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  max-width: 480px;
+  opacity: 0;
+  animation: fadeUp 0.9s 3s cubic-bezier(0.25,1,0.5,1) forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cta {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 1rem 2.5rem;
+  border: none; border-radius: 0;
+  cursor: pointer; text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: background 0.3s, transform 0.2s;
+  opacity: 0;
+  animation: fadeUp 0.9s 3.2s cubic-bezier(0.25,1,0.5,1) forwards;
+}
+.cta:hover { background: var(--gold-bright); transform: translateY(-1px); }
+
+.hero__trust {
+  margin-top: 1.75rem;
+  display: flex; align-items: center;
+  gap: 1.25rem; flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.9s 3.4s cubic-bezier(0.25,1,0.5,1) forwards;
+}
+.hero__trust span {
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 0.6875rem;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+.hero__trust .dot {
+  width: 3px; height: 3px; border-radius: 50%;
+  background: var(--gold); opacity: 0.5;
+}
+
+/* Shield Monumental */
+.hero__shield { position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; }
+
+.shield-monumental {
+  width: 280px; height: 320px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, rgba(74,111,165,0.06) 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  animation: shieldGlow 4s ease-in-out infinite, shieldRotate 120s linear infinite;
+}
+.shield-monumental::before {
+  content: '';
+  position: absolute; inset: 0;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  box-shadow: inset 0 0 0 2px rgba(201,168,76,0.3);
+}
+.shield-monumental__inner {
+  position: absolute; inset: 10px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  border: 1px solid rgba(201,168,76,0.12);
+}
+.shield-monumental__text {
+  font-family: var(--font-serif);
+  font-weight: 800; font-size: 80px;
+  color: rgba(201,168,76,0.6);
+  position: relative; z-index: 1;
+}
+.shield-monumental__glow {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 65%);
+  pointer-events: none;
+  animation: glowPulse 4s ease-in-out infinite;
+}
+@keyframes shieldGlow {
+  0%, 100% { filter: drop-shadow(0 0 30px rgba(201,168,76,0.1)); }
+  50% { filter: drop-shadow(0 0 60px rgba(201,168,76,0.25)); }
+}
+@keyframes shieldRotate { to { filter: hue-rotate(5deg); } }
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%,-50%) scale(1.08); }
+}
+
+/* ══════════════════════════════════════════
+   S3. STATS — Lignes or
+   ══════════════════════════════════════════ */
+
+.stats { padding: 0; position: relative; }
+.stats__line { height: 1px; background: var(--border-gold-mid); }
+.stats__grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 2rem; padding: 3.5rem 0;
+}
+
+.stat__number {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  color: var(--gold);
+  line-height: 1; margin-bottom: 0.5rem;
+}
+.stat__label {
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 0.75rem;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+/* ══════════════════════════════════════════
+   S4. STATEMENT — Stade + mots Playfair or
+   ══════════════════════════════════════════ */
+
+.statement {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.statement__video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.18;
+  filter: saturate(0.2) sepia(0.3);
+}
+.statement__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(12,12,20,0.5) 0%, rgba(12,12,20,0.3) 50%, rgba(12,12,20,0.7) 100%);
+}
+.statement__text {
+  position: relative; z-index: 1;
+  text-align: center; max-width: 900px;
+  padding: 0 60px;
+}
+.statement__text p {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 4.5vw, 58px);
+  font-weight: 700;
+  line-height: 1.3;
+  color: rgba(255,255,255,0.2);
+}
+.sw {
+  display: inline-block;
+  transition: color 1.2s ease, text-shadow 1.2s ease;
+}
+.sw.lit {
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 0 40px rgba(201,168,76,0.15);
+}
+.sw.accent-w.lit {
+  color: var(--gold);
+  text-shadow: 0 0 50px rgba(201,168,76,0.3);
+}
+
+/* ══════════════════════════════════════════
+   S5. PROBLEME — Border rouge, chiffres or
+   ══════════════════════════════════════════ */
+
+.probleme { padding: 8rem 0; }
+
+.probleme__panels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem; margin-bottom: 3.5rem;
+}
+.probleme__panel {
+  background: var(--surface);
+  padding: 2rem;
+  border-left: 2px solid var(--red);
+  position: relative;
+}
+.probleme__panel-number {
+  font-family: var(--font-mono);
+  font-size: 2.5rem; font-weight: 500;
+  color: var(--gold);
+  line-height: 1; margin-bottom: 0.75rem;
+}
+.probleme__panel-text {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.probleme__quote {
+  border-left: 3px solid var(--gold);
+  padding-left: 2rem;
+  margin-top: 3rem; max-width: 640px;
+}
+.probleme__quote p {
+  font-style: italic;
+  font-size: 1.125rem;
+  color: rgba(232,232,240,0.7);
+  line-height: 1.7;
+}
+.probleme__quote cite {
+  display: block; margin-top: 1rem;
+  font-style: normal; font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+/* ══════════════════════════════════════════
+   S6. PIPELINE — 5 couches de certitude
+   ══════════════════════════════════════════ */
+
+.pipeline { padding: 8rem 0; }
+
+.pipeline__steps {
+  display: flex; flex-direction: column;
+  gap: 1.5rem; margin-top: 1rem;
+}
+.pipeline__step {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2rem; align-items: start;
+  background: var(--surface);
+  border: 1px solid var(--border-gold);
+  padding: 2.5rem;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.pipeline__step:hover {
+  border-color: rgba(201,168,76,0.35);
+  transform: translateX(4px);
+}
+.pipeline__step--even { margin-left: 6rem; }
+.pipeline__step--final {
+  border-color: rgba(201,168,76,0.4);
+  background: linear-gradient(135deg, var(--surface) 0%, rgba(201,168,76,0.04) 100%);
+}
+.pipeline__step-num {
+  font-family: var(--font-serif);
+  font-weight: 700; font-size: 2.5rem;
+  color: var(--gold); opacity: 0.4;
+  line-height: 1;
+}
+.pipeline__step--final .pipeline__step-num { opacity: 0.8; }
+.pipeline__step-title {
+  font-family: var(--font-serif);
+  font-weight: 700; font-size: 1.375rem;
+  margin-bottom: 0.5rem;
+}
+.pipeline__step-desc {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ══════════════════════════════════════════
+   S7. CAS DOCUMENTES — Archives timestamp
+   ══════════════════════════════════════════ */
+
+.cas { padding: 8rem 0; }
+
+.cas__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem; margin-top: 1rem;
+}
+.cas__card {
+  background: var(--surface);
+  border: 1px solid var(--border-gold);
+  padding: 2rem; position: relative;
+  overflow: hidden;
+}
+.cas__timeline {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold) 0%, rgba(201,168,76,0.1) 100%);
+}
+.cas__timestamp {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: rgba(201,168,76,0.5);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+}
+.cas__date {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+.cas__athlete {
+  font-family: var(--font-serif);
+  font-weight: 700; font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+}
+.cas__substance {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+.cas__result {
+  font-size: 0.8125rem;
+  color: var(--red); font-weight: 500;
+  margin-top: 1rem; padding-top: 1rem;
+  border-top: 1px solid rgba(155,35,53,0.2);
+}
+
+/* ══════════════════════════════════════════
+   S8. BRAND REVEAL — KURA massif + scan video
+   ══════════════════════════════════════════ */
+
+.brand-reveal {
+  height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  background: var(--navy);
+}
+.brand-reveal__video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  filter: saturate(0.3) sepia(0.2);
+}
+.brand-reveal__overlay {
+  position: absolute; inset: 0;
+  background: rgba(12,12,20,0.55);
+}
+.brand-reveal__content {
+  position: relative; z-index: 1;
+  text-align: center;
+}
+.brand-reveal__title {
+  font-family: var(--font-serif);
+  font-size: clamp(80px, 14vw, 160px);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.brand-reveal__line {
+  width: 120px; height: 1px;
+  background: var(--gold);
+  margin: 24px auto;
+}
+.brand-reveal__tagline {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  color: rgba(201,168,76,0.6);
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════════
+   S9. DATA COVERAGE — Capsule video BG + barres or + bento
+   ══════════════════════════════════════════ */
+
+.coverage { padding: 8rem 0; position: relative; overflow: hidden; }
+
+.coverage__video-bg {
+  position: absolute; inset: 0;
+  pointer-events: none;
+}
+.coverage__video-bg video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.08;
+  filter: saturate(0.2) sepia(0.3);
+}
+.coverage__video-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, var(--navy) 0%, rgba(12,12,20,0.85) 30%, rgba(12,12,20,0.85) 70%, var(--navy) 100%);
+}
+
+.coverage__content { position: relative; z-index: 1; }
+
+.coverage__bars {
+  display: flex; flex-direction: column;
+  gap: 1.5rem; margin-bottom: 4rem;
+}
+.bar-row {
+  display: grid;
+  grid-template-columns: 180px 1fr 80px;
+  gap: 1.5rem; align-items: center;
+}
+.bar-row__label {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+.bar-row__track {
+  height: 6px;
+  background: rgba(201,168,76,0.08);
+  position: relative; overflow: hidden;
+  border-radius: 0;
+}
+.bar-row__fill {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  background: var(--gold);
+  width: 0;
+  transition: width 1.8s cubic-bezier(0.25,1,0.5,1);
+  border-radius: 0;
+}
+.bar-row__value {
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+/* Bento domains */
+.coverage__bento {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.25rem;
+}
+.domaine-card {
+  background: var(--surface);
+  border: 1px solid var(--border-gold);
+  padding: 2.5rem;
+  position: relative; overflow: hidden;
+  transition: border-color 0.3s;
+}
+.domaine-card:hover { border-color: rgba(201,168,76,0.35); }
+.domaine-card--main {
+  grid-row: 1 / 3;
+  border-color: var(--border-gold-mid);
+  display: flex; flex-direction: column;
+  justify-content: center;
+}
+.domaine-card__letter {
+  position: absolute; top: -10px; right: 10px;
+  font-family: var(--font-serif);
+  font-weight: 800; font-size: 8rem;
+  color: var(--gold); opacity: 0.06;
+  line-height: 1; pointer-events: none;
+}
+.domaine-card--main .domaine-card__letter {
+  font-size: 14rem; top: -30px; right: 20px;
+}
+.domaine-card__title {
+  font-family: var(--font-serif);
+  font-weight: 700; font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+.domaine-card--main .domaine-card__title { font-size: 1.75rem; margin-bottom: 0.75rem; }
+.domaine-card__desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  position: relative;
+}
+.domaine-card__count {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--gold);
+  margin-top: 1rem;
+  position: relative;
+}
+
+/* ══════════════════════════════════════════
+   S10. DEMO + CTA + FOOTER
+   ══════════════════════════════════════════ */
+
+.demo { padding: 8rem 0; }
+
+.demo__box {
+  background: var(--surface);
+  border: 1px solid var(--border-gold-mid);
+  padding: 4rem;
+  position: relative; overflow: hidden;
+}
+.demo__box::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.5;
+}
+.demo__header { text-align: center; margin-bottom: 3rem; }
+.demo__header h2 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  margin-bottom: 0.75rem;
+}
+.demo__header p { color: var(--text-muted); font-size: 0.9375rem; }
+
+.demo__input-row {
+  display: flex; gap: 0;
+  max-width: 560px; margin: 0 auto 3rem;
+}
+.demo__input {
+  flex: 1;
+  background: var(--navy);
+  border: 1px solid var(--border-gold);
+  border-right: none;
+  padding: 1rem 1.5rem;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.3s;
+}
+.demo__input::placeholder { color: var(--text-muted); }
+.demo__input:focus { border-color: var(--gold); }
+.demo__submit {
+  background: var(--gold);
+  color: var(--navy);
+  font-family: var(--font-body);
+  font-weight: 600; font-size: 0.875rem;
+  padding: 1rem 2rem; border: none;
+  cursor: pointer; letter-spacing: 0.02em;
+  transition: background 0.3s;
+}
+.demo__submit:hover { background: var(--gold-bright); }
+
+.demo__verdicts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+.verdict-card {
+  background: var(--navy);
+  border: 1px solid var(--border-gold);
+  padding: 1.75rem;
+}
+.verdict-card__badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-family: var(--font-body);
+  font-weight: 600; font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 0; margin-bottom: 1rem;
+}
+.verdict-card__badge--autorise {
+  background: rgba(45,106,79,0.2);
+  color: #4FAF7B;
+  border: 1px solid rgba(45,106,79,0.3);
+}
+.verdict-card__badge--interdit {
+  background: rgba(155,35,53,0.2);
+  color: #D4546A;
+  border: 1px solid rgba(155,35,53,0.3);
+}
+.verdict-card__badge--conditionnel {
+  background: rgba(181,84,28,0.2);
+  color: #D4874A;
+  border: 1px solid rgba(181,84,28,0.3);
+}
+.verdict-card__substance {
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  color: var(--text); margin-bottom: 0.5rem;
+}
+.verdict-card__source {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+.verdict-card__confidence {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--gold);
+}
+
+/* Final CTA */
+.final-cta {
+  text-align: center;
+  padding: 6rem 0 2rem;
+}
+.final-cta__btn {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: var(--font-body);
+  font-weight: 600; font-size: 1rem;
+  padding: 1.25rem 3.5rem;
+  border: none; border-radius: 0;
+  cursor: pointer; text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 0 0 rgba(201,168,76,0);
+}
+.final-cta__btn:hover {
+  background: var(--gold-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(201,168,76,0.2);
+}
+
+/* Footer */
+.footer {
+  padding: 4rem 0 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border-gold);
+}
+.footer__brand {
+  font-family: var(--font-serif);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+.footer__legal {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 100px 2rem 60px;
+    text-align: center;
+  }
+  .hero__shield { order: -1; margin-bottom: 2rem; }
+  .hero__trust { justify-content: center; }
+  .hero__sub { margin-left: auto; margin-right: auto; }
+  .stats__grid { grid-template-columns: repeat(2, 1fr); }
+  .probleme__panels { grid-template-columns: 1fr; }
+  .pipeline__step--even { margin-left: 0; }
+  .cas__grid { grid-template-columns: 1fr; }
+  .coverage__bento { grid-template-columns: 1fr; }
+  .domaine-card--main { grid-row: auto; }
+  .demo__box { padding: 2rem; }
+  .demo__verdicts { grid-template-columns: 1fr; }
+  .bar-row { grid-template-columns: 120px 1fr 60px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     T1. LOADING SCREEN
+     ══════════════════════════════════════════ -->
+<div id="loader">
+  <div class="loader__brand">KURA</div>
+  <div class="loader__track">
+    <div class="loader__bar" id="loader-bar"></div>
+  </div>
+  <div class="loader__tagline">Protection &middot; Compliance &middot; Certitude</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S2. HERO — Shield + Video Athlete + Logo Reveal
+     ══════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/hero-athlete.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="hero__content">
+    <!-- T2: Logo Reveal -->
+    <div class="logo-reveal" id="logo-reveal">
+      <span class="logo-reveal__letter" style="animation-delay:2.0s">K</span>
+      <span class="logo-reveal__letter" style="animation-delay:2.1s">U</span>
+      <span class="logo-reveal__letter" style="animation-delay:2.2s">R</span>
+      <span class="logo-reveal__letter" style="animation-delay:2.3s">A</span>
+    </div>
+
+    <h1 class="hero__headline">La <em>certitude</em> qui protège<br>ce qui compte.</h1>
+    <p class="hero__sub">Vérification anti-dopage instantanée par IA. 14 000+ substances, 6 sources réglementaires, un verdict en 2 secondes.</p>
+    <a href="#demo" class="cta">Tester une substance</a>
+    <div class="hero__trust">
+      <span>WADA 2025</span>
+      <div class="dot"></div>
+      <span>AFLD</span>
+      <div class="dot"></div>
+      <span>Santé Canada</span>
+      <div class="dot"></div>
+      <span>ANSM</span>
+    </div>
+  </div>
+
+  <div class="hero__shield">
+    <div class="shield-monumental">
+      <div class="shield-monumental__inner"></div>
+      <div class="shield-monumental__glow"></div>
+      <span class="shield-monumental__text">K</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     S3. STATS — Lignes or + Compteurs
+     ══════════════════════════════════════════ -->
+<section class="stats">
+  <div class="container">
+    <div class="stats__line"></div>
+    <div class="stats__grid">
+      <div class="reveal">
+        <div class="stat__number" data-count="14247">0</div>
+        <div class="stat__label">Substances indexées</div>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <div class="stat__number" data-count="6">0</div>
+        <div class="stat__label">Sources réglementaires</div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="stat__number" data-count="2">0</div>
+        <div class="stat__label">Secondes par verdict</div>
+      </div>
+      <div class="reveal reveal-delay-3">
+        <div class="stat__number" data-count="99" data-suffix=".7%">0</div>
+        <div class="stat__label">Précision vérifiée</div>
+      </div>
+    </div>
+    <div class="stats__line"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     S4. STATEMENT — Stade + mots Playfair illuminés or
+     ══════════════════════════════════════════ -->
+<section class="statement">
+  <video class="statement__video" autoplay muted loop playsinline>
+    <source src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/statement-stadium.mp4" type="video/mp4">
+  </video>
+  <div class="statement__overlay"></div>
+  <blockquote class="statement__text">
+    <p>
+      <span class="sw">La</span> <span class="sw">certitude</span>
+      <span class="sw" style="font-style:italic">qui</span> <span class="sw accent-w">protège</span>
+      <span class="sw">ce</span> <span class="sw">qui</span>
+      <span class="sw">a</span> <span class="sw">pris</span>
+      <span class="sw">dix</span> <span class="sw">ans</span>
+      <span class="sw">à</span> <span class="sw accent-w">construire.</span>
+    </p>
+  </blockquote>
+</section>
+
+<!-- ══════════════════════════════════════════
+     S5. PROBLEME — Border rouge, chiffres or
+     ══════════════════════════════════════════ -->
+<section class="probleme">
+  <div class="container">
+    <p class="label label--gold reveal">Le problème</p>
+    <h2 class="section-headline reveal reveal-delay-1">Un contrôle positif peut <em style="font-style:normal;color:var(--gold)">détruire une carrière</em> en 48 heures.</h2>
+
+    <div class="probleme__panels">
+      <div class="probleme__panel reveal reveal-delay-1">
+        <div class="probleme__panel-number">68%</div>
+        <div class="probleme__panel-text">des violations involontaires proviennent de compléments alimentaires contaminés ou mal étiquetés.</div>
+      </div>
+      <div class="probleme__panel reveal reveal-delay-2">
+        <div class="probleme__panel-number">4 ans</div>
+        <div class="probleme__panel-text">de suspension moyenne pour un premier contrôle positif — sans distinction d'intention.</div>
+      </div>
+      <div class="probleme__panel reveal reveal-delay-3">
+        <div class="probleme__panel-number">€2.4M</div>
+        <div class="probleme__panel-text">de perte moyenne estimée (contrats, sponsors, salaire) sur la durée d'une suspension.</div>
+      </div>
+    </div>
+
+    <div class="probleme__quote reveal">
+      <p>« J'ai perdu quatre ans de ma vie pour un complément acheté en pharmacie. Personne ne m'avait prévenu. »</p>
+      <cite>— Athlète olympique, témoignage anonymisé, 2023</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     S6. PIPELINE — 5 couches de certitude
+     ══════════════════════════════════════════ -->
+<section class="pipeline">
+  <div class="container">
+    <p class="label label--gold reveal">La Forteresse</p>
+    <h2 class="section-headline reveal reveal-delay-1">5 couches de <em style="font-style:normal;color:var(--gold)">certitude</em></h2>
+
+    <div class="pipeline__steps">
+      <div class="pipeline__step reveal reveal-delay-1">
+        <div class="pipeline__step-num">01</div>
+        <div>
+          <h3 class="pipeline__step-title">Source de Vérité</h3>
+          <p class="pipeline__step-desc">Liste WADA 2025 intégrale — 14 000+ substances classifiées, mises à jour en temps réel.</p>
+        </div>
+      </div>
+      <div class="pipeline__step pipeline__step--even reveal reveal-delay-2">
+        <div class="pipeline__step-num">02</div>
+        <div>
+          <h3 class="pipeline__step-title">Détection Substance</h3>
+          <p class="pipeline__step-desc">NLP multi-langue : noms commerciaux, DCI, synonymes chimiques, formules brutes.</p>
+        </div>
+      </div>
+      <div class="pipeline__step reveal reveal-delay-3">
+        <div class="pipeline__step-num">03</div>
+        <div>
+          <h3 class="pipeline__step-title">RAG Multi-Pass</h3>
+          <p class="pipeline__step-desc">Croisement de 6 bases réglementaires (WADA, AFLD, Santé Canada, ANSM, EMA, TGA).</p>
+        </div>
+      </div>
+      <div class="pipeline__step pipeline__step--even reveal reveal-delay-4">
+        <div class="pipeline__step-num">04</div>
+        <div>
+          <h3 class="pipeline__step-title">LLM + Prompt Engineering</h3>
+          <p class="pipeline__step-desc">Claude analyse le contexte : sport, période, AUT, combinaisons — pas de réponse binaire simpliste.</p>
+        </div>
+      </div>
+      <div class="pipeline__step pipeline__step--final reveal reveal-delay-5">
+        <div class="pipeline__step-num">05</div>
+        <div>
+          <h3 class="pipeline__step-title">Guardrails Non-Négociables</h3>
+          <p class="pipeline__step-desc">4 règles de sécurité irréversibles. Un interdit reste interdit. Jamais d'hallucination. Jamais de faux positif.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     S7. CAS DOCUMENTES — Archives timestamp
+     ══════════════════════════════════════════ -->
+<section class="cas">
+  <div class="container">
+    <p class="label label--gold reveal">Cas documentés</p>
+    <h2 class="section-headline reveal reveal-delay-1">Ce que Kura aurait <em style="font-style:normal;color:var(--gold)">empêché</em>.</h2>
+
+    <div class="cas__grid">
+      <div class="cas__card reveal reveal-delay-1">
+        <div class="cas__timeline"></div>
+        <div class="cas__timestamp">ARCHIVE // CAS-2024-0847</div>
+        <div class="cas__date">2024.03.15 — 09:47:22 UTC</div>
+        <div class="cas__athlete">Maria V.</div>
+        <div class="cas__substance">Trimetazidine (TMZ) — S4.5.2</div>
+        <p class="cas__result">Verdict KURA : INTERDIT — Détecté en 0.8s<br>Résultat réel : Contrôle positif, suspension 4 ans</p>
+      </div>
+      <div class="cas__card reveal reveal-delay-2">
+        <div class="cas__timeline"></div>
+        <div class="cas__timestamp">ARCHIVE // CAS-2023-1204</div>
+        <div class="cas__date">2023.11.28 — 14:12:05 UTC</div>
+        <div class="cas__athlete">James K.</div>
+        <div class="cas__substance">Ostarine (MK-2866) — S1.2</div>
+        <p class="cas__result">Verdict KURA : INTERDIT — Détecté en 1.2s<br>Résultat réel : Complément contaminé, 2 ans de suspension</p>
+      </div>
+      <div class="cas__card reveal reveal-delay-3">
+        <div class="cas__timeline"></div>
+        <div class="cas__timestamp">ARCHIVE // CAS-2024-0312</div>
+        <div class="cas__date">2024.06.02 — 08:33:41 UTC</div>
+        <div class="cas__athlete">Sophie L.</div>
+        <div class="cas__substance">Furosémide — S5</div>
+        <p class="cas__result">Verdict KURA : INTERDIT — Détecté en 0.6s<br>Résultat réel : Prescription médicale non déclarée, 18 mois</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     S8. BRAND REVEAL — KURA massif + scan video
+     ══════════════════════════════════════════ -->
+<section class="brand-reveal">
+  <video class="brand-reveal__video" autoplay muted loop playsinline>
+    <source src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/hero-scan.mp4" type="video/mp4">
+  </video>
+  <div class="brand-reveal__overlay"></div>
+  <div class="brand-reveal__content">
+    <h2 class="brand-reveal__title reveal">KURA</h2>
+    <div class="brand-reveal__line reveal reveal-delay-1"></div>
+    <p class="brand-reveal__tagline reveal reveal-delay-2">Kura protège. Toujours.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     S9. DATA COVERAGE — Capsule video + barres or + bento
+     ══════════════════════════════════════════ -->
+<section class="coverage">
+  <div class="coverage__video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/demo-capsule.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="container coverage__content">
+    <p class="label label--gold reveal">Couverture réglementaire</p>
+    <h2 class="section-headline reveal reveal-delay-1">Chaque <em style="font-style:normal;color:var(--gold)">source</em> qui compte.</h2>
+
+    <!-- Barres or -->
+    <div class="coverage__bars">
+      <div class="bar-row reveal reveal-delay-1">
+        <div class="bar-row__label">WADA 2025</div>
+        <div class="bar-row__track"><div class="bar-row__fill" data-width="100%"></div></div>
+        <div class="bar-row__value">14 247</div>
+      </div>
+      <div class="bar-row reveal reveal-delay-2">
+        <div class="bar-row__label">AFLD France</div>
+        <div class="bar-row__track"><div class="bar-row__fill" data-width="85%"></div></div>
+        <div class="bar-row__value">12 109</div>
+      </div>
+      <div class="bar-row reveal reveal-delay-3">
+        <div class="bar-row__label">Santé Canada</div>
+        <div class="bar-row__track"><div class="bar-row__fill" data-width="72%"></div></div>
+        <div class="bar-row__value">10 258</div>
+      </div>
+      <div class="bar-row reveal reveal-delay-4">
+        <div class="bar-row__label">ANSM</div>
+        <div class="bar-row__track"><div class="bar-row__fill" data-width="60%"></div></div>
+        <div class="bar-row__value">8 547</div>
+      </div>
+      <div class="bar-row reveal reveal-delay-5">
+        <div class="bar-row__label">EMA + TGA</div>
+        <div class="bar-row__track"><div class="bar-row__fill" data-width="48%"></div></div>
+        <div class="bar-row__value">6 832</div>
+      </div>
+    </div>
+
+    <!-- Bento domaines -->
+    <div class="coverage__bento">
+      <div class="domaine-card domaine-card--main reveal">
+        <div class="domaine-card__letter">S</div>
+        <div class="domaine-card__title">Substances Interdites</div>
+        <div class="domaine-card__desc">Couverture complète des catégories S0 à S9 et M1 à M3. Agents anabolisants, hormones, beta-2 agonistes, modulateurs hormonaux, diurétiques et agents masquants.</div>
+        <div class="domaine-card__count">→ 11 catégories, 14 247 entrées</div>
+      </div>
+      <div class="domaine-card reveal reveal-delay-1">
+        <div class="domaine-card__letter">P</div>
+        <div class="domaine-card__title">Méthodes Interdites</div>
+        <div class="domaine-card__desc">Manipulation de sang, perfusions IV, dopage génétique et cellulaire. Détection des formulations combinées.</div>
+        <div class="domaine-card__count">→ 3 catégories M</div>
+      </div>
+      <div class="domaine-card reveal reveal-delay-2">
+        <div class="domaine-card__letter">C</div>
+        <div class="domaine-card__title">Compléments à risque</div>
+        <div class="domaine-card__desc">Base de données croisée des compléments contaminés. Alertes sur les marques et lots identifiés par les laboratoires accrédités.</div>
+        <div class="domaine-card__count">→ 2 400+ produits référencés</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     S10. DEMO + CTA + FOOTER
+     ══════════════════════════════════════════ -->
+<section class="demo" id="demo">
+  <div class="container">
+    <div class="demo__box reveal">
+      <div class="demo__header">
+        <p class="label label--gold" style="margin-bottom:1rem">Essayez maintenant</p>
+        <h2>Vérifiez une substance en <em style="font-style:normal;color:var(--gold)">2 secondes</em></h2>
+        <p>Entrez un nom de médicament, complément ou substance active.</p>
+      </div>
+
+      <div class="demo__input-row">
+        <input type="text" class="demo__input" placeholder="Ex: Ibuprofène, Salbutamol, Ostarine..." aria-label="Rechercher une substance">
+        <button class="demo__submit">VÉRIFIER</button>
+      </div>
+
+      <div class="demo__verdicts">
+        <div class="verdict-card reveal reveal-delay-1">
+          <div class="verdict-card__badge verdict-card__badge--autorise">Autorisé</div>
+          <div class="verdict-card__substance">Ibuprofène</div>
+          <div class="verdict-card__source">WADA 2025 — Non listé</div>
+          <div class="verdict-card__confidence">Confiance : 99.2%</div>
+        </div>
+        <div class="verdict-card reveal reveal-delay-2">
+          <div class="verdict-card__badge verdict-card__badge--interdit">Interdit</div>
+          <div class="verdict-card__substance">Ostarine (MK-2866)</div>
+          <div class="verdict-card__source">WADA 2025 — S1.2 Agents anabolisants</div>
+          <div class="verdict-card__confidence">Confiance : 99.8%</div>
+        </div>
+        <div class="verdict-card reveal reveal-delay-3">
+          <div class="verdict-card__badge verdict-card__badge--conditionnel">Conditionnel</div>
+          <div class="verdict-card__substance">Salbutamol</div>
+          <div class="verdict-card__source">WADA 2025 — S3 (seuil 1600µg/24h)</div>
+          <div class="verdict-card__confidence">Confiance : 98.4%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+  <div class="container">
+    <div class="reveal">
+      <p style="font-family:var(--font-serif);font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;margin-bottom:1rem">Protégez votre carrière.</p>
+      <p style="color:var(--text-muted);margin-bottom:2.5rem;font-size:1rem">Accès anticipé — gratuit pour les athlètes et équipes médicales.</p>
+      <a href="#" class="final-cta__btn">Demander un accès</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__brand">KURA</div>
+    <div class="footer__legal">
+      Protection · Compliance · Certitude<br>
+      © 2025 Kura. Données WADA 2025. Non affilié à l'AMA.<br>
+      <span style="color:rgba(201,168,76,0.3);font-size:0.6875rem">Cet outil ne constitue pas un avis médical ou juridique.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Contact shield video (preload for future use) -->
+<link rel="prefetch" href="file:///Users/diazarel/kura-v4/kura-ai/dashboard/public/videos/contact-shield.mp4">
+
+<!-- ══════════════════════════════════════════
+     SCRIPTS — 8 techniques cinématiques
+     ══════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  // ── T1 : Loading Screen ──
+  const loader = document.getElementById('loader');
+  const loaderBar = document.getElementById('loader-bar');
+
+  // Start bar animation
+  requestAnimationFrame(() => {
+    loaderBar.style.width = '100%';
+  });
+
+  // Dismiss loader after bar completes
+  setTimeout(() => {
+    loader.classList.add('done');
+    // Remove from DOM after transition
+    setTimeout(() => { loader.remove(); }, 900);
+  }, 2000);
+
+  // ── T7 : Scroll Reveals (IntersectionObserver) ──
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    revealObserver.observe(el);
+  });
+
+  // ── T8 : Counter Animation (JetBrains Mono, gold) ──
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 2000;
+        const startTime = performance.now();
+
+        function updateCounter(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease out cubic
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = Math.round(eased * target);
+
+          if (target > 1000) {
+            el.textContent = current.toLocaleString('fr-FR') + suffix;
+          } else {
+            el.textContent = current + suffix;
+          }
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+          }
+        }
+
+        requestAnimationFrame(updateCounter);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('[data-count]').forEach(el => {
+    counterObserver.observe(el);
+  });
+
+  // ── T4 : Statement Words Illumination ──
+  const statementObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const words = entry.target.querySelectorAll('.sw');
+        words.forEach((w, i) => {
+          setTimeout(() => {
+            w.classList.add('lit');
+          }, 200 + i * 180);
+        });
+        statementObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  const statementSection = document.querySelector('.statement__text');
+  if (statementSection) {
+    statementObserver.observe(statementSection);
+  }
+
+  // ── T6 : Data Bars Fill Animation ──
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const fill = entry.target;
+        const targetWidth = fill.dataset.width;
+        // Slight delay for stagger effect
+        setTimeout(() => {
+          fill.style.width = targetWidth;
+        }, 200);
+        barObserver.unobserve(fill);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.bar-row__fill').forEach(el => {
+    barObserver.observe(el);
+  });
+
+  // ── Smooth scroll for anchor links ──
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banlieuwood — Programme pédagogique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════════
+   TOKENS & RESET
+═══════════════════════════════════════════════ */
+:root {
+  --c-orange:  #FF6B35;
+  --c-ink:     #0D0B09;
+  --c-cream:   #F2EBD9;
+  --c-warm:    #EDE4CF;
+  --c-muted:   rgba(13,11,9,0.38);
+  --c-border:  rgba(13,11,9,0.08);
+  --font-d: 'Bebas Neue', sans-serif;
+  --font-b: 'Plus Jakarta Sans', sans-serif;
+  --font-m: 'Space Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--c-cream);
+  color: var(--c-ink);
+  font-family: var(--font-b);
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* GRAIN */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.02'/%3E%3C/svg%3E");
+}
+
+/* ═══════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.3s, padding 0.3s;
+}
+
+.nav.scrolled {
+  background: rgba(242,235,217,0.95);
+  backdrop-filter: blur(8px);
+  padding: 14px 64px;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.nav-logo {
+  font-family: var(--font-d);
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  color: var(--c-ink);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-link {
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(13,11,9,0.5);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-link:hover { color: var(--c-ink); }
+.nav-link.active { color: var(--c-orange); }
+
+.nav-cta {
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--c-ink);
+  color: var(--c-cream);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.nav-cta:hover { opacity: 0.8; }
+
+/* ═══════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  background: var(--c-ink);
+  color: var(--c-cream);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 64px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("../../photos/_1177608.JPG");
+  background-size: cover;
+  background-position: center 30%;
+  opacity: 0.18;
+}
+
+.hero-kicker {
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-orange);
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.hero-h1 {
+  font-family: var(--font-d);
+  font-size: clamp(80px, 12vw, 160px);
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  color: var(--c-cream);
+  position: relative;
+  font-feature-settings: "liga" 0, "kern" 1;
+  margin-bottom: 40px;
+}
+
+.hero-h1 em {
+  font-style: normal;
+  color: var(--c-orange);
+}
+
+.hero-intro {
+  max-width: 520px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(242,235,217,0.65);
+  position: relative;
+  margin-bottom: 48px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  position: relative;
+}
+
+.hero-stat-num {
+  font-family: var(--font-d);
+  font-size: 40px;
+  color: var(--c-orange);
+  line-height: 1;
+}
+
+.hero-stat-label {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(242,235,217,0.38);
+  margin-top: 4px;
+}
+
+/* ═══════════════════════════════════════════════
+   INTRO SECTION
+═══════════════════════════════════════════════ */
+.intro {
+  padding: 120px 64px;
+  background: var(--c-cream);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.intro-citation {
+  font-family: var(--font-d);
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  color: var(--c-ink);
+}
+
+.intro-body {
+  padding-top: 8px;
+}
+
+.intro-body p {
+  font-size: 15px;
+  color: rgba(13,11,9,0.65);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.intro-body p:last-child { margin-bottom: 0; }
+
+.intro-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.badge {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border: 1px solid rgba(13,11,9,0.15);
+  color: rgba(13,11,9,0.55);
+}
+
+.badge.highlight {
+  background: var(--c-orange);
+  border-color: var(--c-orange);
+  color: #fff;
+}
+
+/* ═══════════════════════════════════════════════
+   MODULE DETAIL
+═══════════════════════════════════════════════ */
+.modules {
+  padding: 0 64px 120px;
+  background: var(--c-cream);
+}
+
+.modules-label {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+  padding: 64px 0 48px;
+  border-top: 1px solid var(--c-border);
+}
+
+.module-block {
+  display: grid;
+  grid-template-columns: 80px 1fr 280px;
+  gap: 0 48px;
+  padding: 56px 0;
+  border-bottom: 1px solid var(--c-border);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.module-block:hover {
+  background: rgba(13,11,9,0.02);
+  margin: 0 -64px;
+  padding-left: 64px;
+  padding-right: 64px;
+}
+
+.module-num {
+  font-family: var(--font-d);
+  font-size: clamp(56px, 6vw, 80px);
+  line-height: 1;
+  color: var(--c-orange);
+  letter-spacing: -0.02em;
+  align-self: start;
+  padding-top: 4px;
+}
+
+.module-main {
+  align-self: start;
+}
+
+.module-title {
+  font-family: var(--font-d);
+  font-size: clamp(28px, 3.5vw, 44px);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--c-ink);
+  margin-bottom: 16px;
+}
+
+.module-desc {
+  font-size: 15px;
+  color: rgba(13,11,9,0.6);
+  line-height: 1.8;
+  max-width: 540px;
+  margin-bottom: 28px;
+}
+
+.module-objectives {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.module-objective {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: rgba(13,11,9,0.55);
+  line-height: 1.5;
+}
+
+.module-objective::before {
+  content: '→';
+  color: var(--c-orange);
+  font-family: var(--font-m);
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.module-meta {
+  align-self: start;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.meta-card {
+  background: var(--c-warm);
+  padding: 16px;
+}
+
+.meta-card-label {
+  font-family: var(--font-m);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+  margin-bottom: 8px;
+}
+
+.meta-card-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-ink);
+  line-height: 1.5;
+}
+
+.meta-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.meta-tag {
+  font-family: var(--font-m);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  padding: 4px 8px;
+  background: rgba(255,107,53,0.1);
+  color: var(--c-orange);
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════
+   PEAC SECTION
+═══════════════════════════════════════════════ */
+.peac {
+  background: var(--c-ink);
+  color: var(--c-cream);
+  padding: 100px 64px;
+}
+
+.peac-label {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-orange);
+  margin-bottom: 40px;
+}
+
+.peac-title {
+  font-family: var(--font-d);
+  font-size: clamp(40px, 6vw, 80px);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  color: var(--c-cream);
+  margin-bottom: 64px;
+  max-width: 700px;
+}
+
+.peac-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(242,235,217,0.08);
+  border: 1px solid rgba(242,235,217,0.08);
+}
+
+.peac-card {
+  background: var(--c-ink);
+  padding: 40px 32px;
+}
+
+.peac-card-num {
+  font-family: var(--font-d);
+  font-size: 48px;
+  color: var(--c-orange);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.peac-card-title {
+  font-family: var(--font-d);
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  color: var(--c-cream);
+  margin-bottom: 12px;
+}
+
+.peac-card-desc {
+  font-size: 13px;
+  color: rgba(242,235,217,0.45);
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════
+   CTA SECTION
+═══════════════════════════════════════════════ */
+.cta-section {
+  padding: 120px 64px;
+  background: var(--c-warm);
+  text-align: center;
+}
+
+.cta-label {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+  margin-bottom: 24px;
+}
+
+.cta-title {
+  font-family: var(--font-d);
+  font-size: clamp(40px, 6vw, 80px);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  color: var(--c-ink);
+  margin-bottom: 16px;
+}
+
+.cta-sub {
+  font-size: 15px;
+  color: var(--c-muted);
+  margin-bottom: 48px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.btn-primary {
+  font-family: var(--font-m);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--c-ink);
+  color: var(--c-cream);
+  border: none;
+  padding: 16px 32px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+
+.btn-outline {
+  font-family: var(--font-m);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--c-ink);
+  border: 1px solid rgba(13,11,9,0.2);
+  padding: 16px 32px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-outline:hover { border-color: var(--c-ink); }
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer {
+  background: var(--c-ink);
+  color: rgba(242,235,217,0.35);
+  padding: 48px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo {
+  font-family: var(--font-d);
+  font-size: 18px;
+  letter-spacing: 0.06em;
+  color: rgba(242,235,217,0.5);
+}
+
+.footer-copy {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+}
+
+/* ═══════════════════════════════════════════════
+   REVEAL
+═══════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .nav { padding: 16px 24px; }
+  .nav.scrolled { padding: 12px 24px; }
+  .nav-links { display: none; }
+  .hero { padding: 0 24px 64px; }
+  .hero-stats { flex-wrap: wrap; gap: 32px; }
+  .intro { padding: 80px 24px; grid-template-columns: 1fr; gap: 40px; }
+  .modules { padding: 0 24px 80px; }
+  .module-block { grid-template-columns: 56px 1fr; gap: 0 24px; }
+  .module-meta { grid-column: 1 / -1; grid-row: 3; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .peac { padding: 80px 24px; }
+  .peac-grid { grid-template-columns: 1fr; }
+  .cta-section { padding: 80px 24px; }
+  .cta-buttons { flex-direction: column; align-items: center; }
+  footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <a href="banlieuwood-site-v2.html" class="nav-logo">BANLIEUWOOD</a>
+  <div class="nav-links">
+    <a href="banlieuwood-programme.html" class="nav-link active">Programme</a>
+    <a href="banlieuwood-films.html" class="nav-link">Films</a>
+    <a href="banlieuwood-site-v2.html#equipe" class="nav-link">Équipe</a>
+    <a href="banlieuwood-site-v2.html#cockpit" class="nav-link">Cockpit</a>
+    <a href="banlieuwood-site-v2.html#contact" class="nav-link">Contact</a>
+    <a href="cockpit-prototype.html" class="nav-cta">Accéder au Cockpit</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-kicker">Programme pédagogique · 8 modules</div>
+  <h1 class="hero-h1 reveal">
+    APPRENDRE<br>
+    À <em>FILMER</em><br>
+    SON MONDE
+  </h1>
+  <p class="hero-intro reveal delay-1">
+    8 modules progressifs. De la lecture d'image au film terminé.
+    Une méthode construite sur 8 ans d'intervention dans les quartiers populaires de Seine-Saint-Denis.
+  </p>
+  <div class="hero-stats reveal delay-2">
+    <div>
+      <div class="hero-stat-num">8</div>
+      <div class="hero-stat-label">Modules</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">45</div>
+      <div class="hero-stat-label">Min / séance</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">3</div>
+      <div class="hero-stat-label">Parcours couverts</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">1200</div>
+      <div class="hero-stat-label">Jeunes formés</div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="intro-citation reveal">
+    On n'apprend pas à filmer. On apprend à voir.
+  </div>
+  <div class="intro-body reveal delay-1">
+    <p>
+      Le programme Banlieuwood n'est pas une formation technique au cinéma. C'est une éducation au regard.
+      Chaque module construit une compétence concrète — composition, lumière, récit, son — mais l'objectif réel est de donner à chaque jeune la conviction qu'il a quelque chose à dire et les outils pour le dire.
+    </p>
+    <p>
+      Les 8 modules peuvent être suivis dans l'ordre pour une progression complète, ou choisis à la carte selon le projet de la classe. Chaque séance est autonome et documentée via le Cockpit Intervenant.
+    </p>
+    <div class="intro-badges">
+      <span class="badge highlight">PEAC</span>
+      <span class="badge highlight">Parcours Avenir</span>
+      <span class="badge highlight">Parcours Citoyen</span>
+      <span class="badge">CM2 → Lycée</span>
+      <span class="badge">45–60 min</span>
+      <span class="badge">Toute discipline</span>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section class="modules">
+  <p class="modules-label">Les 8 modules</p>
+
+  <!-- M1 -->
+  <div class="module-block reveal" id="m1">
+    <div class="module-num">M1</div>
+    <div class="module-main">
+      <h2 class="module-title">LE REGARD</h2>
+      <p class="module-desc">
+        Avant d'apprendre à filmer, apprendre à voir. Ce module s'ouvre sur une question simple : que regarde-t-on quand on regarde une image ? Lecture de photogrammes, analyse de composition, identification du point de vue. Le regard n'est jamais neutre.
+      </p>
+      <ul class="module-objectives">
+        <li class="module-objective">Identifier les éléments d'une composition (règle des tiers, lignes directrices, profondeur)</li>
+        <li class="module-objective">Distinguer point de vue caméra et point de vue narratif</li>
+        <li class="module-objective">Réaliser 3 cadres sur smartphone avec intention consciente</li>
+        <li class="module-objective">Verbaliser ses choix devant la classe sans jugement de valeur</li>
+      </ul>
+    </div>
+    <div class="module-meta">
+      <div class="meta-card">
+        <div class="meta-card-label">Durée</div>
+        <div class="meta-card-value">45 min</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Niveau</div>
+        <div class="meta-card-value">CM2 → 3e</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Matériels</div>
+        <div class="meta-card-value">Smartphones ou tablettes · Écran de projection</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Parcours</div>
+        <div class="meta-tags">
+          <span class="meta-tag">PEAC</span>
+          <span class="meta-tag">Citoyen</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- M2 -->
+  <div class="module-block reveal" id="m2">
+    <div class="module-num">M2</div>
+    <div class="module-main">
+      <h2 class="module-title">L'HISTOIRE</h2>
+      <p class="module-desc">
+        Du récit oral au scénario en 3 actes. Ce module part d'une règle simple : toute histoire commence par "quelqu'un veut quelque chose mais quelque chose l'en empêche". Structure narrative, personnages, dialogue. La narration comme langage universel accessible à tous.
+      </p>
+      <ul class="module-objectives">
+        <li class="module-objective">Maîtriser la structure en 3 actes et l'identifier dans des films connus</li>
+        <li class="module-objective">Écrire un pitch en une phrase (personnage + désir + obstacle)</li>
+        <li class="module-objective">Passer du récit oral au synopsis écrit en 10 min</li>
+        <li class="module-objective">Distinguer ce qu'on raconte de la façon dont on le raconte</li>
+      </ul>
+    </div>
+    <div class="module-meta">
+      <div class="meta-card">
+        <div class="meta-card-label">Durée</div>
+        <div class="meta-card-value">50 min</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Niveau</div>
+        <div class="meta-card-value">CM2 → Terminale</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Matériels</div>
+        <div class="meta-card-value">Papier · Écran · Extraits de films</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Parcours</div>
+        <div class="meta-tags">
+          <span class="meta-tag">PEAC</span>
+          <span class="meta-tag">Avenir</span>
+          <span class="meta-tag">Citoyen</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- M3 -->
+  <div class="module-block reveal" id="m3">
+    <div class="module-num">M3</div>
+    <div class="module-main">
+      <h2 class="module-title">LA LUMIÈRE</h2>
+      <p class="module-desc">
+        Comprendre la lumière, c'est comprendre le sens caché des images. Naturelle, artificielle, directe, diffuse — chaque source de lumière crée une émotion différente. Les élèves expérimentent avec les fenêtres de la classe, les lampes de téléphone, des feuilles blanches comme réflecteurs.
+      </p>
+      <ul class="module-objectives">
+        <li class="module-objective">Identifier les types d'éclairage et leur effet émotionnel (lumière dure/douce, contre-jour)</li>
+        <li class="module-objective">Réaliser un portrait en 3 éclairages différents sur le même sujet</li>
+        <li class="module-objective">Utiliser des objets du quotidien comme outils lumière</li>
+        <li class="module-objective">Argumenter le choix d'un éclairage pour une scène donnée</li>
+      </ul>
+    </div>
+    <div class="module-meta">
+      <div class="meta-card">
+        <div class="meta-card-label">Durée</div>
+        <div class="meta-card-value">45 min</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Niveau</div>
+        <div class="meta-card-value">6e → Terminale</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Matériels</div>
+        <div class="meta-card-value">Smartphones · Lampes · Réflecteurs DIY</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Parcours</div>
+        <div class="meta-tags">
+          <span class="meta-tag">PEAC</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- M4 -->
+  <div class="module-block reveal" id="m4">
+    <div class="module-num">M4</div>
+    <div class="module-main">
+      <h2 class="module-title">LE SON</h2>
+      <p class="module-desc">
+        Le son qu'on n'entend pas est souvent plus fort que l'image. Ce module révèle ce que les élèves n'entendent plus : l'ambiance sonore de leur classe, leur quartier, leur vie. Prise de son directe, dialogue, ambiance, musique de fond — le son construit la réalité autant que l'image.
+      </p>
+      <ul class="module-objectives">
+        <li class="module-objective">Écouter activement et identifier les couches sonores d'un espace</li>
+        <li class="module-objective">Enregistrer un dialogue avec la perche (bricolée) et le téléphone</li>
+        <li class="module-objective">Comprendre le rôle du son off, du son direct et de la musique</li>
+        <li class="module-objective">Remonter un extrait sonore sur une image fixe</li>
+      </ul>
+    </div>
+    <div class="module-meta">
+      <div class="meta-card">
+        <div class="meta-card-label">Durée</div>
+        <div class="meta-card-value">50 min</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Niveau</div>
+        <div class="meta-card-value">CM2 → Terminale</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Matériels</div>
+        <div class="meta-card-value">Smartphones · Écouteurs · CapCut ou iMovie</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Parcours</div>
+        <div class="meta-tags">
+          <span class="meta-tag">PEAC</span>
+          <span class="meta-tag">Citoyen</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- M5 -->
+  <div class="module-block reveal" id="m5">
+    <div class="module-num">M5</div>
+    <div class="module-main">
+      <h2 class="module-title">LA DIRECTION</h2>
+      <p class="module-desc">
+        Comment fait-on jouer quelqu'un qui n'a jamais joué ? Ce module explore la direction d'acteurs amateurs — confidence, écoute, intention, précision. Les élèves jouent, observent, dirigent. Ils découvrent que diriger, c'est avant tout écouter et faire confiance.
+      </p>
+      <ul class="module-objectives">
+        <li class="module-objective">Distinguer la mise en scène de la mise en cadre</li>
+        <li class="module-objective">Donner des indications précises et non-jugeantes à un comédien amateur</li>
+        <li class="module-objective">Tourner une scène courte (20–30 sec) avec 2 comédiens et un réalisateur</li>
+        <li class="module-objective">Faire un retour critique bienveillant sur le jeu observé</li>
+      </ul>
+    </div>
+    <div class="module-meta">
+      <div class="meta-card">
+        <div class="meta-card-label">Durée</div>
+        <div class="meta-card-value">60 min</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Niveau</div>
+        <div class="meta-card-value">5e → Terminale</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Matériels</div>
+        <div class="meta-card-value">Smartphones · Espace dégagé · Scénette préécrite</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Parcours</div>
+        <div class="meta-tags">
+          <span class="meta-tag">PEAC</span>
+          <span class="meta-tag">Avenir</span>
+          <span class="meta-tag">Citoyen</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- M6 -->
+  <div class="module-block reveal" id="m6">
+    <div class="module-num">M6</div>
+    <div class="module-main">
+      <h2 class="module-title">LE MONTAGE</h2>
+      <p class="module-desc">
+        Le montage, c'est là que le film naît vraiment. Ce module montre aux élèves que l'ordre des images crée le sens — deux plans identiques montés différemment racontent deux histoires. Rythme, raccord, émotion : l'invisible architecture du cinéma.
+      </p>
+      <ul class="module-objectives">
+        <li class="module-objective">Comprendre l'effet Koulechov et ses implications narratives</li>
+        <li class="module-objective">Monter une séquence courte (5–7 plans) avec CapCut ou iMovie</li>
+        <li class="module-objective">Comprendre les différents types de raccord (mouvement, regard, temporel)</li>
+        <li class="module-objective">Identifier le rythme d'un film au montage et son effet émotionnel</li>
+      </ul>
+    </div>
+    <div class="module-meta">
+      <div class="meta-card">
+        <div class="meta-card-label">Durée</div>
+        <div class="meta-card-value">60 min</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Niveau</div>
+        <div class="meta-card-value">6e → Terminale</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Matériels</div>
+        <div class="meta-card-value">Tablettes ou PC · CapCut / iMovie / Davinci Resolve</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Parcours</div>
+        <div class="meta-tags">
+          <span class="meta-tag">PEAC</span>
+          <span class="meta-tag">Avenir</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- M7 -->
+  <div class="module-block reveal" id="m7">
+    <div class="module-num">M7</div>
+    <div class="module-main">
+      <h2 class="module-title">LA DIFFUSION</h2>
+      <p class="module-desc">
+        Un film qui n'est pas vu n'existe pas. Ce module prépare les élèves à présenter leur travail — festivals scolaires, séances de projection en classe, retours d'audience. Comment parler de son film, répondre aux questions, recevoir la critique. L'art du présent après l'art du plateau.
+      </p>
+      <ul class="module-objectives">
+        <li class="module-objective">Préparer et animer une projection devant une audience (camarades, parents, jury)</li>
+        <li class="module-objective">Présenter son film en 3 min : intention, process, regard critique</li>
+        <li class="module-objective">Formuler un retour constructif sur le film d'un camarade</li>
+        <li class="module-objective">Comprendre les circuits de diffusion (festivals, plateformes, projections publiques)</li>
+      </ul>
+    </div>
+    <div class="module-meta">
+      <div class="meta-card">
+        <div class="meta-card-label">Durée</div>
+        <div class="meta-card-value">45 min</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Niveau</div>
+        <div class="meta-card-value">CM2 → Terminale</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Matériels</div>
+        <div class="meta-card-value">Vidéoprojecteur · Salle disponible</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Parcours</div>
+        <div class="meta-tags">
+          <span class="meta-tag">PEAC</span>
+          <span class="meta-tag">Avenir</span>
+          <span class="meta-tag">Citoyen</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- M8 -->
+  <div class="module-block reveal" id="m8">
+    <div class="module-num">M8</div>
+    <div class="module-main">
+      <h2 class="module-title">L'ÉQUIPE</h2>
+      <p class="module-desc">
+        Un film, c'est un collectif. Ce module explore les métiers du cinéma : réalisation, production, direction de la photo, son, montage, décoration. Chaque élève découvre un métier possible, une trajectoire envisageable. Pas seulement acteur ou réalisateur — ingénieur du son, chef opérateur, scripte, directeur de casting.
+      </p>
+      <ul class="module-objectives">
+        <li class="module-objective">Identifier au moins 10 métiers du cinéma et leur rôle dans la production</li>
+        <li class="module-objective">Organiser une équipe de tournage courte métrage (6–8 rôles) et tourner 3 min</li>
+        <li class="module-objective">Comprendre que chaque métier technique est aussi un métier artistique</li>
+        <li class="module-objective">Connecter les compétences cinéma à des filières professionnelles concrètes (audiovisuel, communication, design)</li>
+      </ul>
+    </div>
+    <div class="module-meta">
+      <div class="meta-card">
+        <div class="meta-card-label">Durée</div>
+        <div class="meta-card-value">60 min</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Niveau</div>
+        <div class="meta-card-value">4e → Terminale</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Matériels</div>
+        <div class="meta-card-value">Smartphones · Fiches rôles imprimées</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-card-label">Parcours</div>
+        <div class="meta-tags">
+          <span class="meta-tag">PEAC</span>
+          <span class="meta-tag">Avenir</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- PEAC -->
+<section class="peac">
+  <p class="peac-label">Cadre institutionnel</p>
+  <h2 class="peac-title reveal">
+    3 PARCOURS<br>OBLIGATOIRES.<br>
+    <span style="color:var(--c-orange)">1 INTERVENTION.</span>
+  </h2>
+  <div class="peac-grid">
+    <div class="peac-card reveal">
+      <div class="peac-card-num">01</div>
+      <div class="peac-card-title">PEAC</div>
+      <div class="peac-card-desc">Parcours d'Éducation Artistique et Culturelle. Chaque module Banlieuwood couvre les objectifs du PEAC définis par le ministère de l'Éducation nationale — pratique artistique, rencontre avec l'œuvre, réflexion sur la création.</div>
+    </div>
+    <div class="peac-card reveal delay-1">
+      <div class="peac-card-num">02</div>
+      <div class="peac-card-title">PARCOURS AVENIR</div>
+      <div class="peac-card-desc">Découverte des métiers et des filières professionnelles. Les modules M5, M6, M8 permettent à chaque élève de se projeter dans un métier du secteur audiovisuel et d'en comprendre les réalités concrètes.</div>
+    </div>
+    <div class="peac-card reveal delay-2">
+      <div class="peac-card-num">03</div>
+      <div class="peac-card-title">PARCOURS CITOYEN</div>
+      <div class="peac-card-desc">Éducation aux médias et à l'information, expression citoyenne, partage et débat. Les modules M1, M2, M4, M7 abordent le regard critique, la production de sens et la diffusion responsable d'un message.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <p class="cta-label">Travailler ensemble</p>
+  <h2 class="cta-title reveal">VOTRE ÉCOLE<br>EST EN 93 ?</h2>
+  <p class="cta-sub reveal delay-1">
+    Nous intervenons dans les établissements de Seine-Saint-Denis sur demande. Gratuit pour les établissements partenaires de la DSDEN 93.
+  </p>
+  <div class="cta-buttons reveal delay-2">
+    <button class="btn-primary" onclick="window.location='banlieuwood-site-v2.html#contact'">Nous contacter</button>
+    <button class="btn-outline" onclick="window.location='banlieuwood-films.html'">Voir nos films</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">BANLIEUWOOD</div>
+  <div class="footer-copy">Association loi 1901 · Seine-Saint-Denis · Depuis 2016</div>
+</footer>
+
+<script>
+// NAV scroll
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Reveal observer
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
