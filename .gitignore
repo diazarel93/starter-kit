@@ -43,4 +43,8 @@ yarn-error.log*
 # Claude Code — machine-local (ne pas versionner)
 .claude/settings.local.json
 .claude/sessions/
+.claude/subagent.log
+
+# Tracking coûts API — local uniquement
+tools/brain-agent/.api-costs.json
 tsconfig.tsbuildinfo
