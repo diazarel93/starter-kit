@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banlieuwood — Filmographie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════════
+   TOKENS & RESET
+═══════════════════════════════════════════════ */
+:root {
+  --c-orange:  #FF6B35;
+  --c-ink:     #0D0B09;
+  --c-cream:   #F2EBD9;
+  --c-warm:    #EDE4CF;
+  --c-muted:   rgba(13,11,9,0.38);
+  --c-border:  rgba(13,11,9,0.08);
+  --font-d: 'Bebas Neue', sans-serif;
+  --font-b: 'Plus Jakarta Sans', sans-serif;
+  --font-m: 'Space Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--c-ink);
+  color: var(--c-cream);
+  font-family: var(--font-b);
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* GRAIN */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.025'/%3E%3C/svg%3E");
+}
+
+/* ═══════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.3s, padding 0.3s;
+}
+
+.nav.scrolled {
+  background: rgba(13,11,9,0.92);
+  backdrop-filter: blur(8px);
+  padding: 14px 64px;
+  border-bottom: 1px solid rgba(242,235,217,0.06);
+}
+
+.nav-logo {
+  font-family: var(--font-d);
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  color: var(--c-cream);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-link {
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(242,235,217,0.38);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-link:hover { color: var(--c-cream); }
+.nav-link.active { color: var(--c-orange); }
+
+.nav-cta {
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--c-orange);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.nav-cta:hover { opacity: 0.85; }
+
+/* ═══════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════ */
+.hero {
+  padding: 180px 64px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  border-bottom: 1px solid rgba(242,235,217,0.06);
+}
+
+.hero-left {}
+
+.hero-kicker {
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-orange);
+  margin-bottom: 24px;
+}
+
+.hero-h1 {
+  font-family: var(--font-d);
+  font-size: clamp(64px, 9vw, 120px);
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  color: var(--c-cream);
+  font-feature-settings: "liga" 0, "kern" 1;
+  margin-bottom: 32px;
+}
+
+.hero-h1 em {
+  font-style: normal;
+  color: var(--c-orange);
+}
+
+.hero-right {
+  padding-bottom: 8px;
+}
+
+.hero-count {
+  font-family: var(--font-d);
+  font-size: clamp(80px, 12vw, 160px);
+  color: rgba(242,235,217,0.07);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+
+.hero-desc {
+  font-size: 15px;
+  color: rgba(242,235,217,0.5);
+  line-height: 1.8;
+  max-width: 400px;
+}
+
+/* ═══════════════════════════════════════════════
+   FILTERS
+═══════════════════════════════════════════════ */
+.filters {
+  padding: 32px 64px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(242,235,217,0.06);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.filters::-webkit-scrollbar { display: none; }
+
+.filter-label {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(242,235,217,0.25);
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
+.filter-btn {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: transparent;
+  color: rgba(242,235,217,0.4);
+  border: 1px solid rgba(242,235,217,0.1);
+  padding: 7px 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  color: var(--c-cream);
+  border-color: rgba(242,235,217,0.3);
+}
+
+.filter-btn.active {
+  background: var(--c-cream);
+  color: var(--c-ink);
+  border-color: var(--c-cream);
+}
+
+.filter-sep {
+  width: 1px;
+  height: 16px;
+  background: rgba(242,235,217,0.08);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════
+   FILM LIST — Style A24
+═══════════════════════════════════════════════ */
+.film-list {
+  list-style: none;
+}
+
+.film-item {
+  display: grid;
+  grid-template-columns: 64px 1fr 180px 120px;
+  align-items: center;
+  gap: 32px;
+  padding: 24px 64px;
+  border-bottom: 1px solid rgba(242,235,217,0.05);
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.film-item:hover {
+  background: rgba(242,235,217,0.025);
+}
+
+.film-item:hover .film-thumb { transform: scale(1.04); }
+.film-item:hover .film-title-text { color: var(--c-cream); }
+.film-item:hover .film-arrow { opacity: 1; transform: translateX(0); }
+
+.film-num {
+  font-family: var(--font-m);
+  font-size: 11px;
+  color: rgba(242,235,217,0.18);
+  letter-spacing: 0.06em;
+}
+
+.film-center {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+}
+
+.film-thumb-wrap {
+  width: 56px;
+  height: 40px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: rgba(242,235,217,0.04);
+}
+
+.film-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.7;
+}
+
+.film-info {
+  min-width: 0;
+}
+
+.film-title-text {
+  font-family: var(--font-d);
+  font-size: clamp(16px, 2vw, 22px);
+  letter-spacing: 0.03em;
+  color: rgba(242,235,217,0.75);
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s;
+}
+
+.film-synopsis {
+  font-size: 12px;
+  color: rgba(242,235,217,0.3);
+  margin-top: 4px;
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 480px;
+}
+
+.film-meta-col {
+  font-family: var(--font-m);
+  font-size: 10px;
+  color: rgba(242,235,217,0.3);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.film-meta-col .genre {
+  display: block;
+  color: rgba(242,235,217,0.18);
+  font-size: 9px;
+  margin-top: 3px;
+}
+
+.film-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.film-duration {
+  font-family: var(--font-m);
+  font-size: 10px;
+  color: rgba(242,235,217,0.25);
+  letter-spacing: 0.06em;
+}
+
+.film-arrow {
+  font-family: var(--font-m);
+  font-size: 11px;
+  color: var(--c-orange);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+/* Awards badge */
+.film-award {
+  font-family: var(--font-m);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  background: rgba(255,107,53,0.12);
+  border: 1px solid rgba(255,107,53,0.25);
+  color: var(--c-orange);
+  white-space: nowrap;
+}
+
+/* Full-page hover preview */
+.film-preview {
+  position: fixed;
+  top: 0; right: 0;
+  width: 40vw;
+  height: 100vh;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+  background-size: cover;
+  background-position: center;
+}
+
+.film-preview::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--c-ink) 0%, transparent 30%);
+}
+
+.film-preview.visible { opacity: 1; }
+
+/* ═══════════════════════════════════════════════
+   FEATURED FILM
+═══════════════════════════════════════════════ */
+.featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 400px;
+  margin-bottom: 0;
+}
+
+.featured-image {
+  position: relative;
+  overflow: hidden;
+  background: rgba(242,235,217,0.04);
+}
+
+.featured-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.65;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+}
+
+.featured:hover .featured-image img {
+  transform: scale(1.03);
+  opacity: 0.75;
+}
+
+.featured-badge {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--c-orange);
+  color: #fff;
+  padding: 5px 12px;
+}
+
+.featured-info {
+  background: rgba(242,235,217,0.025);
+  padding: 56px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid rgba(242,235,217,0.06);
+}
+
+.featured-kicker {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-orange);
+  margin-bottom: 20px;
+}
+
+.featured-title {
+  font-family: var(--font-d);
+  font-size: clamp(32px, 4vw, 52px);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--c-cream);
+  margin-bottom: 20px;
+  font-feature-settings: "liga" 0, "kern" 1;
+}
+
+.featured-desc {
+  font-size: 14px;
+  color: rgba(242,235,217,0.5);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.featured-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.featured-tag {
+  font-family: var(--font-m);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border: 1px solid rgba(242,235,217,0.12);
+  color: rgba(242,235,217,0.4);
+}
+
+.btn-play {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--c-orange);
+  color: #fff;
+  border: none;
+  padding: 14px 28px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.btn-play:hover { opacity: 0.88; transform: translateY(-1px); }
+
+.play-icon {
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 5px 0 5px 9px;
+  border-color: transparent transparent transparent #fff;
+}
+
+/* ═══════════════════════════════════════════════
+   YEAR DIVIDER
+═══════════════════════════════════════════════ */
+.year-divider {
+  padding: 24px 64px 16px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border-bottom: 1px solid rgba(242,235,217,0.05);
+}
+
+.year-num {
+  font-family: var(--font-d);
+  font-size: 32px;
+  color: rgba(242,235,217,0.12);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.year-count {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: rgba(242,235,217,0.2);
+}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+.bottom-cta {
+  padding: 80px 64px;
+  text-align: center;
+  border-top: 1px solid rgba(242,235,217,0.06);
+}
+
+.bottom-cta-title {
+  font-family: var(--font-d);
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  color: var(--c-cream);
+  margin-bottom: 16px;
+}
+
+.bottom-cta-title span { color: var(--c-orange); }
+
+.bottom-cta-sub {
+  font-size: 14px;
+  color: rgba(242,235,217,0.4);
+  margin-bottom: 40px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+.btn-outline-cream {
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: transparent;
+  color: rgba(242,235,217,0.6);
+  border: 1px solid rgba(242,235,217,0.2);
+  padding: 14px 28px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-outline-cream:hover {
+  color: var(--c-cream);
+  border-color: rgba(242,235,217,0.5);
+}
+
+footer {
+  padding: 32px 64px;
+  border-top: 1px solid rgba(242,235,217,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo {
+  font-family: var(--font-d);
+  font-size: 18px;
+  letter-spacing: 0.06em;
+  color: rgba(242,235,217,0.3);
+}
+
+.footer-copy {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: rgba(242,235,217,0.15);
+}
+
+/* ═══════════════════════════════════════════════
+   REVEAL
+═══════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.08s; }
+.delay-2 { transition-delay: 0.16s; }
+
+/* ═══════════════════════════════════════════════
+   FILTER HIDDEN
+═══════════════════════════════════════════════ */
+.film-item.hidden { display: none; }
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .nav { padding: 16px 24px; }
+  .nav.scrolled { padding: 12px 24px; }
+  .nav-links { display: none; }
+  .hero { padding: 140px 24px 64px; grid-template-columns: 1fr; gap: 32px; }
+  .hero-count { font-size: 72px; }
+  .filters { padding: 20px 24px; }
+  .film-item { grid-template-columns: 48px 1fr; padding: 20px 24px; gap: 16px; }
+  .film-meta-col, .film-right { display: none; }
+  .film-thumb-wrap { width: 40px; height: 28px; }
+  .featured { grid-template-columns: 1fr; }
+  .featured-image { height: 240px; }
+  .featured-info { padding: 32px 24px; }
+  .year-divider { padding: 20px 24px 12px; }
+  .bottom-cta { padding: 60px 24px; }
+  footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="film-preview" id="film-preview"></div>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <a href="banlieuwood-site-v2.html" class="nav-logo">BANLIEUWOOD</a>
+  <div class="nav-links">
+    <a href="banlieuwood-programme.html" class="nav-link">Programme</a>
+    <a href="banlieuwood-films.html" class="nav-link active">Films</a>
+    <a href="banlieuwood-site-v2.html#equipe" class="nav-link">Équipe</a>
+    <a href="banlieuwood-site-v2.html#cockpit" class="nav-link">Cockpit</a>
+    <a href="banlieuwood-site-v2.html#contact" class="nav-link">Contact</a>
+    <a href="cockpit-prototype.html" class="nav-cta">Cockpit Intervenant</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-kicker">Filmographie · 2016–2024</div>
+    <h1 class="hero-h1 reveal">
+      47<br>
+      <em>FILMS</em><br>
+      PRODUITS
+    </h1>
+  </div>
+  <div class="hero-right">
+    <div class="hero-count reveal">47</div>
+    <p class="hero-desc reveal delay-1">
+      Chaque film est produit par une classe, sous la direction d'un intervenant Banlieuwood. Courts-métrages, documentaires, fictions, essais visuels. Tous réalisés en Seine-Saint-Denis.
+    </p>
+  </div>
+</section>
+
+<!-- FILTERS -->
+<div class="filters">
+  <span class="filter-label">Filtrer</span>
+  <button class="filter-btn active" data-filter="all">Tout</button>
+  <div class="filter-sep"></div>
+  <button class="filter-btn" data-filter="2024">2024</button>
+  <button class="filter-btn" data-filter="2023">2023</button>
+  <button class="filter-btn" data-filter="2022">2022</button>
+  <button class="filter-btn" data-filter="2021">2021</button>
+  <button class="filter-btn" data-filter="2020">2020</button>
+  <div class="filter-sep"></div>
+  <button class="filter-btn" data-filter="fiction">Fiction</button>
+  <button class="filter-btn" data-filter="documentaire">Documentaire</button>
+  <button class="filter-btn" data-filter="experimental">Expérimental</button>
+  <div class="filter-sep"></div>
+  <button class="filter-btn" data-filter="primaire">Primaire</button>
+  <button class="filter-btn" data-filter="college">Collège</button>
+  <button class="filter-btn" data-filter="lycee">Lycée</button>
+</div>
+
+<!-- FEATURED — FILM DE L'ANNÉE -->
+<div class="featured">
+  <div class="featured-image">
+    <img src="../../photos/_1177608.JPG" alt="Les Mains dans le Béton">
+    <div class="featured-badge">Film de l'année 2024</div>
+  </div>
+  <div class="featured-info">
+    <div class="featured-kicker">Film phare · 2024</div>
+    <h2 class="featured-title">LES MAINS<br>DANS LE BÉTON</h2>
+    <p class="featured-desc">
+      Un jeune de 14 ans filme son grand-père en train de construire quelque chose. Entre les deux, presque rien — et tout. Court-métrage documentaire réalisé par la 3e B du Collège Jean Moulin, Bondy.
+    </p>
+    <div class="featured-tags">
+      <span class="featured-tag">Documentaire</span>
+      <span class="featured-tag">12 min</span>
+      <span class="featured-tag">3e B · Jean Moulin</span>
+      <span class="featured-tag">Festival Jean Rouch 2024</span>
+    </div>
+    <button class="btn-play">
+      <span class="play-icon"></span>
+      Voir le film
+    </button>
+  </div>
+</div>
+
+<!-- FILMS LIST -->
+<ul class="film-list" id="filmList">
+
+  <!-- 2024 -->
+  <li class="year-divider">
+    <span class="year-num">2024</span>
+    <span class="year-count">8 films</span>
+  </li>
+
+  <li class="film-item reveal" data-year="2024" data-genre="fiction" data-niveau="college">
+    <span class="film-num">01</span>
+    <div class="film-center">
+      <div class="film-thumb-wrap">
+        <img class="film-thumb" src="../../photos/_1177442.JPG" alt="Nuit d'Hiver" loading="lazy">
+      </div>
+      <div class="film-info">
+        <div class="film-title-text">NUIT D'HIVER</div>
+        <div class="film-synopsis">Un adolescent rentre tard. Son père l'attend. La conversation qui ne vient pas.</div>
+      </div>
+    </div>
+    <div class="film-meta-col">
+      2024
+      <span class="genre">Fiction</span>
+    </div>
+    <div class="film-right">
+      <span class="film-duration">8 min</span>
+      <span class="film-arrow">→</span>
+    </div>
+  </li>
+
+  <li class="film-item reveal delay-1" data-year="2024" data-genre="documentaire" data-niveau="lycee">
+    <span class="film-num">02</span>
+    <div class="film-center">
+      <div class="film-thumb-wrap">
+        <img class="film-thumb" src="../../photos/_1177608.JPG" alt="Les Marchandes" loading="lazy">
+      </div>
+      <div class="film-info">
+        <div class="film-title-text">LES MARCHANDES</div>
+        <div class="film-synopsis">Portrait des femmes du marché de Bobigny. Leurs mains, leurs voix, leurs horaires impossibles.</div>
+      </div>
+    </div>
+    <div class="film-meta-col">
+      2024
+      <span class="genre">Documentaire</span>
+    </div>
+    <div class="film-right">
+      <span class="film-award">Festival Jean Rouch</span>
+      <span class="film-duration">14 min</span>
+      <span class="film-arrow">→</span>
+    </div>
+  </li>
+
+  <li class="film-item reveal delay-2" data-year="2024" data-genre="experimental" data-niveau="college">
+    <span class="film-num">03</span>
+    <div class="film-center">
+      <div class="film-thumb-wrap">
+        <img class="film-thumb" src="../../photos/_1177442.JPG" alt="Le Bus 105" loading="lazy">
+      </div>
+      <div class="film-info">
+        <div class="film-title-text">LE BUS 105</div>
+        <div class="film-synopsis">40 minutes de trajet, 40 histoires possibles. Essai visuel sur l'espace du bus comme scène de théâtre.</div>
+      </div>
+    </div>
+    <div class="film-meta-col">
+      2024
+      <span class="genre">Expérimental</span>
+    </div>
+    <div class="film-right">
+      <span class="film-duration">7 min</span>
+      <span class="film-arrow">→</span>
+    </div>
+  </li>
+
+  <li class="film-item reveal" data-year="2024" data-genre="fiction" data-niveau="primaire">
+    <span class="film-num">04</span>
+    <div class="film-center">
+      <div class="film-thumb-wrap">
+        <img class="film-thumb" src="../../photos/_1177608.JPG" alt="La Tortue et le Renard" loading="lazy">
+      </div>
+      <div class="film-info">
+        <div class="film-title-text">LA TORTUE ET LE RENARD</div>
+        <div class="film-synopsis">Réécriture de La Fontaine par une classe de CM2. Le renard ne gagne pas cette fois.</div>
+      </div>
+    </div>
+    <div class="film-meta-col">
+      2024
+      <span class="genre">Fiction</span>
+    </div>
+    <div class="film-right">
+      <span class="film-duration">5 min</span>
+      <span class="film-arrow">→</span>
+    </div>
+  </li>
+
+  <!-- 2023 -->
+  <li class="year-divider">
+    <span class="year-num">2023</span>
+    <span class="year-count">9 films</span>
+  </li>
+
+  <li class="film-item reveal" data-year="2023" data-genre="documentaire" data-niveau="college">
+    <span class="film-num">05</span>
+    <div class="film-center">
+      <div class="film-thumb-wrap">
+        <img class="film-thumb" src="../../photos/_1177442.JPG" alt="Construire" loading="lazy">
+      </div>
+      <div class="film-info">
+        <div class="film-title-text">CONSTRUIRE</div>
+        <div class="film-synopsis">Les ouvriers du chantier d'à côté filmés pendant la pause. Ce qu'on ne voit jamais.</div>
+      </div>
+    </div>
+    <div class="film-meta-col">
+      2023
+      <span class="genre">Documentaire</span>
+    </div>
+    <div class="film-right">
+      <span class="film-award">Cinéma du Réel</span>
+      <span class="film-duration">11 min</span>
+      <span class="film-arrow">→</span>
+    </div>
+  </li>
+
+  <li class="film-item reveal delay-1" data-year="2023" data-genre="fiction" data-niveau="lycee">
+    <span class="film-num">06</span>
+    <div class="film-center">
+      <div class="film-thumb-wrap">
+        <img class="film-thumb" src="../../photos/_1177608.JPG" alt="La Lettre" loading="lazy">
+      </div>
+      <div class="film-info">
+        <div class="film-title-text">LA LETTRE</div>
+        <div class="film-synopsis">Une lycéenne écrit une lettre à sa grand-mère au Sénégal. Elle ne sait pas encore qu'elle ne l'enverra pas.</div>
+      </div>
+    </div>
+    <div class="film-meta-col">
+      2023
+      <span class="genre">Fiction</span>
+    </div>
+    <div class="film-right">
+      <span class="film-duration">16 min</span>
+      <span class="film-arrow">→</span>
+    </div>
+  </li>
+
+  <li class="film-item reveal delay-2" data-year="2023" data-genre="experimental" data-niveau="college">
+    <span class="film-num">07</span>
+    <div class="film-center">
+      <div class="film-thumb-wrap">
+        <img class="film-thumb" src="../../photos/_1177442.JPG" alt="Bruits de Fond" loading="lazy">
+      </div>
+      <div class="film-info">
+        <div class="film-title-text">BRUITS DE FOND</div>
+        <div class="film-synopsis">Ce que la cité fait entendre quand tout le monde dort. Paysage sonore filmé, 4h du matin.</div>
+      </div>
+    </div>
+    <div class="film-meta-col">
+      2023
+      <span class="genre">Expérimental</span>
+    </div>
+    <div class="film-right">
+      <span class="film-duration">9 min</span>
+      <span class="film-arrow">→</span>
+    </div>
+  </li>
+
+  <!-- 2022 -->
+  <li class="year-divider">
+    <span class="year-num">2022</span>
+    <span class="year-count">8 films</span>
+  </li>
+
+  <li class="film-item reveal" data-year="2022" data-genre="documentaire" data-niveau="college">
+    <span class="film-num">08</span>
+    <div class="film-center">
+      <div class="film-thumb-wrap">
+        <img class="film-thumb" src="../../photos/_1177608.JPG" alt="Ce Que Je Suis" loading="lazy">
+      </div>
+      <div class="film-info">
+        <div class="film-title-text">CE QUE JE SUIS</div>
+        <div class="film-synopsis">Portraits non chorégraphiés. 12 élèves de 5e filmés de dos, de profil, de loin. Le regard que l'école ne pose jamais.</div>
+      </div>
+    </div>
+    <div class="film-meta-col">
+      2022
+      <span class="genre">Documentaire</span>
+    </div>
+    <div class="film-right">
+      <span class="film-award">Prix du jury lycéen</span>
+      <span class="film-duration">13 min</span>
+      <span class="film-arrow">→</span>
+    </div>
+  </li>
+
+  <li class="film-item reveal delay-1" data-year="2022" data-genre="fiction" data-niveau="lycee">
+    <span class="film-num">09</span>
+    <div class="film-center">
+      <div class="film-thumb-wrap">
+        <img class="film-thumb" src="../../photos/_1177442.JPG" alt="Avant de Partir" loading="lazy">
+      </div>
+      <div class="film-info">
+        <div class="film-title-text">AVANT DE PARTIR</div>
+        <div class="film-synopsis">Une famille qui déménage hors du 93 filme son dernier dimanche dans l'appartement.</div>
+      </div>
+    </div>
+    <div class="film-meta-col">
+      2022
+      <span class="genre">Fiction</span>
+    </div>
+    <div class="film-right">
+      <span class="film-duration">18 min</span>
+      <span class="film-arrow">→</span>
+    </div>
+  </li>
+
+  <!-- 2021 -->
+  <li class="year-divider">
+    <span class="year-num">2021</span>
+    <span class="year-count">6 films</span>
+  </li>
+
+  <li class="film-item reveal" data-year="2021" data-genre="documentaire" data-niveau="college">
+    <span class="film-num">10</span>
+    <div class="film-center">
+      <div class="film-thumb-wrap">
+        <img class="film-thumb" src="../../photos/_1177608.JPG" alt="Fenêtres" loading="lazy">
+      </div>
+      <div class="film-info">
+        <div class="film-title-text">FENÊTRES</div>
+        <div class="film-synopsis">Confinement — les élèves filment depuis leur fenêtre. Ce qu'on voit quand on ne peut plus sortir.</div>
+      </div>
+    </div>
+    <div class="film-meta-col">
+      2021
+      <span class="genre">Documentaire</span>
+    </div>
+    <div class="film-right">
+      <span class="film-award">Sélection officielle Clermont-Ferrand</span>
+      <span class="film-duration">22 min</span>
+      <span class="film-arrow">→</span>
+    </div>
+  </li>
+
+  <li class="film-item reveal delay-1" data-year="2021" data-genre="fiction" data-niveau="primaire">
+    <span class="film-num">11</span>
+    <div class="film-center">
+      <div class="film-thumb-wrap">
+        <img class="film-thumb" src="../../photos/_1177442.JPG" alt="Super Héros du Jeudi" loading="lazy">
+      </div>
+      <div class="film-info">
+        <div class="film-title-text">SUPER HÉROS DU JEUDI</div>
+        <div class="film-synopsis">Une classe de CE2 invente ses propres super-héros. Sans cap, sans logo. Juste des pouvoirs invisibles.</div>
+      </div>
+    </div>
+    <div class="film-meta-col">
+      2021
+      <span class="genre">Fiction</span>
+    </div>
+    <div class="film-right">
+      <span class="film-duration">6 min</span>
+      <span class="film-arrow">→</span>
+    </div>
+  </li>
+
+  <!-- 2020 -->
+  <li class="year-divider">
+    <span class="year-num">2020</span>
+    <span class="year-count">5 films</span>
+  </li>
+
+  <li class="film-item reveal" data-year="2020" data-genre="experimental" data-niveau="lycee">
+    <span class="film-num">12</span>
+    <div class="film-center">
+      <div class="film-thumb-wrap">
+        <img class="film-thumb" src="../../photos/_1177608.JPG" alt="Ne Me Demandez Pas" loading="lazy">
+      </div>
+      <div class="film-info">
+        <div class="film-title-text">NE ME DEMANDEZ PAS</div>
+        <div class="film-synopsis">Une série de refus filmés. Des jeunes de terminale qui répondent "non" à des questions qu'on leur pose tout le temps.</div>
+      </div>
+    </div>
+    <div class="film-meta-col">
+      2020
+      <span class="genre">Expérimental</span>
+    </div>
+    <div class="film-right">
+      <span class="film-duration">8 min</span>
+      <span class="film-arrow">→</span>
+    </div>
+  </li>
+
+</ul>
+
+<!-- BOTTOM CTA -->
+<div class="bottom-cta">
+  <h2 class="bottom-cta-title reveal">
+    VOTRE CLASSE<br>FAIT <span>LE PROCHAIN.</span>
+  </h2>
+  <p class="bottom-cta-sub reveal delay-1">
+    Chaque film ici a été réalisé en 1 à 3 séances Banlieuwood. Le vôtre peut être le prochain.
+  </p>
+  <a href="banlieuwood-site-v2.html#contact" class="btn-outline-cream reveal delay-2">Nous contacter</a>
+</div>
+
+<footer>
+  <div class="footer-logo">BANLIEUWOOD</div>
+  <div class="footer-copy">47 films · Seine-Saint-Denis · 2016–2024</div>
+</footer>
+
+<script>
+// NAV scroll
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Film preview on hover
+const filmPreview = document.getElementById('film-preview');
+document.querySelectorAll('.film-item[data-year]').forEach(item => {
+  const thumb = item.querySelector('.film-thumb');
+  if (!thumb) return;
+  item.addEventListener('mouseenter', () => {
+    filmPreview.style.backgroundImage = `url(${thumb.src})`;
+    filmPreview.classList.add('visible');
+  });
+  item.addEventListener('mouseleave', () => {
+    filmPreview.classList.remove('visible');
+  });
+});
+
+// Filters
+const filterBtns = document.querySelectorAll('.filter-btn');
+const filmItems  = document.querySelectorAll('.film-item[data-year]');
+const yearDivs   = document.querySelectorAll('.year-divider');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const f = btn.dataset.filter;
+
+    filmItems.forEach(item => {
+      const match =
+        f === 'all' ||
+        item.dataset.year === f ||
+        item.dataset.genre === f ||
+        item.dataset.niveau === f;
+      item.classList.toggle('hidden', !match);
+    });
+
+    // Hide year dividers if no films visible below
+    yearDivs.forEach(div => {
+      let next = div.nextElementSibling;
+      let hasVisible = false;
+      while (next && !next.classList.contains('year-divider')) {
+        if (!next.classList.contains('hidden') && next.tagName === 'LI') hasVisible = true;
+        next = next.nextElementSibling;
+      }
+      div.style.display = hasVisible ? '' : 'none';
+    });
+  });
+});
+</script>
+</body>
+</html>

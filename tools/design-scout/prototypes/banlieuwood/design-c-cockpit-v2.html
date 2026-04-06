@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banlieuwood — Cockpit & Ateliers Cinéma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════════════ */
+:root {
+  --c-orange: #FF6B35;
+  --c-cream:  #F2EBD9;
+  --c-warm:   #EDE4CF;
+  --c-ink:    #0D0B09;
+  --font-c: 'Bebas Neue', sans-serif;
+  --font-b: 'Plus Jakarta Sans', sans-serif;
+  --font-m: 'Space Mono', monospace;
+}
+
+/* ═══════════════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; cursor: none; }
+body {
+  font-family: var(--font-b);
+  background: var(--c-cream);
+  color: var(--c-ink);
+  overflow-x: hidden;
+}
+button { font-family: inherit; cursor: none; }
+a { cursor: none; }
+
+/* ═══════════════════════════════════════════════════
+   GRAIN GLOBAL
+═══════════════════════════════════════════════════ */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.04'/%3E%3C/svg%3E");
+  animation: grain-shift 1.4s steps(2) infinite;
+}
+@keyframes grain-shift {
+  0%   { transform: translate(0,0); }
+  25%  { transform: translate(-2px, 1px); }
+  50%  { transform: translate(2px, -1px); }
+  75%  { transform: translate(-1px, 2px); }
+  100% { transform: translate(1px, -2px); }
+}
+
+/* ═══════════════════════════════════════════════════
+   CURSEUR CUSTOM
+═══════════════════════════════════════════════════ */
+#cursor {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--c-orange);
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%,-50%);
+  transition: width 0.22s, height 0.22s, background 0.22s, opacity 0.22s;
+  mix-blend-mode: normal;
+}
+#cursor.big {
+  width: 36px; height: 36px;
+  background: rgba(255,107,53,0.18);
+  border: 1.5px solid rgba(255,107,53,0.5);
+}
+#cursor.hidden { opacity: 0; }
+
+/* ═══════════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════════ */
+.reveal, .reveal-fast {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal-fast { transition-duration: 0.45s; }
+.reveal.visible, .reveal-fast.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════
+   KEN BURNS
+═══════════════════════════════════════════════════ */
+@keyframes kenBurns1 {
+  0%   { transform: scale(1) translate(0,0); }
+  100% { transform: scale(1.08) translate(-1.5%, 1%); }
+}
+@keyframes kenBurns2 {
+  0%   { transform: scale(1) translate(0,0); }
+  100% { transform: scale(1.06) translate(1%, -1.2%); }
+}
+@keyframes kenBurns3 {
+  0%   { transform: scale(1) translate(0,0); }
+  100% { transform: scale(1.07) translate(-0.8%, 0.8%); }
+}
+
+/* ═══════════════════════════════════════════════════
+   PULSE ANIMATIONS
+═══════════════════════════════════════════════════ */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.75); }
+}
+@keyframes livePulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255,107,53,0.4); }
+  50%       { opacity: 0.6; box-shadow: 0 0 0 5px rgba(255,107,53,0); }
+}
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes counter-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 1 — HERO
+═══════════════════════════════════════════════════ */
+.c2-hero {
+  min-height: 100vh;
+  background: var(--c-cream);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.c2-hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.018'/%3E%3C/svg%3E");
+}
+.c2-hero::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(13,11,9,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13,11,9,0.022) 1px, transparent 1px);
+  background-size: 96px 96px;
+}
+
+/* NAV */
+.c2-nav {
+  position: relative; z-index: 10;
+  padding: 28px 64px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.c2-logo {
+  font-family: var(--font-c);
+  font-size: 15px; letter-spacing: 6px;
+  color: var(--c-ink);
+}
+.c2-nav-links { display: flex; gap: 40px; }
+.c2-nav-link {
+  color: rgba(0,0,0,0.28); font-size: 12px;
+  text-decoration: none; font-weight: 300;
+  transition: color 0.2s;
+}
+.c2-nav-link:hover { color: rgba(0,0,0,0.65); }
+.c2-nav-cta {
+  background: var(--c-ink); color: white;
+  border: none; padding: 10px 26px;
+  font-family: var(--font-b); font-size: 12px; font-weight: 600;
+  transition: background 0.2s, transform 0.18s;
+}
+.c2-nav-cta:hover { background: #2a2a2a; transform: translateY(-1px); }
+
+/* HERO BODY */
+.c2-hero-body {
+  flex: 1;
+  display: flex; flex-direction: column;
+  padding: 72px 64px 0;
+  position: relative; z-index: 2;
+  padding-bottom: calc(45vh + 64px);
+}
+.c2-h1 {
+  font-family: var(--font-c);
+  font-size: clamp(96px, 13.5vw, 196px);
+  line-height: 0.86;
+  color: var(--c-ink);
+  white-space: nowrap;
+  margin-bottom: 0;
+}
+.c2-h1 em { color: var(--c-orange); font-style: normal; }
+.c2-hero-divider {
+  width: 72px; height: 3px;
+  background: var(--c-orange);
+  margin: 36px 0;
+}
+.c2-sub {
+  font-size: 14px;
+  color: rgba(0,0,0,0.48);
+  line-height: 1.7;
+  max-width: 480px;
+  font-weight: 300;
+  margin-bottom: 32px;
+}
+.c2-hero-btns { display: flex; gap: 14px; margin-bottom: 56px; }
+.c2-btn-main {
+  background: var(--c-orange); color: white;
+  border: none; padding: 14px 40px;
+  font-family: var(--font-b); font-size: 13px; font-weight: 700;
+  transition: filter 0.2s, transform 0.18s;
+}
+.c2-btn-main:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.c2-btn-sec {
+  background: transparent;
+  border: 2px solid rgba(0,0,0,0.12);
+  color: var(--c-ink); padding: 12px 36px;
+  font-family: var(--font-b); font-size: 13px;
+  transition: border-color 0.2s, background 0.2s, transform 0.18s;
+}
+.c2-btn-sec:hover { border-color: rgba(0,0,0,0.28); background: rgba(0,0,0,0.03); transform: translateY(-1px); }
+
+/* STATS */
+.c2-hero-stats {
+  display: flex; gap: 0;
+  border-top: 1px solid rgba(0,0,0,0.07);
+  padding-top: 44px;
+}
+.c2-hero-stat {
+  padding-right: 52px;
+  border-right: 1px solid rgba(0,0,0,0.07);
+  margin-right: 52px;
+}
+.c2-hero-stat:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+.c2-stat-val {
+  font-family: var(--font-c);
+  font-size: 54px; color: var(--c-ink); line-height: 1;
+}
+.c2-stat-lbl {
+  font-family: var(--font-m);
+  font-size: 9px; color: rgba(0,0,0,0.35);
+  letter-spacing: 2px; text-transform: uppercase; margin-top: 6px;
+}
+
+/* FILMSTRIP (position absolute, bottom 0) */
+.c2-filmstrip-wrap {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 3;
+  height: 45vh;
+}
+.c2-filmstrip {
+  display: grid;
+  grid-template-columns: 13fr 50fr 22fr 15fr;
+  height: 100%;
+  overflow: hidden;
+}
+.c2-film-cell {
+  position: relative; overflow: hidden;
+  background: #08080a;
+}
+.c2-film-cell-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  filter: saturate(0) brightness(0.55) contrast(1.2);
+  transition: transform 7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.c2-film-cell:nth-child(1) .c2-film-cell-bg { animation: kenBurns1 22s ease-in-out infinite alternate; }
+.c2-film-cell:nth-child(2) .c2-film-cell-bg { animation: kenBurns2 28s ease-in-out infinite alternate; }
+.c2-film-cell:nth-child(3) .c2-film-cell-bg { animation: kenBurns3 24s ease-in-out infinite alternate; }
+.c2-film-cell:nth-child(4) .c2-film-cell-bg { animation: kenBurns1 20s ease-in-out infinite alternate-reverse; }
+.c2-film-cell.main .c2-film-cell-bg { filter: saturate(0.05) brightness(0.55) contrast(1.2); }
+.c2-film-cell-n {
+  position: absolute; bottom: 16px; left: 14px; z-index: 5;
+  font-family: var(--font-m); font-size: 8px;
+  color: rgba(255,255,255,0.18); letter-spacing: 3px;
+  transition: color 0.3s;
+}
+.c2-film-cell:hover .c2-film-cell-n { color: rgba(255,255,255,0.5); }
+.c2-film-cell::after {
+  content: attr(data-title);
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
+  padding: 36px 16px 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+  font-family: var(--font-c); font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+  color: rgba(255,255,255,0);
+  transition: color 0.45s; pointer-events: none;
+}
+.c2-film-cell:hover::after { color: rgba(255,255,255,0.7); }
+.c2-filmstrip-label {
+  position: absolute;
+  bottom: 24px; left: 40px; z-index: 20;
+  font-family: var(--font-m);
+  font-size: 9px; letter-spacing: 5px;
+  color: rgba(255,255,255,0.28); text-transform: uppercase;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 2 — TICKER ORANGE
+═══════════════════════════════════════════════════ */
+.c2-ticker-wrap {
+  background: var(--c-orange);
+  height: 20vh;
+  display: flex; align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+.c2-ticker-track {
+  display: flex;
+  white-space: nowrap;
+  animation: ticker 22s linear infinite;
+}
+.c2-ticker-text {
+  font-family: var(--font-c);
+  font-size: clamp(28px, 3.5vw, 56px);
+  color: white;
+  letter-spacing: 6px;
+  padding-right: 80px;
+  opacity: 0.92;
+}
+.c2-ticker-dot {
+  color: rgba(255,255,255,0.45);
+  margin-right: 80px;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 3 — LES 8 MODULES
+═══════════════════════════════════════════════════ */
+.c2-modules {
+  background: var(--c-cream);
+  padding: 112px 64px;
+}
+.c2-modules-head {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 88px;
+  align-items: start;
+  margin-bottom: 72px;
+}
+.c2-modules-label {
+  font-family: var(--font-m);
+  font-size: 9px; letter-spacing: 5px; text-transform: uppercase;
+  color: rgba(0,0,0,0.28); padding-top: 8px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.c2-modules-h {
+  font-family: var(--font-c);
+  font-size: clamp(52px, 6vw, 92px);
+  color: var(--c-ink); line-height: 0.94;
+  white-space: pre-line;
+}
+.c2-modules-h em { color: var(--c-orange); font-style: normal; }
+.c2-modules-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+.c2-module-card {
+  background: rgba(0,0,0,0.025);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 36px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.25s, border-color 0.25s;
+}
+.c2-module-card:hover { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.1); }
+.c2-module-card.climax { border-color: rgba(255,107,53,0.2); }
+.c2-module-n-big {
+  font-family: var(--font-c);
+  font-size: 100px;
+  color: rgba(0,0,0,0.05);
+  line-height: 1;
+  position: absolute; top: -8px; right: 12px;
+  pointer-events: none;
+  transition: color 0.3s;
+}
+.c2-module-card.climax .c2-module-n-big { color: rgba(255,107,53,0.12); }
+.c2-module-card:hover .c2-module-n-big { color: rgba(0,0,0,0.08); }
+.c2-module-card.climax:hover .c2-module-n-big { color: rgba(255,107,53,0.18); }
+.c2-module-badge {
+  font-family: var(--font-m);
+  font-size: 8px; letter-spacing: 3px;
+  color: rgba(0,0,0,0.3); margin-bottom: 12px;
+  display: block;
+}
+.c2-module-card.climax .c2-module-badge { color: rgba(255,107,53,0.7); }
+.c2-module-name {
+  font-family: var(--font-c);
+  font-size: 28px; color: var(--c-ink); line-height: 1;
+  margin-bottom: 10px;
+}
+.c2-module-desc {
+  font-size: 12px; color: rgba(0,0,0,0.45);
+  line-height: 1.75; font-weight: 300;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 4 — COCKPIT MOCKUP (fond ink)
+═══════════════════════════════════════════════════ */
+.c2-cockpit {
+  background: var(--c-ink);
+  padding: 112px 64px;
+  position: relative;
+  overflow: hidden;
+}
+.c2-cockpit::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.025'/%3E%3C/svg%3E");
+}
+.c2-cockpit-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.45fr;
+  gap: 96px;
+  align-items: start;
+  position: relative; z-index: 1;
+}
+.c2-cockpit-label {
+  font-family: var(--font-m);
+  font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+  color: rgba(255,107,53,0.65); margin-bottom: 20px;
+  display: block;
+}
+.c2-cockpit-h {
+  font-family: var(--font-c);
+  font-size: clamp(48px, 5.2vw, 80px);
+  color: white; line-height: 0.94; margin-bottom: 24px;
+}
+.c2-cockpit-sub {
+  font-size: 14px; color: rgba(255,255,255,0.32);
+  line-height: 1.8; margin-bottom: 44px; font-weight: 300;
+  max-width: 380px;
+}
+.c2-feats { display: flex; flex-direction: column; }
+.c2-feat {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 24px; align-items: flex-start;
+  padding: 28px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  transition: border-color 0.3s;
+}
+.c2-feat:last-child { border-bottom: 1px solid rgba(255,255,255,0.05); }
+.c2-feat:hover { border-top-color: rgba(255,107,53,0.2); }
+.c2-feat-num {
+  font-family: var(--font-m);
+  font-size: 44px;
+  color: rgba(255,107,53,0.16);
+  line-height: 1;
+}
+.c2-feat-title {
+  font-family: var(--font-c);
+  font-size: 28px; color: white; line-height: 1; margin-bottom: 6px;
+}
+.c2-feat-desc {
+  font-size: 12px; color: rgba(255,255,255,0.32);
+  line-height: 1.75; font-weight: 300;
+}
+
+/* MOCKUP iPad */
+.c2-ipad-wrap { position: relative; }
+.c2-ipad {
+  background: rgba(8,8,10,0.97);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04),
+    0 48px 140px rgba(0,0,0,0.85),
+    0 0 80px rgba(255,107,53,0.04);
+}
+.c2-ipad-bar {
+  height: 40px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; padding: 0 16px; gap: 8px;
+}
+.c2-ipad-dot { width: 9px; height: 9px; border-radius: 50%; }
+.c2-ipad-dot:nth-child(1) { background: rgba(255,95,87,0.65); }
+.c2-ipad-dot:nth-child(2) { background: rgba(255,189,68,0.45); }
+.c2-ipad-dot:nth-child(3) { background: rgba(39,201,63,0.45); }
+.c2-ipad-bar-label {
+  margin-left: 8px;
+  font-family: var(--font-m); font-size: 10px;
+  color: rgba(255,255,255,0.18); letter-spacing: 1px;
+}
+.c2-ipad-body { padding: 20px; }
+.c2-ipad-session {
+  background: rgba(255,107,53,0.08);
+  border: 1px solid rgba(255,107,53,0.14);
+  padding: 14px 16px; margin-bottom: 16px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.c2-ipad-session-title {
+  font-size: 12px; color: rgba(255,255,255,0.6);
+  font-family: var(--font-b); font-weight: 600;
+  margin-bottom: 3px;
+}
+.c2-ipad-session-sub {
+  font-family: var(--font-m);
+  font-size: 9px; color: rgba(255,255,255,0.22); letter-spacing: 1px;
+}
+.c2-ipad-live {
+  font-family: var(--font-m); font-size: 9px;
+  color: var(--c-orange); letter-spacing: 2px;
+  text-transform: uppercase;
+  display: flex; align-items: center; gap: 5px;
+  background: rgba(255,107,53,0.08);
+  padding: 5px 10px; border: 1px solid rgba(255,107,53,0.2);
+}
+.c2-ipad-live-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--c-orange);
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+.c2-ipad-teams {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px; margin-bottom: 14px;
+}
+.c2-ipad-team {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 14px 10px; text-align: center;
+  transition: border-color 0.3s;
+}
+.c2-ipad-team.hot {
+  border-color: rgba(255,107,53,0.25);
+  background: rgba(255,107,53,0.05);
+}
+.c2-ipad-team-name {
+  font-family: var(--font-m); font-size: 9px;
+  color: rgba(255,255,255,0.35); letter-spacing: 1px; margin-bottom: 8px;
+}
+.c2-ipad-team-score {
+  font-family: var(--font-c); font-size: 32px;
+  color: rgba(255,255,255,0.75); line-height: 1;
+}
+.c2-ipad-team.hot .c2-ipad-team-score { color: var(--c-orange); }
+.c2-ipad-section-lbl {
+  font-family: var(--font-m); font-size: 8px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,0.14); margin: 14px 0 8px;
+}
+.c2-ipad-actions { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.c2-ipad-action-row {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 10px 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.c2-ipad-row-lbl {
+  font-size: 10px; color: rgba(255,255,255,0.3);
+  flex: 1; letter-spacing: 0.3px;
+}
+.c2-ipad-badge {
+  font-family: var(--font-m); font-size: 8px;
+  padding: 2px 8px; letter-spacing: 1px;
+}
+.c2-badge-active { background: rgba(255,107,53,0.1); color: rgba(255,107,53,0.8); }
+.c2-badge-wait   { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.2); }
+.c2-badge-ready  { background: rgba(39,201,63,0.1); color: rgba(39,201,63,0.7); }
+.c2-ipad-cta {
+  background: var(--c-orange); color: white;
+  border: none; width: 100%; padding: 13px;
+  font-family: var(--font-b); font-size: 11px; font-weight: 700;
+  cursor: pointer; letter-spacing: 0.5px;
+  transition: filter 0.2s;
+}
+.c2-ipad-cta:hover { filter: brightness(1.1); }
+.c2-ipad-bottom {
+  background: rgba(255,255,255,0.02);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 10px 16px;
+  display: flex; gap: 10px; align-items: center;
+}
+.c2-ipad-live-dot2 {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--c-orange);
+  animation: livePulse 2s ease-in-out infinite;
+}
+.c2-ipad-status {
+  font-family: var(--font-m); font-size: 9px;
+  color: rgba(255,255,255,0.2); letter-spacing: 1px;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 5 — PROTOCOLE TOURNAGE (fond warm cream)
+═══════════════════════════════════════════════════ */
+.c2-protocol {
+  background: var(--c-warm);
+  padding: 112px 64px;
+  overflow: hidden;
+}
+.c2-protocol-head { margin-bottom: 72px; }
+.c2-protocol-h {
+  font-family: var(--font-c);
+  font-size: clamp(72px, 9vw, 136px);
+  color: var(--c-ink); line-height: 0.9;
+  opacity: 0.92;
+}
+.c2-protocol-h em { color: var(--c-orange); font-style: normal; }
+.c2-steps { display: flex; flex-direction: column; }
+.c2-step {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  align-items: baseline;
+  border-top: 1px solid rgba(0,0,0,0.07);
+  padding: 32px 0; gap: 24px;
+  transition: background 0.2s;
+  position: relative;
+}
+.c2-step:last-child { border-bottom: 1px solid rgba(0,0,0,0.07); }
+.c2-step:hover { background: rgba(0,0,0,0.025); margin: 0 -64px; padding-left: 64px; padding-right: 64px; }
+.c2-step-n {
+  font-family: var(--font-m);
+  font-size: 52px; color: rgba(0,0,0,0.05); line-height: 1;
+  transition: color 0.3s;
+}
+.c2-step.orange .c2-step-n { color: rgba(255,107,53,0.22); }
+.c2-step-name {
+  font-family: var(--font-c);
+  font-size: clamp(26px, 2.8vw, 42px);
+  color: var(--c-ink); line-height: 1; margin-bottom: 6px;
+}
+.c2-step-desc {
+  font-size: 13px; color: rgba(0,0,0,0.4);
+  line-height: 1.7; font-weight: 300;
+}
+.c2-step-meta {
+  font-family: var(--font-m);
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(0,0,0,0.25); white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 6 — DOCTRINE (fond ink absolu)
+═══════════════════════════════════════════════════ */
+.c2-doctrine {
+  min-height: 60vh;
+  background: var(--c-ink);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  padding: 88px 64px;
+  text-align: center;
+}
+.c2-doctrine::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.025'/%3E%3C/svg%3E");
+}
+.c2-doctrine-lbl {
+  font-family: var(--font-m); font-size: 8px;
+  letter-spacing: 6px; color: rgba(255,107,53,0.55);
+  text-transform: uppercase; margin-bottom: 48px;
+  position: relative; z-index: 10;
+}
+.c2-doctrine-h {
+  font-family: var(--font-c);
+  font-size: clamp(42px, 7vw, 108px);
+  color: white; line-height: 1.0;
+  max-width: 980px;
+  position: relative; z-index: 10;
+  margin-bottom: 36px;
+}
+.c2-doctrine-h em { color: var(--c-orange); font-style: normal; }
+.c2-doctrine-sub {
+  font-family: var(--font-m);
+  font-size: 10px; letter-spacing: 4px;
+  color: rgba(255,255,255,0.22);
+  text-transform: uppercase;
+  position: relative; z-index: 10;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 7 — VALIDATION INSTITUTIONNELLE
+═══════════════════════════════════════════════════ */
+.c2-instit {
+  background: var(--c-cream);
+  padding: 112px 64px;
+}
+.c2-instit-h {
+  font-family: var(--font-c);
+  font-size: clamp(48px, 5.5vw, 80px);
+  color: var(--c-ink); line-height: 0.94; margin-bottom: 72px;
+}
+.c2-instit-h em { color: var(--c-orange); font-style: normal; }
+.c2-instit-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; margin-bottom: 64px;
+}
+.c2-instit-item {
+  background: rgba(0,0,0,0.025);
+  border: 1px solid rgba(0,0,0,0.07);
+  padding: 40px 32px;
+  transition: background 0.25s;
+}
+.c2-instit-item:hover { background: rgba(0,0,0,0.04); }
+.c2-instit-check {
+  width: 24px; height: 24px;
+  background: var(--c-orange);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+}
+.c2-instit-check svg { width: 13px; height: 13px; fill: none; stroke: white; stroke-width: 2.5; }
+.c2-instit-name {
+  font-family: var(--font-c); font-size: 32px;
+  color: var(--c-ink); margin-bottom: 10px; line-height: 1;
+}
+.c2-instit-desc {
+  font-size: 12px; color: rgba(0,0,0,0.45);
+  line-height: 1.75; font-weight: 300;
+}
+/* Socle commun */
+.c2-socle {
+  background: rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.07);
+  padding: 28px 32px;
+  display: flex; align-items: center; gap: 24px;
+  margin-bottom: 64px;
+}
+.c2-socle-label {
+  font-family: var(--font-m); font-size: 8px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(0,0,0,0.35); flex-shrink: 0;
+}
+.c2-socle-domains {
+  display: flex; gap: 16px; flex-wrap: wrap;
+}
+.c2-socle-d {
+  font-family: var(--font-c); font-size: 14px;
+  color: var(--c-ink); opacity: 0.6;
+  padding: 4px 12px;
+  border: 1px solid rgba(0,0,0,0.1);
+  transition: opacity 0.2s, border-color 0.2s;
+}
+.c2-socle-d:hover { opacity: 1; border-color: var(--c-orange); }
+/* Partenaires */
+.c2-partners-lbl {
+  font-family: var(--font-m); font-size: 9px;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: rgba(0,0,0,0.3); margin-bottom: 28px;
+}
+.c2-partners { display: flex; gap: 36px; align-items: center; flex-wrap: wrap; }
+.c2-partner {
+  font-family: var(--font-c); font-size: 16px;
+  color: rgba(0,0,0,0.25); letter-spacing: 2px;
+  transition: color 0.25s;
+}
+.c2-partner:hover { color: var(--c-ink); }
+
+/* ═══════════════════════════════════════════════════
+   SECTION 8 — TÉMOIGNAGES
+═══════════════════════════════════════════════════ */
+.c2-testimony {
+  background: #111009;
+  padding: 112px 64px;
+  position: relative; overflow: hidden;
+}
+.c2-testimony::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.02'/%3E%3C/svg%3E");
+}
+.c2-testimony-inner { position: relative; z-index: 1; }
+.c2-testimony-lbl {
+  font-family: var(--font-m); font-size: 9px;
+  letter-spacing: 5px; text-transform: uppercase;
+  color: rgba(255,107,53,0.55); margin-bottom: 64px;
+}
+.c2-testimonials { display: flex; flex-direction: column; gap: 2px; }
+.c2-testimonial {
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 44px 40px;
+  background: rgba(255,255,255,0.02);
+  transition: background 0.25s;
+}
+.c2-testimonial:hover { background: rgba(255,255,255,0.04); }
+.c2-test-quote {
+  font-family: var(--font-c);
+  font-size: clamp(24px, 2.8vw, 40px);
+  color: white; line-height: 1.1;
+  margin-bottom: 28px;
+}
+.c2-test-quote em { color: var(--c-orange); font-style: normal; }
+.c2-test-attr {
+  display: flex; align-items: center; gap: 14px;
+}
+.c2-test-dash { width: 28px; height: 1px; background: var(--c-orange); display: block; flex-shrink: 0; }
+.c2-test-name {
+  font-family: var(--font-m); font-size: 10px;
+  color: rgba(255,255,255,0.35); letter-spacing: 1px;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 9 — POUR LES ÉTABLISSEMENTS
+═══════════════════════════════════════════════════ */
+.c2-etab {
+  background: var(--c-cream);
+  padding: 112px 64px;
+}
+.c2-etab-h {
+  font-family: var(--font-c);
+  font-size: clamp(52px, 6vw, 92px);
+  color: var(--c-ink); line-height: 0.94; margin-bottom: 72px;
+}
+.c2-etab-h em { color: var(--c-orange); font-style: normal; }
+.c2-etab-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2px; margin-bottom: 72px;
+}
+.c2-etab-item {
+  background: rgba(0,0,0,0.025);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 36px 32px;
+  transition: background 0.25s;
+}
+.c2-etab-item:hover { background: rgba(0,0,0,0.04); }
+.c2-etab-item-label {
+  font-family: var(--font-m); font-size: 8px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,107,53,0.55); margin-bottom: 14px;
+}
+.c2-etab-item-h {
+  font-family: var(--font-c); font-size: 32px;
+  color: var(--c-ink); margin-bottom: 10px; line-height: 1;
+}
+.c2-etab-item-p {
+  font-size: 12px; color: rgba(0,0,0,0.45);
+  line-height: 1.75; font-weight: 300;
+}
+.c2-etab-ctas {
+  display: flex; gap: 14px; margin-bottom: 64px;
+}
+
+/* ═══════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════ */
+.c2-footer {
+  background: var(--c-warm);
+  padding: 64px;
+  display: grid; grid-template-columns: 2fr 1fr 1fr;
+  gap: 64px;
+  border-top: 1px solid rgba(0,0,0,0.07);
+}
+.c2-footer-logo {
+  font-family: var(--font-c);
+  font-size: 22px; letter-spacing: 4px;
+  color: var(--c-ink); margin-bottom: 16px;
+}
+.c2-footer-tag {
+  font-size: 12px; color: rgba(0,0,0,0.38);
+  line-height: 1.75; font-weight: 300; max-width: 300px;
+}
+.c2-footer-col-h {
+  font-family: var(--font-m); font-size: 9px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(0,0,0,0.3); margin-bottom: 20px;
+}
+.c2-footer-links { display: flex; flex-direction: column; gap: 10px; }
+.c2-footer-link {
+  font-size: 12px; color: rgba(0,0,0,0.4);
+  text-decoration: none; transition: color 0.2s;
+}
+.c2-footer-link:hover { color: var(--c-ink); }
+.c2-footer-bottom {
+  padding: 20px 64px;
+  border-top: 1px solid rgba(0,0,0,0.07);
+  display: flex; justify-content: space-between;
+  font-family: var(--font-m); font-size: 9px;
+  color: rgba(0,0,0,0.25); letter-spacing: 1px;
+  background: var(--c-warm);
+}
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE 768px
+═══════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .c2-nav { padding: 20px 24px; }
+  .c2-nav-links { display: none; }
+  .c2-hero-body { padding: 40px 24px 0; padding-bottom: calc(40vh + 40px); }
+  .c2-h1 { font-size: clamp(64px, 16vw, 96px); white-space: normal; }
+  .c2-filmstrip-wrap { height: 40vh; }
+  .c2-filmstrip { grid-template-columns: 1fr 1fr; }
+  .c2-film-cell:nth-child(3), .c2-film-cell:nth-child(4) { display: none; }
+  .c2-modules-head { grid-template-columns: 1fr; gap: 24px; }
+  .c2-modules-label { writing-mode: horizontal-tb; transform: none; }
+  .c2-modules-grid { grid-template-columns: 1fr 1fr; }
+  .c2-cockpit-inner { grid-template-columns: 1fr; gap: 48px; }
+  .c2-step { grid-template-columns: 72px 1fr; }
+  .c2-step-meta { display: none; }
+  .c2-instit-grid { grid-template-columns: 1fr; }
+  .c2-etab-grid { grid-template-columns: 1fr; }
+  .c2-etab-ctas { flex-direction: column; }
+  .c2-cta-inner { flex-direction: column; gap: 48px; }
+  .c2-footer { grid-template-columns: 1fr; gap: 40px; padding: 40px 24px; }
+  .c2-footer-bottom { padding: 16px 24px; flex-direction: column; gap: 8px; }
+  .c2-modules, .c2-cockpit, .c2-protocol, .c2-instit, .c2-testimony, .c2-etab { padding-left: 24px; padding-right: 24px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Curseur -->
+<div id="cursor"></div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 1 — HERO
+══════════════════════════════════════════════════ -->
+<section class="c2-hero">
+  <nav class="c2-nav">
+    <span class="c2-logo">BANLIEUWOOD</span>
+    <div class="c2-nav-links">
+      <a href="#modules" class="c2-nav-link">Modules</a>
+      <a href="#cockpit" class="c2-nav-link">Cockpit</a>
+      <a href="#instit" class="c2-nav-link">Institutions</a>
+      <a href="#etab" class="c2-nav-link">Établissements</a>
+    </div>
+    <button class="c2-nav-cta">Accéder au cockpit</button>
+  </nav>
+
+  <div class="c2-hero-body">
+    <h1 class="c2-h1">L'OUTIL QUI<br>MANQUAIT À<br>CHAQUE <em>INTERVENANT</em></h1>
+    <div class="c2-hero-divider"></div>
+    <p class="c2-sub">8 modules. Un film. 3 parcours institutionnels. En 5 semaines.</p>
+    <div class="c2-hero-btns">
+      <button class="c2-btn-main">Accéder au cockpit</button>
+      <button class="c2-btn-sec">Voir les modules</button>
+    </div>
+    <div class="c2-hero-stats">
+      <div class="c2-hero-stat">
+        <div class="c2-stat-val" data-counter="1200">1200</div>
+        <div class="c2-stat-lbl">Jeunes formés</div>
+      </div>
+      <div class="c2-hero-stat">
+        <div class="c2-stat-val" data-counter="47">47</div>
+        <div class="c2-stat-lbl">Films produits</div>
+      </div>
+      <div class="c2-hero-stat">
+        <div class="c2-stat-val" data-counter="8">8</div>
+        <div class="c2-stat-lbl">Ans de présence</div>
+      </div>
+      <div class="c2-hero-stat">
+        <div class="c2-stat-val" data-counter="3">3</div>
+        <div class="c2-stat-lbl">Parcours institutionnels</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filmstrip photos N&B, position absolute bottom 0 -->
+  <div class="c2-filmstrip-wrap">
+    <div class="c2-filmstrip">
+      <div class="c2-film-cell" data-title="ATELIER · MAKING-OF">
+        <div class="c2-film-cell-bg" style="background-image:url('../../making-of/frame_007.jpg');"></div>
+        <span class="c2-film-cell-n">01</span>
+      </div>
+      <div class="c2-film-cell main" data-title="TOURNAGE · PASSAGE 2024">
+        <div class="c2-film-cell-bg" style="background-image:url('../../making-of/frame_015.jpg');"></div>
+        <span class="c2-film-cell-n">02</span>
+      </div>
+      <div class="c2-film-cell" data-title="ÉLÈVES · PITCH M4">
+        <div class="c2-film-cell-bg" style="background-image:url('../../making-of/frame_022.jpg');"></div>
+        <span class="c2-film-cell-n">03</span>
+      </div>
+      <div class="c2-film-cell" data-title="PROJECTION · FINALE">
+        <div class="c2-film-cell-bg" style="background-image:url('../../making-of/frame_035.jpg');"></div>
+        <span class="c2-film-cell-n">04</span>
+      </div>
+    </div>
+    <div class="c2-filmstrip-label">DEPUIS 2016 · SEINE-SAINT-DENIS</div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     SECTION 2 — TICKER ORANGE
+══════════════════════════════════════════════════ -->
+<div class="c2-ticker-wrap">
+  <div class="c2-ticker-track" id="c2-ticker">
+    <span class="c2-ticker-text">M1 <span class="c2-ticker-dot">·</span> LE REGARD <span class="c2-ticker-dot">·</span> M2 <span class="c2-ticker-dot">·</span> LES ÉMOTIONS <span class="c2-ticker-dot">·</span> M3 <span class="c2-ticker-dot">·</span> ET SI... <span class="c2-ticker-dot">·</span> M4 <span class="c2-ticker-dot">·</span> LE PITCH <span class="c2-ticker-dot">·</span> M5 <span class="c2-ticker-dot">·</span> LE VOTE <span class="c2-ticker-dot">·</span> M6 <span class="c2-ticker-dot">·</span> LE SCÉNARIO <span class="c2-ticker-dot">·</span> M7 <span class="c2-ticker-dot">·</span> STORYBOARD <span class="c2-ticker-dot">·</span> M8 <span class="c2-ticker-dot">·</span> L'ÉQUIPE <span class="c2-ticker-dot">·</span></span>
+    <span class="c2-ticker-text">M1 <span class="c2-ticker-dot">·</span> LE REGARD <span class="c2-ticker-dot">·</span> M2 <span class="c2-ticker-dot">·</span> LES ÉMOTIONS <span class="c2-ticker-dot">·</span> M3 <span class="c2-ticker-dot">·</span> ET SI... <span class="c2-ticker-dot">·</span> M4 <span class="c2-ticker-dot">·</span> LE PITCH <span class="c2-ticker-dot">·</span> M5 <span class="c2-ticker-dot">·</span> LE VOTE <span class="c2-ticker-dot">·</span> M6 <span class="c2-ticker-dot">·</span> LE SCÉNARIO <span class="c2-ticker-dot">·</span> M7 <span class="c2-ticker-dot">·</span> STORYBOARD <span class="c2-ticker-dot">·</span> M8 <span class="c2-ticker-dot">·</span> L'ÉQUIPE <span class="c2-ticker-dot">·</span></span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     SECTION 3 — LES 8 MODULES
+══════════════════════════════════════════════════ -->
+<section class="c2-modules" id="modules">
+  <div class="c2-modules-head">
+    <div><span class="c2-modules-label">Méthode</span></div>
+    <div>
+      <h2 class="c2-modules-h reveal">8 modules.<br>Un <em>film.</em></h2>
+    </div>
+  </div>
+  <div class="c2-modules-grid">
+    <div class="c2-module-card reveal-fast">
+      <span class="c2-module-n-big">1</span>
+      <span class="c2-module-badge">M1</span>
+      <div class="c2-module-name">Le Regard</div>
+      <p class="c2-module-desc">Analyser des images, observer, interpréter. Apprendre à lire un film avant de le faire.</p>
+    </div>
+    <div class="c2-module-card reveal-fast">
+      <span class="c2-module-n-big">2</span>
+      <span class="c2-module-badge">M2</span>
+      <div class="c2-module-name">Les Émotions</div>
+      <p class="c2-module-desc">Construire une scène avec contraintes. Exprimer sans les mots, juste avec le corps et l'espace.</p>
+    </div>
+    <div class="c2-module-card reveal-fast">
+      <span class="c2-module-n-big">3</span>
+      <span class="c2-module-badge">M3</span>
+      <div class="c2-module-name">Et si...</div>
+      <p class="c2-module-desc">Brainstorm collectif. Imaginer des histoires à partir d'une contrainte simple. Aucune mauvaise idée.</p>
+    </div>
+    <div class="c2-module-card reveal-fast">
+      <span class="c2-module-n-big">4</span>
+      <span class="c2-module-badge">M4</span>
+      <div class="c2-module-name">Le Pitch</div>
+      <p class="c2-module-desc">Pitcher son idée en 30 secondes devant la classe. L'exercice de clarté le plus puissant qui soit.</p>
+    </div>
+    <div class="c2-module-card reveal-fast">
+      <span class="c2-module-n-big">5</span>
+      <span class="c2-module-badge">M5</span>
+      <div class="c2-module-name">Le Vote</div>
+      <p class="c2-module-desc">Voter démocratiquement pour choisir l'histoire. Le groupe décide — pas l'adulte. Zéro arbitraire.</p>
+    </div>
+    <div class="c2-module-card reveal-fast">
+      <span class="c2-module-n-big">6</span>
+      <span class="c2-module-badge">M6</span>
+      <div class="c2-module-name">Le Scénario</div>
+      <p class="c2-module-desc">Co-écrire les dialogues, les descriptions, les émotions. Le film appartient à tout le groupe.</p>
+    </div>
+    <div class="c2-module-card reveal-fast">
+      <span class="c2-module-n-big">7</span>
+      <span class="c2-module-badge">M7</span>
+      <div class="c2-module-name">Storyboard</div>
+      <p class="c2-module-desc">Plans de cadrage, découpage, plan au sol. Visualiser chaque image avant de la tourner.</p>
+    </div>
+    <div class="c2-module-card climax reveal-fast">
+      <span class="c2-module-n-big">8</span>
+      <span class="c2-module-badge">M8 — CLIMAX</span>
+      <div class="c2-module-name">L'Équipe</div>
+      <p class="c2-module-desc">Attribution des rôles par talents invisibles. Chaque élève trouve sa place — réal, son, image, régie.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     SECTION 4 — COCKPIT MOCKUP
+══════════════════════════════════════════════════ -->
+<section class="c2-cockpit" id="cockpit">
+  <div class="c2-cockpit-inner">
+    <!-- Gauche : texte -->
+    <div class="reveal">
+      <span class="c2-cockpit-label">Outil numérique</span>
+      <h2 class="c2-cockpit-h">Le Cockpit<br>Intervenant</h2>
+      <p class="c2-cockpit-sub">Tableau de bord iPad-first. Tout ce dont le professionnel du cinéma a besoin pour mener une séance avec 25 jeunes — sans formation technique supplémentaire.</p>
+      <div class="c2-feats">
+        <div class="c2-feat reveal-fast">
+          <span class="c2-feat-num">01</span>
+          <div>
+            <div class="c2-feat-title">Séances temps réel</div>
+            <div class="c2-feat-desc">Démarrer, pauser, gérer les modules M1–M8 depuis l'iPad en live. Vue d'ensemble instantanée du groupe.</div>
+          </div>
+        </div>
+        <div class="c2-feat reveal-fast">
+          <span class="c2-feat-num">02</span>
+          <div>
+            <div class="c2-feat-title">IA Gemini intégrée</div>
+            <div class="c2-feat-desc">Exercices générés et adaptés au niveau du groupe en séance. Pitch timer, vote anonyme, brainstorm collectif.</div>
+          </div>
+        </div>
+        <div class="c2-feat reveal-fast">
+          <span class="c2-feat-num">03</span>
+          <div>
+            <div class="c2-feat-title">Rapport pédagogique</div>
+            <div class="c2-feat-desc">Synthèse automatique après chaque séance pour le professeur. Progression, observations, prochaine étape.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Droite : mockup iPad -->
+    <div class="c2-ipad-wrap reveal">
+      <div class="c2-ipad">
+        <div class="c2-ipad-bar">
+          <div class="c2-ipad-dot"></div>
+          <div class="c2-ipad-dot"></div>
+          <div class="c2-ipad-dot"></div>
+          <span class="c2-ipad-bar-label">COCKPIT · SESSION LIVE</span>
+        </div>
+        <div class="c2-ipad-body">
+          <div class="c2-ipad-session">
+            <div class="c2-ipad-session-meta">
+              <div class="c2-ipad-session-title">M4 — Le Pitch · 30 secondes chrono</div>
+              <div class="c2-ipad-session-sub">COLLÈGE JEAN MOULIN · BONDY · 14 MARS 2025</div>
+            </div>
+            <span class="c2-ipad-live"><span class="c2-ipad-live-dot"></span>LIVE</span>
+          </div>
+
+          <div class="c2-ipad-section-lbl">PITCHS EN COURS</div>
+          <div class="c2-ipad-teams">
+            <div class="c2-ipad-team hot">
+              <div class="c2-ipad-team-name">SOUFIANE</div>
+              <div class="c2-ipad-team-score">28s</div>
+            </div>
+            <div class="c2-ipad-team">
+              <div class="c2-ipad-team-name">AMINA</div>
+              <div class="c2-ipad-team-score">—</div>
+            </div>
+            <div class="c2-ipad-team">
+              <div class="c2-ipad-team-name">RYAN</div>
+              <div class="c2-ipad-team-score">—</div>
+            </div>
+          </div>
+
+          <div class="c2-ipad-section-lbl">MODULE EN COURS</div>
+          <div class="c2-ipad-actions">
+            <div class="c2-ipad-action-row">
+              <span class="c2-ipad-row-lbl">M4 — Pitch timer (30s)</span>
+              <span class="c2-ipad-badge c2-badge-active">EN COURS</span>
+            </div>
+            <div class="c2-ipad-action-row">
+              <span class="c2-ipad-row-lbl">Vote anonyme M5 — prêt</span>
+              <span class="c2-ipad-badge c2-badge-ready">PRÊT</span>
+            </div>
+            <div class="c2-ipad-action-row">
+              <span class="c2-ipad-row-lbl">M6 Scénario collectif</span>
+              <span class="c2-ipad-badge c2-badge-wait">ATTENTE</span>
+            </div>
+            <div class="c2-ipad-action-row">
+              <span class="c2-ipad-row-lbl">IA Gemini — exercice adapté</span>
+              <span class="c2-ipad-badge c2-badge-ready">PRÊT</span>
+            </div>
+          </div>
+
+          <button class="c2-ipad-cta">Lancer le vote M5 →</button>
+        </div>
+        <div class="c2-ipad-bottom">
+          <div class="c2-ipad-live-dot2"></div>
+          <span class="c2-ipad-status">25 participants · M4/M8 · LIVE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     SECTION 5 — PROTOCOLE TOURNAGE
+══════════════════════════════════════════════════ -->
+<section class="c2-protocol">
+  <div class="c2-protocol-head">
+    <h2 class="c2-protocol-h reveal">De M1 au<br><em>Grand Écran.</em></h2>
+  </div>
+  <div class="c2-steps">
+    <div class="c2-step reveal-fast">
+      <span class="c2-step-n">M1–M8</span>
+      <div>
+        <div class="c2-step-name">Cockpit — 8 séances</div>
+        <p class="c2-step-desc">Les 8 modules en classe. Regard, émotions, pitch, vote, scénario, storyboard, équipe. L'intervenant pilote tout depuis le cockpit.</p>
+      </div>
+      <span class="c2-step-meta">INT · CLASSE · SÉANCES 1–8</span>
+    </div>
+    <div class="c2-step reveal-fast">
+      <span class="c2-step-n">S9</span>
+      <div>
+        <div class="c2-step-name">Préparation</div>
+        <p class="c2-step-desc">Plan de tournage, répétition à sec, check-list matériel. L'équipe prend ses marques avant le plateau.</p>
+      </div>
+      <span class="c2-step-meta">INT · ATELIER · MATIN</span>
+    </div>
+    <div class="c2-step orange reveal-fast">
+      <span class="c2-step-n">S10–S11</span>
+      <div>
+        <div class="c2-step-name">Tournage</div>
+        <p class="c2-step-desc">Caméra = téléphone. Micro si dispo. Répartition équipe par rôles M8. Le film se fait. Pour de vrai.</p>
+      </div>
+      <span class="c2-step-meta">EXT · QUARTIER · JOUR</span>
+    </div>
+    <div class="c2-step reveal-fast">
+      <span class="c2-step-n">S12</span>
+      <div>
+        <div class="c2-step-name">Montage</div>
+        <p class="c2-step-desc">Visionnage des rushes, sélection, assemblage. Montage simple — image, son, titres. Un vrai court-métrage.</p>
+      </div>
+      <span class="c2-step-meta">INT · STUDIO · APRÈS-MIDI</span>
+    </div>
+    <div class="c2-step reveal-fast">
+      <span class="c2-step-n">S13</span>
+      <div>
+        <div class="c2-step-name">Projection publique</div>
+        <p class="c2-step-desc">Optionnelle mais recommandée. Le film existe dans le monde. Salle, parents, festival — le groupe voit son travail reconnu.</p>
+      </div>
+      <span class="c2-step-meta">SALLE · FESTIVAL · SOIR</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     SECTION 6 — DOCTRINE
+══════════════════════════════════════════════════ -->
+<section class="c2-doctrine">
+  <div class="c2-doctrine-lbl">BANLIEUWOOD — DOCTRINE</div>
+  <h2 class="c2-doctrine-h reveal">Pas de notes.<br>Pas de classement.<br>Juste de la <em>création.</em></h2>
+  <p class="c2-doctrine-sub">Doctrine Banlieuwood — applicable dans tous les établissements de France.</p>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     SECTION 7 — VALIDATION INSTITUTIONNELLE
+══════════════════════════════════════════════════ -->
+<section class="c2-instit" id="instit">
+  <h2 class="c2-instit-h reveal">3 parcours obligatoires.<br><em>1 seule</em> intervention.</h2>
+  <div class="c2-instit-grid">
+    <div class="c2-instit-item reveal-fast">
+      <div class="c2-instit-check">
+        <svg viewBox="0 0 13 10"><polyline points="1,5 5,9 12,1"/></svg>
+      </div>
+      <div class="c2-instit-name">PEAC</div>
+      <p class="c2-instit-desc">Parcours d'Éducation Artistique et Culturelle. Pratique artistique validée par le rectorat. Coché automatiquement à chaque atelier.</p>
+    </div>
+    <div class="c2-instit-item reveal-fast">
+      <div class="c2-instit-check">
+        <svg viewBox="0 0 13 10"><polyline points="1,5 5,9 12,1"/></svg>
+      </div>
+      <div class="c2-instit-name">Parcours Avenir</div>
+      <p class="c2-instit-desc">Découverte des métiers du cinéma — réalisation, son, image, régie, montage. L'intervenant partage son métier, pas une simulation.</p>
+    </div>
+    <div class="c2-instit-item reveal-fast">
+      <div class="c2-instit-check">
+        <svg viewBox="0 0 13 10"><polyline points="1,5 5,9 12,1"/></svg>
+      </div>
+      <div class="c2-instit-name">Parcours Citoyen</div>
+      <p class="c2-instit-desc">Vote, coopération, expression, esprit critique. La démocratie vécue — pas enseignée. Le groupe décide, l'individu s'assume.</p>
+    </div>
+  </div>
+  <div class="c2-socle">
+    <div class="c2-socle-label">Socle commun</div>
+    <div class="c2-socle-domains">
+      <span class="c2-socle-d">Domaine 1 — Expression</span>
+      <span class="c2-socle-d">Domaine 2 — Coopération</span>
+      <span class="c2-socle-d">Domaine 3 — Esprit critique</span>
+    </div>
+  </div>
+  <div class="c2-partners-lbl">Partenaires &amp; financeurs</div>
+  <div class="c2-partners">
+    <span class="c2-partner">Académie de Créteil</span>
+    <span class="c2-partner">Académie de Versailles</span>
+    <span class="c2-partner">Académie de Paris</span>
+    <span class="c2-partner">CNC</span>
+    <span class="c2-partner">DRAC Île-de-France</span>
+    <span class="c2-partner">CNAF</span>
+    <span class="c2-partner">Mairie de Bondy</span>
+    <span class="c2-partner">Mairie de Saint-Denis</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     SECTION 8 — TÉMOIGNAGES
+══════════════════════════════════════════════════ -->
+<section class="c2-testimony">
+  <div class="c2-testimony-inner">
+    <div class="c2-testimony-lbl">Témoignages — intervenants &amp; équipes pédagogiques</div>
+    <div class="c2-testimonials">
+      <div class="c2-testimonial reveal">
+        <p class="c2-test-quote">Les élèves qui ne participent jamais se sont <em>révélés.</em> Le vote démocratique les a rendus fiers de leur contribution. C'est du jamais vu en 15 ans de carrière.</p>
+        <div class="c2-test-attr">
+          <span class="c2-test-dash"></span>
+          <span class="c2-test-name">Sophie Martin — Professeure français · Collège Jean Moulin, Bondy</span>
+        </div>
+      </div>
+      <div class="c2-testimonial reveal">
+        <p class="c2-test-quote">L'interface est parfaite pour les ateliers. Je pilote tout depuis le cockpit, et les gamins sont à fond. Le <em>pitch timer</em> crée une énergie dingue.</p>
+        <div class="c2-test-attr">
+          <span class="c2-test-dash"></span>
+          <span class="c2-test-name">Karim Benziani — Intervenant cinéma · Association Écran Libre</span>
+        </div>
+      </div>
+      <div class="c2-testimonial reveal">
+        <p class="c2-test-quote">Enfin un outil pédagogique qui respecte les élèves. Pas de notes, pas de classement, juste de la <em>création collective.</em></p>
+        <div class="c2-test-attr">
+          <span class="c2-test-dash"></span>
+          <span class="c2-test-name">Claire Dubois — Coordinatrice PEAC · Académie de Créteil</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     SECTION 9 — POUR LES ÉTABLISSEMENTS
+══════════════════════════════════════════════════ -->
+<section class="c2-etab" id="etab">
+  <h2 class="c2-etab-h reveal">Un programme<br><em>clé en main.</em></h2>
+  <div class="c2-etab-grid">
+    <div class="c2-etab-item reveal-fast">
+      <div class="c2-etab-item-label">Encadrement</div>
+      <div class="c2-etab-item-h">Intervenant</div>
+      <p class="c2-etab-item-p">Un professionnel du cinéma dédié à chaque séance. Il partage son métier, pas une animation. Protocole Cockpit intégré. Zéro charge enseignant.</p>
+    </div>
+    <div class="c2-etab-item reveal-fast">
+      <div class="c2-etab-item-label">Équipement</div>
+      <div class="c2-etab-item-h">Matériel</div>
+      <p class="c2-etab-item-p">Format minimal : téléphone + Cockpit. Format complet : caméras, micros, lumières, tablettes de montage. Tout fourni, aucune infrastructure requise.</p>
+    </div>
+    <div class="c2-etab-item reveal-fast">
+      <div class="c2-etab-item-label">Logistique</div>
+      <div class="c2-etab-item-h">5 semaines</div>
+      <p class="c2-etab-item-p">Film livré en 5 semaines depuis M1. 4 séances minimum sur le terrain. Planning sur mesure, intégration au calendrier scolaire sans perturbation.</p>
+    </div>
+    <div class="c2-etab-item reveal-fast">
+      <div class="c2-etab-item-label">Accès</div>
+      <div class="c2-etab-item-h">Financements</div>
+      <p class="c2-etab-item-p">Gratuit pour les établissements REP et REP+. Financements CNAF, CNC, DRAC disponibles. Dossier monté et suivi par Banlieuwood.</p>
+    </div>
+  </div>
+  <div class="c2-etab-ctas">
+    <button class="c2-btn-main">Contacter notre équipe</button>
+    <button class="c2-btn-sec">Télécharger le dossier pédagogique</button>
+  </div>
+  <div class="c2-partners-lbl" style="color:rgba(0,0,0,0.3)">Nos partenaires institutionnels</div>
+  <div class="c2-partners">
+    <span class="c2-partner" style="color:rgba(0,0,0,0.25)">Académie de Créteil</span>
+    <span class="c2-partner" style="color:rgba(0,0,0,0.25)">CNC — Éducation à l'image</span>
+    <span class="c2-partner" style="color:rgba(0,0,0,0.25)">DRAC Île-de-France</span>
+    <span class="c2-partner" style="color:rgba(0,0,0,0.25)">CNAF</span>
+    <span class="c2-partner" style="color:rgba(0,0,0,0.25)">PEAC</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════ -->
+<footer>
+  <div class="c2-footer">
+    <div>
+      <div class="c2-footer-logo">BANLIEUWOOD</div>
+      <p class="c2-footer-tag">Association loi 1901 — Moteur de création collective par le cinéma pour les jeunes des quartiers populaires. 8 ans. 1200 jeunes. 47 films.</p>
+    </div>
+    <div>
+      <div class="c2-footer-col-h">Navigation</div>
+      <div class="c2-footer-links">
+        <a href="#modules" class="c2-footer-link">Les 8 modules</a>
+        <a href="#cockpit" class="c2-footer-link">Cockpit intervenant</a>
+        <a href="#instit" class="c2-footer-link">Validation institutionnelle</a>
+        <a href="#etab" class="c2-footer-link">Établissements</a>
+      </div>
+    </div>
+    <div>
+      <div class="c2-footer-col-h">Contact</div>
+      <div class="c2-footer-links">
+        <a href="#" class="c2-footer-link">contact@banlieuwood.fr</a>
+        <a href="#" class="c2-footer-link">Dossier pédagogique</a>
+        <a href="#" class="c2-footer-link">Presse</a>
+        <a href="#" class="c2-footer-link">Mentions légales</a>
+      </div>
+    </div>
+  </div>
+  <div class="c2-footer-bottom">
+    <span>© 2025 Banlieuwood — Association loi 1901</span>
+    <span>DEPUIS 2016 · SEINE-SAINT-DENIS · 1200 JEUNES · 47 FILMS</span>
+  </div>
+</footer>
+
+
+<script>
+// ── Curseur custom ─────────────────────────────
+const cur = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top  = e.clientY + 'px';
+});
+document.querySelectorAll('button, a, .c2-module-card, .c2-testimonial, .c2-etab-item, .c2-instit-item').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.classList.add('big'));
+  el.addEventListener('mouseleave', () => cur.classList.remove('big'));
+});
+
+// ── Scroll Reveal ──────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+document.querySelectorAll('.reveal, .reveal-fast').forEach(el => observer.observe(el));
+
+// ── Compteurs hero ─────────────────────────────
+function animateCounter(el) {
+  const target = parseInt(el.dataset.counter, 10);
+  const suffix = el.dataset.suffix || (target >= 1000 ? '+' : '');
+  const duration = 1400;
+  const start = performance.now();
+  function update(now) {
+    const t = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    const val = Math.round(ease * target);
+    el.textContent = val.toLocaleString('fr-FR') + suffix;
+    if (t < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animateCounter(e.target);
+      counterObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-counter]').forEach(el => counterObs.observe(el));
+</script>
+
+</body>
+</html>
