@@ -15,11 +15,7 @@
     "test:e2e": "playwright test",
     "type-check": "tsc --noEmit",
     "check-all": "npm run type-check && npm run lint && npm run format:check && npm run test",
-    "db:types": "supabase gen types typescript --local > src/types/database.ts",
-    "design:capture": "node tools/design-scout/capture.js",
-    "design:sources": "node tools/design-scout/capture.js --sources",
-    "design:stats": "node tools/design-scout/scout.js stats",
-    "design:report": "node tools/design-scout/scout.js report"
+    "db:types": "supabase gen types typescript --local > src/types/database.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.82.0",
@@ -46,7 +42,6 @@
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.2.2",
     "jsdom": "^29.0.1",
-    "playwright": "^1.59.1",
     "postcss": "^8.5.8",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
